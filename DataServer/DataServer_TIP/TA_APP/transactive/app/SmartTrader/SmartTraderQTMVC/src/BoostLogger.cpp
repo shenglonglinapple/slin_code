@@ -1,6 +1,6 @@
 #include "BoostLogger.h"
 //#include "ProjectSysInclude.h"
-
+//add by lin for test svn github
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
