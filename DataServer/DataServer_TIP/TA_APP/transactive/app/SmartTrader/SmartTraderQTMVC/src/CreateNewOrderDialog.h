@@ -12,6 +12,7 @@
 #include <QtCore/QModelIndex>
 
 #include <QtGui/QDialog>
+#include "Order.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -40,17 +41,33 @@ public:
     CCreateNewOrderDialog(QWidget *parent = 0);
 	~CCreateNewOrderDialog();
 
-public:
-	void setupUi();
-	void translateLanguage();
+signals:
+	/*
+	class: CCreateNewOrderDialog
+	signals:
+	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	fun send signals: slotClientLoginParamChanged()
+
+	class: CClientDataManagerWorker
+	public slots: 
+	void slotNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	*/
+	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
 
 private slots:
 	void slotPushButtonBuyClicked(bool checked);
 	void slotPushButtonSellClicked(bool checked);
+
+public:
+	void setupUi();
+	void translateLanguage();
+
+
 public:
 	void resetData(const QString& strInstrumentCode, int nVolume, float fPrice);
 private:
 	void _CreateConnect();
+	Order::OrderType _GetOrderType(const QString& strOrderType);
 private:
 	QString m_pTextEdit_Symbol_Value;
 	QString m_pComboBox_OrderType_Value;

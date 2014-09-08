@@ -102,6 +102,18 @@ public slots:
 	*/
 	void slotQuotesTableViewColumnsChanged();
 
+
+	/*
+	class: CCreateNewOrderDialog
+	signals:
+	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	fun send signals: slotClientLoginParamChanged()
+
+	class: CClientDataManagerWorker
+	public slots: 
+	void slotNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	*/
+	void slotNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
 signals:
 
 	/*
@@ -193,7 +205,7 @@ private:
 	CProjectUtilityFun* m_pUtilityFun;
 private:
 	boost::mutex m_mutexForMapAccount;
-	QMap<int, Account*> m_MapAccount;
+	QMap<int, Account*> m_MapAccount;//AccountID
 };
 
 //QT_END_NAMESPACE

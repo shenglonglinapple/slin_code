@@ -8,6 +8,8 @@
 #include "TreeItemContract.h"
 #include "QuotesTableView.h"
 #include "ContractInfoWindow.h"
+#include "CreateNewOrderDialog.h"
+#include "Order.h"
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -145,6 +147,12 @@ void CClientMainWindow::_CreateConnect()
 		SIGNAL(signalAddContractToSmartQuotes (unsigned int)),
 		m_pClientDataManagerWorker,
 		SLOT(slotAddContractToSmartQuotes(unsigned int)));
+
+	QObject::connect(m_pSmartHotQuotesWindow->m_pTreeView_Quotes->m_pCreateNewOrderDialog, 
+		SIGNAL(signalNewOrder(Order::Side, Order::OrderType, QString, double, int)),
+		m_pClientDataManagerWorker,
+		SLOT(slotNewOrder(Order::Side, Order::OrderType, QString, double, int)));
+	
 
 
 	//

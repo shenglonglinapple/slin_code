@@ -87,8 +87,8 @@ int main(int argc, char *argv[])
 
 	//CClientManager objClientWindow;
 
-	CCreateNewOrderDialog* pCCreateNewOrderDialog = new CCreateNewOrderDialog(NULL);
-	pCCreateNewOrderDialog->show();
+	//CCreateNewOrderDialog* pCCreateNewOrderDialog = new CCreateNewOrderDialog(NULL);
+	//pCCreateNewOrderDialog->show();
 
 	nFunRes = app.exec(); 
 

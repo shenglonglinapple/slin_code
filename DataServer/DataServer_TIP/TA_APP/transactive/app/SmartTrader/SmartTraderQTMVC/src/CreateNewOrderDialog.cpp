@@ -9,7 +9,7 @@ USING_BOOST_LOG;
 
 //QT_BEGIN_NAMESPACE
 static const int DEFVALUE_INT_Window_Width = 400;
-static const int DEFVALUE_INT_Window_Height = 400;
+static const int DEFVALUE_INT_Window_Height = 300;
 
 static const std::string DEFVALUE_String_CCreateNewOrderDialog_WindowTitle = "Create New Order";
 static const std::string DEFVALUE_String_Label_Symbol_Text = "Symbol:";
@@ -202,16 +202,65 @@ void CCreateNewOrderDialog::resetData(const QString& strInstrumentCode, int nVol
 
 }
 
+Order::OrderType CCreateNewOrderDialog::_GetOrderType(const QString& strOrderType)
+{
+	if (strOrderType.isEmpty())
+	{
+		return Order::UNKNOWN;
+	}
+	else if (0 == strOrderType.compare(QString(DEFVALUE_String_ComboBox_OrderType_Item_0__Limit.c_str())))
+	{
+		return Order::LIMIT;
+	}
+	else if (0 == strOrderType.compare(QString(DEFVALUE_String_ComboBox_OrderType_Item_1_Market_FAK.c_str())))
+	{
+		return Order::MARKET_FAK;
+	}
+	else
+	{
+		return Order::MARKET;
+	}
+
+}
+
 void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 {
-	QString strInstrumentCode;
-	int nVolume = 0;
+	//int nOrderType = 0;
+	QString strOrderType;
+	int quantity = 0;
 	double fPrice = 0;
 
+	Order::Side nGetSide = Order::BUY;
+	Order::OrderType nGetOrderType = Order::UNKNOWN;
+	QString strInstrumentCode;
+
+	//nOrderType = m_pComboBox_OrderType->currentIndex();
+	strOrderType = m_pComboBox_OrderType->currentText();
+	nGetSide = Order::BUY;
+	nGetOrderType = _GetOrderType(strOrderType);
 	strInstrumentCode = m_pLineEdit_Symbol->text();
-	nVolume = m_pSpinBox_Volume->value();
 	fPrice = m_pSpinBox_Price->value();
+	quantity = m_pSpinBox_Volume->value();
 	
+
+
+	//emit
+	{
+		LOG_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CCreateNewOrderDialog"
+			<<" "<<"fun:"<<"slotPushButtonBuyClicked(bool checked)"
+			<<" "<<"emit"
+			<<" "<<"signalNewOrder()"
+			<<" "<<"param:"
+			<<" "<<"nGetSide="<<nGetSide
+			<<" "<<"nGetOrderType="<<nGetOrderType
+			<<" "<<"strInstrumentCode="<<strInstrumentCode.toStdString().c_str()
+			<<" "<<"fPrice="<<fPrice
+			<<" "<<"quantity="<<quantity;
+
+		emit signalNewOrder(nGetSide, nGetOrderType, strInstrumentCode, fPrice, quantity);	
+	}
+
 }
 
 void CCreateNewOrderDialog::slotPushButtonSellClicked( bool checked )

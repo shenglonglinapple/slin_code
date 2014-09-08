@@ -139,6 +139,8 @@ private:
 
 public:
 	CContractInfoWindow* m_pContractInfoWindow;
+	CCreateNewOrderDialog* m_pCreateNewOrderDialog;
+
 private:
 	QString m_strSelectedColumnsForCheck;
 
@@ -146,7 +148,6 @@ private:
 	QAction* m_pActionAddHotQuotes;
 	QAction* m_pActionRemoveHotQuotes;
 	QAction* m_pActionCustomColumns;
-	CCreateNewOrderDialog* m_pCreateNewOrderDialog;
 	IconDelegate* m_pIconDelegate_Column_Change;
 	int m_nColumnIndex_Change;
 	CCustomColumnsDialog* m_pCustomColumnsDialog;

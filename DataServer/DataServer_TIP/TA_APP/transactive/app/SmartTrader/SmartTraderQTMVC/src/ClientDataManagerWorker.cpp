@@ -68,6 +68,11 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
 		m_MapInstrumentIDData.clear();
 	}
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
+		m_MapAccount.clear();
+	}
 }
 
 void CClientDataManagerWorker::run()
@@ -661,6 +666,138 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 
 void CClientDataManagerWorker::onAccountDownloaded( Account& account )
 {
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
+		m_MapAccount.insert(account.getAccountID(), &account);
+	}
+}
+
+void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity )
+{
+	//emit
+	{
+		LOG_DEBUG<<" "<<"slot"
+			<<" "<<"class:"<<"CClientDataManagerWorker"
+			<<" "<<"fun:"<<"slotNewOrder()"
+			<<" "<<"slot"
+			<<" "<<"slotNewOrder()"
+			<<" "<<"param:"
+			<<" "<<"nSide="<<nSide
+			<<" "<<"nOrderType="<<nOrderType
+			<<" "<<"strInstrumentCode="<<strInstrumentCode.toStdString().c_str()
+			<<" "<<"fPrice="<<fPrice
+			<<" "<<"quantity="<<quantity;
+	}
+
+
+	QMap<unsigned int, Instrument*>::iterator  iterFind;
+	std::string strLogInfo;
+	Instrument* pInstrumentGet = NULL;
+	Account* pAccount = NULL;
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
+		if (false == m_MapInstrumentIDData.contains(strInstrumentCode.toUInt()))
+		{
+			LOG_ERROR<<"not find nInstrumentID="<<strInstrumentCode.toUInt()
+				<<" "<<"in m_MapInstrumentIDData"
+				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
+			return;
+		}
+
+		iterFind = m_MapInstrumentIDData.find(strInstrumentCode.toUInt());
+		//find ok
+		pInstrumentGet = iterFind.value();
+	}
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
+		if (m_MapAccount.isEmpty())
+		{
+			LOG_ERROR<<""<<"m_MapAccount is empty";
+			return;
+		}
+		pAccount = m_MapAccount.begin().value();
+	}
+
+	switch (nOrderType)
+	{
+	case Order::MARKET:
+		if (Order::BUY == nSide)
+		{
+			m_pMyTradeClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+		}
+		else if (Order::SELL == nSide)
+		{
+			m_pMyTradeClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+		}
+		break;
+	case Order::MARKET_FAK:
+		if (Order::BUY == nSide)
+		{
+			m_pMyTradeClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+		}
+		else if (Order::SELL == nSide)
+		{
+			m_pMyTradeClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+		}
+		break;
+	case Order::MARKET_FOK:
+		if (Order::BUY == nSide)
+		{
+			m_pMyTradeClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+		}
+		else if (Order::SELL == nSide)
+		{
+			m_pMyTradeClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+		}
+		break;
+	case Order::LIMIT:
+		if (Order::BUY == nSide)
+		{
+			m_pMyTradeClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		else if (Order::SELL == nSide)
+		{
+			m_pMyTradeClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		break;
+	case Order::LIMIT_FAK:
+		if (Order::BUY == nSide)
+		{
+			m_pMyTradeClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		else if (Order::SELL == nSide)
+		{
+			m_pMyTradeClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		break;
+	case Order::LIMIT_FOK:
+		if (Order::BUY == nSide)
+		{
+			m_pMyTradeClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		else if (Order::SELL == nSide)
+		{
+			m_pMyTradeClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		break;
+	case Order::STOP:
+		if (Order::BUY == nSide)
+		{
+			m_pMyTradeClient->buyStop(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		else if (Order::SELL == nSide)
+		{
+			m_pMyTradeClient->sellStop(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+		}
+		break;
+	case Order::UNKNOWN:
+		LOG_ERROR<<"CClientDataManagerWorker::slotNewOrder"<<" Order::UNKNOWN";
+		break;
+	}//switch (nSide)
+
+
 
 }
 
