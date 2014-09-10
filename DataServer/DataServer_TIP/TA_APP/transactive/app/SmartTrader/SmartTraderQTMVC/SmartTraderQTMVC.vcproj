@@ -319,6 +319,18 @@
 				SourceControlFiles="false"
 				>
 				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_BottomDockWidget.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_ClientDataManagerWorker.cpp"
 					>
 					<FileConfiguration
@@ -504,6 +516,18 @@
 				Filter="cpp;moc"
 				SourceControlFiles="false"
 				>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_BottomDockWidget.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_ClientDataManagerWorker.cpp"
 					>
@@ -887,7 +911,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="SmartHotQuotesWindow"
+			Name="LeftDockWidget"
 			>
 			<File
 				RelativePath=".\src\IconDelegate.cpp"
@@ -1232,6 +1256,56 @@
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="BottomDockWidget"
+			>
+			<File
+				RelativePath=".\src\BottomDockWidget.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\BottomDockWidget.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing BottomDockWidget.h..."
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_DEBUG\include&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Moc&apos;ing BottomDockWidget.h..."
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\src\OrderInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\OrderInfo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\TreeItemOrder.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\TreeItemOrder.h"
+				>
 			</File>
 		</Filter>
 	</Files>

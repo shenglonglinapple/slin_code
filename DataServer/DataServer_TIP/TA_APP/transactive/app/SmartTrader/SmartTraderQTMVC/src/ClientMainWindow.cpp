@@ -58,7 +58,7 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
     : QMainWindow(parent)
 {
 	m_pClientDataManagerWorker = NULL;
-	m_pSmartHotQuotesWindow = NULL;
+	m_pLeftDockWidget = NULL;
 	m_pMdiArea = NULL;
 	m_pClientDataManagerWorker = new CClientDataManagerWorker();
 
@@ -138,17 +138,17 @@ void CClientMainWindow::_CreateConnect()
 	//
 	QObject::connect(m_pClientDataManagerWorker, 
 		SIGNAL(signalContractInfoChanged (CTreeItemContract*)),
-		m_pSmartHotQuotesWindow->m_pTreeView_Quotes->m_pContractInfoWindow,
+		m_pLeftDockWidget->m_pTreeView_Quotes->m_pContractInfoWindow,
 		SLOT(slotContractInfoChanged(CTreeItemContract*)));
 
 
 	//
-	QObject::connect(m_pSmartHotQuotesWindow->m_pTreeView_Quotes->m_pContractInfoWindow, 
+	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes->m_pContractInfoWindow, 
 		SIGNAL(signalAddContractToSmartQuotes (unsigned int)),
 		m_pClientDataManagerWorker,
 		SLOT(slotAddContractToSmartQuotes(unsigned int)));
 
-	QObject::connect(m_pSmartHotQuotesWindow->m_pTreeView_Quotes->m_pCreateNewOrderDialog, 
+	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes->m_pCreateNewOrderDialog, 
 		SIGNAL(signalNewOrder(Order::Side, Order::OrderType, QString, double, int)),
 		m_pClientDataManagerWorker,
 		SLOT(slotNewOrder(Order::Side, Order::OrderType, QString, double, int)));
@@ -156,12 +156,12 @@ void CClientMainWindow::_CreateConnect()
 
 
 	//
-	QObject::connect(m_pSmartHotQuotesWindow->m_pTreeView_Quotes, 
+	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes, 
 		SIGNAL(signalRemoveContractFromSmartQuotes (unsigned int)),
 		m_pClientDataManagerWorker,
 		SLOT(slotRemoveContractFromSmartQuotes(unsigned int)));
 
-	QObject::connect(m_pSmartHotQuotesWindow->m_pTreeView_Quotes, 
+	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes, 
 		SIGNAL(signalQuotesTableViewColumnsChanged ()),
 		m_pClientDataManagerWorker,
 		SLOT(slotQuotesTableViewColumnsChanged()));
@@ -169,23 +169,32 @@ void CClientMainWindow::_CreateConnect()
 
 	QObject::connect(m_pClientDataManagerWorker, 
 		SIGNAL(signalQuotesInfoChanged(CTreeItemQuotes*)), 
-		m_pSmartHotQuotesWindow, 
+		m_pLeftDockWidget, 
 		SLOT(slotQuotesInfoChanged(CTreeItemQuotes*))); 
 
 }
 void CClientMainWindow::setupUi()
 {
 	//left
-	QDockWidget* m_DockWidgetFirst = NULL;
+	QDockWidget* m_DockWidget_Left = NULL;
+	QDockWidget* m_DockWidget_Bottom = NULL;
 	Qt::DockWidgetArea nDockWidgetFirstArea;
 	QWidget* pWindowOne = NULL;
+	QWidget* pWidget_Bottom = NULL;
 	
 	//add Samrt hot Quotes window
-	m_pSmartHotQuotesWindow = new CSmartHotQuotesWindow(this);
+	m_pLeftDockWidget = new CLeftDockWidget(this);
+	pWidget_Bottom = new QWidget(this);
 
-	m_DockWidgetFirst = new QDockWidget(this);
-	m_DockWidgetFirst->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-	m_DockWidgetFirst->setWidget(m_pSmartHotQuotesWindow);
+	m_DockWidget_Left = new QDockWidget(this);
+	m_DockWidget_Left->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+	m_DockWidget_Left->setWidget(m_pLeftDockWidget);
+
+	m_DockWidget_Bottom = new QDockWidget(this);
+	m_DockWidget_Bottom->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
+	m_DockWidget_Bottom->setWidget(pWidget_Bottom);
+
+	
 
 	//right
 	pWindowOne = new QWidget(this);
@@ -204,7 +213,9 @@ void CClientMainWindow::setupUi()
 
 
 	nDockWidgetFirstArea = Qt::LeftDockWidgetArea;
-	this->addDockWidget(nDockWidgetFirstArea, m_DockWidgetFirst);
+	this->addDockWidget(nDockWidgetFirstArea, m_DockWidget_Left);
+	nDockWidgetFirstArea = Qt::BottomDockWidgetArea;
+	this->addDockWidget(nDockWidgetFirstArea, m_DockWidget_Bottom);	
 	this->setCentralWidget(m_pMdiArea);
 
 	this->setWindowIcon(QIcon(QObject::tr(DEF_VALUE_MainWidgetWindowIcon.c_str())));//任务栏中的图标
@@ -212,7 +223,7 @@ void CClientMainWindow::setupUi()
 	this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);
 
 
-	m_DockWidgetFirst->setWindowTitle(QObject::tr("Market Watch:"));
+	m_DockWidget_Left->setWindowTitle(QObject::tr("Market Watch:"));
 
 
 	QMetaObject::connectSlotsByName(this);

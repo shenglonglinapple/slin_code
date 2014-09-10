@@ -1,32 +1,29 @@
-#ifndef __CLASS__SMART_HOT_QUOTES_WINDOW_H__
-#define __CLASS__SMART_HOT_QUOTES_WINDOW_H__
+#ifndef __CLASS__BOTTOM_DOCK_WIDGET_H__
+#define __CLASS__BOTTOM_DOCK_WIDGET_H__
 
 
 
 #include <QtGui/QMainWindow>
 #include <QtCore/QModelIndex>
 #include <QtGui/QTabWidget>
+#include <QtGui/QTableView>
 
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
-class QTabWidget;
-
 QT_END_NAMESPACE
 
 class CTreeModelQuotes;
-class CQuotesTableView;
 class CTreeItemQuotes;
 
-//class IconDelegate;
-class CLeftDockWidget : public QWidget
+class CBottomDockWidget : public QWidget
 {
     Q_OBJECT
 
 
 public:
-    CLeftDockWidget(QWidget* parent = 0);
-	~CLeftDockWidget();
+    CBottomDockWidget(QWidget* parent = 0);
+	~CBottomDockWidget();
 public:
 	void setupUi();
 	void translateLanguage();
@@ -61,11 +58,10 @@ private:
 private:
 	CTreeModelQuotes* m_pTreeModelQuotes;
 public:
-	//IconDelegate* m_pIconDelegate;
-	CQuotesTableView* m_pTreeView_Quotes;
+	QTableView* m_pTableView_Order;
 
 };
 
 //QT_END_NAMESPACE
 
-#endif//__CLASS__SMART_HOT_QUOTES_WINDOW_H__
+#endif//__CLASS__BOTTOM_DOCK_WIDGET_H__

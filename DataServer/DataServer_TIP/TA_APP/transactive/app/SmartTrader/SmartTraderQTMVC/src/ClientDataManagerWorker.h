@@ -157,6 +157,16 @@ public:
 	void onInstrumentDownloaded(const Instrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate(const Instrument& instrument);
 	void onAccountDownloaded(Account& account);
+	/// Hook method when the order is accepted by exchange.
+	void onOrderAccepted(const Order &order);
+	/// Hook method when order is canceled.
+	void onOrderCanceled(const Order &order);
+	/// Hook method when order is rejected.
+	void onOrderRejected(const Order &order);
+	/// Hook method when order filled
+	void onOrderFilled(const Order &order);
+	/// Hook method when cancel request get rejected
+	void onCancelReject(const Order &order);
 public:
 	virtual void run();	//CBoostThread
 	virtual void terminate();//CBoostThread
@@ -182,7 +192,8 @@ private:
 	void _UnInitMVCDataForContract();
 	void _InitMVCDataForQuotes();
 	void _UnInitMVCDataForQuotes();
-
+private:
+	void _UpdateOrderInfo(const Order &order);
 private:
 	bool	m_toTerminate;
 	EThreadJobState  m_nThreadJobState;
@@ -206,6 +217,12 @@ private:
 private:
 	boost::mutex m_mutexForMapAccount;
 	QMap<int, Account*> m_MapAccount;//AccountID
+
+private:
+	boost::mutex m_mutexForMapOrder;
+	QMap<unsigned int, Order*> m_MapOrder;//OrderID
+
+	
 };
 
 //QT_END_NAMESPACE

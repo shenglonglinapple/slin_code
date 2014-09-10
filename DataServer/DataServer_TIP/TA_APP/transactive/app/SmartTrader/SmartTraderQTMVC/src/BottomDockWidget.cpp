@@ -1,11 +1,10 @@
-#include "SmartHotQuotesWindow.h"
+#include "BottomDockWidget.h"
 
 
 
 #include "ProjectQTInclude.h"
 
 #include "ClientDataManagerWorker.h"
-#include "QuotesTableView.h"
 #include "TreeModelQuotes.h"
 #include "TreeItemQuotes.h"
 
@@ -17,25 +16,19 @@ USING_BOOST_LOG;
 ////QT_END_NAMESPACE
 
 //////////////////////////////////////////////////////////////////////////
-static int DEFVALUE_INT_Window_Width = 400;
-static int DEFVALUE_INT_Window_Height = 300;
+static int DEFVALUE_INT_Window_Width = 600;
+static int DEFVALUE_INT_Window_Height = 100;
 
 
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow = "ObjectName_CSmartHotQuotesWindow";
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow_WidgetCentral = "ObjectName_CSmartHotQuotesWindow_WidgetCentral";
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow_VBoxLayout = "ObjectName_CSmartHotQuotesWindow_VBoxLayout";
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow_TreeViewQuotes = "ObjectName_CSmartHotQuotesWindow_TreeViewQuotes";
-
-static const std::string DEFVALUE_String_ActionAddHotQuotes = "AddQuotes";//添加合约报价
 
 
-CLeftDockWidget::CLeftDockWidget(QWidget* parent)
+CBottomDockWidget::CBottomDockWidget(QWidget* parent)
     : QWidget(parent)
 {
 
 	m_pVBoxLayout = NULL;
 	m_pTreeModelQuotes = NULL;
-	m_pTreeView_Quotes = NULL;//m_pTreeModelQuotes
+	m_pTableView_Order = NULL;//m_pTreeModelQuotes
 
     setupUi();
 	translateLanguage();
@@ -45,29 +38,29 @@ CLeftDockWidget::CLeftDockWidget(QWidget* parent)
 }
 
 
-CLeftDockWidget::~CLeftDockWidget()
+CBottomDockWidget::~CBottomDockWidget()
 {
 	
 }
 
 
-QSize CLeftDockWidget::sizeHint() const
+QSize CBottomDockWidget::sizeHint() const
 {
 	//for QDockWidget
 	return QSize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height); /* 在这里定义dock的初始大小 */
 }
 
-void CLeftDockWidget::_CreateAction()
+void CBottomDockWidget::_CreateAction()
 {
 
 }
 
-void CLeftDockWidget::_CreateConnect()
+void CBottomDockWidget::_CreateConnect()
 {
 
 }
 
-void CLeftDockWidget::setupUi()
+void CBottomDockWidget::setupUi()
 {
 	this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);
 	this->setWindowFlags(Qt::Dialog);
@@ -75,7 +68,7 @@ void CLeftDockWidget::setupUi()
 	m_pTabWidget = new QTabWidget(this);
 	m_pTabWidget->setTabPosition(QTabWidget::South);	//enum TabPosition { North, South, West, East
 
-	m_pTreeView_Quotes = new CQuotesTableView(m_pTabWidget);
+	m_pTableView_Order = new CQuotesTableView(m_pTabWidget);
 
 	
  	m_pVBoxLayout = new QVBoxLayout(this);
@@ -89,15 +82,15 @@ void CLeftDockWidget::setupUi()
 
 	QMetaObject::connectSlotsByName(this);
 } 
-void CLeftDockWidget::translateLanguage()
+void CBottomDockWidget::translateLanguage()
 {
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_ObjectName_CSmartHotQuotesWindow.c_str()));
-	m_pTabWidget->addTab(m_pTreeView_Quotes, QObject::tr("Symbols"));
+	m_pTabWidget->addTab(m_pTableView_Order, QObject::tr("Symbols"));
 
 }
 
 
-void CLeftDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
+void CBottomDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
 {
 	LOG_DEBUG<<"CSmartHotQuotesWindow process slotQuotesInfoChanged"
 		<<" "<<"pTreeItem=ox"<<pTreeItem;
@@ -111,17 +104,17 @@ void CLeftDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
 		m_pTreeModelQuotes->setRootItem(pTreeItem);
 
 		//mvc
-		m_pTreeView_Quotes->setModel(m_pTreeModelQuotes);
+		m_pTableView_Order->setModel(m_pTreeModelQuotes);
 		//m_pTreeView_Quotes->setColumnWidth(0, 200);
-		m_pTreeView_Quotes->setCurrentIndex(inValidIndex);
-		m_pTreeView_Quotes->resizeColumnsToContents();
+		m_pTableView_Order->setCurrentIndex(inValidIndex);
+		m_pTableView_Order->resizeColumnsToContents();
 
 	}
 	else
 	{
 		m_pTreeModelQuotes->setRootItem(pTreeItem);
-		m_pTreeView_Quotes->setCurrentIndex(inValidIndex);
-		m_pTreeView_Quotes->resizeColumnsToContents();
+		m_pTableView_Order->setCurrentIndex(inValidIndex);
+		m_pTableView_Order->resizeColumnsToContents();
 	}
 }
 

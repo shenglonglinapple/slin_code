@@ -110,6 +110,56 @@ void CSmartTraderClient::onAccountDownloaded( Account& account )
 
 }
 
+void CSmartTraderClient::onOrderAccepted( const Order &order )
+{
+	LOG_DEBUG<<"onOrderAccepted"
+		<<" "<<"getOrderID="<<order.getOrderID();
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onOrderAccepted(order);
+	}
+}
+
+void CSmartTraderClient::onOrderCanceled( const Order &order )
+{
+	LOG_DEBUG<<"onOrderCanceled"
+		<<" "<<"getOrderID="<<order.getOrderID();
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onOrderCanceled(order);
+	}
+}
+
+void CSmartTraderClient::onOrderRejected( const Order &order )
+{
+	LOG_DEBUG<<"onOrderRejected"
+		<<" "<<"getOrderID="<<order.getOrderID();
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onOrderRejected(order);
+	}
+}
+
+void CSmartTraderClient::onOrderFilled( const Order &order )
+{
+	LOG_DEBUG<<"onOrderFilled"
+		<<" "<<"getOrderID="<<order.getOrderID();
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onOrderFilled(order);
+	}
+}
+
+void CSmartTraderClient::onCancelReject( const Order &order )
+{
+	LOG_DEBUG<<"onCancelReject"
+		<<" "<<"getOrderID="<<order.getOrderID();
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onCancelReject(order);
+	}
+}
+
 
 //QT_END_NAMESPACE
 

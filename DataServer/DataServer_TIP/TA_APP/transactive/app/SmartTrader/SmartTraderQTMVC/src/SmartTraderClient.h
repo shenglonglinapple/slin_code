@@ -31,6 +31,20 @@ public:
 	/// Hook method when account downloaded
 	virtual void onAccountDownloaded(Account& account);
 
+	/// Hook method when the order is accepted by exchange.
+	virtual void onOrderAccepted(const Order &order);
+
+	/// Hook method when order is canceled.
+	virtual void onOrderCanceled(const Order &order);
+
+	/// Hook method when order is rejected.
+	virtual void onOrderRejected(const Order &order);
+
+	/// Hook method when order filled
+	virtual void onOrderFilled(const Order &order);
+
+	/// Hook method when cancel request get rejected
+	virtual void onCancelReject(const Order &order);
 
 private:
 	CClientLoginParam* m_pClientLoginParam;

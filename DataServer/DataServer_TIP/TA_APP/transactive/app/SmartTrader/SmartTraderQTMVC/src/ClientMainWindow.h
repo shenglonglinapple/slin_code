@@ -24,7 +24,7 @@ QT_END_NAMESPACE
 
 
 class CClientDataManagerWorker;
-class CSmartHotQuotesWindow;
+class CLeftDockWidget;
 
 class CClientMainWindow : public QMainWindow
 {
@@ -51,7 +51,7 @@ public:
 
 public:
 	//GUI
-	CSmartHotQuotesWindow* m_pSmartHotQuotesWindow;//top
+	CLeftDockWidget* m_pLeftDockWidget;//top
 private:
 	QMdiArea* m_pMdiArea;
 

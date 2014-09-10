@@ -51,6 +51,12 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
 		m_MapAccount.clear();
 	}
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
+		m_MapOrder.clear();
+	}
+
 }
 
 CClientDataManagerWorker::~CClientDataManagerWorker(void)
@@ -72,6 +78,11 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 	{
 		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
 		m_MapAccount.clear();
+	}
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
+		m_MapOrder.clear();
 	}
 }
 
@@ -669,6 +680,58 @@ void CClientDataManagerWorker::onAccountDownloaded( Account& account )
 	{
 		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
 		m_MapAccount.insert(account.getAccountID(), &account);
+	}
+}
+
+
+void CClientDataManagerWorker::onOrderAccepted(const Order &order)
+{
+	_UpdateOrderInfo(order);
+
+
+}
+void CClientDataManagerWorker::onOrderCanceled(const Order &order)
+{
+
+	_UpdateOrderInfo(order);
+
+
+}
+void CClientDataManagerWorker::onOrderRejected(const Order &order)
+{
+	_UpdateOrderInfo(order);
+
+
+}
+void CClientDataManagerWorker::onOrderFilled(const Order &order)
+{
+	_UpdateOrderInfo(order);
+
+
+}
+void CClientDataManagerWorker::onCancelReject(const Order &order)
+{
+	_UpdateOrderInfo(order);
+	
+}
+void CClientDataManagerWorker::_UpdateOrderInfo(const Order &order)
+{
+	QMap<unsigned int, Order*>::iterator iterMap;
+	Order* pOrder = NULL;
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
+		if (m_MapOrder.contains(order.getOrderID()))
+		{
+			iterMap = m_MapOrder.find(order.getOrderID());
+			pOrder = iterMap.value();
+			*pOrder = order;
+		}
+		else
+		{
+			pOrder = (Order*)&order;
+			m_MapOrder.insert(order.getOrderID(), pOrder);
+		}
 	}
 }
 
