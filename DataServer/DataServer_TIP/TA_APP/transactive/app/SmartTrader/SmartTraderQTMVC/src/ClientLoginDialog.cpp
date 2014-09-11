@@ -4,6 +4,7 @@
 
 #include "ClientLoginParam.h"
 #include "ServerSettingDialog.h"
+#include "PwdLineEdit.h"
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -108,7 +109,7 @@ void CClientLoginDialog::setupUi()
 
 	m_pLabel_Password = new QLabel(this);
 
-	m_pLineEdit_Password = new QLineEdit(this);
+	m_pLineEdit_Password = new CPwdLineEdit(this);
 	m_pLineEdit_Password->setEchoMode(QLineEdit::Password);
 	m_pLineEdit_Password->setMinimumSize(qSizeRightAreaOne);
 	m_pLabel_Password->setBuddy(m_pLineEdit_Password);

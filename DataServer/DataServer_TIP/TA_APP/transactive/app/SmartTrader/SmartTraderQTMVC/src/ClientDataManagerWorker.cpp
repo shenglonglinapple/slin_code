@@ -2,14 +2,22 @@
 
 #include <QtCore/QStringList>
 
-#include "ContractInfo.h"
-#include "TreeItemContract.h"
-#include "QuotesInfo.h"
-#include "TreeItemQuotes.h"
+
 #include "ClientLoginParam.h"
 #include "SmartTraderClient.h"
 #include "ProjectUtilityFun.h"
 #include "ConfigInfo.h"
+
+#include "ContractInfo.h"
+#include "TreeItemContract.h"
+
+#include "QuotesInfo.h"
+#include "TreeItemQuotes.h"
+
+#include "OrderInfo.h"
+#include "TreeItemOrder.h"
+
+
 
 
 #include "BoostLogger.h"
@@ -30,10 +38,10 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 
 	m_pClientLoginParam = NULL;
 	m_pMyTradeClient = NULL;
-	m_pNodeRootContract = NULL;
+	m_pTreeItemContract_Root = NULL;
 	m_pContractInfo = NULL;
 	m_pQuotesInfo = NULL;
-	m_pNodeRootQuotes = NULL;
+	m_pTreeItemQuotes_Root = NULL;
 	m_pUtilityFun = NULL;
 
 	m_pUtilityFun = new CProjectUtilityFun();
@@ -248,19 +256,19 @@ void CClientDataManagerWorker::_InitMVCDataForContract()
 {
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
-		if (NULL != m_pNodeRootContract)
+		if (NULL != m_pTreeItemContract_Root)
 		{
-			delete m_pNodeRootContract;
-			m_pNodeRootContract = NULL;
+			delete m_pTreeItemContract_Root;
+			m_pTreeItemContract_Root = NULL;
 		}
 
 		QList<QVariant> dataColumn;
 		QString strMapKey;
 		dataColumn.clear();
 		dataColumn.push_back("DataType_Root");
-		m_pNodeRootContract = new CTreeItemContract(dataColumn, NULL);
-		m_pNodeRootContract->setDataType(CTreeItemContract::DataTypeContract_Root);
-		m_pNodeRootContract->setInstrumentID(0);
+		m_pTreeItemContract_Root = new CTreeItemContract(dataColumn, NULL);
+		m_pTreeItemContract_Root->setDataType(CTreeItemContract::DataTypeContract_Root);
+		m_pTreeItemContract_Root->setInstrumentID(0);
 		m_pContractInfo = new CContractInfo();
 	}
 
@@ -272,10 +280,10 @@ void CClientDataManagerWorker::_UnInitMVCDataForContract()
 {
 	boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
 
-	if (NULL != m_pNodeRootContract)
+	if (NULL != m_pTreeItemContract_Root)
 	{
-		delete m_pNodeRootContract;
-		m_pNodeRootContract = NULL;
+		delete m_pTreeItemContract_Root;
+		m_pTreeItemContract_Root = NULL;
 	}
 
 	if (NULL != m_pContractInfo)
@@ -291,41 +299,93 @@ void CClientDataManagerWorker::_UnInitMVCDataForContract()
 void CClientDataManagerWorker::_InitMVCDataForQuotes()
 {
 	boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
-	if (NULL != m_pNodeRootQuotes)
+	if (NULL != m_pTreeItemQuotes_Root)
 	{
-		delete m_pNodeRootQuotes;
-		m_pNodeRootQuotes = NULL;
+		delete m_pTreeItemQuotes_Root;
+		m_pTreeItemQuotes_Root = NULL;
 	}
 
 	//root node save all column Names
 	QList<QVariant> dataTreeItem;
 	CTreeItemQuotes::getLstClumnName(dataTreeItem);
-	m_pNodeRootQuotes = new CTreeItemQuotes(dataTreeItem, NULL);
-	m_pNodeRootQuotes->setDataType(CTreeItemQuotes::DataTypeSmartQuotes_Root);
-	m_pNodeRootQuotes->rootNodeRetColumnsName();
+	m_pTreeItemQuotes_Root = new CTreeItemQuotes(dataTreeItem, NULL);
+	m_pTreeItemQuotes_Root->setDataType(CTreeItemQuotes::ItemDataType_ROOT);
+	m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
 
 	m_pQuotesInfo = new CQuotesInfo();
 
 	LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
-		<<" "<<"m_pNodeRootQuotes=ox"<<m_pNodeRootQuotes;
+		<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
 
-	emit signalQuotesInfoChanged(m_pNodeRootQuotes);
+	emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 
 }
 void CClientDataManagerWorker::_UnInitMVCDataForQuotes()
 {
 	boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
 
-	if (NULL != m_pNodeRootQuotes)
+	if (NULL != m_pTreeItemQuotes_Root)
 	{
-		delete m_pNodeRootQuotes;
-		m_pNodeRootQuotes = NULL;
+		delete m_pTreeItemQuotes_Root;
+		m_pTreeItemQuotes_Root = NULL;
 	}
 
 	if (NULL != m_pQuotesInfo)
 	{
 		delete m_pQuotesInfo;
 		m_pQuotesInfo = NULL;
+	}
+
+}
+
+
+
+void CClientDataManagerWorker::_InitMVCDataForOrder()
+{
+	boost::mutex::scoped_lock lock(m_mutexForMapOrder);	
+	if (NULL != m_pTreeItemOrder_root)
+	{
+		delete m_pTreeItemOrder_root;
+		m_pTreeItemOrder_root = NULL;
+	}
+
+	//root node save all column Names
+	QList<QVariant> dataTreeItem;
+	CTreeItemOrder::getLstClumnName(dataTreeItem);
+	m_pTreeItemOrder_root = new CTreeItemOrder(dataTreeItem, NULL);
+	m_pTreeItemOrder_root->setDataType(CTreeItemOrder::ItemDataType_ROOT);
+	m_pTreeItemOrder_root->rootNodeSetColumnsName();
+
+	m_pOrderInfo = new COrderInfo();
+
+	{
+		LOG_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CClientDataManagerWorker"
+			<<" "<<"fun:"<<"_UpdateOrderInfo()"
+			<<" "<<"emit"
+			<<" "<<"signalOrderInfoChanged()"
+			<<" "<<"param:"
+			<<" "<<"m_pTreeItemOrder_root=0x"<<m_pTreeItemOrder_root;
+
+		emit signalOrderInfoChanged(m_pTreeItemOrder_root);
+	}
+
+
+}
+void CClientDataManagerWorker::_UnInitMVCDataForOrder()
+{
+	boost::mutex::scoped_lock lock(m_mutexForMapOrder);	
+
+	if (NULL != m_pTreeItemOrder_root)
+	{
+		delete m_pTreeItemOrder_root;
+		m_pTreeItemOrder_root = NULL;
+	}
+
+	if (NULL != m_pOrderInfo)
+	{
+		delete m_pOrderInfo;
+		m_pOrderInfo = NULL;
 	}
 
 }
@@ -352,12 +412,12 @@ void CClientDataManagerWorker::onInstrumentDownloaded( const Instrument& instrum
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
 		m_pContractInfo->setValue(instrument);
-		m_pNodeRootContract->appendThreeChild(m_pContractInfo);
+		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
 
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
-			<<""<<"m_pNodeRootContract=0x"<<m_pNodeRootContract;
+			<<""<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
 
-		emit signalContractInfoChanged(m_pNodeRootContract);
+		emit signalContractInfoChanged(m_pTreeItemContract_Root);
 	}
 
 
@@ -408,11 +468,11 @@ void CClientDataManagerWorker::onMarketDataUpdate(const Instrument& instrument)
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
-		m_pNodeRootQuotes->resetChildrenData(m_pQuotesInfo);
-		m_pNodeRootQuotes->rootNodeRetColumnsName();
+		m_pTreeItemQuotes_Root->resetChildrenData(m_pQuotesInfo);
+		m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
-			<<" "<<"m_pNodeRootQuotes=ox"<<m_pNodeRootQuotes;
-		emit signalQuotesInfoChanged(m_pNodeRootQuotes);
+			<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
+		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
 
 
@@ -472,11 +532,11 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
-		m_pNodeRootQuotes->appendChildByData(m_pQuotesInfo);
-		m_pNodeRootQuotes->rootNodeRetColumnsName();
+		m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
+		m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
-			<<" "<<"m_pNodeRootQuotes=ox"<<m_pNodeRootQuotes;
-		emit signalQuotesInfoChanged(m_pNodeRootQuotes);
+			<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
+		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
 	
 
@@ -529,10 +589,10 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 		
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
-		m_pNodeRootContract->appendThreeChild(m_pContractInfo);
+		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
-			<<""<<"m_pNodeRootContract=0x"<<m_pNodeRootContract;
-		emit signalContractInfoChanged(m_pNodeRootContract);
+			<<""<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
+		emit signalContractInfoChanged(m_pTreeItemContract_Root);
 	}
 
 
@@ -589,23 +649,23 @@ void CClientDataManagerWorker::_Test()
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
 		m_pContractInfo->setDefaultValue();
-		m_pNodeRootContract->appendThreeChild(m_pContractInfo);
+		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
 
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
-			<<""<<"m_pNodeRootContract=0x"<<m_pNodeRootContract;
+			<<""<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
 
-		emit signalContractInfoChanged(m_pNodeRootContract);
+		emit signalContractInfoChanged(m_pTreeItemContract_Root);
 	}
 
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);
 		m_pQuotesInfo->setDefaultValue();
-		m_pNodeRootQuotes->appendChildByData(m_pQuotesInfo);
-		m_pNodeRootQuotes->rootNodeRetColumnsName();
+		m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
+		m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
-			<<" "<<"m_pNodeRootQuotes=ox"<<m_pNodeRootQuotes;
-		emit signalQuotesInfoChanged(m_pNodeRootQuotes);
+			<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
+		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
 
 
@@ -633,16 +693,16 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 	{
 		boost::mutex::scoped_lock lockMutexForNodeRootQuotes(m_mutexForNodeRootQuotes);
 		//delete old data
-		if (NULL != m_pNodeRootQuotes)
+		if (NULL != m_pTreeItemQuotes_Root)
 		{
-			delete m_pNodeRootQuotes;
-			m_pNodeRootQuotes = NULL;
+			delete m_pTreeItemQuotes_Root;
+			m_pTreeItemQuotes_Root = NULL;
 		}
 		//new root data
 		QList<QVariant> dataTreeItem;
 		CTreeItemQuotes::getLstClumnName(dataTreeItem);
-		m_pNodeRootQuotes = new CTreeItemQuotes(dataTreeItem, NULL);
-		m_pNodeRootQuotes->setDataType(CTreeItemQuotes::DataTypeSmartQuotes_Root);
+		m_pTreeItemQuotes_Root = new CTreeItemQuotes(dataTreeItem, NULL);
+		m_pTreeItemQuotes_Root->setDataType(CTreeItemQuotes::ItemDataType_ROOT);
 	}
 
 	{
@@ -658,7 +718,7 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 				iterFind = m_MapInstrumentIDData.find(nInstrumentID);
 				pInstrument = iterFind.value();
 				m_pQuotesInfo->setValue(*pInstrument);
-				m_pNodeRootQuotes->appendChildByData(m_pQuotesInfo);
+				m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
 			}//if
 		}//foreach
 
@@ -667,9 +727,9 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 			<<" "<<"emit"
 			<<" "<<"signalQuotesInfoChanged(CTreeItemQuotes*)"
 			<<" "<<"param:"
-			<<" "<<"m_pNodeRootQuotes=0x"<<m_pNodeRootQuotes;
+			<<" "<<"m_pNodeRootQuotes=0x"<<m_pTreeItemQuotes_Root;
 
-		emit signalQuotesInfoChanged(m_pNodeRootQuotes);
+		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
 
 	return;
@@ -721,17 +781,35 @@ void CClientDataManagerWorker::_UpdateOrderInfo(const Order &order)
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
+
+		m_pOrderInfo->setValue(order);
+
 		if (m_MapOrder.contains(order.getOrderID()))
 		{
 			iterMap = m_MapOrder.find(order.getOrderID());
 			pOrder = iterMap.value();
 			*pOrder = order;
+			m_pTreeItemOrder_root->resetChildrenData(m_pOrderInfo);
 		}
 		else
 		{
 			pOrder = (Order*)&order;
 			m_MapOrder.insert(order.getOrderID(), pOrder);
+			m_pTreeItemOrder_root->appendChildByData(m_pOrderInfo);
 		}
+	}
+
+
+	{
+		LOG_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CClientDataManagerWorker"
+			<<" "<<"fun:"<<"_UpdateOrderInfo()"
+			<<" "<<"emit"
+			<<" "<<"signalOrderInfoChanged()"
+			<<" "<<"param:"
+			<<" "<<"m_pTreeItemOrder_root=0x"<<m_pTreeItemOrder_root;
+
+		emit signalOrderInfoChanged(m_pTreeItemOrder_root);
 	}
 }
 

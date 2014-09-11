@@ -13,8 +13,8 @@ QT_BEGIN_NAMESPACE
 class QVBoxLayout;
 QT_END_NAMESPACE
 
-class CTreeModelQuotes;
-class CTreeItemQuotes;
+class CTreeModelOrder;
+class CTreeItemOrder;
 
 class CBottomDockWidget : public QWidget
 {
@@ -37,14 +37,14 @@ public slots:
 	/*
 	class: CClientDataManagerWorker
 	signals:
-	void signalQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
-	fun send signals: slotAddContractToSmartQuotes()
+	void signalOrderInfoChanged(CTreeItemOrder* pTreeItem);
+	fun send signals: _InitMVCDataForOrder() slotAddContractToSmartQuotes()
 
-	class: CSmartHotQuotesWindow
+	class: CBottomDockWidget
 	public slots: 
-	void slotQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
+	void slotOrderInfoChanged(CTreeItemOrder* pTreeItem);
 	*/
-	void slotQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
+	void slotOrderInfoChanged(CTreeItemOrder* pTreeItem);
 
 signals:
 
@@ -56,7 +56,7 @@ private:
 	QVBoxLayout* m_pVBoxLayout;
 	QTabWidget* m_pTabWidget;
 private:
-	CTreeModelQuotes* m_pTreeModelQuotes;
+	CTreeModelOrder* m_pTreeModel_Order;
 public:
 	QTableView* m_pTableView_Order;
 

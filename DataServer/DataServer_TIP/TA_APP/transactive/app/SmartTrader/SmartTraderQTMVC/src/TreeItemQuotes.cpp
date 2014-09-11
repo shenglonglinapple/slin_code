@@ -118,7 +118,7 @@ CTreeItemQuotes::CTreeItemQuotes(const QList<QVariant> &data, CTreeItemQuotes *p
 	m_pParentItem = parent;
 	m_ItemData = data;
 	m_ItemDataNum = m_ItemData.count();
-	m_nDataType = DataTypeSmartQuotes_Instrument;
+	m_nDataType = ItemDataType_ITEM;
 	m_nInstrumentPriceChange = IconDelegate::InstrumentPriceChange_NoQuotes;
 	m_nInstrumentID = 0;
 	m_strInstrumentCode = "0";
@@ -137,7 +137,7 @@ CTreeItemQuotes::CTreeItemQuotes()
 	m_pParentItem = NULL;
 	m_ItemData = dataTreeItem;
 	m_ItemDataNum = m_ItemData.count();
-	m_nDataType = CTreeItemQuotes::DataTypeSmartQuotes_Root;
+	m_nDataType = CTreeItemQuotes::ItemDataType_ROOT;
 
 }
 
@@ -236,7 +236,7 @@ void CTreeItemQuotes::appendChildByData(CQuotesInfo* pExchangeInfo)
 
 	pTreeItemInstrumentCode = new CTreeItemQuotes(dataTreeItem, this);
 	pTreeItemInstrumentCode->resetCurrentNodeData(pExchangeInfo);
-	pTreeItemInstrumentCode->setDataType(DataTypeSmartQuotes_Instrument);
+	pTreeItemInstrumentCode->setDataType(ItemDataType_ITEM);
 
 	this->appendChild(&pTreeItemInstrumentCode);
 	pTreeItemInstrumentCode = NULL;
@@ -448,12 +448,12 @@ bool CTreeItemQuotes::removeChildren( int position, int count )
 	return true;
 }
 
-void CTreeItemQuotes::setDataType( enDataTypeSmartQuotes nDataTypeExchange )
+void CTreeItemQuotes::setDataType( enItemDataType nDataTypeExchange )
 {
 	m_nDataType = nDataTypeExchange;
 }
 
-CTreeItemQuotes::enDataTypeSmartQuotes CTreeItemQuotes::getDataType()
+CTreeItemQuotes::enItemDataType CTreeItemQuotes::getDataType()
 {
 	return m_nDataType;
 }
@@ -700,7 +700,7 @@ bool CTreeItemQuotes::insertChildren( int position, int count, int columns )
 		CTreeItemQuotes* pTreeItemInstrumentCode = NULL;
 		pTreeItemInstrumentCode = new CTreeItemQuotes(dataTreeItem, this);
 		pTreeItemInstrumentCode->resetCurrentNodeDataDefultValue();
-		pTreeItemInstrumentCode->setDataType(DataTypeSmartQuotes_Instrument);
+		pTreeItemInstrumentCode->setDataType(ItemDataType_ITEM);
 		m_LstChildItems.insert(position, pTreeItemInstrumentCode);
 		pTreeItemInstrumentCode = NULL;
 
@@ -779,7 +779,7 @@ float CTreeItemQuotes::getLastPrice()
 
 void CTreeItemQuotes::rootNodeRetColumnsName()
 {
-	if (CTreeItemQuotes::DataTypeSmartQuotes_Root != m_nDataType)
+	if (CTreeItemQuotes::ItemDataType_ROOT != m_nDataType)
 	{
 		return;
 	}
@@ -789,7 +789,7 @@ void CTreeItemQuotes::rootNodeRetColumnsName()
 	CTreeItemQuotes::getLstClumnName(m_ItemData);
 
 	m_ItemDataNum = m_ItemData.count();
-	this->setDataType(CTreeItemQuotes::DataTypeSmartQuotes_Root);
+	this->setDataType(CTreeItemQuotes::ItemDataType_ROOT);
 }
 
 

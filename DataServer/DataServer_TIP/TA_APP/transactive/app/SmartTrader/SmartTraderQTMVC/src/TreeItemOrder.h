@@ -21,11 +21,11 @@ class COrderInfo;
 class CTreeItemOrder
 {
 public:
-	enum enDataTypeOrder
+	enum enItemDataType
 	{ 
-		DataTypeOrder_NULL,
-		DataTypeOrder_Root,
-		DataTypeOrder_OrderInfo,
+		ItemDataType_NULL,
+		ItemDataType_ROOT,
+		ItemDataType_ITEM,
 
 	};
 public:
@@ -58,15 +58,15 @@ public:
 	int indexOfChildren(CTreeItemOrder* pChildrenItem) const;
 
 public:
-	void rootNodeRetColumnsName();
+	void rootNodeSetColumnsName();
 public:
 	void appendChildByData(COrderInfo* pData);
 	void resetChildrenData(COrderInfo* pData);
 	void resetCurrentNodeData(COrderInfo* pData );
 	void resetCurrentNodeDataDefultValue();
 
-	void setDataType(enDataTypeOrder nDataTypeExchange);
-	enDataTypeOrder getDataType();
+	void setDataType(enItemDataType nDataTypeExchange);
+	enItemDataType getDataType();
 	unsigned int getKey();
 
 public:
@@ -81,7 +81,7 @@ private:
     QList<QVariant> m_ItemData;
 	int  m_ItemDataNum;
 private:
-	enDataTypeOrder m_nDataType;
+	enItemDataType m_nDataType;
 private:
 	unsigned int m_nKey;
 

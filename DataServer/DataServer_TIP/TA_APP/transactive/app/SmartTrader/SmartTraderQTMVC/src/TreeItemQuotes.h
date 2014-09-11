@@ -21,11 +21,11 @@ class CQuotesInfo;
 class CTreeItemQuotes
 {
 public:
-	enum enDataTypeSmartQuotes
+	enum enItemDataType
 	{ 
-		DataTypeSmartQuotes_NULL,
-		DataTypeSmartQuotes_Root,
-		DataTypeSmartQuotes_Instrument,
+		ItemDataType_NULL,
+		ItemDataType_ROOT,
+		ItemDataType_ITEM,
 
 	};
 public:
@@ -65,8 +65,8 @@ public:
 	void resetCurrentNodeData(CQuotesInfo* pExchangeInfo );
 	void resetCurrentNodeDataDefultValue();
 
-	void setDataType(enDataTypeSmartQuotes nDataTypeExchange);
-	enDataTypeSmartQuotes getDataType();
+	void setDataType(enItemDataType nDataTypeExchange);
+	enItemDataType getDataType();
 	IconDelegate::enInstrumentPriceChange getInstrumentPriceChange();
 	unsigned int getInstrumentID();
 	QString getInstrumentCode();
@@ -84,7 +84,7 @@ private:
     QList<QVariant> m_ItemData;
 	int  m_ItemDataNum;
 private:
-	enDataTypeSmartQuotes m_nDataType;
+	enItemDataType m_nDataType;
 private:
 	IconDelegate::enInstrumentPriceChange m_nInstrumentPriceChange;
 	unsigned int m_nInstrumentID ;

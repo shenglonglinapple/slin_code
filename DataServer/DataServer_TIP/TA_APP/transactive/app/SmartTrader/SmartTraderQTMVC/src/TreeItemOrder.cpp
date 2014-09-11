@@ -37,7 +37,7 @@ CTreeItemOrder::CTreeItemOrder(const QList<QVariant> &data, CTreeItemOrder *pare
 	m_pParentItem = parent;
 	m_ItemData = data;
 	m_ItemDataNum = m_ItemData.count();
-	m_nDataType = DataTypeOrder_NULL;
+	m_nDataType = ItemDataType_NULL;
 ;
 }
 
@@ -53,7 +53,7 @@ CTreeItemOrder::CTreeItemOrder()
 	m_pParentItem = NULL;
 	m_ItemData = dataTreeItem;
 	m_ItemDataNum = m_ItemData.count();
-	m_nDataType = DataTypeOrder_NULL;
+	m_nDataType = ItemDataType_NULL;
 
 }
 
@@ -152,7 +152,7 @@ void CTreeItemOrder::appendChildByData(COrderInfo* pData)
 
 	pTreeItemInstrumentCode = new CTreeItemOrder(dataTreeItem, this);
 	pTreeItemInstrumentCode->resetCurrentNodeData(pData);
-	pTreeItemInstrumentCode->setDataType(DataTypeOrder_OrderInfo);
+	pTreeItemInstrumentCode->setDataType(ItemDataType_ITEM);
 
 	this->appendChild(&pTreeItemInstrumentCode);
 	pTreeItemInstrumentCode = NULL;
@@ -168,7 +168,7 @@ void CTreeItemOrder::_GetItemDataFromClass(COrderInfo* pData, QList<QVariant>& i
 	CTreeItemOrder::getLstClumnName(strlstClumnNameShow);
 
 	itemDataTmp.clear();
-	m_nKey = pData->getValueByName(DEFVALUE_String_ColumnName_Data_Key.c_str());
+	m_nKey = pData->getValueByName(DEFVALUE_String_ColumnName_Data_Key.c_str()).toUInt();
 
 	foreach (const QString& strColumnName, strlstClumnNameShow)
 	{
@@ -257,12 +257,12 @@ bool CTreeItemOrder::removeChildren( int position, int count )
 	return true;
 }
 
-void CTreeItemOrder::setDataType( enDataTypeOrder nDataTypeExchange )
+void CTreeItemOrder::setDataType( enItemDataType nDataTypeExchange )
 {
 	m_nDataType = nDataTypeExchange;
 }
 
-CTreeItemOrder::enDataTypeOrder CTreeItemOrder::getDataType()
+CTreeItemOrder::enItemDataType CTreeItemOrder::getDataType()
 {
 	return m_nDataType;
 }
@@ -315,7 +315,7 @@ bool CTreeItemOrder::insertChildren( int position, int count, int columns )
 		CTreeItemOrder* pTreeItemInstrumentCode = NULL;
 		pTreeItemInstrumentCode = new CTreeItemOrder(dataTreeItem, this);
 		pTreeItemInstrumentCode->resetCurrentNodeDataDefultValue();
-		pTreeItemInstrumentCode->setDataType(DataTypeOrder_OrderInfo);
+		pTreeItemInstrumentCode->setDataType(ItemDataType_ITEM);
 		m_LstChildItems.insert(position, pTreeItemInstrumentCode);
 		pTreeItemInstrumentCode = NULL;
 
@@ -383,9 +383,9 @@ bool CTreeItemOrder::setData( int column, const QVariant &dataValue )
 }
 
 
-void CTreeItemOrder::rootNodeRetColumnsName()
+void CTreeItemOrder::rootNodeSetColumnsName()
 {
-	if (CTreeItemOrder::DataTypeOrder_Root != m_nDataType)
+	if (CTreeItemOrder::ItemDataType_ROOT != m_nDataType)
 	{
 		return;
 	}
@@ -395,7 +395,7 @@ void CTreeItemOrder::rootNodeRetColumnsName()
 	CTreeItemOrder::getLstClumnName(m_ItemData);
 
 	m_ItemDataNum = m_ItemData.count();
-	this->setDataType(CTreeItemOrder::DataTypeOrder_Root);
+	this->setDataType(CTreeItemOrder::ItemDataType_ROOT);
 }
 
 unsigned int CTreeItemOrder::getKey()

@@ -1,4 +1,4 @@
-#include "TreeModelQuotes.h"
+#include "TreeModelOrder.h"
 
 
 //qt sys
@@ -13,34 +13,34 @@
 #include <QtCore/QModelIndex>
 
 
-#include "TreeItemContract.h"
+#include "TreeItemOrder.h"
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
 
 
 
-CTreeModelQuotes::CTreeModelQuotes(QObject *parent)
+CTreeModelOrder::CTreeModelOrder(QObject *parent)
     : QAbstractItemModel(parent)
 {
 	m_pRootItemCopy = NULL;
 }
 
 
-CTreeModelQuotes::~CTreeModelQuotes()
+CTreeModelOrder::~CTreeModelOrder()
 {
 	m_pRootItemCopy = NULL;
 }
 
 
 
-int CTreeModelQuotes::columnCount(const QModelIndex &parent) const
+int CTreeModelOrder::columnCount(const QModelIndex &parent) const
 {
 	int nColumnCount = 0;
 
     if (parent.isValid())
 	{
-        nColumnCount = static_cast<CTreeItemQuotes*>(parent.internalPointer())->columnCount();
+        nColumnCount = static_cast<CTreeItemOrder*>(parent.internalPointer())->columnCount();
 	}
     else
 	{
@@ -52,9 +52,9 @@ int CTreeModelQuotes::columnCount(const QModelIndex &parent) const
 
 
 
-QVariant CTreeModelQuotes::data(const QModelIndex &index, int role) const
+QVariant CTreeModelOrder::data(const QModelIndex &index, int role) const
 {
-	CTreeItemQuotes* item = NULL;
+	CTreeItemOrder* item = NULL;
 
     if (!index.isValid())
 	{
@@ -66,18 +66,18 @@ QVariant CTreeModelQuotes::data(const QModelIndex &index, int role) const
         return QVariant();
 	}
 
-    item = static_cast<CTreeItemQuotes*>(index.internalPointer());
+    item = static_cast<CTreeItemOrder*>(index.internalPointer());
 
     return item->data(index.column());
 }
 
 
 
-Qt::ItemFlags CTreeModelQuotes::flags(const QModelIndex &index) const
+Qt::ItemFlags CTreeModelOrder::flags(const QModelIndex &index) const
 {
 	Qt::ItemFlags nFlagsTreeItem;
-	CTreeItemQuotes* pTreeItem = NULL;
-	CTreeItemQuotes::enItemDataType nDataType = CTreeItemQuotes::ItemDataType_ITEM;
+	CTreeItemOrder* pTreeItem = NULL;
+	CTreeItemOrder::enItemDataType nDataType = CTreeItemOrder::ItemDataType_ITEM;
 
     if (!index.isValid())
 	{
@@ -87,7 +87,7 @@ Qt::ItemFlags CTreeModelQuotes::flags(const QModelIndex &index) const
 
     //return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 
-	pTreeItem = static_cast<CTreeItemQuotes*>(index.internalPointer());
+	pTreeItem = static_cast<CTreeItemOrder*>(index.internalPointer());
 
 	if (NULL == pTreeItem)
 	{
@@ -96,7 +96,7 @@ Qt::ItemFlags CTreeModelQuotes::flags(const QModelIndex &index) const
 	}
 
 	nDataType = pTreeItem->getDataType();
-	if (CTreeItemQuotes::ItemDataType_ITEM == nDataType)
+	if (CTreeItemOrder::ItemDataType_ITEM == nDataType)
 	{
 		//nFlagsTreeItem = Qt::ItemIsEditable;
 		nFlagsTreeItem = Qt::ItemIsEnabled | Qt::ItemIsSelectable |  Qt::ItemIsEditable;
@@ -109,7 +109,7 @@ Qt::ItemFlags CTreeModelQuotes::flags(const QModelIndex &index) const
 
 
 
-QVariant CTreeModelQuotes::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant CTreeModelOrder::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
@@ -123,10 +123,10 @@ QVariant CTreeModelQuotes::headerData(int section, Qt::Orientation orientation, 
 
 
 
-QModelIndex CTreeModelQuotes::index(int row, int column, const QModelIndex &parent) const
+QModelIndex CTreeModelOrder::index(int row, int column, const QModelIndex &parent) const
 {
-	CTreeItemQuotes* parentItem = NULL;
-	CTreeItemQuotes* childItem = NULL;
+	CTreeItemOrder* parentItem = NULL;
+	CTreeItemOrder* childItem = NULL;
 
     if (!hasIndex(row, column, parent))
 	{
@@ -139,7 +139,7 @@ QModelIndex CTreeModelQuotes::index(int row, int column, const QModelIndex &pare
 	}
     else
 	{
-        parentItem = static_cast<CTreeItemQuotes*>(parent.internalPointer());
+        parentItem = static_cast<CTreeItemOrder*>(parent.internalPointer());
 	}
 
     childItem = parentItem->child(row);
@@ -157,17 +157,17 @@ QModelIndex CTreeModelQuotes::index(int row, int column, const QModelIndex &pare
 
 
 
-QModelIndex CTreeModelQuotes::parent(const QModelIndex &index) const
+QModelIndex CTreeModelOrder::parent(const QModelIndex &index) const
 {
-	CTreeItemQuotes* childItem = NULL;
-	CTreeItemQuotes* parentItem = NULL;
+	CTreeItemOrder* childItem = NULL;
+	CTreeItemOrder* parentItem = NULL;
 
     if (!index.isValid())
 	{
         return QModelIndex();
 	}
 
-    childItem = static_cast<CTreeItemQuotes*>(index.internalPointer());
+    childItem = static_cast<CTreeItemOrder*>(index.internalPointer());
     parentItem = childItem->parent();
 
     if (parentItem == m_pRootItemCopy)
@@ -180,9 +180,9 @@ QModelIndex CTreeModelQuotes::parent(const QModelIndex &index) const
 
 
 
-int CTreeModelQuotes::rowCount(const QModelIndex &parent) const
+int CTreeModelOrder::rowCount(const QModelIndex &parent) const
 {
-    CTreeItemQuotes* parentItem = NULL;
+    CTreeItemOrder* parentItem = NULL;
     if (parent.column() > 0)
 	{
         return 0;
@@ -194,22 +194,22 @@ int CTreeModelQuotes::rowCount(const QModelIndex &parent) const
 	}
     else
 	{
-        parentItem = static_cast<CTreeItemQuotes*>(parent.internalPointer());
+        parentItem = static_cast<CTreeItemOrder*>(parent.internalPointer());
 	}
 
     return parentItem->childCount();
 }
 
-void CTreeModelQuotes::setRootItem( CTreeItemQuotes* rootItem )
+void CTreeModelOrder::setRootItem( CTreeItemOrder* rootItem )
 {
 	m_pRootItemCopy = rootItem;
 	reset();
 }
 
 
-bool CTreeModelQuotes::removeRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
+bool CTreeModelOrder::removeRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
 {
-	CTreeItemQuotes* parentItem = _GetItem(parent);
+	CTreeItemOrder* parentItem = _GetItem(parent);
 	bool success = true;
 
 	beginRemoveRows(parent, position, position + rows - 1);
@@ -220,13 +220,13 @@ bool CTreeModelQuotes::removeRows( int position, int rows, const QModelIndex &pa
 }
 
 
-CTreeItemQuotes* CTreeModelQuotes::_GetItem( const QModelIndex& index ) const
+CTreeItemOrder* CTreeModelOrder::_GetItem( const QModelIndex& index ) const
 {
-	CTreeItemQuotes *item = NULL;
+	CTreeItemOrder *item = NULL;
 
 	if (index.isValid()) 
 	{
-		item = static_cast<CTreeItemQuotes*>(index.internalPointer());
+		item = static_cast<CTreeItemOrder*>(index.internalPointer());
 		if (NULL != item) 
 		{
 			return item;
@@ -236,9 +236,9 @@ CTreeItemQuotes* CTreeModelQuotes::_GetItem( const QModelIndex& index ) const
 	return m_pRootItemCopy;
 }
 
-bool CTreeModelQuotes::insertRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
+bool CTreeModelOrder::insertRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
 {
-	CTreeItemQuotes *parentItem = _GetItem(parent);
+	CTreeItemOrder *parentItem = _GetItem(parent);
 	bool success;
 
 	beginInsertRows(parent, position, position + rows - 1);
@@ -248,7 +248,7 @@ bool CTreeModelQuotes::insertRows( int position, int rows, const QModelIndex &pa
 	return success;
 }
 
-bool CTreeModelQuotes::removeColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
+bool CTreeModelOrder::removeColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
 {
 	bool success;
 
@@ -264,7 +264,7 @@ bool CTreeModelQuotes::removeColumns( int position, int columns, const QModelInd
 	return success;
 }
 
-bool CTreeModelQuotes::insertColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
+bool CTreeModelOrder::insertColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
 {
 	bool success;
 
@@ -275,7 +275,7 @@ bool CTreeModelQuotes::insertColumns( int position, int columns, const QModelInd
 	return success;
 }
 
-bool CTreeModelQuotes::setHeaderData( int section, Qt::Orientation orientation, const QVariant &value, int role /*= Qt::EditRole*/ )
+bool CTreeModelOrder::setHeaderData( int section, Qt::Orientation orientation, const QVariant &value, int role /*= Qt::EditRole*/ )
 {
 	if (role != Qt::EditRole || orientation != Qt::Horizontal)
 		return false;
@@ -288,12 +288,12 @@ bool CTreeModelQuotes::setHeaderData( int section, Qt::Orientation orientation, 
 	return result;
 }
 
-bool CTreeModelQuotes::setData( const QModelIndex &index, const QVariant &value, int role /*= Qt::EditRole*/ )
+bool CTreeModelOrder::setData( const QModelIndex &index, const QVariant &value, int role /*= Qt::EditRole*/ )
 {
 	if (role != Qt::EditRole)
 		return false;
 
-	CTreeItemQuotes *item = _GetItem(index);
+	CTreeItemOrder *item = _GetItem(index);
 	bool result = item->setData(index.column(), value);
 
 	if (result)

@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 
 
 
-	//CClientManager objClientWindow;
+	CClientManager objClientWindow;
 
 	//CCreateNewOrderDialog* pCCreateNewOrderDialog = new CCreateNewOrderDialog(NULL);
 	//pCCreateNewOrderDialog->show();

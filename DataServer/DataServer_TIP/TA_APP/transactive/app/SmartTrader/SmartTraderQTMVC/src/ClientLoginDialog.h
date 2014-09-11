@@ -25,6 +25,7 @@ QT_END_NAMESPACE
 
 class CClientLoginParam;
 class CServerSettingDialog;
+class CPwdLineEdit;
 
 class CClientLoginDialog : public QDialog
 {
@@ -98,7 +99,7 @@ private:
 	QComboBox* m_pComboBox_UserName;
 
 	QLabel* m_pLabel_Password;
-	QLineEdit* m_pLineEdit_Password;
+	CPwdLineEdit* m_pLineEdit_Password;
 
 	QPushButton* m_pPushButtonSetting;
 	QPushButton* m_pPushButtonLogin;

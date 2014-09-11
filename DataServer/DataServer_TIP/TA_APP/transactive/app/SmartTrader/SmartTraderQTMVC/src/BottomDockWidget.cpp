@@ -5,8 +5,8 @@
 #include "ProjectQTInclude.h"
 
 #include "ClientDataManagerWorker.h"
-#include "TreeModelQuotes.h"
-#include "TreeItemQuotes.h"
+#include "TreeItemOrder.h"
+#include "TreeModelOrder.h"
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -18,17 +18,15 @@ USING_BOOST_LOG;
 //////////////////////////////////////////////////////////////////////////
 static int DEFVALUE_INT_Window_Width = 600;
 static int DEFVALUE_INT_Window_Height = 100;
-
-
-
+static const std::string   DEFVALUE_String_Window_Title = "OrderInfo";
 
 CBottomDockWidget::CBottomDockWidget(QWidget* parent)
     : QWidget(parent)
 {
 
 	m_pVBoxLayout = NULL;
-	m_pTreeModelQuotes = NULL;
-	m_pTableView_Order = NULL;//m_pTreeModelQuotes
+	m_pTreeModel_Order = NULL;
+	m_pTableView_Order = NULL;//
 
     setupUi();
 	translateLanguage();
@@ -63,13 +61,14 @@ void CBottomDockWidget::_CreateConnect()
 void CBottomDockWidget::setupUi()
 {
 	this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);
-	this->setWindowFlags(Qt::Dialog);
+	//this->setWindowFlags(Qt::Dialog);
 
 	m_pTabWidget = new QTabWidget(this);
 	m_pTabWidget->setTabPosition(QTabWidget::South);	//enum TabPosition { North, South, West, East
 
-	m_pTableView_Order = new CQuotesTableView(m_pTabWidget);
 
+	m_pTableView_Order = new QTableView(m_pTabWidget);
+	m_pTableView_Order->setFrameShape(QFrame::NoFrame); //设置无边框
 	
  	m_pVBoxLayout = new QVBoxLayout(this);
  	m_pVBoxLayout->addWidget(m_pTabWidget);
@@ -78,33 +77,36 @@ void CBottomDockWidget::setupUi()
 	//
 
 	this->setLayout(m_pVBoxLayout);
+	//设置窗体标题栏隐藏并设置位于顶层
+	this->setWindowFlags(Qt::FramelessWindowHint);
+	//可获取鼠标跟踪效果
+	this->setMouseTracking(true);
 
 
 	QMetaObject::connectSlotsByName(this);
 } 
 void CBottomDockWidget::translateLanguage()
 {
-	this->setWindowTitle(QObject::tr(DEFVALUE_String_ObjectName_CSmartHotQuotesWindow.c_str()));
-	m_pTabWidget->addTab(m_pTableView_Order, QObject::tr("Symbols"));
+	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_Title.c_str()));
+	m_pTabWidget->addTab(m_pTableView_Order, QObject::tr("OrderInfo"));
 
 }
 
-
-void CBottomDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
+void CBottomDockWidget::slotOrderInfoChanged( CTreeItemOrder* pTreeItem )
 {
-	LOG_DEBUG<<"CSmartHotQuotesWindow process slotQuotesInfoChanged"
-		<<" "<<"pTreeItem=ox"<<pTreeItem;
+	LOG_DEBUG<<"CBottomDockWidget process slotOrderInfoChanged"
+		<<" "<<"pTreeItem=0x"<<pTreeItem;
 
 	QModelIndex inValidIndex;
 
-	if (NULL == m_pTreeModelQuotes)
+	if (NULL == m_pTreeModel_Order)
 	{
 		//
-		m_pTreeModelQuotes = new CTreeModelQuotes(this);
-		m_pTreeModelQuotes->setRootItem(pTreeItem);
+		m_pTreeModel_Order = new CTreeModelOrder(this);
+		m_pTreeModel_Order->setRootItem(pTreeItem);
 
 		//mvc
-		m_pTableView_Order->setModel(m_pTreeModelQuotes);
+		m_pTableView_Order->setModel(m_pTreeModel_Order);
 		//m_pTreeView_Quotes->setColumnWidth(0, 200);
 		m_pTableView_Order->setCurrentIndex(inValidIndex);
 		m_pTableView_Order->resizeColumnsToContents();
@@ -112,7 +114,7 @@ void CBottomDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
 	}
 	else
 	{
-		m_pTreeModelQuotes->setRootItem(pTreeItem);
+		m_pTreeModel_Order->setRootItem(pTreeItem);
 		m_pTableView_Order->setCurrentIndex(inValidIndex);
 		m_pTableView_Order->resizeColumnsToContents();
 	}

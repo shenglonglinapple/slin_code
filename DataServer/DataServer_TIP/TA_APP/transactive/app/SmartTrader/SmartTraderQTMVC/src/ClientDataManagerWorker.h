@@ -24,6 +24,8 @@ class CTreeItemQuotes;
 class CClientLoginParam;
 class CSmartTraderClient;
 class CProjectUtilityFun;
+class COrderInfo;
+class CTreeItemOrder;
 
 
 
@@ -153,6 +155,19 @@ signals:
 	void signalQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
 
 
+	/*
+	class: CClientDataManagerWorker
+	signals:
+	void signalOrderInfoChanged(CTreeItemOrder* pTreeItem);
+	fun send signals: _InitMVCDataForOrder() slotAddContractToSmartQuotes() _UpdateOrderInfo()
+
+	class: CBottomDockWidget
+	public slots: 
+	void slotOrderInfoChanged(CTreeItemOrder* pTreeItem);
+	*/
+	void signalOrderInfoChanged(CTreeItemOrder* pTreeItem);
+
+
 public:
 	void onInstrumentDownloaded(const Instrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate(const Instrument& instrument);
@@ -192,8 +207,11 @@ private:
 	void _UnInitMVCDataForContract();
 	void _InitMVCDataForQuotes();
 	void _UnInitMVCDataForQuotes();
+	void _InitMVCDataForOrder();
+	void _UnInitMVCDataForOrder();
 private:
 	void _UpdateOrderInfo(const Order &order);
+
 private:
 	bool	m_toTerminate;
 	EThreadJobState  m_nThreadJobState;
@@ -203,12 +221,12 @@ private:
 private:
 	boost::mutex m_mutexForNodeRootContract;
 	CContractInfo* m_pContractInfo;
-	CTreeItemContract* m_pNodeRootContract;//total
+	CTreeItemContract* m_pTreeItemContract_Root;//total
 
 private:
 	boost::mutex m_mutexForNodeRootQuotes;
 	CQuotesInfo* m_pQuotesInfo;
-	CTreeItemQuotes* m_pNodeRootQuotes;//submarket
+	CTreeItemQuotes* m_pTreeItemQuotes_Root;//submarket
 
 private:
 	CClientLoginParam* m_pClientLoginParam;
@@ -221,7 +239,8 @@ private:
 private:
 	boost::mutex m_mutexForMapOrder;
 	QMap<unsigned int, Order*> m_MapOrder;//OrderID
-
+	COrderInfo* m_pOrderInfo;
+	CTreeItemOrder* m_pTreeItemOrder_root;
 	
 };
 

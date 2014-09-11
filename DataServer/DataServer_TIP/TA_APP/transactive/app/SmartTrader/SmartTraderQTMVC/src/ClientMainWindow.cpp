@@ -1,15 +1,21 @@
 #include "ClientMainWindow.h"
 
 #include "ProjectQTInclude.h"
+#include "Order.h"
+
 
 #include "ClientDataManagerWorker.h"
+
+
 #include "SmartHotQuotesWindow.h"
-#include "ClientDataManagerWorker.h"
-#include "TreeItemContract.h"
 #include "QuotesTableView.h"
+#include "TreeItemContract.h"
 #include "ContractInfoWindow.h"
 #include "CreateNewOrderDialog.h"
-#include "Order.h"
+
+
+#include "BottomDockWidget.h"
+#include "TreeItemOrder.h"
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -59,6 +65,7 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
 {
 	m_pClientDataManagerWorker = NULL;
 	m_pLeftDockWidget = NULL;
+	m_pBottomDockWidget = NULL;
 	m_pMdiArea = NULL;
 	m_pClientDataManagerWorker = new CClientDataManagerWorker();
 
@@ -172,6 +179,12 @@ void CClientMainWindow::_CreateConnect()
 		m_pLeftDockWidget, 
 		SLOT(slotQuotesInfoChanged(CTreeItemQuotes*))); 
 
+
+	QObject::connect(m_pClientDataManagerWorker, 
+		SIGNAL(signalOrderInfoChanged(CTreeItemOrder*)), 
+		m_pBottomDockWidget, 
+		SLOT(slotOrderInfoChanged(CTreeItemOrder*))); 
+
 }
 void CClientMainWindow::setupUi()
 {
@@ -180,11 +193,10 @@ void CClientMainWindow::setupUi()
 	QDockWidget* m_DockWidget_Bottom = NULL;
 	Qt::DockWidgetArea nDockWidgetFirstArea;
 	QWidget* pWindowOne = NULL;
-	QWidget* pWidget_Bottom = NULL;
 	
 	//add Samrt hot Quotes window
 	m_pLeftDockWidget = new CLeftDockWidget(this);
-	pWidget_Bottom = new QWidget(this);
+	m_pBottomDockWidget = new CBottomDockWidget(this);
 
 	m_DockWidget_Left = new QDockWidget(this);
 	m_DockWidget_Left->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
@@ -192,7 +204,7 @@ void CClientMainWindow::setupUi()
 
 	m_DockWidget_Bottom = new QDockWidget(this);
 	m_DockWidget_Bottom->setAllowedAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea);
-	m_DockWidget_Bottom->setWidget(pWidget_Bottom);
+	m_DockWidget_Bottom->setWidget(m_pBottomDockWidget);
 
 	
 
