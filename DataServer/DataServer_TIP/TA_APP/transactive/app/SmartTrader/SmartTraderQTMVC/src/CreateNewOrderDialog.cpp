@@ -127,6 +127,7 @@ void CCreateNewOrderDialog::setupUi()
 	m_pPushButtonBuy = new QPushButton(this);
 	//m_pPushButtonBuy->setMinimumSize(qSizeButtonBuy);
 
+
 	m_pPushButtonSell = new QPushButton(this);
 	//m_pPushButtonSell->setMinimumSize(qSizeButtonSell);
 

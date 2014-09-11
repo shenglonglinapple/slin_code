@@ -1,4 +1,7 @@
 #include "PwdLineEdit.h"
+
+#include <QtGui/QKeyEvent>
+#include <QtGui/QLineEdit>
 /*
 友好地提示用户，且不可复制、粘贴，实现密码的有力保护！
 在做用户登录界面的时候，往往会用到密码框，则其中的一些功能也要求与普通的输入框不同，包括不能全选、复制、粘贴、无右键菜单等、设置密码不可见等功能
