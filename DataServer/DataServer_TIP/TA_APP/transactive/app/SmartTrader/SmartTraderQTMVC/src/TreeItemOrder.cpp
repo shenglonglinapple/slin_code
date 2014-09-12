@@ -22,7 +22,37 @@ USING_BOOST_LOG;
 
 static const std::string DEFVALUE_String_ColumnName_Data_Key = "Key";//
 
+
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_CumQty = "CumQty";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_LastQty = "LastQty";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderQty = "OrderQty";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_LeavesQty = "LeavesQty";//
+
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_Price = "Price";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_Price2 = "Price2";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_LastPx = "LastPx";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_AvgPrice = "AvgPrice";//
+
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_Side = "Side";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderType = "OrderType";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderStatus = "OrderStatus";//
+
+
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_RejectReason = "RejectReason";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_Text = "Text";//
+
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_UserID = "UserID";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_ClOrdID = "ClOrdID";//
 static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderID = "OrderID";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_AccountID = "AccountID";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_StrategyID = "StrategyID";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_InstrumentID = "InstrumentID";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_TransactTime = "TransactTime";//
+
+
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderInfoMasks = "OrderInfoMasks";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_Fees = "Fees";//
+static const std::string DEFVALUE_String_ColumnName_OrderInfo_Margin = "Margin";//
 
 
 //NS_BEGIN(TA_App_App)
@@ -270,8 +300,86 @@ CTreeItemOrder::enItemDataType CTreeItemOrder::getDataType()
 
 void CTreeItemOrder::getLstClumnName(QStringList& strlstClumnName )
 {
+	QString strColumnName;
 	strlstClumnName.clear();
-	QString strColumnName = DEFVALUE_String_ColumnName_OrderInfo_OrderID.c_str();
+	
+	//	static const std::string DEFVALUE_String_ColumnName_OrderInfo_CumQty = "CumQty";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_CumQty.c_str();
+	strlstClumnName.push_back(strColumnName);
+
+	//	static const std::string DEFVALUE_String_ColumnName_OrderInfo_LastQty = "LastQty";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_LastQty.c_str();
+	strlstClumnName.push_back(strColumnName);
+
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderQty = "OrderQty";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_OrderQty.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_LeavesQty = "LeavesQty";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_LeavesQty.c_str();
+	strlstClumnName.push_back(strColumnName);
+
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_Price = "Price";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_Price.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_Price2 = "Price2";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_Price2.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_LastPx = "LastPx";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_LastPx.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_AvgPrice = "AvgPrice";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_AvgPrice.c_str();
+	strlstClumnName.push_back(strColumnName);
+
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_Side = "Side";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_Side.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderType = "OrderType";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_OrderType.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderStatus = "OrderStatus";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_OrderStatus.c_str();
+	strlstClumnName.push_back(strColumnName);
+
+
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_RejectReason = "RejectReason";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_RejectReason.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_Text = "Text";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_Text.c_str();
+	strlstClumnName.push_back(strColumnName);
+
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_UserID = "UserID";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_UserID.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_ClOrdID = "ClOrdID";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_ClOrdID.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderID = "OrderID";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_OrderID.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_AccountID = "AccountID";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_AccountID.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_StrategyID = "StrategyID";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_StrategyID.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_InstrumentID = "InstrumentID";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_InstrumentID.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_TransactTime = "TransactTime";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_TransactTime.c_str();
+	strlstClumnName.push_back(strColumnName);
+
+
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_OrderInfoMasks = "OrderInfoMasks";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_OrderInfoMasks.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_Fees = "Fees";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_Fees.c_str();
+	strlstClumnName.push_back(strColumnName);
+	//static const std::string DEFVALUE_String_ColumnName_OrderInfo_Margin = "Margin";//
+	strColumnName = DEFVALUE_String_ColumnName_OrderInfo_Margin.c_str();
 	strlstClumnName.push_back(strColumnName);
 
 	return;

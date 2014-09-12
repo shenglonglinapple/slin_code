@@ -275,12 +275,12 @@ void CCreateNewOrderDialog::_CreateConnect()
 	QObject::connect(m_pPushButtonBuy, 
 		SIGNAL(clicked(bool)),
 		this, 
-		SLOT(slotPushButtonBuyClicked()));
+		SLOT(slotPushButtonBuyClicked(bool)));
 
 	QObject::connect(m_pPushButtonSell, 
 		SIGNAL(clicked(bool)),
 		this, 
-		SLOT(slotPushButtonSellClicked()));
+		SLOT(slotPushButtonSellClicked(bool)));
 }
 
 

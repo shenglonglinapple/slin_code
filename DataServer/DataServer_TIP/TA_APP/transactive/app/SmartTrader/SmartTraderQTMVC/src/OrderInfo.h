@@ -45,6 +45,36 @@ private:
 	CProjectUtilityFun* m_pUtilityFun;
 public:
 	unsigned int m_nKey;
+
+public:
+	Order::Side m_side;
+	int m_cumQty;
+	int m_lastQty;
+	int m_orderQty;
+	int m_leavesQty;
+	int m_rejectReason;
+
+	float m_price;
+	float m_price2;
+	float m_lastPx;
+	float m_avgPrice;
+	Order::OrderType m_orderType;
+	Order::OrderStatus m_orderStatus;
+
+	unsigned int m_userID;
+	unsigned int m_orderID;
+	unsigned int m_clOrdID;
+	unsigned int m_strategyID;
+	unsigned int m_transactTime;
+	unsigned int m_orderInfoMasks;
+
+	unsigned int m_nAccountID;	
+	unsigned int m_nInstrumentID;
+
+	double m_fees;
+	double m_margin;
+
+	std::string m_text;
 }; 
 
 
