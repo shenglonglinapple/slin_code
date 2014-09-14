@@ -71,6 +71,7 @@ public:
 	unsigned int getInstrumentID();
 	QString getInstrumentCode();
 	float getLastPrice();
+	unsigned int getHotInstrumentIDByCode(const QString& strInstrumentCode);
 
 public:
 	static void getLstClumnName(QList<QVariant>& lstClumnName );

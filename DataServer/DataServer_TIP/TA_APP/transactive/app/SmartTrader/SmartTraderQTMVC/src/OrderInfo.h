@@ -40,41 +40,39 @@ public:
 	unsigned int getKey();
 private:
 	void _ClearData();
-
+	QString _GetStrOrderType(Order::OrderType nOrderType);
+	QString _GetStrOrderStatus(Order::OrderStatus nOrderStatus);
+	QString _GetStrOrderStatus(Order::Side nSide);
+	int _GetColumnValue_Filled(Order::OrderStatus nOrderStatus);
 private:
 	CProjectUtilityFun* m_pUtilityFun;
 public:
 	unsigned int m_nKey;
-
-public:
+	unsigned int m_orderID;
+	Order::OrderType m_orderType;
+	QString m_str_Column_OrderType;//Limit
+	QString m_str_Column_TIF;//有效时间
+	Order::OrderStatus m_orderStatus;
+	QString m_str_Column_OrderStatus;//NEW
+	QString m_strExchangeName;
+	QString m_strInstrumentCode;
+	QString m_str_Column_Account;//"CTS007"
 	Order::Side m_side;
-	int m_cumQty;
-	int m_lastQty;
+	QString m_str_Column_BuyOrSell;//
 	int m_orderQty;
-	int m_leavesQty;
-	int m_rejectReason;
-
+	int m_n_Column_Lots;//"Lots"
 	float m_price;
 	float m_price2;
-	float m_lastPx;
+	int m_n_Column_Filled;//"Filled"//0 1
 	float m_avgPrice;
-	Order::OrderType m_orderType;
-	Order::OrderStatus m_orderStatus;
-
-	unsigned int m_userID;
-	unsigned int m_orderID;
-	unsigned int m_clOrdID;
-	unsigned int m_strategyID;
 	unsigned int m_transactTime;
-	unsigned int m_orderInfoMasks;
-
-	unsigned int m_nAccountID;	
-	unsigned int m_nInstrumentID;
-
+	QString m_str_Column_Time;
+	int m_rejectReason;
+	std::string m_text;//RejectReason
 	double m_fees;
 	double m_margin;
-
-	std::string m_text;
+	QString m_Column_Contract;//合约//"SHFE/ag1409"
+	QString m_Column_Currency;// = "Currency";//货币//"CNY"
 }; 
 
 

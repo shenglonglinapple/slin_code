@@ -26,7 +26,7 @@ public:
 public:
 	void log_Instrument_info(const std::string& file, int line, const std::string& strLogInfo, const Instrument &instrument );
 	float checkFloatNanValue(const float& fValueTmp);
-
+	int getUTCOffset();
 };
 
 

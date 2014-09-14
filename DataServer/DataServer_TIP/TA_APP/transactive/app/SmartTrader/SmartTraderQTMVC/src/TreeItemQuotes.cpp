@@ -395,6 +395,29 @@ void CTreeItemQuotes::resetCurrentNodeDataDefultValue()
 }
 
 
+unsigned int CTreeItemQuotes::getHotInstrumentIDByCode(const QString& strInstrumentCode)
+{
+	CTreeItemQuotes* pTreeItemFind = NULL;
+	QList<CTreeItemQuotes*>::iterator iterLst;
+	unsigned int nInstrumentID = -1;
+
+	iterLst = m_LstChildItems.begin();
+	while (iterLst != m_LstChildItems.end())
+	{
+		pTreeItemFind = (*iterLst);
+
+		if (pTreeItemFind->getInstrumentCode() == strInstrumentCode)
+		{
+			nInstrumentID = pTreeItemFind->getInstrumentID();
+			return nInstrumentID;
+		}
+
+		iterLst++;
+	}
+	return nInstrumentID;
+
+}
+
 void CTreeItemQuotes::resetChildrenData(CQuotesInfo* pExchangeInfo )
 {
 	CTreeItemQuotes* pTreeItemFind = NULL;

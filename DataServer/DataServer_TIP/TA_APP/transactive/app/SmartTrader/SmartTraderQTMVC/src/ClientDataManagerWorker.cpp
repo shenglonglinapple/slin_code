@@ -43,11 +43,14 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 	m_pQuotesInfo = NULL;
 	m_pTreeItemQuotes_Root = NULL;
 	m_pUtilityFun = NULL;
+	m_pOrderInfo = NULL;
+	m_pTreeItemOrder_root = NULL;
 
 	m_pUtilityFun = new CProjectUtilityFun();
 
 	_InitMVCDataForContract();
 	_InitMVCDataForQuotes();
+	_InitMVCDataForOrder();
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
@@ -210,6 +213,7 @@ void CClientDataManagerWorker::_Process_StopWork()
 	_UnInitLoginParam();
 	_UnInitMVCDataForContract();
 	_UnInitMVCDataForQuotes();
+	_UnInitMVCDataForOrder();
 	m_nThreadJobState = JobState_End;
 }
 
@@ -813,6 +817,21 @@ void CClientDataManagerWorker::_UpdateOrderInfo(const Order &order)
 	}
 }
 
+unsigned int CClientDataManagerWorker::_GetInstrumentIDByInstruemntCode(const QString& strInstrumentCode)
+{
+	unsigned int nInstruemntID = -1;
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
+		nInstruemntID = m_pTreeItemQuotes_Root->getHotInstrumentIDByCode(strInstrumentCode);
+		LOG_DEBUG<<"strInstrumentCode="<<strInstrumentCode.toStdString()
+			<<" "<<"getHotInstrumentIDByCode"
+			<<" "<<"nInstruemntID="<<nInstruemntID;
+	}
+
+	return nInstruemntID;
+}
+
 void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity )
 {
 	//emit
@@ -835,18 +854,20 @@ void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType
 	std::string strLogInfo;
 	Instrument* pInstrumentGet = NULL;
 	Account* pAccount = NULL;
+	unsigned int nInstrumentCode = 0;
+	nInstrumentCode = _GetInstrumentIDByInstruemntCode(strInstrumentCode);//"IF1402"
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		if (false == m_MapInstrumentIDData.contains(strInstrumentCode.toUInt()))
+		if (false == m_MapInstrumentIDData.contains(nInstrumentCode))
 		{
-			LOG_ERROR<<"not find nInstrumentID="<<strInstrumentCode.toUInt()
+			LOG_ERROR<<"not find nInstrumentID="<<nInstrumentCode
 				<<" "<<"in m_MapInstrumentIDData"
 				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
 			return;
 		}
 
-		iterFind = m_MapInstrumentIDData.find(strInstrumentCode.toUInt());
+		iterFind = m_MapInstrumentIDData.find(nInstrumentCode);
 		//find ok
 		pInstrumentGet = iterFind.value();
 	}

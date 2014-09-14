@@ -210,6 +210,9 @@ private:
 	void _InitMVCDataForOrder();
 	void _UnInitMVCDataForOrder();
 private:
+	unsigned int _GetInstrumentIDByInstruemntCode(const QString& strInstrumentCode);
+
+private:
 	void _UpdateOrderInfo(const Order &order);
 
 private:

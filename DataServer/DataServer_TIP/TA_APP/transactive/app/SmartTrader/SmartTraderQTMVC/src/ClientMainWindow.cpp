@@ -1,21 +1,18 @@
 #include "ClientMainWindow.h"
 
+#include <QtGui/QTabWidget>
 #include "ProjectQTInclude.h"
 #include "Order.h"
 
-
 #include "ClientDataManagerWorker.h"
-
-
 #include "SmartHotQuotesWindow.h"
 #include "QuotesTableView.h"
 #include "TreeItemContract.h"
 #include "ContractInfoWindow.h"
 #include "CreateNewOrderDialog.h"
-
-
 #include "BottomDockWidget.h"
 #include "TreeItemOrder.h"
+
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -236,6 +233,8 @@ void CClientMainWindow::setupUi()
 
 
 	m_DockWidget_Left->setWindowTitle(QObject::tr("Market Watch:"));
+	m_DockWidget_Bottom->setWindowTitle(QObject::tr("Order Info:"));
+	//m_DockWidget_Bottom->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint);
 
 
 	QMetaObject::connectSlotsByName(this);
