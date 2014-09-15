@@ -54,6 +54,7 @@ private:
 
 public:
 	bool removeChildren(int position);
+	bool removeChildrenByData(const CContractInfo* pExchangeInfo);
 private:
 	//use map for sort string
 	QMap<QString, CTreeItemContract*> m_MapStringChildren;

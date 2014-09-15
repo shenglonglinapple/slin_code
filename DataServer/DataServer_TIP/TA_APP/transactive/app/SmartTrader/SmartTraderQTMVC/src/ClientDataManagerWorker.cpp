@@ -1,7 +1,7 @@
 #include "ClientDataManagerWorker.h"
 
 #include <QtCore/QStringList>
-
+#include "Bar.h"
 
 #include "ClientLoginParam.h"
 #include "SmartTraderClient.h"
@@ -534,6 +534,20 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 	}
 
+
+
+	{
+		//remove nInstrumentID from m_pTreeItemContract_Root
+		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+		m_pContractInfo->setValue(*pInstrument);
+		m_pTreeItemContract_Root->removeChildrenByData(m_pContractInfo);
+
+		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
+			<<""<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
+
+		emit signalContractInfoChanged(m_pTreeItemContract_Root);
+	}
+
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
 		m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
@@ -544,6 +558,26 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 	}
 	
 
+	//TODO. test
+	/// Download history data from server from a time span 
+// 	unsigned int downloadHistoryData( 
+// 		const Instrument &instrument, 
+// 		BarType interval, 
+// 		unsigned int from, 
+// 		unsigned int to );
+
+	BarType nBarType = DAY;
+	unsigned int nFromTime = 0;
+	unsigned int nToTime = 0;
+	//"%d-%d-%d %d:%d:%d"
+	nFromTime = m_pUtilityFun->strToDateTime("2013-01-01 01:01:01");
+	nToTime = m_pUtilityFun->strToDateTime("2014-01-01 01:01:01");
+
+	m_pMyTradeClient->downloadHistoryData(*pInstrument, nBarType, nFromTime, nToTime);
+
+	LOG_DEBUG<<" "<<"downloadHistoryData"
+		<<" "<<"getInstrumentID="<<pInstrument->getInstrumentID()
+		<<" "<<"getInstrumentCode="<<pInstrument->getInstrumentCode();
 
 }
 
@@ -961,6 +995,13 @@ void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType
 
 
 
+}
+
+void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
+{
+	LOG_DEBUG<<"onBarDataUpdate"
+		<<" "<<"barData.instrumentID="<<barData.instrumentID
+		<<" "<<"barData.bars.size="<<barData.bars.size();
 }
 
 

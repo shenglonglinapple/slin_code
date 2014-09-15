@@ -49,6 +49,8 @@ public:
 	/// Hook method when cancel request get rejected
 	virtual void onCancelReject(const Order &order) = 0;
 
+	/// Hook method when receive bar summary update
+	virtual void onBarDataUpdate(const BarSummary &barData) = 0;
 };
 
 

@@ -303,6 +303,55 @@ bool CTreeItemContract::removeChildren(int position)
 	return true;
 }
 
+
+bool CTreeItemContract::removeChildrenByData(const CContractInfo* pExchangeInfo)
+{
+	int nIndex = 0;
+	CTreeItemContract* pTreeItemTmp = NULL;
+	QMap<QString,CTreeItemContract*>::iterator iterMap;
+
+	iterMap = m_MapStringChildren.begin();
+
+	if (DataTypeContract_Root == this->m_nDataTypeExchange )
+	{
+		if (m_MapStringChildren.contains(pExchangeInfo->getExchangeName()))
+		{
+			iterMap = m_MapStringChildren.find(pExchangeInfo->getExchangeName());
+			pTreeItemTmp = iterMap.value();
+			pTreeItemTmp->removeChildrenByData(pExchangeInfo);
+
+		}
+	}
+	else if (DataTypeContract_ExchangeName == this->m_nDataTypeExchange )
+	{
+		if (m_MapStringChildren.contains(pExchangeInfo->getUnderlyingCode()))
+		{
+			iterMap = m_MapStringChildren.find(pExchangeInfo->getUnderlyingCode());
+			pTreeItemTmp = iterMap.value();
+			pTreeItemTmp->removeChildrenByData(pExchangeInfo);
+		}
+	}
+	else if (DataTypeContract_UnderlyingCode == this->m_nDataTypeExchange )
+	{
+		if (m_MapStringChildren.contains(pExchangeInfo->getInstrumentCode()))
+		{
+			iterMap = m_MapStringChildren.find(pExchangeInfo->getInstrumentCode());
+			pTreeItemTmp = iterMap.value();
+
+
+			nIndex = m_ItemData.indexOf(QVariant(pExchangeInfo->getInstrumentCode()), 0);
+			m_ItemData.removeAt(nIndex);
+
+			delete pTreeItemTmp;
+			pTreeItemTmp = NULL;
+			m_MapStringChildren.erase(iterMap);
+
+		}
+	}
+
+	return true;
+}
+
 void CTreeItemContract::setDataType( enDataTypeContract nDataTypeExchange )
 {
 	m_nDataTypeExchange = nDataTypeExchange;

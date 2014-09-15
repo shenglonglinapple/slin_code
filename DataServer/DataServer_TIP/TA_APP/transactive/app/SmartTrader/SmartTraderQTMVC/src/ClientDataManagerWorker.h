@@ -182,6 +182,9 @@ public:
 	void onOrderFilled(const Order &order);
 	/// Hook method when cancel request get rejected
 	void onCancelReject(const Order &order);
+	/// Hook method when receive bar summary update
+	void onBarDataUpdate(const BarSummary &barData);
+
 public:
 	virtual void run();	//CBoostThread
 	virtual void terminate();//CBoostThread

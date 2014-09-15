@@ -114,7 +114,7 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 	nFlagsTreeItem = model->flags(index);
 	if (nFlagsTreeItemCheck== nFlagsTreeItem)
 	{
-		model->removeRow(index.row(), index.parent());
+		//model->removeRow(index.row(), index.parent());
 
 		LOG_DEBUG<<"CContractInfoWindow emit signalAddContractToSmartQuotes"
 			<<" "<<"nInstrumentID="<<nInstrumentID;

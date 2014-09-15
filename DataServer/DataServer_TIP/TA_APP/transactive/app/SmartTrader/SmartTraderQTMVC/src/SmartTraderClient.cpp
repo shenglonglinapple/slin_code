@@ -160,6 +160,17 @@ void CSmartTraderClient::onCancelReject( const Order &order )
 	}
 }
 
+void CSmartTraderClient::onBarDataUpdate( const BarSummary &barData )
+{
+	LOG_DEBUG<<"onBarDataUpdate"
+		<<" "<<"barData.instrumentID="<<barData.instrumentID
+		<<" "<<"barData.bars.size="<<barData.bars.size();
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onBarDataUpdate(barData);
+	}
+}
+
 
 //QT_END_NAMESPACE
 
