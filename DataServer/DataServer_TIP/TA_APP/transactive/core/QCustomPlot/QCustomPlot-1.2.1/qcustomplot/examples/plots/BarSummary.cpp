@@ -12,8 +12,11 @@ BarSumary::BarSumary()
 	int nBarIndex = 0;
 	Bar barData;
 
+	//::srand(8); // set the random seed, so we always get the same random data
+	//FIVE_MINUTES
+	//60  * 5 = 300 minutes  6 houres
 	nBarIndex = 0;
-	for (int nIndex = 0; nIndex < 100; nIndex++)
+	for (int nIndex = 0; nIndex < 60; nIndex++)
 	{
 		barData.low = 0;
 		barData.high = 0;

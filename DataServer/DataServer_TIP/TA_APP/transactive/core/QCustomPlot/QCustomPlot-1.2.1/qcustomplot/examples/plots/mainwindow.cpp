@@ -1684,8 +1684,19 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	customPlot->xAxis->setLabel(QObject::tr("X-time"));
 	customPlot->yAxis->setLabel(QObject::tr("Y-value"));
 
+	// configure bottom axis to show date and time instead of number:
+	customPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	customPlot->xAxis->setDateTimeFormat("yyyy-MM-dd\nhh-mm-ss");
 
-	
+	//FIVE_MINUTES
+	//60  * 5 = 300 minutes  6 houres
+	double nTimeNow = QDateTime::currentDateTime().toTime_t();
+	// make key axis range scroll with the data (at a constant range size of 8):
+	customPlot->xAxis->setRange(nTimeNow, nTimeNow + 6*3600);
+	customPlot->yAxis->setRange(0, 200);
+	// show legend:
+	customPlot->legend->setVisible(false);
+
 	iterMap = pBarSumary->bars.begin();
 	while (iterMap != pBarSumary->bars.end())
 	{
@@ -1694,7 +1705,7 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 		pStatisticalBoxTmp = NULL;
 		pStatisticalBoxTmp = new QCPStatisticalBox(customPlot->xAxis, customPlot->yAxis);
 		customPlot->addPlottable(pStatisticalBoxTmp);
-
+		
 
 		fMinimum = iterMap->second.low;
 		fMaximum= iterMap->second.high;
@@ -1732,7 +1743,7 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 		pStatisticalBoxTmp->setUpperQuartile(fUpperQuartile);
 		pStatisticalBoxTmp->setMaximum(fMaximum);
 
-		pStatisticalBoxTmp->setWidth(0.5);//矩形宽度
+		pStatisticalBoxTmp->setWidth(1);//矩形宽度
 		pStatisticalBoxTmp->setWhiskerWidth(0);//上顶，下底 直线宽度
 
 
@@ -1752,10 +1763,8 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	//customPlot->rescaleAxes();
 	//customPlot->xAxis->scaleRange(2, customPlot->xAxis->range().center());
 	//customPlot->yAxis->setRange(0, 10);
-	customPlot->rescaleAxes();
+	//customPlot->rescaleAxes();
 	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
-
-
 
 }
 
