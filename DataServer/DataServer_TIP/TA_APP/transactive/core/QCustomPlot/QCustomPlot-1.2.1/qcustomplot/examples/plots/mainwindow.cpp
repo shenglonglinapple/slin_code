@@ -1671,10 +1671,13 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	double fLowerQuartile = 0;
 	double fUpperQuartile = 0;
 
-
 	BarSumary* pBarSumary = NULL;
 	int nIndex = 1;
 	std::map<int, Bar>::iterator iterMap;
+
+	QVector<double> xData(60), yData(60);
+	unsigned int nTimeNow;
+
 
 	//new data
 	pBarSumary = new BarSumary();
@@ -1689,14 +1692,17 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	customPlot->xAxis->setDateTimeFormat("yyyy-MM-dd\nhh-mm-ss");
 
 	//FIVE_MINUTES
-	//60  * 5 = 300 minutes  6 houres
-	double nTimeNow = QDateTime::currentDateTime().toTime_t();
+	//one bar 5 minutes  * 60
+	//double nTimeNow = QDateTime::currentDateTime().toTime_t();
+	nTimeNow = QDateTime::currentDateTime().toTime_t();
 	// make key axis range scroll with the data (at a constant range size of 8):
-	customPlot->xAxis->setRange(nTimeNow, nTimeNow + 6*3600);
+	customPlot->xAxis->setRange(nTimeNow, nTimeNow + 5 * 60 * 60);
+	
 	customPlot->yAxis->setRange(0, 200);
 	// show legend:
 	customPlot->legend->setVisible(false);
 
+	nIndex = 0;
 	iterMap = pBarSumary->bars.begin();
 	while (iterMap != pBarSumary->bars.end())
 	{
@@ -1705,10 +1711,13 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 		pStatisticalBoxTmp = NULL;
 		pStatisticalBoxTmp = new QCPStatisticalBox(customPlot->xAxis, customPlot->yAxis);
 		customPlot->addPlottable(pStatisticalBoxTmp);
-		
+
 
 		fMinimum = iterMap->second.low;
 		fMaximum= iterMap->second.high;
+		iterMap->second.timestamp = nTimeNow + nIndex * 5 * 60;//5 minutes
+		xData[nIndex] = iterMap->second.timestamp;
+		yData[nIndex] = iterMap->second.high;
 		
 		if (iterMap->second.open > iterMap->second.close)
 		{
@@ -1736,15 +1745,19 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 		pStatisticalBoxTmp->setMedianPen(*pBoxPenRef);
 		
 		// set data:
-		pStatisticalBoxTmp->setKey(nIndex);
+		//pStatisticalBoxTmp->setKey(nIndex);
+		pStatisticalBoxTmp->setKey(iterMap->second.timestamp);
 		pStatisticalBoxTmp->setMinimum(fMinimum);
 		pStatisticalBoxTmp->setLowerQuartile(fLowerQuartile);
 		pStatisticalBoxTmp->setMedian(fLowerQuartile);
 		pStatisticalBoxTmp->setUpperQuartile(fUpperQuartile);
 		pStatisticalBoxTmp->setMaximum(fMaximum);
 
-		pStatisticalBoxTmp->setWidth(1);//矩形宽度
+		//pStatisticalBoxTmp->setWidth(1);//矩形宽度
+		pStatisticalBoxTmp->setWidth(5 * 60);//矩形宽度
+		
 		pStatisticalBoxTmp->setWhiskerWidth(0);//上顶，下底 直线宽度
+
 
 
 		nIndex++;
@@ -1753,6 +1766,9 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	}//while
 
 
+	QCPGraph *pGraphHighLine = customPlot->addGraph(customPlot->xAxis, customPlot->yAxis);
+	pGraphHighLine->setData(xData, yData);
+
 
 	if (NULL != pBarSumary)
 	{
@@ -1760,7 +1776,7 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 		pBarSumary = NULL;
 	}
 	
-	//customPlot->rescaleAxes();
+	customPlot->rescaleAxes();
 	//customPlot->xAxis->scaleRange(2, customPlot->xAxis->range().center());
 	//customPlot->yAxis->setRange(0, 10);
 	//customPlot->rescaleAxes();
