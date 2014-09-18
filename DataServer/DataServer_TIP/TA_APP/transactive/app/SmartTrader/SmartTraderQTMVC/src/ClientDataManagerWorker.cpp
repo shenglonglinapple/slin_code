@@ -115,7 +115,7 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 		iterMap = m_MapHistoryData.begin();
 		while (iterMap != m_MapHistoryData.end())
 		{
-			pDataRef = iterMap.data();
+			pDataRef = iterMap.value();
 
 			delete pDataRef;
 			pDataRef = NULL;
@@ -593,14 +593,14 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
 		if (0 == m_nDoTest)
 		{
-			m_nDoTest = 1;
+			//m_nDoTest = 1;
 			CHistoryDataManager* pMyBarSumary = NULL;
 			pMyBarSumary = new CHistoryDataManager();
 
 			pMyBarSumary->m_nRequestID = 0;
 			pMyBarSumary->m_pHistoryRequest->m_nRequestID = 0;
 			pMyBarSumary->m_pHistoryRequest->m_nRequestType = CHistoryDataRequest::HistoryRequestType_0_From_To;
-			pMyBarSumary->m_pHistoryRequest = pInstrument;
+			pMyBarSumary->m_pHistoryRequest->m_pInstrument = pInstrument;
 			pMyBarSumary->m_pHistoryRequest->m_nBarType = FIVE_MINUTE;
 			pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0 = m_pUtilityFun->getTimeNow();
 			pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0 = pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0 - (60 * FIVE_MINUTE);
@@ -609,8 +609,13 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 			pMyBarSumary->m_pHistoryRequest->m_strInstrumentCode = pInstrument->getInstrumentCode();
 
 
+// 			pMyBarSumary->m_nRequestID = m_pMyTradeClient->downloadHistoryData(
+// 				*pInstrument, pMyBarSumary->m_pHistoryRequest->m_nBarType, pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0, pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0);
+
 			pMyBarSumary->m_nRequestID = m_pMyTradeClient->downloadHistoryData(
-				*pInstrument, pMyBarSumary->m_pHistoryRequest->m_nBarType, pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0, pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0);
+				*pInstrument, pMyBarSumary->m_pHistoryRequest->m_nBarType, pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0, 60, true);
+
+			//downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int fromTime, unsigned short count, bool subscribe );
 
 			pMyBarSumary->m_pHistoryRequest->logInfo();
 
@@ -1043,6 +1048,42 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 	LOG_DEBUG<<"CClientDataManagerWorker::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
 		<<" "<<"barData.bars.size="<<barData.bars.size();
+
+
+	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
+	CHistoryDataManager* pMyBarSumaryRef = NULL;
+
+	{
+		//TODO. historydata test
+		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		iterMap = m_MapHistoryData.begin();
+		//if (m_MapHistoryData.contains(requestID))
+		{
+			//iterMap = m_MapHistoryData.find(requestID);
+			pMyBarSumaryRef = iterMap.value();
+		}
+
+		if (NULL != pMyBarSumaryRef)
+		{
+			unsigned int requestID = pMyBarSumaryRef->m_nRequestID;
+			pMyBarSumaryRef->m_pHistoryACK->onHistoryDataDownloaded(requestID, bars);
+			pMyBarSumaryRef->m_pHistoryACK->logInfo();
+
+
+			{
+				LOG_DEBUG<<" "<<"emit"
+					<<" "<<"class:"<<"CClientDataManagerWorker"
+					<<" "<<"fun:"<<"onHistoryDataDownloaded()"
+					<<" "<<"emit"
+					<<" "<<"signalHistoryDataChanged()"
+					<<" "<<"param:"
+					<<" "<<"pMyBarSumaryRef=0x"<<pMyBarSumaryRef;
+
+				emit signalHistoryDataChanged(pMyBarSumaryRef);
+			}
+
+		}
+	}
 }
 
 void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
@@ -1061,7 +1102,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 		if (m_MapHistoryData.contains(requestID))
 		{
 			iterMap = m_MapHistoryData.find(requestID);
-			pMyBarSumaryRef = iterMap.data();
+			pMyBarSumaryRef = iterMap.value();
 		}
 
 		if (NULL != pMyBarSumaryRef)
