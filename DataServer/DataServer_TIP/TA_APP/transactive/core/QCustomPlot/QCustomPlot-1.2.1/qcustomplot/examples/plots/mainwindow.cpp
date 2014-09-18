@@ -1675,12 +1675,17 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	int nIndex = 1;
 	std::map<int, Bar>::iterator iterMap;
 
-	QVector<double> xData(60), yData(60);
-	unsigned int nTimeNow;
-
-
 	//new data
 	pBarSumary = new BarSumary();
+
+	QVector<double> xData(60), yData(60);
+	unsigned int nTimeNow;
+	int nBarTypeSeconds = 5 * 60; //FIVE_MINUTES
+	int nBarCount = pBarSumary->bars.size();//60
+	int nTotalSeconds = nBarCount * nBarTypeSeconds;// 5 * 60 * 60
+	int nBarWith = nBarTypeSeconds;//5 * 60; //FIVE_MINUTES
+
+
 
 
 	// prepare axes:
@@ -1694,11 +1699,14 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	//FIVE_MINUTES
 	//one bar 5 minutes  * 60
 	//double nTimeNow = QDateTime::currentDateTime().toTime_t();
-	nTimeNow = QDateTime::currentDateTime().toTime_t();
+	//nTimeNow = QDateTime::currentDateTime().toTime_t();
+	iterMap = pBarSumary->bars.begin();
+	nTimeNow = iterMap->second.timestamp;
+
 	// make key axis range scroll with the data (at a constant range size of 8):
-	customPlot->xAxis->setRange(nTimeNow, nTimeNow + 5 * 60 * 60);
+	customPlot->xAxis->setRange(nTimeNow, nTimeNow + nBarTypeSeconds);
 	
-	customPlot->yAxis->setRange(0, 200);
+	//customPlot->yAxis->setRange(0, 200);
 	// show legend:
 	customPlot->legend->setVisible(false);
 
@@ -1706,7 +1714,7 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	iterMap = pBarSumary->bars.begin();
 	while (iterMap != pBarSumary->bars.end())
 	{
-		iterMap->second;
+		//iterMap->second;
 		// create empty statistical box plottables:
 		pStatisticalBoxTmp = NULL;
 		pStatisticalBoxTmp = new QCPStatisticalBox(customPlot->xAxis, customPlot->yAxis);
@@ -1715,7 +1723,7 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 
 		fMinimum = iterMap->second.low;
 		fMaximum= iterMap->second.high;
-		iterMap->second.timestamp = nTimeNow + nIndex * 5 * 60;//5 minutes
+		//iterMap->second.timestamp = nTimeNow + nIndex * nBarTypeSeconds;//5 minutes
 		xData[nIndex] = iterMap->second.timestamp;
 		yData[nIndex] = iterMap->second.high;
 		
@@ -1754,7 +1762,7 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 		pStatisticalBoxTmp->setMaximum(fMaximum);
 
 		//pStatisticalBoxTmp->setWidth(1);//矩形宽度
-		pStatisticalBoxTmp->setWidth(5 * 60);//矩形宽度
+		pStatisticalBoxTmp->setWidth(nBarWith);//矩形宽度
 		
 		pStatisticalBoxTmp->setWhiskerWidth(0);//上顶，下底 直线宽度
 

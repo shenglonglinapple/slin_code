@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <math.h>
+#include <QtCore/QDateTime>
 #include "BarSummary.h"
 
 
@@ -11,12 +12,22 @@ BarSumary::BarSumary()
 
 	int nBarIndex = 0;
 	Bar barData;
+	unsigned int nTimeNow;
+	int nBarTypeSeconds = 5 * 60; //FIVE_MINUTES
+	int nBarCount = 60;
+
+	//FIVE_MINUTES
+	//one bar 5 minutes  * 60
+	//double nTimeNow = QDateTime::currentDateTime().toTime_t();
+	nTimeNow = QDateTime::currentDateTime().toTime_t();
+	nTimeNow = nTimeNow - (nBarTypeSeconds * nBarCount);//set start time
+
 
 	//::srand(8); // set the random seed, so we always get the same random data
 	//FIVE_MINUTES
 	//60  * 5 = 300 minutes  6 houres
 	nBarIndex = 0;
-	for (int nIndex = 0; nIndex < 60; nIndex++)
+	for (int nIndex = 0; nIndex < nBarCount; nIndex++)
 	{
 		barData.low = 0;
 		barData.high = 0;
@@ -27,6 +38,8 @@ BarSumary::BarSumary()
 
 		double tmp1 = ::rand() % 100;
 		double tmp2 = ::rand() % 100;
+
+		barData.timestamp = nTimeNow + nIndex * nBarTypeSeconds;//5 minutes
 
 		barData.open = tmp1;
 		barData.close = tmp2;
