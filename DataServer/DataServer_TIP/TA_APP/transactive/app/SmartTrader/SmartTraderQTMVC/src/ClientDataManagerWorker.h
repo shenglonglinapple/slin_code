@@ -26,7 +26,7 @@ class CSmartTraderClient;
 class CProjectUtilityFun;
 class COrderInfo;
 class CTreeItemOrder;
-
+class CHistoryDataManager;
 
 
 class CClientDataManagerWorker : 
@@ -168,22 +168,33 @@ signals:
 	void signalOrderInfoChanged(CTreeItemOrder* pTreeItem);
 
 
+	/*
+	class: CClientDataManagerWorker
+	signals:
+	void signalHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	fun send signals: onHistoryDataDownloaded()
+
+	class: CMidSubWidget
+	public slots: 
+	void slotHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	*/
+	void signalHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+
+
+	
 public:
 	void onInstrumentDownloaded(const Instrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate(const Instrument& instrument);
 	void onAccountDownloaded(Account& account);
-	/// Hook method when the order is accepted by exchange.
+	//order
 	void onOrderAccepted(const Order &order);
-	/// Hook method when order is canceled.
 	void onOrderCanceled(const Order &order);
-	/// Hook method when order is rejected.
 	void onOrderRejected(const Order &order);
-	/// Hook method when order filled
 	void onOrderFilled(const Order &order);
-	/// Hook method when cancel request get rejected
 	void onCancelReject(const Order &order);
-	/// Hook method when receive bar summary update
+	//history bar
 	void onBarDataUpdate(const BarSummary &barData);
+	void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 
 public:
 	virtual void run();	//CBoostThread
@@ -247,7 +258,10 @@ private:
 	QMap<unsigned int, Order*> m_MapOrder;//OrderID
 	COrderInfo* m_pOrderInfo;
 	CTreeItemOrder* m_pTreeItemOrder_root;
-	
+private:
+	boost::mutex m_mutexForMapHistoryData;
+	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//nRequestID
+	int m_nDoTest;
 };
 
 //QT_END_NAMESPACE

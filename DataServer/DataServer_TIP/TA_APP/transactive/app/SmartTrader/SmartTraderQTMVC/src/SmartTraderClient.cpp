@@ -162,12 +162,24 @@ void CSmartTraderClient::onCancelReject( const Order &order )
 
 void CSmartTraderClient::onBarDataUpdate( const BarSummary &barData )
 {
-	LOG_DEBUG<<"onBarDataUpdate"
+	LOG_DEBUG<<"CSmartTraderClient::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
 		<<" "<<"barData.bars.size="<<barData.bars.size();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
 		m_pProcessRecvDataHandle->onBarDataUpdate(barData);
+	}
+}
+
+void CSmartTraderClient::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
+{
+	LOG_DEBUG<<"CSmartTraderClient::onHistoryDataDownloaded"
+		<<" "<<"requestID="<<requestID
+		<<" "<<"bars->size()="<<bars->size();
+
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onHistoryDataDownloaded(requestID, bars);
 	}
 }
 

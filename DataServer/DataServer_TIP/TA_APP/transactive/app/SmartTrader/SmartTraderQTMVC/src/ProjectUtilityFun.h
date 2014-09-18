@@ -23,6 +23,8 @@ public:
 	//"%04d-%02d-%02d %02d:%02d:%02d"
 	std::string dataTimeToStr(time_t nTimeValue);
 
+	time_t getTimeNow();
+
 public:
 	void log_Instrument_info(const std::string& file, int line, const std::string& strLogInfo, const Instrument &instrument );
 	float checkFloatNanValue(const float& fValueTmp);

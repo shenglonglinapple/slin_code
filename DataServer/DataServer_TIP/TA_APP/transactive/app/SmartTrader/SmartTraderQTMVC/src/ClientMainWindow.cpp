@@ -5,13 +5,17 @@
 #include "Order.h"
 
 #include "ClientDataManagerWorker.h"
+
+#include "BottomDockWidget.h"
+#include "MidSubWidget.h"
 #include "SmartHotQuotesWindow.h"
 #include "QuotesTableView.h"
-#include "TreeItemContract.h"
+
 #include "ContractInfoWindow.h"
 #include "CreateNewOrderDialog.h"
-#include "BottomDockWidget.h"
 #include "TreeItemOrder.h"
+#include "TreeItemContract.h"
+#include "HistoryDataManager.h"
 
 
 #include "BoostLogger.h"
@@ -64,6 +68,8 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
 	m_pLeftDockWidget = NULL;
 	m_pBottomDockWidget = NULL;
 	m_pMdiArea = NULL;
+	m_pEastMidSubWidget = NULL;
+
 	m_pClientDataManagerWorker = new CClientDataManagerWorker();
 
  	_CreateActions();
@@ -182,6 +188,13 @@ void CClientMainWindow::_CreateConnect()
 		m_pBottomDockWidget, 
 		SLOT(slotOrderInfoChanged(CTreeItemOrder*))); 
 
+
+
+	QObject::connect(m_pClientDataManagerWorker, 
+		SIGNAL(signalHistoryDataChanged(CHistoryDataManager*)), 
+		m_pEastMidSubWidget, 
+		SLOT(slotHistoryDataChanged(CHistoryDataManager*))); 
+
 }
 void CClientMainWindow::setupUi()
 {
@@ -189,7 +202,7 @@ void CClientMainWindow::setupUi()
 	QDockWidget* m_DockWidget_Left = NULL;
 	QDockWidget* m_DockWidget_Bottom = NULL;
 	Qt::DockWidgetArea nDockWidgetFirstArea;
-	QWidget* pWindowOne = NULL;
+	m_pEastMidSubWidget = NULL;
 	
 	//add Samrt hot Quotes window
 	m_pLeftDockWidget = new CLeftDockWidget(this);
@@ -206,12 +219,13 @@ void CClientMainWindow::setupUi()
 	
 
 	//right
-	pWindowOne = new QWidget(this);
+	m_pEastMidSubWidget = new CMidSubWidget(this);
+	//East West South North
 
 	m_pMdiArea = new QMdiArea(this);
 	m_pMdiArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	m_pMdiArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-	m_pMdiArea->addSubWindow(pWindowOne);
+	m_pMdiArea->addSubWindow(m_pEastMidSubWidget);
 
 	foreach (QMdiSubWindow *window, m_pMdiArea->subWindowList()) 
 	{

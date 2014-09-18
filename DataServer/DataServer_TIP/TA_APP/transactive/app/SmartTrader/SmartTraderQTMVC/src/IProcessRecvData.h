@@ -26,7 +26,7 @@ public:
 	{
 	
 	}
-
+public:
 	/// process receiving instrument information 
 	virtual void onInstrumentDownloaded(const Instrument& instrument) = 0;
 
@@ -49,8 +49,13 @@ public:
 	/// Hook method when cancel request get rejected
 	virtual void onCancelReject(const Order &order) = 0;
 
+public:
 	/// Hook method when receive bar summary update
 	virtual void onBarDataUpdate(const BarSummary &barData) = 0;
+
+	/// Hook method when history data is downloaded
+	virtual void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars) = 0;
+
 };
 
 

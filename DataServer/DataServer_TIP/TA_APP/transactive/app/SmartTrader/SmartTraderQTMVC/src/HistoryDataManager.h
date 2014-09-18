@@ -1,0 +1,26 @@
+#ifndef  __CLASS__HISTORY_DATA_MANAGER_H__
+#define  __CLASS__HISTORY_DATA_MANAGER_H__
+
+#include <iostream>
+#include "HistoryDataRequest.h"
+#include "HistoryDataACK.h"
+
+class CHistoryDataManager
+{
+public:
+	CHistoryDataManager();
+	~CHistoryDataManager();
+public:
+	CHistoryDataRequest* m_pHistoryRequest;
+	CHistoryDataACK* m_pHistoryACK;
+public:
+	unsigned int m_nRequestID;
+
+
+
+};
+
+#endif// __CLASS__MY_BAR_SUMARY_H__
+
+
+

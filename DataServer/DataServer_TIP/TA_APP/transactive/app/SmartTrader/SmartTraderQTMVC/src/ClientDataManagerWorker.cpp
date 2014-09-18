@@ -17,6 +17,7 @@
 #include "OrderInfo.h"
 #include "TreeItemOrder.h"
 
+#include "HistoryDataManager.h"
 
 
 
@@ -68,6 +69,15 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 		m_MapOrder.clear();
 	}
 
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		m_MapHistoryData.clear();
+		m_nDoTest = 0;
+	}
+
+	
+
 }
 
 CClientDataManagerWorker::~CClientDataManagerWorker(void)
@@ -80,6 +90,8 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 		delete m_pUtilityFun;
 		m_pUtilityFun = NULL;
 	}
+
+
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
@@ -95,6 +107,25 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
 		m_MapOrder.clear();
 	}
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		QMap<unsigned int, CHistoryDataManager*>::Iterator iterMap;
+		CHistoryDataManager* pDataRef = NULL;
+		iterMap = m_MapHistoryData.begin();
+		while (iterMap != m_MapHistoryData.end())
+		{
+			pDataRef = iterMap.data();
+
+			delete pDataRef;
+			pDataRef = NULL;
+
+			iterMap++;
+		}
+		m_MapHistoryData.clear();
+	}
+
+
 }
 
 void CClientDataManagerWorker::run()
@@ -204,7 +235,6 @@ void CClientDataManagerWorker::_Process_LoginToServer()
 void CClientDataManagerWorker::_Process_MonitorExchangeInfo()
 {
 	m_nThreadJobState = JobState_MonitorExchangeInfo;
-	//TODO.
 }
 
 void CClientDataManagerWorker::_Process_StopWork()
@@ -558,27 +588,38 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 	}
 	
 
-	//TODO. test
-	/// Download history data from server from a time span 
-// 	unsigned int downloadHistoryData( 
-// 		const Instrument &instrument, 
-// 		BarType interval, 
-// 		unsigned int from, 
-// 		unsigned int to );
+	{
+		//TODO. historydata test
+		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		if (0 == m_nDoTest)
+		{
+			m_nDoTest = 1;
+			CHistoryDataManager* pMyBarSumary = NULL;
+			pMyBarSumary = new CHistoryDataManager();
 
-	BarType nBarType = DAY;
-	unsigned int nFromTime = 0;
-	unsigned int nToTime = 0;
-	//"%d-%d-%d %d:%d:%d"
-	nFromTime = m_pUtilityFun->strToDateTime("2013-01-01 01:01:01");
-	nToTime = m_pUtilityFun->strToDateTime("2014-01-01 01:01:01");
+			pMyBarSumary->m_nRequestID = 0;
+			pMyBarSumary->m_pHistoryRequest->m_nRequestID = 0;
+			pMyBarSumary->m_pHistoryRequest->m_nRequestType = CHistoryDataRequest::HistoryRequestType_0_From_To;
+			pMyBarSumary->m_pHistoryRequest = pInstrument;
+			pMyBarSumary->m_pHistoryRequest->m_nBarType = FIVE_MINUTE;
+			pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0 = m_pUtilityFun->getTimeNow();
+			pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0 = pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0 - (60 * FIVE_MINUTE);
 
-	m_pMyTradeClient->downloadHistoryData(*pInstrument, nBarType, nFromTime, nToTime);
+			pMyBarSumary->m_pHistoryRequest->m_nInstrumentID = pInstrument->getInstrumentID();
+			pMyBarSumary->m_pHistoryRequest->m_strInstrumentCode = pInstrument->getInstrumentCode();
 
-	LOG_DEBUG<<" "<<"downloadHistoryData"
-		<<" "<<"getInstrumentID="<<pInstrument->getInstrumentID()
-		<<" "<<"getInstrumentCode="<<pInstrument->getInstrumentCode();
 
+			pMyBarSumary->m_nRequestID = m_pMyTradeClient->downloadHistoryData(
+				*pInstrument, pMyBarSumary->m_pHistoryRequest->m_nBarType, pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0, pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0);
+
+			pMyBarSumary->m_pHistoryRequest->logInfo();
+
+			m_MapHistoryData.insert(pMyBarSumary->m_nRequestID, pMyBarSumary);
+			pMyBarSumary = NULL;
+
+		}
+	}
+	
 }
 
 void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int nInstrumentID )
@@ -999,9 +1040,50 @@ void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType
 
 void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 {
-	LOG_DEBUG<<"onBarDataUpdate"
+	LOG_DEBUG<<"CClientDataManagerWorker::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
 		<<" "<<"barData.bars.size="<<barData.bars.size();
+}
+
+void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
+{
+	LOG_DEBUG<<"CClientDataManagerWorker::onHistoryDataDownloaded"
+		<<" "<<"requestID="<<requestID
+		<<" "<<"bars->size.size="<<bars->size();
+
+	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
+	CHistoryDataManager* pMyBarSumaryRef = NULL;
+
+	{
+		//TODO. historydata test
+		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		iterMap = m_MapHistoryData.begin();
+		if (m_MapHistoryData.contains(requestID))
+		{
+			iterMap = m_MapHistoryData.find(requestID);
+			pMyBarSumaryRef = iterMap.data();
+		}
+
+		if (NULL != pMyBarSumaryRef)
+		{
+			pMyBarSumaryRef->m_pHistoryACK->onHistoryDataDownloaded(requestID, bars);
+			pMyBarSumaryRef->m_pHistoryACK->logInfo();
+
+
+			{
+				LOG_DEBUG<<" "<<"emit"
+					<<" "<<"class:"<<"CClientDataManagerWorker"
+					<<" "<<"fun:"<<"onHistoryDataDownloaded()"
+					<<" "<<"emit"
+					<<" "<<"signalHistoryDataChanged()"
+					<<" "<<"param:"
+					<<" "<<"pMyBarSumaryRef=0x"<<pMyBarSumaryRef;
+
+				emit signalHistoryDataChanged(pMyBarSumaryRef);
+			}
+
+		}
+	}
 }
 
 

@@ -26,6 +26,7 @@ QT_END_NAMESPACE
 class CClientDataManagerWorker;
 class CLeftDockWidget;
 class CBottomDockWidget;
+class CMidSubWidget;
 
 class CClientMainWindow : public QMainWindow
 {
@@ -54,6 +55,7 @@ public:
 	//GUI
 	CLeftDockWidget* m_pLeftDockWidget;//top
 	CBottomDockWidget* m_pBottomDockWidget;
+	CMidSubWidget* m_pEastMidSubWidget;//East West South North
 private:
 	QMdiArea* m_pMdiArea;
 

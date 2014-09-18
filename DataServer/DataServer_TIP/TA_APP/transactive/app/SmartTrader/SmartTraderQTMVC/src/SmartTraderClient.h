@@ -30,7 +30,7 @@ public:
 	virtual void onMarketDataUpdate(const Instrument &instrument);
 	/// Hook method when account downloaded
 	virtual void onAccountDownloaded(Account& account);
-
+public:
 	/// Hook method when the order is accepted by exchange.
 	virtual void onOrderAccepted(const Order &order);
 
@@ -45,9 +45,11 @@ public:
 
 	/// Hook method when cancel request get rejected
 	virtual void onCancelReject(const Order &order);
-
+public:
 	/// Hook method when receive bar summary update
 	virtual void onBarDataUpdate(const BarSummary &barData);
+	/// Hook method when history data is downloaded
+	virtual void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 
 private:
 	CClientLoginParam* m_pClientLoginParam;
