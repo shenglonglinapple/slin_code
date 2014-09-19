@@ -10,18 +10,31 @@
 USING_BOOST_LOG;
 
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+
 CHistoryDataRequest::CHistoryDataRequest()
 {
 	m_pUtilityFun = NULL;
+
+	m_nRequestType = HistoryRequestType_Time;
+	m_pInstrumentRef = NULL;
+	m_nBarType = FIVE_SECOND;
+	m_nTimeFrom = 0;
+	m_nTimeTo =0;
+	m_nBarCount = 0;
+	m_bSubscribe = false;	
+	m_pMyTradeClientRef = NULL;
+
 	m_pUtilityFun = new CProjectUtilityFun();
-
-	m_nInstrumentID = 0;
-	m_nBarType = FIVE_MINUTE;//5 * 60
-	m_nBarTypeSeconds = m_nBarType;
-	
-
-
-	
 }
 
 CHistoryDataRequest::~CHistoryDataRequest()
@@ -31,24 +44,127 @@ CHistoryDataRequest::~CHistoryDataRequest()
 		delete m_pUtilityFun;
 		m_pUtilityFun = NULL;
 	}
-	m_nInstrumentID = 0;
-	m_nBarType = FIVE_MINUTE;//5 * 60
-	m_nBarTypeSeconds = m_nBarType;
+
+	m_nRequestType = HistoryRequestType_Time;
+	m_pInstrumentRef = NULL;
+	m_nBarType = FIVE_SECOND;
+	m_nTimeFrom = 0;
+	m_nTimeTo =0;
+	m_nBarCount = 0;
+	m_bSubscribe = false;	
+	m_pMyTradeClientRef = NULL;
 }
 
-void CHistoryDataRequest::logInfo()
+
+std::string CHistoryDataRequest::_GetRequestStrValue()
 {
-	if (HistoryRequestType_0_From_To == m_nRequestType)
+	std::string strRequestStrValue;
+
+	switch (m_nRequestType)
 	{
-		LOG_DEBUG<<" "<<"HistoryRequestType_0_From_To"
-			<<" "<<"m_nRequestID="<<m_nRequestID
-			<<" "<<"m_nBarType="<<m_nBarType
-			<<" "<<"m_nInstrumentID="<<m_nInstrumentID
-			<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode
-			<<" "<<"nFromTime="<<m_pUtilityFun->dataTimeToStr(m_nFromTime_Type0).c_str()
-			<<" "<<"nToTime="<<m_pUtilityFun->dataTimeToStr(m_nToTime_Type0).c_str();
+	case HistoryRequestType_Time:
+		{
+			strRequestStrValue = "HistoryRequestType_Time";
+		}
+		break;
+	case HistoryRequestType_NumberSubscribe:
+		{
+			strRequestStrValue = "HistoryRequestType_NumberSubscribe";
+		}
+		break;
+	case HistoryRequestType_NumberTimeSubscribe:
+		{
+			strRequestStrValue = "HistoryRequestType_NumberTimeSubscribe";
+		}
+		break;
+	default:
+		break;
 	}
 
+}
+void CHistoryDataRequest::logInfo()
+{
+	LOG_DEBUG<<" "<<"m_nRequestType="<<_GetRequestStrValue.c_str()
+		<<" "<<"m_nInstrumentID="<<m_pInstrumentRef->getInstrumentID()
+		<<" "<<"m_strInstrumentCode="<<m_pInstrumentRef->getInstrumentCode()
+		<<" "<<"m_nBarType="<<m_nBarType
+		<<" "<<"m_nTimeFrom="<<m_pUtilityFun->dataTimeToStr(m_nTimeFrom).c_str()
+		<<" "<<"m_nTimeTo="<<m_pUtilityFun->dataTimeToStr(m_nTimeTo).c_str()
+		<<" "<<"m_nBarCount="<<m_nBarCount
+		<<" "<<"m_bSubscribe="<<m_bSubscribe
+		<<" "<<"m_nRequestID="<<m_nRequestID;
+}
+
+void CHistoryDataRequest::setRequestType( enCHistoryRequestType nRequestType )
+{
+	m_nRequestType = nRequestType;
+}
+
+void CHistoryDataRequest::setInstrumentHandle( Instrument* pInstrumentRef )
+{
+	m_pInstrumentRef = pInstrumentRef;
+}
+void CHistoryDataRequest::setBarType(BarType nBarType)
+{
+	m_nBarType = nBarType;
+}
+
+void CHistoryDataRequest::setSubscribe( bool bSubscribe )
+{
+	m_bSubscribe = bSubscribe;
 
 }
 
+void CHistoryDataRequest::setBarCount( unsigned short nBarCount )
+{
+	m_nBarCount = nBarCount;
+}
+
+void CHistoryDataRequest::setTimeFrom( unsigned int nTimeFrom )
+{
+	m_nTimeFrom = nTimeFrom;
+}
+
+void CHistoryDataRequest::setTimeTo( unsigned int nTimeTo )
+{
+	m_nTimeTo = nTimeTo;
+}
+void CHistoryDataRequest::sentRequest(CSmartTraderClient* pMyTradeClient)
+{
+	m_pMyTradeClientRef = pMyTradeClient;
+	_SentRequestToServer();
+}
+
+void CHistoryDataRequest::_SentRequestToServer()
+{
+	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int from, unsigned int to );
+	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned short number, bool subscribe );
+	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int fromTime, unsigned short count, bool subscribe );
+
+	switch (m_nRequestType)
+	{
+	case HistoryRequestType_Time:
+		{
+			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(*m_pInstrumentRef, m_nBarType, m_nTimeFrom, m_nTimeTo);
+		}
+		break;
+	case HistoryRequestType_NumberSubscribe:
+		{
+			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(*m_pInstrumentRef, m_nBarType, m_nBarCount, m_bSubscribe);
+		}
+		break;
+	case HistoryRequestType_NumberTimeSubscribe:
+		{
+			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(*m_pInstrumentRef, m_nBarType, m_nTimeFrom, m_nBarCount, m_bSubscribe);
+		}
+		break;
+	default:
+		break;
+	}
+
+}
+
+int CHistoryDataRequest::getBarType()
+{
+	return m_nBarType;
+}

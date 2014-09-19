@@ -14,10 +14,11 @@ public:
 	CHistoryDataRequest* m_pHistoryRequest;
 	CHistoryDataACK* m_pHistoryACK;
 public:
-	unsigned int m_nRequestID;
-
-
-
+	int getBarType();
+	unsigned int getTimeFrom();
+	unsigned int getTimeTo();
+public:
+	unsigned int m_nInstrumentID;
 };
 
 #endif// __CLASS__MY_BAR_SUMARY_H__

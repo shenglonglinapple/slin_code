@@ -7,7 +7,12 @@
 
 class Instrument;
 class CProjectUtilityFun;
+class CSmartTraderClient;
 
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 class CHistoryDataRequest
 {
 public:
@@ -16,36 +21,36 @@ public:
 public:
 	enum enCHistoryRequestType
 	{
-		HistoryRequestType_0_From_To,
-		HistoryRequestType_1_Number_Subscribe,
-		HistoryRequestType_2_Number_From_Count_Subscribe,
+		HistoryRequestType_Time,
+		HistoryRequestType_NumberSubscribe,
+		HistoryRequestType_NumberTimeSubscribe,
 	};
 public:
 	enCHistoryRequestType m_nRequestType;
-public:
-	Instrument* m_pInstrument;
+	Instrument* m_pInstrumentRef;
 	BarType m_nBarType;
+	bool m_bSubscribe;
+	unsigned short m_nBarCount;
+	unsigned int m_nTimeFrom;
+	unsigned int m_nTimeTo;
+	CSmartTraderClient* m_pMyTradeClientRef;
 public:
-	//RequestType_From_To
-	unsigned int m_nFromTime_Type0;
-	unsigned int m_nToTime_Type0;
-public:
-	//RequestType_Number_Subscribe
-	unsigned short m_nNumber_Type1;
-	bool m_bSubscribe_Type1;
-public:
-	//RequestType_Number_From_Count_Subscribe
-	unsigned int m_nFromTime_Type2;
-	unsigned short m_nCount_Type2;
-	bool m_bSubscribe_Type2;
-public:
-	int m_nBarTypeSeconds;
-	std::string m_strInstrumentCode;
-	unsigned int m_nInstrumentID;
-public:	
 	unsigned int m_nRequestID;
 public:
 	void logInfo();
+	int getBarType();
+public:
+	void setRequestType(enCHistoryRequestType nRequestType);
+	void setInstrumentHandle(Instrument* pInstrumentRef);
+	void setBarType(BarType nBarType);
+	void setTimeFrom(unsigned int nTimeFrom);
+	void setTimeTo(unsigned int nTimeTo);
+	void setBarCount(unsigned short nBarCount);
+	void setSubscribe(bool bSubscribe);
+	void sentRequest(CSmartTraderClient* pMyTradeClient);
+private:
+	void _SentRequestToServer();
+	std::string _GetRequestStrValue();
 private:
 	CProjectUtilityFun* m_pUtilityFun;
 };

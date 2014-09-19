@@ -30,3 +30,25 @@ CHistoryDataManager::~CHistoryDataManager()
 		m_pHistoryACK = NULL;
 	}
 }
+
+int CHistoryDataManager::getBarType()
+{
+	int nBarType;//FIVE_SECOND
+	nBarType = m_pHistoryRequest->getBarType();
+	return nBarType;
+}
+
+unsigned int CHistoryDataManager::getTimeFrom()
+{
+	unsigned int nTimeFrom;
+
+	nTimeFrom = m_pHistoryACK->getTimeFrom();
+	return nTimeFrom;
+}
+
+unsigned int CHistoryDataManager::getTimeTo()
+{
+	unsigned int nTimeTo;
+	nTimeTo = m_pHistoryACK->getTimeTo();
+	return nTimeTo;
+}

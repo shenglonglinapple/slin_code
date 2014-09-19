@@ -17,11 +17,6 @@ CHistoryDataACK::CHistoryDataACK()
 
 	m_nInstrumentID = 0;
 	m_MapBarData.clear();
-	m_nBarType = FIVE_MINUTE;//5 * 60
-	m_nBarTypeSeconds = m_nBarType;
-	
-
-
 	
 }
 
@@ -34,13 +29,10 @@ CHistoryDataACK::~CHistoryDataACK()
 	}
 	m_nInstrumentID = 0;
 	m_MapBarData.clear();
-	m_nBarType = FIVE_MINUTE;//5 * 60
-	m_nBarTypeSeconds = m_nBarType;
 }
 
-void CHistoryDataACK::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
+void CHistoryDataACK::onHistoryDataDownloaded(BarsPtr bars )
 {
-	m_nRequestID = requestID;
 	//std::set<Bar>;
 	Bars::iterator iterSet;
 	iterSet = bars->begin();
@@ -54,23 +46,51 @@ void CHistoryDataACK::onHistoryDataDownloaded( unsigned int requestID, BarsPtr b
 		iterSet++;
 	}
 
+	_ResetTimeValue();
 }
 
+void CHistoryDataACK::onBarDataUpdate( const BarSummary &barData )
+{
+	std::map<int, Bar>::const_iterator iterMap;// bars; //bars indexed by interval
 
+	iterMap = barData.bars.cbegin();
+	while (iterMap != barData.bars.cend())
+	{
+		Bar newBar = iterMap->second;// (*iterMap).second;
+		m_MapBarData.insert(newBar.timestamp, newBar);
+		iterMap++;
+	}
+
+	_ResetTimeValue();
+}
+
+void CHistoryDataACK::_ResetTimeValue()
+{
+	QMap<unsigned int, Bar>::iterator iterMapFirst;
+	QMap<unsigned int, Bar>::iterator iterMapLast;
+	//if (RequestType_From_To == m_nRequestType)
+	if (m_MapBarData.size() > 0)
+	{
+		iterMapFirst = m_MapBarData.begin();
+		iterMapLast = m_MapBarData.end();
+		iterMapLast--;
+
+		m_nTimeFrom = iterMapFirst.data().timestamp;
+		m_nTimeTo = iterMapLast.data().timestamp;
+
+		m_strTimeFrom = m_pUtilityFun->dataTimeToStr(m_nTimeFrom);
+		m_strTimeTo = m_pUtilityFun->dataTimeToStr(m_nTimeTo);
+	}
+}
 void CHistoryDataACK::logInfo()
 {
-	//if (RequestType_From_To == m_nRequestType)
-	{
-		LOG_DEBUG<<" "<<"RequestType_From_To"
-			<<" "<<"m_nRequestID="<<m_nRequestID
-			<<" "<<"m_nBarType="<<m_nBarType
-			<<" "<<"m_nInstrumentID="<<m_nInstrumentID
-			<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode
-			<<" "<<"nFromTime="<<m_pUtilityFun->dataTimeToStr(m_nFromTime).c_str()
-			<<" "<<"nToTime="<<m_pUtilityFun->dataTimeToStr(m_nToTime).c_str()
-			<<" "<<"m_MapBarData.size()="<<m_MapBarData.size();
 
-	}
+	LOG_DEBUG<<" "<<
+		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
+		<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode
+		<<" "<<"m_MapBarData.size()="<<m_MapBarData.size()
+		<<" "<<"nFromTime="<<m_strTimeFrom
+		<<" "<<"nToTime="<<m_strTimeTo;
 }
 
 
@@ -83,6 +103,7 @@ void CHistoryDataACK::initTestData()
 	unsigned int nBarCount = 60;
 	double tmp1 = 0;
 	double tmp2 = 0;
+	int m_nBarTypeSeconds = FIVE_MINUTE;
 
 	//FIVE_MINUTES
 	//one bar 5 minutes  * 60
@@ -129,5 +150,28 @@ void CHistoryDataACK::initTestData()
 		nBarIndex++;
 	}
 
+	_ResetTimeValue();
 
 }
+
+unsigned int CHistoryDataACK::getTimeFrom()
+{
+	_ResetTimeValue();
+	return m_nTimeFrom;
+}
+
+unsigned int CHistoryDataACK::getTimeTo()
+{
+	_ResetTimeValue();
+	return m_nTimeTo;
+}
+
+BarType CHistoryDataACK::getBarType()
+{
+	return m_nBarType;
+}
+void CHistoryDataACK::setBarType( BarType nBarType )
+{
+	m_nBarType = nBarType;
+}
+

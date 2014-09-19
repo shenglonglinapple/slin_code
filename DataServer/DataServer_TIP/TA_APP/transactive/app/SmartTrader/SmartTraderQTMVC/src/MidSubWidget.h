@@ -7,13 +7,16 @@
 #include <QtCore/QModelIndex>
 #include <QtGui/QTabWidget>
 #include <QtGui/QTableView>
+#include <QtCore/QList>
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
 QT_END_NAMESPACE
 
-class QCustomPlot;
 class CHistoryDataManager;
+class QCPStatisticalBox;
+class QCustomPlot;
+class CMidSubDrawHelper;
 
 class CMidSubWidget : public QWidget
 {
@@ -29,14 +32,14 @@ public slots:
 	/*
 	class: CClientDataManagerWorker
 	signals:
-	void signalHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 	fun send signals: onHistoryDataDownloaded()
 
 	class: CMidSubWidget
 	public slots: 
-	void slotHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 	*/
-	void slotHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 public:
 	void setupUi();
 	void translateLanguage();
@@ -50,6 +53,7 @@ private:
 private:
 	QVBoxLayout* verticalLayout;
 	QCustomPlot* m_pCustomPlot;
+	CMidSubDrawHelper* m_pMidSubDrawHelper;
 };
 
 //QT_END_NAMESPACE

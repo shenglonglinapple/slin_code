@@ -171,14 +171,14 @@ signals:
 	/*
 	class: CClientDataManagerWorker
 	signals:
-	void signalHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 	fun send signals: onHistoryDataDownloaded()
 
 	class: CMidSubWidget
 	public slots: 
-	void slotHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 	*/
-	void signalHistoryDataChanged(CHistoryDataManager* pMyBarSumary);
+	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 
 
 	
@@ -260,7 +260,7 @@ private:
 	CTreeItemOrder* m_pTreeItemOrder_root;
 private:
 	boost::mutex m_mutexForMapHistoryData;
-	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//nRequestID
+	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//instrumentID
 	int m_nDoTest;
 };
 

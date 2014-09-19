@@ -1476,6 +1476,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\MidSubDrawHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MidSubDrawHelper.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\MidSubWidget.cpp"
 				>
 			</File>

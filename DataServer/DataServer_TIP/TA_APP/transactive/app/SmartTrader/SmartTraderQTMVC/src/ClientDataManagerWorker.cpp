@@ -518,7 +518,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
 	std::string strInstrumentCode;
-	Instrument* pInstrument = NULL;
+	Instrument* pInstrumentRef = NULL;
 	QMap<unsigned int, Instrument*>::iterator  iterFind;
 
 	LOG_DEBUG<<"CClientDataManagerWorker process slotAddContractToSmartQuotes"
@@ -538,7 +538,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		iterFind = m_MapInstrumentIDData.find(nInstrumentID);
 
 		//find ok
-		pInstrument = iterFind.value();
+		pInstrumentRef = iterFind.value();
 
 		QStringList strLstUserInstruemt;
 		strLstUserInstruemt = CConfigInfo::getInstance().getLstUserInstrument();
@@ -553,7 +553,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 			<<" "<<"InstrumentID="<<nInstrumentID;
 		m_pMyTradeClient->subscribeMarketData(nInstrumentID);
 
-		m_pQuotesInfo->setValue(*pInstrument);
+		m_pQuotesInfo->setValue(*pInstrumentRef);
 		strExchangeName = m_pQuotesInfo->m_strExchangeName.toStdString();
 		strUnderlyingCode = m_pQuotesInfo->m_strUnderlyingCode.toStdString();
 		strInstrumentCode = m_pQuotesInfo->m_strInstrumentCode.toStdString();
@@ -569,7 +569,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 	{
 		//remove nInstrumentID from m_pTreeItemContract_Root
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
-		m_pContractInfo->setValue(*pInstrument);
+		m_pContractInfo->setValue(*pInstrumentRef);
 		m_pTreeItemContract_Root->removeChildrenByData(m_pContractInfo);
 
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
@@ -589,38 +589,26 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 	
 
 	{
-		//TODO. historydata test
+		//TODO. TTTTTTTTTTT historydata test
 		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
 		if (0 == m_nDoTest)
 		{
 			//m_nDoTest = 1;
-			CHistoryDataManager* pMyBarSumary = NULL;
-			pMyBarSumary = new CHistoryDataManager();
+			CHistoryDataManager* pHistoryDataManager = NULL;
+			pHistoryDataManager = new CHistoryDataManager();
 
-			pMyBarSumary->m_nRequestID = 0;
-			pMyBarSumary->m_pHistoryRequest->m_nRequestID = 0;
-			pMyBarSumary->m_pHistoryRequest->m_nRequestType = CHistoryDataRequest::HistoryRequestType_0_From_To;
-			pMyBarSumary->m_pHistoryRequest->m_pInstrument = pInstrument;
-			pMyBarSumary->m_pHistoryRequest->m_nBarType = FIVE_MINUTE;
-			pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0 = m_pUtilityFun->getTimeNow();
-			pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0 = pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0 - (60 * FIVE_MINUTE);
+			pHistoryDataManager->m_nInstrumentID = nInstrumentID;
+			pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
+			pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
+			pHistoryDataManager->m_pHistoryRequest->setBarType(FIVE_SECOND);
+			pHistoryDataManager->m_pHistoryRequest->setTimeFrom(m_pUtilityFun->getTimeNow());
+			pHistoryDataManager->m_pHistoryRequest->setBarCount(60);
+			pHistoryDataManager->m_pHistoryRequest->setSubscribe(true);
+			pHistoryDataManager->m_pHistoryRequest->sentRequest(m_pMyTradeClient);
+			pHistoryDataManager->m_pHistoryRequest->logInfo();
 
-			pMyBarSumary->m_pHistoryRequest->m_nInstrumentID = pInstrument->getInstrumentID();
-			pMyBarSumary->m_pHistoryRequest->m_strInstrumentCode = pInstrument->getInstrumentCode();
-
-
-// 			pMyBarSumary->m_nRequestID = m_pMyTradeClient->downloadHistoryData(
-// 				*pInstrument, pMyBarSumary->m_pHistoryRequest->m_nBarType, pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0, pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0);
-
-			pMyBarSumary->m_nRequestID = m_pMyTradeClient->downloadHistoryData(
-				*pInstrument, pMyBarSumary->m_pHistoryRequest->m_nBarType, pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0, 60, true);
-
-			//downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int fromTime, unsigned short count, bool subscribe );
-
-			pMyBarSumary->m_pHistoryRequest->logInfo();
-
-			m_MapHistoryData.insert(pMyBarSumary->m_nRequestID, pMyBarSumary);
-			pMyBarSumary = NULL;
+			m_MapHistoryData.insert(pHistoryDataManager->m_nInstrumentID, pHistoryDataManager);
+			pHistoryDataManager = NULL;
 
 		}
 	}
@@ -1049,41 +1037,39 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
 		<<" "<<"barData.bars.size="<<barData.bars.size();
 
-
 	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
-	CHistoryDataManager* pMyBarSumaryRef = NULL;
+	CHistoryDataManager* pHistoryDataManager = NULL;
 
 	{
 		//TODO. historydata test
 		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
-		iterMap = m_MapHistoryData.begin();
-		//if (m_MapHistoryData.contains(requestID))
+
+		if (!m_MapHistoryData.contains(barData.instrumentID))
 		{
-			//iterMap = m_MapHistoryData.find(requestID);
-			pMyBarSumaryRef = iterMap.value();
+			//find error
+			LOG_ERROR<<" "<<"find error instrumentID="<<barData.instrumentID;
+			return;
+		}
+		iterMap = m_MapHistoryData.find(barData.instrumentID);
+
+		pHistoryDataManager = iterMap.value();
+		pHistoryDataManager->m_pHistoryACK->onBarDataUpdate(barData);
+		pHistoryDataManager->m_pHistoryACK->logInfo();
+
+
+		{
+			LOG_DEBUG<<" "<<"emit"
+				<<" "<<"class:"<<"CClientDataManagerWorker"
+				<<" "<<"fun:"<<"onBarDataUpdate()"
+				<<" "<<"emit"
+				<<" "<<"signalHistoryDataChanged()"
+				<<" "<<"param:"
+				<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
+
+			emit signalHistoryDataChanged(pHistoryDataManager);
 		}
 
-		if (NULL != pMyBarSumaryRef)
-		{
-			unsigned int requestID = pMyBarSumaryRef->m_nRequestID;
-			pMyBarSumaryRef->m_pHistoryACK->onHistoryDataDownloaded(requestID, bars);
-			pMyBarSumaryRef->m_pHistoryACK->logInfo();
-
-
-			{
-				LOG_DEBUG<<" "<<"emit"
-					<<" "<<"class:"<<"CClientDataManagerWorker"
-					<<" "<<"fun:"<<"onHistoryDataDownloaded()"
-					<<" "<<"emit"
-					<<" "<<"signalHistoryDataChanged()"
-					<<" "<<"param:"
-					<<" "<<"pMyBarSumaryRef=0x"<<pMyBarSumaryRef;
-
-				emit signalHistoryDataChanged(pMyBarSumaryRef);
-			}
-
-		}
-	}
+	}//scoped_lock
 }
 
 void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
@@ -1093,38 +1079,51 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 		<<" "<<"bars->size.size="<<bars->size();
 
 	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
-	CHistoryDataManager* pMyBarSumaryRef = NULL;
+	CHistoryDataManager* pHistoryDataManager = NULL;
 
 	{
 		//TODO. historydata test
 		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
 		iterMap = m_MapHistoryData.begin();
-		if (m_MapHistoryData.contains(requestID))
+		while (iterMap != m_MapHistoryData.end())
 		{
-			iterMap = m_MapHistoryData.find(requestID);
-			pMyBarSumaryRef = iterMap.value();
-		}
-
-		if (NULL != pMyBarSumaryRef)
-		{
-			pMyBarSumaryRef->m_pHistoryACK->onHistoryDataDownloaded(requestID, bars);
-			pMyBarSumaryRef->m_pHistoryACK->logInfo();
-
-
+			pHistoryDataManager = iterMap.value();
+			if (pHistoryDataManager->m_pHistoryRequest->m_nRequestID == requestID)
 			{
-				LOG_DEBUG<<" "<<"emit"
-					<<" "<<"class:"<<"CClientDataManagerWorker"
-					<<" "<<"fun:"<<"onHistoryDataDownloaded()"
-					<<" "<<"emit"
-					<<" "<<"signalHistoryDataChanged()"
-					<<" "<<"param:"
-					<<" "<<"pMyBarSumaryRef=0x"<<pMyBarSumaryRef;
-
-				emit signalHistoryDataChanged(pMyBarSumaryRef);
+				break;
 			}
+			pHistoryDataManager = NULL;
 
+			iterMap++;
 		}
-	}
+
+		if (iterMap == m_MapHistoryData.end())
+		{
+			//find error
+			//TODO.
+			LOG_ERROR<<" "<<"not find requestID="<<requestID;
+			return;
+		}
+
+		pHistoryDataManager = iterMap.value();
+		pHistoryDataManager->m_pHistoryACK->onHistoryDataDownloaded(bars);
+		pHistoryDataManager->m_pHistoryACK->logInfo();
+
+
+		{
+			LOG_DEBUG<<" "<<"emit"
+				<<" "<<"class:"<<"CClientDataManagerWorker"
+				<<" "<<"fun:"<<"onHistoryDataDownloaded()"
+				<<" "<<"emit"
+				<<" "<<"signalHistoryDataChanged()"
+				<<" "<<"param:"
+				<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
+
+			emit signalHistoryDataChanged(pHistoryDataManager);
+		}
+
+	}//scoped_lock
+
 }
 
 

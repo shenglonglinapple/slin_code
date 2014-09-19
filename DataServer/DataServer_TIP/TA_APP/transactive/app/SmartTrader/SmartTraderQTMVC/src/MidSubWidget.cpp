@@ -5,8 +5,10 @@
 #include "ProjectQTInclude.h"
 
 #include "ClientDataManagerWorker.h"
-#include "qcustomplot.h"
 #include "HistoryDataManager.h"
+#include "MidSubDrawHelper.h"
+#include "qcustomplot.h"
+
 
 
 #include "BoostLogger.h"
@@ -26,6 +28,9 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 {
 
 	m_pCustomPlot = NULL;
+	m_pMidSubDrawHelper = NULL;
+
+	m_pMidSubDrawHelper = new CMidSubDrawHelper();
 
     setupUi();
 	translateLanguage();
@@ -42,7 +47,11 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 
 CMidSubWidget::~CMidSubWidget()
 {
-	
+	if (NULL != m_pMidSubDrawHelper)
+	{
+		delete m_pMidSubDrawHelper;
+		m_pMidSubDrawHelper = NULL;
+	}
 }
 
 
@@ -92,7 +101,8 @@ void CMidSubWidget::doTest()
 
 }
 
-void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pMyBarSumary )
+
+void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataManager )
 {
 	//emit
 	{
@@ -100,7 +110,25 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pMyBarSumary )
 			<<" "<<"class:"<<"CMidSubWidget"
 			<<" "<<"fun:"<<"slotHistoryDataChanged()"
 			<<" "<<"param:"
-			<<" "<<"pMyBarSumary=0x"<<pMyBarSumary;
+			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
+	}
+
+	m_pCustomPlot->clearGraphs();
+	m_pMidSubDrawHelper->drawHistoryData(pHistoryDataManager, m_pCustomPlot);
+	m_pCustomPlot->replot();//draw again
+
+}
+
+#if 0
+void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataManager )
+{
+	//emit
+	{
+		LOG_DEBUG<<" "<<"slot"
+			<<" "<<"class:"<<"CMidSubWidget"
+			<<" "<<"fun:"<<"slotHistoryDataChanged()"
+			<<" "<<"param:"
+			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
 	}
 
 
@@ -109,7 +137,6 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pMyBarSumary )
 	QBrush greenBrush(QColor(0, 255, 0, 255));//green
 	QPen greenPen(QColor(0, 255, 0, 255));//green
 
-	int nBarWith = pMyBarSumary->m_pHistoryRequest->m_nBarTypeSeconds; //FIVE_MINUTES
 
 	QBrush* pBoxBrushRef = NULL;
 	QPen* pBoxPenRef = NULL;
@@ -124,6 +151,11 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pMyBarSumary )
 	int nIndex = 0;
 	QVector<double> xData;
 	QVector<double> yData;
+	unsigned int nTimeFrom = 0;
+	unsigned int nTimeTo = 0;
+	int nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
+	nTimeFrom = pHistoryDataManager->getTimeFrom();
+	nTimeTo = pHistoryDataManager->getTimeTo();
 
 	// prepare axes:
 	m_pCustomPlot->clearGraphs();	
@@ -135,14 +167,14 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pMyBarSumary )
 	m_pCustomPlot->xAxis->setDateTimeFormat("yyyy-MM-dd\nhh-mm-ss");
 
 	// make key axis range scroll with the data (at a constant range size of 8):
-	m_pCustomPlot->xAxis->setRange(pMyBarSumary->m_pHistoryRequest->m_nFromTime_Type0, pMyBarSumary->m_pHistoryRequest->m_nToTime_Type0);
+	m_pCustomPlot->xAxis->setRange(nTimeFrom, nTimeTo);
 	//customPlot->yAxis->setRange(0, 200);
 	// show legend:
 	m_pCustomPlot->legend->setVisible(false);
 
 	nIndex = 0;
-	iterMap = pMyBarSumary->m_pHistoryACK->m_MapBarData.begin();
-	while (iterMap != pMyBarSumary->m_pHistoryACK->m_MapBarData.end())
+	iterMap = pHistoryDataManager->m_pHistoryACK->m_MapBarData.begin();
+	while (iterMap != pHistoryDataManager->m_pHistoryACK->m_MapBarData.end())
 	{
 		//iterMap->second;
 		// create empty statistical box plottables:
@@ -210,6 +242,8 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pMyBarSumary )
 	m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 	m_pCustomPlot->replot();//draw again
 }
+#endif
+
 
 //QT_END_NAMESPACE
 
