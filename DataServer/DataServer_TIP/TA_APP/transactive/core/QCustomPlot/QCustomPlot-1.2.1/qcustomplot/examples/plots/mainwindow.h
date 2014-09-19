@@ -98,6 +98,7 @@ public:
 	void setupMyTestOneDemo(QCustomPlot *customPlot);
 	void setupMyTestTwoDemo(QCustomPlot *customPlot);
 	void setupMyTestThreeDemo(QCustomPlot *customPlot);
+	void setupMyTestForeDemo(QCustomPlot *customPlot);
 
 private slots:
   void realtimeDataSlot();

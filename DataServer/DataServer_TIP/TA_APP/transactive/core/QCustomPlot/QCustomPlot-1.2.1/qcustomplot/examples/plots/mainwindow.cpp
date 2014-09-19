@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
   setGeometry(400, 250, 542, 390);
   
   //setupDemo(0);
-  setupDemo(22);
+  setupDemo(23);
   
   //setupPlayground(ui->customPlot);
   // 0:  setupQuadraticDemo(ui->customPlot);
@@ -111,6 +111,7 @@ void MainWindow::setupDemo(int demoIndex)
 	case 20: setupMyTestOneDemo(this->customPlot); break;
 	case 21: setupMyTestTwoDemo(this->customPlot); break;
 	case 22: setupMyTestThreeDemo(this->customPlot); break;
+	case 23: setupMyTestForeDemo(this->customPlot); break;
 		
 		
 
@@ -1791,6 +1792,172 @@ void MainWindow::setupMyTestThreeDemo(QCustomPlot *customPlot)
 	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
 }
+
+
+
+void MainWindow::setupMyTestForeDemo(QCustomPlot *customPlot)
+{
+	demoName = "My Test One Demo";
+	QCPStatisticalBox *pStatisticalBoxTmp = NULL;
+	QBrush redBrush(QColor(255, 0, 0, 255));//red
+	QPen redPen(QColor(255, 0, 0, 255));//red
+	QBrush greenBrush(QColor(0, 255, 0, 255));//green
+	QPen greenPen(QColor(0, 255, 0, 255));//green
+
+	QBrush* pBoxBrushRef = NULL;
+	QPen* pBoxPenRef = NULL;
+
+	double fMinimum = 0;
+	double fMaximum = 0;
+	double fLowerQuartile = 0;
+	double fUpperQuartile = 0;
+
+	BarSumary* pBarSumary = NULL;
+	int nIndex = 1;
+	std::map<int, Bar>::iterator iterMap;
+
+	//new data
+	pBarSumary = new BarSumary();
+
+	QVector<double> xData(60), yData(60);
+	unsigned int nTimeNow;
+	int nBarTypeSeconds = 5 * 60; //FIVE_MINUTES
+	int nBarCount = pBarSumary->bars.size();//60
+	int nTotalSeconds = nBarCount * nBarTypeSeconds;// 5 * 60 * 60
+	int nBarWith = nBarTypeSeconds;//5 * 60; //FIVE_MINUTES
+
+
+	// configure axis rect:
+	customPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
+
+	QCPAxisRect *wideAxisRect = new QCPAxisRect(customPlot);
+	QCPAxisRect *subRectLeft = new QCPAxisRect(customPlot); // false means to not setup default axes
+
+	wideAxisRect->setupFullAxesBox(true);
+	// prepare axes:
+	wideAxisRect->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	wideAxisRect->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	// configure bottom axis to show date and time instead of number:
+	wideAxisRect->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	wideAxisRect->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd\nhh-mm-ss");
+
+
+	subRectLeft->setupFullAxesBox(true);
+	subRectLeft->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	subRectLeft->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	subRectLeft->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	subRectLeft->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd\nhh-mm-ss");
+
+
+	customPlot->plotLayout()->addElement(0, 0, wideAxisRect); // insert axis rect in first row
+	customPlot->plotLayout()->addElement(1, 0, subRectLeft); // sub layout in second row (grid layout will grow accordingly)
+
+
+	
+
+	//FIVE_MINUTES
+	//one bar 5 minutes  * 60
+	//double nTimeNow = QDateTime::currentDateTime().toTime_t();
+	//nTimeNow = QDateTime::currentDateTime().toTime_t();
+	iterMap = pBarSumary->bars.begin();
+	nTimeNow = iterMap->second.timestamp;
+
+	// make key axis range scroll with the data (at a constant range size of 8):
+	wideAxisRect->axis(QCPAxis::atBottom)->setRange(nTimeNow, nTimeNow + nBarTypeSeconds);
+
+	//customPlot->yAxis->setRange(0, 200);
+	// show legend:
+	//customPlot->legend->setVisible(false);
+
+	nIndex = 0;
+	iterMap = pBarSumary->bars.begin();
+	while (iterMap != pBarSumary->bars.end())
+	{
+		//iterMap->second;
+		// create empty statistical box plottables:
+		pStatisticalBoxTmp = NULL;
+		pStatisticalBoxTmp = new QCPStatisticalBox(wideAxisRect->axis(QCPAxis::atBottom), wideAxisRect->axis(QCPAxis::atLeft));
+		customPlot->addPlottable(pStatisticalBoxTmp);
+
+		fMinimum = iterMap->second.low;
+		fMaximum= iterMap->second.high;
+		//iterMap->second.timestamp = nTimeNow + nIndex * nBarTypeSeconds;//5 minutes
+		xData[nIndex] = iterMap->second.timestamp;
+		yData[nIndex] = iterMap->second.high;
+
+		if (iterMap->second.open > iterMap->second.close)
+		{
+			fLowerQuartile = iterMap->second.close;
+			fUpperQuartile = iterMap->second.open;
+
+			pBoxBrushRef = &redBrush;
+			pBoxPenRef = &redPen;
+
+		}
+		else
+		{
+			fLowerQuartile = iterMap->second.open;
+			fUpperQuartile = iterMap->second.close;
+
+			pBoxBrushRef = &greenBrush;
+			pBoxPenRef = &greenPen;
+		}
+
+		//boxBrush.setStyle(Qt::SolidPattern); // make it look oldschool Qt::SolidPattern  Qt::Dense6Pattern
+		pStatisticalBoxTmp->setBrush(*pBoxBrushRef);
+		pStatisticalBoxTmp->setPen(*pBoxPenRef);
+		pStatisticalBoxTmp->setWhiskerPen(*pBoxPenRef);
+		pStatisticalBoxTmp->setWhiskerBarPen(*pBoxPenRef);
+		pStatisticalBoxTmp->setMedianPen(*pBoxPenRef);
+
+		// set data:
+		//pStatisticalBoxTmp->setKey(nIndex);
+		pStatisticalBoxTmp->setKey(iterMap->second.timestamp);
+		pStatisticalBoxTmp->setMinimum(fMinimum);
+		pStatisticalBoxTmp->setLowerQuartile(fLowerQuartile);
+		pStatisticalBoxTmp->setMedian(fLowerQuartile);
+		pStatisticalBoxTmp->setUpperQuartile(fUpperQuartile);
+		pStatisticalBoxTmp->setMaximum(fMaximum);
+
+		//pStatisticalBoxTmp->setWidth(1);//矩形宽度
+		pStatisticalBoxTmp->setWidth(nBarWith);//矩形宽度
+
+		pStatisticalBoxTmp->setWhiskerWidth(0);//上顶，下底 直线宽度
+
+
+
+		nIndex++;
+
+		iterMap++;
+	}//while
+
+
+	
+	QCPBars* pBarTmp = NULL;
+	pBarTmp = new QCPBars(subRectLeft->axis(QCPAxis::atBottom), subRectLeft->axis(QCPAxis::atLeft));
+	customPlot->addPlottable(pBarTmp);
+	pBarTmp->setWidth(nBarWith);
+	pBarTmp->setData(xData, yData);
+
+
+	//QCPGraph *pGraphHighLine = customPlot->addGraph(subRectLeft->axis(QCPAxis::atBottom), subRectLeft->axis(QCPAxis::atLeft));
+	//pGraphHighLine->setData(xData, yData);
+
+
+	if (NULL != pBarSumary)
+	{
+		delete pBarSumary;
+		pBarSumary = NULL;
+	}
+
+	customPlot->rescaleAxes();
+	//customPlot->xAxis->scaleRange(2, customPlot->xAxis->range().center());
+	//customPlot->yAxis->setRange(0, 10);
+	//customPlot->rescaleAxes();
+	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+
+}
+
 
 
 
