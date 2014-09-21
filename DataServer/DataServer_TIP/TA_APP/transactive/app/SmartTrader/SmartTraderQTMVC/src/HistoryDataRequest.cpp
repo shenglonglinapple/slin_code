@@ -6,6 +6,8 @@
 #include <QtCore/QDateTime>
 #include "Bar.h"
 
+#include "SmartTraderClient.h"
+
 #include "BoostLogger.h"
 USING_BOOST_LOG;
 
@@ -81,10 +83,12 @@ std::string CHistoryDataRequest::_GetRequestStrValue()
 		break;
 	}
 
+	return strRequestStrValue;
+
 }
 void CHistoryDataRequest::logInfo()
 {
-	LOG_DEBUG<<" "<<"m_nRequestType="<<_GetRequestStrValue.c_str()
+	LOG_DEBUG<<" "<<"m_nRequestType="<<_GetRequestStrValue()
 		<<" "<<"m_nInstrumentID="<<m_pInstrumentRef->getInstrumentID()
 		<<" "<<"m_strInstrumentCode="<<m_pInstrumentRef->getInstrumentCode()
 		<<" "<<"m_nBarType="<<m_nBarType

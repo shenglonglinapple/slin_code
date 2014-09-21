@@ -75,7 +75,32 @@ void CMidSubWidget::setupUi()
 {
 	//this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);
 	//this->setWindowFlags(Qt::Dialog);
+	QCPAxisRect* pAxisRectTop = NULL;
+	QCPAxisRect* pAxisRectBottom = NULL;
 	m_pCustomPlot = new QCustomPlot(this);
+
+	m_pCustomPlot->clearGraphs();
+	m_pCustomPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
+
+	pAxisRectTop = new QCPAxisRect(m_pCustomPlot);
+	pAxisRectTop->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pAxisRectTop->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pAxisRectTop->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+
+	pAxisRectBottom = new QCPAxisRect(m_pCustomPlot);
+	pAxisRectBottom->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+
+	m_pCustomPlot->plotLayout()->addElement(0, 0, pAxisRectTop); // insert axis rect in first row
+	m_pCustomPlot->plotLayout()->addElement(1, 0, pAxisRectBottom); // insert axis rect in first row
+
+	m_pCustomPlot->rescaleAxes();
+	m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	m_pCustomPlot->replot();//draw again
+
 
 	verticalLayout = new QVBoxLayout(this);
 	verticalLayout->setSpacing(6);
@@ -114,7 +139,13 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 	}
 
 	m_pCustomPlot->clearGraphs();
-	m_pMidSubDrawHelper->drawHistoryData(pHistoryDataManager, m_pCustomPlot);
+	m_pCustomPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
+	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot);
+	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot);
+
+	m_pCustomPlot->rescaleAxes();
+	m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+
 	m_pCustomPlot->replot();//draw again
 
 }

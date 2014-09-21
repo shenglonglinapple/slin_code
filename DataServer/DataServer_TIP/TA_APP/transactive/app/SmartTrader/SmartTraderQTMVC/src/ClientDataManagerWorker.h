@@ -239,7 +239,8 @@ private:
 	boost::mutex m_mutexForNodeRootContract;
 	CContractInfo* m_pContractInfo;
 	CTreeItemContract* m_pTreeItemContract_Root;//total
-
+	int m_SignalControl_NotWork;
+	int m_IndexSigalControl;
 private:
 	boost::mutex m_mutexForNodeRootQuotes;
 	CQuotesInfo* m_pQuotesInfo;

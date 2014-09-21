@@ -53,8 +53,8 @@ void CHistoryDataACK::onBarDataUpdate( const BarSummary &barData )
 {
 	std::map<int, Bar>::const_iterator iterMap;// bars; //bars indexed by interval
 
-	iterMap = barData.bars.cbegin();
-	while (iterMap != barData.bars.cend())
+	iterMap = barData.bars.begin();
+	while (iterMap != barData.bars.end())
 	{
 		Bar newBar = iterMap->second;// (*iterMap).second;
 		m_MapBarData.insert(newBar.timestamp, newBar);
@@ -75,8 +75,8 @@ void CHistoryDataACK::_ResetTimeValue()
 		iterMapLast = m_MapBarData.end();
 		iterMapLast--;
 
-		m_nTimeFrom = iterMapFirst.data().timestamp;
-		m_nTimeTo = iterMapLast.data().timestamp;
+		m_nTimeFrom = iterMapFirst->timestamp;
+		m_nTimeTo = iterMapLast->timestamp;
 
 		m_strTimeFrom = m_pUtilityFun->dataTimeToStr(m_nTimeFrom);
 		m_strTimeTo = m_pUtilityFun->dataTimeToStr(m_nTimeTo);
@@ -85,7 +85,7 @@ void CHistoryDataACK::_ResetTimeValue()
 void CHistoryDataACK::logInfo()
 {
 
-	LOG_DEBUG<<" "<<
+	LOG_DEBUG<<" "<<" "
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
 		<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode
 		<<" "<<"m_MapBarData.size()="<<m_MapBarData.size()

@@ -13,7 +13,8 @@ public:
 	CMidSubDrawHelper();
 	~CMidSubDrawHelper();
 public:
-	void drawHistoryData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot);
+	void drawHistoryBarData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot);
+	void drawHistoryVolumeData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot);
 public:
 
 };
