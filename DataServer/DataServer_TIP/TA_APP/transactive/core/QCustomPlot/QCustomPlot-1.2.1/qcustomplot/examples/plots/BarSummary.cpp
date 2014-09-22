@@ -39,6 +39,7 @@ BarSumary::BarSumary()
 		double tmp1 = ::rand() % 100;
 		double tmp2 = ::rand() % 100;
 
+		barData.volume = ::rand() % 100;
 		barData.timestamp = nTimeNow + nIndex * nBarTypeSeconds;//5 minutes
 
 		barData.open = tmp1;

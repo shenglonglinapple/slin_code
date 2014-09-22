@@ -1799,6 +1799,7 @@ void MainWindow::setupMyTestForeDemo(QCustomPlot *customPlot)
 {
 	demoName = "My Test One Demo";
 	QCPStatisticalBox *pStatisticalBoxTmp = NULL;
+	QCPStatisticalBox *pVolumeBoxTmp = NULL;
 	QBrush redBrush(QColor(255, 0, 0, 255));//red
 	QPen redPen(QColor(255, 0, 0, 255));//red
 	QBrush greenBrush(QColor(0, 255, 0, 255));//green
@@ -1864,6 +1865,7 @@ void MainWindow::setupMyTestForeDemo(QCustomPlot *customPlot)
 
 	// make key axis range scroll with the data (at a constant range size of 8):
 	wideAxisRect->axis(QCPAxis::atBottom)->setRange(nTimeNow, nTimeNow + nBarTypeSeconds);
+	
 
 	//customPlot->yAxis->setRange(0, 200);
 	// show legend:
@@ -1877,7 +1879,9 @@ void MainWindow::setupMyTestForeDemo(QCustomPlot *customPlot)
 		// create empty statistical box plottables:
 		pStatisticalBoxTmp = NULL;
 		pStatisticalBoxTmp = new QCPStatisticalBox(wideAxisRect->axis(QCPAxis::atBottom), wideAxisRect->axis(QCPAxis::atLeft));
+		pVolumeBoxTmp = new QCPStatisticalBox(subRectLeft->axis(QCPAxis::atBottom), subRectLeft->axis(QCPAxis::atLeft));
 		customPlot->addPlottable(pStatisticalBoxTmp);
+		customPlot->addPlottable(pVolumeBoxTmp);
 
 		fMinimum = iterMap->second.low;
 		fMaximum= iterMap->second.high;
@@ -1910,6 +1914,14 @@ void MainWindow::setupMyTestForeDemo(QCustomPlot *customPlot)
 		pStatisticalBoxTmp->setWhiskerBarPen(*pBoxPenRef);
 		pStatisticalBoxTmp->setMedianPen(*pBoxPenRef);
 
+
+		pVolumeBoxTmp->setBrush(*pBoxBrushRef);
+		pVolumeBoxTmp->setPen(*pBoxPenRef);
+		pVolumeBoxTmp->setWhiskerPen(*pBoxPenRef);
+		pVolumeBoxTmp->setWhiskerBarPen(*pBoxPenRef);
+		pVolumeBoxTmp->setMedianPen(*pBoxPenRef);
+		
+
 		// set data:
 		//pStatisticalBoxTmp->setKey(nIndex);
 		pStatisticalBoxTmp->setKey(iterMap->second.timestamp);
@@ -1919,10 +1931,20 @@ void MainWindow::setupMyTestForeDemo(QCustomPlot *customPlot)
 		pStatisticalBoxTmp->setUpperQuartile(fUpperQuartile);
 		pStatisticalBoxTmp->setMaximum(fMaximum);
 
+		pVolumeBoxTmp->setKey(iterMap->second.timestamp);
+		pVolumeBoxTmp->setMinimum(0);
+		pVolumeBoxTmp->setLowerQuartile(0);
+		pVolumeBoxTmp->setMedian(0);
+		pVolumeBoxTmp->setUpperQuartile(iterMap->second.volume);
+		pVolumeBoxTmp->setMaximum(iterMap->second.volume);
+
 		//pStatisticalBoxTmp->setWidth(1);//矩形宽度
 		pStatisticalBoxTmp->setWidth(nBarWith);//矩形宽度
-
 		pStatisticalBoxTmp->setWhiskerWidth(0);//上顶，下底 直线宽度
+
+
+		pVolumeBoxTmp->setWidth(nBarWith);
+		pVolumeBoxTmp->setWhiskerWidth(0);//上顶，下底 直线宽度
 
 
 
@@ -1933,11 +1955,11 @@ void MainWindow::setupMyTestForeDemo(QCustomPlot *customPlot)
 
 
 	
-	QCPBars* pBarTmp = NULL;
-	pBarTmp = new QCPBars(subRectLeft->axis(QCPAxis::atBottom), subRectLeft->axis(QCPAxis::atLeft));
-	customPlot->addPlottable(pBarTmp);
-	pBarTmp->setWidth(nBarWith);
-	pBarTmp->setData(xData, yData);
+// 	QCPBars* pBarTmp = NULL;
+// 	pBarTmp = new QCPBars(subRectLeft->axis(QCPAxis::atBottom), subRectLeft->axis(QCPAxis::atLeft));
+// 	customPlot->addPlottable(pBarTmp);
+// 	pBarTmp->setWidth(nBarWith);
+// 	pBarTmp->setData(xData, yData);
 
 
 	//QCPGraph *pGraphHighLine = customPlot->addGraph(subRectLeft->axis(QCPAxis::atBottom), subRectLeft->axis(QCPAxis::atLeft));
