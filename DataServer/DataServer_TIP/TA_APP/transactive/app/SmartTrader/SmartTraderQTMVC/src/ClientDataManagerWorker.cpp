@@ -450,14 +450,14 @@ void CClientDataManagerWorker::onInstrumentDownloaded( const Instrument& instrum
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
 		m_pContractInfo->setValue(instrument);
 		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
-
-		m_IndexSigalControl++;
-		if (m_IndexSigalControl > m_SignalControl_NotWork)
-		{
-			LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
-				<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
-			emit signalContractInfoChanged(m_pTreeItemContract_Root);
-		}
+		//use slotContractInfoWindowResetData()
+// 		m_IndexSigalControl++;
+// 		if (m_IndexSigalControl > m_SignalControl_NotWork)
+// 		{
+// 			LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
+// 				<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
+// 			emit signalContractInfoChanged(m_pTreeItemContract_Root);
+// 		}
 	}
 
 
@@ -593,6 +593,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
 		if (0 == m_nDoTest)
 		{
+			//time_t timeNow = m_pUtilityFun->strToDateTime("2014-08-23 20:06:09");
 			//m_nDoTest = 1;
 			CHistoryDataManager* pHistoryDataManager = NULL;
 			pHistoryDataManager = new CHistoryDataManager();
@@ -601,8 +602,8 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 			pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
 			pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
 			pHistoryDataManager->m_pHistoryRequest->setBarType(FIVE_SECOND);
-			pHistoryDataManager->m_pHistoryRequest->setTimeFrom(m_pUtilityFun->getTimeNow() - 60 * 60 * 24 );
-			pHistoryDataManager->m_pHistoryRequest->setBarCount(600);
+			pHistoryDataManager->m_pHistoryRequest->setTimeFrom(m_pUtilityFun->getTimeNow() - 60 * 60 * 24 * 10);
+			pHistoryDataManager->m_pHistoryRequest->setBarCount(6000);
 			pHistoryDataManager->m_pHistoryRequest->setSubscribe(true);
 			pHistoryDataManager->m_pHistoryRequest->sentRequest(m_pMyTradeClient);
 			pHistoryDataManager->m_pHistoryRequest->logInfo();
