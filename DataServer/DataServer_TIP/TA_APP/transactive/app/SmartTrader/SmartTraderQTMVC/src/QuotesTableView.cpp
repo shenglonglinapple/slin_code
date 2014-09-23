@@ -73,8 +73,11 @@ CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
 	m_pActionCustomColumns = new QAction(QObject::tr(DEFVALUE_String_ActionCustomColumns.c_str()), this); 
 
 	m_pCreateNewOrderDialog = new CCreateNewOrderDialog(this);
+	m_pCreateNewOrderDialog->hide();
 	m_pContractInfoWindow = new CContractInfoWindow(this);
+	m_pContractInfoWindow->hide();
 	m_pCustomColumnsDialog = new CCustomColumnsDialog(this);
+	m_pCustomColumnsDialog->hide();
 
 	//this->setWindowTitle(QObject::tr("Market Watch:"));
 	//connect action
@@ -171,6 +174,17 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 	LOG_DEBUG<<"CQuotesTableView process contextMenuEvent"
 		<<" "<<"pEvent=0x"<<pEvent;
 
+
+	{
+		LOG_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CQuotesTableView"
+			<<" "<<"fun:"<<"contextMenuEvent()"
+			<<" "<<"emit"
+			<<" "<<"signalContractInfoWindowResetData()";
+
+		emit signalContractInfoWindowResetData();
+	}
+
 	QPoint point;
 	QCursor currentCursor;
 	QModelIndex nCurrentTreeItemIndex;
@@ -187,7 +201,7 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 		//treeview line no data
 		//set menu pos
 		QMenu menuRightClieck(this);
-		menuRightClieck.addAction(m_pActionAddHotQuotes);
+		menuRightClieck.addAction(m_pActionAddHotQuotes);	//first ContractInfoWindow reset data
 		menuRightClieck.exec(QCursor::pos());
 		return;
 	}
@@ -202,7 +216,7 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 
 	//set menu pos
 	QMenu menuRightClieck(this);
-	menuRightClieck.addAction(m_pActionAddHotQuotes);
+	menuRightClieck.addAction(m_pActionAddHotQuotes);	//first ContractInfoWindow reset data
 	menuRightClieck.addAction(m_pActionRemoveHotQuotes);
 	menuRightClieck.addAction(m_pActionCustomColumns);
 	//menuRightClieck.exec(currentCursor.pos());
@@ -251,6 +265,8 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 void CQuotesTableView::slotActionAddHotQuotesTriggered()
 {
 	LOG_DEBUG<<"CQuotesTableView process slotActionAddHotQuotesTriggered";
+
+	//first ContractInfoWindow reset data
 
 	QCursor currentCursor = this->cursor(); 
 	currentCursor.pos();
@@ -361,11 +377,22 @@ void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 		<<" "<<"slot"
 		<<" "<<"slotMouseRightClickInHHeaderView(QMouseEvent*)"
 		<<" "<<"param:"
-		<<" "<<"QMouseEvent* e="<<e;
+		<<" "<<"QMouseEvent* e=0x"<<e;
+
+
+	{
+		LOG_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CQuotesTableView"
+			<<" "<<"fun:"<<"slotMouseRightClickInHHeaderView(e)"
+			<<" "<<"emit"
+			<<" "<<"signalContractInfoWindowResetData()";
+
+		emit signalContractInfoWindowResetData();
+	}
 
 	//set menu pos
 	QMenu menuRightClieck(this);
-	menuRightClieck.addAction(m_pActionAddHotQuotes);
+	menuRightClieck.addAction(m_pActionAddHotQuotes);	//first ContractInfoWindow reset data
 	menuRightClieck.addAction(m_pActionRemoveHotQuotes);
 	menuRightClieck.addAction(m_pActionCustomColumns);
 	//menuRightClieck.exec(currentCursor.pos());

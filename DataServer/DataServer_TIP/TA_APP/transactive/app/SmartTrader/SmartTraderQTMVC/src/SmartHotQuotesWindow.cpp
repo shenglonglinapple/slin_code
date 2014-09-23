@@ -35,7 +35,7 @@ CLeftDockWidget::CLeftDockWidget(QWidget* parent)
 
 	m_pVBoxLayout = NULL;
 	m_pTreeModelQuotes = NULL;
-	m_pTreeView_Quotes = NULL;//m_pTreeModelQuotes
+	m_pTableView_Quotes = NULL;//m_pTreeModelQuotes
 
     setupUi();
 	translateLanguage();
@@ -75,7 +75,7 @@ void CLeftDockWidget::setupUi()
 	m_pTabWidget = new QTabWidget(this);
 	m_pTabWidget->setTabPosition(QTabWidget::South);	//enum TabPosition { North, South, West, East
 
-	m_pTreeView_Quotes = new CQuotesTableView(m_pTabWidget);
+	m_pTableView_Quotes = new CQuotesTableView(m_pTabWidget);
 
 	
  	m_pVBoxLayout = new QVBoxLayout(this);
@@ -92,7 +92,7 @@ void CLeftDockWidget::setupUi()
 void CLeftDockWidget::translateLanguage()
 {
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_ObjectName_CSmartHotQuotesWindow.c_str()));
-	m_pTabWidget->addTab(m_pTreeView_Quotes, QObject::tr("Symbols"));
+	m_pTabWidget->addTab(m_pTableView_Quotes, QObject::tr("Symbols"));
 
 }
 
@@ -111,17 +111,17 @@ void CLeftDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
 		m_pTreeModelQuotes->setRootItem(pTreeItem);
 
 		//mvc
-		m_pTreeView_Quotes->setModel(m_pTreeModelQuotes);
+		m_pTableView_Quotes->setModel(m_pTreeModelQuotes);
 		//m_pTreeView_Quotes->setColumnWidth(0, 200);
-		m_pTreeView_Quotes->setCurrentIndex(inValidIndex);
-		m_pTreeView_Quotes->resizeColumnsToContents();
+		m_pTableView_Quotes->setCurrentIndex(inValidIndex);
+		m_pTableView_Quotes->resizeColumnsToContents();
 
 	}
 	else
 	{
 		m_pTreeModelQuotes->setRootItem(pTreeItem);
-		m_pTreeView_Quotes->setCurrentIndex(inValidIndex);
-		m_pTreeView_Quotes->resizeColumnsToContents();
+		m_pTableView_Quotes->setCurrentIndex(inValidIndex);
+		m_pTableView_Quotes->resizeColumnsToContents();
 	}
 }
 

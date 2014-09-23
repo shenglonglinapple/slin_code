@@ -336,7 +336,7 @@ bool CTreeItemContract::removeChildrenByData(const CContractInfo* pExchangeInfo)
 		if (m_MapStringChildren.contains(pExchangeInfo->getInstrumentCode()))
 		{
 			iterMap = m_MapStringChildren.find(pExchangeInfo->getInstrumentCode());
-			pTreeItemTmp = iterMap.value();
+			pTreeItemTmp = iterMap.value();//find ok
 
 
 			nIndex = m_ItemData.indexOf(QVariant(pExchangeInfo->getInstrumentCode()), 0);

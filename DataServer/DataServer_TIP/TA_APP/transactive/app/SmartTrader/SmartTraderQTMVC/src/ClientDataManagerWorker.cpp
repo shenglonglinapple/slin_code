@@ -557,7 +557,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		//subscribe this instrument
 		LOG_DEBUG<<"subscribeMarketData"
 			<<" "<<"InstrumentID="<<nInstrumentID;
-		m_pMyTradeClient->subscribeMarketData(nInstrumentID);
+		m_pMyTradeClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 
 		m_pQuotesInfo->setValue(*pInstrumentRef);
 		strExchangeName = m_pQuotesInfo->m_strExchangeName.toStdString();
@@ -570,19 +570,13 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 	}
 
-
-
 	{
+		//remove later
 		//remove nInstrumentID from m_pTreeItemContract_Root
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
-		m_pContractInfo->setValue(*pInstrumentRef);
-		m_pTreeItemContract_Root->removeChildrenByData(m_pContractInfo);
-
-		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
-			<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
-
-		emit signalContractInfoChanged(m_pTreeItemContract_Root);
+		//class: CQuotesTableView signals:	void signalContractInfoWindowResetData();
+		//CClientDataManagerWorker::slotContractInfoWindowResetData()
 	}
+
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
@@ -1130,6 +1124,72 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 
 	}//scoped_lock
 
+}
+
+void CClientDataManagerWorker::slotContractInfoWindowResetData()
+{
+
+	LOG_DEBUG<<" "<<"slot"
+		<<" "<<"class:"<<"CClientDataManagerWorker"
+		<<" "<<"fun:"<<"slotContractInfoWindowResetData";
+
+
+	std::string strExchangeName;
+	std::string strUnderlyingCode;
+	std::string strInstrumentCode;
+	Instrument* pInstrumentRef = NULL;
+	QMap<unsigned int, Instrument*>::iterator  iterFind;
+	unsigned int nUserInstrumentID = 0;
+
+	QStringList strLstUserInstruemt;
+	strLstUserInstruemt = CConfigInfo::getInstance().getLstUserInstrument();
+
+
+	{
+		//check in total list
+		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
+
+		foreach (const QString& strUserInstrumentID, strLstUserInstruemt)
+		{
+			nUserInstrumentID = 0;
+			nUserInstrumentID = strUserInstrumentID.toUInt();
+
+			if (false == m_MapInstrumentIDData.contains(nUserInstrumentID))
+			{
+				LOG_ERROR<<"not find nInstrumentID="<<nUserInstrumentID
+					<<" "<<"in m_MapInstrumentIDData"
+					<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
+				pInstrumentRef = NULL;
+			}
+			else
+			{
+				//find ok
+				iterFind = m_MapInstrumentIDData.find(nUserInstrumentID);
+				pInstrumentRef = iterFind.value();
+
+				m_pQuotesInfo->setValue(*pInstrumentRef);
+				strExchangeName = m_pQuotesInfo->m_strExchangeName.toStdString();
+				strUnderlyingCode = m_pQuotesInfo->m_strUnderlyingCode.toStdString();
+				strInstrumentCode = m_pQuotesInfo->m_strInstrumentCode.toStdString();
+				LOG_DEBUG<<"user subscribed MarketData for"
+					<<" "<<"InstrumentID="<<nUserInstrumentID
+					<<" "<<"ExchangeName="<<strExchangeName
+					<<" "<<"strInstrumentCode="<<strInstrumentCode;
+
+				//remove nInstrumentID from m_pTreeItemContract_Root
+				boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+				m_pTreeItemContract_Root->removeChildrenByData(m_pContractInfo);
+			}//if
+
+		}//foreach
+	}
+
+	{
+		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
+			<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
+		emit signalContractInfoChanged(m_pTreeItemContract_Root);
+	}
 }
 
 

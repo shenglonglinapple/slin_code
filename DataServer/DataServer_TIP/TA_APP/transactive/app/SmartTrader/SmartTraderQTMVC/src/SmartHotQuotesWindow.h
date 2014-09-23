@@ -62,7 +62,7 @@ private:
 	CTreeModelQuotes* m_pTreeModelQuotes;
 public:
 	//IconDelegate* m_pIconDelegate;
-	CQuotesTableView* m_pTreeView_Quotes;
+	CQuotesTableView* m_pTableView_Quotes;
 
 };
 

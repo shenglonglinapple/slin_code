@@ -148,17 +148,17 @@ void CClientMainWindow::_CreateConnect()
 	//
 	QObject::connect(m_pClientDataManagerWorker, 
 		SIGNAL(signalContractInfoChanged (CTreeItemContract*)),
-		m_pLeftDockWidget->m_pTreeView_Quotes->m_pContractInfoWindow,
+		m_pLeftDockWidget->m_pTableView_Quotes->m_pContractInfoWindow,
 		SLOT(slotContractInfoChanged(CTreeItemContract*)));
 
 
 	//
-	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes->m_pContractInfoWindow, 
+	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes->m_pContractInfoWindow, 
 		SIGNAL(signalAddContractToSmartQuotes (unsigned int)),
 		m_pClientDataManagerWorker,
 		SLOT(slotAddContractToSmartQuotes(unsigned int)));
 
-	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes->m_pCreateNewOrderDialog, 
+	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes->m_pCreateNewOrderDialog, 
 		SIGNAL(signalNewOrder(Order::Side, Order::OrderType, QString, double, int)),
 		m_pClientDataManagerWorker,
 		SLOT(slotNewOrder(Order::Side, Order::OrderType, QString, double, int)));
@@ -166,12 +166,17 @@ void CClientMainWindow::_CreateConnect()
 
 
 	//
-	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes, 
+	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes, 
+		SIGNAL(signalContractInfoWindowResetData()),
+		m_pClientDataManagerWorker,
+		SLOT(slotContractInfoWindowResetData()));
+
+	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes, 
 		SIGNAL(signalRemoveContractFromSmartQuotes (unsigned int)),
 		m_pClientDataManagerWorker,
 		SLOT(slotRemoveContractFromSmartQuotes(unsigned int)));
 
-	QObject::connect(m_pLeftDockWidget->m_pTreeView_Quotes, 
+	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes, 
 		SIGNAL(signalQuotesTableViewColumnsChanged ()),
 		m_pClientDataManagerWorker,
 		SLOT(slotQuotesTableViewColumnsChanged()));

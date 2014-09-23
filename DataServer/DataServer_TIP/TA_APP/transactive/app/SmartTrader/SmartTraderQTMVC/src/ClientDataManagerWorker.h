@@ -91,6 +91,18 @@ public slots:
 	void slotRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
 
 
+	/*
+	class: CQuotesTableView
+	signals:
+	void signalContractInfoWindowResetData();
+	fun send signals: CQuotesTableView::contextMenuEvent()
+	CQuotesTableView::slotMouseRightClickInHHeaderView()
+
+	class: CClientDataManagerWorker
+	public slots: 
+	void slotContractInfoWindowResetData();
+	*/
+	void slotContractInfoWindowResetData();
 	
 	/*
 	class: CQuotesTableView
