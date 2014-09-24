@@ -32,7 +32,10 @@ MainWindow::MainWindow(QWidget *parent) :
   //setupLegendTest(mCustomPlot);
   //setupMultiAxisRectInteractions(mCustomPlot);
   //setupAdaptiveSamplingTest(mCustomPlot);
-  setupColorMapTest(mCustomPlot);
+  //setupColorMapTest(mCustomPlot);
+
+
+  setupItemTracerTest_MyTest_1(mCustomPlot);
   //setupTestbed(mCustomPlot);
 }
 
@@ -1021,4 +1024,53 @@ void MainWindow::mouseWheel(QWheelEvent *event)
     mCustomPlot->axisRect()->setRangeZoom(Qt::Horizontal);
   else
     mCustomPlot->axisRect()->setRangeZoom(Qt::Horizontal|Qt::Vertical);
+}
+
+
+
+
+void MainWindow::setupItemTracerTest_MyTest_1(QCustomPlot *customPlot)
+{
+	QCPGraph *graph = customPlot->addGraph();
+	int n = 200;
+	QVector<double> x(n), y(n);
+	for (int i=0; i<n; ++i)
+	{
+		x[i] = 0.5+i/(double)n*4;
+		y[i] = qSin(x[i])+1.5;
+	}
+	graph->setData(x, y);
+
+	QCPItemTracer *graphTracer = new QCPItemTracer(customPlot);
+	customPlot->addItem(graphTracer);
+	graphTracer->setGraph(graph);
+	graphTracer->setGraphKey(2.3);
+	graphTracer->setStyle(QCPItemTracer::tsCrosshair);
+	graphTracer->setInterpolating(true);
+	tracerTestTracer = graphTracer;
+	connect(customPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(tracerTestMouseMove(QMouseEvent*)));
+	//graphTracer->setStyle(QCPItemTracer::tsSquare);
+
+	QCPItemText *text = new QCPItemText(customPlot);
+	customPlot->addItem(text);
+	text->setText("Tracer");
+	text->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
+	text->position->setType(QCPItemPosition::ptAxisRectRatio);
+	text->position->setCoords(0.5, 0.05);
+	text->setPen(QPen());
+
+	QCPItemCurve *curve = new QCPItemCurve(customPlot);
+	customPlot->addItem(curve);
+	curve->start->setParentAnchor(text->bottom);
+	curve->startDir->setParentAnchor(curve->start);
+	curve->startDir->setCoords(0, 100);
+	curve->end->setParentAnchor(tracerTestTracer->position);
+	curve->end->setCoords(0, -5);
+	curve->endDir->setParentAnchor(curve->end);
+	curve->endDir->setCoords(0, -100);
+	curve->setHead(QCPLineEnding::esSpikeArrow);
+
+
+
+
 }

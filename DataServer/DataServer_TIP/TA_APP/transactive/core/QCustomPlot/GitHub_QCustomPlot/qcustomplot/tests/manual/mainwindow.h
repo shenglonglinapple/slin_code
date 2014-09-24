@@ -67,7 +67,10 @@ public slots:
   
   
   void mouseWheel(QWheelEvent *event);
-  
+
+public:
+  void setupItemTracerTest_MyTest_1(QCustomPlot *customPlot);
+
 private:
   Ui::MainWindow *ui;
   QCustomPlot *mCustomPlot;
