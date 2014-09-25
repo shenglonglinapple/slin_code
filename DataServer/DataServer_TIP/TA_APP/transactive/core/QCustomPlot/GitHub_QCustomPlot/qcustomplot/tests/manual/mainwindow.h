@@ -68,6 +68,10 @@ public slots:
   
   void mouseWheel(QWheelEvent *event);
 
+
+  void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
+
+
 public:
   void setupItemTracerTest_MyTest_1(QCustomPlot *customPlot);
 
@@ -75,6 +79,7 @@ private:
   Ui::MainWindow *ui;
   QCustomPlot *mCustomPlot;
   QCPItemTracer *tracerTestTracer;
+  QCPItemTracerCrossHair* m_pQCPItemTracerCrossHair;
   QTimer mReplotTimer;
   QTimer mDataTimer;
 };

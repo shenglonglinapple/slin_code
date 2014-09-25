@@ -50,6 +50,7 @@
 #include "items/item-ellipse.h"
 #include "items/item-pixmap.h"
 #include "items/item-tracer.h"
+#include "items/item-tracer-crosshair.h"
 #include "items/item-bracket.h"
 #include "layoutelements/layoutelement-axisrect.h"
 #include "layoutelements/layoutelement-legend.h"
