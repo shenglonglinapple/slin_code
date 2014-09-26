@@ -785,6 +785,42 @@
 				</FileConfiguration>
 			</File>
 		</Filter>
+		<Filter
+			Name="bar"
+			>
+			<File
+				RelativePath=".\Bar.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Bar.h"
+				>
+			</File>
+			<File
+				RelativePath=".\HistoryDataACK.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\HistoryDataACK.h"
+				>
+			</File>
+			<File
+				RelativePath=".\HistoryDataManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\HistoryDataManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MidSubDrawHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MidSubDrawHelper.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 		<Global

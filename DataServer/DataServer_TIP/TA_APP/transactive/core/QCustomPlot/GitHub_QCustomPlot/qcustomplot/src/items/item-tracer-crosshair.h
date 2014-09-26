@@ -7,6 +7,41 @@
 class QCPPainter;
 class QCustomPlot;
 class QCPGraph;
+class QCPStatisticalBox;
+
+//////////////////////////////////////////////////////////////////////////
+class QCP_LIB_DECL QCPStatisticalBoxTracerCrossData
+{
+public:
+	QCPStatisticalBoxTracerCrossData();
+	~QCPStatisticalBoxTracerCrossData();
+public:
+	void clear();
+public:
+	bool m_bSetData;
+public:
+	double m_nGraphKey;
+	double m_nGraphValue;
+};
+//////////////////////////////////////////////////////////////////////////
+class QCP_LIB_DECL QCPGraphTracerCrossData
+{
+public:
+	QCPGraphTracerCrossData();
+	~QCPGraphTracerCrossData();
+public:
+	void clear();
+	void setGraphKey(double fGraphKey);
+	void setGraphValue(QCPGraph* pPlottableRef);
+	bool isSetData();
+public:
+	bool m_bSetData;
+public:
+	double m_nGraphKey;
+	double m_nGraphValue;
+	
+};
+//////////////////////////////////////////////////////////////////////////
 
 class QCP_LIB_DECL QCPItemTracerCrossHair : public QCPAbstractItem
 {
@@ -50,6 +85,11 @@ public:
 	// reimplemented virtual methods:
 	virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
 
+public:
+	void setTracerAxisRect(QCPAxisRect* pAxisRect);
+	void setShowBottom(QCPAxis::LabelType nShowType, bool bShow, const QString& strFormat);
+	void setShowLeft(QCPAxis::LabelType nShowType, bool bShow, const QString& strFormat);
+	QCPItemPosition* const m_pItemPosition;
 
 protected:
 	// reimplemented virtual methods:
@@ -59,7 +99,13 @@ protected:
 	QPen mainPen() const;
 	QBrush mainBrush() const;
 private:
-	void _UpdateItemInfo();
+	void _UpdateAllInfo();
+	void _UpdateLinesInfo();
+	void _UpdateTextInfo();
+	void _UpdateVerticalCrossValue();
+	void _GetValue_QCPGraph(QCPGraph* pPlottableRef);
+	void _GetValue_QCPStatisticalBox(QCPStatisticalBox* pPlottableRef);
+	void _ClearCrossData();
 protected:
 	// property members:
 	QPen mPen;
@@ -68,25 +114,36 @@ protected:
 	QBrush mSelectedBrush;
 	TracerStyle mStyle;
 protected:
-	QPointF m_pointf_center;
+	//QPointF m_pointf_center;
 protected:
-	//Qt::Horizontal
-	bool   m_bShowHorizontalLine;
+	//Qt::Horizontal Ë®Æ½
 	QLineF m_linef_Horizontal;
-	QString m_str_Horizontal_bottom;
-	QPointF m_pointf_Horizontal_bottom;
-	QString m_str_Horizontal_top;
-	QPointF m_pointf_Horizontal_top;
-	//Qt::Vertical
-	bool   m_bShowVerticalLine;
+	bool   m_bShow_Linef_Horizontal;
+
+	bool   m_bShow_Horizontal_left;
+	QCPAxis::LabelType m_nShowType_Horizontal_left;
+	QString   m_strFormat_Horizontal_left;
+	QString m_str_Horizontal_left;
+	QPointF m_pointf_Horizontal_left;
+	QString m_str_Horizontal_right;
+	QPointF m_pointf_Horizontal_right;
+
+
+	//Qt::Vertical ´¹Ö±
 	QLineF m_linef_Vertical;
-	QString m_str_Vertical_left;
-	QPointF m_pointf_Vertical_left;
-	QString m_str_Vertical_right;
-	QPointF m_pointf_Vertical_right;
+	bool   m_bShow_Linef_Vertical;
 
+	bool   m_bShow_Vertical_bottom;
+	QCPAxis::LabelType m_nShowType_Vertical_bottom;
+	QString   m_strFormat_Vertical_bottom;
+	QString m_str_Vertical_bottom;
+	QPointF m_pointf_Vertical_bottom;
+	QString m_str_Vertical_top;
+	QPointF m_pointf_Vertical_top;
 
-	
+private:
+	QCPGraphTracerCrossData* m_pQCPGraphTracerCrossData;
+	QCPStatisticalBoxTracerCrossData* m_pQCPStatisticalBoxTracerCrossData;	
 };
 
 #endif // QCP_ITEM_TRACER_CROSSHAIR_H

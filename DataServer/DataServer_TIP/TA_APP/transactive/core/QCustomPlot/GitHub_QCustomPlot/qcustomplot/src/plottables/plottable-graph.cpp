@@ -140,6 +140,8 @@ QCPData::QCPData(double key, double value) :
 QCPGraph::QCPGraph(QCPAxis *keyAxis, QCPAxis *valueAxis) :
   QCPAbstractPlottable(keyAxis, valueAxis)
 {
+  m_nPType = QCPAbstractPlottable::ptQCPGraph;
+
   mData = new QCPDataMap;
   
   setPen(QPen(Qt::blue, 0));

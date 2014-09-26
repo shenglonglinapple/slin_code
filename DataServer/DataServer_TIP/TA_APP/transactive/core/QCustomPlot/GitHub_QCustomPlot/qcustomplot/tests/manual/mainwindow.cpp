@@ -20,7 +20,7 @@
 #include <QHBoxLayout>
 #include <QDir>
 
-
+#include <QtCore/QDateTime>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -30,7 +30,8 @@ ui(new Ui::MainWindow)
 
 	mCustomPlot = NULL;
 	tracerTestTracer = NULL;
-	m_pQCPItemTracerCrossHair = NULL;
+	m_pQCPItemTracerCrossHairTop = NULL;
+	m_pQCPItemTracerCrossHairBottom = NULL;
 
 	ui->setupUi(this);
 	setGeometry(300, 300, 500, 500);
@@ -64,7 +65,8 @@ ui(new Ui::MainWindow)
 	//setupColorMapTest(mCustomPlot);
 
 
-	setupItemTracerTest_MyTest_1(mCustomPlot);
+	//setupItemTracerTest_MyTest_1(mCustomPlot);
+	setupItemTracerTest_MyTest_2(mCustomPlot);
 	//setupTestbed(mCustomPlot);
 }
 
@@ -1065,18 +1067,41 @@ void MainWindow::mouseWheel(QWheelEvent *event)
 
 void MainWindow::setupItemTracerTest_MyTest_1(QCustomPlot *customPlot)
 {
-	QCPLayoutGrid *topLayout =customPlot->plotLayout();
+	QCPAxisRect* pAxisRectTop = NULL;
+	QCPAxisRect* pAxisRectBottom = NULL;
+	QCPLayoutGrid *pLayoutGrid = NULL;
+	QCPMarginGroup *pMarginGroup = NULL;
+	QCPItemTracerCrossHair *pTracerTop = NULL;
+	QCPItemTracerCrossHair *pTracerBottom = NULL;
 
-	QCPAxisRect *r = new QCPAxisRect(customPlot);
-	topLayout->addElement(1, 0, r);
-	r->addAxes(QCPAxis::atLeft|QCPAxis::atRight|QCPAxis::atBottom|QCPAxis::atTop);
+	customPlot->clearGraphs();
+	customPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
 
-	QCPMarginGroup *group = new QCPMarginGroup(customPlot);
-	topLayout->element(0, 0)->setMarginGroup(QCP::msAll, group);
-	topLayout->element(1, 0)->setMarginGroup(QCP::msAll, group);
+	pAxisRectTop = new QCPAxisRect(customPlot);
+	pAxisRectTop->setupFullAxesBox(true);
+	//pAxisRectTop->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	//pAxisRectTop->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	//pAxisRectTop->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	//pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+
+	pAxisRectBottom = new QCPAxisRect(customPlot);
+	pAxisRectBottom->setupFullAxesBox(true);
+	//pAxisRectBottom->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	//pAxisRectBottom->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	//pAxisRectBottom->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	//pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+
+	customPlot->plotLayout()->addElement(0, 0, pAxisRectTop); // insert axis rect in first row
+	customPlot->plotLayout()->addElement(1, 0, pAxisRectBottom); // insert axis rect in first row
+
+	pLayoutGrid = customPlot->plotLayout();
+	pMarginGroup = new QCPMarginGroup(customPlot);
+	pLayoutGrid->element(0, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
+	pLayoutGrid->element(1, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
 
 
-	QCPGraph *graph = customPlot->addGraph();
+
+	QCPGraph *graph = customPlot->addGraph(pAxisRectTop->axis(QCPAxis::atBottom), pAxisRectTop->axis(QCPAxis::atLeft));
 	int n = 200;
 	QVector<double> x(n), y(n);
 	for (int i=0; i<n; ++i)
@@ -1086,28 +1111,114 @@ void MainWindow::setupItemTracerTest_MyTest_1(QCustomPlot *customPlot)
 	}
 	graph->setData(x, y);
 
-	QCPItemTracerCrossHair *graphTracer = new QCPItemTracerCrossHair(customPlot);
-	customPlot->addItem(graphTracer);
-	graphTracer->setStyle(QCPItemTracerCrossHair::tsCrosshair);
-	m_pQCPItemTracerCrossHair = graphTracer;
+
+	pTracerTop = NULL;
+	pTracerTop = new QCPItemTracerCrossHair(customPlot);
+	customPlot->addItem(pTracerTop);
+	pTracerTop->setTracerAxisRect(pAxisRectTop);
+	pTracerTop->setStyle(QCPItemTracerCrossHair::tsCrosshair);
+	m_pQCPItemTracerCrossHairTop = pTracerTop;
+
+	pTracerBottom = NULL;
+	pTracerBottom = new QCPItemTracerCrossHair(customPlot);
+	customPlot->addItem(pTracerBottom);
+	pTracerBottom->setTracerAxisRect(pAxisRectBottom);
+	pTracerBottom->setStyle(QCPItemTracerCrossHair::tsCrosshair);
+	m_pQCPItemTracerCrossHairBottom = pTracerBottom;
 	connect(customPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
 
-// 	customPlot->addLayer("insetLayer");
-// 	customPlot->setCurrentLayer("insetLayer");
-// 	QCPAxisRect *insetAxRect = new QCPAxisRect(customPlot);
-// 	insetAxRect->setMinimumSize(300, 250);
-// 	customPlot->axisRect(0)->insetLayout()->addElement(insetAxRect, Qt::AlignRight|Qt::AlignTop);
-// 	insetAxRect->setupFullAxesBox(true);
-// 	insetAxRect->setBackground(QBrush(QColor(240, 240, 240)));
 
+	customPlot->rescaleAxes();
+	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	customPlot->replot();//draw again
 
 
 }
 
 
+
+void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
+{
+	QCPAxisRect* pAxisRectTop = NULL;
+	QCPAxisRect* pAxisRectBottom = NULL;
+	QCPLayoutGrid *pLayoutGrid = NULL;
+	QCPMarginGroup *pMarginGroup = NULL;
+	QCPItemTracerCrossHair *pTracerTop = NULL;
+	QCPItemTracerCrossHair *pTracerBottom = NULL;
+
+	customPlot->clearGraphs();
+	customPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
+
+	pAxisRectTop = new QCPAxisRect(customPlot);
+	pAxisRectTop->setupFullAxesBox(true);
+	pAxisRectTop->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pAxisRectTop->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pAxisRectTop->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+
+	pAxisRectBottom = new QCPAxisRect(customPlot);
+	pAxisRectBottom->setupFullAxesBox(true);
+	pAxisRectBottom->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+
+	customPlot->plotLayout()->addElement(0, 0, pAxisRectTop); // insert axis rect in first row
+	customPlot->plotLayout()->addElement(1, 0, pAxisRectBottom); // insert axis rect in first row
+
+	pLayoutGrid = customPlot->plotLayout();
+	pMarginGroup = new QCPMarginGroup(customPlot);
+	pLayoutGrid->element(0, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
+	pLayoutGrid->element(1, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
+
+
+
+	QCPGraph *graph = customPlot->addGraph(pAxisRectTop->axis(QCPAxis::atBottom), pAxisRectTop->axis(QCPAxis::atLeft));
+	int n = 200;
+	QVector<double> x(n), y(n);
+	for (int nIndex=0; nIndex<n; ++nIndex)
+	{
+		//x[i] = 0.5+i/(double)n*4;
+		unsigned int nTimeNow = 0;
+		double xValue = 0.5 + nIndex/(double)n*4;
+		nTimeNow = QDateTime::currentDateTime().toTime_t() + nIndex;
+		x[nIndex] = nTimeNow;
+		//y[nIndex] = qSin(x[nIndex])+1.5;//
+		y[nIndex] = qSin(xValue)+1.5;//
+	}
+	graph->setData(x, y);
+
+
+	pTracerTop = NULL;
+	pTracerTop = new QCPItemTracerCrossHair(customPlot);
+	customPlot->addItem(pTracerTop);
+	pTracerTop->setTracerAxisRect(pAxisRectTop);
+	pTracerTop->setStyle(QCPItemTracerCrossHair::tsCrosshair);
+	pTracerTop->setShowLeft(QCPAxis::ltNumber, true, QString(""));
+	pTracerTop->setShowBottom(QCPAxis::ltDateTime, true, QString("yyyy-MM-dd hh-mm-ss"));
+	m_pQCPItemTracerCrossHairTop = pTracerTop;
+
+	pTracerBottom = NULL;
+	pTracerBottom = new QCPItemTracerCrossHair(customPlot);
+	customPlot->addItem(pTracerBottom);
+	pTracerBottom->setTracerAxisRect(pAxisRectBottom);
+	pTracerBottom->setStyle(QCPItemTracerCrossHair::tsCrosshair);
+	pTracerBottom->setShowLeft(QCPAxis::ltNumber, true, QString(""));
+	pTracerBottom->setShowBottom(QCPAxis::ltDateTime, true, QString("yyyy-MM-dd hh-mm-ss"));
+	m_pQCPItemTracerCrossHairBottom = pTracerBottom;
+	connect(customPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
+
+
+	customPlot->rescaleAxes();
+	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	customPlot->replot();//draw again
+
+
+}
+
 void MainWindow::QCPItemTracerCrossHairMouseMove(QMouseEvent *event)
 {
-	if (NULL != m_pQCPItemTracerCrossHair)
+	if (NULL != m_pQCPItemTracerCrossHairTop)
 	{ 
 		int nValue_x = 0;
 		int nValue_y = 0;
@@ -1139,8 +1250,19 @@ void MainWindow::QCPItemTracerCrossHairMouseMove(QMouseEvent *event)
 		//m_pQCPItemTracerCrossHair->setGraphKey(mCustomPlot->xAxis->pixelToCoord(event->pos().x()));
 		//m_pQCPItemTracerCrossHair->position->setCoords(event->posF());
 		
-		m_pQCPItemTracerCrossHair->setCenterPos(pointfValue_e_QPointF);
+		m_pQCPItemTracerCrossHairTop->setCenterPos(pointfValue_e_QPointF);
 	}
+
+	if (NULL != m_pQCPItemTracerCrossHairBottom)
+	{
+		QPointF pointfValue_e_QPointF;
+
+		pointfValue_e_QPointF = event->posF();
+
+		m_pQCPItemTracerCrossHairBottom->setCenterPos(pointfValue_e_QPointF);
+
+	}
+	
 
 	mCustomPlot->replot();
 }

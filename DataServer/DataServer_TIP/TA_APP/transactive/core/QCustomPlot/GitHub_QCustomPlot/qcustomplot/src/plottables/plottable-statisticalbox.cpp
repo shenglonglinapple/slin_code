@@ -104,6 +104,8 @@ QCPStatisticalBox::QCPStatisticalBox(QCPAxis *keyAxis, QCPAxis *valueAxis) :
   mUpperQuartile(0),
   mMaximum(0)
 {
+  m_nPType = QCPAbstractPlottable::ptQCPStatisticalBox;
+
   setOutlierStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, Qt::blue, 6));
   setWhiskerWidth(0.2);
   setWidth(0.5);

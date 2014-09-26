@@ -116,6 +116,8 @@ QCPCurveData::QCPCurveData(double t, double key, double value) :
 QCPCurve::QCPCurve(QCPAxis *keyAxis, QCPAxis *valueAxis) :
   QCPAbstractPlottable(keyAxis, valueAxis)
 {
+  m_nPType = QCPAbstractPlottable::ptQCPCurve;
+
   mData = new QCPCurveDataMap;
   mPen.setColor(Qt::blue);
   mPen.setStyle(Qt::SolidLine);

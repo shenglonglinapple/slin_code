@@ -192,6 +192,8 @@ QCPAbstractPlottable::QCPAbstractPlottable(QCPAxis *keyAxis, QCPAxis *valueAxis)
   mSelectable(true),
   mSelected(false)
 {
+  m_nPType = ptQCPAbstractPlottable;
+
   if (keyAxis->parentPlot() != valueAxis->parentPlot())
     qDebug() << Q_FUNC_INFO << "Parent plot of keyAxis is not the same as that of valueAxis.";
   if (keyAxis->orientation() == valueAxis->orientation())
@@ -743,4 +745,14 @@ void QCPAbstractPlottable::deselectEvent(bool *selectionStateChanged)
     if (selectionStateChanged)
       *selectionStateChanged = mSelected != selBefore;
   }
+}
+
+QCPAbstractPlottable::PLayerableType QCPAbstractPlottable::getPTType()
+{
+	return m_nPType;
+}
+
+void QCPAbstractPlottable::setPTType( PLayerableType nPTpe )
+{
+	m_nPType = nPTpe;
 }

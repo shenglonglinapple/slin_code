@@ -529,6 +529,7 @@ QCPColorMap::QCPColorMap(QCPAxis *keyAxis, QCPAxis *valueAxis) :
   mTightBoundary(false),
   mMapImageInvalidated(true)
 {
+	m_nPType = QCPAbstractPlottable::ptQCPColorMap;
 }
 
 QCPColorMap::~QCPColorMap()

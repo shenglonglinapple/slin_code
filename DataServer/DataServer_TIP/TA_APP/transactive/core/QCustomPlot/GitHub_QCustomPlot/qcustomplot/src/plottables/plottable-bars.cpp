@@ -128,6 +128,8 @@ QCPBarData::QCPBarData(double key, double value) :
 QCPBars::QCPBars(QCPAxis *keyAxis, QCPAxis *valueAxis) :
   QCPAbstractPlottable(keyAxis, valueAxis)
 {
+  m_nPType = QCPAbstractPlottable::ptQCPBars;
+
   mData = new QCPBarDataMap;
   mPen.setColor(Qt::blue);
   mPen.setStyle(Qt::SolidLine);

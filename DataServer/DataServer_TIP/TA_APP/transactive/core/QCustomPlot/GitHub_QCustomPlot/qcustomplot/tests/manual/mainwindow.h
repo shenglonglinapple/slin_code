@@ -74,12 +74,14 @@ public slots:
 
 public:
   void setupItemTracerTest_MyTest_1(QCustomPlot *customPlot);
+  void setupItemTracerTest_MyTest_2(QCustomPlot *customPlot);
 
 private:
   Ui::MainWindow *ui;
   QCustomPlot *mCustomPlot;
   QCPItemTracer *tracerTestTracer;
-  QCPItemTracerCrossHair* m_pQCPItemTracerCrossHair;
+  QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairTop;
+  QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairBottom;
   QTimer mReplotTimer;
   QTimer mDataTimer;
 };

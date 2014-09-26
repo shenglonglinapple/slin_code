@@ -52,7 +52,22 @@ class QCP_LIB_DECL QCPAbstractPlottable : public QCPLayerable
   /// \endcond
 public:
   QCPAbstractPlottable(QCPAxis *keyAxis, QCPAxis *valueAxis);
-  
+public:
+	enum PLayerableType
+	{
+		ptNone          ///< 
+		,ptQCPAbstractPlottable   ///< QCPAbstractPlottable
+		,ptQCPBars    ///< QCPBars
+		,ptQCPColorMap   ///< QCPColorMap
+		,ptQCPCurve    ///< QCPCurve
+		,ptQCPGraph    ///< QCPGraph
+		,ptQCPStatisticalBox    ///< QCPStatisticalBox
+	};
+public:
+	PLayerableType getPTType();
+	void setPTType(PLayerableType nPTpe);
+	PLayerableType m_nPType;
+public:
   // getters:
   QString name() const { return mName; }
   bool antialiasedFill() const { return mAntialiasedFill; }
