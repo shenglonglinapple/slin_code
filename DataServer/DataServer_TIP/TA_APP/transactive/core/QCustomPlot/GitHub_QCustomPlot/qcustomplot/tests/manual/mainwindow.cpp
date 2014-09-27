@@ -21,13 +21,21 @@
 #include <QDir>
 
 #include <QtCore/QDateTime>
+#include <time.h>       /* time_t, struct tm, difftime, time, mktime */
 
+#include "Bar.h"
+#include "MidSubDrawHelper.h"
+#include "HistoryDataManager.h"
+#include "HistoryDataACK.h"
+
+
+static std::string DEF_STRING_FORMAT_TIME = "yyyy-MM-dd hh:mm:ss";
 
 MainWindow::MainWindow(QWidget *parent) :
 QMainWindow(parent),
 ui(new Ui::MainWindow)
 {
-
+	test_QDataTime();
 	mCustomPlot = NULL;
 	tracerTestTracer = NULL;
 	m_pQCPItemTracerCrossHairTop = NULL;
@@ -1082,14 +1090,14 @@ void MainWindow::setupItemTracerTest_MyTest_1(QCustomPlot *customPlot)
 	//pAxisRectTop->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
 	//pAxisRectTop->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
 	//pAxisRectTop->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	//pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+	//pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");//DEF_STRING_FORMAT_TIME
 
 	pAxisRectBottom = new QCPAxisRect(customPlot);
 	pAxisRectBottom->setupFullAxesBox(true);
 	//pAxisRectBottom->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
 	//pAxisRectBottom->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
 	//pAxisRectBottom->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	//pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+	//pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");//DEF_STRING_FORMAT_TIME
 
 	customPlot->plotLayout()->addElement(0, 0, pAxisRectTop); // insert axis rect in first row
 	customPlot->plotLayout()->addElement(1, 0, pAxisRectBottom); // insert axis rect in first row
@@ -1135,45 +1143,11 @@ void MainWindow::setupItemTracerTest_MyTest_1(QCustomPlot *customPlot)
 
 }
 
-
-
-void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
+void MainWindow::setupItemTracerTest_MyTest_addGrap(QCustomPlot *customPlot, QCPAxisRect* pAxisRect)
 {
-	QCPAxisRect* pAxisRectTop = NULL;
-	QCPAxisRect* pAxisRectBottom = NULL;
-	QCPLayoutGrid *pLayoutGrid = NULL;
-	QCPMarginGroup *pMarginGroup = NULL;
-	QCPItemTracerCrossHair *pTracerTop = NULL;
-	QCPItemTracerCrossHair *pTracerBottom = NULL;
-
-	customPlot->clearGraphs();
-	customPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
-
-	pAxisRectTop = new QCPAxisRect(customPlot);
-	pAxisRectTop->setupFullAxesBox(true);
-	pAxisRectTop->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
-	pAxisRectTop->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
-	pAxisRectTop->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
-
-	pAxisRectBottom = new QCPAxisRect(customPlot);
-	pAxisRectBottom->setupFullAxesBox(true);
-	pAxisRectBottom->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
-	pAxisRectBottom->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
-	pAxisRectBottom->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
-
-	customPlot->plotLayout()->addElement(0, 0, pAxisRectTop); // insert axis rect in first row
-	customPlot->plotLayout()->addElement(1, 0, pAxisRectBottom); // insert axis rect in first row
-
-	pLayoutGrid = customPlot->plotLayout();
-	pMarginGroup = new QCPMarginGroup(customPlot);
-	pLayoutGrid->element(0, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
-	pLayoutGrid->element(1, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
 
 
-
-	QCPGraph *graph = customPlot->addGraph(pAxisRectTop->axis(QCPAxis::atBottom), pAxisRectTop->axis(QCPAxis::atLeft));
+	QCPGraph *graph = customPlot->addGraph(pAxisRect->axis(QCPAxis::atBottom), pAxisRect->axis(QCPAxis::atLeft));
 	int n = 200;
 	QVector<double> x(n), y(n);
 	for (int nIndex=0; nIndex<n; ++nIndex)
@@ -1187,6 +1161,52 @@ void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
 		y[nIndex] = qSin(xValue)+1.5;//
 	}
 	graph->setData(x, y);
+}
+
+void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
+{
+	QCPAxisRect* pAxisRectTop = NULL;
+	QCPAxisRect* pAxisRectBottom = NULL;
+	QCPLayoutGrid *pLayoutGrid = NULL;
+	QCPMarginGroup *pMarginGroup = NULL;
+	QCPItemTracerCrossHair *pTracerTop = NULL;
+	QCPItemTracerCrossHair *pTracerBottom = NULL;
+	CMidSubDrawHelper* m_pMidSubDrawHelper = NULL;
+	CHistoryDataManager* pHistoryDataManager = NULL;
+
+	customPlot->clearGraphs();
+	customPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
+
+	pAxisRectTop = new QCPAxisRect(customPlot);
+	pAxisRectTop->setupFullAxesBox(true);
+	pAxisRectTop->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pAxisRectTop->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pAxisRectTop->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat(DEF_STRING_FORMAT_TIME.c_str());
+
+	pAxisRectBottom = new QCPAxisRect(customPlot);
+	pAxisRectBottom->setupFullAxesBox(true);
+	pAxisRectBottom->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat(DEF_STRING_FORMAT_TIME.c_str());//("yyyy-MM-dd hh-mm-ss");
+
+	customPlot->plotLayout()->addElement(0, 0, pAxisRectTop); // insert axis rect in first row
+	customPlot->plotLayout()->addElement(1, 0, pAxisRectBottom); // insert axis rect in first row
+
+	pLayoutGrid = customPlot->plotLayout();
+	pMarginGroup = new QCPMarginGroup(customPlot);
+	pLayoutGrid->element(0, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
+	pLayoutGrid->element(1, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
+
+	m_pMidSubDrawHelper = new CMidSubDrawHelper();
+	pHistoryDataManager = new CHistoryDataManager();
+
+	//m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, customPlot, pAxisRectTop);
+	//m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, customPlot, pAxisRectBottom);
+
+	setupItemTracerTest_MyTest_addGrap(customPlot, pAxisRectTop);
+	setupItemTracerTest_MyTest_addGrap(customPlot, pAxisRectBottom);
 
 
 	pTracerTop = NULL;
@@ -1195,7 +1215,7 @@ void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
 	pTracerTop->setTracerAxisRect(pAxisRectTop);
 	pTracerTop->setStyle(QCPItemTracerCrossHair::tsCrosshair);
 	pTracerTop->setShowLeft(QCPAxis::ltNumber, true, QString(""));
-	pTracerTop->setShowBottom(QCPAxis::ltDateTime, true, QString("yyyy-MM-dd hh-mm-ss"));
+	pTracerTop->setShowBottom(QCPAxis::ltDateTime, true, QString(DEF_STRING_FORMAT_TIME.c_str()));
 	m_pQCPItemTracerCrossHairTop = pTracerTop;
 
 	pTracerBottom = NULL;
@@ -1204,7 +1224,7 @@ void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
 	pTracerBottom->setTracerAxisRect(pAxisRectBottom);
 	pTracerBottom->setStyle(QCPItemTracerCrossHair::tsCrosshair);
 	pTracerBottom->setShowLeft(QCPAxis::ltNumber, true, QString(""));
-	pTracerBottom->setShowBottom(QCPAxis::ltDateTime, true, QString("yyyy-MM-dd hh-mm-ss"));
+	pTracerBottom->setShowBottom(QCPAxis::ltDateTime, true, QString(DEF_STRING_FORMAT_TIME.c_str()));
 	m_pQCPItemTracerCrossHairBottom = pTracerBottom;
 	connect(customPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
 
@@ -1212,6 +1232,19 @@ void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
 	customPlot->rescaleAxes();
 	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 	customPlot->replot();//draw again
+
+
+	if (NULL != m_pMidSubDrawHelper)
+	{
+		delete m_pMidSubDrawHelper;
+		m_pMidSubDrawHelper = NULL;
+	}
+	
+	if (NULL != pHistoryDataManager)
+	{
+		delete pHistoryDataManager;
+		pHistoryDataManager = NULL;
+	}
 
 
 }
@@ -1266,3 +1299,31 @@ void MainWindow::QCPItemTracerCrossHairMouseMove(QMouseEvent *event)
 
 	mCustomPlot->replot();
 }
+
+
+void MainWindow::test_QDataTime()
+{
+	QString strFormat_Vertical_bottom = DEF_STRING_FORMAT_TIME.c_str();
+	QString strTimeValueUTC;
+	QString strTimeValueLocal;
+	QDateTime testQDataTimeUTC;
+	QDateTime testQDataTimeLocal;
+	//void WINAPI GetSystemTimeAsFileTime
+	//test
+	time_t time_secsSince1Jan1970UTC;
+	time_t time_local;
+	struct tm* pTTMM = NULL;
+	time_secsSince1Jan1970UTC = time(NULL);
+	testQDataTimeUTC = QDateTime::fromTime_t(time_secsSince1Jan1970UTC);
+	strTimeValueUTC = testQDataTimeUTC.toString(strFormat_Vertical_bottom);
+
+
+	pTTMM = localtime(&time_secsSince1Jan1970UTC);
+	time_local = mktime(pTTMM);
+	//time(&timer);  /* get current time; same as: timer = time(NULL)  */
+	//time_secsSince1Jan1970UTC = time(NULL);//utc
+	testQDataTimeLocal = QDateTime::fromTime_t(time_secsSince1Jan1970UTC).toLocalTime();
+	strTimeValueLocal = testQDataTimeLocal.toString(strFormat_Vertical_bottom);
+
+	int a = 0;
+};

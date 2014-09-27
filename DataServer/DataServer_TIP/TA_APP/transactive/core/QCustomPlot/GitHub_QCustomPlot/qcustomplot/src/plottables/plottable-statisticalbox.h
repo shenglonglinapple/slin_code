@@ -53,6 +53,16 @@ class QCP_LIB_DECL QCPStatisticalBox : public QCPAbstractPlottable
   Q_PROPERTY(QCPScatterStyle outlierStyle READ outlierStyle WRITE setOutlierStyle)
   /// \endcond
 public:
+	enum BoxType
+	{
+		btBox,
+		btBar,//open lower close high
+		btVolume,//volume
+	};
+public:
+	void setBoxType(BoxType nBoxType);
+	BoxType getBoxType();
+public:
   explicit QCPStatisticalBox(QCPAxis *keyAxis, QCPAxis *valueAxis);
   
   // getters:
@@ -98,6 +108,7 @@ protected:
   double mWhiskerWidth;
   QPen mWhiskerPen, mWhiskerBarPen, mMedianPen;
   QCPScatterStyle mOutlierStyle;
+  BoxType m_nBoxType;
   
   // reimplemented virtual methods:
   virtual void draw(QCPPainter *painter);

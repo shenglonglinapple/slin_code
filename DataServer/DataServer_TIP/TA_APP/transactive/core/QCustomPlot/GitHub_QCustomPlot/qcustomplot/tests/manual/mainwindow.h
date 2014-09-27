@@ -75,6 +75,8 @@ public slots:
 public:
   void setupItemTracerTest_MyTest_1(QCustomPlot *customPlot);
   void setupItemTracerTest_MyTest_2(QCustomPlot *customPlot);
+  void test_QDataTime();
+  void setupItemTracerTest_MyTest_addGrap(QCustomPlot *customPlot, QCPAxisRect* pAxisRect);
 
 private:
   Ui::MainWindow *ui;

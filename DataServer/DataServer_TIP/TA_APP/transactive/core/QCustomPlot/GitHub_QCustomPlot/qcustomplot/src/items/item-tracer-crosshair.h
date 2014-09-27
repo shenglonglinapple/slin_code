@@ -3,6 +3,8 @@
 
 #include "../global.h"
 #include "../item.h"
+#include <QtCore/QList>
+#include <QtCore/QMap>
 
 class QCPPainter;
 class QCustomPlot;
@@ -17,11 +19,20 @@ public:
 	~QCPStatisticalBoxTracerCrossData();
 public:
 	void clear();
+	void setKey(double fKey);
+	void setValue(QCPStatisticalBox* pPlottableRef);
+	bool isSetData();
 public:
 	bool m_bSetData;
 public:
-	double m_nGraphKey;
-	double m_nGraphValue;
+	double m_fKey;
+	double m_fMinimum;
+	double m_fLowerQuartile;
+	double m_fUpperQuartile;
+	double m_fMaximum;
+	double m_fWidth;
+	QPen m_fWhiskerBarPen;
+	int m_nBoxType;
 };
 //////////////////////////////////////////////////////////////////////////
 class QCP_LIB_DECL QCPGraphTracerCrossData
@@ -31,8 +42,8 @@ public:
 	~QCPGraphTracerCrossData();
 public:
 	void clear();
-	void setGraphKey(double fGraphKey);
-	void setGraphValue(QCPGraph* pPlottableRef);
+	void setKey(double fGraphKey);
+	void setValue(QCPGraph* pPlottableRef);
 	bool isSetData();
 public:
 	bool m_bSetData;
@@ -80,15 +91,18 @@ public:
 	void setBrush(const QBrush &brush);
 	void setSelectedBrush(const QBrush &brush);
 	void setStyle(TracerStyle style);
-	void setCenterPos(const QPointF& posf);
 
 	// reimplemented virtual methods:
 	virtual double selectTest(const QPointF &pos, bool onlySelectable, QVariant *details=0) const;
 
 public:
+	void setCenterPos(const QPointF& posf);
 	void setTracerAxisRect(QCPAxisRect* pAxisRect);
 	void setShowBottom(QCPAxis::LabelType nShowType, bool bShow, const QString& strFormat);
 	void setShowLeft(QCPAxis::LabelType nShowType, bool bShow, const QString& strFormat);
+	QList<QCPStatisticalBoxTracerCrossData*>* getCrossBarData();
+	QList<QCPGraphTracerCrossData*>* getCrossGrapData();
+public:
 	QCPItemPosition* const m_pItemPosition;
 
 protected:
@@ -106,6 +120,8 @@ private:
 	void _GetValue_QCPGraph(QCPGraph* pPlottableRef);
 	void _GetValue_QCPStatisticalBox(QCPStatisticalBox* pPlottableRef);
 	void _ClearCrossData();
+	void _ClearData_ListCrossBarData();
+	void _ClearData_ListCrossGrapData();
 protected:
 	// property members:
 	QPen mPen;
@@ -143,7 +159,10 @@ protected:
 
 private:
 	QCPGraphTracerCrossData* m_pQCPGraphTracerCrossData;
-	QCPStatisticalBoxTracerCrossData* m_pQCPStatisticalBoxTracerCrossData;	
+	QCPStatisticalBoxTracerCrossData* m_pQCPStatisticalBoxTracerCrossData;
+	QList<QCPStatisticalBoxTracerCrossData*>* m_pListCrossBarData;
+	QList<QCPGraphTracerCrossData*>* m_pListCrossGrapData;
+
 };
 
 #endif // QCP_ITEM_TRACER_CROSSHAIR_H

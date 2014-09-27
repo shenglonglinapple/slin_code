@@ -138,142 +138,39 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
 	}
 
+	QCPAxisRect* pAxisRect = NULL;
+	QCPLayoutGrid* pLayoutGrid = NULL;
+	QCPMarginGroup* pMarginGroup = NULL;
 	m_pCustomPlot->clearGraphs();
 	m_pCustomPlot->plotLayout()->clear(); // clear default axis rect so we can start from scratch
-	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot);
-	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot);
 
-	m_pCustomPlot->rescaleAxes();
-	m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	pAxisRect = NULL;
+	pAxisRect = new QCPAxisRect(m_pCustomPlot);
+	pAxisRect->setupFullAxesBox(true);
+	m_pCustomPlot->plotLayout()->addElement(0, 0, pAxisRect); // insert axis rect in first row
+	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, pAxisRect);
 
-	m_pCustomPlot->replot();//draw again
-
-}
-
-#if 0
-void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataManager )
-{
-	//emit
-	{
-		LOG_DEBUG<<" "<<"slot"
-			<<" "<<"class:"<<"CMidSubWidget"
-			<<" "<<"fun:"<<"slotHistoryDataChanged()"
-			<<" "<<"param:"
-			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
-	}
+	pAxisRect = NULL;
+	pAxisRect = new QCPAxisRect(m_pCustomPlot);
+	pAxisRect->setupFullAxesBox(true);
+	m_pCustomPlot->plotLayout()->addElement(0, 0, pAxisRect); // insert axis rect in first row
+	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, pAxisRect);
+	pAxisRect = NULL;
 
 
-	QBrush redBrush(QColor(255, 0, 0, 255));//red
-	QPen redPen(QColor(255, 0, 0, 255));//red
-	QBrush greenBrush(QColor(0, 255, 0, 255));//green
-	QPen greenPen(QColor(0, 255, 0, 255));//green
-
-
-	QBrush* pBoxBrushRef = NULL;
-	QPen* pBoxPenRef = NULL;
-	QCPStatisticalBox *pStatisticalBoxRef = NULL;
-
-	double fMinimum = 0;
-	double fMaximum = 0;
-	double fLowerQuartile = 0;
-	double fUpperQuartile = 0;
-
-	QMap<unsigned int, Bar>::iterator iterMap;
-	int nIndex = 0;
-	QVector<double> xData;
-	QVector<double> yData;
-	unsigned int nTimeFrom = 0;
-	unsigned int nTimeTo = 0;
-	int nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
-	nTimeFrom = pHistoryDataManager->getTimeFrom();
-	nTimeTo = pHistoryDataManager->getTimeTo();
-
-	// prepare axes:
-	m_pCustomPlot->clearGraphs();	
-	m_pCustomPlot->xAxis->setLabel(QObject::tr("X-time"));
-	m_pCustomPlot->yAxis->setLabel(QObject::tr("Y-value"));
-
-	// configure bottom axis to show date and time instead of number:
-	m_pCustomPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
-	m_pCustomPlot->xAxis->setDateTimeFormat("yyyy-MM-dd\nhh-mm-ss");
-
-	// make key axis range scroll with the data (at a constant range size of 8):
-	m_pCustomPlot->xAxis->setRange(nTimeFrom, nTimeTo);
-	//customPlot->yAxis->setRange(0, 200);
-	// show legend:
-	m_pCustomPlot->legend->setVisible(false);
-
-	nIndex = 0;
-	iterMap = pHistoryDataManager->m_pHistoryACK->m_MapBarData.begin();
-	while (iterMap != pHistoryDataManager->m_pHistoryACK->m_MapBarData.end())
-	{
-		//iterMap->second;
-		// create empty statistical box plottables:
-		pStatisticalBoxRef = NULL;
-		pStatisticalBoxRef = new QCPStatisticalBox(m_pCustomPlot->xAxis, m_pCustomPlot->yAxis);
-		m_pCustomPlot->addPlottable(pStatisticalBoxRef);
-
-
-		fMinimum = iterMap->low;
-		fMaximum= iterMap->high;
-		//iterMap->second.timestamp = nTimeNow + nIndex * nBarTypeSeconds;//5 minutes
-		xData[nIndex] = iterMap->timestamp;
-		yData[nIndex] = iterMap->volume;
-
-		if (iterMap->open > iterMap->close)
-		{
-			//high->low
-			fLowerQuartile = iterMap->close;
-			fUpperQuartile = iterMap->open;
-
-			pBoxBrushRef = &redBrush;
-			pBoxPenRef = &redPen;
-
-		}
-		else
-		{
-			fLowerQuartile = iterMap->open;
-			fUpperQuartile = iterMap->close;
-
-			pBoxBrushRef = &greenBrush;
-			pBoxPenRef = &greenPen;
-		}
-
-		//boxBrush.setStyle(Qt::SolidPattern); // make it look oldschool Qt::SolidPattern  Qt::Dense6Pattern
-		pStatisticalBoxRef->setBrush(*pBoxBrushRef);
-		pStatisticalBoxRef->setPen(*pBoxPenRef);
-		pStatisticalBoxRef->setWhiskerPen(*pBoxPenRef);
-		pStatisticalBoxRef->setWhiskerBarPen(*pBoxPenRef);
-		pStatisticalBoxRef->setMedianPen(*pBoxPenRef);
-
-		// set data:
-		//pStatisticalBoxTmp->setKey(nIndex);
-		pStatisticalBoxRef->setKey(iterMap->timestamp);
-		pStatisticalBoxRef->setMinimum(fMinimum);
-		pStatisticalBoxRef->setLowerQuartile(fLowerQuartile);
-		pStatisticalBoxRef->setMedian(fLowerQuartile);
-		pStatisticalBoxRef->setUpperQuartile(fUpperQuartile);
-		pStatisticalBoxRef->setMaximum(fMaximum);
-
-		//pStatisticalBoxTmp->setWidth(1);//矩形宽度
-		pStatisticalBoxRef->setWidth(nBarWith);//矩形宽度
-
-		pStatisticalBoxRef->setWhiskerWidth(0);//上顶，下底 直线宽度
-
-		nIndex++;
-		iterMap++;
-	}//while
-
-
-	QCPGraph *pGrapLineVolume = m_pCustomPlot->addGraph(m_pCustomPlot->xAxis, m_pCustomPlot->yAxis);
-	pGrapLineVolume->setData(xData, yData);
+	pLayoutGrid = m_pCustomPlot->plotLayout();
+	pMarginGroup = new QCPMarginGroup(m_pCustomPlot);
+	pLayoutGrid->element(0, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
+	pLayoutGrid->element(1, 0)->setMarginGroup(QCP::msAll, pMarginGroup);
+	pLayoutGrid = NULL;
+	pMarginGroup = NULL;
 
 
 	m_pCustomPlot->rescaleAxes();
 	m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 	m_pCustomPlot->replot();//draw again
+
 }
-#endif
 
 
 //QT_END_NAMESPACE

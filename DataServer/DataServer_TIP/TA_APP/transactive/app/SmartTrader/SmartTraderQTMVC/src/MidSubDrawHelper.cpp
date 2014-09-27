@@ -24,7 +24,7 @@ CMidSubDrawHelper::~CMidSubDrawHelper()
 }
 
 
-void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot)
+void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect)
 {
 	QBrush redBrush(QColor(255, 0, 0, 255));//red
 	QPen redPen(QColor(255, 0, 0, 255));//red
@@ -34,7 +34,6 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 	QBrush* pBoxBrushRef = NULL;
 	QPen* pBoxPenRef = NULL;
 	QCPStatisticalBox *pStatisticalBoxRef = NULL;
-	QCPAxisRect* pAxisRect = NULL; 
 
 	double fMinimum = 0;
 	double fMaximum = 0;
@@ -49,18 +48,14 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 	nTimeFrom = pHistoryDataManager->getTimeFrom();
 	nTimeTo = pHistoryDataManager->getTimeTo();
 
-	pAxisRect = new QCPAxisRect(pCustomPlot);
-	pCustomPlot->plotLayout()->addElement(0, 0, pAxisRect); // insert axis rect in first row
-
 	// prepare axes:
-	pAxisRect->setupFullAxesBox(true);
-	pAxisRect->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
-	pAxisRect->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
-	pAxisRect->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	pAxisRect->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+	pRect->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pRect->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pRect->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pRect->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
 
 	// make key axis range scroll with the data (at a constant range size of 8):
-	pAxisRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
+	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
 
 	nIndex = 0;
 	iterMap = pHistoryDataManager->m_pHistoryACK->m_MapBarData.begin();
@@ -69,7 +64,7 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 		//iterMap->second;
 		// create empty statistical box plottables:
 		pStatisticalBoxRef = NULL;
-		pStatisticalBoxRef = new QCPStatisticalBox(pAxisRect->axis(QCPAxis::atBottom), pAxisRect->axis(QCPAxis::atLeft));
+		pStatisticalBoxRef = new QCPStatisticalBox(pRect->axis(QCPAxis::atBottom), pRect->axis(QCPAxis::atLeft));
 		pCustomPlot->addPlottable(pStatisticalBoxRef);
 
 		fMinimum = iterMap->low;
@@ -123,12 +118,11 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 	pBoxBrushRef = NULL;
 	pBoxPenRef = NULL;
 	pStatisticalBoxRef = NULL;
-	pAxisRect = NULL; 
 }
 
 
 
-void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot)
+void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect)
 {
 	QBrush redBrush(QColor(255, 0, 0, 255));//red
 	QPen redPen(QColor(255, 0, 0, 255));//red
@@ -139,7 +133,6 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	QBrush* pBoxBrushRef = NULL;
 	QPen* pBoxPenRef = NULL;
 	QCPStatisticalBox *pStatisticalBoxRef = NULL;
-	QCPAxisRect* pAxisRect = NULL; 
 
 	double fMinimum = 0;
 	double fMaximum = 0;
@@ -155,17 +148,13 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	nTimeTo = pHistoryDataManager->getTimeTo();
 
 	// prepare axes:
-	pAxisRect = new QCPAxisRect(pCustomPlot);
-	pCustomPlot->plotLayout()->addElement(1, 0, pAxisRect); // insert axis rect in first row
-
-	pAxisRect->setupFullAxesBox(true);
-	pAxisRect->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
-	pAxisRect->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
-	pAxisRect->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	pAxisRect->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+	pRect->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+	pRect->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
+	pRect->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
+	pRect->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
 
 	// make key axis range scroll with the data (at a constant range size of 8):
-	pAxisRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
+	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
 
 	nIndex = 0;
 	iterMap = pHistoryDataManager->m_pHistoryACK->m_MapBarData.begin();
@@ -174,7 +163,7 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 		//iterMap->second;
 		// create empty statistical box plottables:
 		pStatisticalBoxRef = NULL;
-		pStatisticalBoxRef = new QCPStatisticalBox(pAxisRect->axis(QCPAxis::atBottom), pAxisRect->axis(QCPAxis::atLeft));
+		pStatisticalBoxRef = new QCPStatisticalBox(pRect->axis(QCPAxis::atBottom), pRect->axis(QCPAxis::atLeft));
 		pCustomPlot->addPlottable(pStatisticalBoxRef);
 
 		if (iterMap->open > iterMap->close)
@@ -225,6 +214,5 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	pBoxBrushRef = NULL;
 	pBoxPenRef = NULL;
 	pStatisticalBoxRef = NULL;
-	pAxisRect = NULL; 
 }
 

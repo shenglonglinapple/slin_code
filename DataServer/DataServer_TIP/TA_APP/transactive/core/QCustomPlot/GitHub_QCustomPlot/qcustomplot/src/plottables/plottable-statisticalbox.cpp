@@ -105,6 +105,7 @@ QCPStatisticalBox::QCPStatisticalBox(QCPAxis *keyAxis, QCPAxis *valueAxis) :
   mMaximum(0)
 {
   m_nPType = QCPAbstractPlottable::ptQCPStatisticalBox;
+  m_nBoxType = btBox;
 
   setOutlierStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, Qt::blue, 6));
   setWhiskerWidth(0.2);
@@ -490,4 +491,14 @@ QCPRange QCPStatisticalBox::getValueRange(bool &foundRange, SignDomain inSignDom
     foundRange = false;
     return QCPRange();
   }
+}
+
+void QCPStatisticalBox::setBoxType( BoxType nBoxType )
+{
+	m_nBoxType = nBoxType;
+}
+
+QCPStatisticalBox::BoxType QCPStatisticalBox::getBoxType()
+{
+	return m_nBoxType;
 }

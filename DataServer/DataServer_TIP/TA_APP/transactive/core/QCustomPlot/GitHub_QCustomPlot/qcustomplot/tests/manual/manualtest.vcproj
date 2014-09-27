@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189"
 				Optimization="4"
-				AdditionalIncludeDirectories="C:\Qt\4.8.5\include;C:\Qt\4.8.5\include\QtCore;C:\Qt\4.8.5\include\QtGui;C:\Qt\4.8.5\include\ActiveQt;debug;.;C:\Qt\4.8.5\mkspecs\default;.\GeneratedFiles"
+				AdditionalIncludeDirectories="C:\Qt\4.8.5\include;C:\Qt\4.8.5\include\QtCore;C:\Qt\4.8.5\include\QtGui;C:\Qt\4.8.5\include\ActiveQt;debug;.;C:\Qt\4.8.5\mkspecs\default;.\GeneratedFiles;.\testbar"
 				PreprocessorDefinitions="_WINDOWS,UNICODE,WIN32,QT_DLL,QT_GUI_LIB,QT_CORE_LIB,QT_HAVE_MMX,QT_HAVE_3DNOW,QT_HAVE_SSE,QT_HAVE_MMXEXT,QT_HAVE_SSE2,QT_THREAD_SUPPORT"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
@@ -412,7 +412,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing mainwindow.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\GeneratedFiles&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\testbar&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -786,38 +786,38 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="bar"
+			Name="testbar"
 			>
 			<File
-				RelativePath=".\Bar.cpp"
+				RelativePath=".\testbar\Bar.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Bar.h"
+				RelativePath=".\testbar\Bar.h"
 				>
 			</File>
 			<File
-				RelativePath=".\HistoryDataACK.cpp"
+				RelativePath=".\testbar\HistoryDataACK.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\HistoryDataACK.h"
+				RelativePath=".\testbar\HistoryDataACK.h"
 				>
 			</File>
 			<File
-				RelativePath=".\HistoryDataManager.cpp"
+				RelativePath=".\testbar\HistoryDataManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\HistoryDataManager.h"
+				RelativePath=".\testbar\HistoryDataManager.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MidSubDrawHelper.cpp"
+				RelativePath=".\testbar\MidSubDrawHelper.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MidSubDrawHelper.h"
+				RelativePath=".\testbar\MidSubDrawHelper.h"
 				>
 			</File>
 		</Filter>

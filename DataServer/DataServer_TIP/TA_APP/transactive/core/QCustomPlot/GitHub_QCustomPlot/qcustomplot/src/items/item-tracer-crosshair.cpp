@@ -57,6 +57,12 @@ m_pItemPosition(this->createPosition("position"))/*QCPItemPosition* const m_pIte
 	m_pQCPStatisticalBoxTracerCrossData = NULL; 	
 	m_pQCPStatisticalBoxTracerCrossData = new QCPStatisticalBoxTracerCrossData();
 
+	m_pListCrossBarData = NULL;
+	m_pListCrossBarData = new QList<QCPStatisticalBoxTracerCrossData*>();
+
+	m_pListCrossGrapData = NULL;
+	m_pListCrossGrapData = new QList<QCPGraphTracerCrossData*>();
+
 	setBrush(Qt::NoBrush);
 	setSelectedBrush(Qt::NoBrush);
 	setPen(QPen(Qt::black));
@@ -80,7 +86,66 @@ QCPItemTracerCrossHair::~QCPItemTracerCrossHair()
 		m_pQCPStatisticalBoxTracerCrossData = NULL;
 	}
 
+	if (NULL != m_pListCrossBarData)
+	{
+		_ClearData_ListCrossBarData();
+		m_pListCrossBarData = NULL;		
+	}
 	
+	if (NULL != m_pListCrossGrapData)
+	{
+		_ClearData_ListCrossGrapData();
+		m_pListCrossGrapData = NULL;		
+	}
+
+}
+
+void QCPItemTracerCrossHair::_ClearData_ListCrossBarData()
+{
+	if (NULL != m_pListCrossBarData)
+	{
+		QList<QCPStatisticalBoxTracerCrossData*>::Iterator iterList;
+		QCPStatisticalBoxTracerCrossData* pTmp = NULL;
+		iterList = m_pListCrossBarData->begin();
+		while (iterList != m_pListCrossBarData->end())
+		{
+			pTmp = (*iterList);
+
+			delete pTmp;
+			pTmp = NULL;
+
+
+			iterList++;
+		}
+		m_pListCrossBarData->clear();
+		delete m_pListCrossBarData;
+		m_pListCrossBarData = NULL;		
+	}
+}
+
+
+void QCPItemTracerCrossHair::_ClearData_ListCrossGrapData()
+{
+
+	if (NULL != m_pListCrossGrapData)
+	{
+		QList<QCPGraphTracerCrossData*>::Iterator iterList;
+		QCPGraphTracerCrossData* pTmp = NULL;
+		iterList = m_pListCrossGrapData->begin();
+		while (iterList != m_pListCrossGrapData->end())
+		{
+			pTmp = (*iterList);
+
+			delete pTmp;
+			pTmp = NULL;
+
+
+			iterList++;
+		}
+		m_pListCrossGrapData->clear();
+		delete m_pListCrossGrapData;
+		m_pListCrossGrapData = NULL;		
+	}
 }
 
 /*!
@@ -191,12 +256,72 @@ void QCPItemTracerCrossHair::draw(QCPPainter *painter)
  			painter->drawText(m_pointf_Vertical_bottom, m_str_Vertical_bottom);
  			painter->drawText(m_pointf_Vertical_top, m_str_Vertical_top);
 
-			if (m_pQCPGraphTracerCrossData->isSetData())
+
+			if (NULL != m_pListCrossGrapData)
 			{
-				QString strInfo;
-				strInfo = QString("%1, %2").arg(m_pQCPGraphTracerCrossData->m_nGraphKey).arg(m_pQCPGraphTracerCrossData->m_nGraphValue);
-				painter->drawText(m_pointf_Horizontal_left.x() + 50, m_pointf_Horizontal_left.y() + 10, strInfo);
+				QList<QCPGraphTracerCrossData*>::Iterator iterList;
+				QCPGraphTracerCrossData* pTmp = NULL;
+				iterList = m_pListCrossGrapData->begin();
+				while (iterList != m_pListCrossGrapData->end())
+				{
+					pTmp = (*iterList);
+
+					if (pTmp->isSetData())
+					{
+						QString strInfo;
+						strInfo = QString("k=%1, V=%2").arg(pTmp->m_nGraphKey).arg(pTmp->m_nGraphValue);
+						painter->drawText(m_pointf_Horizontal_left.x() + 50, m_pointf_Horizontal_left.y() + 10, strInfo);
+					}
+
+
+					iterList++;
+				}
+	
 			}
+
+			if (NULL != m_pListCrossBarData)
+			{
+				int nIndex = 1;
+				QList<QCPStatisticalBoxTracerCrossData*>::Iterator iterList;
+				QCPStatisticalBoxTracerCrossData* pTmp = NULL;
+				iterList = m_pListCrossBarData->begin();
+				while (iterList != m_pListCrossBarData->end())
+				{
+					pTmp = (*iterList);
+
+					if (pTmp->isSetData())
+					{
+						if (QCPStatisticalBox::btBar == pTmp->m_nBoxType)
+						{
+							QString strInfo;
+							strInfo = QString("k=%1, Min=%2, Lower=%3, Upper=%4, Max=%5, with=%6")
+								.arg(pTmp->m_fKey)
+								.arg(pTmp->m_fMinimum)
+								.arg(pTmp->m_fLowerQuartile)
+								.arg(pTmp->m_fUpperQuartile)
+								.arg(pTmp->m_fMaximum)
+								.arg(pTmp->m_fWidth);
+							painter->setPen(pTmp->m_fWhiskerBarPen);
+							painter->drawText(QPointF(m_pointf_Horizontal_left.x() + 50, m_pointf_Horizontal_left.y() + nIndex * 50), strInfo);
+						}
+						else
+						{
+							//if (QCPStatisticalBox::btVolume == pTmp->m_nBoxType)
+							QString strInfo;
+							strInfo = QString("k=%1, Volume=%2")
+								.arg(pTmp->m_fKey)
+								.arg(pTmp->m_fMaximum);
+							painter->setPen(pTmp->m_fWhiskerBarPen);
+							painter->drawText(QPointF(m_pointf_Horizontal_left.x() + 50, m_pointf_Horizontal_left.y() + nIndex * 50), strInfo);
+
+						}
+						
+					}
+
+					iterList++;
+					nIndex++;
+				}
+			}//if
 			
 			break;
 		}
@@ -293,7 +418,8 @@ void QCPItemTracerCrossHair::_UpdateTextInfo()
 		{
 			QString strTimeValue;
 			strTimeValue = mParentPlot->locale().toString(QDateTime::fromTime_t(fKey).toLocalTime(), m_strFormat_Vertical_bottom);
-			m_str_Vertical_bottom =  QString("%1 fKey=%2 strTimekey=%3").arg("Vertical_bottom").arg(fKey).arg(strTimeValue);
+			//m_str_Vertical_bottom =  QString("%1 fKey=%2 strTimekey=%3").arg("Vertical_bottom").arg(fKey).arg(strTimeValue);
+			m_str_Vertical_bottom =  QString("%1").arg(strTimeValue);
 		}
 		else
 		{
@@ -312,11 +438,13 @@ void QCPItemTracerCrossHair::_UpdateTextInfo()
 		{
 			QString strTimeValue;
 			strTimeValue = mParentPlot->locale().toString(QDateTime::fromTime_t(fKey).toLocalTime(), m_strFormat_Horizontal_left);
-			m_str_Horizontal_left =  QString("%1 fValue=%2 strTimekey=%3").arg("Horizontal_left").arg(fValue).arg(strTimeValue);
+			//m_str_Horizontal_left =  QString("%1 fValue=%2 strTimekey=%3").arg("Horizontal_left").arg(fValue).arg(strTimeValue);
+			m_str_Horizontal_left =  QString("%1").arg(fValue);
 		}
 		else
 		{
-			m_str_Horizontal_left =  QString("%1 fValue=%2").arg("Horizontal_left").arg(fValue);
+			//m_str_Horizontal_left =  QString("%1 fValue=%2").arg("Horizontal_left").arg(fValue);
+			m_str_Horizontal_left =  QString("%1").arg(fValue);
 		}		
 	}
 	else
@@ -397,6 +525,15 @@ void QCPItemTracerCrossHair::_ClearCrossData()
 	{
 		m_pQCPStatisticalBoxTracerCrossData->clear();
 	}
+
+	_ClearData_ListCrossBarData();
+	_ClearData_ListCrossGrapData();
+
+	m_pListCrossBarData = NULL;
+	m_pListCrossBarData = new QList<QCPStatisticalBoxTracerCrossData*>();
+
+	m_pListCrossGrapData = NULL;
+	m_pListCrossGrapData = new QList<QCPGraphTracerCrossData*>();
 	
 }
 
@@ -417,8 +554,18 @@ void QCPItemTracerCrossHair::_GetValue_QCPGraph(QCPGraph* pPlottableRef)
 	if (NULL != m_pQCPGraphTracerCrossData)
 	{
 		m_pQCPGraphTracerCrossData->clear();
-		m_pQCPGraphTracerCrossData->setGraphKey(nGraphKey);
-		m_pQCPGraphTracerCrossData->setGraphValue(pPlottableRef);
+		m_pQCPGraphTracerCrossData->setKey(nGraphKey);
+		m_pQCPGraphTracerCrossData->setValue(pPlottableRef);
+		if (m_pQCPGraphTracerCrossData->isSetData())
+		{
+			//find ok
+			m_pQCPGraphTracerCrossData->m_nGraphKey;
+			m_pQCPGraphTracerCrossData->m_nGraphValue;
+
+			m_pListCrossGrapData->push_back(m_pQCPGraphTracerCrossData);
+			m_pQCPGraphTracerCrossData = NULL;
+			m_pQCPGraphTracerCrossData = new QCPGraphTracerCrossData();
+		}
 	}
 	
 
@@ -430,7 +577,32 @@ void QCPItemTracerCrossHair::_GetValue_QCPStatisticalBox(QCPStatisticalBox* pPlo
 	{
 		return;
 	}
-	
+	double nGraphKey = 0;
+	//QPointF center(m_pItemPosition->pixelPoint());
+	//nGraphKey = center.x();
+	nGraphKey = m_pItemPosition->key();
+
+	if (NULL != m_pQCPStatisticalBoxTracerCrossData)
+	{
+		m_pQCPStatisticalBoxTracerCrossData->clear();
+		m_pQCPStatisticalBoxTracerCrossData->setKey(nGraphKey);
+		m_pQCPStatisticalBoxTracerCrossData->setValue(pPlottableRef);
+
+		if (m_pQCPStatisticalBoxTracerCrossData->isSetData())
+		{
+			//find ok
+			m_pQCPStatisticalBoxTracerCrossData->m_fKey;
+			m_pQCPStatisticalBoxTracerCrossData->m_fMinimum;
+			m_pQCPStatisticalBoxTracerCrossData->m_fLowerQuartile;
+			m_pQCPStatisticalBoxTracerCrossData->m_fUpperQuartile;
+			m_pQCPStatisticalBoxTracerCrossData->m_fMaximum;
+			m_pQCPStatisticalBoxTracerCrossData->m_fWidth;
+			
+			m_pListCrossBarData->push_back(m_pQCPStatisticalBoxTracerCrossData);
+			m_pQCPStatisticalBoxTracerCrossData = NULL;
+			m_pQCPStatisticalBoxTracerCrossData = new QCPStatisticalBoxTracerCrossData();
+		}
+	}
 
 }
 void QCPItemTracerCrossHair::_UpdateVerticalCrossValue()
@@ -485,6 +657,18 @@ void QCPItemTracerCrossHair::_UpdateVerticalCrossValue()
 
 }
 
+QList<QCPStatisticalBoxTracerCrossData*>* QCPItemTracerCrossHair::getCrossBarData()
+{
+	return m_pListCrossBarData;
+}
+
+QList<QCPGraphTracerCrossData*>* QCPItemTracerCrossHair::getCrossGrapData()
+{
+	return m_pListCrossGrapData;
+}
+
+
+
 
 
 
@@ -496,23 +680,90 @@ void QCPItemTracerCrossHair::_UpdateVerticalCrossValue()
 QCPStatisticalBoxTracerCrossData::QCPStatisticalBoxTracerCrossData()
 {
 	m_bSetData = false;
-	m_nGraphKey = 0;
-	m_nGraphValue = 0;
+
+	m_fKey = 0;
+	m_fMinimum = 0;
+	m_fLowerQuartile = 0;
+	m_fUpperQuartile = 0;
+	m_fMaximum = 0;
+	m_fWidth = 0;
+	m_fWhiskerBarPen = QPen();//QColor Qt::red
+
 }
 
 QCPStatisticalBoxTracerCrossData::~QCPStatisticalBoxTracerCrossData()
 {
 	m_bSetData = false;
-	m_nGraphKey = 0;
-	m_nGraphValue = 0;
+
+	m_fKey = 0;
+	m_fMinimum = 0;
+	m_fLowerQuartile = 0;
+	m_fUpperQuartile = 0;
+	m_fMaximum = 0;
+	m_fWidth = 0;
+	m_fWhiskerBarPen = QPen();//QColor Qt::red
 }
 
 void QCPStatisticalBoxTracerCrossData::clear()
 {
 	m_bSetData = false;
-	m_nGraphKey = 0;
-	m_nGraphValue = 0;
+
+	m_fKey = 0;
+	m_fMinimum = 0;
+	m_fLowerQuartile = 0;
+	m_fUpperQuartile = 0;
+	m_fMaximum = 0;
+	m_fWidth = 0;
+	m_fWhiskerBarPen = QPen();//QColor Qt::red
 }
+
+void QCPStatisticalBoxTracerCrossData::setKey(double fKey)
+{
+	clear();
+	m_bSetData = true;
+	m_fKey = fKey;
+}
+void QCPStatisticalBoxTracerCrossData::setValue(QCPStatisticalBox* pPlottableRef)
+{
+	if (NULL == pPlottableRef)
+	{
+		m_bSetData = false;
+		return;
+	}
+
+	if (false == m_bSetData)
+	{
+		return;
+	}
+
+	double fGetkey = 0;
+	double fGetMinKey = 0;
+	double fGetMaxKey = 0;
+	fGetkey = pPlottableRef->key();
+	m_fWidth = pPlottableRef->width();
+	fGetMinKey = (fGetkey - (m_fWidth * 0.5));//mKey-mWidth*0.5, mKey+mWidth*0.5
+	fGetMaxKey = (fGetkey + (m_fWidth * 0.5));
+	if (m_fKey < fGetMinKey || m_fKey > fGetMaxKey)
+	{
+		m_bSetData = false;
+		return;
+	}
+
+	m_fWidth = pPlottableRef->width();
+	m_fMinimum = pPlottableRef->minimum();
+	m_fLowerQuartile = pPlottableRef->lowerQuartile();
+	m_fUpperQuartile = pPlottableRef->upperQuartile();
+	m_fMaximum = pPlottableRef->maximum();
+	m_fWhiskerBarPen = pPlottableRef->whiskerBarPen();
+	m_nBoxType = pPlottableRef->getBoxType();
+	
+}
+
+bool QCPStatisticalBoxTracerCrossData::isSetData()
+{
+	return m_bSetData;
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 QCPGraphTracerCrossData::QCPGraphTracerCrossData()
@@ -536,13 +787,13 @@ void QCPGraphTracerCrossData::clear()
 	m_nGraphValue = 0;
 }
 
-void QCPGraphTracerCrossData::setGraphKey(double fGraphKey)
+void QCPGraphTracerCrossData::setKey(double fGraphKey)
 {
 	clear();
 	m_bSetData = true;
 	m_nGraphKey = fGraphKey;
 }
-void QCPGraphTracerCrossData::setGraphValue(QCPGraph* pPlottableRef)
+void QCPGraphTracerCrossData::setValue(QCPGraph* pPlottableRef)
 {
 	if (NULL == pPlottableRef)
 	{
