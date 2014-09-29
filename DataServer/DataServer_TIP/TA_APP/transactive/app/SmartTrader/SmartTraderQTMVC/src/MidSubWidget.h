@@ -17,6 +17,9 @@ class CHistoryDataManager;
 class QCPStatisticalBox;
 class QCustomPlot;
 class CMidSubDrawHelper;
+class QCPItemTracerCrossHair;
+class QCPAxisRect;
+class QCPMarginGroup;
 
 class CMidSubWidget : public QWidget
 {
@@ -40,6 +43,10 @@ public slots:
 	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 	*/
 	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
+
+
+	void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
+
 public:
 	void setupUi();
 	void translateLanguage();
@@ -50,10 +57,17 @@ private:
 	void _CreateConnect();
 private:
 	void doTest();
+	void _ReSetCustomPlot();
 private:
 	QVBoxLayout* verticalLayout;
 	QCustomPlot* m_pCustomPlot;
 	CMidSubDrawHelper* m_pMidSubDrawHelper;
+	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairTop;
+	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairBottom;
+	QCPAxisRect* m_pAxisRectTop;
+	QCPAxisRect* m_pAxisRectBottom;
+	QCPMarginGroup* m_pMarginGroup;
+
 };
 
 //QT_END_NAMESPACE

@@ -7,11 +7,12 @@
 #include "Bar.h"
 #include "HistoryDataManager.h"
 
-#include "qcustomplot.h"
+#include "qcp.h"
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
 
+static std::string DEF_STRING_FORMAT_TIME = "yyyy-MM-dd hh:mm:ss";
 
 CMidSubDrawHelper::CMidSubDrawHelper()
 {
@@ -44,7 +45,11 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 	int nIndex = 0;
 	unsigned int nTimeFrom = 0;
 	unsigned int nTimeTo = 0;
-	int nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
+	double nLeftAxisRangeMin = 0;
+	double nLeftAxisRangeMax = 0;
+
+	int nBarWith = 0;
+	nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
 	nTimeFrom = pHistoryDataManager->getTimeFrom();
 	nTimeTo = pHistoryDataManager->getTimeTo();
 
@@ -52,10 +57,8 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 	pRect->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
 	pRect->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
 	pRect->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	pRect->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+	pRect->axis(QCPAxis::atBottom)->setDateTimeFormat(DEF_STRING_FORMAT_TIME.c_str());
 
-	// make key axis range scroll with the data (at a constant range size of 8):
-	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
 
 	nIndex = 0;
 	iterMap = pHistoryDataManager->m_pHistoryACK->m_MapBarData.begin();
@@ -95,6 +98,7 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 
 		// set data:
 		//pStatisticalBoxTmp->setKey(nIndex);
+		pStatisticalBoxRef->setBoxType(QCPStatisticalBox::btBar);
 		pStatisticalBoxRef->setKey(iterMap->timestamp);
 		pStatisticalBoxRef->setMinimum(fMinimum);
 		pStatisticalBoxRef->setLowerQuartile(fLowerQuartile);
@@ -107,9 +111,24 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 
 		pStatisticalBoxRef->setWhiskerWidth(0);//上顶，下底 直线宽度
 
+
+		if (fMinimum < nLeftAxisRangeMin)
+		{
+			nLeftAxisRangeMin = fMinimum;
+		}
+
+		if (fMaximum > nLeftAxisRangeMax)
+		{
+			nLeftAxisRangeMax = fMaximum;
+		}
+
 		nIndex++;
 		iterMap++;
 	}//while
+
+	// make key axis range scroll with the data (at a constant range size of 8):
+	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
+	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMin, nLeftAxisRangeMax);
 
 
 // 	pCustomPlot->rescaleAxes();
@@ -134,6 +153,7 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	QPen* pBoxPenRef = NULL;
 	QCPStatisticalBox *pStatisticalBoxRef = NULL;
 
+
 	double fMinimum = 0;
 	double fMaximum = 0;
 	double fLowerQuartile = 0;
@@ -143,7 +163,10 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	int nIndex = 0;
 	unsigned int nTimeFrom = 0;
 	unsigned int nTimeTo = 0;
-	int nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
+	double nLeftAxisRangeMin = 0;
+	double nLeftAxisRangeMax = 0;
+	int nBarWith = 0;
+	nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
 	nTimeFrom = pHistoryDataManager->getTimeFrom();
 	nTimeTo = pHistoryDataManager->getTimeTo();
 
@@ -151,10 +174,9 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	pRect->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
 	pRect->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
 	pRect->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
-	pRect->axis(QCPAxis::atBottom)->setDateTimeFormat("yyyy-MM-dd hh-mm-ss");
+	pRect->axis(QCPAxis::atBottom)->setDateTimeFormat(DEF_STRING_FORMAT_TIME.c_str());
 
-	// make key axis range scroll with the data (at a constant range size of 8):
-	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
+
 
 	nIndex = 0;
 	iterMap = pHistoryDataManager->m_pHistoryACK->m_MapBarData.begin();
@@ -192,7 +214,7 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 
 		// set data:
 		//pStatisticalBoxTmp->setKey(nIndex);
-
+		pStatisticalBoxRef->setBoxType(QCPStatisticalBox::btVolume);
 		pStatisticalBoxRef->setKey(iterMap->timestamp);		
 		pStatisticalBoxRef->setMinimum(fMinimum);
 		pStatisticalBoxRef->setLowerQuartile(fLowerQuartile);
@@ -204,10 +226,23 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 		pStatisticalBoxRef->setWidth(nBarWith);//矩形宽度
 		pStatisticalBoxRef->setWhiskerWidth(0);//上顶，下底 直线宽度
 
+		if (fMinimum < nLeftAxisRangeMin)
+		{
+			nLeftAxisRangeMin = fMinimum;
+		}
+		
+		if (fMaximum > nLeftAxisRangeMax)
+		{
+			nLeftAxisRangeMax = fMaximum;
+		}
+
 		nIndex++;
 		iterMap++;
 	}//while
 
+	// make key axis range scroll with the data (at a constant range size of 8):
+	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
+	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMin, nLeftAxisRangeMax);
 
 
 

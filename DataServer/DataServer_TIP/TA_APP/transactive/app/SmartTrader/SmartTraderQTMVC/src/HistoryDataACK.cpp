@@ -100,16 +100,16 @@ void CHistoryDataACK::initTestData()
 	unsigned int nBarIndex = 0;
 	Bar barData;
 	unsigned int nTimeNow;
-	unsigned int nBarCount = 60;
+	unsigned int nBarCount = 200;
 	double tmp1 = 0;
 	double tmp2 = 0;
-	int m_nBarTypeSeconds = FIVE_MINUTE;
+	int nBarTypeSeconds = m_nBarType;//FIVE_MINUTE;
 
 	//FIVE_MINUTES
 	//one bar 5 minutes  * 60
 	//double nTimeNow = QDateTime::currentDateTime().toTime_t();
 	nTimeNow = QDateTime::currentDateTime().toTime_t();
-	nTimeNow = nTimeNow - (m_nBarTypeSeconds * nBarCount);//set start time
+	nTimeNow = nTimeNow - (nBarTypeSeconds * nBarCount);//set start time
 
 
 	//::srand(8); // set the random seed, so we always get the same random data
@@ -122,26 +122,26 @@ void CHistoryDataACK::initTestData()
 		barData.high = 0;
 		barData.open = 0;
 		barData.close = 0;
-		barData.volume = 0;
+		barData.volume = ::rand() % 100;
 		barData.timestamp = 0;
 
 		tmp1 = ::rand() % 100;
 		tmp2 = ::rand() % 100;
 
-		barData.timestamp = nTimeNow + nIndex * m_nBarTypeSeconds;//5 minutes
+		barData.timestamp = nTimeNow + nIndex * nBarTypeSeconds;//m_nBarType;//FIVE_MINUTE;
 
 		barData.open = tmp1;
 		barData.close = tmp2;
 
 		if (barData.open > barData.close)
 		{
-			barData.high = barData.open + 0.5;
-			barData.low = barData.close - 0.5;
+			barData.high = barData.open + 5;
+			barData.low = barData.close - 5;
 		}
 		else
 		{
-			barData.high = barData.close + 0.5;
-			barData.low = barData.open - 0.5;
+			barData.high = barData.close + 5;
+			barData.low = barData.open - 5;
 		}
 
 
