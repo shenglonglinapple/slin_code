@@ -22,6 +22,7 @@ public:
 	void setKey(double fKey);
 	void setValue(QCPStatisticalBox* pPlottableRef);
 	bool isSetData();
+	void setDrawInfo(QRect clipRect);
 public:
 	bool m_bSetData;
 public:
@@ -33,6 +34,9 @@ public:
 	double m_fWidth;
 	QPen m_fWhiskerBarPen;
 	int m_nBoxType;
+public:
+	QPointF m_pointf;
+	QString m_strInfo;
 };
 //////////////////////////////////////////////////////////////////////////
 class QCP_LIB_DECL QCPGraphTracerCrossData
@@ -45,11 +49,16 @@ public:
 	void setKey(double fGraphKey);
 	void setValue(QCPGraph* pPlottableRef);
 	bool isSetData();
+	void setDrawInfo(QRect clipRect);
 public:
 	bool m_bSetData;
 public:
 	double m_nGraphKey;
 	double m_nGraphValue;
+	QPen m_Pen;
+public:
+	QPointF m_pointf;
+	QString m_strInfo;
 	
 };
 //////////////////////////////////////////////////////////////////////////
@@ -75,7 +84,8 @@ public:
 	};
 	Q_ENUMS(TracerStyle)
 
-		QCPItemTracerCrossHair(QCustomPlot *parentPlot);
+public:
+	QCPItemTracerCrossHair(QCustomPlot *parentPlot);
 	virtual ~QCPItemTracerCrossHair();
 public:
 	// getters:

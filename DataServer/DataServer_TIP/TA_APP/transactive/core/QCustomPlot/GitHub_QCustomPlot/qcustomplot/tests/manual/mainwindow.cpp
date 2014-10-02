@@ -1202,11 +1202,11 @@ void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
 	m_pMidSubDrawHelper = new CMidSubDrawHelper();
 	pHistoryDataManager = new CHistoryDataManager();
 
-	//m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, customPlot, pAxisRectTop);
-	//m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, customPlot, pAxisRectBottom);
+	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, customPlot, pAxisRectTop);
+	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, customPlot, pAxisRectBottom);
 
-	setupItemTracerTest_MyTest_addGrap(customPlot, pAxisRectTop);
-	setupItemTracerTest_MyTest_addGrap(customPlot, pAxisRectBottom);
+	//setupItemTracerTest_MyTest_addGrap(customPlot, pAxisRectTop);
+	//setupItemTracerTest_MyTest_addGrap(customPlot, pAxisRectBottom);
 
 
 	pTracerTop = NULL;
@@ -1229,7 +1229,7 @@ void MainWindow::setupItemTracerTest_MyTest_2(QCustomPlot *customPlot)
 	connect(customPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
 
 
-	customPlot->rescaleAxes();
+	//customPlot->rescaleAxes();
 	customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 	customPlot->replot();//draw again
 

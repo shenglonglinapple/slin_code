@@ -2,11 +2,13 @@
 
 #include "../painter.h"
 #include "../core.h"
+#include "../axis.h"
 #include "../plottables/plottable-graph.h"
 #include "../layoutelements/layoutelement-axisrect.h"
 
 
 #include "../plottables/plottable-statisticalbox.h"
+
 
 
 
@@ -265,15 +267,8 @@ void QCPItemTracerCrossHair::draw(QCPPainter *painter)
 				while (iterList != m_pListCrossGrapData->end())
 				{
 					pTmp = (*iterList);
-
-					if (pTmp->isSetData())
-					{
-						QString strInfo;
-						strInfo = QString("k=%1, V=%2").arg(pTmp->m_nGraphKey).arg(pTmp->m_nGraphValue);
-						painter->drawText(m_pointf_Horizontal_left.x() + 50, m_pointf_Horizontal_left.y() + 10, strInfo);
-					}
-
-
+					painter->setPen(pTmp->m_Pen);
+					painter->drawText(pTmp->m_pointf, pTmp->m_strInfo);
 					iterList++;
 				}
 	
@@ -289,34 +284,8 @@ void QCPItemTracerCrossHair::draw(QCPPainter *painter)
 				{
 					pTmp = (*iterList);
 
-					if (pTmp->isSetData())
-					{
-						if (QCPStatisticalBox::btBar == pTmp->m_nBoxType)
-						{
-							QString strInfo;
-							strInfo = QString("k=%1, Min=%2, Lower=%3, Upper=%4, Max=%5, with=%6")
-								.arg(pTmp->m_fKey)
-								.arg(pTmp->m_fMinimum)
-								.arg(pTmp->m_fLowerQuartile)
-								.arg(pTmp->m_fUpperQuartile)
-								.arg(pTmp->m_fMaximum)
-								.arg(pTmp->m_fWidth);
-							painter->setPen(pTmp->m_fWhiskerBarPen);
-							painter->drawText(QPointF(m_pointf_Horizontal_left.x() + 50, m_pointf_Horizontal_left.y() + nIndex * 50), strInfo);
-						}
-						else
-						{
-							//if (QCPStatisticalBox::btVolume == pTmp->m_nBoxType)
-							QString strInfo;
-							strInfo = QString("k=%1, Volume=%2")
-								.arg(pTmp->m_fKey)
-								.arg(pTmp->m_fMaximum);
-							painter->setPen(pTmp->m_fWhiskerBarPen);
-							painter->drawText(QPointF(m_pointf_Horizontal_left.x() + 50, m_pointf_Horizontal_left.y() + nIndex * 50), strInfo);
-
-						}
-						
-					}
+					painter->setPen(pTmp->m_fWhiskerBarPen);
+					painter->drawText(pTmp->m_pointf, pTmp->m_strInfo);
 
 					iterList++;
 					nIndex++;
@@ -408,10 +377,13 @@ void QCPItemTracerCrossHair::_UpdateTextInfo()
 {
 	double fKey = 0; 
 	double fValue = 0;
+	QPointF center(m_pItemPosition->pixelPoint());
+	QRect clip = clipRect();
+
 
 	fKey = m_pItemPosition->key();
 	fValue = m_pItemPosition->value();
-
+	//
 	if (m_bShow_Vertical_bottom)
 	{
 		if (QCPAxis::ltDateTime == m_nShowType_Vertical_bottom)
@@ -431,7 +403,7 @@ void QCPItemTracerCrossHair::_UpdateTextInfo()
 		m_str_Vertical_bottom =  QString("");
 	}
 
-
+	//
 	if (m_bShow_Horizontal_left)
 	{
 		if (QCPAxis::ltDateTime == m_nShowType_Horizontal_left)
@@ -451,10 +423,10 @@ void QCPItemTracerCrossHair::_UpdateTextInfo()
 	{
 		m_str_Horizontal_left =  QString("");
 	}
-	
+	//
 	m_str_Horizontal_right =  QString("%1").arg("Horizontal_right");
 	m_str_Vertical_top = QString("%1").arg("Vertical_top");
-
+	//
 	//×ø±êÏµ topleft(0, 0) xÖá yÖá
 	m_pointf_Horizontal_left.setX(m_pointf_Horizontal_left.x() + 5);
 	m_pointf_Horizontal_left.setY(m_pointf_Horizontal_left.y() - 10);
@@ -540,6 +512,9 @@ void QCPItemTracerCrossHair::_ClearCrossData()
 
 void QCPItemTracerCrossHair::_GetValue_QCPGraph(QCPGraph* pPlottableRef)
 {
+	QPointF center(m_pItemPosition->pixelPoint());
+	QRect clip = clipRect();
+
 	if (NULL == pPlottableRef)
 	{
 		return;
@@ -558,6 +533,7 @@ void QCPItemTracerCrossHair::_GetValue_QCPGraph(QCPGraph* pPlottableRef)
 		m_pQCPGraphTracerCrossData->setValue(pPlottableRef);
 		if (m_pQCPGraphTracerCrossData->isSetData())
 		{
+			m_pQCPGraphTracerCrossData->setDrawInfo(clip);
 			//find ok
 			m_pQCPGraphTracerCrossData->m_nGraphKey;
 			m_pQCPGraphTracerCrossData->m_nGraphValue;
@@ -573,6 +549,9 @@ void QCPItemTracerCrossHair::_GetValue_QCPGraph(QCPGraph* pPlottableRef)
 }
 void QCPItemTracerCrossHair::_GetValue_QCPStatisticalBox(QCPStatisticalBox* pPlottableRef)
 {
+	QPointF center(m_pItemPosition->pixelPoint());
+	QRect clip = clipRect();
+
 	if (NULL == pPlottableRef)
 	{
 		return;
@@ -590,6 +569,7 @@ void QCPItemTracerCrossHair::_GetValue_QCPStatisticalBox(QCPStatisticalBox* pPlo
 
 		if (m_pQCPStatisticalBoxTracerCrossData->isSetData())
 		{
+			m_pQCPStatisticalBoxTracerCrossData->setDrawInfo(clip);
 			//find ok
 			m_pQCPStatisticalBoxTracerCrossData->m_fKey;
 			m_pQCPStatisticalBoxTracerCrossData->m_fMinimum;
@@ -613,6 +593,7 @@ void QCPItemTracerCrossHair::_UpdateVerticalCrossValue()
 	QCPAbstractPlottable::PLayerableType  nPType;
 	QCPGraph* pQCPGraphTmp = NULL;
 	QCPStatisticalBox* pQCPStatisticalBoxTmp = NULL;
+	QCPAxis* pKeyAxisGet = NULL;
 	
 	_ClearCrossData();
 
@@ -620,37 +601,29 @@ void QCPItemTracerCrossHair::_UpdateVerticalCrossValue()
 	for (nPlottableIndex = 0; nPlottableIndex < nPlottableCount; nPlottableIndex++)
 	{	
 		pPlottableRef = mParentPlot->plottable(nPlottableIndex);
-		nPType = pPlottableRef->getPTType();
+		pKeyAxisGet = pPlottableRef->keyAxis();
 
-		switch (nPType)
+		if (pKeyAxisGet == m_pItemPosition->keyAxis())
 		{
-		case QCPAbstractPlottable::ptNone:
-			break;
-		case QCPAbstractPlottable::ptQCPAbstractPlottable:
-			///< QCPAbstractPlottable
-			break;
-		case QCPAbstractPlottable::ptQCPBars:
-			///< QCPBars
-			break;
-		case QCPAbstractPlottable::ptQCPColorMap:
-			///< QCPColorMap
-			break;
-		case QCPAbstractPlottable::ptQCPCurve:
-			///< QCPCurve
-			break;
-		case QCPAbstractPlottable::ptQCPGraph:
-			///< QCPGraph
-			pQCPGraphTmp = dynamic_cast<QCPGraph*>(pPlottableRef);//child parent
-			_GetValue_QCPGraph(pQCPGraphTmp);
-			break;
-		case QCPAbstractPlottable::ptQCPStatisticalBox:
-			 ///< QCPStatisticalBox
-			pQCPStatisticalBoxTmp = dynamic_cast<QCPStatisticalBox*>(pPlottableRef); 
-			_GetValue_QCPStatisticalBox(pQCPStatisticalBoxTmp);
-			break;
-		default:
-			break;
-		}//switch
+			nPType = pPlottableRef->getPTType();
+			switch (nPType)
+			{
+			case QCPAbstractPlottable::ptQCPGraph:
+				///< QCPGraph
+				pQCPGraphTmp = dynamic_cast<QCPGraph*>(pPlottableRef);//child parent
+				_GetValue_QCPGraph(pQCPGraphTmp);
+				break;
+			case QCPAbstractPlottable::ptQCPStatisticalBox:
+				///< QCPStatisticalBox
+				pQCPStatisticalBoxTmp = dynamic_cast<QCPStatisticalBox*>(pPlottableRef); 
+				_GetValue_QCPStatisticalBox(pQCPStatisticalBoxTmp);
+				break;
+			default:
+				break;
+			}//switch
+
+		}//if
+		
 		
 	}//for
 	
@@ -759,6 +732,39 @@ void QCPStatisticalBoxTracerCrossData::setValue(QCPStatisticalBox* pPlottableRef
 	
 }
 
+void QCPStatisticalBoxTracerCrossData::setDrawInfo(QRect clipRect)
+{
+	m_pointf = QPointF(clipRect.x() + 10, clipRect.y() + 10);
+
+	if (QCPStatisticalBox::btBar == this->m_nBoxType)
+	{
+		if (QColor(Qt::green) == m_fWhiskerBarPen.color().toRgb())
+		{
+			//green up
+			m_strInfo = QString("O:%1,L:%1,C:%2,H:%3")
+				.arg(this->m_fLowerQuartile)
+				.arg(this->m_fMinimum)
+				.arg(this->m_fUpperQuartile)
+				.arg(this->m_fMaximum);
+		}
+		else //if (QColor(Qt::red) == m_fWhiskerBarPen.color())
+		{
+			//green down
+			m_strInfo = QString("O:%1,L:%1,C:%2,H:%3")
+				.arg(this->m_fUpperQuartile)
+				.arg(this->m_fMinimum)
+				.arg(this->m_fLowerQuartile)
+				.arg(this->m_fMaximum);
+		}
+		
+	}
+	else
+	{
+		//if (QCPStatisticalBox::btVolume == pTmp->m_nBoxType)
+		m_strInfo = QString("Volume=%1")
+			.arg(this->m_fMaximum);
+	}
+}
 bool QCPStatisticalBoxTracerCrossData::isSetData()
 {
 	return m_bSetData;
@@ -806,6 +812,8 @@ void QCPGraphTracerCrossData::setValue(QCPGraph* pPlottableRef)
 		return;
 	}
 	bool mInterpolating = false;
+
+	m_Pen = pPlottableRef->pen();
 
 	if (pPlottableRef->data()->size() > 1)
 	{
@@ -884,6 +892,15 @@ bool QCPGraphTracerCrossData::isSetData()
 {
 	return m_bSetData;
 }
+
+void QCPGraphTracerCrossData::setDrawInfo( QRect clipRect )
+{
+	m_pointf = QPointF(clipRect.x() + 10, clipRect.y() + 10);
+
+	m_strInfo = QString("V:%1")
+		.arg(this->m_nGraphValue);
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////

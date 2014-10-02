@@ -22,6 +22,7 @@
 			ConfigurationType="4"
 			UseOfMFC="0"
 			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -45,7 +46,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189"
 				Optimization="4"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;,&quot;$(QTDIR)\include\QtGui&quot;,&quot;$(QTDIR)\include&quot;,&quot;$(QTDIR)\include\ActiveQt&quot;,&quot;build-debug&quot;,$(QTDIR)\mkspecs\default"
+				AdditionalIncludeDirectories="C:\Qt\4.8.5\include;C:\Qt\4.8.5\include\QtCore;C:\Qt\4.8.5\include\QtGui;C:\Qt\4.8.5\include\ActiveQt;C:\Qt\4.8.5\mkspecs\default;&quot;build-debug&quot;;..\src;..\src\plottables;..\src\layoutelements;..\src\items"
 				PreprocessorDefinitions="_WINDOWS,UNICODE,WIN32,QT_GUI_LIB,QT_CORE_LIB,QT_HAVE_MMX,QT_HAVE_3DNOW,QT_HAVE_SSE,QT_HAVE_MMXEXT,QT_HAVE_SSE2,QT_THREAD_SUPPORT"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
@@ -72,7 +73,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\qcustomplotd.lib"
+				OutputFile="..\..\..\..\..\..\..\sdk\win32_nd\qcustomplotd.lib"
 				SuppressStartupBanner="true"
 			/>
 			<Tool
@@ -877,7 +878,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing axis.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -907,7 +908,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing colorgradient.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -937,7 +938,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing core.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -971,7 +972,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing item.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1001,7 +1002,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing layer.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1031,7 +1032,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing layout.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1061,7 +1062,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing lineending.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1091,7 +1092,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing painter.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1121,7 +1122,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing plottable.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1162,7 +1163,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-bracket.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1192,7 +1193,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-curve.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1222,7 +1223,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-ellipse.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1252,7 +1253,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-line.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1282,7 +1283,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-pixmap.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1312,7 +1313,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-rect.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1342,7 +1343,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-straightline.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1372,7 +1373,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-text.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1402,7 +1403,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-tracer-crosshair.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1432,7 +1433,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing item-tracer.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1466,7 +1467,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing layoutelement-axisrect.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1496,7 +1497,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing layoutelement-colorscale.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1526,7 +1527,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing layoutelement-legend.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1556,7 +1557,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing layoutelement-plottitle.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1590,7 +1591,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing plottable-bars.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1620,7 +1621,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing plottable-colormap.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1650,7 +1651,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing plottable-curve.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1680,7 +1681,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing plottable-graph.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1710,7 +1711,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing plottable-statisticalbox.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-I$(QTDIR)\mkspecs\default&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_THREAD_SUPPORT -D_MBCS  &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\build-debug&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-I.\..\src&quot; &quot;-I.\..\src\plottables&quot; &quot;-I.\..\src\layoutelements&quot; &quot;-I.\..\src\items&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\build-$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>

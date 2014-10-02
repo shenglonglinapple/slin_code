@@ -55,7 +55,7 @@ void CHistoryDataACK::initTestData()
 	unsigned int nBarIndex = 0;
 	Bar barData;
 	unsigned int nTimeNow;
-	unsigned int nBarCount = 200;
+	unsigned int nBarCount = 100;
 	double tmp1 = 0;
 	double tmp2 = 0;
 	int nBarTypeSeconds = m_nBarType;//FIVE_MINUTE;
