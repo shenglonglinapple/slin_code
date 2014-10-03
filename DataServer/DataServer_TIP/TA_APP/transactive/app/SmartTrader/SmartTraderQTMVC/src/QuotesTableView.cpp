@@ -309,6 +309,7 @@ void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 		pModel = this->model();
 
 		m_pUserOrderInfo->setDataByItem(pCurrentTreeItem);
+		m_pUserOrderInfo->m_nQuantity = 1;
 		m_pCreateNewOrderDialog->resetData(m_pUserOrderInfo);
 		m_pCreateNewOrderDialog->move(point);
 		m_pCreateNewOrderDialog->show();

@@ -36,8 +36,11 @@ private:
 	QString m_strExchangeName;
 	QString m_strInstrumentCode;
 	float m_fLastPrice;
-	int m_nVolume;
+	int m_nQuantity;
 private:
+	Order::Side m_nSide;
+	Order::OrderType m_nOrderType;
+
 }; 
 
 

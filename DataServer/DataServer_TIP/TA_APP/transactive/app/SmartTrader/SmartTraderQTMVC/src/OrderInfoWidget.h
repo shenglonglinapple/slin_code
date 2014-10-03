@@ -33,6 +33,7 @@ class QGridLayout;
 QT_END_NAMESPACE
 
 class COrderInfo;
+class CUserOrderInfo;
 
 class COrderInfoWidget : public QDialog
 {
@@ -62,7 +63,7 @@ signals:
 
 
 public:
-	void setOrderInfo(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	void setOrderInfo(CUserOrderInfo* pUserOrderInfo);
 
 private slots:
 	void slotPushButtonOKClicked(bool checked);
@@ -76,10 +77,8 @@ private:
 	void _CreateConnect();
 private:
 	COrderInfo* m_pOrderInfo;
+	CUserOrderInfo* m_pUserOrderInfo ;
 private:
-	Order::Side m_nSide;
-	Order::OrderType m_nOrderType;
-	QString m_strInstrumentCode;
 	double m_fPrice;
 	int m_quantity;
 	OrderCheckRes m_nCheckRes;

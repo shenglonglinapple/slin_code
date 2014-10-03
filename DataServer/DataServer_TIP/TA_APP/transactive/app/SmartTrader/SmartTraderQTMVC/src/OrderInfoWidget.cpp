@@ -2,7 +2,7 @@
 
 #include "ProjectQTInclude.h"
 #include "OrderInfo.h"
-
+#include "UserOrderInfo.h"
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -42,6 +42,7 @@ COrderInfoWidget::COrderInfoWidget(QWidget *parent)
 	m_pPushButtonOK = NULL;
 	m_pPushButtonCancel = NULL;
 	m_pOrderInfo = NULL;
+	m_pUserOrderInfo = NULL;
 
 	m_str_OrderSide_Value.clear();
 	m_str_OrderType_Value.clear();
@@ -57,6 +58,7 @@ COrderInfoWidget::COrderInfoWidget(QWidget *parent)
 	m_str_Price_Value = "99.9";//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
 	m_pOrderInfo = new COrderInfo();
+	m_pUserOrderInfo = new CUserOrderInfo();
 	this->setupUi();
 	this->translateLanguage();
 	this->_CreateConnect();
@@ -72,6 +74,11 @@ COrderInfoWidget::~COrderInfoWidget()
 		m_pOrderInfo = NULL;
 	}
 
+	if (NULL != m_pUserOrderInfo)
+	{
+		delete m_pUserOrderInfo;
+		m_pUserOrderInfo = NULL;
+	}
 }
 
 
@@ -154,14 +161,14 @@ void COrderInfoWidget::slotPushButtonOKClicked( bool checked )
 			<<" "<<"emit"
 			<<" "<<"signalNewOrder()"
 			<<" "<<"param:"
-			<<" "<<"m_nSide="<<m_nSide
-			<<" "<<"m_nOrderType="<<m_nOrderType
-			<<" "<<"strInstrumentCode="<<m_strInstrumentCode.toStdString().c_str()
-			<<" "<<"m_fPrice="<<m_fPrice
+			<<" "<<"m_nSide="<<m_pUserOrderInfo->m_nSide
+			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
+			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
+			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
 			<<" "<<"m_quantity="<<m_quantity
 			<<" "<<"m_nCheckRes="<<m_nCheckRes;
 
-		emit signalOrderCheck(m_nSide, m_nOrderType, m_strInstrumentCode, m_fPrice, m_quantity, m_nCheckRes);	
+		emit signalOrderCheck(m_pUserOrderInfo->m_nSide, m_pUserOrderInfo->m_nOrderType, m_pUserOrderInfo->m_strInstrumentCode,  m_pUserOrderInfo->m_fLastPrice, m_quantity, m_nCheckRes);	
 	}
 }
 
@@ -176,14 +183,14 @@ void COrderInfoWidget::slotPushButtonCancelClicked( bool checked )
 			<<" "<<"emit"
 			<<" "<<"signalNewOrder()"
 			<<" "<<"param:"
-			<<" "<<"m_nSide="<<m_nSide
-			<<" "<<"m_nOrderType="<<m_nOrderType
-			<<" "<<"strInstrumentCode="<<m_strInstrumentCode.toStdString().c_str()
-			<<" "<<"m_fPrice="<<m_fPrice
+			<<" "<<"m_nSide="<<m_pUserOrderInfo->m_nSide
+			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
+			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
+			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
 			<<" "<<"m_quantity="<<m_quantity
 			<<" "<<"m_nCheckRes="<<m_nCheckRes;
 
-		emit signalOrderCheck(m_nSide, m_nOrderType, m_strInstrumentCode, m_fPrice, m_quantity, m_nCheckRes);	
+		emit signalOrderCheck(m_pUserOrderInfo->m_nSide, m_pUserOrderInfo->m_nOrderType, m_pUserOrderInfo->m_strInstrumentCode,  m_pUserOrderInfo->m_fLastPrice, m_quantity, m_nCheckRes);	
 	}
 }
 
@@ -201,12 +208,15 @@ void COrderInfoWidget::_CreateConnect()
 		SLOT(slotPushButtonCancelClicked(bool)));
 }
 
-void COrderInfoWidget::setOrderInfo( Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity )
+
+void COrderInfoWidget::setOrderInfo( CUserOrderInfo* pUserOrderInfo )
 {
-	m_nSide = nSide;
-	m_nOrderType = nOrderType;
-	m_strInstrumentCode = strInstrumentCode;
-	m_fPrice = fPrice;
+	(*m_pUserOrderInfo) = (*pUserOrderInfo);
+
+	m_nSide = m_pUserOrderInfo->m_nSide;
+	m_nOrderType = m_pUserOrderInfo->m_nOrderType;
+	m_strInstrumentCode = m_pUserOrderInfo->m_strInstrumentCode;
+	m_fPrice = m_pUserOrderInfo->m_fLastPrice;
 	m_quantity = quantity;
 
 	m_str_OrderSide_Value = m_pOrderInfo->getStrOrderSide(nSide);
@@ -217,6 +227,7 @@ void COrderInfoWidget::setOrderInfo( Order::Side nSide, Order::OrderType nOrderT
 
 	this->translateLanguage();
 	//this->show();
+
 }
 
 

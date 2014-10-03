@@ -124,6 +124,7 @@ private:
 public:
 	COrderInfoWidget* m_pOrderInfoWidget;
 	COrderInfo* m_pOrderInfo;
+	CUserOrderInfo* m_pUserOrderInfo;
 };
 
 //QT_END_NAMESPACE

@@ -3,6 +3,7 @@
 #include "ProjectQTInclude.h"
 
 #include "OrderInfo.h"
+#include "UserOrderInfo.h"
 #include "OrderInfoWidget.h"
 
 
@@ -47,6 +48,7 @@ CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 	m_pPushButtonSell = NULL;
 	m_pOrderInfoWidget = NULL;
 	m_pOrderInfo = NULL;
+	m_pUserOrderInfo = NULL;
 
 	m_pTextEdit_Symbol_Value.clear();
 	m_pComboBox_OrderType_Value.clear();
@@ -62,6 +64,7 @@ CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 	m_pSpinBox_Price_Value = 99.9f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
 	m_pOrderInfo = new COrderInfo();
+	m_pUserOrderInfo = new CUserOrderInfo();
 
 	this->setupUi();
 	this->translateLanguage();
@@ -76,6 +79,12 @@ CCreateNewOrderDialog::~CCreateNewOrderDialog()
 	{
 		delete m_pOrderInfo;
 		m_pOrderInfo = NULL;
+	}
+
+	if (NULL != m_pUserOrderInfo)
+	{
+		delete m_pUserOrderInfo;
+		m_pUserOrderInfo = NULL;
 	}
 }
 
@@ -210,8 +219,10 @@ void CCreateNewOrderDialog::translateLanguage()
 void CCreateNewOrderDialog::resetData( CUserOrderInfo* pUserOrderInfo )
 {
 	m_pTextEdit_Symbol_Value = pUserOrderInfo->m_strInstrumentCode;
-	m_pSpinBox_Volume_Value = pUserOrderInfo->m_nVolume;
+	m_pSpinBox_Volume_Value = pUserOrderInfo->m_nQuantity;
 	m_pSpinBox_Price_Value = pUserOrderInfo->m_fLastPrice;
+
+	(*m_pUserOrderInfo) = (*pUserOrderInfo);
 
 	this->translateLanguage();
 
@@ -220,23 +231,14 @@ void CCreateNewOrderDialog::resetData( CUserOrderInfo* pUserOrderInfo )
 
 void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 {
-	QString strOrderType;
-	int quantity = 0;
-	double fPrice = 0;
-
-	Order::Side nGetSide = Order::BUY;
-	Order::OrderType nGetOrderType = Order::UNKNOWN;
-	QString strInstrumentCode;
-
-	//nOrderType = m_pComboBox_OrderType->currentIndex();
-	strOrderType = m_pComboBox_OrderType->currentText();
-	nGetSide = Order::BUY;
-	nGetOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
-	strInstrumentCode = m_pLineEdit_Symbol->text();
-	fPrice = m_pSpinBox_Price->value();
-	quantity = m_pSpinBox_Volume->value();
-
-	m_pOrderInfoWidget->setOrderInfo(nGetSide, nGetOrderType, strInstrumentCode, fPrice, quantity);
+	//
+	m_pUserOrderInfo->m_nSide = Order::BUY;
+	m_pUserOrderInfo->m_nOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
+	m_pUserOrderInfo->m_fLastPrice = m_pSpinBox_Price->value();
+	m_pUserOrderInfo->m_nQuantity = m_pSpinBox_Volume->value();
+	
+	//
+	m_pOrderInfoWidget->setOrderInfo(m_pUserOrderInfo);
 	m_pOrderInfoWidget->move(200, 200);
 	m_pOrderInfoWidget->show();
 
