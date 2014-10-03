@@ -244,7 +244,7 @@ void CTreeItemQuotes::appendChildByData(CQuotesInfo* pExchangeInfo)
 
 
 
-void CTreeItemQuotes::_GetItemDataFromClass(CQuotesInfo* pExchangeInfo, QList<QVariant>& itemDataTmp)
+void CTreeItemQuotes::_GetItemDataFromClass(CQuotesInfo* pData, QList<QVariant>& itemDataTmp)
 {
 
 	QVariant varValueGet;
@@ -252,13 +252,15 @@ void CTreeItemQuotes::_GetItemDataFromClass(CQuotesInfo* pExchangeInfo, QList<QV
 	CTreeItemQuotes::getLstClumnName(strlstClumnNameShow);
 
 	//default data
-	varValueGet = pExchangeInfo->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_InstrumentPriceChange.c_str()));
+	varValueGet = pData->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_InstrumentPriceChange.c_str()));
 	m_nInstrumentPriceChange = (IconDelegate::enInstrumentPriceChange)varValueGet.toInt();
-	varValueGet = pExchangeInfo->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_InstrumentID.c_str()));
+	varValueGet = pData->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_InstrumentID.c_str()));
 	m_nInstrumentID = varValueGet.toUInt();
-	varValueGet = pExchangeInfo->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_InstrumentCode.c_str()));
+	varValueGet = pData->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_ExchangeName.c_str()));
+	m_strExchangeName = varValueGet.toString();
+	varValueGet = pData->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_InstrumentCode.c_str()));
 	m_strInstrumentCode = varValueGet.toString();
-	varValueGet = pExchangeInfo->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_LastPrice.c_str()));
+	varValueGet = pData->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_LastPrice.c_str()));
 	m_fLastPrice = varValueGet.toFloat();
 
 
@@ -267,110 +269,13 @@ void CTreeItemQuotes::_GetItemDataFromClass(CQuotesInfo* pExchangeInfo, QList<QV
 
 	foreach (const QString& strColumnName, strlstClumnNameShow)
 	{
-		varValueGet = pExchangeInfo->getValueByName(strColumnName);
+		varValueGet = pData->getValueByName(strColumnName);
 		itemDataTmp.push_back(varValueGet);
 	}
 
 	return;
 }
 
-
-#if 0
-
-
-void CTreeItemQuotes::_GetItemDataFromClass( const CQuotesInfo* pExchangeInfo, QList<QVariant>& itemDataTmp)
-{
-	QVariant strColumnValue;
-
-	m_nInstrumentPriceChange = pExchangeInfo->m_nInstrumentPriceChange;
-
-	m_nInstrumentID = pExchangeInfo->m_nInstrumentID;
-	m_strInstrumentCode = pExchangeInfo->m_strInstrumentCode;
-	m_fLastPrice = pExchangeInfo->m_fLastPrice;
-	
-	itemDataTmp.clear();
-
-
-	//
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_InstrumentPriceChange = "Change";//Change//变动//价格变化颜色
-	strColumnValue = QVariant(pExchangeInfo->m_nInstrumentPriceChange);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_ExchangeName = "Exchange Name";//ExchangeName//交易所
-	strColumnValue = QVariant(pExchangeInfo->m_strExchangeName);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_InstrumentCode = "Contract Name";//InstrumentCode//合约名称
-	strColumnValue = QVariant(pExchangeInfo->m_strInstrumentCode);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_BidVolume = "Bid Volume";//BidVolume//买量
-	strColumnValue = QVariant(pExchangeInfo->m_nBidVolume);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_BidPrice = "Bid";//BidPrice//买价
-	strColumnValue = QVariant(pExchangeInfo->m_fBidPrice);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_AskVolume = "Offer Volume";//AskVolume//卖量
-	strColumnValue = QVariant(pExchangeInfo->m_nAskVolume);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_AskPrice = "Offer";//AskPrice//卖价
-	strColumnValue = QVariant(pExchangeInfo->m_fAskPrice);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_LastVolume = "Last Volume";//LastVolume//成交量
-	strColumnValue = QVariant(pExchangeInfo->m_nLastVolume);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_LastPrice = "Last";//LastPrice//成交价
-	strColumnValue = QVariant(pExchangeInfo->m_fLastPrice);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_YDSP = "YDSP";//YDSP//昨收盘
-	strColumnValue = QVariant(pExchangeInfo->m_strYDSPTmp);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_MarketStatus = "Status";//MarketStatus//市场状态
-	strColumnValue = QVariant(pExchangeInfo->m_nMarketStatus);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_OpeningPrice = "Opening";//OpeningPrice//开市价
-	strColumnValue = QVariant(pExchangeInfo->m_fOpeningPrice);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_BidTotal = "Bid Total";//Bid Total//买累计
-	strColumnValue = QVariant(pExchangeInfo->m_strBidTotalTmp);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_OfferTotal = "Offer Total";//Offer Total//卖累计
-	strColumnValue = QVariant(pExchangeInfo->m_strOfferTotalTmp);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_LowPrice = "Low";//LowPrice//最低价
-	strColumnValue = QVariant(pExchangeInfo->m_fLowPrice);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_HighPrice = "High";//HighPrice//最高价
-	strColumnValue = QVariant(pExchangeInfo->m_fHighPrice);
-	itemDataTmp.push_back(strColumnValue);
-
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_Closeing = "Closeing";//Closeing//收盘价
-	strColumnValue = QVariant(pExchangeInfo->m_strCloseingTmp);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_RefPrice = "Ref Price";//Ref Price//参考价
-	strColumnValue = QVariant(pExchangeInfo->m_strRefPriceTmp);
-	itemDataTmp.push_back(strColumnValue);
-
-	//static const std::string DEFVALUE_String_ColumnName_SmartQuotes_strUpdateTime = "UpdateTime";//更新时间
-	strColumnValue = QVariant(pExchangeInfo->m_strGetupdateTime.c_str());
-	itemDataTmp.push_back(strColumnValue);
-
-}
-#endif
 
 void CTreeItemQuotes::resetCurrentNodeData(CQuotesInfo* pExchangeInfo )
 {
@@ -485,6 +390,10 @@ CTreeItemQuotes::enItemDataType CTreeItemQuotes::getDataType()
 unsigned int CTreeItemQuotes::getInstrumentID()
 {
 	return m_nInstrumentID;
+}
+QString CTreeItemQuotes::getExchangeName()
+{
+	return m_strExchangeName;
 }
 
 IconDelegate::enInstrumentPriceChange CTreeItemQuotes::getInstrumentPriceChange()
@@ -813,6 +722,31 @@ void CTreeItemQuotes::rootNodeRetColumnsName()
 
 	m_ItemDataNum = m_ItemData.count();
 	this->setDataType(CTreeItemQuotes::ItemDataType_ROOT);
+}
+
+void CTreeItemQuotes::removeChildByData( CQuotesInfo* pExchangeInfo )
+{
+	CTreeItemQuotes* pTreeItemFind = NULL;
+	QList<CTreeItemQuotes*>::iterator iterLst;
+	unsigned int nInstrumentID = 0;
+	nInstrumentID = pExchangeInfo->getInstrumentID();
+
+	iterLst = m_LstChildItems.begin();
+	while (iterLst != m_LstChildItems.end())
+	{
+		pTreeItemFind = (*iterLst);
+
+		if (pTreeItemFind->getInstrumentID() == nInstrumentID)
+		{
+			delete pTreeItemFind;
+			pTreeItemFind = NULL;
+
+			m_LstChildItems.erase(iterLst);// removeAt()
+			break;
+		}
+
+		iterLst++;
+	}
 }
 
 

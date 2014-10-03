@@ -86,7 +86,6 @@ CClientMainWindow::~CClientMainWindow()
 {
 	if (NULL != m_pClientDataManagerWorker)
 	{
-		m_pClientDataManagerWorker->terminateAndWait();
 		delete m_pClientDataManagerWorker;
 		m_pClientDataManagerWorker = NULL;
 	}

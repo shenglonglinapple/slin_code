@@ -12,6 +12,7 @@
 #include <QtCore/QModelIndex>
 
 #include <QtGui/QDialog>
+#include "OrderInfoWidget.h"
 #include "Order.h"
 
 
@@ -32,6 +33,8 @@ class QDoubleSpinBox;
 class QGridLayout;
 QT_END_NAMESPACE
 
+class COrderInfo;
+class CUserOrderInfo;
 
 class CCreateNewOrderDialog : public QDialog
 {
@@ -46,13 +49,27 @@ signals:
 	class: CCreateNewOrderDialog
 	signals:
 	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
-	fun send signals: slotClientLoginParamChanged()
+	fun send signals: slotOrderCheck()
 
 	class: CClientDataManagerWorker
 	public slots: 
 	void slotNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
 	*/
 	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+public slots:
+	/*
+	class: COrderInfoWidget
+	signals:
+	void signalOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, OrderCheckRes nCheckRes);
+	fun send signals: slotPushButtonOKClicked() slotPushButtonCancelClicked()
+
+	class: CCreateNewOrderDialog
+	public slots: 
+	void slotOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, OrderCheckRes nCheckRes);
+	*/
+	void slotOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, COrderInfoWidget::OrderCheckRes nCheckRes);
+
+
 
 private slots:
 	void slotPushButtonBuyClicked(bool checked);
@@ -64,10 +81,9 @@ public:
 
 
 public:
-	void resetData(const QString& strInstrumentCode, int nVolume, float fPrice);
+	void resetData(CUserOrderInfo* pUserOrderInfo);
 private:
 	void _CreateConnect();
-	Order::OrderType _GetOrderType(const QString& strOrderType);
 private:
 	QString m_pTextEdit_Symbol_Value;
 	QString m_pComboBox_OrderType_Value;
@@ -105,7 +121,9 @@ private:
 	QPushButton* m_pPushButtonBuy;
 	QPushButton* m_pPushButtonSell;
 
-
+public:
+	COrderInfoWidget* m_pOrderInfoWidget;
+	COrderInfo* m_pOrderInfo;
 };
 
 //QT_END_NAMESPACE

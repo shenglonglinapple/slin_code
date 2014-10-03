@@ -35,15 +35,19 @@ public:
 
 	void logInfo(const QString& strLogInfo) const;
 public:
+	QString getStrOrderType(Order::OrderType nOrderType);
+	Order::OrderType getEnumOrderType(const QString& strOrderType);
+
+	QString getStrOrderStatus(Order::OrderStatus nOrderStatus);
+	QString getStrOrderSide(Order::Side nSide);
+	int getColumnValueIsOrderFilled(Order::OrderStatus nOrderStatus);
+
+public:
 	void setDefaultValue();
 	QVariant getValueByName(const QString& strName);
 	unsigned int getKey();
 private:
 	void _ClearData();
-	QString _GetStrOrderType(Order::OrderType nOrderType);
-	QString _GetStrOrderStatus(Order::OrderStatus nOrderStatus);
-	QString _GetStrOrderStatus(Order::Side nSide);
-	int _GetColumnValue_Filled(Order::OrderStatus nOrderStatus);
 private:
 	CProjectUtilityFun* m_pUtilityFun;
 public:

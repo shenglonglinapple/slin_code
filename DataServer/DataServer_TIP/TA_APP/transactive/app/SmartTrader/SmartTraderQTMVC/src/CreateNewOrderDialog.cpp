@@ -2,6 +2,9 @@
 
 #include "ProjectQTInclude.h"
 
+#include "OrderInfo.h"
+#include "OrderInfoWidget.h"
+
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -42,6 +45,8 @@ CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 	m_pComboBox_TagName = NULL;
 	m_pPushButtonBuy = NULL;
 	m_pPushButtonSell = NULL;
+	m_pOrderInfoWidget = NULL;
+	m_pOrderInfo = NULL;
 
 	m_pTextEdit_Symbol_Value.clear();
 	m_pComboBox_OrderType_Value.clear();
@@ -56,6 +61,8 @@ CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 	m_pSpinBox_Volume_Value = 1;
 	m_pSpinBox_Price_Value = 99.9f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
+	m_pOrderInfo = new COrderInfo();
+
 	this->setupUi();
 	this->translateLanguage();
 	this->_CreateConnect();
@@ -65,7 +72,11 @@ CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 
 CCreateNewOrderDialog::~CCreateNewOrderDialog()
 {
-
+	if (NULL != m_pOrderInfo)
+	{
+		delete m_pOrderInfo;
+		m_pOrderInfo = NULL;
+	}
 }
 
 
@@ -85,6 +96,9 @@ void CCreateNewOrderDialog::setupUi()
 	QSize qSizeCheckBoxOpenClose(80, 20);
 	QSize qSizeButtonBuy(200, 20);
 	QSize qSizeButtonSell(80, 20);
+
+	m_pOrderInfoWidget = new COrderInfoWidget(this);
+	m_pOrderInfoWidget->hide();
 
 	//eg: Symbol: IF1401
 	m_pLabel_Symbol = new QLabel(this);
@@ -191,42 +205,21 @@ void CCreateNewOrderDialog::translateLanguage()
 	m_pLabel_SellVolume->setText(QObject::tr("0"));
 }
 
-void CCreateNewOrderDialog::resetData(const QString& strInstrumentCode, int nVolume, float fPrice)
-{
-	m_pTextEdit_Symbol_Value = strInstrumentCode;
-	m_pSpinBox_Volume_Value = nVolume;
-	m_pSpinBox_Price_Value = fPrice;
 
-	m_pLineEdit_Symbol->setText(m_pTextEdit_Symbol_Value);
-	m_pSpinBox_Volume->setValue(m_pSpinBox_Volume_Value);
-	m_pSpinBox_Price->setValue(m_pSpinBox_Price_Value);
+
+void CCreateNewOrderDialog::resetData( CUserOrderInfo* pUserOrderInfo )
+{
+	m_pTextEdit_Symbol_Value = pUserOrderInfo->m_strInstrumentCode;
+	m_pSpinBox_Volume_Value = pUserOrderInfo->m_nVolume;
+	m_pSpinBox_Price_Value = pUserOrderInfo->m_fLastPrice;
+
+	this->translateLanguage();
 
 }
 
-Order::OrderType CCreateNewOrderDialog::_GetOrderType(const QString& strOrderType)
-{
-	if (strOrderType.isEmpty())
-	{
-		return Order::UNKNOWN;
-	}
-	else if (0 == strOrderType.compare(QString(DEFVALUE_String_ComboBox_OrderType_Item_0__Limit.c_str())))
-	{
-		return Order::LIMIT;
-	}
-	else if (0 == strOrderType.compare(QString(DEFVALUE_String_ComboBox_OrderType_Item_1_Market_FAK.c_str())))
-	{
-		return Order::MARKET_FAK;
-	}
-	else
-	{
-		return Order::MARKET;
-	}
-
-}
 
 void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 {
-	//int nOrderType = 0;
 	QString strOrderType;
 	int quantity = 0;
 	double fPrice = 0;
@@ -238,34 +231,38 @@ void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 	//nOrderType = m_pComboBox_OrderType->currentIndex();
 	strOrderType = m_pComboBox_OrderType->currentText();
 	nGetSide = Order::BUY;
-	nGetOrderType = _GetOrderType(strOrderType);
+	nGetOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
 	strInstrumentCode = m_pLineEdit_Symbol->text();
 	fPrice = m_pSpinBox_Price->value();
 	quantity = m_pSpinBox_Volume->value();
-	
 
-
-	//emit
-	{
-		LOG_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CCreateNewOrderDialog"
-			<<" "<<"fun:"<<"slotPushButtonBuyClicked(bool checked)"
-			<<" "<<"emit"
-			<<" "<<"signalNewOrder()"
-			<<" "<<"param:"
-			<<" "<<"nGetSide="<<nGetSide
-			<<" "<<"nGetOrderType="<<nGetOrderType
-			<<" "<<"strInstrumentCode="<<strInstrumentCode.toStdString().c_str()
-			<<" "<<"fPrice="<<fPrice
-			<<" "<<"quantity="<<quantity;
-
-		emit signalNewOrder(nGetSide, nGetOrderType, strInstrumentCode, fPrice, quantity);	
-	}
+	m_pOrderInfoWidget->setOrderInfo(nGetSide, nGetOrderType, strInstrumentCode, fPrice, quantity);
+	m_pOrderInfoWidget->move(200, 200);
+	m_pOrderInfoWidget->show();
 
 }
 
 void CCreateNewOrderDialog::slotPushButtonSellClicked( bool checked )
 {
+	QString strOrderType;
+	int quantity = 0;
+	double fPrice = 0;
+
+	Order::Side nGetSide = Order::BUY;
+	Order::OrderType nGetOrderType = Order::UNKNOWN;
+	QString strInstrumentCode;
+
+	//nOrderType = m_pComboBox_OrderType->currentIndex();
+	strOrderType = m_pComboBox_OrderType->currentText();
+	nGetSide = Order::BUY;
+	nGetOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
+	strInstrumentCode = m_pLineEdit_Symbol->text();
+	fPrice = m_pSpinBox_Price->value();
+	quantity = m_pSpinBox_Volume->value();
+
+	m_pOrderInfoWidget->setOrderInfo(nGetSide, nGetOrderType, strInstrumentCode, fPrice, quantity);
+	m_pOrderInfoWidget->move(200, 200);
+	m_pOrderInfoWidget->show();
 
 }
 
@@ -281,6 +278,40 @@ void CCreateNewOrderDialog::_CreateConnect()
 		SIGNAL(clicked(bool)),
 		this, 
 		SLOT(slotPushButtonSellClicked(bool)));
+
+	QObject::connect(m_pOrderInfoWidget, 
+		SIGNAL(signalOrderCheck(Order::Side, Order::OrderType, QString, double, int, OrderCheckRes)),
+		this, 
+		SLOT(slotOrderCheck(Order::Side, Order::OrderType, QString, double, int, OrderCheckRes)));
+
+
+	
+}
+
+void CCreateNewOrderDialog::slotOrderCheck( Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, COrderInfoWidget::OrderCheckRes nCheckRes )
+{
+	m_pOrderInfoWidget->hide();
+	//emit
+	if (COrderInfoWidget::OrderCheckRes_OK == nCheckRes)
+	{
+		LOG_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CCreateNewOrderDialog"
+			<<" "<<"fun:"<<"slotOrderCheck(Order::Side, Order::OrderType, QString, double, int, OrderCheckRes)"
+			<<" "<<"emit"
+			<<" "<<"signalNewOrder()"
+			<<" "<<"param:"
+			<<" "<<"nSide="<<nSide
+			<<" "<<"nOrderType="<<nOrderType
+			<<" "<<"strInstrumentCode="<<strInstrumentCode.toStdString().c_str()
+			<<" "<<"fPrice="<<fPrice
+			<<" "<<"quantity="<<quantity;
+
+		emit signalNewOrder(nSide, nOrderType, strInstrumentCode, fPrice, quantity);	
+	}
+	else if (COrderInfoWidget::OrderCheckRes_Cancel == nCheckRes)
+	{
+		LOG_DEBUG<<" "<<"user Cancel new order";
+	}
 }
 
 

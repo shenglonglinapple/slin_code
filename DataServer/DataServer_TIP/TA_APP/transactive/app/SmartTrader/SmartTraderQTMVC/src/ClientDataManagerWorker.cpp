@@ -32,11 +32,6 @@ USING_BOOST_LOG;
 
 CClientDataManagerWorker::CClientDataManagerWorker(void)
 {	
-	//BOOST_LOG_FUNCTION();
-
-	m_nThreadJobState = JobState_Begin;
-	m_toTerminate = false;
-
 	m_pClientLoginParam = NULL;
 	m_pMyTradeClient = NULL;
 	m_pTreeItemContract_Root = NULL;
@@ -80,7 +75,6 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 	//TODO.ForTest
 	m_SignalControl_NotWork = 990;
 	m_IndexSigalControl = 0;
-
 }
 
 CClientDataManagerWorker::~CClientDataManagerWorker(void)
@@ -131,135 +125,9 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 
 }
 
-void CClientDataManagerWorker::run()
-{
-	m_nThreadJobState = JobState_Begin;
-
-	while (false == m_toTerminate)
-	{
-		//_ThreadJob();
-		CBoostThread::sleep(1000);
-	}
-	_ProcessUserTerminate();
-}
-
-void CClientDataManagerWorker::terminate()
-{
-	//BOOST_LOG_FUNCTION();
-
-	m_toTerminate = true;
-}
-
-
-int CClientDataManagerWorker::_ProcessUserTerminate()
-{
-	//BOOST_LOG_FUNCTION();
-
-	int nFunRes = 0;
-	m_nThreadJobState = JobState_End;
-	return nFunRes;
-}
-
-bool CClientDataManagerWorker::isFinishWork()
-{
-	//BOOST_LOG_FUNCTION();
-
-	bool bFinishWork = false;
-	if (JobState_End == m_nThreadJobState)
-	{
-		bFinishWork = true;
-	}
-	return bFinishWork;
-
-}
-
-void CClientDataManagerWorker::_ThreadJob()
-{
-	//BOOST_LOG_FUNCTION();
-
-
-	switch (m_nThreadJobState)
-	{
-	case JobState_Begin:
-		m_nThreadJobState = JobState_InitParam;
-		break;
-	case JobState_InitParam:
-		_Process_InitParam();
-		break;
-	case JobState_LoginToServer:
-		_Process_LoginToServer();
-		break;
-	case JobState_MonitorExchangeInfo:
-		_Process_MonitorExchangeInfo();
-		break;
-	case JobState_StopWork:
-		_Process_StopWork();
-		//TA_App_App::CBoostThread::sleep(1000);
-		break;
-	case JobState_End:
-		//TA_App_App::CBoostThread::sleep(1000);
-		break;
-	default:
-		break;
-
-	}//switch
-}
-
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CClientDataManagerWorker::_Process_InitParam()
-{
-	_InitLoginParam();
-	_InitTraderClient();
-	m_nThreadJobState = JobState_LoginToServer;
-
-}
-void CClientDataManagerWorker::_Process_LoginToServer()
-{
-	m_nThreadJobState = JobState_MonitorExchangeInfo;
-
-	if (NULL != m_pMyTradeClient)
-	{
-		delete m_pMyTradeClient;
-		m_pMyTradeClient = NULL;
-	}
-	m_pMyTradeClient = new CSmartTraderClient(*m_pClientLoginParam);
-	m_pMyTradeClient->setProcessRecvDataHandle(this);
-	int nloginToServerRes = m_pMyTradeClient->loginToServer();
-
-	LOG_DEBUG<<"CClientDataManagerWorker emit signalLoginToServerResult"
-		<<" "<<"nlogonToServerRes="<<nloginToServerRes;
-
-	emit signalLoginToServerResult(nloginToServerRes);
-
-}
-
-void CClientDataManagerWorker::_Process_MonitorExchangeInfo()
-{
-	m_nThreadJobState = JobState_MonitorExchangeInfo;
-}
-
-void CClientDataManagerWorker::_Process_StopWork()
-{
-	_UnInitTraderClient();
-	_UnInitLoginParam();
-	_UnInitMVCDataForContract();
-	_UnInitMVCDataForQuotes();
-	_UnInitMVCDataForOrder();
-	m_nThreadJobState = JobState_End;
-}
-
-
-//////////////////////////////////////////////////////////////////////////
-void CClientDataManagerWorker::_InitLoginParam()
-{
-	_UnInitLoginParam();
-	m_pClientLoginParam = new CClientLoginParam();
-	m_pClientLoginParam->setDefaultValue();
-
-
-}
 void CClientDataManagerWorker::_UnInitLoginParam()
 {
 	if (NULL != m_pClientLoginParam)
@@ -270,24 +138,6 @@ void CClientDataManagerWorker::_UnInitLoginParam()
 
 }
 
-void CClientDataManagerWorker::_InitTraderClient()
-{
-	_UnInitTraderClient();
-	m_pMyTradeClient = new CSmartTraderClient(*m_pClientLoginParam);
-	m_pMyTradeClient->setProcessRecvDataHandle(this);
-}
-void CClientDataManagerWorker::_UnInitTraderClient()
-{
-	if (NULL != m_pMyTradeClient)
-	{
-		m_pMyTradeClient->logoff();
-		m_pMyTradeClient->setProcessRecvDataHandle(NULL);
-
-		delete m_pMyTradeClient;
-		m_pMyTradeClient = NULL;
-	}
-
-}
 
 void CClientDataManagerWorker::_InitMVCDataForContract()
 {
@@ -545,7 +395,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 		//find ok
 		pInstrumentRef = iterFind.value();
-
+		//save to configfile
 		QStringList strLstUserInstruemt;
 		strLstUserInstruemt = CConfigInfo::getInstance().getLstUserInstrument();
 		if (!strLstUserInstruemt.contains(QVariant(nInstrumentID).toString()))
@@ -555,19 +405,10 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		}
 
 		//subscribe this instrument
-		LOG_DEBUG<<"subscribeMarketData"
-			<<" "<<"InstrumentID="<<nInstrumentID;
+		LOG_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
 		m_pMyTradeClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 
 		m_pQuotesInfo->setValue(*pInstrumentRef);
-		strExchangeName = m_pQuotesInfo->m_strExchangeName.toStdString();
-		strUnderlyingCode = m_pQuotesInfo->m_strUnderlyingCode.toStdString();
-		strInstrumentCode = m_pQuotesInfo->m_strInstrumentCode.toStdString();
-		LOG_DEBUG<<"slotAddContractToSmartQuotes add contract to SmartQuotes"
-			<<" "<<"InstrumentID="<<nInstrumentID
-			<<" "<<"ExchangeName="<<strExchangeName
-			<<" "<<"strInstrumentCode="<<strInstrumentCode;
-
 	}
 
 	{
@@ -580,10 +421,19 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
+
+		strExchangeName = m_pQuotesInfo->m_strExchangeName.toStdString();
+		strUnderlyingCode = m_pQuotesInfo->m_strUnderlyingCode.toStdString();
+		strInstrumentCode = m_pQuotesInfo->m_strInstrumentCode.toStdString();
+		LOG_DEBUG<<"slotAddContractToSmartQuotes add contract to SmartQuotes"
+			<<" "<<"InstrumentID="<<nInstrumentID
+			<<" "<<"ExchangeName="<<strExchangeName
+			<<" "<<"strInstrumentCode="<<strInstrumentCode;
+
 		m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
 		m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
-			<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
+			<<" "<<"m_pTreeItemQuotes_Root=ox"<<m_pTreeItemQuotes_Root;
 		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
 	
@@ -649,22 +499,43 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 		m_pMyTradeClient->unsubscribeMarketData(pInstrument->getInstrumentID());
 
 		m_pContractInfo->setValue(*pInstrument);
-		strExchangeName = m_pContractInfo->getExchangeName().toStdString();
-		strUnderlyingCode = m_pContractInfo->getUnderlyingCode().toStdString();
-		strInstrumentCode = m_pContractInfo->getInstrumentCode().toStdString();
-		LOG_DEBUG<<"slotRemoveContractFromSmartQuotes add contract to ContratInfo"
-			<<" "<<"InstrumentID="<<nInstrumentID
-			<<" "<<"ExchangeName="<<strExchangeName
-			<<" "<<"strInstrumentCode="<<strInstrumentCode;
+		m_pQuotesInfo->setValue(*pInstrument);		
 	}
 
 
-		
+	//remove
 	{
+		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);
+		LOG_DEBUG<<"slotRemoveContractFromSmartQuotes remove hot Quotes"
+			<<" "<<"InstrumentID="<<nInstrumentID
+			<<" "<<"ExchangeName="<<strExchangeName
+			<<" "<<"strInstrumentCode="<<strInstrumentCode;
+
+		m_pTreeItemQuotes_Root->removeChildByData(m_pQuotesInfo);
+
+		LOG_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CClientDataManagerWorker"
+			<<" "<<"emit"
+			<<" "<<"signalQuotesInfoChanged(CTreeItemQuotes*)"
+			<<" "<<"param:"
+			<<" "<<"m_pTreeItemQuotes_Root=0x"<<m_pTreeItemQuotes_Root;
+		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
+	}
+		
+
+	//add
+	{		
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+		LOG_DEBUG<<"slotRemoveContractFromSmartQuotes add contract to ContratInfo"
+			<<" "<<"InstrumentID="<<nInstrumentID
+			<<" "<<"ExchangeName="<<m_pContractInfo->getExchangeName().toStdString()
+			<<" "<<"strInstrumentCode="<<m_pContractInfo->getInstrumentCode().toStdString();
+
 		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
+
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
 			<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
+
 		emit signalContractInfoChanged(m_pTreeItemContract_Root);
 	}
 
@@ -672,6 +543,20 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 	
 
 }
+
+
+void CClientDataManagerWorker::_UnInitTraderClient()
+{
+	if (NULL != m_pMyTradeClient)
+	{
+		m_pMyTradeClient->logoff();
+		m_pMyTradeClient->setProcessRecvDataHandle(NULL);
+
+		delete m_pMyTradeClient;
+		m_pMyTradeClient = NULL;
+	}
+}
+
 
 void CClientDataManagerWorker::slotClientLoginParamChanged( CClientLoginParam* pClientLoginParam )
 {
@@ -699,7 +584,10 @@ void CClientDataManagerWorker::slotClientLoginParamChanged( CClientLoginParam* p
 
 void CClientDataManagerWorker::_Test()
 {
-	_Process_InitParam();
+	_UnInitLoginParam();
+	m_pClientLoginParam = new CClientLoginParam();
+	m_pClientLoginParam->setDefaultValue();
+
 	emit signalLoginToServerResult(0);
 
 
@@ -1168,12 +1056,12 @@ void CClientDataManagerWorker::slotContractInfoWindowResetData()
 				iterFind = m_MapInstrumentIDData.find(nUserInstrumentID);
 				pInstrumentRef = iterFind.value();
 
-				m_pQuotesInfo->setValue(*pInstrumentRef);
-				strExchangeName = m_pQuotesInfo->m_strExchangeName.toStdString();
-				strUnderlyingCode = m_pQuotesInfo->m_strUnderlyingCode.toStdString();
-				strInstrumentCode = m_pQuotesInfo->m_strInstrumentCode.toStdString();
-				LOG_DEBUG<<"user subscribed MarketData for"
-					<<" "<<"InstrumentID="<<nUserInstrumentID
+				m_pContractInfo->setValue(*pInstrumentRef);
+				strExchangeName = m_pContractInfo->getExchangeName().toStdString();
+				strUnderlyingCode = m_pContractInfo->getUnderlyingCode().toStdString();
+				strInstrumentCode = m_pContractInfo->getInstrumentCode().toStdString();
+				LOG_DEBUG<<"ContractInfo Window Reset Data"
+					<<" "<<"InstrumentID="<<m_pContractInfo->getInstrumentID()
 					<<" "<<"ExchangeName="<<strExchangeName
 					<<" "<<"strInstrumentCode="<<strInstrumentCode;
 
@@ -1188,7 +1076,7 @@ void CClientDataManagerWorker::slotContractInfoWindowResetData()
 	{
 		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
 		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
-			<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
+			<<" "<<"m_pTreeItemContract_Root=0x"<<m_pTreeItemContract_Root;
 		emit signalContractInfoChanged(m_pTreeItemContract_Root);
 	}
 }

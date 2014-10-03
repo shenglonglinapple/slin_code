@@ -111,9 +111,75 @@ void COrderInfo::_ClearData()
 	this->m_nKey = 0;
 
 }
+Order::OrderType COrderInfo::getEnumOrderType( const QString& strOrderType )
+{
+	QString strOrderTypeTmp;
+	QString strCheckTmp;
+	Order::OrderType nOrderType = Order::UNKNOWN;
+	strOrderTypeTmp = strOrderType;
+	strOrderTypeTmp = strOrderTypeTmp.toUpper();
+
+	strCheckTmp = "MARKET";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::MARKET;
+		return nOrderType;
+	}
+
+	strCheckTmp = "MARKET_FAK";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::MARKET_FAK;
+		return nOrderType;
+	}
+
+	strCheckTmp = "MARKET_FOK";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::MARKET_FOK;
+		return nOrderType;
+	}
+
+	strCheckTmp = "LIMIT";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::LIMIT;
+		return nOrderType;
+	}
+
+	strCheckTmp = "LIMIT_FAK";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::LIMIT_FAK;
+		return nOrderType;
+	}
+
+	strCheckTmp = "LIMIT_FOK";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::LIMIT_FOK;
+		return nOrderType;
+	}
+
+	strCheckTmp = "STOP";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::STOP;
+		return nOrderType;
+	}
+
+	strCheckTmp = "UNKNOWN";
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderType = Order::UNKNOWN;
+		return nOrderType;
+	}
+
+	return nOrderType;
+}
 
 
-QString COrderInfo::_GetStrOrderType(Order::OrderType nOrderType)
+QString COrderInfo::getStrOrderType(Order::OrderType nOrderType)
 {
 	QString strValue;
 
@@ -154,7 +220,7 @@ QString COrderInfo::_GetStrOrderType(Order::OrderType nOrderType)
 
 
 
-QString COrderInfo::_GetStrOrderStatus(Order::OrderStatus  nOrderStatus)
+QString COrderInfo::getStrOrderStatus(Order::OrderStatus  nOrderStatus)
 {
 	QString strValue;
 
@@ -210,7 +276,7 @@ QString COrderInfo::_GetStrOrderStatus(Order::OrderStatus  nOrderStatus)
 
 
 
-QString COrderInfo::_GetStrOrderStatus(Order::Side  nSide)
+QString COrderInfo::getStrOrderSide(Order::Side  nSide)
 {
 	QString strValue;
 
@@ -231,7 +297,7 @@ QString COrderInfo::_GetStrOrderStatus(Order::Side  nSide)
 
 }
 
-int COrderInfo::_GetColumnValue_Filled(Order::OrderStatus  nOrderStatus)
+int COrderInfo::getColumnValueIsOrderFilled(Order::OrderStatus  nOrderStatus)
 {
 	int nValue = 0;
 
@@ -257,20 +323,20 @@ void COrderInfo::setValue( const Order &newValue )
 
 	m_orderID = newValue.getOrderID();
 	m_orderType = newValue.getOrderType();
-	m_str_Column_OrderType = _GetStrOrderType(m_orderType);
+	m_str_Column_OrderType = getStrOrderType(m_orderType);
 	m_str_Column_TIF = "Day";
 	m_orderStatus = newValue.getOrderStatus();
-	m_str_Column_OrderStatus = _GetStrOrderStatus(m_orderStatus);
+	m_str_Column_OrderStatus = getStrOrderStatus(m_orderStatus);
 	m_strExchangeName = newValue.getInstrument().getExchangeName().c_str();
 	m_strInstrumentCode = newValue.getInstrument().getInstrumentCode().c_str();
 	m_str_Column_Account = newValue.getAccount().getAccountCode();
 	m_side = newValue.getSide();
-	m_str_Column_BuyOrSell = _GetStrOrderStatus(m_side);
+	m_str_Column_BuyOrSell = getStrOrderSide(m_side);
 	m_orderQty = newValue.getOrderQty();
 	m_n_Column_Lots = m_orderQty;
 	m_price = newValue.getPrice();
 	m_price2 = newValue.getPrice2();
-	m_n_Column_Filled = _GetColumnValue_Filled(m_orderStatus);
+	m_n_Column_Filled = getColumnValueIsOrderFilled(m_orderStatus);
 	m_avgPrice = newValue.getAvgPrice();
 	m_transactTime = newValue.getTransactTime();
 	m_str_Column_Time = m_pUtilityFun->dataTimeToStr((time_t)m_transactTime).c_str();
@@ -444,6 +510,7 @@ QVariant COrderInfo::getValueByName( const QString& strName )
 
 	return varValueRes;
 }
+
 
 
 

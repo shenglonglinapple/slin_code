@@ -1,7 +1,10 @@
 #ifndef __CLASS_CLIENT_DATA_MAMAGER_WORKER__HH__
 #define __CLASS_CLIENT_DATA_MAMAGER_WORKER__HH__
 
+#include <boost/chrono.hpp>
 #include <boost/thread.hpp>
+#include <boost/bind.hpp>
+
 
 #include <QtCore/QObject>
 #include <QtCore/QMap>
@@ -9,7 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtCore/QString>
 
-#include "BoostThread.h"
+//#include "BoostThread.h"
 
 #include "IProcessRecvData.h"
 
@@ -31,23 +34,10 @@ class CHistoryDataManager;
 
 class CClientDataManagerWorker : 
 	public QObject,
-	public CBoostThread, 
 	public IProcessRecvData
 {
 	Q_OBJECT
 
-private:
-	enum EThreadJobState
-	{
-		JobState_Begin,
-
-		JobState_InitParam,
-		JobState_LoginToServer,
-		JobState_MonitorExchangeInfo,
-
-		JobState_StopWork,
-		JobState_End,
-	};
 public:
 	CClientDataManagerWorker(void);
 	~CClientDataManagerWorker(void);
@@ -209,26 +199,11 @@ public:
 	void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 
 public:
-	virtual void run();	//CBoostThread
-	virtual void terminate();//CBoostThread
-	bool  isFinishWork();//CBoostThread
-private:
-	void _ThreadJob();
-	int	 _ProcessUserTerminate();  
-private:
-	void _Process_MonitorExchangeInfo();
-public:
-	void _Process_InitParam();
-	void _Process_LoginToServer();
-	void _Process_StopWork();
-public:
 	void _Test();
 
 private:
-	void _InitLoginParam();
-	void _UnInitLoginParam();
-	void _InitTraderClient();
 	void _UnInitTraderClient();
+	void _UnInitLoginParam();
 	void _InitMVCDataForContract();
 	void _UnInitMVCDataForContract();
 	void _InitMVCDataForQuotes();
@@ -241,9 +216,7 @@ private:
 private:
 	void _UpdateOrderInfo(const Order &order);
 
-private:
-	bool	m_toTerminate;
-	EThreadJobState  m_nThreadJobState;
+
 private:
 	boost::mutex m_mutexForMapInstrumentIDData;
 	QMap<unsigned int, Instrument*> m_MapInstrumentIDData;

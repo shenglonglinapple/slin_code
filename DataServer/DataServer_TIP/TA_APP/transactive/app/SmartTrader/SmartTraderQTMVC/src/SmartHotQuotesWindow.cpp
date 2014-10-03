@@ -20,13 +20,8 @@ USING_BOOST_LOG;
 static int DEFVALUE_INT_Window_Width = 400;
 static int DEFVALUE_INT_Window_Height = 300;
 
+static const std::string DEFVALUE_String_Window_Title = "CLeftDockWidget_Window_Title";
 
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow = "ObjectName_CSmartHotQuotesWindow";
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow_WidgetCentral = "ObjectName_CSmartHotQuotesWindow_WidgetCentral";
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow_VBoxLayout = "ObjectName_CSmartHotQuotesWindow_VBoxLayout";
-static const std::string DEFVALUE_String_ObjectName_CSmartHotQuotesWindow_TreeViewQuotes = "ObjectName_CSmartHotQuotesWindow_TreeViewQuotes";
-
-static const std::string DEFVALUE_String_ActionAddHotQuotes = "AddQuotes";//添加合约报价
 
 
 CLeftDockWidget::CLeftDockWidget(QWidget* parent)
@@ -91,7 +86,7 @@ void CLeftDockWidget::setupUi()
 } 
 void CLeftDockWidget::translateLanguage()
 {
-	this->setWindowTitle(QObject::tr(DEFVALUE_String_ObjectName_CSmartHotQuotesWindow.c_str()));
+	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_Title.c_str()));
 	m_pTabWidget->addTab(m_pTableView_Quotes, QObject::tr("Symbols"));
 
 }

@@ -61,6 +61,8 @@ public:
 	void rootNodeRetColumnsName();
 public:
 	void appendChildByData(CQuotesInfo* pExchangeInfo);
+	void removeChildByData(CQuotesInfo* pExchangeInfo);
+
 	void resetChildrenData(CQuotesInfo* pExchangeInfo);
 	void resetCurrentNodeData(CQuotesInfo* pExchangeInfo );
 	void resetCurrentNodeDataDefultValue();
@@ -69,6 +71,7 @@ public:
 	enItemDataType getDataType();
 	IconDelegate::enInstrumentPriceChange getInstrumentPriceChange();
 	unsigned int getInstrumentID();
+	QString getExchangeName();
 	QString getInstrumentCode();
 	float getLastPrice();
 	unsigned int getHotInstrumentIDByCode(const QString& strInstrumentCode);
@@ -78,7 +81,7 @@ public:
 	static void getLstClumnName(QStringList& strlstClumnName );
 
 private:
-	void _GetItemDataFromClass(CQuotesInfo* pExchangeInfo, QList<QVariant>& itemDataTmp);
+	void _GetItemDataFromClass(CQuotesInfo* pData, QList<QVariant>& itemDataTmp);
 private:
 	CTreeItemQuotes* m_pParentItem;
 	QList<CTreeItemQuotes*> m_LstChildItems;
@@ -89,6 +92,7 @@ private:
 private:
 	IconDelegate::enInstrumentPriceChange m_nInstrumentPriceChange;
 	unsigned int m_nInstrumentID ;
+	QString m_strExchangeName;
 	QString m_strInstrumentCode;
 	float m_fLastPrice;
 

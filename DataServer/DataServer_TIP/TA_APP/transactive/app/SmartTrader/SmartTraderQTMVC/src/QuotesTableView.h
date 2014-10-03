@@ -24,6 +24,7 @@ class CCreateNewOrderDialog;
 class CCustomColumnsDialog;
 class CContractInfoWindow;
 class CQuotesHHeaderView;
+class CUserOrderInfo;
 
 class CQuotesTableView : public QTableView
 { 
@@ -154,6 +155,7 @@ private:
 public:
 	CContractInfoWindow* m_pContractInfoWindow;
 	CCreateNewOrderDialog* m_pCreateNewOrderDialog;
+	CUserOrderInfo* m_pUserOrderInfo;
 
 private:
 	QString m_strSelectedColumnsForCheck;

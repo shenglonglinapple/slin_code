@@ -13,6 +13,7 @@
 #include "CreateNewOrderDialog.h"
 #include "QuotesHHeaderView.h"
 #include "ConfigInfo.h"
+#include "UserOrderInfo.h"
 
 #include "BoostLogger.h"
 USING_BOOST_LOG;
@@ -40,6 +41,7 @@ CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
 	m_pCustomColumnsDialog = NULL;
 	m_pIconDelegate_Column_Change = NULL;
 	m_nColumnIndex_Change = -1;
+	m_pUserOrderInfo = NULL;
 
 	m_nColumnIndex_Change = CConfigInfo::getInstance().getColumnIndex_Change();
 
@@ -54,13 +56,6 @@ CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
 	this->setAlternatingRowColors(true);
 	this->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
 
-	// 	this->setStyleSheet("QTableView{background-color: rgb(250, 250, 115);"
-	// 		"alternate-background-color: rgb(141, 163, 215);}");  //把表格的背景调成黄蓝相间
-	//this->setSelectionBehavior(QAbstractItemView::SelectItems);
-	//this->setAnimated(false);
-	//this->setAllColumnsShowFocus(true);
-	//this->header()->setVisible(true);
-	//m_pTreeView_Quotes->header()->setStretchLastSection(false);
 
 	m_pHorizontalHeader = new CQuotesHHeaderView(Qt::Horizontal, this);
 	//m_pHorizontalHeader = this->horizontalHeader();
@@ -78,6 +73,7 @@ CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
 	m_pContractInfoWindow->hide();
 	m_pCustomColumnsDialog = new CCustomColumnsDialog(this);
 	m_pCustomColumnsDialog->hide();
+	m_pUserOrderInfo = new CUserOrderInfo();
 
 	//this->setWindowTitle(QObject::tr("Market Watch:"));
 	//connect action
@@ -112,6 +108,13 @@ CQuotesTableView::~CQuotesTableView()
 		m_pCreateNewOrderDialog = NULL;
 	}
 
+	if (NULL != m_pUserOrderInfo)
+	{
+		delete m_pUserOrderInfo;
+		m_pUserOrderInfo = NULL;
+	}
+	
+
 	if (NULL != m_pContractInfoWindow)
 	{
 		delete m_pContractInfoWindow;
@@ -128,6 +131,8 @@ CQuotesTableView::~CQuotesTableView()
 		delete m_pIconDelegate_Column_Change;
 		m_pIconDelegate_Column_Change = NULL;
 	}
+
+
 
 	m_pHorizontalHeader = NULL;
 	m_pVerticalHeader = NULL;
@@ -174,7 +179,7 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 	LOG_DEBUG<<"CQuotesTableView process contextMenuEvent"
 		<<" "<<"pEvent=0x"<<pEvent;
 
-
+	//prepare data for view
 	{
 		LOG_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CQuotesTableView"
@@ -208,10 +213,10 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 
 	//treeview line have data
 	pCurrentTreeItem = (CTreeItemQuotes*)nCurrentTreeItemIndex.internalPointer();
-	nInstrumentID = pCurrentTreeItem->getInstrumentID();
-	strLogInfo = QString("contextMenuEvent nInstrumentID=%1").arg(nInstrumentID);
 	LOG_DEBUG<<"CQuotesTableView::contextMenuEvent"
-		<<" "<<"nInstrumentID="<<nInstrumentID;
+		<<" "<<"getInstrumentID="<<pCurrentTreeItem->getInstrumentID()
+		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
+		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
 	//QMessageBox::about(this, strLogInfo, strLogInfo);
 
 	//set menu pos
@@ -247,17 +252,20 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 	pCurrentTreeItem = (CTreeItemQuotes*)nCurrentTreeItemIndex.internalPointer();
 	nInstrumentID = pCurrentTreeItem->getInstrumentID();
 
-	strLogInfo = QString("contextMenuEvent nInstrumentID=%1").arg(nInstrumentID);
+	//strLogInfo = QString("contextMenuEvent nInstrumentID=%1").arg(nInstrumentID);
 
 	pModel = this->model();
 	nRowDoubleClick = nCurrentTreeItemIndex.row();
 	nColumnDoubleClick = nCurrentTreeItemIndex.column();
-	strLogInfo += pModel->data(nCurrentTreeItemIndex, Qt::DisplayRole).toString();
+	//strLogInfo += pModel->data(nCurrentTreeItemIndex, Qt::DisplayRole).toString();
 
 	pModel->removeRow(nCurrentTreeItemIndex.row(), nCurrentTreeItemIndex.parent());
 		
 	LOG_DEBUG<<"CQuotesTableView emit signalRemoveContractFromSmartQuotes"
-		<<" "<<"nInstrumentID="<<nInstrumentID;
+		<<" "<<"nInstrumentID="<<pCurrentTreeItem->getInstrumentID()
+		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
+		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
+
 
 	emit signalRemoveContractFromSmartQuotes(nInstrumentID);
 }
@@ -291,27 +299,17 @@ void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 		LOG_DEBUG<<"CQuotesTableView process mouseDoubleClickEvent Qt::LeftButton";
 
 		QAbstractItemModel* pModel = NULL;
-		unsigned int nInstrumentID = 0;
-		QString strInstrumentCode;
-		float fLastPrice;
 		QModelIndex nCurrentTreeItemIndex;
 		CTreeItemQuotes* pCurrentTreeItem = NULL;
-		QString strLogInfo;
 		QPoint point = pEvent->pos(); //get Pos
 		QCursor currentCursor = this->cursor(); 
 
 		nCurrentTreeItemIndex = this->currentIndex();
 		pCurrentTreeItem = (CTreeItemQuotes*)nCurrentTreeItemIndex.internalPointer();
-		nInstrumentID = pCurrentTreeItem->getInstrumentID();
-		strInstrumentCode = pCurrentTreeItem->getInstrumentCode();
-		fLastPrice = pCurrentTreeItem->getLastPrice();
-
-		strLogInfo = QString("mouseDoubleClickEvent nInstrumentID=%1").arg(nInstrumentID);
-
 		pModel = this->model();
-		strLogInfo += pModel->data(nCurrentTreeItemIndex, Qt::DisplayRole).toString();
 
-		m_pCreateNewOrderDialog->resetData(strInstrumentCode, 1, fLastPrice);
+		m_pUserOrderInfo->setDataByItem(pCurrentTreeItem);
+		m_pCreateNewOrderDialog->resetData(m_pUserOrderInfo);
 		m_pCreateNewOrderDialog->move(point);
 		m_pCreateNewOrderDialog->show();
 	}
