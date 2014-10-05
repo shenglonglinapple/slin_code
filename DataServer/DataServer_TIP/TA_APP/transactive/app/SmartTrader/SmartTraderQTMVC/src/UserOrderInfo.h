@@ -20,10 +20,16 @@ class CTreeItemQuotes;
 
 class CUserOrderInfo 
 { 
+public:
+	enum OrderCheckRes
+	{
+		OrderCheckRes_OK,
+		OrderCheckRes_Cancel,
+	};
 public: 
 	CUserOrderInfo();
-
 	virtual ~CUserOrderInfo(); 
+public: 
 	CUserOrderInfo& operator=(const CUserOrderInfo& cParam);
 public:
 	void setDataByItem(CTreeItemQuotes* pData);
@@ -31,16 +37,17 @@ private:
 	void _ClearData();
 private:
 	COrderInfo* m_pOrderInfo;
-private:
+public:
 	unsigned int m_nInstrumentID ;
 	QString m_strExchangeName;
 	QString m_strInstrumentCode;
 	float m_fLastPrice;
 	int m_nQuantity;
-private:
+public:
 	Order::Side m_nSide;
 	Order::OrderType m_nOrderType;
-
+public:
+	OrderCheckRes m_nCheckRes;
 }; 
 
 

@@ -158,9 +158,9 @@ void CClientMainWindow::_CreateConnect()
 		SLOT(slotAddContractToSmartQuotes(unsigned int)));
 
 	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes->m_pCreateNewOrderDialog, 
-		SIGNAL(signalNewOrder(Order::Side, Order::OrderType, QString, double, int)),
+		SIGNAL(signalNewOrder(CUserOrderInfo*)),
 		m_pClientDataManagerWorker,
-		SLOT(slotNewOrder(Order::Side, Order::OrderType, QString, double, int)));
+		SLOT(slotNewOrder(CUserOrderInfo)));
 	
 
 

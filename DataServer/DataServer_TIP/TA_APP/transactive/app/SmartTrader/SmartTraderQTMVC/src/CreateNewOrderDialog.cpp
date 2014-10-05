@@ -200,7 +200,7 @@ void CCreateNewOrderDialog::translateLanguage()
 	m_pSpinBox_Volume->setValue(m_pSpinBox_Volume_Value);
 
 	m_pLabel_Price->setText(QObject::tr("Price:"));
-	m_pSpinBox_Price->setValue(m_pSpinBox_Volume_Value);
+	m_pSpinBox_Price->setValue(m_pSpinBox_Price_Value);
 
 	m_pLabel_TagName->setText(QObject::tr("Tag Name:"));
 	nIndex = 0;
@@ -231,7 +231,13 @@ void CCreateNewOrderDialog::resetData( CUserOrderInfo* pUserOrderInfo )
 
 void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 {
-	//
+	int nCurrentIndex = 0;
+	QString strOrderType;
+
+	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
+	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
+
+
 	m_pUserOrderInfo->m_nSide = Order::BUY;
 	m_pUserOrderInfo->m_nOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
 	m_pUserOrderInfo->m_fLastPrice = m_pSpinBox_Price->value();
@@ -239,32 +245,32 @@ void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 	
 	//
 	m_pOrderInfoWidget->setOrderInfo(m_pUserOrderInfo);
-	m_pOrderInfoWidget->move(200, 200);
+	//m_pOrderInfoWidget->move(200, 200);
+	m_pOrderInfoWidget->move(this->cursor().pos());
 	m_pOrderInfoWidget->show();
 
 }
 
 void CCreateNewOrderDialog::slotPushButtonSellClicked( bool checked )
 {
+	int nCurrentIndex = 0;
 	QString strOrderType;
-	int quantity = 0;
-	double fPrice = 0;
 
-	Order::Side nGetSide = Order::BUY;
-	Order::OrderType nGetOrderType = Order::UNKNOWN;
-	QString strInstrumentCode;
+	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
+	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
-	//nOrderType = m_pComboBox_OrderType->currentIndex();
-	strOrderType = m_pComboBox_OrderType->currentText();
-	nGetSide = Order::BUY;
-	nGetOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
-	strInstrumentCode = m_pLineEdit_Symbol->text();
-	fPrice = m_pSpinBox_Price->value();
-	quantity = m_pSpinBox_Volume->value();
 
-	m_pOrderInfoWidget->setOrderInfo(nGetSide, nGetOrderType, strInstrumentCode, fPrice, quantity);
-	m_pOrderInfoWidget->move(200, 200);
+	m_pUserOrderInfo->m_nSide = Order::SELL;
+	m_pUserOrderInfo->m_nOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
+	m_pUserOrderInfo->m_fLastPrice = m_pSpinBox_Price->value();
+	m_pUserOrderInfo->m_nQuantity = m_pSpinBox_Volume->value();
+
+	//
+	m_pOrderInfoWidget->setOrderInfo(m_pUserOrderInfo);
+	//m_pOrderInfoWidget->move(200, 200);
+	m_pOrderInfoWidget->move(this->cursor().pos());
 	m_pOrderInfoWidget->show();
+
 
 }
 
@@ -290,11 +296,11 @@ void CCreateNewOrderDialog::_CreateConnect()
 	
 }
 
-void CCreateNewOrderDialog::slotOrderCheck( Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, COrderInfoWidget::OrderCheckRes nCheckRes )
+void CCreateNewOrderDialog::slotOrderCheck(CUserOrderInfo* pUserOrderInfo)
 {
 	m_pOrderInfoWidget->hide();
 	//emit
-	if (COrderInfoWidget::OrderCheckRes_OK == nCheckRes)
+	if (CUserOrderInfo::OrderCheckRes_OK == pUserOrderInfo->m_nCheckRes)
 	{
 		LOG_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CCreateNewOrderDialog"
@@ -302,15 +308,15 @@ void CCreateNewOrderDialog::slotOrderCheck( Order::Side nSide, Order::OrderType 
 			<<" "<<"emit"
 			<<" "<<"signalNewOrder()"
 			<<" "<<"param:"
-			<<" "<<"nSide="<<nSide
-			<<" "<<"nOrderType="<<nOrderType
-			<<" "<<"strInstrumentCode="<<strInstrumentCode.toStdString().c_str()
-			<<" "<<"fPrice="<<fPrice
-			<<" "<<"quantity="<<quantity;
+			<<" "<<"nSide="<<pUserOrderInfo->m_nSide
+			<<" "<<"nOrderType="<<pUserOrderInfo->m_nOrderType
+			<<" "<<"strInstrumentCode="<<pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
+			<<" "<<"fPrice="<<pUserOrderInfo->m_fLastPrice
+			<<" "<<"quantity="<<pUserOrderInfo->m_nQuantity;
 
-		emit signalNewOrder(nSide, nOrderType, strInstrumentCode, fPrice, quantity);	
+		emit signalNewOrder(pUserOrderInfo);	
 	}
-	else if (COrderInfoWidget::OrderCheckRes_Cancel == nCheckRes)
+	else if (CUserOrderInfo::OrderCheckRes_Cancel ==  pUserOrderInfo->m_nCheckRes)
 	{
 		LOG_DEBUG<<" "<<"user Cancel new order";
 	}

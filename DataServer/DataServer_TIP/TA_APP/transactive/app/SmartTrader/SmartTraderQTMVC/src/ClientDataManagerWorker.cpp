@@ -15,6 +15,7 @@
 #include "TreeItemQuotes.h"
 
 #include "OrderInfo.h"
+#include "UserOrderInfo.h"
 #include "TreeItemOrder.h"
 
 #include "HistoryDataManager.h"
@@ -789,7 +790,7 @@ unsigned int CClientDataManagerWorker::_GetInstrumentIDByInstruemntCode(const QS
 	return nInstruemntID;
 }
 
-void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity )
+void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 {
 	//emit
 	{
@@ -799,11 +800,12 @@ void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType
 			<<" "<<"slot"
 			<<" "<<"slotNewOrder()"
 			<<" "<<"param:"
-			<<" "<<"nSide="<<nSide
-			<<" "<<"nOrderType="<<nOrderType
-			<<" "<<"strInstrumentCode="<<strInstrumentCode.toStdString().c_str()
-			<<" "<<"fPrice="<<fPrice
-			<<" "<<"quantity="<<quantity;
+			<<" "<<"nInstrumentID"<<pUserOrderInfo->m_nInstrumentID
+			<<" "<<"nSide="<<pUserOrderInfo->m_nSide
+			<<" "<<"nOrderType="<<pUserOrderInfo->m_nOrderType
+			<<" "<<"strInstrumentCode="<<pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
+			<<" "<<"fPrice="<<pUserOrderInfo->m_fLastPrice
+			<<" "<<"quantity="<<pUserOrderInfo->m_nQuantity;
 	}
 
 
@@ -811,20 +813,21 @@ void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType
 	std::string strLogInfo;
 	Instrument* pInstrumentGet = NULL;
 	Account* pAccount = NULL;
-	unsigned int nInstrumentCode = 0;
-	nInstrumentCode = _GetInstrumentIDByInstruemntCode(strInstrumentCode);//"IF1402"
+	unsigned int nInstrumentID = 0;
+	//nInstrumentID = _GetInstrumentIDByInstruemntCode(strInstrumentCode);//"IF1402"
+	nInstrumentID = pUserOrderInfo->m_nInstrumentID;
 
 	{
 		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		if (false == m_MapInstrumentIDData.contains(nInstrumentCode))
+		if (false == m_MapInstrumentIDData.contains(nInstrumentID))
 		{
-			LOG_ERROR<<"not find nInstrumentID="<<nInstrumentCode
+			LOG_ERROR<<"not find nInstrumentID="<<nInstrumentID
 				<<" "<<"in m_MapInstrumentIDData"
 				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
 			return;
 		}
 
-		iterFind = m_MapInstrumentIDData.find(nInstrumentCode);
+		iterFind = m_MapInstrumentIDData.find(nInstrumentID);
 		//find ok
 		pInstrumentGet = iterFind.value();
 	}
@@ -838,6 +841,11 @@ void CClientDataManagerWorker::slotNewOrder( Order::Side nSide, Order::OrderType
 		}
 		pAccount = m_MapAccount.begin().value();
 	}
+
+	Order::OrderType nOrderType = pUserOrderInfo->m_nOrderType;
+	Order::Side nSide = pUserOrderInfo->m_nSide;
+	int quantity = pUserOrderInfo->m_nQuantity;
+	double fPrice = pUserOrderInfo->m_fLastPrice;
 
 	switch (nOrderType)
 	{

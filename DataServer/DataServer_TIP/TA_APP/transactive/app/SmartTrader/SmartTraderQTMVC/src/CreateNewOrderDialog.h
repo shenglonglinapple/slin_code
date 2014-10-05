@@ -48,26 +48,26 @@ signals:
 	/*
 	class: CCreateNewOrderDialog
 	signals:
-	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	void signalNewOrder(CUserOrderInfo* pUserOrderInfo);
 	fun send signals: slotOrderCheck()
 
 	class: CClientDataManagerWorker
 	public slots: 
-	void slotNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
 	*/
-	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	void signalNewOrder(CUserOrderInfo* pUserOrderInfo);
 public slots:
 	/*
 	class: COrderInfoWidget
 	signals:
-	void signalOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, OrderCheckRes nCheckRes);
+	void signalOrderCheck(CUserOrderInfo* pUserOrderInfo);
 	fun send signals: slotPushButtonOKClicked() slotPushButtonCancelClicked()
 
 	class: CCreateNewOrderDialog
 	public slots: 
-	void slotOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, OrderCheckRes nCheckRes);
+	void slotOrderCheck(CUserOrderInfo* pUserOrderInfo);
 	*/
-	void slotOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, COrderInfoWidget::OrderCheckRes nCheckRes);
+	void slotOrderCheck(CUserOrderInfo* pUserOrderInfo);
 
 
 

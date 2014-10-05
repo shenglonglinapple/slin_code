@@ -42,6 +42,9 @@ CUserOrderInfo& CUserOrderInfo::operator=( const CUserOrderInfo& cParam )
 	m_strInstrumentCode = cParam.m_strInstrumentCode;
 	m_fLastPrice = cParam.m_fLastPrice;
 	m_nQuantity = cParam.m_nQuantity;
+	m_nSide = cParam.m_nSide;
+	m_nOrderType = cParam.m_nOrderType;
+
 
 
 	return *this;

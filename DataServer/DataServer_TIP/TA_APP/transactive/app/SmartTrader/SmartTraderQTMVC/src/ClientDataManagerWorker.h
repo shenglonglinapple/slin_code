@@ -28,8 +28,10 @@ class CClientLoginParam;
 class CSmartTraderClient;
 class CProjectUtilityFun;
 class COrderInfo;
+class CUserOrderInfo;
 class CTreeItemOrder;
 class CHistoryDataManager;
+
 
 
 class CClientDataManagerWorker : 
@@ -110,14 +112,14 @@ public slots:
 	/*
 	class: CCreateNewOrderDialog
 	signals:
-	void signalNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	void signalNewOrder(CUserOrderInfo* pUserOrderInfo);
 	fun send signals: slotClientLoginParamChanged()
 
 	class: CClientDataManagerWorker
 	public slots: 
-	void slotNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
 	*/
-	void slotNewOrder(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity);
+	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
 signals:
 
 	/*

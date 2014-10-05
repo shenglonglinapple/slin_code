@@ -38,12 +38,7 @@ class CUserOrderInfo;
 class COrderInfoWidget : public QDialog
 {
     Q_OBJECT
-public:
-	enum OrderCheckRes
-	{
-		OrderCheckRes_OK,
-		OrderCheckRes_Cancel,
-	};
+
 public:
     COrderInfoWidget(QWidget *parent = 0);
 	~COrderInfoWidget();
@@ -51,15 +46,14 @@ signals:
 	/*
 	class: COrderInfoWidget
 	signals:
-	void signalOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, OrderCheckRes nCheckRes);
+	void signalOrderCheck(CUserOrderInfo* pUserOrderInfo);
 	fun send signals: slotPushButtonOKClicked() slotPushButtonCancelClicked()
 
 	class: CCreateNewOrderDialog
 	public slots: 
-	void slotOrderCheck(Order::Side nSide, Order::OrderType nOrderType, QString strInstrumentCode, double fPrice, int quantity, OrderCheckRes nCheckRes);
+	void slotOrderCheck(CUserOrderInfo* pUserOrderInfo);
 	*/
-	void signalOrderCheck(Order::Side nSide, Order::OrderType nOrderType, 
-		QString strInstrumentCode, double fPrice, int quantity, OrderCheckRes nCheckRes);
+	void signalOrderCheck(CUserOrderInfo* pUserOrderInfo);
 
 
 public:
@@ -78,10 +72,6 @@ private:
 private:
 	COrderInfo* m_pOrderInfo;
 	CUserOrderInfo* m_pUserOrderInfo ;
-private:
-	double m_fPrice;
-	int m_quantity;
-	OrderCheckRes m_nCheckRes;
 private:
 	QString m_str_OrderSide_Value;
 	QString m_str_OrderType_Value;

@@ -4,6 +4,7 @@
 #include "OrderInfo.h"
 #include "UserOrderInfo.h"
 
+
 #include "BoostLogger.h"
 USING_BOOST_LOG;
 
@@ -152,7 +153,8 @@ void COrderInfoWidget::translateLanguage()
 
 void COrderInfoWidget::slotPushButtonOKClicked( bool checked )
 {
-	m_nCheckRes = OrderCheckRes_OK;
+	m_pUserOrderInfo->m_nCheckRes = CUserOrderInfo::OrderCheckRes_OK;
+
 	//emit
 	{
 		LOG_DEBUG<<" "<<"emit"
@@ -165,16 +167,17 @@ void COrderInfoWidget::slotPushButtonOKClicked( bool checked )
 			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
 			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
 			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
-			<<" "<<"m_quantity="<<m_quantity
-			<<" "<<"m_nCheckRes="<<m_nCheckRes;
+			<<" "<<"m_quantity="<<m_pUserOrderInfo->m_nQuantity
+			<<" "<<"m_nCheckRes="<<m_pUserOrderInfo->m_nCheckRes;
 
-		emit signalOrderCheck(m_pUserOrderInfo->m_nSide, m_pUserOrderInfo->m_nOrderType, m_pUserOrderInfo->m_strInstrumentCode,  m_pUserOrderInfo->m_fLastPrice, m_quantity, m_nCheckRes);	
+		emit signalOrderCheck(m_pUserOrderInfo);
 	}
 }
 
 void COrderInfoWidget::slotPushButtonCancelClicked( bool checked )
 {
-	m_nCheckRes = OrderCheckRes_Cancel;
+	m_pUserOrderInfo->m_nCheckRes = CUserOrderInfo::OrderCheckRes_Cancel;
+
 	//emit
 	{
 		LOG_DEBUG<<" "<<"emit"
@@ -187,10 +190,10 @@ void COrderInfoWidget::slotPushButtonCancelClicked( bool checked )
 			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
 			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
 			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
-			<<" "<<"m_quantity="<<m_quantity
-			<<" "<<"m_nCheckRes="<<m_nCheckRes;
+			<<" "<<"m_quantity="<<m_pUserOrderInfo->m_nQuantity
+			<<" "<<"m_nCheckRes="<<m_pUserOrderInfo->m_nCheckRes;
 
-		emit signalOrderCheck(m_pUserOrderInfo->m_nSide, m_pUserOrderInfo->m_nOrderType, m_pUserOrderInfo->m_strInstrumentCode,  m_pUserOrderInfo->m_fLastPrice, m_quantity, m_nCheckRes);	
+		emit signalOrderCheck(m_pUserOrderInfo);
 	}
 }
 
@@ -213,17 +216,11 @@ void COrderInfoWidget::setOrderInfo( CUserOrderInfo* pUserOrderInfo )
 {
 	(*m_pUserOrderInfo) = (*pUserOrderInfo);
 
-	m_nSide = m_pUserOrderInfo->m_nSide;
-	m_nOrderType = m_pUserOrderInfo->m_nOrderType;
-	m_strInstrumentCode = m_pUserOrderInfo->m_strInstrumentCode;
-	m_fPrice = m_pUserOrderInfo->m_fLastPrice;
-	m_quantity = quantity;
-
-	m_str_OrderSide_Value = m_pOrderInfo->getStrOrderSide(nSide);
-	m_str_OrderType_Value = m_pOrderInfo->getStrOrderType(nOrderType);
-	m_str_InstrumentCode_Value = strInstrumentCode;
-	m_str_Price_Value = QVariant(fPrice).toString();
-	m_str_Quantity_Value = QVariant(quantity).toString();
+	m_str_OrderSide_Value = m_pOrderInfo->getStrOrderSide(m_pUserOrderInfo->m_nSide);
+	m_str_OrderType_Value = m_pOrderInfo->getStrOrderType(m_pUserOrderInfo->m_nOrderType);
+	m_str_InstrumentCode_Value = m_pUserOrderInfo->m_strInstrumentCode;
+	m_str_Price_Value = QVariant(m_pUserOrderInfo->m_fLastPrice).toString();
+	m_str_Quantity_Value = QVariant(m_pUserOrderInfo->m_nQuantity).toString();
 
 	this->translateLanguage();
 	//this->show();
