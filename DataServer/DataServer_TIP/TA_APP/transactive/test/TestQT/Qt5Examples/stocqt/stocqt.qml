@@ -92,7 +92,8 @@ Rectangle
         orientation: ListView.Horizontal //水平方向上放了两个页面  StockListView（列表页面） StockView（曲线页面）
         boundsBehavior: Flickable.StopAtBounds     // 滑动时停在边界，默认可以拉拽更远并在弹回时带有超调效果
         //listViewActive is value 1
-        //使用属性绑定，当listViewActive被激活时，使currentIndex置0，从而跳转到列表页面
+        //使用属性绑定，当listViewActive set value 1时，使currentIndex置0，从而跳转到列表页面
+        //使用属性绑定，当listViewActive set value 0时，使currentIndex置1，从而跳转到列表页面
         currentIndex: id_qml_stocqt.listViewActive == 0 ? 1 : 0
 
         onCurrentIndexChanged:
