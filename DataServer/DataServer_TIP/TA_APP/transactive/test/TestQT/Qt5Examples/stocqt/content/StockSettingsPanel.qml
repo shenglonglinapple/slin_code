@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    id: root
+    id: id_qml_StockSettingsPanel
     width: 440
     height: 160
     color: "transparent"
@@ -19,8 +19,8 @@ Rectangle {
 
     Text {
         id: openText
-        anchors.left: root.left
-        anchors.top: root.top
+        anchors.left: id_qml_StockSettingsPanel.left
+        anchors.top: id_qml_StockSettingsPanel.top
         color: "#000000"
         font.family: "Open Sans"
         font.pointSize: 19
@@ -29,7 +29,7 @@ Rectangle {
 
     Text {
         id: closeText
-        anchors.left: root.left
+        anchors.left: id_qml_StockSettingsPanel.left
         anchors.top: openText.bottom
         anchors.topMargin: 10
         color: "#000000"
@@ -40,7 +40,7 @@ Rectangle {
 
     Text {
         id: highText
-        anchors.left: root.left
+        anchors.left: id_qml_StockSettingsPanel.left
         anchors.top: closeText.bottom
         anchors.topMargin: 10
         color: "#000000"
@@ -51,7 +51,7 @@ Rectangle {
 
     Text {
         id: lowText
-        anchors.left: root.left
+        anchors.left: id_qml_StockSettingsPanel.left
         anchors.top: highText.bottom
         anchors.topMargin: 10
         color: "#000000"
@@ -62,7 +62,7 @@ Rectangle {
 
     Rectangle {
         height: 4
-        anchors.left: root.left
+        anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
         anchors.right: openButton.left
         anchors.rightMargin: 65
@@ -72,7 +72,7 @@ Rectangle {
 
     Rectangle {
         height: 4
-        anchors.left: root.left
+        anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
         anchors.right: closeButton.left
         anchors.rightMargin: 65
@@ -82,7 +82,7 @@ Rectangle {
 
     Rectangle {
         height: 4
-        anchors.left: root.left
+        anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
         anchors.right: highButton.left
         anchors.rightMargin: 65
@@ -92,7 +92,7 @@ Rectangle {
 
     Rectangle {
         height: 4
-        anchors.left: root.left
+        anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
         anchors.right: lowButton.left
         anchors.rightMargin: 65
@@ -104,7 +104,7 @@ Rectangle {
         id: openButton
         buttonEnabled: false
         anchors.verticalCenter: openText.verticalCenter
-        anchors.right: root.right
+        anchors.right: id_qml_StockSettingsPanel.right
         anchors.rightMargin: 40
     }
 
@@ -112,7 +112,7 @@ Rectangle {
         id: closeButton
         buttonEnabled: false
         anchors.verticalCenter: closeText.verticalCenter
-        anchors.right: root.right
+        anchors.right: id_qml_StockSettingsPanel.right
         anchors.rightMargin: 40
     }
 
@@ -120,7 +120,7 @@ Rectangle {
         id: highButton
         buttonEnabled: true
         anchors.verticalCenter: highText.verticalCenter
-        anchors.right: root.right
+        anchors.right: id_qml_StockSettingsPanel.right
         anchors.rightMargin: 40
     }
 
@@ -128,7 +128,7 @@ Rectangle {
         id: lowButton
         buttonEnabled: true
         anchors.verticalCenter: lowText.verticalCenter
-        anchors.right: root.right
+        anchors.right: id_qml_StockSettingsPanel.right
         anchors.rightMargin: 40
     }
 }

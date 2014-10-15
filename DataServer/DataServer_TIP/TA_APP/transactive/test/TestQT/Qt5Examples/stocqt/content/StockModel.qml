@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
-ListModel {                                  // ListModel作为根项目，自定义属性作为接口，并定义了多个函数。但他本身在初始化时并不进行运算
-    id: model
+ListModel
+{                                  // ListModel作为根项目，自定义属性作为接口，并定义了多个函数。但他本身在初始化时并不进行运算
+    id: id_qml_StockModel
     property string stockId: ""              // 股票ID
     property string stockName: ""            // 股票名
     property string stockDataCycle: "d"      // 数据周期
@@ -12,19 +13,19 @@ ListModel {                                  // ListModel作为根项目，自�
     signal dataReady                      // 耗时的数据类通常需要定义这个信号
 
     function indexOf(date) {                               // 返回从特定date的数据在数据集中的位置
-        var newest = new Date(model.get(0).date);               // 获取第一个数据对象的日期
-        var oldest = new Date(model.get(model.count - 1).date); // 最后一个数据对象的日期
+        var newest = new Date(id_qml_StockModel.get(0).date);               // 获取第一个数据对象的日期
+        var oldest = new Date(id_qml_StockModel.get(id_qml_StockModel.count - 1).date); // 最后一个数据对象的日期
         if (newest <= date)
             return -1;                                // 在最新日期之后直接返回
 
         if (oldest >= date)
-            return model.count - 1;                  // 在最先日期之前全部返回
+            return id_qml_StockModel.count - 1;                  // 在最先日期之前全部返回
 
         var currDiff = 0;
         var bestDiff = Math.abs(date.getTime() - newest.getTime());
         var retval = 0;                                            // 返回变量
-        for (var i = 0; i < model.count; i++) {
-            var d = new Date(model.get(i).date);
+        for (var i = 0; i < id_qml_StockModel.count; i++) {
+            var d = new Date(id_qml_StockModel.get(i).date);
             currDiff = Math.abs(d.getTime() - date.getTime());    // 计算时间差值
             if (currDiff < bestDiff) {                         // 从最新时间向目标时间推进
                 bestDiff = currDiff;
@@ -90,8 +91,8 @@ ListModel {                                  // ListModel作为根项目，自�
 
         xhr.open("GET", req, true);        // 初始化请求参数，还未发送请求
 
-        model.ready = false;               // 标志位置false
-        model.clear();                     // 数据清空
+        id_qml_StockModel.ready = false;               // 标志位置false
+        id_qml_StockModel.clear();                     // 数据清空
         var i = 1;                          // 输出一下调试信息可知，返回的数据第一行为描述符，因此将其跳过
         xhr.onreadystatechange = function() {  // readyState是XMLHttpRequest的一个属性，其值从0变化到4
             if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE) {
@@ -100,15 +101,15 @@ ListModel {                                  // ListModel作为根项目，自�
                 for (;i < records.length; i++ ) {
                     var r = records[i].split(',');                 // 以逗号将数据分割
                     if (r.length === 7)                            // 数据校验
-                        model.append(createStockPrice(r));         // 函数调用，向model中添加数据
+                        id_qml_StockModel.append(createStockPrice(r));         // 函数调用，向model中添加数据
                 }
 
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (model.count > 0) {
-                        model.ready = true;
-                        model.stockPrice = model.get(0).adjusted;  // 将最新的的调整收盘价赋予stockPrice
-                        model.stockPriceChanged = model.count > 1 ? (Math.round((model.stockPrice - model.get(1).close) * 100) / 100) : 0;                                                                                   // 相比前一天的收盘价变化率
-                        model.dataReady();                         //emit signal
+                    if (id_qml_StockModel.count > 0) {
+                        id_qml_StockModel.ready = true;
+                        id_qml_StockModel.stockPrice = id_qml_StockModel.get(0).adjusted;  // 将最新的的调整收盘价赋予stockPrice
+                        id_qml_StockModel.stockPriceChanged = id_qml_StockModel.count > 1 ? (Math.round((id_qml_StockModel.stockPrice - id_qml_StockModel.get(1).close) * 100) / 100) : 0;                                                                                   // 相比前一天的收盘价变化率
+                        id_qml_StockModel.dataReady();                         //emit signal
                     }
                 }
             }

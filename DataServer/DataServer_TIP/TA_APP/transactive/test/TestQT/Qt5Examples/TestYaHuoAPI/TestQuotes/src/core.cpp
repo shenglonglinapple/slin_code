@@ -1,0 +1,142 @@
+//
+//  core.cpp
+//  quote
+//
+//  Copyright (C) 2013, 2014  André Pereira Henriques
+//  aphenriques (at) outlook (dot) com
+//
+//  This file is part of quote.
+//
+//  quote is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  quote is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with quote.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+#include "core.h"
+#include <stdexcept>
+#include <sstream>
+#include <string>
+#include "curl_util.h"
+#include "Exception.h"
+#include "string_util.h"
+
+namespace quote {
+    namespace detail {
+        namespace core {
+            std::string getLatestQuotesCsv(const std::string &instruments, const std::string &quoteTypes)
+			{
+                if (instruments.empty() == false)
+				{
+                    if (quoteTypes.empty() == false) 
+					{
+                        std::stringstream url;
+                        url << "http://finance.yahoo.com/d/quotes.csv?s="
+                            << instruments
+                            << "&f="
+                            << quoteTypes;
+                        std::string latestQuotesCsv = detail::curl_util::getUrlData(url.str());
+                        detail::string_util::trim(latestQuotesCsv);
+                        if (latestQuotesCsv.empty() || latestQuotesCsv.at(0) != '<') 
+						{ // leading '<' indicates server error
+                            return std::move(latestQuotesCsv);
+                        } 
+						else 
+						{
+                            throw Exception(__FILE__, __LINE__, __FUNCTION__, "server (Yahoo! Finance) error");
+                        }
+                    }
+					else 
+					{
+                        throw Exception(__FILE__, __LINE__, __FUNCTION__, "empty quoteTypes");
+                    }
+                } 
+				else 
+				{
+                    throw Exception(__FILE__, __LINE__, __FUNCTION__, "empty instruments parameter");
+                }
+            }
+
+// 			template<typename T>
+// 			std::string getLatestQuotesCsv( const std::string &instruments, const T &quoteTypes )
+// 			{
+// 				std::string quoteTypesString;
+// 				for (QuoteType quoteType : quoteTypes)
+// 				{
+// 					quoteTypesString.append(detail::conversion::getString(quoteType));
+// 				}
+// 				return detail::core::getLatestQuotesCsv(instruments, quoteTypesString);
+// 			}
+
+			std::string getLatestQuotesCsv(const std::string &instruments, std::list<QuoteType> quoteTypes)
+			{
+				std::string quoteTypesString;
+				std::list<QuoteType>::iterator iterLst;
+				iterLst = quoteTypes.begin();
+				while (iterLst != quoteTypes.end())
+				{
+					std::string strQuotesType;
+					strQuotesType.clear();
+					strQuotesType = detail::conversion::getString(*iterLst);
+
+					//quoteTypesString.append(detail::conversion::getString(quoteType));
+					quoteTypesString.append(strQuotesType);
+
+					iterLst++;
+				}
+				return detail::core::getLatestQuotesCsv(instruments, quoteTypesString);
+			}
+
+
+            std::string getHistoricalQuotesCsv(const std::string &instrument, 
+				unsigned startYear, unsigned startMonth, unsigned startDay,
+				unsigned endYear, unsigned endMonth, unsigned endDay, 
+				const std::string &rangeType) 
+			{
+                if (instrument.empty() == false) 
+				{
+                    std::stringstream url;
+                    url << "http://ichart.yahoo.com/table.csv?s="
+                        << instrument
+                        << "&a="
+                        << startMonth - 1
+                        << "&b="
+                        << startDay
+                        << "&c="
+                        << startYear
+                        << "&d="
+                        << endMonth - 1
+                        << "&e="
+                        << endDay
+                        << "&f="
+                        << endYear
+                        << "&g="
+                        << rangeType
+                        << "&ignore=.csv";
+                    std::string historicalQuotesCsv = detail::curl_util::getUrlData(url.str());
+                    detail::string_util::trim(historicalQuotesCsv);
+                    if (historicalQuotesCsv.empty() || historicalQuotesCsv.at(0) != '<')
+					{ // leading '<' indicates server error
+                        return std::move(historicalQuotesCsv);
+                    } 
+					else
+					{
+                        throw Exception(__FILE__, __LINE__, __FUNCTION__, "server (Yahoo! Finance) error");
+                    }
+                } 
+				else 
+				{
+                    throw Exception(__FILE__, __LINE__, __FUNCTION__, "empty instrument parameter");
+                }
+            }
+        }
+    }
+}

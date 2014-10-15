@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
-Rectangle {
-    id: root
+Rectangle
+{
+    id: id_qml_StockListView
     width: 320
     height: 410
     anchors.top: parent.top
@@ -11,8 +12,36 @@ Rectangle {
     property string currentStockId: ""
     property string currentStockName: ""
 
-    ListView {
-        id: view
+
+
+
+    //mvc
+    StockListModel
+    {
+        id: m_listModel;
+    }
+
+    StockListDelegate
+    {
+        id: m_listDelegate;
+    }
+
+    //Component for ListView
+    Component
+    {
+        id: m_highlight
+        Rectangle
+        {
+            width: parent.width
+            color: "#eeeeee";
+            //color: "lightsteelblue";
+            //color: "red";
+        }
+    }
+
+    ListView
+    {
+        id: m_listViewStock
         anchors.fill: parent
         width: parent.width
         clip: true                            // clip以延时加载数据
@@ -20,12 +49,26 @@ Rectangle {
         highlightMoveDuration: 0
         focus: true
         snapMode: ListView.SnapToItem
-        model: StockListModel{}                 // 定义model
+        model: m_listModel;                 // 定义model
+        delegate: m_listDelegate;
+        highlight: m_highlight
 
-        function requestUrl(stockId) {            // 最近5天的url创建函数，与StockModel不同的是，由于未定义stockId属性，它带有这样一个参数
+
+        onCurrentIndexChanged:
+        {                       // 当该ListView中的某个项目被选中
+            id_qml_stocqt.listViewActive = 0;                         // 切换主ListView的页面
+            id_qml_StockListView.currentStockId = model.get(currentIndex).stockId;       // 获取 Id 与 name
+            id_qml_StockListView.currentStockName = model.get(currentIndex).name;
+        }
+
+
+
+        function requestUrl(stockId)
+        {
+            // 最近5天的url创建函数，与StockModel不同的是，由于未定义stockId属性，它带有这样一个参数
             var endDate = new Date("");            // today
             var startDate = new Date()
-            startDate.setDate(startDate.getDate() - 5);
+            startDate.setDate(startDate.getDate() - 5);// 最近5天
 
             var request = "http://ichart.finance.yahoo.com/table.csv?";
             request += "s=" + stockId;
@@ -41,7 +84,8 @@ Rectangle {
             return request;
         }
 
-        function getCloseValue(index) {
+        function getCloseValue(index)
+        {
             var req = requestUrl(model.get(index).stockId);   // 得到对应的股票Id
 
             if (!req)
@@ -51,10 +95,13 @@ Rectangle {
 
             xhr.open("GET", req, true);
 
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE) {
+            xhr.onreadystatechange = function()
+            {
+                if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE)
+                {
                     var records = xhr.responseText.split('\n');
-                    if (records.length > 0) {
+                    if (records.length > 0)
+                    {
                         var r = records[1].split(',');               // 第一条数据，即最新一天的数据
                         model.setProperty(index, "value", r[4]);     // 与StockModel类似，第五个数据为'Close'，即收盘价
                                                                      // 这里将model中index位置数据的"value"值设置为该收盘价                                                                                                    // 注意这个model是StockListModel而不是StockModel
@@ -78,134 +125,8 @@ Rectangle {
             xhr.send()              // 发送请求
         }
 
-        onCurrentIndexChanged: {                       // 当该ListView中的某个项目被选中
-            mainRect.listViewActive = 0;                         // 切换主ListView的页面
-            root.currentStockId = model.get(currentIndex).stockId;       // 获取 Id 与 name
-            root.currentStockName = model.get(currentIndex).name;
-        }
 
-        delegate: Rectangle {                    // 委托组件，基本都是布局，不多说了
-            height: 102
-            width: parent.width
-            color: "transparent"
-            MouseArea {
-                anchors.fill: parent;
-                onClicked: {
-                    view.currentIndex = index;
-                }
-            }
-
-            Text {
-                id: stockIdText
-                anchors.top: parent.top
-                anchors.topMargin: 15
-                anchors.left: parent.left
-                anchors.leftMargin: 15
-                width: 125
-                height: 40
-                color: "#000000"
-                font.family: "Open Sans"                // 我的机器貌似不支持这种字体
-                font.pointSize: 20
-                font.weight: Font.Bold
-                verticalAlignment: Text.AlignVCenter
-                text: stockId
-            }
-
-            Text {
-                id: stockValueText
-                anchors.top: parent.top
-                anchors.topMargin: 15
-                anchors.right: parent.right
-                anchors.rightMargin: 0.31 * parent.width
-                width: 190
-                height: 40
-                color: "#000000"
-                font.family: "Open Sans"
-                font.pointSize: 20
-                font.bold: true
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                text: value
-                Component.onCompleted: view.getCloseValue(index);
-            }
-
-            Text {
-                id: stockValueChangeText
-                anchors.top: parent.top
-                anchors.topMargin: 15
-                anchors.right: parent.right
-                anchors.rightMargin: 20
-                width: 135
-                height: 40
-                color: "#328930"
-                font.family: "Open Sans"
-                font.pointSize: 20
-                font.bold: true
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                text: change
-                onTextChanged: {
-                    if (parseFloat(text) >= 0.0)           // 正为绿色，负为红色
-                        color = "#328930";
-                    else
-                        color = "#d40000";
-                }
-            }
-
-            Text {
-                id: stockNameText
-                anchors.top: stockIdText.bottom
-                anchors.left: parent.left
-                anchors.leftMargin: 15
-                width: 330
-                height: 30
-                color: "#000000"
-                font.family: "Open Sans"
-                font.pointSize: 16
-                font.bold: false
-                elide: Text.ElideRight
-                maximumLineCount: 1
-                verticalAlignment: Text.AlignVCenter
-                text: name
-            }
-
-            Text {
-                id: stockValueChangePercentageText
-                anchors.top: stockIdText.bottom
-                anchors.right: parent.right
-                anchors.rightMargin: 20
-                width: 120
-                height: 30
-                color: "#328930"
-                font.family: "Open Sans"
-                font.pointSize: 18
-                font.bold: false
-                horizontalAlignment: Text.AlignRight
-                verticalAlignment: Text.AlignVCenter
-                text: changePercentage
-                onTextChanged: {
-                    if (parseFloat(text) >= 0.0)
-                        color = "#328930";
-                    else
-                        color = "#d40000";
-                }
-            }
-
-            Rectangle {
-                id: endingLine
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                height: 1
-                width: parent.width
-                color: "#d7d7d7"
-            }
-        }
-
-        highlight: Rectangle {
-            width: parent.width
-            color: "#eeeeee"
-        }
-    }
+    }//ListView
 }
 
 

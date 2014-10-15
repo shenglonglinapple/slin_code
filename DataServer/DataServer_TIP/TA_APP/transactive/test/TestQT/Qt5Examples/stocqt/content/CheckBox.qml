@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
-Item {
-    id: button
+Item
+{
+    id: id_qml_CheckBox
     property bool buttonEnabled: true
     width: 30
     height: 30

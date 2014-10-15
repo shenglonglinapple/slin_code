@@ -40,8 +40,9 @@
 
 import QtQuick 2.0
 
-Rectangle {
-    id: button
+Rectangle
+{
+    id: id_qml_Button
     signal clicked
     property alias text: txt.text // 设置txt.text的属性别名为text，这样Rectangle就不用再声明一个属性以访问txt的text
     property bool buttonEnabled: false
@@ -50,14 +51,14 @@ Rectangle {
     color: "transparent"
     MouseArea {
         anchors.fill: parent
-        onClicked: button.clicked()
+        onClicked: id_qml_Button.clicked()
     }
     Text {
         anchors.centerIn: parent
         font.family: "Open Sans"
         font.pointSize: 19
         font.weight: Font.DemiBold
-        color: button.buttonEnabled ? "#000000" : "#14aaff"
+        color: id_qml_Button.buttonEnabled ? "#000000" : "#14aaff"
         id: txt
     }
 }

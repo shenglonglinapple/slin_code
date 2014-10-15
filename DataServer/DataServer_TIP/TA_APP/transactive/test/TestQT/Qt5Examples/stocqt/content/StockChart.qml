@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    id: chart
+    id: id_qml_StockChart
     width: 320
     height: 200
 
@@ -15,26 +15,26 @@ Rectangle {
 
     function update() {                           // 更新函数
         endDate = new Date();
-        if (chart.activeChart === "year") {                 // 显示一年数据
-            chart.startDate = new Date(chart.endDate.getFullYear() - 1,       // 在当前时间的基础上减一年
-                                       chart.endDate.getMonth(),
-                                       chart.endDate.getDate());
-            chart.gridSize = 12;                                              // 设置网格宽度为12，以固定网格数
+        if (id_qml_StockChart.activeChart === "year") {                 // 显示一年数据
+            id_qml_StockChart.startDate = new Date(id_qml_StockChart.endDate.getFullYear() - 1,       // 在当前时间的基础上减一年
+                                       id_qml_StockChart.endDate.getMonth(),
+                                       id_qml_StockChart.endDate.getDate());
+            id_qml_StockChart.gridSize = 12;                                              // 设置网格宽度为12，以固定网格数
         }
-        else if (chart.activeChart === "month") {          // 显示一个月数据
-            chart.startDate = new Date(chart.endDate.getFullYear(),           // 在当前时间基础上减一个月
-                                       chart.endDate.getMonth() - 1,
-                                       chart.endDate.getDate());
+        else if (id_qml_StockChart.activeChart === "month") {          // 显示一个月数据
+            id_qml_StockChart.startDate = new Date(id_qml_StockChart.endDate.getFullYear(),           // 在当前时间基础上减一个月
+                                       id_qml_StockChart.endDate.getMonth() - 1,
+                                       id_qml_StockChart.endDate.getDate());
             gridSize = 0;                                     // gridSize为0时，采用canvas中定义的网格宽度计算。使每个数据都绘制在坐标线上
         }
-        else if (chart.activeChart === "week") {           // 显示一周数据
-            chart.startDate = new Date(chart.endDate.getFullYear(),            // 在当前时间基础上减七天
-                                       chart.endDate.getMonth(),
-                                       chart.endDate.getDate() - 7);
+        else if (id_qml_StockChart.activeChart === "week") {           // 显示一周数据
+            id_qml_StockChart.startDate = new Date(id_qml_StockChart.endDate.getFullYear(),            // 在当前时间基础上减七天
+                                       id_qml_StockChart.endDate.getMonth(),
+                                       id_qml_StockChart.endDate.getDate() - 7);
             gridSize = 0;
         }
         else {
-            chart.startDate = new Date(2005, 3, 25);         // 否则以2005年为初始年，并定义网格宽度为4
+            id_qml_StockChart.startDate = new Date(2005, 3, 25);         // 否则以2005年为初始年，并定义网格宽度为4
             gridSize = 4;
         }
 
@@ -43,9 +43,9 @@ Rectangle {
 
     Row {                                       // Row布局了4个自定义的按钮
         id: activeChartRow
-        anchors.left: chart.left
-        anchors.right: chart.right
-        anchors.top: chart.top
+        anchors.left: id_qml_StockChart.left
+        anchors.right: id_qml_StockChart.right
+        anchors.top: id_qml_StockChart.top
         anchors.topMargin: 4
         spacing: 52
         onWidthChanged: {                    // 该函数保证宽度变化时优先压缩spacing，且不会造成按钮重叠
@@ -57,37 +57,37 @@ Rectangle {
         Button {
             id: maxButton
             text: "Max"
-            buttonEnabled: chart.activeChart === "max"
+            buttonEnabled: id_qml_StockChart.activeChart === "max"
             onClicked: {
-                chart.activeChart = "max";          // 改变当前图表显示模式，这里的max 实际对应update中的'else'，即2005年作为起始年
-                chart.update();                     // 更新
+                id_qml_StockChart.activeChart = "max";          // 改变当前图表显示模式，这里的max 实际对应update中的'else'，即2005年作为起始年
+                id_qml_StockChart.update();                     // 更新
             }
         }
         Button {
             id: yearButton
             text: "Year"
-            buttonEnabled: chart.activeChart === "year"
+            buttonEnabled: id_qml_StockChart.activeChart === "year"
             onClicked: {
-                chart.activeChart = "year";
-                chart.update();
+                id_qml_StockChart.activeChart = "year";
+                id_qml_StockChart.update();
             }
         }
         Button {
             id: monthButton
             text: "Month"
-            buttonEnabled: chart.activeChart === "month"
+            buttonEnabled: id_qml_StockChart.activeChart === "month"
             onClicked: {
-                chart.activeChart = "month";
-                chart.update();
+                id_qml_StockChart.activeChart = "month";
+                id_qml_StockChart.update();
             }
         }
         Button {
             id: weekButton
             text: "Week"
-            buttonEnabled: chart.activeChart === "week"
+            buttonEnabled: id_qml_StockChart.activeChart === "week"
             onClicked: {
-                chart.activeChart = "week";
-                chart.update();
+                id_qml_StockChart.activeChart = "week";
+                id_qml_StockChart.update();
             }
         }
     }
@@ -150,9 +150,9 @@ Rectangle {
             var height = 35 * canvas.height / 36;            // 垂直线的高度为画布高度的 35/36
             var yOffset = canvas.height - height;            // 垂直线离顶部距离为高度的 1/36
             var xOffset = 0;
-            for (i = 0; i < chart.gridSize; i++) {
-                ctx.moveTo(xOffset + i * chart.gridStep, yOffset);
-                ctx.lineTo(xOffset + i * chart.gridStep, height);
+            for (i = 0; i < id_qml_StockChart.gridSize; i++) {
+                ctx.moveTo(xOffset + i * id_qml_StockChart.gridStep, yOffset);
+                ctx.lineTo(xOffset + i * id_qml_StockChart.gridStep, height);
             }
             ctx.stroke();                                    // 描线
 
@@ -240,7 +240,7 @@ Rectangle {
             var end = points.length;
             var margin = 0;
 
-            if (chart.activeChart === "month" || chart.activeChart === "week") {
+            if (id_qml_StockChart.activeChart === "month" || id_qml_StockChart.activeChart === "week") {
                 margin = 8;
                 ctx.shadowOffsetX = 4;             // x方向的阴影
                 ctx.shadowBlur = 3.5;              // 模糊效果
@@ -267,10 +267,10 @@ Rectangle {
                 return;
             }
 
-            numPoints = stockModel.indexOf(chart.startDate);  // 由StockModel取得startDate到现在的数据数
+            numPoints = stockModel.indexOf(id_qml_StockChart.startDate);  // 由StockModel取得startDate到现在的数据数
 
-            if (chart.gridSize == 0)
-                chart.gridSize = numPoints                    // 使gridStep绑定到(width - canvas.tickMargin) / numPoints上
+            if (id_qml_StockChart.gridSize == 0)
+                id_qml_StockChart.gridSize = numPoints                    // 使gridStep绑定到(width - canvas.tickMargin) / numPoints上
 
             var ctx = canvas.getContext("2d");                // 创建ctx
             ctx.globalCompositeOperation = "source-over";     // 混合模式

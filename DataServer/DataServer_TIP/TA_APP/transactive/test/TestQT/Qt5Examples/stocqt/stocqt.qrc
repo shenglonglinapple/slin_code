@@ -13,5 +13,6 @@
         <file>content/images/icon-left-arrow.png</file>
         <file>content/StockSettingsPanel.qml</file>
         <file>content/StockInfo.qml</file>
+        <file>content/StockListDelegate.qml</file>
     </qresource>
 </RCC>

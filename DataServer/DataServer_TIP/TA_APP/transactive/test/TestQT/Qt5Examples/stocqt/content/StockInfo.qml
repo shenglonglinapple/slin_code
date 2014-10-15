@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {                      // 根项目是一个透明的Rectangle。为什么不用Item，我想可能是因为当时布局的时候把color设置出来可能更方便一些
-    id: root
+    id: id_qml_StockInfo
     width: 440
     height: 160
     color: "transparent"
@@ -18,7 +18,7 @@ Rectangle {                      // 根项目是一个透明的Rectangle。为�
         font.family: "Open Sans"
         font.pointSize: 38
         font.weight: Font.DemiBold
-        text: root.stock.stockId        // 类似的，对显示文本赋值
+        text: id_qml_StockInfo.stock.stockId        // 类似的，对显示文本赋值
     }
 
     Text {                            // name
@@ -32,7 +32,7 @@ Rectangle {                      // 根项目是一个透明的Rectangle。为�
         font.family: "Open Sans"
         font.pointSize: 16
         elide: Text.ElideRight
-        text: root.stock.stockName
+        text: id_qml_StockInfo.stock.stockName
     }
 
     Text {                                 // 价格
@@ -46,7 +46,7 @@ Rectangle {                      // 根项目是一个透明的Rectangle。为�
         font.family: "Open Sans"
         font.pointSize: 30
         font.weight: Font.DemiBold
-        text: root.stock.stockPrice
+        text: id_qml_StockInfo.stock.stockPrice
     }
 
     Text {                            // 价格变化
@@ -56,11 +56,11 @@ Rectangle {                      // 根项目是一个透明的Rectangle。为�
         anchors.top: price.bottom
         anchors.topMargin: 5
         horizontalAlignment: Text.AlignRight
-        color: root.stock.stockPriceChanged < 0 ? "#d40000" : "#328930"
+        color: id_qml_StockInfo.stock.stockPriceChanged < 0 ? "#d40000" : "#328930"
         font.family: "Open Sans"
         font.pointSize: 20
         font.weight: Font.Bold
-        text: root.stock.stockPriceChanged
+        text: id_qml_StockInfo.stock.stockPriceChanged
     }
 
     Text {                                 // 价格变化百分比
@@ -70,10 +70,10 @@ Rectangle {                      // 根项目是一个透明的Rectangle。为�
         anchors.top: priceChange.bottom
         anchors.topMargin: 5
         horizontalAlignment: Text.AlignRight
-        color: root.stock.stockPriceChanged < 0 ? "#d40000" : "#328930"
+        color: id_qml_StockInfo.stock.stockPriceChanged < 0 ? "#d40000" : "#328930"
         font.family: "Open Sans"
         font.pointSize: 18
         font.weight: Font.Bold
-        text: Math.abs(Math.round(root.stock.stockPriceChanged/(root.stock.stockPrice - root.stock.stockPriceChanged) * 100))/100  +"%"
+        text: Math.abs(Math.round(id_qml_StockInfo.stock.stockPriceChanged/(id_qml_StockInfo.stock.stockPrice - id_qml_StockInfo.stock.stockPriceChanged) * 100))/100  +"%"
     }
 }
