@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+//work with StockListDelegate.qml StockListModel.qml
 Rectangle
 {
     id: id_qml_StockListView
@@ -55,11 +56,32 @@ Rectangle
 
 
         onCurrentIndexChanged:
-        {                       // 当该ListView中的某个项目被选中
-            id_qml_stocqt.listViewActive = 0;                         // 切换主ListView的页面
-            id_qml_StockListView.currentStockId = model.get(currentIndex).stockId;       // 获取 Id 与 name
+        {// 当该ListView中的某个项目被选中
+
+            console.log('StockListView.qml', ' ', 'onCurrentIndexChanged',
+                        ' ','currentIndex:',m_listViewStock.currentIndex);
+
+            // 切换主ListView的页面
+            //使用了属性绑定，当listViewActive set value 0时，使currentIndex置1，从而跳转到曲线页面
+            console.log('StockListView.qml', ' ', 'onCurrentIndexChanged',
+                        ' ','update',' ',
+                        ' ','id_qml_stocqt.listViewActive:',id_qml_stocqt.listViewActive);
+            id_qml_stocqt.listViewActive = 0;//使用了属性绑定
+
+            // 获取 Id 与 name
+            //set value and emit
+            id_qml_StockListView.currentStockId = model.get(currentIndex).stockId;
+            console.log('StockListView.qml', ' ', 'onCurrentIndexChanged',
+                        ' ','update',' ','currentStockId',
+                        ' ','currentStockId:',id_qml_StockListView.currentStockId,
+                        ' ','currentStockName:',id_qml_StockListView.currentStockName);
+
             id_qml_StockListView.currentStockName = model.get(currentIndex).name;
-        }
+            console.log('StockListView.qml', ' ', 'onCurrentIndexChanged',
+                        ' ','update',' ','currentStockName',
+                        ' ','currentStockId:',id_qml_StockListView.currentStockId,
+                        ' ','currentStockName:',id_qml_StockListView.currentStockName);
+        }//onCurrentIndexChanged
 
 
 
@@ -89,9 +111,13 @@ Rectangle
             var req = requestUrl(model.get(index).stockId);   // 得到对应的股票Id
 
             if (!req)
+            {
                 return;
-
-            var xhr = new XMLHttpRequest;
+            }
+            console.log('StockListView.qml getCloseValue() XMLHttpRequest',
+                        ' ','index:',index,
+                        ' ','stockId:',model.get(index).stockId);
+            var xhr = new XMLHttpRequest();
 
             xhr.open("GET", req, true);
 
@@ -99,7 +125,25 @@ Rectangle
             {
                 if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE)
                 {
+                    //console.log('xhr.responseText:',xhr.responseText);
+                    /*
+qml: xhr.responseText: Date,Open,High,Low,Close,Volume,Adj Close
+2014-10-14,43.93,44.66,43.38,43.46,4012100,43.46
+2014-10-13,43.43,44.38,42.86,43.10,4187800,43.10
+2014-10-10,44.30,44.47,42.57,43.45,10052700,43.45
+                    */
+
+
                     var records = xhr.responseText.split('\n');
+                    //console.log('records:',records);
+                    //console.log('records.length:',records.length);
+                    /*
+qml: records: [Date,Open,High,Low,Close,Volume,Adj Close,2014-10-14,43.93,44.66,43.38,43.46,4012100,43.46,2014-10-13,43.43,44.38,42.86,43.10,4187800,43.10,2014-10-10,44.30,44.47,42.57,43.45,10052700,43.45,]
+records.length: 5
+                    */
+
+
+
                     if (records.length > 0)
                     {
                         var r = records[1].split(',');               // 第一条数据，即最新一天的数据
@@ -121,9 +165,9 @@ Rectangle
                             model.setProperty(index, "changePercentage", changePercentage.toFixed(2) + "%");
                     }
                 }
-            }
+            }//function
             xhr.send()              // 发送请求
-        }
+        }//function getCloseValue
 
 
     }//ListView

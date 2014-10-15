@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+//work with StockListDelegate.qml StockListView.qml
 ListModel
 {
     id: id_qml_StockListModel

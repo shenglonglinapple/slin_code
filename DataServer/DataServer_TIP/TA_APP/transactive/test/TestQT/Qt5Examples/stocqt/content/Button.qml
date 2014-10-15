@@ -55,7 +55,7 @@ Rectangle
     }
     Text {
         anchors.centerIn: parent
-        font.family: "Open Sans"
+        font.family: "Helvetica";//font.family: "Open Sans"
         font.pointSize: 19
         font.weight: Font.DemiBold
         color: id_qml_Button.buttonEnabled ? "#000000" : "#14aaff"

@@ -1,66 +1,75 @@
 import QtQuick 2.0
 
-Rectangle {
+Rectangle
+{
     id: id_qml_StockSettingsPanel
     width: 440
     height: 160
     color: "transparent"
 
-    property bool drawOpenPrice: openButton.buttonEnabled       // 对外的标志位
+    // 对外的标志位
+    property bool drawOpenPrice: openButton.buttonEnabled
     property bool drawClosePrice: closeButton.buttonEnabled
     property bool drawHighPrice: highButton.buttonEnabled
     property bool drawLowPrice: lowButton.buttonEnabled
 
-    property string openColor: "#face20"                   // 各曲线的颜色设置
+    // 各曲线的颜色设置
+    property string openColor: "#face20"
     property string closeColor: "#14aaff"
     property string highColor: "#80c342"
     property string lowColor: "#f30000"
-    property string volumeColor: "#14aaff"                 // 成交量绘制颜色
+    // 成交量绘制颜色
+    property string volumeColor: "#14aaff"
 
-    Text {
+    Text
+    {//"Open"
         id: openText
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.top: id_qml_StockSettingsPanel.top
         color: "#000000"
-        font.family: "Open Sans"
+        font.family: "Helvetica";//font.family: "Open Sans"
         font.pointSize: 19
         text: "Open"
     }
 
-    Text {
+    Text
+    {//"Close"
         id: closeText
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.top: openText.bottom
         anchors.topMargin: 10
         color: "#000000"
-        font.family: "Open Sans"
+        font.family: "Helvetica";//font.family: "Open Sans"
         font.pointSize: 19
         text: "Close"
     }
 
-    Text {
+    Text
+    {// "High"
         id: highText
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.top: closeText.bottom
         anchors.topMargin: 10
         color: "#000000"
-        font.family: "Open Sans"
+        font.family: "Helvetica";//font.family: "Open Sans"
         font.pointSize: 19
         text: "High"
     }
 
-    Text {
+    Text
+    {//"Low"
         id: lowText
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.top: highText.bottom
         anchors.topMargin: 10
         color: "#000000"
-        font.family: "Open Sans"
+        font.family: "Helvetica";//font.family: "Open Sans"
         font.pointSize: 19
         text: "Low"
     }
 
-    Rectangle {
+    Rectangle
+    {
         height: 4
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
@@ -70,7 +79,8 @@ Rectangle {
         color: openColor
     }
 
-    Rectangle {
+    Rectangle
+    {
         height: 4
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
@@ -80,7 +90,8 @@ Rectangle {
         color: closeColor
     }
 
-    Rectangle {
+    Rectangle
+    {
         height: 4
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
@@ -90,7 +101,8 @@ Rectangle {
         color: highColor
     }
 
-    Rectangle {
+    Rectangle
+    {
         height: 4
         anchors.left: id_qml_StockSettingsPanel.left
         anchors.leftMargin: 114
@@ -100,7 +112,8 @@ Rectangle {
         color: lowColor
     }
 
-    CheckBox {                             // 自定义的CheckBox，提供了属性buttonEnabled表明是否被checked
+    CheckBox
+    {                             // 自定义的CheckBox，提供了属性buttonEnabled表明是否被checked
         id: openButton
         buttonEnabled: false
         anchors.verticalCenter: openText.verticalCenter
@@ -108,7 +121,8 @@ Rectangle {
         anchors.rightMargin: 40
     }
 
-    CheckBox {
+    CheckBox
+    {
         id: closeButton
         buttonEnabled: false
         anchors.verticalCenter: closeText.verticalCenter
@@ -116,7 +130,8 @@ Rectangle {
         anchors.rightMargin: 40
     }
 
-    CheckBox {
+    CheckBox
+    {
         id: highButton
         buttonEnabled: true
         anchors.verticalCenter: highText.verticalCenter
@@ -124,7 +139,8 @@ Rectangle {
         anchors.rightMargin: 40
     }
 
-    CheckBox {
+    CheckBox
+    {
         id: lowButton
         buttonEnabled: true
         anchors.verticalCenter: lowText.verticalCenter

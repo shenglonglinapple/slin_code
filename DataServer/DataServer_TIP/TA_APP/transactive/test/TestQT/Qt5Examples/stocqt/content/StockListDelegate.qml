@@ -1,5 +1,6 @@
 import QtQuick 2.0
 
+//work with StockListModel.qml StockListView.qml
 Component
 {
     id: id_qml_StockListDelegate;
@@ -15,7 +16,11 @@ Component
             anchors.fill: parent;
             onClicked:
             {
-                m_listViewStock.currentIndex = index;
+                console.log('StockListDelegate.qml',
+                            ' ','onClicked:',
+                            ' ','m_listViewStock.currentIndex:', m_listViewStock.currentIndex,
+                            ' ','index:', index);
+                m_listViewStock.currentIndex = index;//where is index define?????
             }
         }
 
@@ -29,7 +34,7 @@ Component
             width: 125
             height: 40
             color: "#0c34f9"
-            font.family: "Open Sans"                // 我的机器貌似不支持这种字体
+            font.family: "Helvetica";//font.family: "Open Sans"// 我的机器貌似不支持这种字体
             font.pointSize: 20
             font.weight: Font.Bold
             verticalAlignment: Text.AlignVCenter
@@ -46,13 +51,20 @@ Component
             width: 190
             height: 40
             color: "#000000"
-            font.family: "Open Sans"
+            font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 20
             font.bold: true
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
             text: value
-            Component.onCompleted: m_listViewStock.getCloseValue(index);
+            Component.onCompleted:
+            {//value=close value
+                console.log('StockListDelegate.qml',
+                            ' ','Text value',' ',
+                            ' ','Component.onCompleted',' ',
+                            ' ','index:',index);
+                m_listViewStock.getCloseValue(index);
+            }
         }
 
         Text
@@ -65,7 +77,7 @@ Component
             width: 135
             height: 40
             color: "#328930"
-            font.family: "Open Sans"
+            font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 20
             font.bold: true
             horizontalAlignment: Text.AlignRight
@@ -75,11 +87,13 @@ Component
             {
                 if (parseFloat(text) >= 0.0)           // 正为绿色，负为红色
                 {
-                    color = "#328930";
+                    //color = "#328930";
+                    color = "green";
                 }
                 else
                 {
-                    color = "#d40000";
+                    //color = "#d40000";
+                    color = "red";
                 }
             }
         }
@@ -93,7 +107,7 @@ Component
             width: 330
             height: 30
             color: "#000000"
-            font.family: "Open Sans"
+            font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 16
             font.bold: false
             elide: Text.ElideRight
@@ -111,7 +125,7 @@ Component
             width: 120
             height: 30
             color: "#328930"
-            font.family: "Open Sans"
+            font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 18
             font.bold: false
             horizontalAlignment: Text.AlignRight

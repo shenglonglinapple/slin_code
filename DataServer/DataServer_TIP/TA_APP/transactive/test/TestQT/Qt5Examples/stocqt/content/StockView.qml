@@ -8,8 +8,8 @@ Rectangle
     height: 480
     color: "transparent"
 
-    property var m_pStock: null
-    property var m_pStocklist: null
+    property var m_data_stock_ref: null
+    property var m_page_listView_ref: null
     signal settingsClicked
 
     function update()
@@ -24,7 +24,7 @@ Rectangle
         anchors.fill: parent
 
         StockInfo
-        {                              // 提供左上方的股票信息
+        {//提供左上方的股票信息
             id: stockInfo;
             anchors.left: parent.left;
             anchors.leftMargin: 10
@@ -33,11 +33,11 @@ Rectangle
             height: 160
             anchors.right: Screen.primaryOrientation === Qt.PortraitOrientation ? parent.right : chart.left                                                                                                // 基于属性绑定的屏幕转向后布局方式的变化
             anchors.rightMargin: 20
-            stock: id_qml_StockView.m_pStock
+            m_data_stock_ref: id_qml_StockView.m_data_stock_ref
         }//StockInfo
 
         StockChart
-        {                              // 右方的曲线绘制部分
+        {//右方的曲线绘制部分
             id: chart
             anchors.bottom: Screen.primaryOrientation === Qt.PortraitOrientation ? settingsPanel.top : parent.bottom
             anchors.bottomMargin: 20
@@ -46,7 +46,7 @@ Rectangle
             anchors.right: parent.right
             anchors.rightMargin: 20
             width: Screen.primaryOrientation === Qt.PortraitOrientation ? parent.width - 40 : 0.6 * parent.width
-            stockModel: id_qml_StockView.m_pStock
+            stockModel: id_qml_StockView.m_data_stock_ref
             settings: settingsPanel
         }//StockChart
 
@@ -58,10 +58,22 @@ Rectangle
             anchors.right: Screen.primaryOrientation === Qt.PortraitOrientation ? parent.right : chart.left
             anchors.rightMargin: 20
             anchors.bottom: parent.bottom
-            onDrawOpenPriceChanged: id_qml_StockView.update()           // 更新
-            onDrawClosePriceChanged: id_qml_StockView.update();
-            onDrawHighPriceChanged: id_qml_StockView.update();
-            onDrawLowPriceChanged: id_qml_StockView.update();
+            onDrawOpenPriceChanged:
+            {
+                id_qml_StockView.update()           // 更新
+            }
+            onDrawClosePriceChanged:
+            {
+                id_qml_StockView.update();
+            }
+            onDrawHighPriceChanged:
+            {
+                id_qml_StockView.update();
+            }
+            onDrawLowPriceChanged:
+            {
+                id_qml_StockView.update();
+            }
         }//StockSettingsPanel
     }
 }
