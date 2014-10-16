@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/qmlfile">
+        <file>QtQuickFinancialEye.qml</file>
+        <file>content/TopBanner.qml</file>
+        <file>content/PageListView.qml</file>
+        <file>content/PageView.qml</file>
+        <file>content/StockListDelegate.qml</file>
+        <file>content/StockListModel.qml</file>
+        <file>content/StockListView.qml</file>
+    </qresource>
+    <qresource prefix="/imgfile">
+        <file>images/icon_left_arrow.png</file>
+        <file>images/icon_right_arrow.png</file>
+    </qresource>
+</RCC>
