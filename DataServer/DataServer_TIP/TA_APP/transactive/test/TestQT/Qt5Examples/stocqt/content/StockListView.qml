@@ -70,13 +70,13 @@ Rectangle
 
             // 获取 Id 与 name
             //set value and emit
-            id_qml_StockListView.currentStockId = model.get(currentIndex).stockId;
+            id_qml_StockListView.currentStockId = model.get(m_listViewStock.currentIndex).stockId;
             console.log('StockListView.qml', ' ', 'onCurrentIndexChanged',
                         ' ','update',' ','currentStockId',
                         ' ','currentStockId:',id_qml_StockListView.currentStockId,
                         ' ','currentStockName:',id_qml_StockListView.currentStockName);
 
-            id_qml_StockListView.currentStockName = model.get(currentIndex).name;
+            id_qml_StockListView.currentStockName = model.get(m_listViewStock.currentIndex).name;
             console.log('StockListView.qml', ' ', 'onCurrentIndexChanged',
                         ' ','update',' ','currentStockName',
                         ' ','currentStockId:',id_qml_StockListView.currentStockId,
