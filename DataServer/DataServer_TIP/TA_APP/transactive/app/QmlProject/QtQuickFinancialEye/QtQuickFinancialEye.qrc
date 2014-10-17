@@ -1,12 +1,20 @@
 <RCC>
     <qresource prefix="/qmlfile">
         <file>QtQuickFinancialEye.qml</file>
+        <file>content/Button.qml</file>
+        <file>content/PageListData.qml</file>
         <file>content/TopBanner.qml</file>
         <file>content/PageListView.qml</file>
         <file>content/PageView.qml</file>
         <file>content/StockListDelegate.qml</file>
         <file>content/StockListModel.qml</file>
         <file>content/StockListView.qml</file>
+        <file>content/StockDetailInfo.qml</file>
+        <file>content/StockDetailView.qml</file>
+        <file>content/StockPriceChart.qml</file>
+        <file>content/StockDetailInfoType.qml</file>
+        <file>content/StockPriceChartCanvas.qml</file>
+        <file>content/DataRequest.qml</file>
     </qresource>
     <qresource prefix="/imgfile">
         <file>images/icon_left_arrow.png</file>

@@ -11,8 +11,10 @@ Component
 
     Rectangle
     {
+        id:m_Rectangle_StockListDelegate;
         height: 102
         width: parent.width;
+
         color: "transparent";
 
         MouseArea
@@ -21,47 +23,81 @@ Component
             onClicked:
             {
                 console.log('StockListDelegate.qml',
-                            ' ','onClicked:',
+                            ' ','MouseArea onClicked',
                             ' ','m_listViewStock.currentIndex:', m_listViewStock.currentIndex,
                             ' ','new index:', index);
 
-                m_listViewStock.currentIndex = index;//where is index define?????
+                //if m_listViewStock.currentIndex the same as index  then will not emit currentIndexChanged
+                if (m_listViewStock.currentIndex != index)
+                {
+                    m_listViewStock.currentIndex = index;//where is index define?????
+                }
+
+                // 获取 Id 与 name
+                //set value and emit
+                m_PageListData.m_str_stockId = m_listViewStock.model.get(m_listViewStock.currentIndex).stockId;
+                m_PageListData.m_str_stockName = m_listViewStock.model.get(m_listViewStock.currentIndex).name;
+                m_PageListData.fun_setDefaultValue();
+                console.log('StockListDelegate.qml',
+                            ' ','MouseArea onClicked',
+                            ' ','m_listViewStock.currentIndex:',m_listViewStock.currentIndex,
+                            ' ','m_PageListData.m_str_stockId:',m_PageListData.m_str_stockId,
+                            ' ','m_PageListData.m_str_stockName:',m_PageListData.m_str_stockName);
+
+                //emit signal signalUpdateStockInfo
+                console.log('StockListDelegate.qml',
+                            ' ','MouseArea onClicked',
+                            ' ','emit signalUpdateStockInfo');
+                m_Mainpage_ListView.signalUpdateStockInfo();
+                //current show StockListView
+                //m_Mainpage_ListView.currentIndex = 0;
+                //then show StockDetailView  m_Mainpage_ListView.currentIndex = 1;
+                m_Mainpage_ListView.currentIndex = 1;
             }
         }
 
         Text
         {
             id: stockIdText
+
+            width: 125
+            height: 40
+
             anchors.top: parent.top
             anchors.topMargin: 15
             anchors.left: parent.left
             anchors.leftMargin: 15
-            width: 125
-            height: 40
+
             color: "#0c34f9"
             font.family: "Helvetica";//font.family: "Open Sans"// 我的机器貌似不支持这种字体
             font.pointSize: 20
             font.weight: Font.Bold
             verticalAlignment: Text.AlignVCenter
+
             text: stockId
         }
 
         Text
         {
             id: stockValueText
+
+            width: 190
+            height: 40
+
             anchors.top: parent.top
             anchors.topMargin: 15
             anchors.right: parent.right
             anchors.rightMargin: 0.31 * parent.width
-            width: 190
-            height: 40
+
             color: "#000000"
             font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 20
             font.bold: true
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
+
             text: value
+
             Component.onCompleted:
             {//value=close value
                 //显示出来后调用这个函数
@@ -77,19 +113,24 @@ Component
         Text
         {
             id: stockValueChangeText
+
+            width: 135
+            height: 40
+
             anchors.top: parent.top
             anchors.topMargin: 15
             anchors.right: parent.right
             anchors.rightMargin: 20
-            width: 135
-            height: 40
+
             color: "#328930"
             font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 20
             font.bold: true
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
+
             text: change
+
             onTextChanged:
             {
                 if (parseFloat(text) >= 0.0)           // 正为绿色，负为红色
@@ -108,11 +149,14 @@ Component
         Text
         {
             id: stockNameText
+
+            width: 330
+            height: 30
+
             anchors.top: stockIdText.bottom
             anchors.left: parent.left
             anchors.leftMargin: 15
-            width: 330
-            height: 30
+
             color: "#000000"
             font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 16
@@ -120,24 +164,30 @@ Component
             elide: Text.ElideRight
             maximumLineCount: 1
             verticalAlignment: Text.AlignVCenter
+
             text: name
         }
 
         Text
         {
             id: stockValueChangePercentageText
+
+            width: 120
+            height: 30
+
             anchors.top: stockIdText.bottom
             anchors.right: parent.right
             anchors.rightMargin: 20
-            width: 120
-            height: 30
+
             color: "#328930"
             font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 18
             font.bold: false
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
+
             text: changePercentage
+
             onTextChanged:
             {
                 if (parseFloat(text) >= 0.0)
@@ -150,10 +200,13 @@ Component
         Rectangle
         {
             id: endingLine
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
+
             height: 1
             width: parent.width
+
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+
             color: "#d7d7d7"
         }
     }

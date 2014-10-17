@@ -2,24 +2,32 @@ import QtQuick 2.0
 import QtQuick.Window 2.1               
 import QtQml.Models 2.1
 
+
+//导航栏
 Rectangle
-{ // 导航栏
+{
+    //0
     id: id_qml_TopBanner
+    //1
+    width: parent.width
     height: 40
     anchors.top: parent.top
-    width: parent.width
-    color: "#000000";
 
-    property var m_MainPage_ListView_ref: null
+    //2
+    color: "#000000";
 
     //"<"
     Image
     {
+        //0
         id: m_Image_left_arrow
-        source:"qrc:///imgfile/images/icon_left_arrow.png"
+        //1
         anchors.left: id_qml_TopBanner.left
         anchors.leftMargin: 10
         anchors.verticalCenter: id_qml_TopBanner.verticalCenter
+
+        source:"qrc:///imgfile/images/icon_left_arrow.png"
+
         //第一个主页面不显示 其余页面都要显示
         //visible: m_List_PageView.currentIndex > 0 ? true : false
         visible: true
@@ -30,15 +38,15 @@ Rectangle
             onClicked:
             {
                 //0 1 2 < 3
-                if (m_MainPage_ListView_ref.currentIndex >= 0)
+                if (m_Mainpage_ListView.currentIndex >= 0)
                 {
-                    if (m_MainPage_ListView_ref.currentIndex === 0)
+                    if (m_Mainpage_ListView.currentIndex === 0)
                     {
-                        m_MainPage_ListView_ref.currentIndex = m_MainPage_ListView_ref.count - 1;//go to last page
+                        m_Mainpage_ListView.currentIndex = m_Mainpage_ListView.count - 1;//go to last page
                     }
                     else
                     {
-                       m_MainPage_ListView_ref.currentIndex = m_MainPage_ListView_ref.currentIndex - 1;
+                       m_Mainpage_ListView.currentIndex = m_Mainpage_ListView.currentIndex - 1;
                     }
                 }
 
@@ -46,11 +54,12 @@ Rectangle
                             ' ', 'Image <',
                             ' ', 'MouseArea',
                             ' ','onClicked',
-                            ' ','m_MainPage_ListView_ref.currentIndex:',m_MainPage_ListView_ref.currentIndex,
-                            ' ','m_MainPage_ListView_ref.count:',m_MainPage_ListView_ref.count);
+                            ' ','m_MainPage_ListView_ref.currentIndex:',m_Mainpage_ListView.currentIndex,
+                            ' ','m_MainPage_ListView_ref.count:',m_Mainpage_ListView.count);
             }//onClicked
         }//MouseArea
     }//Image
+
 
     //"Financial Eye"
     Item
@@ -65,7 +74,9 @@ Rectangle
         Text
         {// Stocqt
             id: m_Text_Financial_Eye
+
             anchors.verticalCenter: m_Item_text_Financial_Eye.verticalCenter
+
             color: "#ffffff"
             font.family: "Abel"
             font.pointSize: id_qml_TopBanner.height - 10
@@ -79,10 +90,12 @@ Rectangle
     Image
     {
         id: m_Image_right_arrow
-        source:"qrc:///imgfile/images/icon_right_arrow.png"
+
         anchors.right: id_qml_TopBanner.right
         anchors.leftMargin: 10
         anchors.verticalCenter: id_qml_TopBanner.verticalCenter
+
+        source:"qrc:///imgfile/images/icon_right_arrow.png"
         //第一个主页面不显示 其余页面都要显示
         //visible: m_List_PageView.currentIndex > 0 ? true : false
         visible: true
@@ -92,18 +105,16 @@ Rectangle
             anchors.fill: parent
             onClicked:
             {
-
-
                 //0 1 2 < 3
-                if (m_MainPage_ListView_ref.currentIndex < m_MainPage_ListView_ref.count)
+                if (m_Mainpage_ListView.currentIndex < m_Mainpage_ListView.count)
                 {
-                    if (m_MainPage_ListView_ref.currentIndex === m_MainPage_ListView_ref.count - 1)
+                    if (m_Mainpage_ListView.currentIndex === m_Mainpage_ListView.count - 1)
                     {
-                        m_MainPage_ListView_ref.currentIndex = 0;//back to begin page
+                        m_Mainpage_ListView.currentIndex = 0;//back to begin page
                     }
                     else
                     {
-                       m_MainPage_ListView_ref.currentIndex = m_MainPage_ListView_ref.currentIndex + 1;
+                       m_Mainpage_ListView.currentIndex = m_Mainpage_ListView.currentIndex + 1;
                     }
                 }
 
@@ -111,8 +122,8 @@ Rectangle
                             ' ', 'Image >',
                             ' ', 'MouseArea',
                             ' ','onClicked',
-                            ' ','m_MainPage_ListView_ref.currentIndex:',m_MainPage_ListView_ref.currentIndex,
-                            ' ','m_MainPage_ListView_ref.count:',m_MainPage_ListView_ref.count);
+                            ' ','m_MainPage_ListView_ref.currentIndex:',m_Mainpage_ListView.currentIndex,
+                            ' ','m_MainPage_ListView_ref.count:',m_Mainpage_ListView.count);
 
             }//onClicked
 

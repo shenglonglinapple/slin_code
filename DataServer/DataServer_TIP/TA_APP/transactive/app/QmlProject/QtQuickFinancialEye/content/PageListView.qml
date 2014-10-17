@@ -27,6 +27,16 @@ ListView
 
     currentIndex: 0;
 
+    /*
+      StockListDelegate.qml
+      MouseArea onClicked
+      emit signalUpdateStockInfo;
+
+
+    */
+    //信号 向服务器发请求 获取当前股票信息
+    signal signalUpdateStockInfo;
+
     onCurrentIndexChanged:
     {
         console.log('MainPage.qml',
@@ -48,12 +58,13 @@ ListView
             id: m_page_StockListView
             width: id_qml_MainPage.width
             height: id_qml_MainPage.height;
+            //m_Mainpage_ListView_ref:id_qml_MainPage;
         }
 
         //index=1
-        PageView
+        StockDetailView
         {//曲线页面
-            id: m_page_PageView_1;
+            id: m_page_StockDetailView;
             width: id_qml_MainPage.width
             height: id_qml_MainPage.height
         }
