@@ -6,6 +6,26 @@ ListModel
     //big first
     id:id_qml_CurrentUserStockData;
 
+
+    //
+    /*
+    ListElement
+    {
+            "m_str_date": recordTmp[0],
+            "m_str_open":recordTmp[1],
+            "m_str_high":recordTmp[2],
+            "m_str_low":recordTmp[3],
+            "m_str_close":recordTmp[4],
+            "m_str_volume":recordTmp[5],
+            "m_str_adjusted":recordTmp[6]
+    }
+    */
+    /*
+    Date,Open,High,Low,Close,Volume,Adj Close
+    2010-08-23,9.00,9.08,8.91,8.91,13309700,7.29  lastdate first
+    2010-08-20,9.07,9.16,9.04,9.09,15380200,7.44
+    */
+
     //
     property string m_n_Name_current:"";//股票名
     property string m_x_Stock_Exchange_current:"";//交易所
@@ -26,17 +46,13 @@ ListModel
     property string m_v_Volume_current: "";//
     property string m_a2_Average_Daily_Volume_current: "";//
     //
-    property string m_str_stockDataCycle: "d";//数据周期
+    property string m_str_HistoryDataCycle: "d";//数据周期  d m y
+    property real m_n_HistoryDataTimeCount: 30;//总时间长度为30天， bar类型d
     property bool m_bool_HistoryDataReady: false;//标志位
     //
     signal signalHistoryDataReady//耗时的数据类通常需要定义这个信号
 
 
-    ///
-    function fun_setDefaultValue()
-    {
-
-    }
 
 
 
@@ -189,6 +205,157 @@ ListModel
         varReturnValue = true;
         return varReturnValue;
     }//function fun_Update_RealTimeInfo_Current()
+
+
+    function fun_createListElement(recordTmp)
+    {// 存储数据对象函数
+        // 用来接收下面分离的7位数据，以类似结构体的形式存储下来
+        // 这也是该model真正存储的数据类型格式
+        //Date,Open,High,Low,Close,Volume,Adj Close
+        //2014-10-13,101.33,101.78,99.81,99.81,53485500,99.81
+        return {
+            "m_str_date": recordTmp[0],
+            "m_str_open":recordTmp[1],
+            "m_str_high":recordTmp[2],
+            "m_str_low":recordTmp[3],
+            "m_str_close":recordTmp[4],
+            "m_str_volume":recordTmp[5],
+            "m_str_adjusted":recordTmp[6]
+        };
+    }
+
+    function fun_Update_HistoryInfo_Current()
+    {
+        var varReturnValue = false;
+        var symbolTmp = "";
+        var varRequest = "";
+
+        //标志位置false
+        id_qml_CurrentUserStockData.m_bool_HistoryDataReady = false;
+        //数据清空
+        id_qml_CurrentUserStockData.clear();
+
+
+        symbolTmp = m_s_Symbol_current;
+        //check
+        if (symbolTmp.length <= 0)
+        {
+            console.error('CurrentUserStockData.qml',
+                        ' ','fun_Update_HistoryInfo_Current',
+                        ' ','m_s_Symbol_current is empty');
+            varReturnValue = false;
+            return varReturnValue;
+        }
+
+
+        if (m_str_HistoryDataCycle !== "d" && m_str_HistoryDataCycle !== "m" && m_str_HistoryDataCycle !== "y")
+        {
+            m_str_HistoryDataCycle = "d";// 如果数据周期不是'天'、'周'、'月'，则定义为'天'
+        }
+        if (m_str_HistoryDataCycle == "d")
+        {
+            varRequest = m_YahooHistoryReqAck.fun_create_request_x_day(symbolTmp, m_n_HistoryDataTimeCount);
+        }
+        //TODO....
+
+
+        if (varRequest.length <= 0)
+        {
+            varReturnValue = false;
+            return varReturnValue;
+        }
+        console.log("CurrentUserStockData.qml",
+                    " ","fun_Update_HistoryInfo_Current:",
+                    " ","XMLHttpRequest:",
+                    " ",varRequest);
+
+        //初始化请求参数，还未发送请求
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", varRequest, true);
+
+        xhr.onreadystatechange = function()
+        {
+            console.log("CurrentUserStockData.qml",
+                        " ","fun_Update_HistoryInfo_Current:",
+                        " ","xhr.readyState:",
+                        " ",xhr.readyState);
+
+            if (xhr.readyState === XMLHttpRequest.DONE)
+            //if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE)
+            {
+
+                console.log("CurrentUserStockData.qml",
+                            " ","fun_Update_HistoryInfo_Current:",
+                            " ","xhr.responseText:",
+                            " ",xhr.responseText);
+
+
+                var varVariableLst = m_YahooHistoryReqAck.fun_process_responseText_Historical_HeaderBody(xhr.responseText);
+
+                /*
+                console.log("CurrentUserStockData.qml",
+                            " ","fun_Update_HistoryInfo_Current:",
+                            " ","varVariableLst.length:",
+                            " ",varVariableLst.length,
+                            " ","varVariableLst:", varVariableLst);
+                */
+
+                //body begin with 1
+                for (var nIndex = 1;nIndex < varVariableLst.length; nIndex++ )
+                {
+                    // 以逗号将数据分割
+                    var varRecodeVariableLst = m_YahooHistoryReqAck.fun_process_responseText_Historical_BodyLine(
+                                varVariableLst[nIndex]);
+                    //var recodeTmp = records[nIndex].split(',');
+                    // 数据校验
+                    if (varRecodeVariableLst.length === 7)
+                    {
+                        // 函数调用，向model中添加数据
+                        id_qml_CurrentUserStockData.append(
+                                    id_qml_CurrentUserStockData.fun_createListElement(
+                                        varRecodeVariableLst));
+                    }
+                    else
+                    {
+                        console.error("CurrentUserStockData.qml",
+                                    " ","fun_Update_HistoryInfo_Current:",
+                                    " ","nIndex:",nIndex,
+                                    " ","varRecodeVariableLst.length:",varRecodeVariableLst.length,
+                                    " ","is not 7",
+                                    " ","varVariableLst[nIndex]:", varVariableLst[nIndex]);
+                    }
+                }
+
+                if (xhr.readyState === XMLHttpRequest.DONE)
+                {
+                    id_qml_CurrentUserStockData.m_bool_HistoryDataReady = true;
+                    console.log("CurrentUserStockData.qml",
+                                " ","fun_Update_HistoryInfo_Current:",
+                                " ","id_qml_CurrentUserStockData.count:",
+                                " ",id_qml_CurrentUserStockData.count,
+                                " ","emit signalHistoryDataReady");
+                    //id_qml_CurrentUserStockData.count;
+                    id_qml_CurrentUserStockData.signalHistoryDataReady();//emit signalHistoryDataReady
+
+                }//if (xhr.readyState === XMLHttpRequest.DONE)
+
+
+            }//if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE)
+
+            console.log("CurrentUserStockData.qml",
+                        " ","HistoryInfo xhr.onreadystatechange = function()  return");
+        }//function
+
+
+        //发送请求
+        xhr.send();
+
+        console.log("CurrentUserStockData.qml",
+                    " ","fun_Update_HistoryInfo_Current() return");
+
+        varReturnValue = true;
+        return varReturnValue;
+    }//function fun_Update_HistoryInfo_Current()
 
 
 

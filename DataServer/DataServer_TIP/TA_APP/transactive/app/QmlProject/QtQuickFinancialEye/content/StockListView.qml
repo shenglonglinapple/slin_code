@@ -6,8 +6,8 @@ import QtQml.Models 2.1
 Rectangle
 {
     id: id_qml_StockListView
-    width: 320
-    height: 410
+
+    width:parent.width;
     anchors.top: parent.top
     anchors.bottom: parent.bottom
 
@@ -48,17 +48,18 @@ Rectangle
         //0
         id: m_listViewStock;
         //1
-        width: parent.width
+        width:parent.width;
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom;
+        //anchors.fill: parent
 
-        anchors.fill: parent
-
-        clip: true                            // clip以延时加载数据
+        clip: true// clip以延时加载数据
         keyNavigationWraps: true
         highlightMoveDuration: 0
         focus: true
         snapMode: ListView.SnapToItem
-        model: m_listModel;                 // 定义model
-        delegate: m_listDelegate;
+        model: m_listModel; // 定义model
+        delegate: m_listDelegate;//显示Item
         highlight: m_Component_highlight;
         currentIndex: 0;
 

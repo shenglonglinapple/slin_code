@@ -12,8 +12,10 @@ Component
     Rectangle
     {
         id:m_Rectangle_StockListDelegate;
-        height: 102
+
         width: parent.width;
+        height: 128
+
 
         color: "transparent";
 
@@ -57,18 +59,19 @@ Component
 
         //
         Text
-        {
+        {//Symbol
             id: m_Text_Symbol
 
-            width: 125
-            height: 40
+            width: 128
+            height: 32
 
             anchors.top: parent.top
             anchors.topMargin: 15
             anchors.left: parent.left
             anchors.leftMargin: 15
 
-            color: "#0c34f9"
+            //color: "#0c34f9"
+            color:"blue"
             font.family: "Helvetica";//font.family: "Open Sans"// 我的机器貌似不支持这种字体
             font.pointSize: 20
             font.weight: Font.Bold
@@ -98,19 +101,44 @@ Component
 
         }//Text
 
+
+        Text
+        {//Name
+            id: m_Text_Name
+
+            width: 256
+            height: 32
+
+            anchors.top: m_Text_Symbol.bottom
+            anchors.left: parent.left
+            anchors.leftMargin: 15
+
+            //color: "#000000"
+            color:"blue"
+            font.family: "Helvetica";//font.family: "Open Sans"
+            font.pointSize: 16
+            font.bold: false
+            elide: Text.ElideRight
+            maximumLineCount: 1
+            verticalAlignment: Text.AlignVCenter
+
+            text: m_n_Name
+        }//Text
+
         Text
         {
             id: m_Text_LastTradePriceOnly
 
-            width: 190
-            height: 40
+            width: 256
+            height: 32
 
             anchors.top: parent.top
-            anchors.topMargin: 15
+            anchors.topMargin: 0.3 * parent.height
             anchors.right: parent.right
             anchors.rightMargin: 0.31 * parent.width
 
-            color: "#000000"
+            //color: "#000000"
+            color: m_c6_Change_Realtime < 0 ? "red" : "green"
             font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 20
             font.bold: true
@@ -129,15 +157,16 @@ Component
         {
             id: m_Text_ChangeRealtime
 
-            width: 135
-            height: 40
+            width: 128
+            height: 32
 
             anchors.top: parent.top
             anchors.topMargin: 15
             anchors.right: parent.right
             anchors.rightMargin: 20
 
-            color: "#328930"
+            //color: "#328930"
+            color: m_c6_Change_Realtime < 0 ? "red" : "green"
             font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 20
             font.bold: true
@@ -150,6 +179,7 @@ Component
 
             onTextChanged:
             {
+                /*
                 if (parseFloat(text) >= 0.0)           // 正为绿色，负为红色
                 {
                     //color = "#328930";
@@ -160,45 +190,26 @@ Component
                     //color = "#d40000";
                     color = "red";
                 }
+                */
+
             }
         }
 
-        Text
-        {
-            id: m_Text_Name
 
-            width: 330
-            height: 30
-
-            anchors.top: m_Text_Symbol.bottom
-            anchors.left: parent.left
-            anchors.leftMargin: 15
-
-            color: "#000000"
-            font.family: "Helvetica";//font.family: "Open Sans"
-            font.pointSize: 16
-            font.bold: false
-            elide: Text.ElideRight
-            maximumLineCount: 1
-            verticalAlignment: Text.AlignVCenter
-
-            text: m_n_Name
-
-
-        }
 
         Text
         {
             id: m_Text_ChangeInPercent
 
-            width: 120
-            height: 30
+            width: 128
+            height: 32
 
             anchors.top: m_Text_Symbol.bottom
             anchors.right: parent.right
             anchors.rightMargin: 20
 
-            color: "#328930"
+            //color: "#328930"
+            color: m_c6_Change_Realtime < 0 ? "red" : "green"
             font.family: "Helvetica";//font.family: "Open Sans"
             font.pointSize: 18
             font.bold: false
@@ -210,25 +221,29 @@ Component
 
             onTextChanged:
             {
+                /*
                 if (parseFloat(text) >= 0.0)
                     color = "#328930";
                 else
                     color = "#d40000";
+                */
             }
         }
 
+        //Item diff line
         Rectangle
         {
             id: endingLine
 
             height: 1
-            width: parent.width
+            width: m_Rectangle_StockListDelegate.width
 
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
+            anchors.bottom: m_Rectangle_StockListDelegate.bottom
+            anchors.left: m_Rectangle_StockListDelegate.left
 
             color: "#d7d7d7"
         }
-    }
+
+    }//Rectangle Item
 
 }//Component mvc_delegate

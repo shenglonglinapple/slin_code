@@ -47,6 +47,7 @@ ListView
         if (1 == id_qml_MainPage.currentIndex)
         {
             m_CurrentUserStockData.fun_Update_RealTimeInfo_Current();
+            //m_CurrentUserStockData.fun_Update_HistoryInfo_Current();
         }
 
     }
