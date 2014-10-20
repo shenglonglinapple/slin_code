@@ -12,10 +12,10 @@ Rectangle
 
 
     //UI
-    StockDetailInfoType
+    StockDataCycleWindow
     {
         //0
-        id:m_StockDetailInfoType;
+        id:m_StockDataCycleWindow;
         //1
         width: id_qml_StockPriceChart.width
         //height: 200

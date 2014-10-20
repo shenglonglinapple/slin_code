@@ -49,17 +49,17 @@ Rectangle
 
         onPaint:
         {// 绘制入口
-            if (!m_PageListData.m_bool_ready)
+            if (!m_CurrentUserStockData.m_bool_ready)
             {// 等待数据完成
                 return;
             }
             console.log('StockPriceChartPrice.qml',
                         ' ','onPaint:',
-                        ' ','m_PageListData.m_bool_ready:',m_PageListData.m_bool_ready);
+                        ' ','m_CurrentUserStockData.m_bool_ready:',m_CurrentUserStockData.m_bool_ready);
 
             // 由StockModel取得startDate到现在的数据数
-            //m_canvas.m_n_TotalPoints = m_PageListData.indexOf(id_qml_StockPriceChartPrice.m_Date_startDate);
-            m_canvas.m_n_TotalPoints = m_PageListData.count;
+            //m_canvas.m_n_TotalPoints = m_CurrentUserStockData.indexOf(id_qml_StockPriceChartPrice.m_Date_startDate);
+            m_canvas.m_n_TotalPoints = m_CurrentUserStockData.count;
 
             /*qml: StockChart.qml   onPaint:   id_qml_StockChart.startDate: Tue Oct 15 2013   m_canvas.numPoints: 251*/
             console.log('StockPriceChartPrice.qml',' ','onPaint:',
@@ -89,7 +89,7 @@ Rectangle
             var points = [];// 创建一个数组
             for (var i = m_n_TotalPoints, j = 0; i >= 0 ; i -= m_canvas.pixelSkip, j += m_canvas.pixelSkip)
             {// pixelSkip被定义为 1
-                var price = m_PageListData.get(i);
+                var price = m_CurrentUserStockData.get(i);
 
                 // 得到最高价
                 if (parseFloat(highestPrice) < parseFloat(price.high))

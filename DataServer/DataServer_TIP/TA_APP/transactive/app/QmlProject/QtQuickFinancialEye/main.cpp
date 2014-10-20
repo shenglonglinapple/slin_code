@@ -4,6 +4,7 @@
 #include <QDir>
 //Not using QQmlApplicationEngine because many examples don't have a Window{}
 #include <QQuickView>
+#include "src/quotetypevalue.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,6 +12,8 @@ int main(int argc, char* argv[])
     app.setOrganizationName("Qt Project");
     app.setOrganizationDomain("qt-project.org");
     app.setApplicationName(QFileInfo(app.applicationFilePath()).baseName());
+
+    QuoteTypeValue::declareQML();
 
     QQuickView view;
     if (qgetenv("QT_QUICK_CORE_PROFILE").toInt())

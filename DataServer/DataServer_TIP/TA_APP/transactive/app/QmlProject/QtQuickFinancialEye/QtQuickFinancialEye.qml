@@ -40,28 +40,33 @@ Rectangle
         anchors.top: m_TopBanner.bottom;
         anchors.bottom: parent.bottom;
         //
-        onSignalUpdateStockInfo:
+        onSignalUpdateCurrentUserStockData:
         {
             //emit signal signalUpdateStockInfo
             console.log('QtQuickFinancialEye.qml',
-                        ' ','PageListView onSignalUpdateStockInfo',
-                        ' ','slot signalUpdateStockInfo');
+                        ' ','PageListView onSignalUpdateCurrentUserStockData',
+                        ' ','slot signalUpdateCurrentUserStockData');
 
-            m_PageListData.fun_setDefaultValue();
+            m_CurrentUserStockData.fun_Update_RealTimeInfo_Current();
 
         }
     }
 
-    //
-    PageListData
+
+    CurrentUserStockData
     {
-        //0
-        id:m_PageListData;
-        //no width height
         //
+        id:m_CurrentUserStockData;
+        //
+        //no width height
+    }
 
 
 
+    //data
+    YahooRealTimeReqAck
+    {
+        id: m_YahooRealTimeReqAck;//这些都是全局变量
     }
 
     //////////////////////////////////////////

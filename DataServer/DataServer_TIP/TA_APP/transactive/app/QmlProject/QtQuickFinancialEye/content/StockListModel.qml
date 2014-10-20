@@ -2,6 +2,47 @@ import QtQuick 2.0
 import QtQuick.Window 2.1
 import QtQml.Models 2.1
 
+
+
+ListModel
+{
+    id:id_qml_StockListModel;
+    //
+    ListElement
+    {
+        m_n_Name: "Apple Inc.";
+        m_s_Symbol: "AAPL";
+        m_l1_Last_Trade_Price_Only: "0.0";
+        m_c6_Change_Realtime: "0.0";
+        m_p2_Change_in_Percent: "0%"
+
+    }
+    //
+    ListElement
+    {
+        m_n_Name: "Adobe Systems Inc.";
+        m_s_Symbol: "ADBE";
+        m_l1_Last_Trade_Price_Only: "0.0";
+        m_c6_Change_Realtime: "0.0";
+        m_p2_Change_in_Percent: "0%"
+    }
+    //
+    ListElement
+    {
+        m_n_Name: "Analog Devices, Inc.";
+        m_s_Symbol: "ADI";
+        m_l1_Last_Trade_Price_Only: "0.0";
+        m_c6_Change_Realtime: "0.0";
+        m_p2_Change_in_Percent: "0%"
+    }
+
+}//ListModel
+
+
+
+
+
+/*
 //work with StockListDelegate.qml StockListView.qml
 ListModel
 {
@@ -117,4 +158,4 @@ ListModel
 }
 
 
-
+*/

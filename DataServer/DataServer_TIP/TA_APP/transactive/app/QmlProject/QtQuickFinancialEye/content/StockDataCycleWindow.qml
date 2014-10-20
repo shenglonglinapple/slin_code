@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Rectangle
 {
-    id: id_qml_StockDetailInfoType
+    id: id_qml_StockDataCycleWindow
 
     width: 320
     height: 200

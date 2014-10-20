@@ -19,9 +19,9 @@ Rectangle
         color: "transparent"
         anchors.fill: parent
 
-        StockDetailInfo
+        StockDataRealTimeWindow
         {//提供左上方的股票信息
-            id: m_StockDetailInfo;
+            id: m_StockDataRealTimeWindow;
 
             height: 160;
 
@@ -43,7 +43,7 @@ Rectangle
 
             anchors.bottom: Screen.primaryOrientation === Qt.PortraitOrientation ? settingsPanel.top : parent.bottom
             anchors.bottomMargin: 1
-            anchors.top : Screen.primaryOrientation === Qt.PortraitOrientation ? m_StockDetailInfo.bottom : parent.top
+            anchors.top : Screen.primaryOrientation === Qt.PortraitOrientation ? m_StockDataRealTimeWindow.bottom : parent.top
             anchors.topMargin: 1
             anchors.right: parent.right
             anchors.rightMargin: 1

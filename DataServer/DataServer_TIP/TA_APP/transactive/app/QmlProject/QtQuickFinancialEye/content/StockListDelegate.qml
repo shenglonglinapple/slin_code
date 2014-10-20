@@ -35,20 +35,19 @@ Component
 
                 // 获取 Id 与 name
                 //set value and emit
-                m_PageListData.m_str_stockId = m_listViewStock.model.get(m_listViewStock.currentIndex).stockId;
-                m_PageListData.m_str_stockName = m_listViewStock.model.get(m_listViewStock.currentIndex).name;
-                m_PageListData.fun_setDefaultValue();
+                m_CurrentUserStockData.m_s_Symbol_current = m_listViewStock.model.get(m_listViewStock.currentIndex).m_s_Symbol;
+
                 console.log('StockListDelegate.qml',
                             ' ','MouseArea onClicked',
                             ' ','m_listViewStock.currentIndex:',m_listViewStock.currentIndex,
-                            ' ','m_PageListData.m_str_stockId:',m_PageListData.m_str_stockId,
-                            ' ','m_PageListData.m_str_stockName:',m_PageListData.m_str_stockName);
+                            ' ','m_CurrentUserStockData.m_s_Symbol_current:',m_CurrentUserStockData.m_s_Symbol_current);
 
                 //emit signal signalUpdateStockInfo
                 console.log('StockListDelegate.qml',
                             ' ','MouseArea onClicked',
-                            ' ','emit signalUpdateStockInfo');
-                m_Mainpage_ListView.signalUpdateStockInfo();
+                            ' ','emit signalUpdateCurrentUserStockData');
+                m_Mainpage_ListView.signalUpdateCurrentUserStockData();
+
                 //current show StockListView
                 //m_Mainpage_ListView.currentIndex = 0;
                 //then show StockDetailView  m_Mainpage_ListView.currentIndex = 1;
@@ -56,9 +55,10 @@ Component
             }
         }
 
+        //
         Text
         {
-            id: stockIdText
+            id: m_Text_Symbol
 
             width: 125
             height: 40
@@ -74,12 +74,33 @@ Component
             font.weight: Font.Bold
             verticalAlignment: Text.AlignVCenter
 
-            text: stockId
-        }
+            text: m_s_Symbol                      
+
+
+            Component.onCompleted:
+            {
+                console.log('StockListDelegate.qml',
+                            ' ','Text m_s_Symbol',' ',
+                            ' ','Component.onCompleted',' ',
+                            ' ','index:',index,
+                            ' ','m_s_Symbol:',m_s_Symbol);
+
+
+                m_page_StockListView.fun_Update_RealTimeInfo_byindex(index);
+
+                //set CurrentUserStockData default value
+                if (0 == index)
+                {
+                    m_CurrentUserStockData.m_s_Symbol_current = m_s_Symbol;
+                }
+
+            }//Component.onCompleted:
+
+        }//Text
 
         Text
         {
-            id: stockValueText
+            id: m_Text_LastTradePriceOnly
 
             width: 190
             height: 40
@@ -96,23 +117,17 @@ Component
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
 
-            text: value
+            text: m_l1_Last_Trade_Price_Only
 
             Component.onCompleted:
-            {//value=close value
+            {
                 //显示出来后调用这个函数
-                console.log('StockListDelegate.qml',
-                            ' ','Text value',' ',
-                            ' ','Component.onCompleted',' ',
-                            ' ','index:',index);
-
-                //m_listViewStock.getCloseValue(index);
             }
         }
 
         Text
         {
-            id: stockValueChangeText
+            id: m_Text_ChangeRealtime
 
             width: 135
             height: 40
@@ -129,7 +144,9 @@ Component
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
 
-            text: change
+            text: m_c6_Change_Realtime
+
+
 
             onTextChanged:
             {
@@ -148,12 +165,12 @@ Component
 
         Text
         {
-            id: stockNameText
+            id: m_Text_Name
 
             width: 330
             height: 30
 
-            anchors.top: stockIdText.bottom
+            anchors.top: m_Text_Symbol.bottom
             anchors.left: parent.left
             anchors.leftMargin: 15
 
@@ -165,17 +182,19 @@ Component
             maximumLineCount: 1
             verticalAlignment: Text.AlignVCenter
 
-            text: name
+            text: m_n_Name
+
+
         }
 
         Text
         {
-            id: stockValueChangePercentageText
+            id: m_Text_ChangeInPercent
 
             width: 120
             height: 30
 
-            anchors.top: stockIdText.bottom
+            anchors.top: m_Text_Symbol.bottom
             anchors.right: parent.right
             anchors.rightMargin: 20
 
@@ -186,7 +205,8 @@ Component
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
 
-            text: changePercentage
+            text: m_p2_Change_in_Percent
+
 
             onTextChanged:
             {

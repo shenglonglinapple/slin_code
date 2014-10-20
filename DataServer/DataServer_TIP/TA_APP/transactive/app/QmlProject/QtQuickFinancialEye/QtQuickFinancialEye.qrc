@@ -9,12 +9,14 @@
         <file>content/StockListDelegate.qml</file>
         <file>content/StockListModel.qml</file>
         <file>content/StockListView.qml</file>
-        <file>content/StockDetailInfo.qml</file>
+        <file>content/StockDataRealTimeWindow.qml</file>
         <file>content/StockDetailView.qml</file>
         <file>content/StockPriceChart.qml</file>
-        <file>content/StockDetailInfoType.qml</file>
+        <file>content/StockDataCycleWindow.qml</file>
         <file>content/StockPriceChartCanvas.qml</file>
-        <file>content/DataRequest.qml</file>
+        <file>content/YahooRealTimeReqAck.qml</file>
+        <file>content/CurrentUserStockData.qml</file>
+        <file>content/YahooHistoryReqAck.qml</file>
     </qresource>
     <qresource prefix="/imgfile">
         <file>images/icon_left_arrow.png</file>

@@ -34,8 +34,8 @@ ListView
 
 
     */
-    //信号 向服务器发请求 获取当前股票信息
-    signal signalUpdateStockInfo;
+    //信号 向服务器发请求 获取当前股票信息realtime history
+    signal signalUpdateCurrentUserStockData;
 
     onCurrentIndexChanged:
     {
@@ -44,7 +44,11 @@ ListView
                     ' ','id_qml_MainPage.currentIndex:',id_qml_MainPage.currentIndex,
                     ' ','id_qml_MainPage.count:',id_qml_MainPage.count);
 
-        //id_qml_MainPage.count;
+        if (1 == id_qml_MainPage.currentIndex)
+        {
+            m_CurrentUserStockData.fun_Update_RealTimeInfo_Current();
+        }
+
     }
 
 
