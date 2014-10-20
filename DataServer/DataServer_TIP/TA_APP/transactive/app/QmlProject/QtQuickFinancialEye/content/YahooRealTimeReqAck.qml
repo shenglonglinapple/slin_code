@@ -115,7 +115,8 @@ Description: Could not process this "GET" request.
             //""Apple "
             //Inc."
 
-            varVariableLst[17] = varVariableLst[17] +","+ varVariableLst[18];
+            //varVariableLst[17] = varVariableLst[17] +","+ varVariableLst[18];
+            varVariableLst[17] = varVariableLst[17] +". Inc";
         }
 
         for (var nIndex = 0; nIndex < varVariableLst.length; nIndex++)

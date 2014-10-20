@@ -37,6 +37,7 @@ Rectangle
         {
             id:m_Rectangle_highlight;
             width: parent.width
+            height: 128
             color: "#eeeeee";
             //color: "lightsteelblue";
             //color: "red";

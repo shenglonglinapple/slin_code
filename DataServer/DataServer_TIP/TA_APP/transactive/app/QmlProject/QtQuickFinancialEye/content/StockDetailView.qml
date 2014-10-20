@@ -35,7 +35,7 @@ Rectangle
 
         /*
         StockPriceChart
-        {//右方的曲线绘制部分
+        {//曲线绘制部分
             id: m_StockPriceChart
 
             //基于属性绑定的屏幕转向后布局方式的变化
