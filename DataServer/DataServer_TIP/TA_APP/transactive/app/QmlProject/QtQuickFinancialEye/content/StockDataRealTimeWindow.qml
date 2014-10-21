@@ -5,7 +5,7 @@ Rectangle
     id: id_qml_StockDataRealTimeWindow
 
     width:parent.width;
-    height: 256;
+    height: m_Item_Text_Symbol.height + m_Item_Text_LastTradePrice.height;
     anchors.top: parent.top
     anchors.left: parent.left;
 

@@ -53,6 +53,10 @@ ListView
     }
 
 
+    function fun_update()
+    {
+        m_page_StockDetailView.fun_update();
+    }
 
     model: ObjectModel
     {

@@ -11,9 +11,8 @@
         <file>content/StockListView.qml</file>
         <file>content/StockDataRealTimeWindow.qml</file>
         <file>content/StockDetailView.qml</file>
-        <file>content/StockPriceChart.qml</file>
-        <file>content/StockDataCycleWindow.qml</file>
-        <file>content/StockPriceChartCanvas.qml</file>
+        <file>content/ChooseHistoryDataTypeWindow.qml</file>
+        <file>content/HistoryDataGraphWindow.qml</file>
         <file>content/YahooRealTimeReqAck.qml</file>
         <file>content/CurrentUserStockData.qml</file>
         <file>content/YahooHistoryReqAck.qml</file>

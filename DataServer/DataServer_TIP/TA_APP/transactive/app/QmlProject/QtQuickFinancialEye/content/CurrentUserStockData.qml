@@ -46,8 +46,9 @@ ListModel
     property string m_v_Volume_current: "";//
     property string m_a2_Average_Daily_Volume_current: "";//
     //
-    property string m_str_HistoryDataCycle: "d";//数据周期  d m y
-    property real m_n_HistoryDataTimeCount: 30;//总时间长度为30天， bar类型d
+    property string m_str_HistoryDataCycle: "m";//数据周期  d m y
+    property real m_n_HistoryDataTimeCount: 1;//总时间长度为30天， bar类型d
+    property string m_str_HistoryDataTimeCount: "1m";//数据周期  d m y
     property bool m_bool_HistoryDataReady: false;//标志位
     //
     signal signalHistoryDataReady//耗时的数据类通常需要定义这个信号
@@ -255,6 +256,14 @@ ListModel
         if (m_str_HistoryDataCycle == "d")
         {
             varRequest = m_YahooHistoryReqAck.fun_create_request_x_day(symbolTmp, m_n_HistoryDataTimeCount);
+        }
+        if (m_str_HistoryDataCycle == "m")
+        {
+            varRequest = m_YahooHistoryReqAck.fun_create_request_x_month(symbolTmp, m_n_HistoryDataTimeCount);
+        }
+        if (m_str_HistoryDataCycle == "y")
+        {
+            varRequest = m_YahooHistoryReqAck.fun_create_request_x_year(symbolTmp, m_n_HistoryDataTimeCount);
         }
         //TODO....
 

@@ -59,6 +59,11 @@ Rectangle
         id:m_CurrentUserStockData;
         //
         //no width height
+        onSignalHistoryDataReady:
+        {
+            m_CurrentUserStockData.m_bool_HistoryDataReady = true;
+            m_Mainpage_ListView.fun_update();
+        }
     }
 
 

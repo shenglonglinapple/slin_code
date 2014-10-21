@@ -168,7 +168,7 @@ Rectangle
                     m_listViewStock.model.setProperty(index, "m_c6_Change_Realtime",varValueTmp);
                     varValueTmp = varVariableLst[3];
                     m_listViewStock.model.setProperty(index, "m_p2_Change_in_Percent",varValueTmp);
-                    varValueTmp = varVariableLst[14];
+                    varValueTmp = varVariableLst[13];
                     m_listViewStock.model.setProperty(index, "m_l1_Last_Trade_Price_Only",varValueTmp);
                     varValueTmp = varVariableLst[17];
                     console.log("StockListView.qml"," ","varValueTmp==",varValueTmp);
