@@ -50,6 +50,13 @@ ListModel
     property real m_n_HistoryDataTimeCount: 1;//总时间长度为30天， bar类型d
     property string m_str_HistoryDataTimeCount: "1m";//数据周期  d m y
     property bool m_bool_HistoryDataReady: false;//标志位
+
+    //
+    property real m_n_HistoryRequest_StartTime_MillSeconds: 0;
+    property real m_n_HistoryRequest_EndTime_MillSeconds: 0;
+    property string m_str_HistoryRequest_StartTime: "ddd yyyy-MM-dd hh:mm:ss";
+    property string m_str_HistoryRequest_EndTime: "ddd yyyy-MM-dd hh:mm:ss";
+
     //
     signal signalHistoryDataReady//耗时的数据类通常需要定义这个信号
 
@@ -230,6 +237,12 @@ ListModel
         var varReturnValue = false;
         var symbolTmp = "";
         var varRequest = "";
+        var stockDataCycle = "d";
+        var nDiffDays = 0;
+        var nDiffMonths = 0;
+        var nDiffYears = 0;
+        var varStartTime = new Date();
+        var varEndTime = new Date();// today
 
         //标志位置false
         id_qml_CurrentUserStockData.m_bool_HistoryDataReady = false;
@@ -255,15 +268,65 @@ ListModel
         }
         if (m_str_HistoryDataCycle == "d")
         {
-            varRequest = m_YahooHistoryReqAck.fun_create_request_x_day(symbolTmp, m_n_HistoryDataTimeCount);
+            //结束时间为当前时间
+            varStartTime = new Date();
+            varEndTime = new Date();// today
+            nDiffDays = m_n_HistoryDataTimeCount;
+            stockDataCycle = "d";
+            varStartTime.setDate(varStartTime.getDate() - nDiffDays);// 最近5天
+
+            varRequest = m_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(
+                        symbolTmp, varStartTime, varEndTime, stockDataCycle);
+
+            m_n_HistoryRequest_StartTime_MillSeconds = varStartTime.getTime();
+            m_n_HistoryRequest_EndTime_MillSeconds = varEndTime.getTime();
+            m_str_HistoryRequest_StartTime = varStartTime.toLocaleString();//"ddd yyyy-MM-dd hh:mm:ss"
+            m_str_HistoryRequest_EndTime = varStartTime.toLocaleString();
+            //"yyyy-MM-dd hh:mm:ss";
+            //"yyyy-MM-dd hh:mm:ss";
         }
         if (m_str_HistoryDataCycle == "m")
         {
-            varRequest = m_YahooHistoryReqAck.fun_create_request_x_month(symbolTmp, m_n_HistoryDataTimeCount);
+            //结束时间为当前时间
+            varStartTime = new Date();
+            varEndTime = new Date();// today
+            nDiffMonths = m_n_HistoryDataTimeCount;//1
+            stockDataCycle = "d";
+            varStartTime.setMonth(varStartTime.getMonth() - nDiffMonths);// 最近3月
+
+            varRequest = m_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(
+                        symbolTmp, varStartTime, varEndTime, stockDataCycle);
+            m_n_HistoryRequest_StartTime_MillSeconds = varStartTime.getTime();
+            m_n_HistoryRequest_EndTime_MillSeconds = varEndTime.getTime();
+            m_str_HistoryRequest_StartTime = varStartTime.toLocaleString();//"ddd yyyy-MM-dd hh:mm:ss"
+            m_str_HistoryRequest_EndTime = varStartTime.toLocaleString();
+
+            console.log("CurrentUserStockData.qml",
+                        " ","fun_Update_HistoryInfo_Current:",
+                        " ","nDiffMonths:",nDiffMonths,
+                        " ","m_HistoryRequest_StartTime:",m_n_HistoryRequest_StartTime_MillSeconds,
+                        " ","m_HistoryRequest_EndTime:",m_n_HistoryRequest_EndTime_MillSeconds,
+                        " ","m_str_HistoryRequest_StartTime:",m_str_HistoryRequest_StartTime,
+                        " ","m_str_HistoryRequest_EndTime:",m_str_HistoryRequest_EndTime);
+
         }
         if (m_str_HistoryDataCycle == "y")
         {
-            varRequest = m_YahooHistoryReqAck.fun_create_request_x_year(symbolTmp, m_n_HistoryDataTimeCount);
+            varStartTime = new Date();
+            varEndTime = new Date();// today
+            nDiffYears = m_n_HistoryDataTimeCount;
+            stockDataCycle = "d";
+
+
+            varStartTime.setFullYear(varStartTime.getFullYear() - nDiffYears);// 最近3月
+
+            varRequest = m_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(
+                        symbolTmp, varStartTime, varEndTime, stockDataCycle);
+            m_n_HistoryRequest_StartTime_MillSeconds = varStartTime.getTime();
+            m_n_HistoryRequest_EndTime_MillSeconds = varEndTime.getTime();
+            m_str_HistoryRequest_StartTime = varStartTime.toLocaleString();//"ddd yyyy-MM-dd hh:mm:ss"
+            m_str_HistoryRequest_EndTime = varStartTime.toLocaleString();
+
         }
         //TODO....
 

@@ -49,12 +49,12 @@ Item
 
 	
 	//1d 5d
-	function fun_create_request_x_day(strSymbol, nDays)
+    function fun_create_request_x_day(strSymbol, nDays, stockDataCycle)
     {// 创建请求数据的url字符串函数
 		var varReturnValue = "";
         var endDate = new Date();// today
         var startDate = new Date(); //结束时间为当前时间
-        var stockDataCycle = "d";
+        //var stockDataCycle = "d";
 		var nDiff = nDays;
 		
 		startDate.setDate(startDate.getDate() - nDiff);// 最近5天
@@ -68,12 +68,12 @@ Item
 
 	
 	//1m 3m 6m
-    function fun_create_request_x_month(strSymbol, nMonths)
+    function fun_create_request_x_month(strSymbol, nMonths, stockDataCycle)
     {// 创建请求数据的url字符串函数
 		var varReturnValue = "";
         var endDate = new Date();// today
         var startDate = new Date();// today //结束时间为当前时间
-        var stockDataCycle = "m";
+        //var stockDataCycle = "m";
         var nDiff = nMonths;
 
         startDate.setMonth(startDate.getMonth() - nMonths);
@@ -86,12 +86,12 @@ Item
 
 	
 	//1y 2y  3y
-	function fun_create_request_x_year(strSymbol, nYears)
+    function fun_create_request_x_year(strSymbol, nYears,stockDataCycle)
     {// 创建请求数据的url字符串函数
 		var varReturnValue = "";
         var endDate = new Date();// today
         var startDate = new Date();// today //结束时间为当前时间
-        var stockDataCycle = "y";
+        //var stockDataCycle = "y";
         var nDiff = nYears;
 		
         startDate.setFullYear(startDate.getFullYear() - nDiff);
