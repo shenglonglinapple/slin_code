@@ -35,6 +35,8 @@ Rectangle
         property real m_n_HighestVolume : 0;
         property real m_n_LowestVolume : 0;
 
+        property real m_yaxis_minmax_range : 0;//y
+        property real m_volume_yaxis_minmax_range : 0;//y
 
         property real m_xaxis_min_value: 0.0;//time stamp seconds since 1970.1.1
         property real m_xaxis_max_value: 0.0;//time stamp seconds since 1970.1.1
@@ -91,18 +93,24 @@ Rectangle
            m_ListModel_PointArray.m_n_LowestVolume = varListElement.m_str_volume;
            //m_ListModel_PointArray.m_n_H_OneDataStep = m_canvas.m_n_Grid_width / m_ListModel_PointArray.m_Array_PointsCount;
 
+
            m_ListModel_PointArray.m_xaxis_min_value = m_CurrentUserStockData.m_n_HistoryRequest_StartTime_MillSeconds;
            m_ListModel_PointArray.m_xaxis_max_value = m_CurrentUserStockData.m_n_HistoryRequest_EndTime_MillSeconds;
            m_ListModel_PointArray.m_xaxis_minmax_range = m_ListModel_PointArray.m_xaxis_max_value - m_ListModel_PointArray.m_xaxis_min_value;
+           m_ListModel_PointArray.m_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
+           m_ListModel_PointArray.m_volume_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestVolume - m_ListModel_PointArray.m_n_LowestVolume;
            if (m_ListModel_PointArray.m_xaxis_minmax_range == 0)
            {
                console.error("HistoryDataGraphWindow.qml",
                            " ","fun_process_data",
                            " ","m_ListModel_PointArray.m_Array_PointsCount:", m_ListModel_PointArray.m_Array_PointsCount,
+                           " ","m_ListModel_PointArray.m_yaxis_minmax_range:", m_ListModel_PointArray.m_yaxis_minmax_range,
+                           " ","m_ListModel_PointArray.m_volume_yaxis_minmax_range:", m_ListModel_PointArray.m_volume_yaxis_minmax_range,
                            " ","m_ListModel_PointArray.m_xaxis_min_value:", m_ListModel_PointArray.m_xaxis_min_value,
                            " ","m_ListModel_PointArray.m_xaxis_max_value:", m_ListModel_PointArray.m_xaxis_max_value,
                            " ","m_ListModel_PointArray.m_xaxis_minmax_range:", m_ListModel_PointArray.m_xaxis_minmax_range);
                m_ListModel_PointArray.m_xaxis_minmax_range = 1;
+               m_ListModel_PointArray.m_volume_yaxis_minmax_range = 1;
                return;
            }
 
@@ -110,6 +118,8 @@ Rectangle
         console.log("HistoryDataGraphWindow.qml",
                     " ","fun_process_data",
                     " ","m_ListModel_PointArray.m_Array_PointsCount:", m_ListModel_PointArray.m_Array_PointsCount,
+                    " ","m_ListModel_PointArray.m_yaxis_minmax_range:", m_ListModel_PointArray.m_yaxis_minmax_range,
+                    " ","m_ListModel_PointArray.m_volume_yaxis_minmax_range:", m_ListModel_PointArray.m_volume_yaxis_minmax_range,
                     " ","m_ListModel_PointArray.m_xaxis_min_value:", m_ListModel_PointArray.m_xaxis_min_value,
                     " ","m_ListModel_PointArray.m_xaxis_max_value:", m_ListModel_PointArray.m_xaxis_max_value,
                     " ","m_ListModel_PointArray.m_xaxis_minmax_range:", m_ListModel_PointArray.m_xaxis_minmax_range,
@@ -147,12 +157,12 @@ Rectangle
             //得到最高价
             if (m_ListModel_PointArray.m_n_HighestVolume < parseInt(varListElement.m_str_volume, 10))
             {
-                m_ListModel_PointArray.m_n_HighestVolume = varListElement.m_str_volume;
+                m_ListModel_PointArray.m_n_HighestVolume = parseInt(varListElement.m_str_volume, 10);
             }
             //得到最低价
             if (m_ListModel_PointArray.m_n_LowestVolume > parseInt(varListElement.m_str_volume, 10))
             {
-                m_ListModel_PointArray.m_n_LowestVolume = varListElement.m_str_volume;
+                m_ListModel_PointArray.m_n_LowestVolume = parseInt(varListElement.m_str_volume, 10);
             }
 
             // 插入数据，它类似于Model，但多了一个 x 的坐标值
@@ -199,11 +209,16 @@ Rectangle
 
         m_ListModel_PointArray.m_Array_PointsCount = m_ListModel_PointArray.count;
 
+        //range
+        m_ListModel_PointArray.m_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
+        m_ListModel_PointArray.m_volume_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestVolume - m_ListModel_PointArray.m_n_LowestVolume;
         console.log("HistoryDataGraphWindow.qml",
                     " ","fun_process_data",
                     " ","m_ListModel_PointArray.m_Array_PointsCount:", m_ListModel_PointArray.m_Array_PointsCount,
                     " ","m_ListModel_PointArray.m_n_HighestPrice:", m_ListModel_PointArray.m_n_HighestPrice,
                     " ","m_ListModel_PointArray.m_n_LowestPrice:", m_ListModel_PointArray.m_n_LowestPrice,
+                    " ","m_ListModel_PointArray.m_yaxis_minmax_range:", m_ListModel_PointArray.m_yaxis_minmax_range,
+                    " ","m_ListModel_PointArray.m_volume_yaxis_minmax_range:", m_ListModel_PointArray.m_volume_yaxis_minmax_range,
                     " ","m_ListModel_PointArray.m_n_HighestVolume:", m_ListModel_PointArray.m_n_HighestVolume,
                     " ","m_ListModel_PointArray.m_n_LowestVolume:", m_ListModel_PointArray.m_n_LowestVolume);
 
@@ -310,8 +325,44 @@ Rectangle
         property real m_n_Bottom_x_axis_Text_globalAlpha : 1;
         property real m_n_Bottom_x_axis_Text_GridMargin : 10;//距离网格10像素
 
+        //right y axis Text
+        property string m_str_Right_y_axis_Text_Colour : "black";//"#000000";//"#EEEEEE";
+        property string m_str_Right_y_axis_Text_Font : "Abel";//ctx.font = "Helvetica"
+        property real m_n_Right_y_axis_Text_Step : 2;//间隔2格写个文字
+        property real m_n_Right_y_axis_Text_globalAlpha : 1;
+        property real m_n_Right_y_axis_Text_GridMargin : 10;//距离网格10像素
 
 
+        ///////////////////////////////////////
+        ///////////////////////////////////////
+        //volume grid     _volume
+        property real m_n_volume_Grid_TopLeft_x : m_n_Grid_TopLeft_x;
+        property real m_n_volume_Grid_TopLeft_y : m_n_Grid_TopLeft_y + m_n_Grid_height + 20;
+        property real m_n_volume_Grid_width : m_n_Grid_width;
+        property real m_n_volume_Grid_height : m_n_Grid_height/2;
+        property string m_str_volume_BackGround_Colour : m_str_BackGround_Colour;//"#f7f2f2"
+        property real m_n_volume_BackGround_globalAlpha:m_n_BackGround_globalAlpha;
+        property string m_str_volume_H_GridLine_Colour : m_str_H_GridLine_Colour;//"red";//"#EEEEEE";
+        property real m_n_volume_H_GridLine_lineWidth : m_n_H_GridLine_lineWidth;
+        property real m_n_volume_H_GridLine_globalAlpha: m_n_H_GridLine_globalAlpha;
+        property string m_str_volume_V_GridLine_Colour : m_str_V_GridLine_Colour;//"red";//"#EEEEEE";
+        property real m_n_volume_V_GridLine_lineWidth : m_n_V_GridLine_lineWidth;
+        property real m_n_volume_V_GridLine_globalAlpha: m_n_V_GridLine_globalAlpha;
+
+        property int m_n_volume_xaxix_GridSize : m_n_xaxix_GridSize/2
+        property real m_n_volume_xaxix_GridStep:m_n_volume_Grid_height/m_n_volume_xaxix_GridSize
+        property int m_n_volume_yaxix_GridSize : m_n_yaxix_GridSize
+        property real m_n_volume_yaxix_GridStep: m_n_volume_Grid_width/m_n_volume_yaxix_GridSize;
+        //volume right y axis Text _volume
+        property string m_str_volume_Right_y_axis_Text_Colour : m_str_Right_y_axis_Text_Colour;//"#000000";//"#EEEEEE";
+        property string m_str_volume_Right_y_axis_Text_Font : m_str_Right_y_axis_Text_Font;//ctx.font = "Helvetica"
+        property real m_n_volume_Right_y_axis_Text_Step : m_n_Right_y_axis_Text_Step;//间隔2格写个文字
+        property real m_n_volume_Right_y_axis_Text_globalAlpha : m_n_Right_y_axis_Text_globalAlpha;
+        property real m_n_volume_Right_y_axis_Text_GridMargin : m_n_Right_y_axis_Text_GridMargin;//距离网格10像素
+        //
+        property string m_str_volume_Price_Line_Colour : m_str_Price_Line_Colour;
+        property real m_n_volume_Price_Line_lineWidth : m_n_Price_Line_lineWidth;
+        property real m_n_volume_Price_Line_globalAlpha : m_n_Price_Line_globalAlpha;//0.5
 
         //绘制入口
         onPaint:
@@ -365,11 +416,18 @@ Rectangle
             fun_draw_V_gridLine(ctx);
 
             //画 水平坐标线
-            fun_draw_bottom_x_axis(ctx);
+            //fun_draw_bottom_x_axis(ctx);
             //画 垂直坐标线
-            fun_draw_right_y_axis(ctx);
+            //fun_draw_right_y_axis(ctx);
 
             fun_draw_bottom_x_axis_text(ctx);
+
+            fun_draw_right_y_axis_text(ctx);
+            //_volume
+            fun_draw_volume_H_gridLine(ctx);
+            fun_draw_volume_V_gridLine(ctx);
+            fun_draw_volume_right_y_axis_text(ctx);
+            fun_draw_volume_line(ctx);
 
             //数据曲线绘制
             fun_draw_Line(ctx);
@@ -435,7 +493,7 @@ Rectangle
 
 
             //水平网格线
-            for (nIndex = 0; nIndex < m_canvas.m_n_xaxix_GridSize; nIndex++)
+            for (nIndex = 0; nIndex <= m_canvas.m_n_xaxix_GridSize; nIndex++)
             {
                 xValue1 = m_n_Grid_TopLeft_x;
                 yValue1 = m_n_Grid_TopLeft_y + (nIndex * m_canvas.m_n_xaxix_GridStep);
@@ -481,7 +539,7 @@ Rectangle
 
 
             //垂直网格线
-            for (nIndex = 0; nIndex < m_canvas.m_n_yaxix_GridSize; nIndex++)
+            for (nIndex = 0; nIndex <= m_canvas.m_n_yaxix_GridSize; nIndex++)
             {
                 xValue1 = m_n_Grid_TopLeft_x + (nIndex * m_canvas.m_n_yaxix_GridStep);
                 yValue1 = m_n_Grid_TopLeft_y;
@@ -654,6 +712,236 @@ Rectangle
             ctx.restore();
         }//fun_draw_bottom_x_axis
 
+
+        function fun_draw_right_y_axis_text(ctx)
+        {
+            //property real m_n_Right_y_axis_Text_Step : 1;//间隔1格写个文字
+            var xValue = 0.0;
+            var yValue = 0.0;
+            var strValue = "";
+            var bDrawText = false;
+            var nIndex = 0;
+            var nSkipStepCount = 0;
+
+
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_right_y_axis_text()");
+
+
+            ctx.save();
+            ctx.fillStyle = m_canvas.m_str_Right_y_axis_Text_Colour;//"red";//"#ffffff";
+            ctx.lineWidth = 0.5;
+            ctx.globalAlpha = m_canvas.m_n_Right_y_axis_Text_globalAlpha;
+            ctx.strokeStyle = m_canvas.m_str_Right_y_axis_Text_Colour;//"#d7d7d7";
+            ctx.font = m_canvas.m_str_Right_y_axis_Text_Font;
+            ctx.beginPath();
+
+
+            //
+            bDrawText = false;
+            nSkipStepCount = m_n_Right_y_axis_Text_Step - 1;//nIndex=0 draw one text
+            for (nIndex = 0; nIndex <= m_n_xaxix_GridSize; nIndex++)
+            {
+                if (nSkipStepCount >= m_n_Right_y_axis_Text_Step - 1)
+                {
+                    bDrawText = true;
+                    nSkipStepCount = 0;
+                }
+                else
+                {
+                    nSkipStepCount++;
+                }//if
+
+                if (bDrawText)
+                {
+                    console.log("HistoryDataGraphWindow.qml",
+                                " ","fun_draw_right_y_axis_text()",
+                                " ","bDrawText=",bDrawText);
+
+                    //right x axis last one
+                    if (nIndex >= m_n_xaxix_GridSize - 1)
+                    {
+                        xValue = m_canvas.m_n_Grid_TopLeft_x + m_canvas.m_n_Grid_width + m_n_Right_y_axis_Text_GridMargin;
+                        yValue = m_canvas.m_n_Grid_TopLeft_y + ((m_n_xaxix_GridSize - nIndex) * m_canvas.m_n_xaxix_GridStep) + m_n_xaxix_GridStep/2;
+                    }
+                    else
+                    {
+                        xValue = m_canvas.m_n_Grid_TopLeft_x + m_canvas.m_n_Grid_width + m_n_Right_y_axis_Text_GridMargin;
+                        yValue = m_canvas.m_n_Grid_TopLeft_y + ((m_n_xaxix_GridSize - nIndex) * m_canvas.m_n_xaxix_GridStep);
+                    }
+
+                    var varLength = (nIndex * m_canvas.m_n_xaxix_GridStep);
+                    var varPriceDiff = m_ListModel_PointArray.m_yaxis_minmax_range * (varLength/m_canvas.m_n_Grid_height);
+                    var varPriceValue = m_ListModel_PointArray.m_n_LowestPrice + varPriceDiff;
+                    strValue = varPriceValue.toFixed(3);//保留三位小数
+
+                    ctx.text(strValue, xValue, yValue);
+
+                    bDrawText = false;//reset
+                }//if (bDrawText)
+
+            }//for
+
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }//fun_draw_right_y_axis_text
+
+
+
+        //
+        function fun_draw_volume_H_gridLine(ctx)
+        {
+            var nIndex = 0;
+            var xValue1 = 0.0;
+            var yValue1 = 0.0;
+            var xValue2 = 0.0;
+            var yValue2 = 0.0;
+
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_volume_H_gridLine()");
+
+            ctx.save();
+            ctx.lineWidth = m_n_volume_H_GridLine_lineWidth;
+            ctx.globalAlpha = m_n_volume_H_GridLine_globalAlpha;
+            ctx.strokeStyle = m_str_volume_H_GridLine_Colour;//"blue";//"#d7d7d7";
+            ctx.beginPath();
+
+            //水平网格线
+            for (nIndex = 0; nIndex <= m_canvas.m_n_volume_xaxix_GridSize; nIndex++)
+            {
+                xValue1 = m_n_volume_Grid_TopLeft_x;
+                yValue1 = m_n_volume_Grid_TopLeft_y + (nIndex * m_canvas.m_n_volume_xaxix_GridStep);
+                ctx.moveTo(xValue1, yValue1);
+
+                xValue2 = m_n_volume_Grid_TopLeft_x + m_canvas.m_n_volume_Grid_width;
+                yValue2 = yValue1;//横向直线
+                ctx.lineTo(xValue2, yValue2);
+            }//for 水平网格线
+
+            ctx.stroke();
+            ctx.restore();
+        }//function fun_draw_volume_H_gridLine(ctx)
+
+
+
+
+        function fun_draw_volume_V_gridLine(ctx)
+        {
+            var nIndex = 0;
+            var xValue1 = 0.0;
+            var yValue1 = 0.0;
+            var xValue2 = 0.0;
+            var yValue2 = 0.0;
+
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_volume_V_gridLine()");
+
+            //保存之前绘制内容
+            ctx.save();
+            ctx.lineWidth = m_n_volume_V_GridLine_lineWidth;
+            ctx.globalAlpha = m_n_volume_V_GridLine_globalAlpha;
+            ctx.strokeStyle = m_str_volume_V_GridLine_Colour;//"#d7d7d7";
+            ctx.beginPath();
+
+            //垂直网格线
+            for (nIndex = 0; nIndex <= m_canvas.m_n_volume_yaxix_GridSize; nIndex++)
+            {
+                xValue1 = m_n_volume_Grid_TopLeft_x + (nIndex * m_canvas.m_n_volume_yaxix_GridStep);
+                yValue1 = m_n_volume_Grid_TopLeft_y;
+                ctx.moveTo(xValue1, yValue1);
+
+                xValue2 = xValue1;//纵向直线
+                yValue2 = m_n_volume_Grid_TopLeft_y + m_canvas.m_n_volume_Grid_height;
+                ctx.lineTo(xValue2, yValue2);
+            }//垂直网格线
+
+            ctx.stroke();
+            ctx.restore();
+        }//function fun_draw_y_gridLine(ctx)
+
+
+
+
+        function fun_draw_volume_right_y_axis_text(ctx)
+        {
+            //property real m_n_Right_y_axis_Text_Step : 1;//间隔1格写个文字
+            var xValue = 0.0;
+            var yValue = 0.0;
+            var strValue = "";
+            var bDrawText = false;
+            var nIndex = 0;
+            var nSkipStepCount = 0;
+
+
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_volume_right_y_axis_text()");
+
+            ctx.save();
+            ctx.fillStyle = m_canvas.m_str_volume_Right_y_axis_Text_Colour;//"red";//"#ffffff";
+            ctx.lineWidth = 0.5;
+            ctx.globalAlpha = m_canvas.m_n_volume_Right_y_axis_Text_globalAlpha;
+            ctx.strokeStyle = m_canvas.m_str_volume_Right_y_axis_Text_Colour;//"#d7d7d7";
+            ctx.font = m_canvas.m_str_volume_Right_y_axis_Text_Font;
+            ctx.beginPath();
+
+
+            //
+            bDrawText = false;
+            nSkipStepCount = m_n_volume_Right_y_axis_Text_Step - 1;//nIndex=0 draw one text
+            for (nIndex = 0; nIndex <= m_n_volume_xaxix_GridSize; nIndex++)
+            {
+                if (nSkipStepCount >= m_n_volume_Right_y_axis_Text_Step - 1)
+                {
+                    bDrawText = true;
+                    nSkipStepCount = 0;
+                }
+                else
+                {
+                    nSkipStepCount++;
+                }//if
+
+                if (bDrawText)
+                {
+                    console.log("HistoryDataGraphWindow.qml",
+                                " ","fun_draw_right_y_axis_text()",
+                                " ","bDrawText=",bDrawText);
+
+                    //right x axis last one
+                    if (nIndex >= m_n_xaxix_GridSize - 1)
+                    {
+                        xValue = m_canvas.m_n_volume_Grid_TopLeft_x + m_canvas.m_n_volume_Grid_width + m_n_volume_Right_y_axis_Text_GridMargin;
+                        yValue = m_canvas.m_n_volume_Grid_TopLeft_y + ((m_n_volume_xaxix_GridSize - nIndex) * m_canvas.m_n_volume_xaxix_GridStep) + m_n_volume_xaxix_GridStep/2;
+                    }
+                    else
+                    {
+                        xValue = m_canvas.m_n_volume_Grid_TopLeft_x + m_canvas.m_n_volume_Grid_width + m_n_volume_Right_y_axis_Text_GridMargin;
+                        yValue = m_canvas.m_n_volume_Grid_TopLeft_y + ((m_n_volume_xaxix_GridSize - nIndex) * m_canvas.m_n_volume_xaxix_GridStep);
+                    }
+
+
+                    var varLength = (nIndex * m_canvas.m_n_volume_xaxix_GridStep);
+                    var varVolumeDiff = m_ListModel_PointArray.m_volume_yaxis_minmax_range * (varLength/m_canvas.m_n_volume_Grid_height);
+                    var varVolumeValue = m_ListModel_PointArray.m_n_LowestVolume + varVolumeDiff;
+                    strValue = varVolumeValue;//.toFixed(3);//保留三位小数
+
+                    ctx.text(strValue, xValue, yValue);
+
+                    bDrawText = false;//reset
+                }//if (bDrawText)
+
+            }//for
+
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+        }//fun_draw_volume_right_y_axis_text
+
+
         function fun_for_test_draw_top_bottom_left_right(ctx)
         {
             var nIndex = 0;
@@ -784,8 +1072,8 @@ Rectangle
             var yValue1 = 0.0;
             var vCurrentValue = 0.0;
             //取值范围
-            var nGraph_heightRange = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
-
+            //var nGraph_heightRange = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
+            var nGraph_heightRange = m_ListModel_PointArray.m_yaxis_minmax_range;
             console.log("HistoryDataGraphWindow.qml",
                         " ","Canvas onPaint",
                         " ","fun_draw_Line()",
@@ -820,11 +1108,22 @@ Rectangle
                 vCurrentValue = 0.0;
                 xValue1 = m_ListModel_PointArray.get(nIndex).m_n_HGridValue;
                 //取出对应设置的价格数据
-                vCurrentValue = m_ListModel_PointArray.get(nIndex).m_str_close;
+                vCurrentValue = m_ListModel_PointArray.get(nIndex).m_str_low;//m_str_low//m_str_close
                 //
                 yValue1 = m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - vCurrentValue)/nGraph_heightRange );
                 yValue1 = m_canvas.m_n_Grid_TopLeft_y + yValue1;
 
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_Line()",
+                            " ","m_n_HighestPrice:",m_ListModel_PointArray.m_n_HighestPrice,
+                            " ","vCurrentValue:",vCurrentValue,
+                            " ","nGraph_heightRange:",nGraph_heightRange,
+                            " ","m_n_HighestPrice:",m_ListModel_PointArray.m_n_HighestPrice,
+                            " ","m_n_Grid_height:",m_canvas.m_n_Grid_height,
+                            " ","yValue1 add:",(m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - vCurrentValue)/nGraph_heightRange )),
+                            " ","m_n_Grid_TopLeft_y:",m_canvas.m_n_Grid_TopLeft_y,
+                            " ","yValue1:",yValue1);
 
                 if (nIndex == 0)
                 {
@@ -851,6 +1150,92 @@ Rectangle
             // 载入保存的内容
             ctx.restore();
         }//fun_draw_Line
+
+
+        function fun_draw_volume_line(ctx)
+        {
+            var nIndex = 0;
+            var xValue1 = 0.0;
+            var yValue1 = 0.0;
+            var vCurrentValue = 0.0;
+            //取值范围
+            var nGraph_heightRange = m_ListModel_PointArray.m_volume_yaxis_minmax_range;
+
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_volume_line()",
+                        " ","nGraph_heightRange=",nGraph_heightRange);
+
+
+            // 保存之前绘制内容
+            ctx.save();
+            ctx.globalAlpha = m_n_volume_Price_Line_globalAlpha;//透明度
+            ctx.strokeStyle = m_str_volume_Price_Line_Colour;
+            ctx.lineWidth = m_n_volume_Price_Line_lineWidth;
+            ctx.beginPath();
+
+            if (nGraph_heightRange == 0)
+            {
+                //range作为被除数不能为0
+                nGraph_heightRange = 1;
+            }
+
+
+            //曲线
+            /*
+              ----------------------------------------------> x
+              |x=0 y=0
+              |
+              |
+              |
+              |
+              V y
+            */
+
+            for (nIndex = 0; nIndex < m_ListModel_PointArray.count; nIndex++)
+            {
+                vCurrentValue = 0.0;
+                xValue1 = m_ListModel_PointArray.get(nIndex).m_n_HGridValue;
+                //取出对应设置的价格数据
+                vCurrentValue = m_ListModel_PointArray.get(nIndex).m_str_volume;
+                //
+                yValue1 = m_canvas.m_n_volume_Grid_height * ((m_ListModel_PointArray.m_n_HighestVolume - vCurrentValue)/nGraph_heightRange );
+                yValue1 = m_canvas.m_n_volume_Grid_TopLeft_y + yValue1;
+
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_volume_line()",
+                            " ","vCurrentValue:",vCurrentValue,
+                            " ","nGraph_heightRange:",nGraph_heightRange,
+                            " ","m_n_HighestVolume:",m_ListModel_PointArray.m_n_HighestVolume,
+                            " ","m_n_volume_Grid_height:",m_canvas.m_n_volume_Grid_height,
+                            " ","yValue1 add:",(m_canvas.m_n_volume_Grid_height * ((m_ListModel_PointArray.m_n_HighestVolume - vCurrentValue)/nGraph_heightRange )),
+                            " ","m_n_volume_Grid_TopLeft_y:",m_canvas.m_n_volume_Grid_TopLeft_y,
+                            " ","yValue1:",yValue1);
+
+
+                if (nIndex == 0)
+                {
+                    //移动到初始点
+                    ctx.moveTo(xValue1, yValue1);
+                }
+                else
+                {
+                    //向后绘制
+                    ctx.lineTo(xValue1, yValue1);
+                }
+
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_volume_line()",
+                            " ","xValue1:",xValue1,
+                            " ","yValue1:",yValue1);
+
+            }//曲线
+
+            ctx.stroke();
+            ctx.restore();
+        }//fun_draw_volume_line
 
 
 
