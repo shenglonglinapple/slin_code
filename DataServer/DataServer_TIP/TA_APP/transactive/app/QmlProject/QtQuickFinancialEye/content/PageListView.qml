@@ -6,10 +6,11 @@ import QtQml.Models 2.1
 ListView
 {
     //标题栏下方则是ListView的内容，它为列表页面与曲线页面提供了滑动切换的能力
-    id: id_qml_MainPage;
+    id: id_qml_PageListView;
 
     //notice:大小位置必须制定清楚才能看到滑动效果
     width: parent.width;
+    //height:100  no use height
     anchors.top: parent.top;
     anchors.bottom: parent.bottom;
 
@@ -41,10 +42,10 @@ ListView
     {
         console.log('MainPage.qml',
                     ' ', 'onCurrentIndexChanged:',
-                    ' ','id_qml_MainPage.currentIndex:',id_qml_MainPage.currentIndex,
-                    ' ','id_qml_MainPage.count:',id_qml_MainPage.count);
+                    ' ','id_qml_MainPage.currentIndex:',id_qml_PageListView.currentIndex,
+                    ' ','id_qml_MainPage.count:',id_qml_PageListView.count);
 
-        if (1 == id_qml_MainPage.currentIndex)
+        if (1 == id_qml_PageListView.currentIndex)
         {
             m_CurrentUserStockData.fun_Update_RealTimeInfo_Current();
             //m_CurrentUserStockData.fun_Update_HistoryInfo_Current();
@@ -65,8 +66,8 @@ ListView
         StockListView
         {//列表页面
             id: m_page_StockListView
-            width: id_qml_MainPage.width
-            height: id_qml_MainPage.height;
+            width: id_qml_PageListView.width
+            height: id_qml_PageListView.height;
             //m_Mainpage_ListView_ref:id_qml_MainPage;
         }
 
@@ -74,16 +75,16 @@ ListView
         StockDetailView
         {//曲线页面
             id: m_page_StockDetailView;
-            width: id_qml_MainPage.width
-            height: id_qml_MainPage.height
+            width: id_qml_PageListView.width
+            height: id_qml_PageListView.height
         }
 
         //index=2
         PageView
         {//曲线页面
             id: m_page_PageView_2;
-            width: id_qml_MainPage.width
-            height: id_qml_MainPage.height
+            width: id_qml_PageListView.width
+            height: id_qml_PageListView.height
         }
     }//model: ObjectModel
 

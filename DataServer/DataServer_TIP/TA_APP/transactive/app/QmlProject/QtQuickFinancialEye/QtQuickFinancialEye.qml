@@ -12,8 +12,8 @@ Rectangle
     //0
     id: id_qml_QtQuickFinancialEye;
     //1
-    width: 1000;
-    height: 800;
+    width: 256;
+    height: 400;
 
     //////////////////////////////////////////
     //导航栏
@@ -23,7 +23,7 @@ Rectangle
         id:m_TopBanner;
         //1
         width: id_qml_QtQuickFinancialEye.width;
-        height: 40;
+        height: 20;
         anchors.top: id_qml_QtQuickFinancialEye.top
         //anchors.bottom:
     }

@@ -14,10 +14,23 @@ Component
         id:m_Rectangle_StockListDelegate;
 
         width: parent.width;
-        height: 128
+        height: 60;
 
 
         color: "transparent";
+
+        property real m_n_Text_Symbol_height: 22;
+        property real m_n_Text_Name_height: 14;
+        property real m_n_Text_LastTradePriceOnly_height: 28;
+        property real m_n_Text_ChangeRealtime_height: 20;
+        property real m_n_Text_ChangeInPercent_height: 16;
+        property real m_n_Text_rightMargin: 10;
+        property real m_n_Text_leftMargin: 10;
+        property real m_n_Text_topMargin: 3;
+        property real m_n_Text_fontsize_percent: 0.5;
+
+
+
 
         MouseArea
         {
@@ -62,18 +75,18 @@ Component
         {//Symbol
             id: m_Text_Symbol
 
-            width: 128
-            height: 32
+            //width: 128
+            height: m_n_Text_Symbol_height;
 
             anchors.top: parent.top
-            anchors.topMargin: 15
+            anchors.topMargin: m_n_Text_topMargin
             anchors.left: parent.left
-            anchors.leftMargin: 15
+            anchors.leftMargin: m_n_Text_leftMargin
 
             //color: "#0c34f9"
             color:"blue"
             font.family: "Helvetica";//font.family: "Open Sans"// 我的机器貌似不支持这种字体
-            font.pointSize: 20
+            font.pointSize: m_n_Text_Symbol_height * m_n_Text_fontsize_percent
             font.weight: Font.Bold
             verticalAlignment: Text.AlignVCenter
 
@@ -106,17 +119,17 @@ Component
         {//Name
             id: m_Text_Name
 
-            width: 256
-            height: 32
+            //width: 256
+            height: m_n_Text_Name_height
 
             anchors.top: m_Text_Symbol.bottom
             anchors.left: parent.left
-            anchors.leftMargin: 15
+            anchors.leftMargin: m_n_Text_leftMargin
 
             //color: "#000000"
             color:"blue"
             font.family: "Helvetica";//font.family: "Open Sans"
-            font.pointSize: 16
+            font.pointSize: m_n_Text_Name_height * m_n_Text_fontsize_percent
             font.bold: false
             elide: Text.ElideRight
             maximumLineCount: 1
@@ -129,18 +142,19 @@ Component
         {
             id: m_Text_LastTradePriceOnly
 
-            width: 256
-            height: 32
+            //width: 256
+            height: m_n_Text_LastTradePriceOnly_height;
 
             anchors.top: parent.top
-            anchors.topMargin: 0.3 * parent.height
+            anchors.topMargin: m_n_Text_topMargin * 2
             anchors.right: parent.right
-            anchors.rightMargin: 0.31 * parent.width
+            anchors.rightMargin: m_n_Text_rightMargin * 7
+
 
             //color: "#000000"
             color: m_c6_Change_Realtime < 0 ? "red" : "green"
             font.family: "Helvetica";//font.family: "Open Sans"
-            font.pointSize: 20
+            font.pointSize: m_n_Text_LastTradePriceOnly_height * m_n_Text_fontsize_percent
             font.bold: true
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -157,18 +171,20 @@ Component
         {
             id: m_Text_ChangeRealtime
 
-            width: 128
-            height: 32
+            //width: 128
+            height: m_n_Text_ChangeRealtime_height
+
 
             anchors.top: parent.top
-            anchors.topMargin: 15
+            anchors.topMargin: m_n_Text_topMargin
             anchors.right: parent.right
-            anchors.rightMargin: 20
+            anchors.rightMargin: m_n_Text_rightMargin
+
 
             //color: "#328930"
             color: m_c6_Change_Realtime < 0 ? "red" : "green"
             font.family: "Helvetica";//font.family: "Open Sans"
-            font.pointSize: 20
+            font.pointSize: m_n_Text_ChangeRealtime_height * m_n_Text_fontsize_percent
             font.bold: true
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter
@@ -201,17 +217,19 @@ Component
         {
             id: m_Text_ChangeInPercent
 
-            width: 128
-            height: 32
+            //width: 128
+            height: m_n_Text_ChangeInPercent_height
 
             anchors.top: m_Text_Symbol.bottom
+            anchors.topMargin: m_n_Text_topMargin/2
             anchors.right: parent.right
-            anchors.rightMargin: 20
+            anchors.rightMargin: m_n_Text_rightMargin
+
 
             //color: "#328930"
             color: m_c6_Change_Realtime < 0 ? "red" : "green"
             font.family: "Helvetica";//font.family: "Open Sans"
-            font.pointSize: 18
+            font.pointSize: m_n_Text_ChangeInPercent_height * m_n_Text_fontsize_percent
             font.bold: false
             horizontalAlignment: Text.AlignRight
             verticalAlignment: Text.AlignVCenter

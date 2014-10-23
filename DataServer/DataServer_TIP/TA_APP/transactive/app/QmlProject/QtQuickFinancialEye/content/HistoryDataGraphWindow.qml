@@ -273,8 +273,8 @@ Rectangle
 
         //坐标线
         //红、绿、蓝。三原色
-        property real m_n_Grid_TopLeft_x : 50;
-        property real m_n_Grid_TopLeft_y : 50;
+        property real m_n_Grid_TopLeft_x : 10;
+        property real m_n_Grid_TopLeft_y : 10;
         property real m_n_Grid_width : m_canvas.width/2;
         property real m_n_Grid_height : m_canvas.height/2;
         property string m_str_BackGround_Colour : id_qml_HistoryDataGraphWindow.color;//"#f7f2f2"

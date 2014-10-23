@@ -10,6 +10,8 @@ Rectangle
 
     color: "transparent"
 
+    property real m_StockDataRealTimeWindow_height: 100;
+
     function fun_update()
     {
         m_HistoryDataGraphWindow.fun_update();
@@ -20,7 +22,7 @@ Rectangle
         id: m_StockDataRealTimeWindow;
         //
         width:id_qml_StockDetailView.width;
-        height: 200;
+        //height: m_StockDataRealTimeWindow_height;
         anchors.top: id_qml_StockDetailView.top
         anchors.left: id_qml_StockDetailView.left;
 

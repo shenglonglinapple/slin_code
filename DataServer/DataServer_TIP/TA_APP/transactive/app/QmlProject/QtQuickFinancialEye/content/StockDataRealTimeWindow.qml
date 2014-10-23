@@ -11,6 +11,9 @@ Rectangle
 
     color: "transparent"
 
+
+      property real m_StockDataRealTimeWindow_height: 100;
+
 /*
 //每个 item 都有 7 条不可见的锚线：左（left）、水平中心（horizontalCenter）、上（top）、下（bottom）、右（right）、垂直中心（verticalCenter）、基线（baseline）
 //使用 anchors 布局时，除了对齐锚线，还可以在指定上（topMargin）、下（bottomMargin）、左（leftMargin）、右（rightMargin）

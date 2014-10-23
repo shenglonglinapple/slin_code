@@ -27,6 +27,7 @@ ListModel
     */
 
     //
+    property string m_str_title_current : "Financial Eye";//
     property string m_n_Name_current:"";//股票名
     property string m_x_Stock_Exchange_current:"";//交易所
     property string m_s_Symbol_current: "";//股票ID
@@ -185,6 +186,9 @@ ListModel
                     id_qml_CurrentUserStockData.m_a2_Average_Daily_Volume_current = varVariableLst[nIndex];
                     nIndex++;
                     id_qml_CurrentUserStockData.m_n_Name_current = varVariableLst[nIndex];
+
+                    id_qml_CurrentUserStockData.m_str_title_current = id_qml_CurrentUserStockData.m_s_Symbol_current
+                            + "(" + id_qml_CurrentUserStockData.m_n_Name_current + ")";
 
                 }
                 else

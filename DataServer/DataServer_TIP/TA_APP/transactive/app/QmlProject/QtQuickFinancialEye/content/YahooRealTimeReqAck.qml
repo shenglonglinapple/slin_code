@@ -83,12 +83,25 @@ Description: Could not process this "GET" request.
         /*
         console.log("YahooRealTimeReqAck.qml",
                     " ","fun_process_responseText_LatestQuotesCsv:",
-                    " ","strResponseText:",
-                    " ",strResponseText);
+                    " ","strResponseTextTmp:",
+                    " ",strResponseTextTmp);
         */
 
         var varHeaderAndBodyLst = strResponseTextTmp.split('</BODY>');
-        varStrBody = varHeaderAndBodyLst[1];        
+        if (varHeaderAndBodyLst.length >= 2)
+        {
+            varStrBody = varHeaderAndBodyLst[1];
+        }
+        else
+        {
+            console.error("YahooRealTimeReqAck.qml",
+                        " ","fun_process_responseText_LatestQuotesCsv error:",
+                        " ","strResponseTextTmp:",
+                        " ",strResponseTextTmp);
+            varStrBody = "";
+        }
+
+
         //"NasdaqNM","AAPL","+1.41","+1.46%","10/17/2014","4:00pm",96.26,97.50,98.12,98.14,96.81,99.00,"96.81 - 99.00",97.67,112.64,68179688,57839400,"Apple ,Inc."
         var varVariableLst = varStrBody.split(',');
 
