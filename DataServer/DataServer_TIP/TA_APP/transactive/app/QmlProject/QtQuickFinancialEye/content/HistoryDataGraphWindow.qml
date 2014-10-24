@@ -11,7 +11,8 @@ Rectangle
     anchors.left: parent.left
     anchors.right: parent.right
     //anchors.bottom: parent.bottom;
-    color: "#FEFEFE"
+    //color: "#FEFEFE"
+    color:"LightYellow"
 
 
     //data
@@ -319,14 +320,14 @@ Rectangle
         property real m_str_Right_y_axis_lineWidth : 1;
 
         //bottom x axis Text
-        property string m_str_Bottom_x_axis_Text_Colour : "black";//"#000000";//"#EEEEEE";
+        property string m_str_Bottom_x_axis_Text_Colour : "DarkBlue";//"#000000";//"#EEEEEE";
         property string m_str_Bottom_x_axis_Text_Font : "Abel";//ctx.font = "Helvetica"
         property real m_n_Bottom_x_axis_Text_Step : 2;//间隔2格写个文字
         property real m_n_Bottom_x_axis_Text_globalAlpha : 1;
         property real m_n_Bottom_x_axis_Text_GridMargin : 10;//距离网格10像素
 
         //right y axis Text
-        property string m_str_Right_y_axis_Text_Colour : "black";//"#000000";//"#EEEEEE";
+        property string m_str_Right_y_axis_Text_Colour : "DarkBlue";//"#000000";//"#EEEEEE";
         property string m_str_Right_y_axis_Text_Font : "Abel";//ctx.font = "Helvetica"
         property real m_n_Right_y_axis_Text_Step : 2;//间隔2格写个文字
         property real m_n_Right_y_axis_Text_globalAlpha : 1;
@@ -337,7 +338,7 @@ Rectangle
         ///////////////////////////////////////
         //volume grid     _volume
         property real m_n_volume_Grid_TopLeft_x : m_n_Grid_TopLeft_x;
-        property real m_n_volume_Grid_TopLeft_y : m_n_Grid_TopLeft_y + m_n_Grid_height + 20;
+        property real m_n_volume_Grid_TopLeft_y : m_n_Grid_TopLeft_y + m_n_Grid_height + 25;
         property real m_n_volume_Grid_width : m_n_Grid_width;
         property real m_n_volume_Grid_height : m_n_Grid_height/2;
         property string m_str_volume_BackGround_Colour : m_str_BackGround_Colour;//"#f7f2f2"
@@ -695,9 +696,13 @@ Rectangle
                     //nTimePos = Date.fromLocaleString(locale, strTimePos, "yyyy-MM-dd hh:mm:ss");
                     varDate.setTime(varDate.getTime() + varMillSeconds);
 
+                    var strYear = varDate.getFullYear();
+                    var strMonth = varDate.getMonth() + 1;
+                    var strDay = varDate.getDay();
                     //varDate.setTime(10000);//"ddd yyyy-MM-dd hh:mm:ss"//millseconds
-                    strValue = varDate.toDateString();//
-
+                    //strValue = varDate.toDateString();//
+                    //strValue = varDate.toLocaleDateString();//根据本地时间格式，把 Date 对象的日期部分转换为字符串。
+                    strValue = strMonth + "-" + strDay;
 
 
                     ctx.text(strValue, xValue, yValue);
@@ -908,11 +913,11 @@ Rectangle
                 if (bDrawText)
                 {
                     console.log("HistoryDataGraphWindow.qml",
-                                " ","fun_draw_right_y_axis_text()",
+                                " ","fun_draw_volume_right_y_axis_text()",
                                 " ","bDrawText=",bDrawText);
 
                     //right x axis last one
-                    if (nIndex >= m_n_xaxix_GridSize - 1)
+                    if (nIndex >= m_n_volume_xaxix_GridSize - 1)
                     {
                         xValue = m_canvas.m_n_volume_Grid_TopLeft_x + m_canvas.m_n_volume_Grid_width + m_n_volume_Right_y_axis_Text_GridMargin;
                         yValue = m_canvas.m_n_volume_Grid_TopLeft_y + ((m_n_volume_xaxix_GridSize - nIndex) * m_canvas.m_n_volume_xaxix_GridStep) + m_n_volume_xaxix_GridStep/2;
@@ -929,6 +934,11 @@ Rectangle
                     var varVolumeValue = m_ListModel_PointArray.m_n_LowestVolume + varVolumeDiff;
                     strValue = varVolumeValue;//.toFixed(3);//保留三位小数
 
+                    console.log("HistoryDataGraphWindow.qml",
+                                " ","fun_draw_volume_right_y_axis_text()",
+                                " ","xValue=",xValue,
+                                " ","yValue=",yValue,
+                                " ","strValue=",strValue);
                     ctx.text(strValue, xValue, yValue);
 
                     bDrawText = false;//reset
@@ -1245,3 +1255,33 @@ Rectangle
 }//Rectangle
 
 
+//doc begin
+/*
+  http://www.cnblogs.com/east-liujie/archive/2006/10/21/535784.html
+javascript Date日期对象
+new Date("month dd,yyyy hh:mm:ss");
+   new  Date("month dd,yyyy");
+   new  Date(yyyy,mth,dd,hh,mm,ss);
+   new Date(yyyy,mth,dd);
+   new Date(ms);需要注意最后一种形式，参数表示的是需要创建的时间和GMT时间1970年1月1日之间相差的毫秒数。
+
+month:用英文表示月份名称，从January到December
+mth:用整数表示月份，从（１月）到１１（１２月）
+dd:表示一个月中的第几天，从1到31
+yyyy:四位数表示的年份
+hh:小时数，从0（午夜）到23（晚11点）
+mm:分钟数，从0到59的整数
+ss:秒数，从0到59的整数
+ms:毫秒数，为大于等于0的整数
+
+new Date("January 12,2006 22:19:35");
+new Date("January 12,2006");
+new Date(2006,0,12,22,19,35);
+new Date(2006,0,12);
+new Date(1137075575000);
+上面的各种创建形式都表示2006　年1月12日这一天。
+
+
+
+*/
+//doc end

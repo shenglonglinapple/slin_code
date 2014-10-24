@@ -16,6 +16,10 @@ Rectangle
     //2
     color: "#000000";
 
+    property real m_n_Image_arrow_width: id_qml_TopBanner.height/2;
+    property real m_n_Image_arrow_height: id_qml_TopBanner.height/2;
+    property real m_n_Image_arrow_Margin: id_qml_TopBanner.height/2;
+
     //"<"
     Image
     {
@@ -23,11 +27,11 @@ Rectangle
         id: m_Image_left_arrow
 
         //1
-        height: id_qml_TopBanner.height
-        width:20
+        height : m_n_Image_arrow_height;
+        width : m_n_Image_arrow_width;
 
         anchors.left: id_qml_TopBanner.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: m_n_Image_arrow_Margin;
         anchors.verticalCenter: id_qml_TopBanner.verticalCenter
 
         source:"qrc:///imgfile/images/icon_left_arrow.png"
@@ -66,14 +70,16 @@ Rectangle
 
 
     //"Financial Eye"
-    Item
+    Rectangle
     {// 将相关组件放在一个Item容器中 "Financial Eye"
         id: m_Item_text_Financial_Eye
         // 容器的尺寸由组件决定
-        width: m_Text_Financial_Eye.width
-        height: m_Text_Financial_Eye.height
+        width: m_Text_Financial_Eye.width;//指定了width才能居中
+        height: id_qml_TopBanner.height
         anchors.horizontalCenter: id_qml_TopBanner.horizontalCenter
         anchors.verticalCenter: id_qml_TopBanner.verticalCenter
+
+        color:"Peru"
 
         Text
         {// Stocqt
@@ -81,9 +87,9 @@ Rectangle
 
             anchors.verticalCenter: m_Item_text_Financial_Eye.verticalCenter
 
-            color: "#ffffff"
+            color: "Gold";//"#ffffff"
             font.family: "Abel"
-            font.pointSize: id_qml_TopBanner.height/2;// - 10
+            font.pointSize: m_Item_text_Financial_Eye.height/2;// - 10
             //text: "Financial Eye"
             text: m_CurrentUserStockData.m_str_title_current;
         }
@@ -97,11 +103,11 @@ Rectangle
         id: m_Image_right_arrow
 
 
-        height: id_qml_TopBanner.height
-        width:20
+        height: m_n_Image_arrow_height
+        width:m_n_Image_arrow_width
 
         anchors.right: id_qml_TopBanner.right
-        anchors.leftMargin: 10
+        anchors.rightMargin: m_n_Image_arrow_Margin
         anchors.verticalCenter: id_qml_TopBanner.verticalCenter
 
         source:"qrc:///imgfile/images/icon_right_arrow.png"

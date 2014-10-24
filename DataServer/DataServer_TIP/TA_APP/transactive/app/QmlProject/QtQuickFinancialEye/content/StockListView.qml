@@ -37,7 +37,7 @@ Rectangle
         {
             id:m_Rectangle_highlight;
             width: parent.width
-            height: m_Rectangle_StockListDelegate.height;//60
+            height: 60;//m_Rectangle_StockListDelegate.height;//60
             color: "#eeeeee";
             //color: "lightsteelblue";
             //color: "red";

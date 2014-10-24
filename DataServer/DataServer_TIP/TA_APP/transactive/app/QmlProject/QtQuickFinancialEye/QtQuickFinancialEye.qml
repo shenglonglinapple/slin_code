@@ -15,7 +15,48 @@ Rectangle
     width: 256;
     height: 400;
 
+
     //////////////////////////////////////////
+    //data
+    CurrentUserStockData
+    {
+        //
+        id:m_CurrentUserStockData;
+        //
+        //no width height
+        onSignalHistoryDataReady:
+        {
+            m_CurrentUserStockData.m_bool_HistoryDataReady = true;
+            m_Mainpage_ListView.fun_update();
+        }
+    }
+
+
+    //data
+    PageListData
+    {
+        id:m_PageListData;
+    }
+
+
+    //data
+    YahooRealTimeReqAck
+    {
+        id: m_YahooRealTimeReqAck;//这些都是全局变量
+    }
+
+
+    //data
+    YahooHistoryReqAck
+    {
+        id: m_YahooHistoryReqAck;//这些都是全局变量
+    }
+    //////////////////////////////////////////
+
+
+
+    //////////////////////////////////////////
+    //UI
     //导航栏
     TopBanner
     {
@@ -23,7 +64,7 @@ Rectangle
         id:m_TopBanner;
         //1
         width: id_qml_QtQuickFinancialEye.width;
-        height: 20;
+        height: id_qml_QtQuickFinancialEye.height * (20/400);
         anchors.top: id_qml_QtQuickFinancialEye.top
         //anchors.bottom:
     }
@@ -51,35 +92,8 @@ Rectangle
 
         }
     }
-
-
-    CurrentUserStockData
-    {
-        //
-        id:m_CurrentUserStockData;
-        //
-        //no width height
-        onSignalHistoryDataReady:
-        {
-            m_CurrentUserStockData.m_bool_HistoryDataReady = true;
-            m_Mainpage_ListView.fun_update();
-        }
-    }
-
-
-
-    //data
-    YahooRealTimeReqAck
-    {
-        id: m_YahooRealTimeReqAck;//这些都是全局变量
-    }
-
-    YahooHistoryReqAck
-    {
-        id: m_YahooHistoryReqAck;//这些都是全局变量
-    }
-
-    //////////////////////////////////////////
+    //UI
+    /////////////////////////////////////////////
 }//Rectangle
 
 

@@ -5,13 +5,14 @@ Rectangle
     id: id_qml_ChooseHistoryDataTypeWindow
 
     width: 256
-    height: m_Row_Buttons.height
+    height: 16
 
     anchors.left: parent.left
-    anchors.leftMargin: 10
-    anchors.right: parent.right
+    //anchors.leftMargin: 10
     anchors.top: parent.top
-    anchors.topMargin: 1
+    //anchors.topMargin: 1
+
+    color: "PowderBlue"
 
     //UI
     Row
@@ -19,13 +20,14 @@ Rectangle
         id: m_Row_Buttons;
 
         anchors.fill: parent;
-        spacing: 20
+        //spacing: 0
 
         onWidthChanged:
         {// 该函数保证宽度变化时优先压缩spacing，且不会造成按钮重叠
-            //var buttonsLen = m_Buttom_max.width + m_Button_year.width + m_Button_month.width + m_Button_week.width;
-            //var space = (width - buttonsLen) / 3;
-            //spacing = Math.max(space, 10);
+            var buttonsLen = m_Buttom_1days.width + m_Buttom_5days.width + m_Buttom_30days.width
+                    + m_Buttom_3months.width + m_Buttom_6months.width;
+            var space = (width - buttonsLen) / 10;
+            spacing = Math.max(space, 4);
         }
 
         //1day

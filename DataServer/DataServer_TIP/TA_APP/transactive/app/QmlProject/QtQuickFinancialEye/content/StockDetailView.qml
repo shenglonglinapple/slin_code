@@ -10,7 +10,13 @@ Rectangle
 
     color: "transparent"
 
-    property real m_StockDataRealTimeWindow_height: 100;
+    property real m_n_StockDataRealTimeWindow_width: id_qml_StockDetailView.width;
+    property real m_n_StockDataRealTimeWindow_height: id_qml_StockDetailView.height*(28/100);
+
+    property real m_n_ChooseHistoryDataTypeWindow_width: id_qml_StockDetailView.width;
+    property real m_n_ChooseHistoryDataTypeWindow_height: id_qml_StockDetailView.height*(6/100);
+
+
 
     function fun_update()
     {
@@ -21,10 +27,11 @@ Rectangle
     {//提供左上方的股票信息
         id: m_StockDataRealTimeWindow;
         //
-        width:id_qml_StockDetailView.width;
-        //height: m_StockDataRealTimeWindow_height;
-        anchors.top: id_qml_StockDetailView.top
-        anchors.left: id_qml_StockDetailView.left;
+        width : m_n_StockDataRealTimeWindow_width;
+        height: m_n_StockDataRealTimeWindow_height;
+        anchors.top: parent.top
+        anchors.left: parent.left;
+        //anchors.leftMargin: 10
 
         //基于属性绑定的屏幕转向后布局方式的变化
         //anchors.right: Screen.primaryOrientation === Qt.PortraitOrientation ? parent.right : m_StockPriceChart.left
@@ -36,8 +43,9 @@ Rectangle
     {
         id : m_ChooseHistoryDataTypeWindow
         //
-        width:id_qml_StockDetailView.width;
-        height: 64;
+        width:m_n_ChooseHistoryDataTypeWindow_width;
+        height: m_n_ChooseHistoryDataTypeWindow_height;
+
         anchors.top: m_StockDataRealTimeWindow.bottom
         anchors.left: id_qml_StockDetailView.left;
     }
