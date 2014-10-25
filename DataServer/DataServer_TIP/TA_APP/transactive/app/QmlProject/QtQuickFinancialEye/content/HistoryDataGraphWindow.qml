@@ -43,6 +43,7 @@ Rectangle
         property real m_xaxis_max_value: 0.0;//time stamp seconds since 1970.1.1
         property real m_xaxis_minmax_range: 0.0;//time stamp seconds since
 
+        property real  nMillSecondsInOneDay : (60 * 60 * 24 * 1000);
     }
 
     function fun_update()
@@ -71,7 +72,7 @@ Rectangle
         var nIndexX = 0;
         var nDataIndex = 0;
         var varListElement;
-        var nSecondsInOneDay = 60 * 60 * 24 * 1000;
+
         var strTimePos = "yyyy-MM-dd hh:mm:ss";
         var nTimePos = new Date();
         var nWidthPos = 0;
@@ -87,33 +88,33 @@ Rectangle
         m_ListModel_PointArray.m_Array_PointsCount = m_CurrentUserStockData.count;
         if (m_ListModel_PointArray.m_Array_PointsCount > 0)
         {
-           varListElement = m_CurrentUserStockData.get(0);
-           m_ListModel_PointArray.m_n_HighestPrice = varListElement.m_str_high;
-           m_ListModel_PointArray.m_n_LowestPrice = varListElement.m_str_low;
-           m_ListModel_PointArray.m_n_HighestVolume = varListElement.m_str_volume;
-           m_ListModel_PointArray.m_n_LowestVolume = varListElement.m_str_volume;
-           //m_ListModel_PointArray.m_n_H_OneDataStep = m_canvas.m_n_Grid_width / m_ListModel_PointArray.m_Array_PointsCount;
+            varListElement = m_CurrentUserStockData.get(0);
+            m_ListModel_PointArray.m_n_HighestPrice = varListElement.m_str_high;
+            m_ListModel_PointArray.m_n_LowestPrice = varListElement.m_str_low;
+            m_ListModel_PointArray.m_n_HighestVolume = varListElement.m_str_volume;
+            m_ListModel_PointArray.m_n_LowestVolume = varListElement.m_str_volume;
 
+            m_ListModel_PointArray.m_xaxis_min_value = m_CurrentUserStockData.m_n_HistoryRequest_StartTime_MillSeconds;
+            m_ListModel_PointArray.m_xaxis_max_value = m_CurrentUserStockData.m_n_HistoryRequest_EndTime_MillSeconds;
 
-           m_ListModel_PointArray.m_xaxis_min_value = m_CurrentUserStockData.m_n_HistoryRequest_StartTime_MillSeconds;
-           m_ListModel_PointArray.m_xaxis_max_value = m_CurrentUserStockData.m_n_HistoryRequest_EndTime_MillSeconds;
-           m_ListModel_PointArray.m_xaxis_minmax_range = m_ListModel_PointArray.m_xaxis_max_value - m_ListModel_PointArray.m_xaxis_min_value;
-           m_ListModel_PointArray.m_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
-           m_ListModel_PointArray.m_volume_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestVolume - m_ListModel_PointArray.m_n_LowestVolume;
-           if (m_ListModel_PointArray.m_xaxis_minmax_range == 0)
-           {
-               console.error("HistoryDataGraphWindow.qml",
-                           " ","fun_process_data",
-                           " ","m_ListModel_PointArray.m_Array_PointsCount:", m_ListModel_PointArray.m_Array_PointsCount,
-                           " ","m_ListModel_PointArray.m_yaxis_minmax_range:", m_ListModel_PointArray.m_yaxis_minmax_range,
-                           " ","m_ListModel_PointArray.m_volume_yaxis_minmax_range:", m_ListModel_PointArray.m_volume_yaxis_minmax_range,
-                           " ","m_ListModel_PointArray.m_xaxis_min_value:", m_ListModel_PointArray.m_xaxis_min_value,
-                           " ","m_ListModel_PointArray.m_xaxis_max_value:", m_ListModel_PointArray.m_xaxis_max_value,
-                           " ","m_ListModel_PointArray.m_xaxis_minmax_range:", m_ListModel_PointArray.m_xaxis_minmax_range);
-               m_ListModel_PointArray.m_xaxis_minmax_range = 1;
-               m_ListModel_PointArray.m_volume_yaxis_minmax_range = 1;
-               return;
-           }
+            m_ListModel_PointArray.m_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
+            m_ListModel_PointArray.m_volume_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestVolume - m_ListModel_PointArray.m_n_LowestVolume;
+
+            m_ListModel_PointArray.m_xaxis_minmax_range = m_ListModel_PointArray.m_xaxis_max_value - m_ListModel_PointArray.m_xaxis_min_value;
+            if (m_ListModel_PointArray.m_xaxis_minmax_range == 0)
+            {
+                console.error("HistoryDataGraphWindow.qml",
+                              " ","fun_process_data",
+                              " ","m_ListModel_PointArray.m_Array_PointsCount:", m_ListModel_PointArray.m_Array_PointsCount,
+                              " ","m_ListModel_PointArray.m_yaxis_minmax_range:", m_ListModel_PointArray.m_yaxis_minmax_range,
+                              " ","m_ListModel_PointArray.m_volume_yaxis_minmax_range:", m_ListModel_PointArray.m_volume_yaxis_minmax_range,
+                              " ","m_ListModel_PointArray.m_xaxis_min_value:", m_ListModel_PointArray.m_xaxis_min_value,
+                              " ","m_ListModel_PointArray.m_xaxis_max_value:", m_ListModel_PointArray.m_xaxis_max_value,
+                              " ","m_ListModel_PointArray.m_xaxis_minmax_range:", m_ListModel_PointArray.m_xaxis_minmax_range);
+                m_ListModel_PointArray.m_xaxis_minmax_range = 1;
+                m_ListModel_PointArray.m_volume_yaxis_minmax_range = 1;
+                return;
+            }
 
         }
         console.log("HistoryDataGraphWindow.qml",
@@ -124,7 +125,7 @@ Rectangle
                     " ","m_ListModel_PointArray.m_xaxis_min_value:", m_ListModel_PointArray.m_xaxis_min_value,
                     " ","m_ListModel_PointArray.m_xaxis_max_value:", m_ListModel_PointArray.m_xaxis_max_value,
                     " ","m_ListModel_PointArray.m_xaxis_minmax_range:", m_ListModel_PointArray.m_xaxis_minmax_range,
-                    " ","range days:", m_ListModel_PointArray.m_xaxis_minmax_range/nSecondsInOneDay);
+                    " ","range days:", m_ListModel_PointArray.m_xaxis_minmax_range/m_ListModel_PointArray.nMillSecondsInOneDay);
 
 
         //m_CurrentUserStockData data 0, time is big
@@ -173,16 +174,16 @@ Rectangle
             if (strTimePos.length <= 0)
             {
                 console.error("HistoryDataGraphWindow.qml",
-                            " ","fun_process_data() length error",
+                              " ","fun_process_data() length error",
                               " ","strTimePos:", strTimePos);
                 return;
             }
             nTimePos = Date.fromLocaleString(locale, strTimePos, "yyyy-MM-dd hh:mm:ss");
             console.log("HistoryDataGraphWindow.qml",
                         " ","fun_process_data()",
-                          " ","strTimePos:", strTimePos,
-                          " ","nTimePos:", nTimePos,
-                          " ","nTimePos.getTime():", nTimePos.getTime());
+                        " ","strTimePos:", strTimePos,
+                        " ","nTimePos:", nTimePos,
+                        " ","nTimePos.getTime():", nTimePos.getTime());
 
 
             nMilSecondsSinceUTCPos = nTimePos.getTime();
@@ -190,20 +191,20 @@ Rectangle
             nHGridValue = m_canvas.m_n_Grid_TopLeft_x + m_canvas.m_n_Grid_width * (nWidthPos/m_ListModel_PointArray.m_xaxis_minmax_range);
             console.log("HistoryDataGraphWindow.qml",
                         " ","fun_process_data()",
-                          " ","nMilSecondsSinceUTCPos:", nMilSecondsSinceUTCPos,
-                          " ","m_ListModel_PointArray.m_xaxis_min_value:", m_ListModel_PointArray.m_xaxis_min_value,
-                          " ","nWidthPos:", nWidthPos,
-                          " ","pos/range:", nWidthPos/m_ListModel_PointArray.m_xaxis_minmax_range,
-                          " ","width*(pos/range):", m_canvas.m_n_Grid_width * (nWidthPos/m_ListModel_PointArray.m_xaxis_minmax_range),
-                          " ","nHGridValue", nHGridValue);
+                        " ","nMilSecondsSinceUTCPos:", nMilSecondsSinceUTCPos,
+                        " ","m_ListModel_PointArray.m_xaxis_min_value:", m_ListModel_PointArray.m_xaxis_min_value,
+                        " ","nWidthPos:", nWidthPos,
+                        " ","pos/range:", nWidthPos/m_ListModel_PointArray.m_xaxis_minmax_range,
+                        " ","width*(pos/range):", m_canvas.m_n_Grid_width * (nWidthPos/m_ListModel_PointArray.m_xaxis_minmax_range),
+                        " ","nHGridValue", nHGridValue);
 
             m_ListModel_PointArray.append({"m_n_HGridValue": nHGridValue,
-                            "m_str_open": varListElement.m_str_open,
-                            "m_str_close": varListElement.m_str_close,
-                            "m_str_high": varListElement.m_str_high,
-                            "m_str_low": varListElement.m_str_low,
-                            "m_str_volume": varListElement.m_str_volume,
-                            "m_str_date": varListElement.m_str_date});
+                                              "m_str_open": varListElement.m_str_open,
+                                              "m_str_close": varListElement.m_str_close,
+                                              "m_str_high": varListElement.m_str_high,
+                                              "m_str_low": varListElement.m_str_low,
+                                              "m_str_volume": varListElement.m_str_volume,
+                                              "m_str_date": varListElement.m_str_date});
             //m_ListModel_PointArray
 
         }//for
@@ -213,6 +214,7 @@ Rectangle
         //range
         m_ListModel_PointArray.m_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
         m_ListModel_PointArray.m_volume_yaxis_minmax_range = m_ListModel_PointArray.m_n_HighestVolume - m_ListModel_PointArray.m_n_LowestVolume;
+
         console.log("HistoryDataGraphWindow.qml",
                     " ","fun_process_data",
                     " ","m_ListModel_PointArray.m_Array_PointsCount:", m_ListModel_PointArray.m_Array_PointsCount,
@@ -238,7 +240,7 @@ Rectangle
         if (varStrTimeTmp.length < varStrCheckShort.length)
         {
             console.error("HistoryDataGraphWindow.qml",
-                        " ","fun_process_data_time_check",
+                          " ","fun_process_data_time_check",
                           " ","error varStrTimeTmp.length  varStrTimeTmp=", varStrTimeTmp);
             varReturnValue = "";
             return varReturnValue;
@@ -299,8 +301,8 @@ Rectangle
 
         //
         property string m_str_Price_Line_Colour : "red";
-        property real m_n_Price_Line_lineWidth : 2;
-        property real m_n_Price_Line_globalAlpha:1;//0.5
+        property real m_n_Price_Line_lineWidth : 1;
+        property real m_n_Price_Line_globalAlpha : 1;//0.5
 
         //
         //bottom x axis
@@ -361,9 +363,9 @@ Rectangle
         property real m_n_volume_Right_y_axis_Text_globalAlpha : m_n_Right_y_axis_Text_globalAlpha;
         property real m_n_volume_Right_y_axis_Text_GridMargin : m_n_Right_y_axis_Text_GridMargin;//距离网格10像素
         //
-        property string m_str_volume_Price_Line_Colour : m_str_Price_Line_Colour;
+        property string m_str_volume_Price_Line_Colour : "SteelBlue";//m_str_Price_Line_Colour;
         property real m_n_volume_Price_Line_lineWidth : m_n_Price_Line_lineWidth;
-        property real m_n_volume_Price_Line_globalAlpha : m_n_Price_Line_globalAlpha;//0.5
+        property real m_n_volume_Price_Line_globalAlpha : 0.6;//m_n_Price_Line_globalAlpha;//0.5
 
         //绘制入口
         onPaint:
@@ -424,14 +426,20 @@ Rectangle
             fun_draw_bottom_x_axis_text(ctx);
 
             fun_draw_right_y_axis_text(ctx);
+
+            //数据曲线绘制
+            //fun_draw_price_Line(ctx);
+            fun_draw_price_rect(ctx);
+            fun_draw_price_rect_low_high_line(ctx);
+
             //_volume
             fun_draw_volume_H_gridLine(ctx);
             fun_draw_volume_V_gridLine(ctx);
             fun_draw_volume_right_y_axis_text(ctx);
-            fun_draw_volume_line(ctx);
 
-            //数据曲线绘制
-            fun_draw_Line(ctx);
+            //fun_draw_volume_line(ctx);
+            fun_draw_volume_rect(ctx);
+
 
         }//onPaint
 
@@ -698,7 +706,7 @@ Rectangle
 
                     var strYear = varDate.getFullYear();
                     var strMonth = varDate.getMonth() + 1;
-                    var strDay = varDate.getDay();
+                    var strDay = varDate.getDate();//.getDay();
                     //varDate.setTime(10000);//"ddd yyyy-MM-dd hh:mm:ss"//millseconds
                     //strValue = varDate.toDateString();//
                     //strValue = varDate.toLocaleDateString();//根据本地时间格式，把 Date 对象的日期部分转换为字符串。
@@ -1075,7 +1083,7 @@ Rectangle
         //fun_draw_Line(ctx, m_Array_Points, 0, m_Array_Points.count - 1, m_str_open, "red", m_n_HighestPrice, m_n_LowestPrice);
         //function fun_draw_Line(ctx, arrayPoints, nIndexFrom, nIndexTo, valueType, lineColor, highestValue, lowestValue)
         //use    function fun_process_data()  first
-        function fun_draw_Line(ctx)
+        function fun_draw_price_Line(ctx)
         {
             var nIndex = 0;
             var xValue1 = 0.0;
@@ -1162,6 +1170,266 @@ Rectangle
         }//fun_draw_Line
 
 
+
+
+        //数据矩形绘制
+        function fun_draw_price_rect(ctx)
+        {
+            var nIndex = 0;
+            var xValue1 = 0.0;
+            var yValue1 = 0.0;
+            var yValueAdd = 0.0;
+            var vCurrentValue = 0.0;
+            var xHight = 0.0;
+            var yHight = 0.0;
+            var varHightValue = 0.0;
+            var xLow = 0.0;
+            var yLow = 0.0;
+            var varLowValue = 0.0;
+            var varCloseValue = 0.0;
+            var varOpenValue = 0.0;
+            var varStrColour = "green";
+
+
+            //取值范围
+            //var nGraph_heightRange = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
+            var nGraph_heightRange = m_ListModel_PointArray.m_yaxis_minmax_range;
+            var oneRectWith = m_canvas.m_n_Grid_width *
+                    (m_ListModel_PointArray.nMillSecondsInOneDay/m_ListModel_PointArray.m_xaxis_minmax_range);
+            oneRectWith = oneRectWith * (14/16);//adjuset
+            var oneRectheight = 0.0;
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_Line()",
+                        " ","nGraph_heightRange=",nGraph_heightRange,
+                        " ","oneRectWith=",oneRectWith);
+
+            // 保存之前绘制内容
+            ctx.save();
+            ctx.fillStyle = m_str_Price_Line_Colour;
+            ctx.globalAlpha = m_n_Price_Line_globalAlpha;//透明度
+            ctx.strokeStyle = m_str_Price_Line_Colour;
+            ctx.lineWidth = m_n_Price_Line_lineWidth;
+            ctx.beginPath();
+
+            if (nGraph_heightRange == 0)
+            {
+                //range作为被除数不能为0
+                nGraph_heightRange = 1;
+            }
+
+
+            //曲线
+            /*
+              ----------------------------------------------> x
+              |x=0 y=0
+              |
+              |
+              |
+              |
+              V y
+            */
+            for (nIndex = 0; nIndex < m_ListModel_PointArray.count; nIndex++)
+            {
+                vCurrentValue = 0.0;
+                xValue1 = m_ListModel_PointArray.get(nIndex).m_n_HGridValue;
+                //取出对应设置的价格数据
+                varCloseValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_close);
+                varOpenValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_open);
+                varHightValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_high);
+                varLowValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_low);
+
+                if (varCloseValue >= varOpenValue)
+                {
+                    //vCurrentValue = varOpenValue;//use min value
+                    vCurrentValue = varCloseValue;
+                    varStrColour = "green";
+                    oneRectheight = m_canvas.m_n_Grid_height * ((varCloseValue - varOpenValue)/nGraph_heightRange);
+                }
+                else
+                {
+                    //vCurrentValue = varCloseValue;//use min value
+                    vCurrentValue = varOpenValue;
+                    varStrColour = "red";
+                    oneRectheight = m_canvas.m_n_Grid_height * ((varOpenValue - varCloseValue)/nGraph_heightRange);
+                }
+                ctx.fillStyle = varStrColour;
+                //ctx.strokeStyle = varStrColour;
+                //
+                yValueAdd = m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - vCurrentValue)/nGraph_heightRange );
+                yValue1 = m_canvas.m_n_Grid_TopLeft_y + yValueAdd;
+
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_price_rect()",
+                            " ","vCurrentValue:",vCurrentValue,
+                            " ","yValue1 add:",yValueAdd,
+                            " ","xValue1:",xValue1,
+                            " ","yValue1:",yValue1,
+                            " ","oneRectWith:",oneRectWith,
+                            " ","oneRectheight:",oneRectheight,
+                            " ","varStrColour:",varStrColour);
+
+                ctx.fillRect(xValue1, yValue1, oneRectWith, oneRectheight);
+
+                /*
+                //
+                xHight = xValue1 + oneRectWith / 2;
+                yValueAdd = m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - varHightValue)/nGraph_heightRange );
+                yHight = m_canvas.m_n_Grid_TopLeft_y + yValueAdd;
+
+                xLow = xHight;
+                yValueAdd = m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - varLowValue)/nGraph_heightRange );
+                yLow = m_canvas.m_n_Grid_TopLeft_y + yValueAdd;
+                ctx.moveTo(xHight, yHight);
+                ctx.lineTo(xLow, yLow);
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_price_rect()",
+                            " ","xHight:",xHight,
+                            " ","yHight:",yHight,
+                            " ","xLow:",xLow,
+                            " ","yLow:",yLow,
+                            " ","varStrColour:",varStrColour);
+
+                */
+
+
+            }//曲线
+
+
+            ctx.closePath();
+            // 描边
+            ctx.stroke();
+            // 载入保存的内容
+            ctx.restore();
+        }//fun_draw_price_rect
+
+        function fun_draw_price_rect_low_high_line(ctx)
+        {
+            var nIndex = 0;
+            var xValue1 = 0.0;
+            var yValue1 = 0.0;
+            var yValueAdd = 0.0;
+            var vCurrentValue = 0.0;
+            var xHight = 0.0;
+            var yHight = 0.0;
+            var varHightValue = 0.0;
+            var xLow = 0.0;
+            var yLow = 0.0;
+            var varLowValue = 0.0;
+            var varCloseValue = 0.0;
+            var varOpenValue = 0.0;
+            var varStrColour = "green";
+
+
+            //取值范围
+            //var nGraph_heightRange = m_ListModel_PointArray.m_n_HighestPrice - m_ListModel_PointArray.m_n_LowestPrice;
+            var nGraph_heightRange = m_ListModel_PointArray.m_yaxis_minmax_range;
+            var oneRectWith = m_canvas.m_n_Grid_width *
+                    (m_ListModel_PointArray.nMillSecondsInOneDay/m_ListModel_PointArray.m_xaxis_minmax_range);
+            oneRectWith = oneRectWith * (14/16);//adjuset
+            var oneRectheight = 0.0;
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_price_rect_low_high_line()",
+                        " ","nGraph_heightRange=",nGraph_heightRange,
+                        " ","oneRectWith=",oneRectWith);
+
+            // 保存之前绘制内容
+            ctx.save();
+            //ctx.fillStyle = m_str_Price_Line_Colour;
+            ctx.fillStyle = "red";
+            ctx.globalAlpha = m_n_Price_Line_globalAlpha;//透明度
+            ctx.strokeStyle = m_str_Price_Line_Colour;
+            //ctx.strokeStyle = "red";
+            ctx.lineWidth = m_n_Price_Line_lineWidth;
+            ctx.beginPath();
+
+            if (nGraph_heightRange == 0)
+            {
+                //range作为被除数不能为0
+                nGraph_heightRange = 1;
+            }
+
+
+            //曲线
+            /*
+              ----------------------------------------------> x
+              |x=0 y=0
+              |
+              |
+              |
+              |
+              V y
+            */
+            for (nIndex = 0; nIndex < m_ListModel_PointArray.count; nIndex++)
+            {
+                vCurrentValue = 0.0;
+                xValue1 = m_ListModel_PointArray.get(nIndex).m_n_HGridValue;
+                //取出对应设置的价格数据
+                varCloseValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_close);
+                varOpenValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_open);
+                varHightValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_high);
+                varLowValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_low);
+
+                if (varCloseValue >= varOpenValue)
+                {
+                    //vCurrentValue = varOpenValue;//use min value
+                    vCurrentValue = varCloseValue;
+                    varStrColour = "green";
+                    oneRectheight = m_canvas.m_n_Grid_height * ((varCloseValue - varOpenValue)/nGraph_heightRange);
+                }
+                else
+                {
+                    //vCurrentValue = varCloseValue;//use min value
+                    vCurrentValue = varOpenValue;
+                    varStrColour = "red";
+                    oneRectheight = m_canvas.m_n_Grid_height * ((varOpenValue - varCloseValue)/nGraph_heightRange);
+                }
+                //ctx.fillStyle = varStrColour;
+                ctx.strokeStyle = varStrColour;
+                //
+                //yValueAdd = m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - vCurrentValue)/nGraph_heightRange );
+                //yValue1 = m_canvas.m_n_Grid_TopLeft_y + yValueAdd;
+                //ctx.fillRect(xValue1, yValue1, oneRectWith, oneRectheight);
+
+                //
+                xHight = xValue1 + oneRectWith / 2;
+                yValueAdd = m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - varHightValue)/nGraph_heightRange );
+                yHight = m_canvas.m_n_Grid_TopLeft_y + yValueAdd;
+
+                xLow = xHight;
+                yValueAdd = m_canvas.m_n_Grid_height * ((m_ListModel_PointArray.m_n_HighestPrice - varLowValue)/nGraph_heightRange );
+                yLow = m_canvas.m_n_Grid_TopLeft_y + yValueAdd;
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_price_rect_low_high_line()",
+                            " ","xHight:",xHight,
+                            " ","yHight:",yHight,
+                            " ","xLow:",xLow,
+                            " ","yLow:",yLow,
+                            " ","varStrColour:",varStrColour);
+
+                //ctx.strokeStyle = varStrColour;
+                //ctx.strokeStyle = "red";
+                ctx.moveTo(xHight, yHight);
+                ctx.lineTo(xLow, yLow);
+
+
+
+
+            }//曲线
+
+
+            ctx.closePath();
+            // 描边
+            ctx.stroke();
+            // 载入保存的内容
+            ctx.restore();
+        }//fun_draw_price_rect
+
+
         function fun_draw_volume_line(ctx)
         {
             var nIndex = 0;
@@ -1209,7 +1477,8 @@ Rectangle
                 //取出对应设置的价格数据
                 vCurrentValue = m_ListModel_PointArray.get(nIndex).m_str_volume;
                 //
-                yValue1 = m_canvas.m_n_volume_Grid_height * ((m_ListModel_PointArray.m_n_HighestVolume - vCurrentValue)/nGraph_heightRange );
+
+                yValue1 = m_canvas.m_n_volume_Grid_height * ((vCurrentValue - m_ListModel_PointArray.m_n_LowestVolume)/nGraph_heightRange );
                 yValue1 = m_canvas.m_n_volume_Grid_TopLeft_y + yValue1;
 
                 console.log("HistoryDataGraphWindow.qml",
@@ -1222,6 +1491,7 @@ Rectangle
                             " ","yValue1 add:",(m_canvas.m_n_volume_Grid_height * ((m_ListModel_PointArray.m_n_HighestVolume - vCurrentValue)/nGraph_heightRange )),
                             " ","m_n_volume_Grid_TopLeft_y:",m_canvas.m_n_volume_Grid_TopLeft_y,
                             " ","yValue1:",yValue1);
+
 
 
                 if (nIndex == 0)
@@ -1248,6 +1518,111 @@ Rectangle
         }//fun_draw_volume_line
 
 
+
+
+        function fun_draw_volume_rect(ctx)
+        {
+            var nIndex = 0;
+            var xValue1 = 0.0;
+            var yValue1 = 0.0;
+            var yValueAdd = 0.0;
+            var vCurrentValue = 0.0;
+            //取值范围
+            var nGraph_heightRange = m_ListModel_PointArray.m_volume_yaxis_minmax_range;
+            var oneRectWith = m_canvas.m_n_volume_Grid_width * (m_ListModel_PointArray.nMillSecondsInOneDay/m_ListModel_PointArray.m_xaxis_minmax_range);
+            var oneRectheight = 0.0;
+            /*
+            m_ListModel_PointArray.m_xaxis_min_value = m_CurrentUserStockData.m_n_HistoryRequest_StartTime_MillSeconds;
+            m_ListModel_PointArray.m_xaxis_max_value = m_CurrentUserStockData.m_n_HistoryRequest_EndTime_MillSeconds;
+            m_ListModel_PointArray.m_xaxis_minmax_range = m_ListModel_PointArray.m_xaxis_max_value - m_ListModel_PointArray.m_xaxis_min_value;
+            */
+
+            console.log("HistoryDataGraphWindow.qml",
+                        " ","Canvas onPaint",
+                        " ","fun_draw_volume_rect()",
+                        " ","nGraph_heightRange=",nGraph_heightRange,
+                        " ","oneRectWith=",oneRectWith);
+
+
+            // 保存之前绘制内容
+            ctx.save();
+            ctx.fillStyle = m_str_volume_Price_Line_Colour;
+            ctx.globalAlpha = m_n_volume_Price_Line_globalAlpha;//透明度
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+
+            //ctx.shadowOffsetX = 4;
+            //ctx.shadowBlur = 3.5;
+            //ctx.shadowColor = Qt.darker(color);
+
+            if (nGraph_heightRange == 0)
+            {
+                //range作为被除数不能为0
+                nGraph_heightRange = 1;
+            }
+
+
+            //曲线
+            /*
+              ----------------------------------------------> x
+              |x=0 y=0
+              |
+              |
+              |
+              |
+              V y
+            */
+
+            for (nIndex = 0; nIndex < m_ListModel_PointArray.count; nIndex++)
+            {
+                vCurrentValue = 0.0;
+                xValue1 = m_ListModel_PointArray.get(nIndex).m_n_HGridValue;
+                //取出对应设置的价格数据
+                vCurrentValue = m_ListModel_PointArray.get(nIndex).m_str_volume;
+                //
+
+                yValueAdd = m_canvas.m_n_volume_Grid_height * ((vCurrentValue - m_ListModel_PointArray.m_n_LowestVolume)/nGraph_heightRange );
+                yValue1 = m_canvas.m_n_volume_Grid_TopLeft_y + yValueAdd;
+                oneRectheight = m_canvas.m_n_volume_Grid_height - yValueAdd;
+
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_volume_rect()",
+                            " ","vCurrentValue:",vCurrentValue,
+                            " ","xValue1:",xValue1,
+                            " ","yValue1:",yValue1,
+                            " ","oneRectWith:",oneRectWith,
+                            " ","oneRectheight:",oneRectheight);
+
+
+                //object fillRect(real x, real y, real w, real h)
+                oneRectWith = 2;
+                ctx.fillRect(xValue1, yValue1, oneRectWith, oneRectheight);
+
+
+                if (nIndex == 0)
+                {
+                    //移动到初始点
+                    ctx.moveTo(xValue1, yValue1);
+                }
+                else
+                {
+                    //向后绘制
+                    ctx.lineTo(xValue1, yValue1);
+                }
+
+
+                console.log("HistoryDataGraphWindow.qml",
+                            " ","Canvas onPaint",
+                            " ","fun_draw_volume_rect()",
+                            " ","xValue1:",xValue1,
+                            " ","yValue1:",yValue1);
+
+            }//曲线
+
+            ctx.stroke();
+            ctx.restore();
+        }//fun_draw_volume_line
 
     }//Canvas
 
