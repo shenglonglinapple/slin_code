@@ -363,9 +363,12 @@ Rectangle
         property real m_n_volume_Right_y_axis_Text_globalAlpha : m_n_Right_y_axis_Text_globalAlpha;
         property real m_n_volume_Right_y_axis_Text_GridMargin : m_n_Right_y_axis_Text_GridMargin;//距离网格10像素
         //
-        property string m_str_volume_Price_Line_Colour : "SteelBlue";//m_str_Price_Line_Colour;
-        property real m_n_volume_Price_Line_lineWidth : m_n_Price_Line_lineWidth;
-        property real m_n_volume_Price_Line_globalAlpha : 0.6;//m_n_Price_Line_globalAlpha;//0.5
+        property string m_str_volume_Line_Colour : "SteelBlue";//m_str_Price_Line_Colour;
+        property real m_n_volume_line_lineWidth : m_n_Price_Line_lineWidth;
+        property string m_str_volume_Rect_Colour_CloseBig : "green";
+        property string m_str_volume_Rect_Colour_CloseSmall : "red";
+        property real m_n_volume_rect_globalAlpha : 0.6;//m_n_Price_Line_globalAlpha;//0.5
+        property real m_n_volume_rect_oneRectWith : 2;
 
         //绘制入口
         onPaint:
@@ -1447,9 +1450,9 @@ Rectangle
 
             // 保存之前绘制内容
             ctx.save();
-            ctx.globalAlpha = m_n_volume_Price_Line_globalAlpha;//透明度
-            ctx.strokeStyle = m_str_volume_Price_Line_Colour;
-            ctx.lineWidth = m_n_volume_Price_Line_lineWidth;
+            ctx.globalAlpha = m_n_volume_rect_globalAlpha;//透明度
+            ctx.strokeStyle = m_str_volume_Line_Colour;
+            ctx.lineWidth = m_n_volume_line_lineWidth;
             ctx.beginPath();
 
             if (nGraph_heightRange == 0)
@@ -1527,6 +1530,9 @@ Rectangle
             var yValue1 = 0.0;
             var yValueAdd = 0.0;
             var vCurrentValue = 0.0;
+            var varCloseValue = 0.0;
+            var varOpenValue = 0.0;
+            var varStrColour = 0.0;
             //取值范围
             var nGraph_heightRange = m_ListModel_PointArray.m_volume_yaxis_minmax_range;
             var oneRectWith = m_canvas.m_n_volume_Grid_width * (m_ListModel_PointArray.nMillSecondsInOneDay/m_ListModel_PointArray.m_xaxis_minmax_range);
@@ -1546,8 +1552,8 @@ Rectangle
 
             // 保存之前绘制内容
             ctx.save();
-            ctx.fillStyle = m_str_volume_Price_Line_Colour;
-            ctx.globalAlpha = m_n_volume_Price_Line_globalAlpha;//透明度
+            ctx.fillStyle = m_str_volume_Line_Colour;
+            ctx.globalAlpha = m_n_volume_rect_globalAlpha;//透明度
             ctx.lineWidth = 1;
             ctx.beginPath();
 
@@ -1579,8 +1585,23 @@ Rectangle
                 xValue1 = m_ListModel_PointArray.get(nIndex).m_n_HGridValue;
                 //取出对应设置的价格数据
                 vCurrentValue = m_ListModel_PointArray.get(nIndex).m_str_volume;
-                //
 
+                varCloseValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_close);
+                varOpenValue = parseFloat(m_ListModel_PointArray.get(nIndex).m_str_open);
+                //
+                if (varCloseValue >= varOpenValue)
+                {
+                    //varStrColour = "green";
+                    varStrColour = m_canvas.m_str_volume_Rect_Colour_CloseBig;
+                }
+                else
+                {
+                    //varStrColour = "red";
+                    varStrColour = m_canvas.m_str_volume_Rect_Colour_CloseSmall;
+                }
+                ctx.fillStyle = varStrColour;
+
+                //
                 yValueAdd = m_canvas.m_n_volume_Grid_height * ((vCurrentValue - m_ListModel_PointArray.m_n_LowestVolume)/nGraph_heightRange );
                 yValue1 = m_canvas.m_n_volume_Grid_TopLeft_y + yValueAdd;
                 oneRectheight = m_canvas.m_n_volume_Grid_height - yValueAdd;
@@ -1596,10 +1617,12 @@ Rectangle
 
 
                 //object fillRect(real x, real y, real w, real h)
-                oneRectWith = 2;
+                //oneRectWith = 2;
+                oneRectWith = m_n_volume_rect_oneRectWith;
                 ctx.fillRect(xValue1, yValue1, oneRectWith, oneRectheight);
 
 
+                /**/
                 if (nIndex == 0)
                 {
                     //移动到初始点
@@ -1610,8 +1633,6 @@ Rectangle
                     //向后绘制
                     ctx.lineTo(xValue1, yValue1);
                 }
-
-
                 console.log("HistoryDataGraphWindow.qml",
                             " ","Canvas onPaint",
                             " ","fun_draw_volume_rect()",
