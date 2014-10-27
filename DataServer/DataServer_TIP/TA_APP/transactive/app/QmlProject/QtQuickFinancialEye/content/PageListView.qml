@@ -40,7 +40,7 @@ ListView
 
     onCurrentIndexChanged:
     {
-        console.log('MainPage.qml',
+        console.log('PageListView.qml',
                     ' ', 'onCurrentIndexChanged:',
                     ' ','id_qml_MainPage.currentIndex:',id_qml_PageListView.currentIndex,
                     ' ','id_qml_MainPage.count:',id_qml_PageListView.count);
@@ -56,7 +56,28 @@ ListView
 
     function fun_update()
     {
-        m_page_StockDetailView.fun_update();
+        console.log('PageListView.qml',
+                    ' ', 'fun_update()',
+                    ' ','id_qml_MainPage.currentIndex:',id_qml_PageListView.currentIndex);
+
+        if (id_qml_PageListView.currentIndex == 1)
+        {
+            console.log('PageListView.qml',
+                        ' ', 'fun_update()',
+                        ' ','id_qml_MainPage.currentIndex:',id_qml_PageListView.currentIndex,
+                        ' ','m_page_StockDetailView.fun_update()');
+           m_page_StockDetailView.fun_update();
+        }
+
+        if (id_qml_PageListView.currentIndex == 2)
+        {
+            console.log('PageListView.qml',
+                        ' ', 'fun_update()',
+                        ' ','id_qml_MainPage.currentIndex:',id_qml_PageListView.currentIndex,
+                        ' ','m_page_StockDetailBigView.fun_update()');
+           m_page_StockDetailBigView.fun_update();
+        }
+
     }
 
     model: ObjectModel
@@ -75,6 +96,13 @@ ListView
         StockDetailView
         {//曲线页面
             id: m_page_StockDetailView;
+            width: id_qml_PageListView.width
+            height: id_qml_PageListView.height
+        }
+
+        StockDetailBigView
+        {
+            id: m_page_StockDetailBigView;
             width: id_qml_PageListView.width
             height: id_qml_PageListView.height
         }

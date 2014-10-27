@@ -16,6 +16,8 @@
         <file>content/YahooRealTimeReqAck.qml</file>
         <file>content/CurrentUserStockData.qml</file>
         <file>content/YahooHistoryReqAck.qml</file>
+        <file>content/StockDetailBigView.qml</file>
+        <file>content/HistoryDataBigGraphWindow.qml</file>
     </qresource>
     <qresource prefix="/imgfile">
         <file>images/icon_left_arrow.png</file>
