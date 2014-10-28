@@ -103,8 +103,10 @@ ListView
         StockDetailBigView
         {
             id: m_page_StockDetailBigView;
-            width: id_qml_PageListView.width
-            height: id_qml_PageListView.height
+            //width: id_qml_PageListView.width
+            //height: id_qml_PageListView.height
+            width: id_qml_PageListView.height
+            height: id_qml_PageListView.width
         }
 
         //index=2

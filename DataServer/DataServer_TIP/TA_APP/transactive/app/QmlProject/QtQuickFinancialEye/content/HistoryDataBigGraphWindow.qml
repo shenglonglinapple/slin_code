@@ -6,11 +6,9 @@ Rectangle
     width: 320
     height: 200
 
-    //变化x y 轴的位置,旋转90度
-    anchors.top: parent.right
-    anchors.left: parent.top
-    anchors.right: parent.bottom
-    anchors.bottom: parent.left
+
+    anchors.left: parent.left
+    anchors.right: parent.right
 
     color:"LightYellow"
 
@@ -267,7 +265,7 @@ Rectangle
 
         //坐标线
         //红、绿、蓝。三原色
-        property real m_n_Grid_TopLeft_x : 10;
+        property real m_n_Grid_TopLeft_x : 20;
         property real m_n_Grid_TopLeft_y : 10;
         property real m_n_Grid_width : m_canvas_BigGraph.width/2 - m_n_Grid_TopLeft_x;
         property real m_n_Grid_height : m_canvas_BigGraph.height/2 - m_n_Grid_TopLeft_y;

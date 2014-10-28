@@ -8,7 +8,19 @@ Rectangle
     width: parent.width;
     height: parent.height;
 
-    color: "transparent"
+    //color: "transparent"
+    color: "blue"
+
+    //矩形旋转，再平移
+    //矩形绕着Item.Center旋转90度，再平移x（height/2-width/2） y(width/2-height/2)，以适合屏幕
+    transformOrigin: Item.Center
+    rotation: 90;//
+    transform: Translate
+    {
+        x: id_qml_StockDetailBigView.height/2 - id_qml_StockDetailBigView.width/2
+        y: id_qml_StockDetailBigView.width/2 - id_qml_StockDetailBigView.height/2
+    }
+
 
     function fun_update()
     {
