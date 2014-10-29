@@ -267,8 +267,8 @@ Rectangle
         //红、绿、蓝。三原色
         property real m_n_Grid_TopLeft_x : 20;
         property real m_n_Grid_TopLeft_y : 10;
-        property real m_n_Grid_width : m_canvas_BigGraph.width/2 - m_n_Grid_TopLeft_x;
-        property real m_n_Grid_height : m_canvas_BigGraph.height/2 - m_n_Grid_TopLeft_y;
+        property real m_n_Grid_width : m_canvas_BigGraph.width* (8/10) - m_n_Grid_TopLeft_x;
+        property real m_n_Grid_height : m_canvas_BigGraph.height* (6/10) - m_n_Grid_TopLeft_y;
 
         property string m_str_BackGround_Colour : id_qml_HistoryDataGraphWindow_BigGraph.color;//"#f7f2f2"
         property real m_n_BackGround_globalAlpha:0.5;

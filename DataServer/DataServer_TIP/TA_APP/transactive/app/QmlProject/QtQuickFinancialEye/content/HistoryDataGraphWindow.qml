@@ -301,8 +301,8 @@ Rectangle
         //红、绿、蓝。三原色
         property real m_n_Grid_TopLeft_x : 10;
         property real m_n_Grid_TopLeft_y : 10;
-        property real m_n_Grid_width : m_canvas.width/2;
-        property real m_n_Grid_height : m_canvas.height/2;
+        property real m_n_Grid_width : m_canvas.width*(7/10);
+        property real m_n_Grid_height : m_canvas.height*(5/10);
         property string m_str_BackGround_Colour : id_qml_HistoryDataGraphWindow.color;//"#f7f2f2"
         property real m_n_BackGround_globalAlpha:0.5;
         property string m_str_H_GridLine_Colour : "#F00000";//"red";//"#EEEEEE";
