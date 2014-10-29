@@ -1,9 +1,119 @@
 import QtQuick 2.0
 import QtQuick.Window 2.1
 import QtQml.Models 2.1
+import QtQuick.LocalStorage 2.0//sqlite db
+
+ListModel
+{
+    id: id_qml_StockListModel
+    Component.onCompleted:
+    {
+        console.log('StockListModel.qml',
+                    ' ','Component.onCompleted');
+        fun_db_LoadUserStockData();
+
+    }
+    Component.onDestruction:
+    {
+        console.log('StockListModel.qml',
+                    ' ','Component.onDestruction');
+        fun_db_SaveUserStockData();
+    }
+
+
+    function fun_db_LoadUserStockData()
+    {
+        console.log('StockListModel.qml',
+                    ' ','fun_db_LoadUserStockData()');
+        //object openDatabaseSync(string name, string version, string description, int estimated_size, jsobject callback(db))
+        var db =  LocalStorage.openDatabaseSync("DB_QtQuickFinancialEye", "1.0", "My model SQL", 50000);
+        db.transaction
+        (
+            function(tx)
+            {
+                tx.executeSql('DROP TABLE TABLE_USERSTOCK');
+                // Create the database if it doesn't already exist
+                //
+                tx.executeSql('CREATE TABLE IF NOT EXISTS TABLE_USERSTOCK(ID INTEGER primary key, m_n_Name TEXT)');
+                // tx.executeSql( 'delete from Images  where id == 1 ');
+
+                var rs = tx.executeSql('SELECT ID, m_n_Name FROM TABLE_USERSTOCK');
+                var index = 0;
+                if (rs.rows.length > 0)
+                {
+                    index = 0;
+                    while (index < rs.rows.length)
+                    {
+                        var myItem = rs.rows.item(index);
+                        id_qml_StockListModel.append( {
+                            "m_n_Name": myItem.m_n_Name,
+                            "m_s_Symbol": myItem.m_n_Name,
+                            "m_l1_Last_Trade_Price_Only": "0.0",
+                            "m_c6_Change_Realtime": "0.0",
+                            "m_p2_Change_in_Percent": "0.0%"});
+
+                        index++;
+                    }
+                }
+                else
+                {
+                    id_qml_StockListModel.append( {
+                        "m_n_Name": "Apple Inc.",
+                        "m_s_Symbol": "AAPL",
+                        "m_l1_Last_Trade_Price_Only": "0.0",
+                        "m_c6_Change_Realtime": "0.0",
+                        "m_p2_Change_in_Percent": "0.0%"});
+
+
+                    id_qml_StockListModel.append( {
+                        "m_n_Name": "Adobe Systems Inc.",
+                        "m_s_Symbol": "ADBE",
+                        "m_l1_Last_Trade_Price_Only": "0.0",
+                        "m_c6_Change_Realtime": "0.0",
+                        "m_p2_Change_in_Percent": "0.0%"});
+
+                    /*
+                    id_qml_StockListModel.append( {
+                        "m_n_Name": "Analog Devices, Inc.",
+                        "m_s_Symbol": "ADI",
+                        "m_l1_Last_Trade_Price_Only": "0.0",
+                        "m_c6_Change_Realtime": "0.0",
+                        "m_p2_Change_in_Percent": "0.0%"});
+                    */
+
+                }
+            }//function(tx)
+        )//db.transaction
+    }//function loadImageData()
+
+
+    function fun_db_SaveUserStockData()
+    {
+        console.log('StockListModel.qml',
+                    ' ','fun_db_SaveUserStockData()');
+        var db =  LocalStorage.openDatabaseSync("DB_QtQuickFinancialEye", "1.0", "My model SQL", 50000);
+        db.transaction
+        (
+            function(tx)
+            {
+                tx.executeSql('DROP TABLE TABLE_USERSTOCK');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS TABLE_USERSTOCK(ID INTEGER primary key, m_n_Name TEXT)');
+                var index = 0;
+                while (index < id_qml_StockListModel.count)
+                {
+                    var myItem = id_qml_StockListModel.get(index);
+                    tx.executeSql('INSERT INTO TABLE_USERSTOCK(ID, m_n_Name) VALUES(?,?)', [index, myItem.m_n_Name]);
+                    index++;
+                }
+            }//function(tx)
+        )//db.transaction
+    }//function saveImageData()
+
+}//ListModel
 
 
 
+/*
 ListModel
 {
     id:id_qml_StockListModel;
@@ -38,7 +148,7 @@ ListModel
 
 }//ListModel
 
-
+*/
 
 
 
