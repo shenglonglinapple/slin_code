@@ -1,0 +1,4 @@
+C:\Users\lin.shenglong\AppData\Local\Qt Project\.....
+C:\Users\lin.shenglong\AppData\Local\Qt Project\QtQuickFinancialEye\QML\OfflineStorage\Databases
+
+数据库文件是保存在~/.local/share/Nokia/QtQmlViewer/QML/OfflineStorage/Databases

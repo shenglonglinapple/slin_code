@@ -5,105 +5,152 @@ import QtQuick.LocalStorage 2.0//sqlite db
 
 ListModel
 {
-    id: id_qml_StockListModel
+    id: id_qml_StockListModel;
+
+
+    /*
+    id_qml_StockListModel.append( {
+        "m_n_Name": "Analog Devices, Inc.",
+        "m_s_Symbol": "ADI",
+        "m_s_Symbol_Extern": "null/.SS/.SZ",
+        "m_l1_Last_Trade_Price_Only": "0.0",
+        "m_c6_Change_Realtime": "0.0",
+        "m_p2_Change_in_Percent": "0.0%"});
+    */
+
+
     Component.onCompleted:
     {
         console.log('StockListModel.qml',
                     ' ','Component.onCompleted');
-        fun_db_LoadUserStockData();
+
+        m_SqliteDbStorage.fun_db_CheckAndCreateTable_TABLE_USERSTOCK();
+        fun_db_LoadData_from_TableUserStock();
 
     }
     Component.onDestruction:
     {
         console.log('StockListModel.qml',
                     ' ','Component.onDestruction');
-        fun_db_SaveUserStockData();
+
+        m_SqliteDbStorage.fun_db_CheckAndCreateTable_TABLE_USERSTOCK();
+        m_SqliteDbStorage.fun_db_clear_table_TABLE_USERSTOCK();
+        fun_db_SaveData_to_TableUserStock();
     }
 
 
-    function fun_db_LoadUserStockData()
+    function fun_db_LoadData_from_TableUserStock()
     {
         console.log('StockListModel.qml',
-                    ' ','fun_db_LoadUserStockData()');
-        //object openDatabaseSync(string name, string version, string description, int estimated_size, jsobject callback(db))
-        var db =  LocalStorage.openDatabaseSync("DB_QtQuickFinancialEye", "1.0", "My model SQL", 50000);
+                    ' ','fun_db_LoadData_from_TableUserStock()');
+
+        var db =  m_SqliteDbStorage.fun_db_CheckAndCreateDB();
         db.transaction
         (
             function(tx)
             {
-                tx.executeSql('DROP TABLE TABLE_USERSTOCK');
-                // Create the database if it doesn't already exist
-                //
-                tx.executeSql('CREATE TABLE IF NOT EXISTS TABLE_USERSTOCK(ID INTEGER primary key, m_n_Name TEXT)');
-                // tx.executeSql( 'delete from Images  where id == 1 ');
-
-                var rs = tx.executeSql('SELECT ID, m_n_Name FROM TABLE_USERSTOCK');
-                var index = 0;
+                //property string m_str_sql_select_TABLE_USERSTOCK_001 : "SELECT C_INDEX,m_s_Symbol,m_s_Symbol_Extern FROM TABLE_USERSTOCK";
+                console.log('StockListModel.qml',
+                            ' ','fun_db_LoadData_from_TableUserStock()',
+                            ' ','executeSql m_SqliteDbStorage.m_str_sql_select_TABLE_USERSTOCK_001:', m_SqliteDbStorage.m_str_sql_select_TABLE_USERSTOCK_001);
+                var rs = tx.executeSql(m_SqliteDbStorage.m_str_sql_select_TABLE_USERSTOCK_001);
+                var nRowIndex = 0;
                 if (rs.rows.length > 0)
                 {
-                    index = 0;
-                    while (index < rs.rows.length)
+                    nRowIndex = 0;
+                    while (nRowIndex < rs.rows.length)
                     {
-                        var myItem = rs.rows.item(index);
+                        var myItem = rs.rows.item(nRowIndex);
                         id_qml_StockListModel.append( {
-                            "m_n_Name": myItem.m_n_Name,
-                            "m_s_Symbol": myItem.m_n_Name,
+                            "m_n_Name": "",
+                            "m_s_Symbol": myItem.m_s_Symbol,
+                            "m_s_Symbol_Extern": myItem.m_s_Symbol_Extern,
                             "m_l1_Last_Trade_Price_Only": "0.0",
                             "m_c6_Change_Realtime": "0.0",
                             "m_p2_Change_in_Percent": "0.0%"});
 
-                        index++;
+
+                        console.log('StockListModel.qml',
+                                    ' ','fun_db_LoadData_from_TableUserStock()',
+                                    ' ','nRowIndex=',nRowIndex,
+                                    ' ','m_s_Symbol=',myItem.m_s_Symbol,
+                                    ' ','m_s_Symbol_Extern=',myItem.m_s_Symbol_Extern);
+
+                        nRowIndex++;
                     }
                 }
                 else
                 {
+                    //"m_s_Symbol_Extern": "null/.SS/.SZ",
                     id_qml_StockListModel.append( {
                         "m_n_Name": "Apple Inc.",
                         "m_s_Symbol": "AAPL",
+                        "m_s_Symbol_Extern": "",
                         "m_l1_Last_Trade_Price_Only": "0.0",
                         "m_c6_Change_Realtime": "0.0",
                         "m_p2_Change_in_Percent": "0.0%"});
+
+                    console.log('StockListModel.qml',
+                                ' ','fun_db_LoadData_from_TableUserStock()',
+                                ' ','use default value',
+                                ' ','m_s_Symbol=AAPL');
 
 
                     id_qml_StockListModel.append( {
                         "m_n_Name": "Adobe Systems Inc.",
                         "m_s_Symbol": "ADBE",
+                        "m_s_Symbol_Extern": "",
                         "m_l1_Last_Trade_Price_Only": "0.0",
                         "m_c6_Change_Realtime": "0.0",
                         "m_p2_Change_in_Percent": "0.0%"});
+
+                    console.log('StockListModel.qml',
+                                ' ','fun_db_LoadData_from_TableUserStock()',
+                                ' ','use default value',
+                                ' ','m_s_Symbol=ADBE');
 
                     /*
                     id_qml_StockListModel.append( {
                         "m_n_Name": "Analog Devices, Inc.",
                         "m_s_Symbol": "ADI",
+                        "m_s_Symbol_Extern": "",
                         "m_l1_Last_Trade_Price_Only": "0.0",
                         "m_c6_Change_Realtime": "0.0",
                         "m_p2_Change_in_Percent": "0.0%"});
                     */
 
-                }
+                }//else
             }//function(tx)
         )//db.transaction
     }//function loadImageData()
 
 
-    function fun_db_SaveUserStockData()
+    function fun_db_SaveData_to_TableUserStock()
     {
         console.log('StockListModel.qml',
-                    ' ','fun_db_SaveUserStockData()');
-        var db =  LocalStorage.openDatabaseSync("DB_QtQuickFinancialEye", "1.0", "My model SQL", 50000);
+                    ' ','fun_db_SaveData_to_TableUserStock()');
+
+        var db =  m_SqliteDbStorage.fun_db_CheckAndCreateDB();
+
         db.transaction
         (
             function(tx)
             {
-                tx.executeSql('DROP TABLE TABLE_USERSTOCK');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS TABLE_USERSTOCK(ID INTEGER primary key, m_n_Name TEXT)');
-                var index = 0;
-                while (index < id_qml_StockListModel.count)
+                var nRowIndex = 0;
+                while (nRowIndex < id_qml_StockListModel.count)
                 {
-                    var myItem = id_qml_StockListModel.get(index);
-                    tx.executeSql('INSERT INTO TABLE_USERSTOCK(ID, m_n_Name) VALUES(?,?)', [index, myItem.m_n_Name]);
-                    index++;
+                    var myItem = id_qml_StockListModel.get(nRowIndex);
+
+                    console.log('StockListModel.qml',
+                                ' ','fun_db_SaveData_to_TableUserStock()',
+                                ' ','executeSql insert_TABLE_USERSTOCK_001:',m_SqliteDbStorage.m_str_sql_insert_TABLE_USERSTOCK_001,
+                                ' ','nRowIndex:',nRowIndex,
+                                ' ','m_s_Symbol:',myItem.m_s_Symbol,
+                                ' ','m_s_Symbol_Extern:',myItem.m_s_Symbol_Extern);
+
+                    tx.executeSql(m_SqliteDbStorage.m_str_sql_insert_TABLE_USERSTOCK_001, [nRowIndex, myItem.m_s_Symbol, myItem.m_s_Symbol_Extern]);
+
+                    nRowIndex++;
                 }
             }//function(tx)
         )//db.transaction

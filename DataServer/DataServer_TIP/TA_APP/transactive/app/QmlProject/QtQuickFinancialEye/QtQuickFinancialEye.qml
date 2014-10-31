@@ -18,6 +18,11 @@ Rectangle
 
     //////////////////////////////////////////
     //data
+    StockSSSZ
+    {
+        id:m_StockSSSZ
+    }
+
     CurrentUserStockData
     {
         //
@@ -38,6 +43,12 @@ Rectangle
         id:m_PageListData;
     }
 
+
+    //data
+    SqliteDbStorage
+    {
+        id:m_SqliteDbStorage
+    }
 
     //data
     YahooRealTimeReqAck
