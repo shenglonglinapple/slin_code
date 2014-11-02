@@ -62,7 +62,7 @@ ListModel
                     {
                         var myItem = rs.rows.item(nRowIndex);
                         id_qml_StockListModel.append( {
-                            "m_n_Name": "",
+                            "m_n_Name": myItem.m_n_Name,
                             "m_s_Symbol": myItem.m_s_Symbol,
                             "m_s_Symbol_Extern": myItem.m_s_Symbol_Extern,
                             "m_l1_Last_Trade_Price_Only": "0.0",
@@ -73,6 +73,7 @@ ListModel
                         console.log('StockListModel.qml',
                                     ' ','fun_db_LoadData_from_TableUserStock()',
                                     ' ','nRowIndex=',nRowIndex,
+                                    ' ','m_n_Name=',myItem.m_n_Name,
                                     ' ','m_s_Symbol=',myItem.m_s_Symbol,
                                     ' ','m_s_Symbol_Extern=',myItem.m_s_Symbol_Extern);
 
@@ -81,6 +82,33 @@ ListModel
                 }
                 else
                 {
+
+                    id_qml_StockListModel.append( {
+                        "m_n_Name": "福日电子",
+                        "m_s_Symbol": "600203.SS",
+                        "m_s_Symbol_Extern": ".SS",
+                        "m_l1_Last_Trade_Price_Only": "0.0",
+                        "m_c6_Change_Realtime": "0.0",
+                        "m_p2_Change_in_Percent": "0.0%"});
+
+                    console.log('StockListModel.qml',
+                                ' ','fun_db_LoadData_from_TableUserStock()',
+                                ' ','use default value',
+                                ' ','m_s_Symbol=600203.SS 福日电子');
+
+                    id_qml_StockListModel.append( {
+                        "m_n_Name": "苏宁云商",
+                        "m_s_Symbol": "002024.SZ",
+                        "m_s_Symbol_Extern": ".SZ",
+                        "m_l1_Last_Trade_Price_Only": "0.0",
+                        "m_c6_Change_Realtime": "0.0",
+                        "m_p2_Change_in_Percent": "0.0%"});
+
+                    console.log('StockListModel.qml',
+                                ' ','fun_db_LoadData_from_TableUserStock()',
+                                ' ','use default value',
+                                ' ','m_s_Symbol=002024.SZ 苏宁云商');
+
                     //"m_s_Symbol_Extern": "null/.SS/.SZ",
                     id_qml_StockListModel.append( {
                         "m_n_Name": "Apple Inc.",
@@ -148,7 +176,7 @@ ListModel
                                 ' ','m_s_Symbol:',myItem.m_s_Symbol,
                                 ' ','m_s_Symbol_Extern:',myItem.m_s_Symbol_Extern);
 
-                    tx.executeSql(m_SqliteDbStorage.m_str_sql_insert_TABLE_USERSTOCK_001, [nRowIndex, myItem.m_s_Symbol, myItem.m_s_Symbol_Extern]);
+                    tx.executeSql(m_SqliteDbStorage.m_str_sql_insert_TABLE_USERSTOCK_001, [nRowIndex, myItem.m_s_Symbol, myItem.m_s_Symbol_Extern, myItem.m_n_Name]);
 
                     nRowIndex++;
                 }

@@ -18,9 +18,9 @@ Rectangle
 
     //////////////////////////////////////////
     //data
-    StockSSSZ
+    TotalStockListModel
     {
-        id:m_StockSSSZ
+        id:m_TotalStockListModel
     }
 
     CurrentUserStockData
@@ -87,9 +87,10 @@ Rectangle
         id:m_Mainpage_ListView;
         //1
         width: id_qml_QtQuickFinancialEye.width;
+        height: id_qml_QtQuickFinancialEye.height * (360/400);
         //notice:大小位置必须制定清楚才能看到滑动效果
         anchors.top: m_TopBanner.bottom;
-        anchors.bottom: id_qml_QtQuickFinancialEye.bottom;
+        //anchors.bottom: m_BottomBanner.top;
         //
         onSignalUpdateCurrentUserStockData:
         {
@@ -103,6 +104,18 @@ Rectangle
 
         }
     }
+
+    BottomBanner
+    {
+        id:m_BottomBanner
+
+        //1
+        width: id_qml_QtQuickFinancialEye.width;
+        height: id_qml_QtQuickFinancialEye.height * (20/400);
+        anchors.top: m_Mainpage_ListView.bottom
+        //anchors.bottom:id_qml_QtQuickFinancialEye.bottom
+    }
+
     //UI
     /////////////////////////////////////////////
 }//Rectangle

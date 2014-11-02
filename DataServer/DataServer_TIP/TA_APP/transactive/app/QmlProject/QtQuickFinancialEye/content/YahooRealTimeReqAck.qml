@@ -45,12 +45,12 @@ Description: Could not process this "GET" request.
     /*
       error: "Analog Devices, I",  have , so 公司名称放在最后
     */
-    function fun_create_request_LatestQuotesCsv(strInstruments)
+    function fun_create_request_LatestQuotesCsv(strSymbol, strSymbolExtern)
     {
         var varReturnValue = "";
 
         varReturnValue = "http://finance.yahoo.com/d/quotes.csv?";
-        varReturnValue += "s=" + strInstruments;
+        varReturnValue += "s=" + strSymbol;
         varReturnValue += "&f=xsc6p2d1t1pobaghml1t8va2n";
         // 返回这一长串url
 

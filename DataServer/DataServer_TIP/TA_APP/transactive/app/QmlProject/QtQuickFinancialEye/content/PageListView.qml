@@ -12,7 +12,7 @@ ListView
     width: parent.width;
     //height:100  no use height
     anchors.top: parent.top;
-    anchors.bottom: parent.bottom;
+    //anchors.bottom: parent.bottom;
 
     //设置该属性使View停止在一个完整的页面上
     snapMode: ListView.SnapOneItem
@@ -60,7 +60,7 @@ ListView
                     ' ', 'fun_update()',
                     ' ','id_qml_MainPage.currentIndex:',id_qml_PageListView.currentIndex);
 
-        if (id_qml_PageListView.currentIndex == 1)
+        if (id_qml_PageListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_StockDetailView)
         {
             console.log('PageListView.qml',
                         ' ', 'fun_update()',
@@ -69,7 +69,7 @@ ListView
            m_page_StockDetailView.fun_update();
         }
 
-        if (id_qml_PageListView.currentIndex == 2)
+        if (id_qml_PageListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_StockDetailBigView)
         {
             console.log('PageListView.qml',
                         ' ', 'fun_update()',
@@ -100,6 +100,7 @@ ListView
             height: id_qml_PageListView.height
         }
 
+        //index=2
         StockDetailBigView
         {
             id: m_page_StockDetailBigView;
@@ -109,7 +110,16 @@ ListView
             height: id_qml_PageListView.width
         }
 
-        //index=2
+        //index=3
+        TotalStockListView
+        {
+            id: m_page_TotalStockListView
+            width: id_qml_PageListView.width
+            height: id_qml_PageListView.height
+        }
+
+
+        //index=4
         PageView
         {//曲线页面
             id: m_page_PageView_2;

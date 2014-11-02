@@ -19,7 +19,10 @@
         <file>content/StockDetailBigView.qml</file>
         <file>content/HistoryDataBigGraphWindow.qml</file>
         <file>content/SqliteDbStorage.qml</file>
-        <file>content/StockSSSZ.qml</file>
+        <file>content/TotalStockListModel.qml</file>
+        <file>content/BottomBanner.qml</file>
+        <file>content/TotalStockListDelegate.qml</file>
+        <file>content/TotalStockListView.qml</file>
     </qresource>
     <qresource prefix="/imgfile">
         <file>images/icon_left_arrow.png</file>

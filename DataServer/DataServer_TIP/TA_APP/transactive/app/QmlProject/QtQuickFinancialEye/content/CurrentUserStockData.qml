@@ -31,6 +31,8 @@ ListModel
     property string m_n_Name_current:"";//股票名
     property string m_x_Stock_Exchange_current:"";//交易所
     property string m_s_Symbol_current: "";//股票ID
+    property string m_s_Symbol_Extern_current: "";//股票交易所 后缀名.SS .SZ NULL
+
     property real   m_c6_Change_Realtime_current: 0.0;//
     property string m_p2_Change_in_Percent_current: "";//
     property string m_d1_Last_Trade_Date_current: "";//
@@ -69,14 +71,16 @@ ListModel
     //fun
     function fun_Update_RealTimeInfo_Current()
     {
-        var varReturnValue = false;
-        var symbolTmp = "";
+        var varReturnValue = false;        
         var varRealTimeInfo = "";
         var varRequest = "";
+        var m_s_Symbol_Tmp = "";
+        var m_s_Symbol_Extern_Tmp = "";
 
-        symbolTmp = m_s_Symbol_current;
+        m_s_Symbol_Tmp = m_s_Symbol_current;
+        m_s_Symbol_Extern_Tmp = m_s_Symbol_Extern_current;
         //check
-        if (symbolTmp.length <= 0)
+        if (m_s_Symbol_Tmp.length <= 0)
         {
             console.error('CurrentUserStockData.qml',
                         ' ','fun_Update_RealTimeInfo_Current',
@@ -85,7 +89,7 @@ ListModel
             return varReturnValue;
         }
 
-        varRequest = m_YahooRealTimeReqAck.fun_create_request_LatestQuotesCsv(symbolTmp);
+        varRequest = m_YahooRealTimeReqAck.fun_create_request_LatestQuotesCsv(m_s_Symbol_Tmp, m_s_Symbol_Extern_Tmp);
         if (varRequest.length <= 0)
         {
             varReturnValue = false;
@@ -239,7 +243,6 @@ ListModel
     function fun_Update_HistoryInfo_Current()
     {
         var varReturnValue = false;
-        var symbolTmp = "";
         var varRequest = "";
         var stockDataCycle = "d";
         var nDiffDays = 0;
@@ -247,6 +250,8 @@ ListModel
         var nDiffYears = 0;
         var varStartTime = new Date();
         var varEndTime = new Date();// today
+        var m_s_Symbol_Tmp = "";
+        var m_s_Symbol_Extern_Tmp = "";
 
         //标志位置false
         id_qml_CurrentUserStockData.m_bool_HistoryDataReady = false;
@@ -254,9 +259,10 @@ ListModel
         id_qml_CurrentUserStockData.clear();
 
 
-        symbolTmp = m_s_Symbol_current;
+        m_s_Symbol_Tmp = m_s_Symbol_current;
+        m_s_Symbol_Extern_Tmp = m_s_Symbol_Extern_current;
         //check
-        if (symbolTmp.length <= 0)
+        if (m_s_Symbol_Tmp.length <= 0)
         {
             console.error('CurrentUserStockData.qml',
                         ' ','fun_Update_HistoryInfo_Current',
@@ -280,7 +286,7 @@ ListModel
             varStartTime.setDate(varStartTime.getDate() - nDiffDays);// 最近5天
 
             varRequest = m_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(
-                        symbolTmp, varStartTime, varEndTime, stockDataCycle);
+                        m_s_Symbol_Tmp, m_s_Symbol_Extern_Tmp, varStartTime, varEndTime, stockDataCycle);
 
             m_n_HistoryRequest_StartTime_MillSeconds = varStartTime.getTime();
             m_n_HistoryRequest_EndTime_MillSeconds = varEndTime.getTime();
@@ -299,7 +305,7 @@ ListModel
             varStartTime.setMonth(varStartTime.getMonth() - nDiffMonths);// 最近3月
 
             varRequest = m_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(
-                        symbolTmp, varStartTime, varEndTime, stockDataCycle);
+                        m_s_Symbol_Tmp, m_s_Symbol_Extern_Tmp, varStartTime, varEndTime, stockDataCycle);
             m_n_HistoryRequest_StartTime_MillSeconds = varStartTime.getTime();
             m_n_HistoryRequest_EndTime_MillSeconds = varEndTime.getTime();
             m_str_HistoryRequest_StartTime = varStartTime.toLocaleString();//"ddd yyyy-MM-dd hh:mm:ss"
@@ -325,7 +331,7 @@ ListModel
             varStartTime.setFullYear(varStartTime.getFullYear() - nDiffYears);// 最近3月
 
             varRequest = m_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(
-                        symbolTmp, varStartTime, varEndTime, stockDataCycle);
+                        m_s_Symbol_Tmp, m_s_Symbol_Extern_Tmp, varStartTime, varEndTime, stockDataCycle);
             m_n_HistoryRequest_StartTime_MillSeconds = varStartTime.getTime();
             m_n_HistoryRequest_EndTime_MillSeconds = varEndTime.getTime();
             m_str_HistoryRequest_StartTime = varStartTime.toLocaleString();//"ddd yyyy-MM-dd hh:mm:ss"

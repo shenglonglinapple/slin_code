@@ -23,11 +23,11 @@ Rectangle
             console.log('HistoryDataGraphWindow.qml',
                         ' ','MouseArea onClicked',
                         ' ','m_Mainpage_ListView.currentIndex:', m_Mainpage_ListView.currentIndex,
-                        ' ','new index:', 2);
+                        ' ','new index:', m_PageListData.m_n_MainpageListView_Index_StockDetailBigView);
 
-            m_Mainpage_ListView.currentIndex = 2;
+            m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_StockDetailBigView;
 
-            if (m_Mainpage_ListView.currentIndex == 2)
+            if (m_Mainpage_ListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_StockDetailBigView)
             {
                 console.log('HistoryDataGraphWindow.qml',
                             ' ','MouseArea onClicked',

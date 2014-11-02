@@ -19,10 +19,10 @@ Item
     property string m_str_table_name_TABLE_USERSTOCK : "TABLE_USERSTOCK";
     property string m_str_sql_drop_table_TABLE_USERSTOCK : "DROP TABLE TABLE_USERSTOCK";
     property string m_str_sql_clear_table_TABLE_USERSTOCK : "DELETE FROM TABLE_USERSTOCK";//"TRUNCATE TABLE TABLE_USERSTOCK";
-    property string m_str_sql_create_table_TABLE_USERSTOCK : "CREATE TABLE IF NOT EXISTS TABLE_USERSTOCK(C_INDEX INTEGER PRIMARY KEY, m_s_Symbol TEXT, m_s_Symbol_Extern TEXT)";
+    property string m_str_sql_create_table_TABLE_USERSTOCK : "CREATE TABLE IF NOT EXISTS TABLE_USERSTOCK(C_INDEX INTEGER PRIMARY KEY, m_s_Symbol TEXT, m_s_Symbol_Extern TEXT, m_n_Name TEXT)";
     property string m_str_sql_delete_from_TABLE_USERSTOCK : "DELETE FROME TABLE_USERSTOCK  WHERE C_INDEX == 1";
-    property string m_str_sql_select_TABLE_USERSTOCK_001 : "SELECT C_INDEX,m_s_Symbol,m_s_Symbol_Extern FROM TABLE_USERSTOCK";
-    property string m_str_sql_insert_TABLE_USERSTOCK_001 : "INSERT INTO TABLE_USERSTOCK(C_INDEX, m_s_Symbol, m_s_Symbol_Extern) VALUES(?,?,?)";
+    property string m_str_sql_select_TABLE_USERSTOCK_001 : "SELECT C_INDEX,m_s_Symbol,m_s_Symbol_Extern,m_n_Name FROM TABLE_USERSTOCK";
+    property string m_str_sql_insert_TABLE_USERSTOCK_001 : "INSERT INTO TABLE_USERSTOCK(C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name) VALUES(?,?,?,?)";
 
 
 

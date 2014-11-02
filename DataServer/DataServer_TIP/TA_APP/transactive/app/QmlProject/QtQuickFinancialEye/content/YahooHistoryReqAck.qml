@@ -8,12 +8,12 @@ Item
 
     //获取股票历史行情数据
     //var startDate = new Date(2011, 4, 25);//指定一个开始时间
-    function fun_create_request_HistoricalQuotesCsv(strInstrument,  dateStart, dateEnd, strRangeType)
+    function fun_create_request_HistoricalQuotesCsv(strSymbol, strSymbolExtern,  dateStart, dateEnd, strRangeType)
     {
         var varReturnValue = "";
 
         varReturnValue = "http://ichart.finance.yahoo.com/table.csv?";
-        varReturnValue += "s=" + strInstrument;
+        varReturnValue += "s=" + strSymbol;
         varReturnValue += "&a=" + dateStart.getMonth();
         varReturnValue += "&b=" + dateStart.getDate();
         varReturnValue += "&c=" + dateStart.getFullYear();
@@ -31,6 +31,7 @@ Item
     {// 创建请求数据的url字符串函数
 		var varReturnValue = "";
         var strSymbol = "APPL";
+        var m_s_Symbol_Extern_Tmp = "";
         var startDate = new Date(2011, 4, 25);      // 指定一个开始时间
         var endDate = new Date();// today   // 结束时间为当前时间
         var stockDataCycle = "v";
@@ -41,7 +42,7 @@ Item
             stockDataCycle = "d";
         }
 
-        varReturnValue = id_qml_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(strSymbol, startDate, endDate, stockDataCycle);
+        varReturnValue = id_qml_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(strSymbol, m_s_Symbol_Extern_Tmp, startDate, endDate, stockDataCycle);
 		return varReturnValue;
     }//fun_create_request_Sample
 
@@ -49,7 +50,7 @@ Item
 
 	
 	//1d 5d
-    function fun_create_request_x_day(strSymbol, nDays, stockDataCycle)
+    function fun_create_request_x_day(strSymbol,strSymbolExtern, nDays, stockDataCycle)
     {// 创建请求数据的url字符串函数
 		var varReturnValue = "";
         var endDate = new Date();// today
@@ -60,7 +61,7 @@ Item
 		startDate.setDate(startDate.getDate() - nDiff);// 最近5天
         
         varReturnValue = id_qml_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(
-                    strSymbol, startDate, endDate, stockDataCycle);
+                    strSymbol,strSymbolExtern, startDate, endDate, stockDataCycle);
 
 		return varReturnValue;
     }//fun_create_request_x_day
@@ -68,7 +69,7 @@ Item
 
 	
 	//1m 3m 6m
-    function fun_create_request_x_month(strSymbol, nMonths, stockDataCycle)
+    function fun_create_request_x_month(strSymbol,strSymbolExtern, nMonths, stockDataCycle)
     {// 创建请求数据的url字符串函数
 		var varReturnValue = "";
         var endDate = new Date();// today
@@ -78,7 +79,7 @@ Item
 
         startDate.setMonth(startDate.getMonth() - nMonths);
         
-		varReturnValue = id_qml_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(strSymbol, startDate, endDate, stockDataCycle);
+        varReturnValue = id_qml_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(strSymbol,strSymbolExtern, startDate, endDate, stockDataCycle);
 		return varReturnValue;
     }//fun_create_request_x_month
 
@@ -86,7 +87,7 @@ Item
 
 	
 	//1y 2y  3y
-    function fun_create_request_x_year(strSymbol, nYears,stockDataCycle)
+    function fun_create_request_x_year(strSymbol,strSymbolExtern, nYears,stockDataCycle)
     {// 创建请求数据的url字符串函数
 		var varReturnValue = "";
         var endDate = new Date();// today
@@ -96,7 +97,7 @@ Item
 		
         startDate.setFullYear(startDate.getFullYear() - nDiff);
         
-		varReturnValue = id_qml_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(strSymbol, startDate, endDate, stockDataCycle);
+        varReturnValue = id_qml_YahooHistoryReqAck.fun_create_request_HistoricalQuotesCsv(strSymbol,strSymbolExtern, startDate, endDate, stockDataCycle);
 		return varReturnValue;
     }//fun_create_request_x_year
 

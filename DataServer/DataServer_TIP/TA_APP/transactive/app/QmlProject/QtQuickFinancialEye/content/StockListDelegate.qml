@@ -51,11 +51,13 @@ Component
                 // 获取 Id 与 name
                 //set value and emit
                 m_CurrentUserStockData.m_s_Symbol_current = m_listViewStock.model.get(m_listViewStock.currentIndex).m_s_Symbol;
+                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_listViewStock.model.get(m_listViewStock.currentIndex).m_s_Symbol_Extern;
 
                 console.log('StockListDelegate.qml',
                             ' ','MouseArea onClicked',
                             ' ','m_listViewStock.currentIndex:',m_listViewStock.currentIndex,
-                            ' ','m_CurrentUserStockData.m_s_Symbol_current:',m_CurrentUserStockData.m_s_Symbol_current);
+                            ' ','m_CurrentUserStockData.m_s_Symbol_current:',m_CurrentUserStockData.m_s_Symbol_current,
+                            ' ','m_CurrentUserStockData.m_s_Symbol_Extern_current:',m_CurrentUserStockData.m_s_Symbol_Extern_current);
 
                 //emit signal signalUpdateStockInfo
                 console.log('StockListDelegate.qml',
@@ -66,7 +68,7 @@ Component
                 //current show StockListView
                 //m_Mainpage_ListView.currentIndex = 0;
                 //then show StockDetailView  m_Mainpage_ListView.currentIndex = 1;
-                m_Mainpage_ListView.currentIndex = 1;
+                m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_StockDetailView;
             }
         }
 
@@ -105,9 +107,10 @@ Component
                 m_page_StockListView.fun_Update_RealTimeInfo_byindex(index);
 
                 //set CurrentUserStockData default value
-                if (0 == index)
+                if (m_PageListData.m_n_MainpageListView_Index_StockListView == index)
                 {
                     m_CurrentUserStockData.m_s_Symbol_current = m_s_Symbol;
+                    m_CurrentUserStockData.m_s_Symbol_Extern_current = m_s_Symbol_Extern;
                 }
 
             }//Component.onCompleted:

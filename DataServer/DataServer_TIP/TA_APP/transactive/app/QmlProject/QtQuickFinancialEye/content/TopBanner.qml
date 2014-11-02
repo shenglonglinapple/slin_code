@@ -38,7 +38,7 @@ Rectangle
 
         //第一个主页面不显示 其余页面都要显示
         //visible: true
-        visible : m_Mainpage_ListView.currentIndex == 0 ? false : true
+        visible : m_Mainpage_ListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_StockListView ? false : true
 
         MouseArea
         {
@@ -46,9 +46,9 @@ Rectangle
             onClicked:
             {
                 //0 1 2 < 3
-                if (m_Mainpage_ListView.currentIndex >= 0)
+                if (m_Mainpage_ListView.currentIndex >= m_PageListData.m_n_MainpageListView_Index_StockListView)
                 {
-                    if (m_Mainpage_ListView.currentIndex === 0)
+                    if (m_Mainpage_ListView.currentIndex === m_PageListData.m_n_MainpageListView_Index_StockListView)
                     {
                         m_Mainpage_ListView.currentIndex = m_Mainpage_ListView.count - 1;//go to last page
                     }

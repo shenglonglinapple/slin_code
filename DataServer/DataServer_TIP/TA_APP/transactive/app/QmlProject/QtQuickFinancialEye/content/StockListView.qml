@@ -80,13 +80,15 @@ Rectangle
     function fun_Update_RealTimeInfo_byindex(index)
     {
         var varReturnValue = false;
-        var symbolTmp = "";
+        var m_s_Symbol_Tmp = "";
+        var m_s_Symbol_Extern_Tmp = "";
         var varRealTimeInfo = "";
         var varRequest = "";
 
-        symbolTmp = m_listViewStock.model.get(index).m_s_Symbol;
+        m_s_Symbol_Tmp = m_listViewStock.model.get(index).m_s_Symbol;
+        m_s_Symbol_Extern_Tmp = m_listViewStock.model.get(index).m_s_Symbol_Extern;
         //check
-        if (symbolTmp.length <= 0)
+        if (m_s_Symbol_Tmp.length <= 0)
         {
             console.error('StockListView.qml',
                         ' ','fun_Update_RealTimeInfo_byindex',
@@ -95,7 +97,7 @@ Rectangle
             return varReturnValue;
         }
 
-        varRequest = m_YahooRealTimeReqAck.fun_create_request_LatestQuotesCsv(symbolTmp);
+        varRequest = m_YahooRealTimeReqAck.fun_create_request_LatestQuotesCsv(m_s_Symbol_Tmp, m_s_Symbol_Extern_Tmp);
         if (varRequest.length <= 0)
         {
             varReturnValue = false;
@@ -163,6 +165,7 @@ Rectangle
                 {
                     var varValueTmp = "";
                     varValueTmp = varVariableLst[1];
+                    console.log("StockListView.qml"," ","varValueTmp==",varValueTmp);
                     m_listViewStock.model.setProperty(index, "m_s_Symbol",varValueTmp);
                     varValueTmp = varVariableLst[2];
                     m_listViewStock.model.setProperty(index, "m_c6_Change_Realtime",varValueTmp);
@@ -171,8 +174,13 @@ Rectangle
                     varValueTmp = varVariableLst[13];
                     m_listViewStock.model.setProperty(index, "m_l1_Last_Trade_Price_Only",varValueTmp);
                     varValueTmp = varVariableLst[17];
-                    console.log("StockListView.qml"," ","varValueTmp==",varValueTmp);
-                    m_listViewStock.model.setProperty(index, "m_n_Name",varValueTmp);
+                    if (varValueTmp.length > 0)
+                    {
+                        console.log("StockListView.qml"," ","varValueTmp==",varValueTmp);
+                        m_listViewStock.model.setProperty(index, "m_n_Name",varValueTmp);
+                    }
+
+
                 }
                 else
                 {
