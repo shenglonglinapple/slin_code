@@ -56,7 +56,7 @@ Rectangle
     ListView
     {
         //0
-        id: m_TotalStockListView
+        id: m_ListView_TotalStock
         //1
         width:parent.width;
         anchors.top: parent.top

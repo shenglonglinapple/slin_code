@@ -13,6 +13,7 @@ Rectangle
         id: mainRect
         color: "transparent"
         anchors.fill: parent
+
     }
 }
 

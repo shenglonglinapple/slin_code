@@ -7,11 +7,11 @@ import QtQml.Models 2.1
 Component
 {
     // 委托组件，基本都是布局
-    id: id_qml_TotalStockListDelegate;
+    id: id_qml_UsrSearchStockListDelegate
 
     Rectangle
     {
-        id:m_Rectangle_TotalStockListDelegate;
+        id:m_Rectangle_UsrSearchStockListDelegate
 
         width: parent.width;
         height: 60;
@@ -26,7 +26,7 @@ Component
         property real m_n_Text_topMargin: 3;
         property real m_n_Text_fontsize_percent: 0.5;
 
-        visible: (m_s_Symbol.indexOf(m_page_TotalStockListView.m_str_SeachStock) >= 0) ? true:false
+        visible: true
 
         MouseArea
         {
@@ -35,25 +35,25 @@ Component
             {
                 console.log('TotalStockListDelegate.qml',
                             ' ','MouseArea onClicked',
-                            ' ','m_TotalStockListModel.count:', m_TotalStockListModel.count,
-                            ' ','m_TotalStockListView.currentIndex:', m_ListView_TotalStock.currentIndex,
+                            ' ','m_UsrSearchStockListModel.count:', m_UsrSearchStockListModel.count,
+                            ' ','m_ListView_UsrSearchStock.currentIndex:', m_ListView_UsrSearchStock.currentIndex,
                             ' ','new index:', index);
 
                 //if m_listViewStock.currentIndex the same as index  then will not emit currentIndexChanged
-                if (m_ListView_TotalStock.currentIndex != index)
+                if (m_TotalStockListView.currentIndex != index)
                 {
-                    m_ListView_TotalStock.currentIndex = index;//where is index define?????
+                    m_TotalStockListView.currentIndex = index;//where is index define?????
                 }
 
 
                 // 获取 Id 与 name
                 //set value and emit
-                m_CurrentUserStockData.m_s_Symbol_current = m_ListView_TotalStock.model.get(m_ListView_TotalStock.currentIndex).m_s_Symbol;
-                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_ListView_TotalStock.model.get(m_ListView_TotalStock.currentIndex).m_s_Symbol_Extern;
+                m_CurrentUserStockData.m_s_Symbol_current = m_ListView_UsrSearchStock.model.get(m_ListView_UsrSearchStock.currentIndex).m_s_Symbol;
+                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_ListView_UsrSearchStock.model.get(m_ListView_UsrSearchStock.currentIndex).m_s_Symbol_Extern;
 
                 console.log('TotalStockListDelegate.qml',
                             ' ','MouseArea onClicked',
-                            ' ','m_TotalStockListView.currentIndex:',m_ListView_TotalStock.currentIndex,
+                            ' ','m_ListView_UsrSearchStock.currentIndex:',m_ListView_UsrSearchStock.currentIndex,
                             ' ','m_CurrentUserStockData.m_s_Symbol_current:',m_CurrentUserStockData.m_s_Symbol_current,
                             ' ','m_CurrentUserStockData.m_s_Symbol_Extern_current:',m_CurrentUserStockData.m_s_Symbol_Extern_current);
 

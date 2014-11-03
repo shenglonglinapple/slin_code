@@ -25,8 +25,21 @@ Item
     property string m_str_sql_insert_TABLE_USERSTOCK_001 : "INSERT INTO TABLE_USERSTOCK(C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name) VALUES(?,?,?,?)";
 
 
+    //TABLE_TOTALSTOCK
+    property string m_str_table_name_TABLE_TOTALSTOCK : "TABLE_TOTALSTOCK";
+    property string m_str_sql_drop_table_TABLE_TOTALSTOCK : "DROP TABLE TABLE_TOTALSTOCK";
+    property string m_str_sql_clear_table_TABLE_TOTALSTOCK : "DELETE FROM TABLE_TOTALSTOCK";
+    property string m_str_sql_create_table_TABLE_TOTALSTOCK : "CREATE TABLE IF NOT EXISTS TABLE_TOTALSTOCK(C_INDEX INTEGER PRIMARY KEY, m_s_Symbol TEXT, m_s_Symbol_Extern TEXT, m_n_Name TEXT)";
+    property string m_str_sql_delete_from_TABLE_TOTALSTOCK : "DELETE FROME TABLE_TOTALSTOCK  WHERE C_INDEX == 1";
+    property string m_str_sql_select_TABLE_TOTALSTOCK_001 : "SELECT C_INDEX,m_s_Symbol,m_s_Symbol_Extern,m_n_Name FROM TABLE_TOTALSTOCK";
+    property string m_str_sql_select_TABLE_TOTALSTOCK_002 : "SELECT COUNT(*) as COUNT FROM TABLE_TOTALSTOCK";
+    property string m_str_sql_insert_TABLE_TOTALSTOCK_001 : "INSERT INTO TABLE_TOTALSTOCK(C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name) VALUES(?,?,?,?)";
 
 
+
+
+    /////////////////////////////////////////////////////////////
+    //DB
     function fun_db_CheckAndCreateDB()
     {
         console.log('SqliteDbStorage.qml',
@@ -41,7 +54,7 @@ Item
         return dbhandle;
 
     }//fun_db_CheckAndCreateDB()
-
+    /////////////////////////////////////////////////////////////
 
 
     /////////////////////////////////////////////////////////////
@@ -60,7 +73,7 @@ Item
                 tx.executeSql(m_str_sql_clear_table_TABLE_USERSTOCK);
             }//function(tx)
         )//db.transaction
-    }//fun_db_common_TurncateTable()
+    }//fun_db_clear_table_TABLE_USERSTOCK()
 
 
     function fun_db_drop_table_TRABLE_USERSTOCK()
@@ -77,7 +90,7 @@ Item
                 tx.executeSql(m_str_sql_drop_table_TABLE_USERSTOCK);
             }//function(tx)
         )//db.transaction
-    }//fun_db_common_TurncateTable()
+    }//fun_db_drop_table_TRABLE_USERSTOCK()
 
 
 
@@ -99,6 +112,59 @@ Item
     /////////////////////////////////////////////////////////////
 
 
+    /////////////////////////////////////////////////////////////
+    //TABLE_TOTALSTOCK
+    function fun_db_clear_table_TABLE_TOTALSTOCK()
+    {
+        console.log('SqliteDbStorage.qml',
+                    ' ','fun_db_clear_table_TABLE_TOTALSTOCK()');
+
+        var dbhandle = id_qml_SqliteDbStorage.fun_db_CheckAndCreateDB();
+
+        dbhandle.transaction
+        (
+            function(tx)
+            {
+                tx.executeSql(m_str_sql_clear_table_TABLE_TOTALSTOCK);
+            }//function(tx)
+        )//db.transaction
+    }//fun_db_clear_table_TABLE_TOTALSTOCK()
+
+
+    function fun_db_drop_table_TABLE_TOTALSTOCK()
+    {
+        console.log('SqliteDbStorage.qml',
+                    ' ','fun_db_drop_table_TABLE_TOTALSTOCK()');
+
+        var dbhandle = id_qml_SqliteDbStorage.fun_db_CheckAndCreateDB();
+
+        dbhandle.transaction
+        (
+            function(tx)
+            {
+                tx.executeSql(m_str_sql_drop_table_TABLE_TOTALSTOCK);
+            }//function(tx)
+        )//db.transaction
+    }//fun_db_drop_table_TABLE_TOTALSTOCK()
+
+
+
+    function fun_db_CheckAndCreateTable_TABLE_TOTALSTOCK()
+    {
+        console.log('SqliteDbStorage.qml',
+                    ' ','fun_db_CheckAndCreateTable_TABLE_TOTALSTOCK()');
+
+        var dbhandle = id_qml_SqliteDbStorage.fun_db_CheckAndCreateDB();
+
+        dbhandle.transaction
+        (
+            function(tx)
+            {
+                tx.executeSql(m_str_sql_create_table_TABLE_TOTALSTOCK);
+            }//function(tx)
+        )//db.transaction
+    }//fun_db_CheckAndCreateTable_TABLE_TOTALSTOCK()
+    /////////////////////////////////////////////////////////////
 
 
 

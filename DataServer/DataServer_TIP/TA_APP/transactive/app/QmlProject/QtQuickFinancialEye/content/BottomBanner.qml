@@ -35,7 +35,7 @@ Rectangle
 
             onClicked:
             {
-                m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_TotalStockListView;
+                m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_UsrSearchStockListView;
                 console.log('BottomBanner.qml',
                             ' ','AddStock',
                             ' ','MouseArea',

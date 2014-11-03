@@ -110,14 +110,13 @@ ListView
             height: id_qml_PageListView.width
         }
 
-        //index=3
-        TotalStockListView
+
+        UsrSearchStockListView
         {
-            id: m_page_TotalStockListView
+            id:m_UsrSearchStockListView
             width: id_qml_PageListView.width
             height: id_qml_PageListView.height
         }
-
 
         //index=4
         PageView

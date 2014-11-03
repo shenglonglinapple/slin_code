@@ -7,11 +7,12 @@ ListModel
 
     //
     property bool m_b_print_log: true;
+    property int m_n_TotalStockListModel_Count : 3325;//total 3325 stocks in SS and SZ
     //
     property int m_n_MainpageListView_Index_StockListView : 0;//PageListaView m_Mainpage_ListView.currentIndex=0
     property int m_n_MainpageListView_Index_StockDetailView : 1;
     property int m_n_MainpageListView_Index_StockDetailBigView : 2;
-    property int m_n_MainpageListView_Index_TotalStockListView : 3;
+    property int m_n_MainpageListView_Index_UsrSearchStockListView : 3;
     property int m_n_MainpageListView_Index_PageView : 4;
 
 

@@ -23,9 +23,16 @@
         <file>content/BottomBanner.qml</file>
         <file>content/TotalStockListDelegate.qml</file>
         <file>content/TotalStockListView.qml</file>
+        <file>content/UsrSearchStockListModel.qml</file>
+        <file>content/UsrSearchStockListDelegate.qml</file>
+        <file>content/UsrSearchStockListView.qml</file>
     </qresource>
     <qresource prefix="/imgfile">
         <file>images/icon_left_arrow.png</file>
         <file>images/icon_right_arrow.png</file>
+        <file>images/textfield.png</file>
+        <file>images/add_icon.png</file>
+        <file>images/add_icon_pressed.png</file>
+        <file>images/delegate.png</file>
     </qresource>
 </RCC>

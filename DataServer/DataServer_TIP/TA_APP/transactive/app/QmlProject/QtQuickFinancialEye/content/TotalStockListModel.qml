@@ -4,6 +4,117 @@ ListModel
 {
     id:id_qml_TotalStockListModel
 
+
+    Component.onCompleted:
+    {
+        console.log('TotalStockListModel.qml',
+                    ' ','Component.onCompleted');
+
+        var nCount = 0;
+        m_SqliteDbStorage.fun_db_CheckAndCreateTable_TABLE_TOTALSTOCK();
+
+        nCount = fun_db_getCount_from_TableTotalStock();
+        if (nCount == id_qml_TotalStockListModel.count)
+        {
+
+        }
+        else
+        {
+            m_SqliteDbStorage.fun_db_clear_table_TABLE_TOTALSTOCK();
+            fun_db_SaveData_to_TableTotalStock();
+        }
+
+
+    }
+    Component.onDestruction:
+    {
+        console.log('TotalStockListModel.qml',
+                    ' ','Component.onDestruction');
+        //m_SqliteDbStorage.fun_db_CheckAndCreateTable_TABLE_TOTALSTOCK();
+        //m_SqliteDbStorage.fun_db_clear_table_TABLE_TOTALSTOCK();
+        //fun_db_SaveData_to_TableTotalStock();
+    }
+
+
+    function fun_db_getCount_from_TableTotalStock()
+    {
+        console.log('TotalStockListModel.qml',
+                    ' ','fun_db_getCount_from_TableTotalStock()');
+        var nCount = 0;
+
+        var db =  m_SqliteDbStorage.fun_db_CheckAndCreateDB();
+        db.transaction
+        (
+            function(tx)
+            {
+                //property string m_str_sql_select_TABLE_TOTALSTOCK_002 : "SELECT COUNT(*) as COUNT FROM TABLE_TOTALSTOCK";
+                console.log('TotalStockListModel.qml',
+                            ' ','fun_db_getCount_from_TableTotalStock()',
+                            ' ','executeSql m_SqliteDbStorage.m_str_sql_select_TABLE_TOTALSTOCK_002:', m_SqliteDbStorage.m_str_sql_select_TABLE_TOTALSTOCK_002);
+                var rs = tx.executeSql(m_SqliteDbStorage.m_str_sql_select_TABLE_TOTALSTOCK_002);
+                var nRowIndex = 0;
+                if (rs.rows.length > 0)
+                {
+                    nRowIndex = 0;
+                    while (nRowIndex < rs.rows.length)
+                    {
+                        var myItem = rs.rows.item(nRowIndex);
+                        nCount = myItem.COUNT;
+
+                        console.log('StockListModel.qml',
+                                    ' ','fun_db_getCount_from_TableTotalStock()',
+                                    ' ','nRowIndex=',nRowIndex,
+                                    ' ','nCount=',myItem.COUNT);
+                        nRowIndex++;
+                    }
+                }
+                else
+                {
+                    nCount = 0;
+                }//else
+
+                return nCount;
+            }//function(tx)
+        )//db.transaction
+
+    }//function fun_db_getCount_from_TableTotalStock()
+
+
+    function fun_db_SaveData_to_TableTotalStock()
+    {
+        console.log('StockListModel.qml',
+                    ' ','fun_db_SaveData_to_TableTotalStock()');
+
+        var db =  m_SqliteDbStorage.fun_db_CheckAndCreateDB();
+
+        db.transaction
+        (
+            function(tx)
+            {
+                var nRowIndex = 0;
+                while (nRowIndex < id_qml_TotalStockListModel.count)
+                {
+                    var myItem = id_qml_TotalStockListModel.get(nRowIndex);
+
+                    console.log('StockListModel.qml',
+                                ' ','fun_db_SaveData_to_TableUserStock()',
+                                ' ','executeSql insert_TABLE_TOTALSTOCK_001:',m_SqliteDbStorage.m_str_sql_insert_TABLE_TOTALSTOCK_001,
+                                ' ','nRowIndex:',nRowIndex,
+                                ' ','m_s_Symbol:',myItem.m_s_Symbol,
+                                ' ','m_s_Symbol_Extern:',myItem.m_s_Symbol_Extern);
+
+                    tx.executeSql(m_SqliteDbStorage.m_str_sql_insert_TABLE_TOTALSTOCK_001, [nRowIndex, myItem.m_s_Symbol, myItem.m_s_Symbol_Extern, myItem.m_n_Name]);
+
+                    nRowIndex++;
+                }
+            }//function(tx)
+        )//db.transaction
+    }//function saveImageData()
+
+
+
+
+    //total 3255 stocks
     //SS all stock name
     ListElement
     {
