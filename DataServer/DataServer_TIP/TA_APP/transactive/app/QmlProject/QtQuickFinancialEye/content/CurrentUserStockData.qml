@@ -71,7 +71,7 @@ ListModel
     //fun
     function fun_Update_RealTimeInfo_Current()
     {
-        var varReturnValue = false;        
+        var varReturnValue = false;
         var varRealTimeInfo = "";
         var varRequest = "";
         var m_s_Symbol_Tmp = "";
@@ -83,8 +83,8 @@ ListModel
         if (m_s_Symbol_Tmp.length <= 0)
         {
             console.error('CurrentUserStockData.qml',
-                        ' ','fun_Update_RealTimeInfo_Current',
-                        ' ','m_s_Symbol_current is empty');
+                          ' ','fun_Update_RealTimeInfo_Current',
+                          ' ','m_s_Symbol_current is empty');
             varReturnValue = false;
             return varReturnValue;
         }
@@ -202,7 +202,7 @@ ListModel
                                 " ","varVariableLst.length:",
                                 " ",varVariableLst.length,
                                 " ","is not 18",
-                                  " ","varVariableLst:", varVariableLst);
+                                " ","varVariableLst:", varVariableLst);
 
                 }
 
@@ -229,6 +229,7 @@ ListModel
         // 这也是该model真正存储的数据类型格式
         //Date,Open,High,Low,Close,Volume,Adj Close
         //2014-10-13,101.33,101.78,99.81,99.81,53485500,99.81
+        /*
         return {
             "m_str_date": recordTmp[0],
             "m_str_open":recordTmp[1],
@@ -238,6 +239,17 @@ ListModel
             "m_str_volume":recordTmp[5],
             "m_str_adjusted":recordTmp[6]
         };
+        */
+
+
+        id_qml_CurrentUserStockData.append(
+                    {"m_str_date": recordTmp[0],
+                        "m_str_open":recordTmp[1],
+                        "m_str_high":recordTmp[2],
+                        "m_str_low":recordTmp[3],
+                        "m_str_close":recordTmp[4],
+                        "m_str_volume":recordTmp[5],
+                        "m_str_adjusted":recordTmp[6]});
     }
 
     function fun_Update_HistoryInfo_Current()
@@ -265,8 +277,8 @@ ListModel
         if (m_s_Symbol_Tmp.length <= 0)
         {
             console.error('CurrentUserStockData.qml',
-                        ' ','fun_Update_HistoryInfo_Current',
-                        ' ','m_s_Symbol_current is empty');
+                          ' ','fun_Update_HistoryInfo_Current',
+                          ' ','m_s_Symbol_current is empty');
             varReturnValue = false;
             return varReturnValue;
         }
@@ -363,7 +375,7 @@ ListModel
                         " ",xhr.readyState);
 
             if (xhr.readyState === XMLHttpRequest.DONE)
-            //if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE)
+                //if (xhr.readyState === XMLHttpRequest.LOADING || xhr.readyState === XMLHttpRequest.DONE)
             {
 
                 console.log("CurrentUserStockData.qml",
@@ -393,18 +405,21 @@ ListModel
                     if (varRecodeVariableLst.length === 7)
                     {
                         // 函数调用，向model中添加数据
+                        /*
                         id_qml_CurrentUserStockData.append(
                                     id_qml_CurrentUserStockData.fun_createListElement(
                                         varRecodeVariableLst));
+                         */
+                        id_qml_CurrentUserStockData.fun_createListElement(varRecodeVariableLst);
                     }
                     else
                     {
                         console.error("CurrentUserStockData.qml",
-                                    " ","fun_Update_HistoryInfo_Current:",
-                                    " ","nIndex:",nIndex,
-                                    " ","varRecodeVariableLst.length:",varRecodeVariableLst.length,
-                                    " ","is not 7",
-                                    " ","varVariableLst[nIndex]:", varVariableLst[nIndex]);
+                                      " ","fun_Update_HistoryInfo_Current:",
+                                      " ","nIndex:",nIndex,
+                                      " ","varRecodeVariableLst.length:",varRecodeVariableLst.length,
+                                      " ","is not 7",
+                                      " ","varVariableLst[nIndex]:", varVariableLst[nIndex]);
                     }
                 }
 

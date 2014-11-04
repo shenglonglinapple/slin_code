@@ -96,12 +96,14 @@ ListModel
                 {
                     var myItem = id_qml_TotalStockListModel.get(nRowIndex);
 
+                    /*
                     console.log('StockListModel.qml',
                                 ' ','fun_db_SaveData_to_TableUserStock()',
                                 ' ','executeSql insert_TABLE_TOTALSTOCK_001:',m_SqliteDbStorage.m_str_sql_insert_TABLE_TOTALSTOCK_001,
                                 ' ','nRowIndex:',nRowIndex,
                                 ' ','m_s_Symbol:',myItem.m_s_Symbol,
                                 ' ','m_s_Symbol_Extern:',myItem.m_s_Symbol_Extern);
+                    */
 
                     tx.executeSql(m_SqliteDbStorage.m_str_sql_insert_TABLE_TOTALSTOCK_001, [nRowIndex, myItem.m_s_Symbol, myItem.m_s_Symbol_Extern, myItem.m_n_Name]);
 

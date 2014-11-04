@@ -40,22 +40,12 @@ Component
                             ' ','new index:', index);
 
                 //if m_listViewStock.currentIndex the same as index  then will not emit currentIndexChanged
-                if (m_TotalStockListView.currentIndex != index)
+                if (m_ListView_UsrSearchStock.currentIndex != index)
                 {
-                    m_TotalStockListView.currentIndex = index;//where is index define?????
+                    m_ListView_UsrSearchStock.currentIndex = index;//where is index define?????
                 }
 
 
-                // 获取 Id 与 name
-                //set value and emit
-                m_CurrentUserStockData.m_s_Symbol_current = m_ListView_UsrSearchStock.model.get(m_ListView_UsrSearchStock.currentIndex).m_s_Symbol;
-                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_ListView_UsrSearchStock.model.get(m_ListView_UsrSearchStock.currentIndex).m_s_Symbol_Extern;
-
-                console.log('TotalStockListDelegate.qml',
-                            ' ','MouseArea onClicked',
-                            ' ','m_ListView_UsrSearchStock.currentIndex:',m_ListView_UsrSearchStock.currentIndex,
-                            ' ','m_CurrentUserStockData.m_s_Symbol_current:',m_CurrentUserStockData.m_s_Symbol_current,
-                            ' ','m_CurrentUserStockData.m_s_Symbol_Extern_current:',m_CurrentUserStockData.m_s_Symbol_Extern_current);
 
             }
         }

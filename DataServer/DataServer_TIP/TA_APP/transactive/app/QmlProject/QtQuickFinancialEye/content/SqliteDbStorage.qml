@@ -33,6 +33,7 @@ Item
     property string m_str_sql_delete_from_TABLE_TOTALSTOCK : "DELETE FROME TABLE_TOTALSTOCK  WHERE C_INDEX == 1";
     property string m_str_sql_select_TABLE_TOTALSTOCK_001 : "SELECT C_INDEX,m_s_Symbol,m_s_Symbol_Extern,m_n_Name FROM TABLE_TOTALSTOCK";
     property string m_str_sql_select_TABLE_TOTALSTOCK_002 : "SELECT COUNT(*) as COUNT FROM TABLE_TOTALSTOCK";
+    property string m_str_sql_select_TABLE_TOTALSTOCK_003 : "SELECT C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name FROM TABLE_TOTALSTOCK where m_s_Symbol LIKE '%?%'";
     property string m_str_sql_insert_TABLE_TOTALSTOCK_001 : "INSERT INTO TABLE_TOTALSTOCK(C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name) VALUES(?,?,?,?)";
 
 
