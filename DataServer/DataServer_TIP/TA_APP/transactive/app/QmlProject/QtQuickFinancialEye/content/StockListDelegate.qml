@@ -51,6 +51,7 @@ Component
                 // 获取 Id 与 name
                 //set value and emit
                 m_CurrentUserStockData.m_s_Symbol_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_s_Symbol;
+                m_CurrentUserStockData.m_n_Name_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_n_Name;
                 m_CurrentUserStockData.m_s_Symbol_Extern_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_s_Symbol_Extern;
 
                 console.log('StockListDelegate.qml',

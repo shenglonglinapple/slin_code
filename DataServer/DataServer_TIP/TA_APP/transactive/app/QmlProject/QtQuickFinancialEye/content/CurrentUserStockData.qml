@@ -189,7 +189,12 @@ ListModel
                     nIndex++;
                     id_qml_CurrentUserStockData.m_a2_Average_Daily_Volume_current = varVariableLst[nIndex];
                     nIndex++;
-                    id_qml_CurrentUserStockData.m_n_Name_current = varVariableLst[nIndex];
+                    if (varVariableLst[nIndex].length > 0)
+                    {
+                        id_qml_CurrentUserStockData.m_n_Name_current = varVariableLst[nIndex];
+                    }
+
+
 
                     id_qml_CurrentUserStockData.m_str_title_current = id_qml_CurrentUserStockData.m_s_Symbol_current
                             + "(" + id_qml_CurrentUserStockData.m_n_Name_current + ")";

@@ -6,13 +6,32 @@ ListModel
     id:id_qml_UsrSearchStockListModel
 
 
+    /*
     ListElement
     {
         C_INDEX:"0";
         m_n_Name:"R003";
+        m_s_Symbol:"600203.SS";
+        m_s_Symbol_Extern:".SS"
+    }
+
+    ListElement
+    {
+        C_INDEX:"0";
+        m_n_Name:"福日电子";
         m_s_Symbol:"201000.SS";
         m_s_Symbol_Extern:".SS"
     }
+
+    ListElement
+    {
+        C_INDEX:"0";
+        m_n_Name:"苏宁云商";
+        m_s_Symbol:"002024.SZ";
+        m_s_Symbol_Extern:".SZ"
+    }
+
+    */
 
     function fun_createListElement(myItem)
     {// 存储数据对象函数

@@ -14,25 +14,48 @@ Rectangle
     anchors.bottom: parent.bottom
 
     //2
-    color: "#000000";
-    //color: "transparent"
+    //color: "#000000";
+    color: "transparent"
 
-    //AddStock
-    Rectangle
-    {
-        id: m_Rectangle_AddStock
-        // 容器的尺寸由组件决定
-        width: m_Text_AddStock.width;//指定了width才能居中
-        height: id_qml_BottomBanner.height
-        anchors.horizontalCenter: id_qml_BottomBanner.horizontalCenter
-        anchors.verticalCenter: id_qml_BottomBanner.verticalCenter
 
-        color:"Peru"
+    //UI
+    Row
+    {//1行 Row布局了自定义的按钮
+        id: m_Row_Buttons;
+        anchors.fill: parent;
+        spacing: 10
 
-        MouseArea
+        onWidthChanged:
+        {// 该函数保证宽度变化时优先压缩spacing，且不会造成按钮重叠
+            var buttonsLen = m_Button_MyStocks.width + m_Button_AddStock.width;
+            var space = (width - buttonsLen) / 10;
+            spacing = Math.max(space, 4);
+        }
+
+        //Button MyStocks
+        Button
         {
-            anchors.fill: parent
+            id: m_Button_MyStocks
+            text: "MyStocks"
+            buttonEnabled: true
+            onClicked:
+            {
+                m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_StockListView;
+                console.log('BottomBanner.qml',
+                            ' ','MyStocks',
+                            ' ','MouseArea',
+                            ' ','onClicked',
+                            ' ','m_Mainpage_ListView.currentIndex:',m_Mainpage_ListView.currentIndex,
+                            ' ','m_Mainpage_ListView.count:',m_Mainpage_ListView.count);
+            }
+        }//Button MyStocks
 
+        //Button AddStock
+        Button
+        {
+            id: m_Button_AddStock
+            text: "AddStock"
+            buttonEnabled: true
             onClicked:
             {
                 m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_UsrSearchStockListView;
@@ -43,24 +66,9 @@ Rectangle
                             ' ','m_Mainpage_ListView.currentIndex:',m_Mainpage_ListView.currentIndex,
                             ' ','m_Mainpage_ListView.count:',m_Mainpage_ListView.count);
             }
+        }//Button MyStocks
 
-        }//MouseArea
-
-        Text
-        {// Stocqt
-            id: m_Text_AddStock
-
-            anchors.verticalCenter: m_Rectangle_AddStock.verticalCenter
-
-            color: "Gold";//"#ffffff"
-            font.family: "Abel"
-            font.pointSize: m_Rectangle_AddStock.height/2;// - 10
-            //text: "Financial Eye"
-            text: "AddStock";
-        }
-    }//Item
-
-
+    }//Row
 
 
 }//Rectangle

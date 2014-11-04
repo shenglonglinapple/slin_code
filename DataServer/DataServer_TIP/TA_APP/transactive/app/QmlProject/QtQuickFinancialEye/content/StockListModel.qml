@@ -81,6 +81,7 @@ ListModel
                 }
                 else
                 {
+                    /*
 
                     id_qml_StockListModel.append( {
                         "m_n_Name": "福日电子",
@@ -90,11 +91,6 @@ ListModel
                         "m_c6_Change_Realtime": "0.0",
                         "m_p2_Change_in_Percent": "0.0%"});
 
-                    console.log('StockListModel.qml',
-                                ' ','fun_db_LoadData_from_TableUserStock()',
-                                ' ','use default value',
-                                ' ','m_s_Symbol=600203.SS 福日电子');
-
                     id_qml_StockListModel.append( {
                         "m_n_Name": "苏宁云商",
                         "m_s_Symbol": "002024.SZ",
@@ -102,12 +98,6 @@ ListModel
                         "m_l1_Last_Trade_Price_Only": "0.0",
                         "m_c6_Change_Realtime": "0.0",
                         "m_p2_Change_in_Percent": "0.0%"});
-
-                    console.log('StockListModel.qml',
-                                ' ','fun_db_LoadData_from_TableUserStock()',
-                                ' ','use default value',
-                                ' ','m_s_Symbol=002024.SZ 苏宁云商');
-
                     //"m_s_Symbol_Extern": "null/.SS/.SZ",
                     id_qml_StockListModel.append( {
                         "m_n_Name": "Apple Inc.",
@@ -117,12 +107,6 @@ ListModel
                         "m_c6_Change_Realtime": "0.0",
                         "m_p2_Change_in_Percent": "0.0%"});
 
-                    console.log('StockListModel.qml',
-                                ' ','fun_db_LoadData_from_TableUserStock()',
-                                ' ','use default value',
-                                ' ','m_s_Symbol=AAPL');
-
-
                     id_qml_StockListModel.append( {
                         "m_n_Name": "Adobe Systems Inc.",
                         "m_s_Symbol": "ADBE",
@@ -131,20 +115,8 @@ ListModel
                         "m_c6_Change_Realtime": "0.0",
                         "m_p2_Change_in_Percent": "0.0%"});
 
-                    console.log('StockListModel.qml',
-                                ' ','fun_db_LoadData_from_TableUserStock()',
-                                ' ','use default value',
-                                ' ','m_s_Symbol=ADBE');
 
-                    /*
-                    id_qml_StockListModel.append( {
-                        "m_n_Name": "Analog Devices, Inc.",
-                        "m_s_Symbol": "ADI",
-                        "m_s_Symbol_Extern": "",
-                        "m_l1_Last_Trade_Price_Only": "0.0",
-                        "m_c6_Change_Realtime": "0.0",
-                        "m_p2_Change_in_Percent": "0.0%"});
-                    */
+                        */
 
                 }//else
             }//function(tx)

@@ -33,7 +33,7 @@ Component
             anchors.fill: parent;
             onClicked:
             {
-                console.log('TotalStockListDelegate.qml',
+                console.log('UsrSearchStockListDelegate.qml',
                             ' ','MouseArea onClicked',
                             ' ','m_UsrSearchStockListModel.count:', m_UsrSearchStockListModel.count,
                             ' ','m_ListView_UsrSearchStock.currentIndex:', m_ListView_UsrSearchStock.currentIndex,
@@ -75,7 +75,7 @@ Component
 
             Component.onCompleted:
             {
-                console.log('TotalStockListDelegate.qml',
+                console.log('UsrSearchStockListDelegate.qml',
                             ' ','Text m_s_Symbol',' ',
                             ' ','Component.onCompleted',' ',
                             ' ','index:',index,
@@ -139,7 +139,7 @@ Component
                 anchors.fill: parent;
                 onClicked:
                 {
-                    console.log('TotalStockListDelegate.qml',
+                    console.log('UsrSearchStockListDelegate.qml',
                                 ' ','m_Text_Add MouseArea onClicked');
 
                     m_page_StockListView.fun_add_usr_stock(m_n_Name, m_s_Symbol, m_s_Symbol_Extern);
@@ -150,7 +150,7 @@ Component
 
             Component.onCompleted:
             {
-                console.log('TotalStockListDelegate.qml',
+                console.log('UsrSearchStockListDelegate.qml',
                             ' ','Text m_Text_Add',' ',
                             ' ','Component.onCompleted',' ',
                             ' ','index:',index,
