@@ -14,7 +14,7 @@ Component
         id:m_Rectangle_UsrSearchStockListDelegate
 
         width: parent.width;
-        height: 60;
+        height: 30;
 
 
         color: "transparent";
@@ -107,6 +107,69 @@ Component
             verticalAlignment: Text.AlignVCenter
 
             text: m_n_Name
+        }//Text
+
+
+        Text
+        {//Name
+            id: m_Text_Add
+
+            //width: 256
+            height: m_n_Text_Name_height
+
+            anchors.top: parent.top
+            anchors.topMargin: m_n_Text_topMargin
+            anchors.left: m_Text_Name.right
+            anchors.leftMargin: m_n_Text_leftMargin
+
+            //color: "#000000"
+            color:"blue"
+            font.family: "Helvetica";//font.family: "Open Sans"
+            font.pointSize: m_n_Text_Name_height * m_n_Text_fontsize_percent
+            font.bold: false
+            elide: Text.ElideRight
+            maximumLineCount: 1
+            verticalAlignment: Text.AlignVCenter
+
+            text: "Add";//"alreadyAdded"
+
+
+            MouseArea
+            {
+                anchors.fill: parent;
+                onClicked:
+                {
+                    console.log('TotalStockListDelegate.qml',
+                                ' ','m_Text_Add MouseArea onClicked');
+
+                    m_page_StockListView.fun_add_usr_stock(m_n_Name, m_s_Symbol, m_s_Symbol_Extern);
+                    m_Text_Add.text = "alreadyAdded";//
+                 }
+            }
+
+
+            Component.onCompleted:
+            {
+                console.log('TotalStockListDelegate.qml',
+                            ' ','Text m_Text_Add',' ',
+                            ' ','Component.onCompleted',' ',
+                            ' ','index:',index,
+                            ' ','m_s_Symbol:',m_s_Symbol);
+
+
+                if (m_page_StockListView.fun_check_in_usr_stockList(m_s_Symbol))
+                {
+                     m_Text_Add.text = "alreadyAdded";//
+                }
+                else
+                {
+                    m_Text_Add.text = "Add";//
+                }
+
+
+            }//Component.onCompleted:
+
+
         }//Text
 
 

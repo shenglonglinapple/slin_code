@@ -39,23 +39,23 @@ Component
             {
                 console.log('StockListDelegate.qml',
                             ' ','MouseArea onClicked',
-                            ' ','m_listViewStock.currentIndex:', m_listViewStock.currentIndex,
+                            ' ','m_ListView_UserStock.currentIndex:', m_ListView_UserStock.currentIndex,
                             ' ','new index:', index);
 
                 //if m_listViewStock.currentIndex the same as index  then will not emit currentIndexChanged
-                if (m_listViewStock.currentIndex != index)
+                if (m_ListView_UserStock.currentIndex != index)
                 {
-                    m_listViewStock.currentIndex = index;//where is index define?????
+                    m_ListView_UserStock.currentIndex = index;//where is index define?????
                 }
 
                 // 获取 Id 与 name
                 //set value and emit
-                m_CurrentUserStockData.m_s_Symbol_current = m_listViewStock.model.get(m_listViewStock.currentIndex).m_s_Symbol;
-                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_listViewStock.model.get(m_listViewStock.currentIndex).m_s_Symbol_Extern;
+                m_CurrentUserStockData.m_s_Symbol_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_s_Symbol;
+                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_s_Symbol_Extern;
 
                 console.log('StockListDelegate.qml',
                             ' ','MouseArea onClicked',
-                            ' ','m_listViewStock.currentIndex:',m_listViewStock.currentIndex,
+                            ' ','m_ListView_UserStock.currentIndex:',m_ListView_UserStock.currentIndex,
                             ' ','m_CurrentUserStockData.m_s_Symbol_current:',m_CurrentUserStockData.m_s_Symbol_current,
                             ' ','m_CurrentUserStockData.m_s_Symbol_Extern_current:',m_CurrentUserStockData.m_s_Symbol_Extern_current);
 

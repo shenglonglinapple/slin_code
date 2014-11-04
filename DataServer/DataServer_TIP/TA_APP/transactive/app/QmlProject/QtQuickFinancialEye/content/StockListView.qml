@@ -13,17 +13,54 @@ Rectangle
 
     color: "white"
 
+
+    function  fun_add_usr_stock(m_n_Name, m_s_Symbol, m_s_Symbol_Extern)
+    {
+        console.log('StockListView.qml',
+                    ' ','fun_add_usr_stock',
+                    ' ','m_s_Symbol=', m_s_Symbol,
+                    ' ','m_n_Name=', m_n_Name);
+
+        m_StockListModel.append( {
+            "m_n_Name": m_n_Name,
+            "m_s_Symbol": m_s_Symbol,
+            "m_s_Symbol_Extern": m_s_Symbol_Extern,
+            "m_l1_Last_Trade_Price_Only": "0.0",
+            "m_c6_Change_Realtime": "0.0",
+            "m_p2_Change_in_Percent": "0.0%"});
+    }
+
+    function  fun_check_in_usr_stockList(m_s_Symbol)
+    {
+        console.log('StockListView.qml',
+                    ' ','fun_check_in_usr_stockList',
+                    ' ','m_s_Symbol=', m_s_Symbol);
+        var bCheck = false;
+
+        for (var nIndex = 0; nIndex < m_StockListModel.count; nIndex++)
+        {
+            if (m_s_Symbol === m_StockListModel.get(nIndex).m_s_Symbol)
+            {
+                bCheck = true;
+                return bCheck;
+            }//if
+        }//for
+
+        return bCheck;
+    }
+
+
     //mvc data
     StockListModel
     {
-        id: m_listModel;
+        id: m_StockListModel;
         //no width height
     }
 
     //mvc 怎样显示这些数据
     StockListDelegate
     {
-        id: m_listDelegate;
+        id: m_StockListDelegate;
         //no width height
     }
 
@@ -47,7 +84,7 @@ Rectangle
     ListView
     {
         //0
-        id: m_listViewStock;
+        id: m_ListView_UserStock;
         //1
         width:parent.width;
         anchors.top: parent.top
@@ -59,8 +96,8 @@ Rectangle
         highlightMoveDuration: 0
         focus: true
         snapMode: ListView.SnapToItem
-        model: m_listModel; // 定义model
-        delegate: m_listDelegate;//显示Item
+        model: m_StockListModel; // 定义model
+        delegate: m_StockListDelegate;//显示Item
         highlight: m_Component_highlight;
         currentIndex: 0;
 
@@ -85,8 +122,8 @@ Rectangle
         var varRealTimeInfo = "";
         var varRequest = "";
 
-        m_s_Symbol_Tmp = m_listViewStock.model.get(index).m_s_Symbol;
-        m_s_Symbol_Extern_Tmp = m_listViewStock.model.get(index).m_s_Symbol_Extern;
+        m_s_Symbol_Tmp = m_ListView_UserStock.model.get(index).m_s_Symbol;
+        m_s_Symbol_Extern_Tmp = m_ListView_UserStock.model.get(index).m_s_Symbol_Extern;
         //check
         if (m_s_Symbol_Tmp.length <= 0)
         {
@@ -166,18 +203,18 @@ Rectangle
                     var varValueTmp = "";
                     varValueTmp = varVariableLst[1];
                     console.log("StockListView.qml"," ","varValueTmp==",varValueTmp);
-                    m_listViewStock.model.setProperty(index, "m_s_Symbol",varValueTmp);
+                    m_ListView_UserStock.model.setProperty(index, "m_s_Symbol",varValueTmp);
                     varValueTmp = varVariableLst[2];
-                    m_listViewStock.model.setProperty(index, "m_c6_Change_Realtime",varValueTmp);
+                    m_ListView_UserStock.model.setProperty(index, "m_c6_Change_Realtime",varValueTmp);
                     varValueTmp = varVariableLst[3];
-                    m_listViewStock.model.setProperty(index, "m_p2_Change_in_Percent",varValueTmp);
+                    m_ListView_UserStock.model.setProperty(index, "m_p2_Change_in_Percent",varValueTmp);
                     varValueTmp = varVariableLst[13];
-                    m_listViewStock.model.setProperty(index, "m_l1_Last_Trade_Price_Only",varValueTmp);
+                    m_ListView_UserStock.model.setProperty(index, "m_l1_Last_Trade_Price_Only",varValueTmp);
                     varValueTmp = varVariableLst[17];
                     if (varValueTmp.length > 0)
                     {
                         console.log("StockListView.qml"," ","varValueTmp==",varValueTmp);
-                        m_listViewStock.model.setProperty(index, "m_n_Name",varValueTmp);
+                        m_ListView_UserStock.model.setProperty(index, "m_n_Name",varValueTmp);
                     }
 
 

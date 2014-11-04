@@ -38,7 +38,6 @@ ListModel
         fun_db_SaveData_to_TableUserStock();
     }
 
-
     function fun_db_LoadData_from_TableUserStock()
     {
         console.log('StockListModel.qml',

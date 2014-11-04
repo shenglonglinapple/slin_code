@@ -21,8 +21,6 @@
         <file>content/SqliteDbStorage.qml</file>
         <file>content/TotalStockListModel.qml</file>
         <file>content/BottomBanner.qml</file>
-        <file>content/TotalStockListDelegate.qml</file>
-        <file>content/TotalStockListView.qml</file>
         <file>content/UsrSearchStockListModel.qml</file>
         <file>content/UsrSearchStockListDelegate.qml</file>
         <file>content/UsrSearchStockListView.qml</file>

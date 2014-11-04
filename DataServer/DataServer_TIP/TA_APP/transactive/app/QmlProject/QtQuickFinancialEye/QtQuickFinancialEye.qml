@@ -23,6 +23,7 @@ Rectangle
         id:m_TotalStockListModel
     }
 
+
     CurrentUserStockData
     {
         //
