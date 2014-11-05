@@ -35,8 +35,11 @@ Component
         MouseArea
         {
             anchors.fill: parent;
+
             onClicked:
             {
+                m_Rectangle_RemoveStock.visible = true;
+
                 console.log('StockListDelegate.qml',
                             ' ','MouseArea onClicked',
                             ' ','m_ListView_UserStock.currentIndex:', m_ListView_UserStock.currentIndex,
@@ -50,9 +53,9 @@ Component
 
                 // 获取 Id 与 name
                 //set value and emit
-                m_CurrentUserStockData.m_s_Symbol_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_s_Symbol;
-                m_CurrentUserStockData.m_n_Name_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_n_Name;
-                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_ListView_UserStock.model.get(m_ListView_UserStock.currentIndex).m_s_Symbol_Extern;
+                m_CurrentUserStockData.m_s_Symbol_current = m_s_Symbol;
+                m_CurrentUserStockData.m_n_Name_current = m_n_Name;
+                m_CurrentUserStockData.m_s_Symbol_Extern_current = m_s_Symbol_Extern;
 
                 console.log('StockListDelegate.qml',
                             ' ','MouseArea onClicked',
@@ -71,7 +74,66 @@ Component
                 //then show StockDetailView  m_Mainpage_ListView.currentIndex = 1;
                 m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_StockDetailView;
             }
-        }
+        }//MouseArea
+
+
+        //RemoveStock
+        Rectangle
+        {
+            id:m_Rectangle_RemoveStock
+
+            width: m_Text_RemoveStock.width
+            height: parent.height
+
+            anchors.left: parent.left
+            anchors.leftMargin: m_n_Text_leftMargin/2
+
+            color: "transparent";
+
+            visible: true
+
+            Text
+            {//
+                id: m_Text_RemoveStock;
+
+                //anchors.top: m_Rectangle_RemoveStock.top
+                //anchors.topMargin: m_Rectangle_RemoveStock.height * (1/10)
+
+                anchors.left: m_Rectangle_RemoveStock.left
+                anchors.leftMargin: 1
+
+                anchors.verticalCenter: m_Rectangle_RemoveStock.verticalCenter
+
+
+                font.family: "Abel";//"Open Sans"//"Abel"
+                font.pointSize : parent.height/2;
+                font.weight: Font.DemiBold
+                color: "red"
+                text: "-"
+
+                MouseArea
+                {
+                    anchors.fill: parent;
+                    onClicked:
+                    {
+                        console.log("StockListDelegate.qml",
+                                    " ","m_Text_RemoveStock MouseArea onClicked",
+                                    " ","m_s_Symbol=",m_s_Symbol,
+                                    " ","m_n_Name=",m_n_Name,
+                                    " ","m_s_Symbol_Extern=",m_s_Symbol_Extern);
+
+                        m_page_StockListView.fun_remove_usr_stockList(m_n_Name, m_s_Symbol, m_s_Symbol_Extern);
+
+                    }//onClicked
+                }//MouseArea
+
+
+            }//Text m_Text_RemoveStock
+
+        }//m_Rectangle_RemoveStock
+
+
+
 
         //
         Text
@@ -83,7 +145,7 @@ Component
 
             anchors.top: parent.top
             anchors.topMargin: m_n_Text_topMargin
-            anchors.left: parent.left
+            anchors.left: m_Rectangle_RemoveStock.right
             anchors.leftMargin: m_n_Text_leftMargin
 
             //color: "#0c34f9"
@@ -108,7 +170,7 @@ Component
                 m_page_StockListView.fun_Update_RealTimeInfo_byindex(index);
 
                 //set CurrentUserStockData default value
-                if (m_PageListData.m_n_MainpageListView_Index_StockListView == index)
+                if (0 == index)
                 {
                     m_CurrentUserStockData.m_s_Symbol_current = m_s_Symbol;
                     m_CurrentUserStockData.m_s_Symbol_Extern_current = m_s_Symbol_Extern;
@@ -127,7 +189,8 @@ Component
             height: m_n_Text_Name_height
 
             anchors.top: m_Text_Symbol.bottom
-            anchors.left: parent.left
+            anchors.left: m_Rectangle_RemoveStock.right
+            //anchors.left: parent.left
             anchors.leftMargin: m_n_Text_leftMargin
 
             //color: "#000000"

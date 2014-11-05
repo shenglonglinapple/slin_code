@@ -22,17 +22,26 @@ Rectangle
     }
 
 
-    function fun_update()
+
+    ChooseHistoryDataTypeWindow
     {
-        m_HistoryDataBigGraphWindow.fun_update();
+        id : m_ChooseHistoryDataTypeBigWindow
+        //
+        width:id_qml_StockDetailBigView.width;
+        height: id_qml_StockDetailBigView.height*(6/100);
+
+        anchors.top: id_qml_StockDetailBigView.top
+        anchors.left: id_qml_StockDetailBigView.left;
+        //anchors.leftMargin: 50
     }
+
 
     //曲线绘制部分
     HistoryDataBigGraphWindow
     {
         id : m_HistoryDataBigGraphWindow
 
-        anchors.top: id_qml_StockDetailBigView.top
+        anchors.top: m_ChooseHistoryDataTypeBigWindow.bottom
         anchors.left: id_qml_StockDetailBigView.left;
         anchors.right: id_qml_StockDetailBigView.right
         //anchors.rightMargin: 1
@@ -41,6 +50,13 @@ Rectangle
 
 
 
+
+
+
+    function fun_update()
+    {
+        m_HistoryDataBigGraphWindow.fun_update();
+    }
 
 }//Rectangle
 

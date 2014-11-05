@@ -14,42 +14,6 @@ Rectangle
     color: "white"
 
 
-    function  fun_add_usr_stock(m_n_Name, m_s_Symbol, m_s_Symbol_Extern)
-    {
-        console.log('StockListView.qml',
-                    ' ','fun_add_usr_stock',
-                    ' ','m_s_Symbol=', m_s_Symbol,
-                    ' ','m_n_Name=', m_n_Name);
-
-        m_StockListModel.append( {
-            "m_n_Name": m_n_Name,
-            "m_s_Symbol": m_s_Symbol,
-            "m_s_Symbol_Extern": m_s_Symbol_Extern,
-            "m_l1_Last_Trade_Price_Only": "0.0",
-            "m_c6_Change_Realtime": "0.0",
-            "m_p2_Change_in_Percent": "0.0%"});
-    }
-
-    function  fun_check_in_usr_stockList(m_s_Symbol)
-    {
-        console.log('StockListView.qml',
-                    ' ','fun_check_in_usr_stockList',
-                    ' ','m_s_Symbol=', m_s_Symbol);
-        var bCheck = false;
-
-        for (var nIndex = 0; nIndex < m_StockListModel.count; nIndex++)
-        {
-            if (m_s_Symbol === m_StockListModel.get(nIndex).m_s_Symbol)
-            {
-                bCheck = true;
-                return bCheck;
-            }//if
-        }//for
-
-        return bCheck;
-    }
-
-
     //mvc data
     StockListModel
     {
@@ -73,8 +37,8 @@ Rectangle
         Rectangle
         {
             id:m_Rectangle_highlight;
-            width: parent.width
-            height: 60;//m_Rectangle_StockListDelegate.height;//60
+            //width: id_qml_StockListView.width
+            //height: 60;//m_Rectangle_StockListDelegate.height;//60
             color: "#eeeeee";
             //color: "lightsteelblue";
             //color: "red";
@@ -245,6 +209,63 @@ Rectangle
         varReturnValue = true;
         return varReturnValue;
     }//function fun_Update_RealTimeInfo_byindex(index)
+
+
+    function  fun_add_usr_stock(m_n_Name, m_s_Symbol, m_s_Symbol_Extern)
+    {
+        console.log('StockListView.qml',
+                    ' ','fun_add_usr_stock',
+                    ' ','m_s_Symbol=', m_s_Symbol,
+                    ' ','m_n_Name=', m_n_Name);
+
+        m_StockListModel.append( {
+            "m_n_Name": m_n_Name,
+            "m_s_Symbol": m_s_Symbol,
+            "m_s_Symbol_Extern": m_s_Symbol_Extern,
+            "m_l1_Last_Trade_Price_Only": "0.0",
+            "m_c6_Change_Realtime": "0.0",
+            "m_p2_Change_in_Percent": "0.0%"});
+    }
+
+
+    function  fun_remove_usr_stockList(m_n_Name, m_s_Symbol, m_s_Symbol_Extern)
+    {
+        console.log("StockListView.qml",
+                    " ","fun_remove_usr_stockList",
+                    " ","m_s_Symbol=", m_s_Symbol,
+                    " ","m_n_Name=", m_n_Name);
+
+        for (var nIndex = 0; nIndex < m_StockListModel.count; nIndex++)
+        {
+            if (m_s_Symbol === m_StockListModel.get(nIndex).m_s_Symbol)
+            {
+                m_StockListModel.remove(nIndex);
+                return;
+            }//if
+        }//for
+
+        return;
+    }
+
+    function  fun_check_in_usr_stockList(m_s_Symbol)
+    {
+        console.log('StockListView.qml',
+                    ' ','fun_check_in_usr_stockList',
+                    ' ','m_s_Symbol=', m_s_Symbol);
+        var bCheck = false;
+
+        for (var nIndex = 0; nIndex < m_StockListModel.count; nIndex++)
+        {
+            if (m_s_Symbol === m_StockListModel.get(nIndex).m_s_Symbol)
+            {
+                bCheck = true;
+                return bCheck;
+            }//if
+        }//for
+
+        return bCheck;
+    }
+
 
 
 

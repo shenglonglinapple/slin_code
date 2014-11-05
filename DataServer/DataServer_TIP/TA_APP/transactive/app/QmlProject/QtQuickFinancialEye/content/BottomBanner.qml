@@ -15,8 +15,10 @@ Rectangle
 
     //2
     //color: "#000000";
-    color: "transparent"
+    //color: "transparent"
+    color: "PowderBlue"
 
+    //visible: m_Mainpage_ListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_StockDetailBigView ? false : true
 
     //UI
     Row
@@ -37,7 +39,7 @@ Rectangle
         {
             id: m_Button_MyStocks
             text: "MyStocks"
-            buttonEnabled: true
+            buttonEnabled: m_Mainpage_ListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_StockListView ? false : true
             onClicked:
             {
                 m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_StockListView;
@@ -55,7 +57,7 @@ Rectangle
         {
             id: m_Button_AddStock
             text: "AddStock"
-            buttonEnabled: true
+            buttonEnabled: m_Mainpage_ListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_UsrSearchStockListView ? false : true
             onClicked:
             {
                 m_Mainpage_ListView.currentIndex = m_PageListData.m_n_MainpageListView_Index_UsrSearchStockListView;

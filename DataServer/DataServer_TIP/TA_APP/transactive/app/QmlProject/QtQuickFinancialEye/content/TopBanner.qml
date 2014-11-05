@@ -111,9 +111,9 @@ Rectangle
         anchors.verticalCenter: id_qml_TopBanner.verticalCenter
 
         source:"qrc:///imgfile/images/icon_right_arrow.png"
-        //第一个主页面不显示 其余页面都要显示
-        //visible: true
-        visible : m_Mainpage_ListView.currentIndex == 2 ? false : true
+        //最后一个主页面不显示 其余页面都要显示
+        //visible: true        
+        visible : m_Mainpage_ListView.currentIndex == m_PageListData.m_n_MainpageListView_Index_UsrSearchStockListView ? false : true
 
         MouseArea
         {

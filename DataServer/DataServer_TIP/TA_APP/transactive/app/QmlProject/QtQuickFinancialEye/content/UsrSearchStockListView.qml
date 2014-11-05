@@ -146,8 +146,8 @@ Rectangle
         Rectangle
         {
             id:m_Rectangle_highlight;
-            width: parent.width
-            height: 30;//m_Rectangle_StockListDelegate.height;//60
+            //width: parent.width
+            //height: 30;//m_Rectangle_StockListDelegate.height;//60
             color: "#eeeeee";
             //color: "lightsteelblue";
             //color: "red";
@@ -181,16 +181,7 @@ Rectangle
 
         }//onCurrentIndexChanged
 
-
-
     }//ListView
-
-
-
-
-
-
-
 
 }//Rectangle
 

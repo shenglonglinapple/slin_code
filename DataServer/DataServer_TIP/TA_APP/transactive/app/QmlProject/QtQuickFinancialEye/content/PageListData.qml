@@ -13,7 +13,7 @@ ListModel
     property int m_n_MainpageListView_Index_StockDetailView : 1;
     property int m_n_MainpageListView_Index_StockDetailBigView : 2;
     property int m_n_MainpageListView_Index_UsrSearchStockListView : 3;
-    property int m_n_MainpageListView_Index_PageView : 4;
+    //property int m_n_MainpageListView_Index_PageView : 4;
 
 
 }//ListModel

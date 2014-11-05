@@ -118,6 +118,7 @@ ListView
             height: id_qml_PageListView.height
         }
 
+        /*
         //index=4
         PageView
         {//曲线页面
@@ -125,6 +126,7 @@ ListView
             width: id_qml_PageListView.width
             height: id_qml_PageListView.height
         }
+        */
     }//model: ObjectModel
 
 
