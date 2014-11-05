@@ -110,8 +110,9 @@ Component
         }//Text
 
 
+        //Add
         Text
-        {//Name
+        {//Add
             id: m_Text_Add
 
             //width: 256
@@ -130,10 +131,7 @@ Component
             elide: Text.ElideRight
             maximumLineCount: 1
             verticalAlignment: Text.AlignVCenter
-
             text: "Add";//"alreadyAdded"
-
-
             MouseArea
             {
                 anchors.fill: parent;
@@ -147,7 +145,6 @@ Component
                  }
             }
 
-
             Component.onCompleted:
             {
                 console.log('UsrSearchStockListDelegate.qml',
@@ -155,8 +152,6 @@ Component
                             ' ','Component.onCompleted',' ',
                             ' ','index:',index,
                             ' ','m_s_Symbol:',m_s_Symbol);
-
-
                 if (m_page_StockListView.fun_check_in_usr_stockList(m_s_Symbol))
                 {
                      m_Text_Add.text = "alreadyAdded";//
@@ -165,12 +160,8 @@ Component
                 {
                     m_Text_Add.text = "Add";//
                 }
-
-
             }//Component.onCompleted:
-
-
-        }//Text
+        }//Text Add
 
 
     }//Rectangle Item
