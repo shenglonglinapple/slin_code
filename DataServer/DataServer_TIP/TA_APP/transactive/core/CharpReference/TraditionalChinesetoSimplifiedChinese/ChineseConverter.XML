@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChineseConverter</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.OfficeConversionEngine">
+            <summary>
+            Represents the TC/SC conversion engine provided by Office 12.
+            </summary>
+        </member>
+        <member name="M:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.OfficeConversionEngine.Create">
+            <summary>
+            Determines whether Office12 installed or not.
+            </summary>
+            <returns>The conversion engine if Office12 exists, null otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.OfficeConversionEngine.TCSCConvert(System.String,Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConversionDirection)">
+            <summary>
+            Using the Office12 conversion engine to convert string between TC and SC.
+            </summary>
+            <param name="input">The string to be converted.</param>
+            <param name="direction">Conversion direction.</param>
+            <returns>The converted string.</returns>
+        </member>
+        <member name="T:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConverter">
+            <summary>
+            Represents a utility class to convert traditional and simplified Chinese characters.
+            </summary>
+            <remarks>
+            This class invokes the conversion engine provided by Office if available; 
+            otherwise the Windows API will be used as a default.
+            Unlike the Windows API which maps the character one by one, the TC/SC conversion engine of 
+            Office 12 converts the string "word-to-word" which gives a better conversion result.
+            </remarks>
+            <example>
+            The following code demonstrates converting a string between traditional and simplified Chinese representation.
+            <code source = "../../Example_CS/Program.cs" lang = "cs"></code>
+            <code source = "../../Example_VB/Main.vb" lang = "vbnet"></code>
+            <code source = "../../Example_CPP/Example_CPP.cpp" lang = "cpp"></code>
+            </example>
+        </member>
+        <member name="M:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConverter.Convert(System.String,Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConversionDirection)">
+            <summary>
+            Converts specified string between traditional and simplified Chinese representation.
+            </summary>
+            <param name="text">The string to be converted.</param>
+            <param name="direction">Conversion direction.</param>
+            <returns>The converted string.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            text is a null reference.
+            </exception>
+            <remarks>
+            See <see cref="T:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConverter"/> for an example of using ChineseConverter.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConversionDirection">
+            <summary>
+            Stores the direction of conversion, including traditional to simplified Chinese and simplified to traditional Chinese.
+            </summary>
+            <remarks>
+            See <see cref="T:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConverter"/> for an example of using ChineseConverter.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConversionDirection.SimplifiedToTraditional">
+            <summary>
+            Maps simplified Chinese to traditional Chinese.
+            </summary>
+        </member>
+        <member name="F:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.ChineseConversionDirection.TraditionalToSimplified">
+            <summary>
+            Maps traditional Chinese to simplified Chinese.
+            </summary>
+        </member>
+        <member name="F:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.NativeMethods.LCMAP_SIMPLIFIED_CHINESE">
+            <summary>
+            Maps traditional Chinese to simplified Chinese.
+            </summary>
+        </member>
+        <member name="F:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.NativeMethods.LCMAP_TRADITIONAL_CHINESE">
+            <summary>
+            Maps simplified Chinese to traditional Chinese.
+            </summary>
+        </member>
+        <member name="F:Microsoft.International.Converters.TraditionalChineseToSimplifiedConverter.NativeMethods.zh_CN">
+            <summary>
+            Represents Chinese (People's Republic of China).
+            </summary>
+        </member>
+    </members>
+</doc>
