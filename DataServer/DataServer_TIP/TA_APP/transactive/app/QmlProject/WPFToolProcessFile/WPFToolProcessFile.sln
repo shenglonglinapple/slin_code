@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFToolProcessFile", "WPFToolProcessFile\WPFToolProcessFile.csproj", "{99D05376-A3FE-4C35-89F7-857E4B85F8EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99D05376-A3FE-4C35-89F7-857E4B85F8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99D05376-A3FE-4C35-89F7-857E4B85F8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99D05376-A3FE-4C35-89F7-857E4B85F8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99D05376-A3FE-4C35-89F7-857E4B85F8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
