@@ -50,6 +50,10 @@ ListModel
         console.log('UsrSearchStockListModel.qml',
                     ' ','begin fun_db_select_from_TableTotalStock()');
         var strSQL = "";
+        var strSearchKeyUp = "";
+
+        strSearchKeyUp = strSeachStock;
+        strSearchKeyUp = strSearchKeyUp.toUpperCase();
 
         var db =  m_SqliteDbStorage.fun_db_CheckAndCreateDB();
         db.transaction
@@ -60,7 +64,7 @@ ListModel
                             ' ','begin db.transaction(callback(tx))');
                 //property string m_str_sql_select_TABLE_TOTALSTOCK_003 : "SELECT C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name FROM TABLE_TOTALSTOCK where m_s_Symbol LIKE '%?%'";
 
-                strSQL = m_SqliteDbStorage.m_str_sql_select_TABLE_TOTALSTOCK_003.replace("?", strSeachStock);
+                strSQL = m_SqliteDbStorage.m_str_sql_select_TABLE_TOTALSTOCK_003.replace("?", strSearchKeyUp);
                 console.log("UsrSearchStockListModel.qml",
                             " ","fun_db_select_from_TableTotalStock()",
                             " ","strSQL:", strSQL);

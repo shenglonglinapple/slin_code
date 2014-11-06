@@ -29,12 +29,12 @@ Item
     property string m_str_table_name_TABLE_TOTALSTOCK : "TABLE_TOTALSTOCK";
     property string m_str_sql_drop_table_TABLE_TOTALSTOCK : "DROP TABLE TABLE_TOTALSTOCK";
     property string m_str_sql_clear_table_TABLE_TOTALSTOCK : "DELETE FROM TABLE_TOTALSTOCK";
-    property string m_str_sql_create_table_TABLE_TOTALSTOCK : "CREATE TABLE IF NOT EXISTS TABLE_TOTALSTOCK(C_INDEX INTEGER PRIMARY KEY, m_s_Symbol TEXT, m_s_Symbol_Extern TEXT, m_n_Name TEXT)";
-    property string m_str_sql_delete_from_TABLE_TOTALSTOCK : "DELETE FROME TABLE_TOTALSTOCK  WHERE C_INDEX == 1";
+    property string m_str_sql_create_table_TABLE_TOTALSTOCK : "CREATE TABLE IF NOT EXISTS TABLE_TOTALSTOCK(C_INDEX INTEGER PRIMARY KEY, m_s_Symbol TEXT, m_s_Symbol_Extern TEXT, m_n_Name TEXT, m_n_NamePinYin TEXT, strSearchKey TEXT)";
+
     property string m_str_sql_select_TABLE_TOTALSTOCK_001 : "SELECT C_INDEX,m_s_Symbol,m_s_Symbol_Extern,m_n_Name FROM TABLE_TOTALSTOCK";
     property string m_str_sql_select_TABLE_TOTALSTOCK_002 : "SELECT COUNT(*) as COUNT FROM TABLE_TOTALSTOCK";
-    property string m_str_sql_select_TABLE_TOTALSTOCK_003 : "SELECT C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name FROM TABLE_TOTALSTOCK where m_s_Symbol LIKE '%?%'";
-    property string m_str_sql_insert_TABLE_TOTALSTOCK_001 : "INSERT INTO TABLE_TOTALSTOCK(C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name) VALUES(?,?,?,?)";
+    property string m_str_sql_select_TABLE_TOTALSTOCK_003 : "SELECT C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name FROM TABLE_TOTALSTOCK where strSearchKey LIKE '%?%'";
+    property string m_str_sql_insert_TABLE_TOTALSTOCK_001 : "INSERT INTO TABLE_TOTALSTOCK(C_INDEX, m_s_Symbol, m_s_Symbol_Extern, m_n_Name, m_n_NamePinYin, strSearchKey) VALUES(?,?,?,?,?,?)";
 
 
 
