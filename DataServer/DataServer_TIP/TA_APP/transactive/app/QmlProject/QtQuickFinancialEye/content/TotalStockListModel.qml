@@ -106,7 +106,7 @@ ListModel
                     */
 
                     var strSearchKey = "";
-                    strSearchKey = myItem.m_n_Name + myItem.m_n_NamePinYin;
+                    strSearchKey = myItem.m_s_Symbol + myItem.m_n_NamePinYin;
                     strSearchKey = strSearchKey.toUpperCase();
 
                     tx.executeSql(m_SqliteDbStorage.m_str_sql_insert_TABLE_TOTALSTOCK_001,
