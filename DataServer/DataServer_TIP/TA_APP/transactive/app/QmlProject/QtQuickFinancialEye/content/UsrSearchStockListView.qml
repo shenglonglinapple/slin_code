@@ -40,7 +40,7 @@ Rectangle
 
             anchors.left: parent.left
 
-            color: "blue";
+            color: "aliceblue";
 
 
             TextInput
