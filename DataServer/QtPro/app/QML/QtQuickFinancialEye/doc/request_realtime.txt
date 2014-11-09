@@ -1,0 +1,182 @@
+
+////////////////////////////////////////////////////////
+http://finance.yahoo.com/q?s=AAPL
+http://www.jarloo.com/yahoo_finance/
+////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+    //获取股票最新行情数据
+    /*
+    http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xnsc6p2d1t1pobaghml1t8va2
+    */
+    /*
+responseText:   <HTML>
+<HEAD>
+<TITLE>Error</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white" FGCOLOR="black">
+<!-- status code : 301 -->
+<!-- Error: GET -->
+<!-- host machine: yts12.global.media.sg3.yahoo.com -->
+<!-- timestamp: 1413689649.000 -->
+<!-- url: http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xnsc6p2d1t1pobaghml1t8va2-->
+<H1>Error</H1>
+<HR>
+
+<FONT FACE="Helvetica,Arial"><B>
+Description: Could not process this "GET" request.
+</B></FONT>
+<HR>
+</BODY>
+"NasdaqNM","Apple Inc.","AAPL","+1.41","+1.46%","10/17/2014","4:00pm",96.26,97.50,98.12,98.14,96.81,99.00,"96.81 - 99.00",97.67,112.64,68179688,57839400
+    */
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=
+
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xnsc6p2d1t1pobaghml1t8va2
+"NasdaqNM","Apple Inc.","AAPL","+1.41","+1.46%","10/17/2014","4:00pm",96.26,97.50,98.12,98.14,96.81,99.00,"96.81 - 99.00",97.67,112.64,68179688,57839400
+Symbol Info
+x: Stock Exchange
+n: Name
+s: Symbol
+xns
+
+
+Date
+c6: Change (Realtime)
+p2: Change in Percent
+d1: Last Trade Date
+t1: Last Trade Time      
+c6p2d1t1
+
+
+
+Pricing
+p: Previous Close  96.26,
+o: Open            97.50,
+b: Bid             98.12 x 100,
+a: Ask             98.14 x 3000
+poba
+
+
+
+Averages
+g: Day’s Low
+h: Day’s High
+m: Day’s Range
+l1: Last Trade (Price Only)
+t8: 1 yr Target Price
+ghml1t8
+
+Volume
+v: Volume
+a2: Average Daily Volume
+va2
+
+
+
+
+
+detail:
+===========================
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=
+
+
+///
+Symbol Info
+x: Stock Exchange     "NasdaqNM"
+n: Name               "Apple Inc.",
+s: Symbol             "AAPL",
+xns
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xns
+"NasdaqNM","Apple Inc.","AAPL",
+///
+
+Date
+c6: Change (Realtime)
+p2: Change in Percent
+d1: Last Trade Date
+t1: Last Trade Time      10/17/2014 4:00pm EDT
+
+c6p2d1t1
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xnsc6p2d1t1
+"NasdaqNM","Apple Inc.","AAPL","+1.41","+1.46%","10/17/2014","4:00pm"
+----10/17/2014 4:00pm EDT
+///
+
+
+Pricing
+p: Previous Close  96.26,
+o: Open            97.50,
+b: Bid             98.12 x 100,
+a: Ask             98.14 x 3000
+
+poba
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xnsc6p2d1t1poba
+"NasdaqNM","Apple Inc.","AAPL","+1.41","+1.46%","10/17/2014","4:00pm",96.26,97.50,98.12,98.14
+
+///
+
+
+
+Averages
+g: Day’s Low
+h: Day’s High
+m: Day’s Range
+k1: Last Trade (Realtime) With Time
+l: Last Trade (With Time)
+l1: Last Trade (Price Only)
+t8: 1 yr Target Price
+
+ghml1t8
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xnsghml1t8
+"NasdaqNM","Apple Inc.","AAPL",96.81,99.00,"96.81 - 99.00",97.67,112.64
+
+
+
+///
+Volume
+v: Volume
+a2: Average Daily Volume
+
+va2
+http://finance.yahoo.com/d/quotes.csv?s=AAPL&f=xnsva2
+"NasdaqNM","Apple Inc.","AAPL",68179688,57839400
+///
+
+
+
+
+
+
+
+
+
