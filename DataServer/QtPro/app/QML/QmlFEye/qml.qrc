@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qmlfile/PageListView.qml</file>
+        <file>qmlfile/SamplePage.qml</file>
+        <file>qmlfile/PageListModel.qml</file>
+    </qresource>
+</RCC>
