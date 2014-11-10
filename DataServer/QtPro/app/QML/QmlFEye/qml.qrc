@@ -4,5 +4,10 @@
         <file>qmlfile/PageListView.qml</file>
         <file>qmlfile/SamplePage.qml</file>
         <file>qmlfile/PageListModel.qml</file>
+        <file>qmlfile/SqliteDbStorage.qml</file>
+        <file>qmlfile/ProgramData.qml</file>
+        <file>qmlfile/TotalStockData.qml</file>
+        <file>qmlfile/YahooRealTimeReqAck.qml</file>
+        <file>qmlfile/YahooHistoryReqAck.qml</file>
     </qresource>
 </RCC>

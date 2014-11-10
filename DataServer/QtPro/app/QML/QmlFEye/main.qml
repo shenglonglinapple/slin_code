@@ -10,22 +10,45 @@ ApplicationWindow
     height: 480
     title: qsTr("Hello World")
 
-    menuBar: MenuBar {
-        Menu {
+    //
+    menuBar: MenuBar
+    {
+        Menu
+        {
             title: qsTr("File")
-            MenuItem {
-                text: qsTr("&Open")
-                onTriggered: console.log("Open action triggered");
-            }
-            MenuItem {
+            MenuItem
+            {
                 text: qsTr("Exit")
-                onTriggered: Qt.quit();
+                onTriggered:
+                {
+                    console.log("main.qml",
+                                " ", "menuBar",
+                                " ", "MenuItem Exit");
+                    Qt.quit();
+                }
+
             }
-        }
+        }//Menu File
     }//menuBar: MenuBar
 
+    //data
+    ProgramData
+    {
+        id:m_ProgramData
+    }
+    SqliteDbStorage
+    {
+        id: m_SqliteDbStorage;
+    }
+    TotalStockData
+    {
+        id:m_TotalStockData;
+    }
+
+    //data end
 
 
+    //
     PageListView
     {
         id: m_PageListView;

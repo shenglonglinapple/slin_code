@@ -4,5 +4,23 @@ Rectangle
 {
     width: 100
     height: 62
-    color: "blue"
-}
+    color: "white"
+
+    property alias text: m_Text_txt.text
+
+
+    Text
+    {
+        id: m_Text_txt
+
+        anchors.centerIn: parent
+
+        font.family: "Helvetica";//font.family: "Open Sans"
+        font.pointSize: 10
+        font.weight: Font.DemiBold
+
+        color: "#14aaff"
+
+    }//Text
+
+}//Rectangle

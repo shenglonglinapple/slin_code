@@ -29,6 +29,16 @@ ListView
     //信号 向服务器发请求 获取当前股票信息realtime history
     signal signalUpdateCurrentUserStockData;
 
+    //
+    PageListModel
+    {
+       id: m_PageListModel
+    }
+
+    model: m_PageListModel
+
+
+    //
     onCurrentIndexChanged:
     {
         console.log("PageListView.qml",
@@ -36,14 +46,6 @@ ListView
                     " ", "id_qml_PageListView.currentIndex=", id_qml_PageListView.currentIndex,
                     " ", "id_qml_PageListView.count=", id_qml_PageListView.count);
     }//onCurrentIndexChanged
-
-
-    PageListModel
-    {
-       id: m_PageListModel
-    }
-
-    model: m_PageListModel
 
 }//ListView
 

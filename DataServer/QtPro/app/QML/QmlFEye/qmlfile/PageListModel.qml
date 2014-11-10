@@ -14,6 +14,7 @@ ObjectModel
         id: m_page_SamplePage;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
+        text: qsTr("index=0");
     }
 
     //index=1
@@ -22,6 +23,7 @@ ObjectModel
         id: m_page_SamplePage_1;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
+        text:qsTr("index=1");
     }
 
     //index=2
@@ -30,6 +32,7 @@ ObjectModel
         id: m_page_SamplePage_2;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
+        text:qsTr("index=2");
     }
 
 }//model: ObjectModel
