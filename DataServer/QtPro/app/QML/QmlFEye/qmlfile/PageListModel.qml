@@ -9,17 +9,17 @@ ObjectModel
 
 
     //index=0
-    SamplePage
-    {//曲线页面
+    MyStocksPage
+    {//
         id: m_page_SamplePage;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
-        text: qsTr("index=0");
+        //text: qsTr("MyStocksPage");
     }
 
     //index=1
     SamplePage
-    {//曲线页面
+    {//
         id: m_page_SamplePage_1;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
@@ -28,7 +28,7 @@ ObjectModel
 
     //index=2
     SamplePage
-    {//曲线页面
+    {//
         id: m_page_SamplePage_2;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height

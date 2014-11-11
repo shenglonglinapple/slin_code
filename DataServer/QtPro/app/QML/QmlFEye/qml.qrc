@@ -9,5 +9,9 @@
         <file>qmlfile/TotalStockData.qml</file>
         <file>qmlfile/YahooRealTimeReqAck.qml</file>
         <file>qmlfile/YahooHistoryReqAck.qml</file>
+        <file>qmlfile/MyStocksPage.qml</file>
+        <file>qmlfile/MyStocksListView.qml</file>
+        <file>qmlfile/MyStocksListModel.qml</file>
+        <file>qmlfile/MyStocksListDelegate.qml</file>
     </qresource>
 </RCC>

@@ -44,6 +44,14 @@ ApplicationWindow
     {
         id:m_TotalStockData;
     }
+    YahooHistoryReqAck
+    {
+        id:m_YahooHistoryReqAck;
+    }
+    YahooRealTimeReqAck
+    {
+        id:m_YahooRealTimeReqAck
+    }
 
     //data end
 

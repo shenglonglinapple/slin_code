@@ -24,6 +24,12 @@ ListView
     //滑动时停在边界，默认可以拉拽更远并在弹回时带有超调效果
     boundsBehavior: Flickable.StopAtBounds
 
+
+    preferredHighlightBegin: 0;
+    preferredHighlightEnd: 0;
+    flickDeceleration: 2000
+    cacheBuffer: 200
+
     currentIndex: 0;
 
     //信号 向服务器发请求 获取当前股票信息realtime history
