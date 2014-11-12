@@ -14,26 +14,26 @@ Rectangle
     //mvc data
     MyStocksListModel
     {
-        id: m_MyStocksListModel;
+        id: m_id_MyStocksListModel;
         //no width height
     }
 
     //mvc 怎样显示这些数据
     MyStocksListDelegate
     {
-        id: m_MyStocksListDelegate;
+        id: m_id_MyStocksListDelegate;
         //no width height
     }
 
     //Component for ListView
     Component
     {
-        id: m_Component_highlight
+        id: m_id_Component_highlight
         //no width height
 
         Rectangle
         {
-            id:m_Rectangle_highlight;
+            id:m_id_Rectangle_highlight;
             color: "#eeeeee";
             //color: "lightsteelblue";
             //color: "red";
@@ -43,7 +43,7 @@ Rectangle
     ListView
     {
         //0
-        id: m_ListView_UserStock;
+        id: m_id_ListView_UserStock;
         //1
         width:parent.width;
         anchors.top: parent.top
@@ -55,9 +55,9 @@ Rectangle
         highlightMoveDuration: 0
         focus: true
         snapMode: ListView.SnapToItem
-        model: m_MyStocksListModel; // 定义model
-        delegate: m_MyStocksListDelegate;//显示Item
-        highlight: m_Component_highlight;
+        model: m_id_MyStocksListModel; // 定义model
+        delegate: m_id_MyStocksListDelegate;//显示Item
+        highlight: m_id_Component_highlight;
         currentIndex: 0;
 
 

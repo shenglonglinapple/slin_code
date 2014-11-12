@@ -6,12 +6,12 @@ Rectangle
     height: 62
     color: "white"
 
-    property alias text: m_Text_txt.text
+    property alias text: m_id_Text_txt.text
 
 
     Text
     {
-        id: m_Text_txt
+        id: m_id_Text_txt
 
         anchors.centerIn: parent
 

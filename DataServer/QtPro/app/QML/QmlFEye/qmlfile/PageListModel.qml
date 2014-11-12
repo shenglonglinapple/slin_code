@@ -11,7 +11,7 @@ ObjectModel
     //index=0
     MyStocksPage
     {//
-        id: m_page_SamplePage;
+        id: m_id_page_SamplePage;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
         //text: qsTr("MyStocksPage");
@@ -20,7 +20,7 @@ ObjectModel
     //index=1
     SamplePage
     {//
-        id: m_page_SamplePage_1;
+        id: m_id_page_SamplePage_1;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
         text:qsTr("index=1");
@@ -29,7 +29,7 @@ ObjectModel
     //index=2
     SamplePage
     {//
-        id: m_page_SamplePage_2;
+        id: m_id_page_SamplePage_2;
         width: id_qml_PageListView.width
         height: id_qml_PageListView.height
         text:qsTr("index=2");

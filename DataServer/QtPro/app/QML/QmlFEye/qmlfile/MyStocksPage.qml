@@ -13,7 +13,7 @@ Rectangle
 
     MyStocksListView
     {
-        id:m_MyStocksListView;
+        id:m_id_MyStocksListView;
         anchors.fill: parent;
 
     }//MyStocksListView

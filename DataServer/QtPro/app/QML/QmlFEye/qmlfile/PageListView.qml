@@ -38,10 +38,10 @@ ListView
     //
     PageListModel
     {
-       id: m_PageListModel
+       id: m_id_PageListModel
     }
 
-    model: m_PageListModel
+    model: m_id_PageListModel
 
 
     //

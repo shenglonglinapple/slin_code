@@ -8,13 +8,13 @@ ListModel
 
 
     /*
-    id_qml_MyStocksListModel.append( {
-        "m_n_Name": "Analog Devices, Inc.",
-        "m_s_Symbol": "ADI",
-        "m_s_Symbol_Extern": "null/.SS/.SZ",
-        "m_l1_Last_Trade_Price_Only": "0.0",
-        "m_c6_Change_Realtime": "0.0",
-        "m_p2_Change_in_Percent": "0.0%"});
+                    id_qml_MyStocksListModel.append( {
+                        "m_n_Name": "三全食品",
+                        "m_s_Symbol": "002216.SZ",
+                        "m_s_Symbol_Extern": ".SZ",
+                        "m_l1_Last_Trade_Price_Only": "0.0",
+                        "m_c6_Change_Realtime": "0.0",
+                        "m_p2_Change_in_Percent": "0.0%"});
     */
 
 
@@ -23,6 +23,9 @@ ListModel
         console.log("MyStocksListModel.qml",
                     " ", "Component.onCompleted");
 
+        //for Test. TODO.
+        m_SqliteDbStorage.fun_db_CheckAndCreateTable_TABLE_USERSTOCK();
+        m_SqliteDbStorage.fun_db_drop_table_TRABLE_USERSTOCK();
         m_SqliteDbStorage.fun_db_CheckAndCreateTable_TABLE_USERSTOCK();
         fun_db_LoadData_from_TableUserStock();
 
@@ -85,9 +88,9 @@ ListModel
                         "m_n_Name": "三全食品",
                         "m_s_Symbol": "002216.SZ",
                         "m_s_Symbol_Extern": ".SZ",
-                        "m_l1_Last_Trade_Price_Only": "0.0",
-                        "m_c6_Change_Realtime": "0.0",
-                        "m_p2_Change_in_Percent": "0.0%"});
+                        "m_l1_Last_Trade_Price_Only": "3.0",
+                        "m_c6_Change_Realtime": "1.0",
+                        "m_p2_Change_in_Percent": "2.0%"});
 
 
                     //do nothing
@@ -109,9 +112,9 @@ ListModel
             function(tx)
             {
                 var nRowIndex = 0;
-                while (nRowIndex < id_qml_StockListModel.count)
+                while (nRowIndex < id_qml_MyStocksListModel.count)//id_qml_MyStocksListModel
                 {
-                    var myItem = id_qml_StockListModel.get(nRowIndex);
+                    var myItem = id_qml_MyStocksListModel.get(nRowIndex);
                     console.log("MyStocksListModel.qml",
                                 " ", "fun_db_SaveData_to_TableUserStock",
                                 " ", "executeSql=",m_SqliteDbStorage.m_str_sql_insert_TABLE_USERSTOCK_001,
