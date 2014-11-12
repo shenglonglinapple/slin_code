@@ -39,7 +39,7 @@ Description: Could not process this "GET" request.
     /*
       error: "Analog Devices, I",  have , so 公司名称放在最后
     */
-    function fun_create_request_LatestQuotesCsv(strSymbol, strSymbolExtern)
+    function fun_create_request_LatestQuotesCsv(strSymbol)
     {
         var varReturnValue = "";
 

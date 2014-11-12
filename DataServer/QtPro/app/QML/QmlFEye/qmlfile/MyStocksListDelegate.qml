@@ -55,6 +55,16 @@ Component
                 font.pointSize: 10
                 color: "blue"
             }
+
+            Component.onCompleted:
+            {
+                console.log("MyStocksListDelegate.qml",
+                            " ", "Text Component.onCompleted",
+                            " ", "fun_Update_RealTimeInfo_byindex index=", index);
+                //id_qml_MyStocksListDelegate.ListView.view
+                id_qml_MyStocksListView.fun_Update_RealTimeInfo_byindex(index);
+
+            }//Component.onCompleted:
         }//m_id_Rectangle_BaseInfo
 
 
@@ -108,10 +118,7 @@ Component
                 color:"white"
                 //color: m_c6_Change_Realtime < 0 ? "red" : "green"
 
-                Component.onCompleted:
-                {
 
-                }//Component.onCompleted:
             }//m_id_Text_ChangeInfo
 
             MouseArea
@@ -171,44 +178,13 @@ Component
 
         }//m_id_Rectangle_ChangeInfo
 
-
-
-        Flickable
-        {
-            id: flick
-            width: parent.width
-            anchors { top: methodTitle.bottom; bottom: parent.bottom }
-            contentHeight: methodText.height
-            clip: true
-
-            Text { id: methodText;
-                text: method;
-                wrapMode: Text.WordWrap;
-                width: details.width }
-        }
-
-        Image
-        {
-            anchors { right: flick.right; top: flick.top }
-            source: "content/pics/moreUp.png"
-            opacity: flick.atYBeginning ? 0 : 1
-        }
-
-        Image
-        {
-            anchors { right: flick.right; bottom: flick.bottom }
-            source: "content/pics/moreDown.png"
-            opacity: flick.atYEnd ? 0 : 1
-        }
-
         Row
         {
             id:m_id_Row_DetailInfo
             width:m_id_Item_MyStocksListDelegate.width
-            anchors.bottom: m_id_Item_MyStocksListDelegate.bottom
-
-            spacing: 10
-            opacity:m_id_Item_MyStocksListDelegate.m_n_details_opacity
+            anchors.bottom: m_id_Item_MyStocksListDelegate.bottom;
+            spacing: 10;
+            opacity:m_id_Item_MyStocksListDelegate.m_n_details_opacity;
             Text
             {
                 text:"AAAA";

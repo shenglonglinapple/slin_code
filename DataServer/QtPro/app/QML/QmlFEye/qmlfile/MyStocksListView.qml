@@ -30,7 +30,6 @@ Rectangle
     {
         id: m_id_Component_highlight
         //no width height
-
         Rectangle
         {
             id:m_id_Rectangle_highlight;
@@ -77,12 +76,12 @@ Rectangle
     {
         var varReturnValue = false;
         var m_s_Symbol_Tmp = "";
-        var m_s_Symbol_Extern_Tmp = "";
         var varRealTimeInfo = "";
         var varRequest = "";
 
-        m_s_Symbol_Tmp = m_ListView_UserStock.model.get(index).m_s_Symbol;
-        m_s_Symbol_Extern_Tmp = m_ListView_UserStock.model.get(index).m_s_Symbol_Extern;
+        m_s_Symbol_Tmp = m_id_ListView_UserStock.model.get(index).m_s_Symbol;
+
+
         //check
         if (m_s_Symbol_Tmp.length <= 0)
         {
@@ -94,7 +93,7 @@ Rectangle
             return varReturnValue;
         }
 
-        varRequest = m_YahooRealTimeReqAck.fun_create_request_LatestQuotesCsv(m_s_Symbol_Tmp, m_s_Symbol_Extern_Tmp);
+        varRequest = m_YahooRealTimeReqAck.fun_create_request_LatestQuotesCsv(m_s_Symbol_Tmp);
         if (varRequest.length <= 0)
         {
             varReturnValue = false;
@@ -159,20 +158,46 @@ Rectangle
                 if (varVariableLst.length >= 18)
                 {
                     var varValueTmp = "";
+                    varValueTmp = varVariableLst[0];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_x_Stock_Exchange",varValueTmp);
                     varValueTmp = varVariableLst[1];
                     console.log("MyStocksListView.qml"," ","varValueTmp==",varValueTmp);
-                    m_ListView_UserStock.model.setProperty(index, "m_s_Symbol",varValueTmp);
+                    m_id_ListView_UserStock.model.setProperty(index, "m_s_Symbol",varValueTmp);
                     varValueTmp = varVariableLst[2];
-                    m_ListView_UserStock.model.setProperty(index, "m_c6_Change_Realtime",varValueTmp);
+                    m_id_ListView_UserStock.model.setProperty(index, "m_c6_Change_Realtime",varValueTmp);
                     varValueTmp = varVariableLst[3];
-                    m_ListView_UserStock.model.setProperty(index, "m_p2_Change_in_Percent",varValueTmp);
+                    m_id_ListView_UserStock.model.setProperty(index, "m_p2_Change_in_Percent",varValueTmp);
+                    varValueTmp = varVariableLst[4];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_d1_Last_Trade_Date",varValueTmp);
+                    varValueTmp = varVariableLst[5];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_ti_Last_Trade_Time",varValueTmp);
+                    varValueTmp = varVariableLst[6];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_p_Previous_Close",varValueTmp);
+                    varValueTmp = varVariableLst[7];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_o_Open",varValueTmp);
+                    varValueTmp = varVariableLst[8];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_b_Bid",varValueTmp);
+                    varValueTmp = varVariableLst[9];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_a_Ask",varValueTmp);
+                    varValueTmp = varVariableLst[10];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_g_Day_Low",varValueTmp);
+                    varValueTmp = varVariableLst[11];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_h_Day_High",varValueTmp);
+                    varValueTmp = varVariableLst[12];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_m_Day_Range",varValueTmp);
                     varValueTmp = varVariableLst[13];
-                    m_ListView_UserStock.model.setProperty(index, "m_l1_Last_Trade_Price_Only",varValueTmp);
+                    m_id_ListView_UserStock.model.setProperty(index, "m_l1_Last_Trade_Price_Only",varValueTmp);
+                    varValueTmp = varVariableLst[14];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_t8_1year_Target_Price",varValueTmp);
+                    varValueTmp = varVariableLst[15];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_v_Volume",varValueTmp);
+                    varValueTmp = varVariableLst[16];
+                    m_id_ListView_UserStock.model.setProperty(index, "m_a2_Average_Daily_Volume",varValueTmp);
                     varValueTmp = varVariableLst[17];
                     if (varValueTmp.length > 0)
                     {
                         console.log("MyStocksListView.qml"," ","varValueTmp==",varValueTmp);
-                        m_ListView_UserStock.model.setProperty(index, "m_n_Name",varValueTmp);
+                        m_id_ListView_UserStock.model.setProperty(index, "m_n_Name",varValueTmp);
                     }
 
 
