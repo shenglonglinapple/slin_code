@@ -25,19 +25,30 @@ Rectangle
         //no width height
     }
 
-    //Component for ListView
+
+    // Define a highlight with customized movement between items.
     Component
     {
         id: m_id_Component_highlight
-        //no width height
         Rectangle
         {
-            id:m_id_Rectangle_highlight;
-            color: "#eeeeee";
-            //color: "lightsteelblue";
-            //color: "red";
-        }
-    }
+            //y: listView.currentItem.y;
+            width: parent.with;
+            //height: 60
+            color: "#eeeeee"
+
+            /*
+            Behavior on y
+            {
+                SpringAnimation
+                {
+                    spring: 2;
+                    damping: 0.1
+                }//SpringAnimation
+            }//Behavior on y
+            */
+        }//Rectangle
+    }//Component
 
     ListView
     {
@@ -56,7 +67,12 @@ Rectangle
         snapMode: ListView.SnapToItem
         model: m_id_MyStocksListModel; // 定义model
         delegate: m_id_MyStocksListDelegate;//显示Item
-        highlight: m_id_Component_highlight;
+
+        // Set the highlight delegate. Note we must also set highlightFollowsCurrentItem
+        // to false so the highlight delegate can control how the highlight is moved.
+        highlight: m_id_Component_highlight
+        //highlightFollowsCurrentItem: false
+
         currentIndex: 0;
 
 

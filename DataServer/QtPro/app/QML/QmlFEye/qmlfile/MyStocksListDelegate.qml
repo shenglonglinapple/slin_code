@@ -20,7 +20,7 @@ Component
         property real m_n_details_opacity : 0;//0.0-1.0
 
         property real m_n_height_nomal : 60;
-        property real m_n_height_details : 200;
+        property real m_n_height_details : 300;
 
 
         Rectangle
@@ -178,26 +178,103 @@ Component
 
         }//m_id_Rectangle_ChangeInfo
 
-        Row
+        Grid
         {
-            id:m_id_Row_DetailInfo
+            id:m_id_Grid_detailInfo
+
             width:m_id_Item_MyStocksListDelegate.width
             anchors.bottom: m_id_Item_MyStocksListDelegate.bottom;
-            spacing: 10;
+
             opacity:m_id_Item_MyStocksListDelegate.m_n_details_opacity;
+
+            columns: 1
+            spacing: 1
+
             Text
             {
-                text:"AAAA";
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Stock Exchange:"+m_x_Stock_Exchange;
             }
             Text
             {
-                text:"BBB";
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Last Trade Date:"+m_d1_Last_Trade_Date;
             }
             Text
             {
-                text:"CCC";
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Last Trade Time:"+m_ti_Last_Trade_Time;
             }
-        }//m_id_Row_DetailInfo
+            Text
+            {
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Previous Close:"+m_p_Previous_Close;
+            }
+            Text
+            {
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Open:"+m_o_Open;
+            }
+            Text
+            {
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Bid:"+m_b_Bid;
+            }
+            Text
+            {
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Ask:"+m_a_Ask;
+            }
+            Text
+            {
+                font.family: "Helvetica";//"Abel"
+                font.bold: true;
+                font.pointSize: 10
+                text:"Day Range:"+m_m_Day_Range;
+            }
+
+
+
+/*
+                    id_qml_MyStocksListModel.append(
+                                {
+                                    "m_x_Stock_Exchange": "shengzhen",
+                                    "m_s_Symbol":"600667.SS",
+                                    "m_c6_Change_Realtime":"3.00",
+                                    "m_p2_Change_in_Percent":"1.00%",
+                                    "m_d1_Last_Trade_Date":"3.00",
+                                    "m_ti_Last_Trade_Time":"2014/10/20 10:01:02",
+                                    "m_p_Previous_Close":"3.00",
+                                    "m_o_Open":"3.00",
+                                    "m_b_Bid":"10000",
+                                    "m_a_Ask":"10",
+                                    "m_g_Day_Low":"3.00",
+                                    "m_h_Day_High":"3.00",
+                                    "m_m_Day_Range":"3.00-3.00",
+                                    "m_l1_Last_Trade_Price_Only":"3.00",
+                                    "m_t8_1year_Target_Price":"3.00",
+                                    "m_v_Volume":"300000",
+                                    "m_a2_Average_Daily_Volume":"100",
+                                    "m_n_Name":"三全食品"
+                                });
+*/
+        }//Grid m_id_Grid_detailInfo
+
+
 
 
         MouseArea
@@ -210,6 +287,8 @@ Component
             //anchors.fill: m_id_Item_MyStocksListDelegate;
             onClicked:
             {
+                //m_id_Item_MyStocksListDelegate.ListView.view.currentIndex = index
+
                 if (m_id_Item_MyStocksListDelegate.state == "states_detail")
                 {
                     m_id_Item_MyStocksListDelegate.state = "states_nomal";
