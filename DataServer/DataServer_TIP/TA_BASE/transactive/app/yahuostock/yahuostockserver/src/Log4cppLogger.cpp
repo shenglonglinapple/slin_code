@@ -100,7 +100,7 @@ int CLog4cppLogger::testLog()
 	MYLOG4CPP_ERROR<<"LOG4CPP_ERROR";
 	MYLOG4CPP_FATAL<<"LOG4CPP_FATAL";
 	MYLOG4CPP_ERROR_Base<<__FILE__<<" "<<__LINE__<<"LOG4CPP_FATAL";
-
+	MYLOG4CPP_ERROR_Base<<" ["<<__FILE__<<":"<<__LINE__<<"] "<<"Exception Info:";
 	return 0;
 }
 

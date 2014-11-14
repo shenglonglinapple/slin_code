@@ -10,6 +10,10 @@
 #include "BaseException.h"
 #include "YahuoHistoryReqAck.h"
 
+#include "CheckTotalStocks.h"
+
+
+
 void tetstCYahuoHistoryReqAck()
 {
 
@@ -23,7 +27,7 @@ void tetstCYahuoHistoryReqAck()
 		2014, 10, 7,
 		YahuoReqAck::daily);
 	std::cout << petr4HistoricalPrices << std::endl;
-};
+}
 
 void testCYahuoRealTimeReqAck()
 {
@@ -62,6 +66,10 @@ int main()
 
 	testCYahuoRealTimeReqAck();
 	tetstCYahuoHistoryReqAck();
+
+	CCheckTotalStocks classCheckTotalStocks;
+
+	classCheckTotalStocks.do_check();
 
 
 	CLog4cppLogger::removeInstance();

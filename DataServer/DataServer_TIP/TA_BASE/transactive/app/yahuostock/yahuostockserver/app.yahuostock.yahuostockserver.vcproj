@@ -219,6 +219,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\CheckTotalStocks.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\CheckTotalStocks.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\CurlUtil.cpp"
 				>
 			</File>
@@ -236,6 +244,14 @@
 			</File>
 			<File
 				RelativePath=".\src\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockData.h"
 				>
 			</File>
 			<File

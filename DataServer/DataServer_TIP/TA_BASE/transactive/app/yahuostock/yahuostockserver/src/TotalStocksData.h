@@ -5,14 +5,18 @@
 
 //TotalStocksData
 
-
+//int m_nArrSize = sizeof(s_SSSZ_Stocks) / sizeof (*s_SSSZ_Stocks);
+//std::string strSymbol = s_SSSZ_Stocks[nIndex].m_psz_Symbol;
+//std::string strName = s_SSSZ_Stocks[nIndex].m_psz_Name;
+//std::string strNamePinYin = s_SSSZ_Stocks[nIndex].m_psz_NamePinYin;
+//std::string strSymbolExtern = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
 
 
 struct st_sssz_stocks	
 {
 	const char*  m_psz_Symbol;
-	const char*  m_psz_Name;
 	const char*  m_psz_NamePinYin;
+	const char*  m_psz_SymbolExtern;
 };
 
 
@@ -20,16286 +24,16286 @@ struct st_sssz_stocks
 static const st_sssz_stocks  s_SSSZ_Stocks[]=	
 {   
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 {
 	/*Symbol*/("201000"),
-	/*Name*/("R003"),
-	/*NamePinYin*/("R003")
+	/*NamePinYin*/("R003"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201001"),
-	/*Name*/("R007"),
-	/*NamePinYin*/("R007")
+	/*NamePinYin*/("R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201002"),
-	/*Name*/("R014"),
-	/*NamePinYin*/("R014")
+	/*NamePinYin*/("R014"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201003"),
-	/*Name*/("R028"),
-	/*NamePinYin*/("R028")
+	/*NamePinYin*/("R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201004"),
-	/*Name*/("R091"),
-	/*NamePinYin*/("R091")
+	/*NamePinYin*/("R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201005"),
-	/*Name*/("R182"),
-	/*NamePinYin*/("R182")
+	/*NamePinYin*/("R182"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201008"),
-	/*Name*/("R001"),
-	/*NamePinYin*/("R001")
+	/*NamePinYin*/("R001"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201009"),
-	/*Name*/("R002"),
-	/*NamePinYin*/("R002")
+	/*NamePinYin*/("R002"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("201010"),
-	/*Name*/("R004"),
-	/*NamePinYin*/("R004")
+	/*NamePinYin*/("R004"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("202001"),
-	/*Name*/("RC001"),
-	/*NamePinYin*/("RC001")
+	/*NamePinYin*/("RC001"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("202003"),
-	/*Name*/("RC003"),
-	/*NamePinYin*/("RC003")
+	/*NamePinYin*/("RC003"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("202007"),
-	/*Name*/("RC007"),
-	/*NamePinYin*/("RC007")
+	/*NamePinYin*/("RC007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203007"),
-	/*Name*/("0501R007"),
-	/*NamePinYin*/("0501R007")
+	/*NamePinYin*/("0501R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203008"),
-	/*Name*/("0501R028"),
-	/*NamePinYin*/("0501R028")
+	/*NamePinYin*/("0501R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203009"),
-	/*Name*/("0501R091"),
-	/*NamePinYin*/("0501R091")
+	/*NamePinYin*/("0501R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203016"),
-	/*Name*/("0504R007"),
-	/*NamePinYin*/("0504R007")
+	/*NamePinYin*/("0504R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203017"),
-	/*Name*/("0504R028"),
-	/*NamePinYin*/("0504R028")
+	/*NamePinYin*/("0504R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203018"),
-	/*Name*/("0504R091"),
-	/*NamePinYin*/("0504R091")
+	/*NamePinYin*/("0504R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203019"),
-	/*Name*/("0505R007"),
-	/*NamePinYin*/("0505R007")
+	/*NamePinYin*/("0505R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203020"),
-	/*Name*/("0505R028"),
-	/*NamePinYin*/("0505R028")
+	/*NamePinYin*/("0505R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203021"),
-	/*Name*/("0505R091"),
-	/*NamePinYin*/("0505R091")
+	/*NamePinYin*/("0505R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203031"),
-	/*Name*/("0509R007"),
-	/*NamePinYin*/("0509R007")
+	/*NamePinYin*/("0509R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203032"),
-	/*Name*/("0509R028"),
-	/*NamePinYin*/("0509R028")
+	/*NamePinYin*/("0509R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203033"),
-	/*Name*/("0509R091"),
-	/*NamePinYin*/("0509R091")
+	/*NamePinYin*/("0509R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203040"),
-	/*Name*/("0512R007"),
-	/*NamePinYin*/("0512R007")
+	/*NamePinYin*/("0512R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203041"),
-	/*Name*/("0512R028"),
-	/*NamePinYin*/("0512R028")
+	/*NamePinYin*/("0512R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203042"),
-	/*Name*/("0512R091"),
-	/*NamePinYin*/("0512R091")
+	/*NamePinYin*/("0512R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203043"),
-	/*Name*/("0513R007"),
-	/*NamePinYin*/("0513R007")
+	/*NamePinYin*/("0513R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203044"),
-	/*Name*/("0513R028"),
-	/*NamePinYin*/("0513R028")
+	/*NamePinYin*/("0513R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203045"),
-	/*Name*/("0513R091"),
-	/*NamePinYin*/("0513R091")
+	/*NamePinYin*/("0513R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203049"),
-	/*Name*/("0601R007"),
-	/*NamePinYin*/("0601R007")
+	/*NamePinYin*/("0601R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203050"),
-	/*Name*/("0601R028"),
-	/*NamePinYin*/("0601R028")
+	/*NamePinYin*/("0601R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203051"),
-	/*Name*/("0601R091"),
-	/*NamePinYin*/("0601R091")
+	/*NamePinYin*/("0601R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203052"),
-	/*Name*/("0603R007"),
-	/*NamePinYin*/("0603R007")
+	/*NamePinYin*/("0603R007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203053"),
-	/*Name*/("0603R028"),
-	/*NamePinYin*/("0603R028")
+	/*NamePinYin*/("0603R028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("203054"),
-	/*Name*/("0603R091"),
-	/*NamePinYin*/("0603R091")
+	/*NamePinYin*/("0603R091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204001"),
-	/*Name*/("GC001"),
-	/*NamePinYin*/("GC001")
+	/*NamePinYin*/("GC001"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204002"),
-	/*Name*/("GC002"),
-	/*NamePinYin*/("GC002")
+	/*NamePinYin*/("GC002"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204003"),
-	/*Name*/("GC003"),
-	/*NamePinYin*/("GC003")
+	/*NamePinYin*/("GC003"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204004"),
-	/*Name*/("GC004"),
-	/*NamePinYin*/("GC004")
+	/*NamePinYin*/("GC004"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204007"),
-	/*Name*/("GC007"),
-	/*NamePinYin*/("GC007")
+	/*NamePinYin*/("GC007"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204014"),
-	/*Name*/("GC014"),
-	/*NamePinYin*/("GC014")
+	/*NamePinYin*/("GC014"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204028"),
-	/*Name*/("GC028"),
-	/*NamePinYin*/("GC028")
+	/*NamePinYin*/("GC028"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204091"),
-	/*Name*/("GC091"),
-	/*NamePinYin*/("GC091")
+	/*NamePinYin*/("GC091"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("204182"),
-	/*Name*/("GC182"),
-	/*NamePinYin*/("GC182")
+	/*NamePinYin*/("GC182"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500001"),
-	/*Name*/("基金金泰"),
-	/*NamePinYin*/("JJJT")
+	/*NamePinYin*/("JJJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500002"),
-	/*Name*/("基金泰和"),
-	/*NamePinYin*/("JJTH")
+	/*NamePinYin*/("JJTH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500003"),
-	/*Name*/("基金安信"),
-	/*NamePinYin*/("JJAX")
+	/*NamePinYin*/("JJAX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500005"),
-	/*Name*/("基金汉盛"),
-	/*NamePinYin*/("JJHC")
+	/*NamePinYin*/("JJHC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500006"),
-	/*Name*/("基金裕阳"),
-	/*NamePinYin*/("JJYY")
+	/*NamePinYin*/("JJYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500007"),
-	/*Name*/("基金景阳"),
-	/*NamePinYin*/("JJJY")
+	/*NamePinYin*/("JJJY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500008"),
-	/*Name*/("基金兴华"),
-	/*NamePinYin*/("JJXH")
+	/*NamePinYin*/("JJXH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500009"),
-	/*Name*/("基金安顺"),
-	/*NamePinYin*/("JJAS")
+	/*NamePinYin*/("JJAS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500011"),
-	/*Name*/("基金金鑫"),
-	/*NamePinYin*/("JJJX")
+	/*NamePinYin*/("JJJX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500015"),
-	/*Name*/("基金汉兴"),
-	/*NamePinYin*/("JJHX")
+	/*NamePinYin*/("JJHX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500018"),
-	/*Name*/("基金兴和"),
-	/*NamePinYin*/("JJXH")
+	/*NamePinYin*/("JJXH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500029"),
-	/*Name*/("基金科讯"),
-	/*NamePinYin*/("JJKX")
+	/*NamePinYin*/("JJKX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500038"),
-	/*Name*/("基金通乾"),
-	/*NamePinYin*/("JJTG")
+	/*NamePinYin*/("JJTG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500056"),
-	/*Name*/("基金科瑞"),
-	/*NamePinYin*/("JJKR")
+	/*NamePinYin*/("JJKR"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("500058"),
-	/*Name*/("基金银丰"),
-	/*NamePinYin*/("JJYF")
+	/*NamePinYin*/("JJYF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510010"),
-	/*Name*/("治理ETF"),
-	/*NamePinYin*/("ZLETF")
+	/*NamePinYin*/("ZLETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510020"),
-	/*Name*/("超大ETF"),
-	/*NamePinYin*/("CDETF")
+	/*NamePinYin*/("CDETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510030"),
-	/*Name*/("价值ETF"),
-	/*NamePinYin*/("JZETF")
+	/*NamePinYin*/("JZETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510050"),
-	/*Name*/("50ETF"),
-	/*NamePinYin*/("50ETF")
+	/*NamePinYin*/("50ETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510060"),
-	/*Name*/("央企ETF"),
-	/*NamePinYin*/("YQETF")
+	/*NamePinYin*/("YQETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510061"),
-	/*Name*/("央企申赎"),
-	/*NamePinYin*/("YQSS")
+	/*NamePinYin*/("YQSS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510070"),
-	/*Name*/("民企ETF"),
-	/*NamePinYin*/("MQETF")
+	/*NamePinYin*/("MQETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510090"),
-	/*Name*/("责任ETF"),
-	/*NamePinYin*/("ZRETF")
+	/*NamePinYin*/("ZRETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510110"),
-	/*Name*/("周期ETF"),
-	/*NamePinYin*/("ZJETF")
+	/*NamePinYin*/("ZJETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510120"),
-	/*Name*/("非周ETF"),
-	/*NamePinYin*/("FZETF")
+	/*NamePinYin*/("FZETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510130"),
-	/*Name*/("中盘ETF"),
-	/*NamePinYin*/("ZPETF")
+	/*NamePinYin*/("ZPETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510150"),
-	/*Name*/("招商上证消费80"),
-	/*NamePinYin*/("QSSZXF80")
+	/*NamePinYin*/("QSSZXF80"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510160"),
-	/*Name*/("小康ETF"),
-	/*NamePinYin*/("XKETF")
+	/*NamePinYin*/("XKETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510170"),
-	/*Name*/("商品ETF"),
-	/*NamePinYin*/("SPETF")
+	/*NamePinYin*/("SPETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510180"),
-	/*Name*/("180ETF"),
-	/*NamePinYin*/("180ETF")
+	/*NamePinYin*/("180ETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510190"),
-	/*Name*/("龙头ETF"),
-	/*NamePinYin*/("LTETF")
+	/*NamePinYin*/("LTETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510210"),
-	/*Name*/("综指ETF"),
-	/*NamePinYin*/("ZZETF")
+	/*NamePinYin*/("ZZETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510220"),
-	/*Name*/("中小ETF"),
-	/*NamePinYin*/("ZXETF")
+	/*NamePinYin*/("ZXETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510230"),
-	/*Name*/("金融ETF"),
-	/*NamePinYin*/("JRETF")
+	/*NamePinYin*/("JRETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510260"),
-	/*Name*/("新兴ETF"),
-	/*NamePinYin*/("XXETF")
+	/*NamePinYin*/("XXETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510270"),
-	/*Name*/("国企ETF"),
-	/*NamePinYin*/("GQETF")
+	/*NamePinYin*/("GQETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510280"),
-	/*Name*/("成长ETF"),
-	/*NamePinYin*/("CCETF")
+	/*NamePinYin*/("CCETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510290"),
-	/*Name*/("380ETF"),
-	/*NamePinYin*/("380ETF")
+	/*NamePinYin*/("380ETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510300"),
-	/*Name*/("300ETF"),
-	/*NamePinYin*/("300ETF")
+	/*NamePinYin*/("300ETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510310"),
-	/*Name*/("HS300ETF"),
-	/*NamePinYin*/("HS300ETF")
+	/*NamePinYin*/("HS300ETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510330"),
-	/*Name*/("华夏300"),
-	/*NamePinYin*/("HX300")
+	/*NamePinYin*/("HX300"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510410"),
-	/*Name*/("资源ETF"),
-	/*NamePinYin*/("ZYETF")
+	/*NamePinYin*/("ZYETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510420"),
-	/*Name*/("180EWETF"),
-	/*NamePinYin*/("180EWETF")
+	/*NamePinYin*/("180EWETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510430"),
-	/*Name*/("50等权"),
-	/*NamePinYin*/("50DQ")
+	/*NamePinYin*/("50DQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510440"),
-	/*Name*/("500沪市ETF"),
-	/*NamePinYin*/("500HSETF")
+	/*NamePinYin*/("500HSETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510450"),
-	/*Name*/("180高ETF"),
-	/*NamePinYin*/("180GETF")
+	/*NamePinYin*/("180GETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510500"),
-	/*Name*/("500ETF"),
-	/*NamePinYin*/("500ETF")
+	/*NamePinYin*/("500ETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510510"),
-	/*Name*/("广发500"),
-	/*NamePinYin*/("AF500")
+	/*NamePinYin*/("AF500"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510520"),
-	/*Name*/("诺安500"),
-	/*NamePinYin*/("NA500")
+	/*NamePinYin*/("NA500"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510610"),
-	/*Name*/("能源行业"),
-	/*NamePinYin*/("NYHY")
+	/*NamePinYin*/("NYHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510620"),
-	/*Name*/("材料行业"),
-	/*NamePinYin*/("CLHY")
+	/*NamePinYin*/("CLHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510630"),
-	/*Name*/("消费行业"),
-	/*NamePinYin*/("XFHY")
+	/*NamePinYin*/("XFHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510650"),
-	/*Name*/("金融行业"),
-	/*NamePinYin*/("JRHY")
+	/*NamePinYin*/("JRHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510660"),
-	/*Name*/("医药行业"),
-	/*NamePinYin*/("YYHY")
+	/*NamePinYin*/("YYHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510680"),
-	/*Name*/("万家380"),
-	/*NamePinYin*/("MG380")
+	/*NamePinYin*/("MG380"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510700"),
-	/*Name*/("百强ETF"),
-	/*NamePinYin*/("BJETF")
+	/*NamePinYin*/("BJETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510880"),
-	/*Name*/("红利ETF"),
-	/*NamePinYin*/("GLETF")
+	/*NamePinYin*/("GLETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("510900"),
-	/*Name*/("H股ETF"),
-	/*NamePinYin*/("HGETF")
+	/*NamePinYin*/("HGETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("511010"),
-	/*Name*/("国债ETF"),
-	/*NamePinYin*/("GZETF")
+	/*NamePinYin*/("GZETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("511210"),
-	/*Name*/("企债ETF"),
-	/*NamePinYin*/("QZETF")
+	/*NamePinYin*/("QZETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("511880"),
-	/*Name*/("银华日利"),
-	/*NamePinYin*/("YHRL")
+	/*NamePinYin*/("YHRL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("511990"),
-	/*Name*/("华宝添益"),
-	/*NamePinYin*/("HBTY")
+	/*NamePinYin*/("HBTY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512010"),
-	/*Name*/("医药ETF"),
-	/*NamePinYin*/("YYETF")
+	/*NamePinYin*/("YYETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512070"),
-	/*Name*/("非银ETF"),
-	/*NamePinYin*/("FYETF")
+	/*NamePinYin*/("FYETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512210"),
-	/*Name*/("景顺食品"),
-	/*NamePinYin*/("JSSP")
+	/*NamePinYin*/("JSSP"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512220"),
-	/*Name*/("景顺TMT"),
-	/*NamePinYin*/("JSTMT")
+	/*NamePinYin*/("JSTMT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512230"),
-	/*Name*/("景顺医药"),
-	/*NamePinYin*/("JSYY")
+	/*NamePinYin*/("JSYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512600"),
-	/*Name*/("主要消费"),
-	/*NamePinYin*/("ZYXF")
+	/*NamePinYin*/("ZYXF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512610"),
-	/*Name*/("医药卫生"),
-	/*NamePinYin*/("YYWS")
+	/*NamePinYin*/("YYWS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("512640"),
-	/*Name*/("金融地产"),
-	/*NamePinYin*/("JRDC")
+	/*NamePinYin*/("JRDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("513030"),
-	/*Name*/("德国30"),
-	/*NamePinYin*/("DG30")
+	/*NamePinYin*/("DG30"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("513100"),
-	/*Name*/("纳指ETF"),
-	/*NamePinYin*/("NZETF")
+	/*NamePinYin*/("NZETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("513500"),
-	/*Name*/("标普500"),
-	/*NamePinYin*/("BP500")
+	/*NamePinYin*/("BP500"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("518800"),
-	/*Name*/("国泰黄金"),
-	/*NamePinYin*/("GTHJ")
+	/*NamePinYin*/("GTHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("518880"),
-	/*Name*/("黄金ETF"),
-	/*NamePinYin*/("HJETF")
+	/*NamePinYin*/("HJETF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580012"),
-	/*Name*/("云化CWB1"),
-	/*NamePinYin*/("YHCWB1")
+	/*NamePinYin*/("YHCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580013"),
-	/*Name*/("武钢CWB1"),
-	/*NamePinYin*/("WGCWB1")
+	/*NamePinYin*/("WGCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580014"),
-	/*Name*/("深高CWB1"),
-	/*NamePinYin*/("SGCWB1")
+	/*NamePinYin*/("SGCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580016"),
-	/*Name*/("上汽CWB1"),
-	/*NamePinYin*/("SQCWB1")
+	/*NamePinYin*/("SQCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580017"),
-	/*Name*/("赣粤CWB1"),
-	/*NamePinYin*/("GYCWB1")
+	/*NamePinYin*/("GYCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580019"),
-	/*Name*/("石化CWB1"),
-	/*NamePinYin*/("DHCWB1")
+	/*NamePinYin*/("DHCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580020"),
-	/*Name*/("上港CWB1"),
-	/*NamePinYin*/("SGCWB1")
+	/*NamePinYin*/("SGCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580021"),
-	/*Name*/("青啤CWB1"),
-	/*NamePinYin*/("QPCWB1")
+	/*NamePinYin*/("QPCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580022"),
-	/*Name*/("国电CWB1"),
-	/*NamePinYin*/("GDCWB1")
+	/*NamePinYin*/("GDCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580023"),
-	/*Name*/("康美CWB1"),
-	/*NamePinYin*/("KMCWB1")
+	/*NamePinYin*/("KMCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580024"),
-	/*Name*/("宝钢CWB1"),
-	/*NamePinYin*/("BGCWB1")
+	/*NamePinYin*/("BGCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580025"),
-	/*Name*/("葛洲CWB1"),
-	/*NamePinYin*/("GZCWB1")
+	/*NamePinYin*/("GZCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580026"),
-	/*Name*/("江铜CWB1"),
-	/*NamePinYin*/("JTCWB1")
+	/*NamePinYin*/("JTCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("580027"),
-	/*Name*/("长虹CWB1"),
-	/*NamePinYin*/("CHCWB1")
+	/*NamePinYin*/("CHCWB1"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600000"),
-	/*Name*/("浦发银行"),
-	/*NamePinYin*/("PFYH")
+	/*NamePinYin*/("PFYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600001"),
-	/*Name*/("邯郸钢铁"),
-	/*NamePinYin*/("HDGT")
+	/*NamePinYin*/("HDGT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600002"),
-	/*Name*/("齐鲁退市"),
-	/*NamePinYin*/("JLTS")
+	/*NamePinYin*/("JLTS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600003"),
-	/*Name*/("ST东北高"),
-	/*NamePinYin*/("STDBG")
+	/*NamePinYin*/("STDBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600004"),
-	/*Name*/("白云机场"),
-	/*NamePinYin*/("BYJC")
+	/*NamePinYin*/("BYJC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600005"),
-	/*Name*/("武钢股份"),
-	/*NamePinYin*/("WGGF")
+	/*NamePinYin*/("WGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600006"),
-	/*Name*/("东风汽车"),
-	/*NamePinYin*/("DFQC")
+	/*NamePinYin*/("DFQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600007"),
-	/*Name*/("中国国贸"),
-	/*NamePinYin*/("ZGGM")
+	/*NamePinYin*/("ZGGM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600008"),
-	/*Name*/("首创股份"),
-	/*NamePinYin*/("SCGF")
+	/*NamePinYin*/("SCGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600009"),
-	/*Name*/("上海机场"),
-	/*NamePinYin*/("SHJC")
+	/*NamePinYin*/("SHJC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600010"),
-	/*Name*/("包钢股份"),
-	/*NamePinYin*/("BGGF")
+	/*NamePinYin*/("BGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600011"),
-	/*Name*/("华能国际"),
-	/*NamePinYin*/("HNGJ")
+	/*NamePinYin*/("HNGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600012"),
-	/*Name*/("皖通高速"),
-	/*NamePinYin*/("WTGS")
+	/*NamePinYin*/("WTGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600015"),
-	/*Name*/("华夏银行"),
-	/*NamePinYin*/("HXYH")
+	/*NamePinYin*/("HXYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600016"),
-	/*Name*/("民生银行"),
-	/*NamePinYin*/("MSYH")
+	/*NamePinYin*/("MSYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600017"),
-	/*Name*/("日照港"),
-	/*NamePinYin*/("RZG")
+	/*NamePinYin*/("RZG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600018"),
-	/*Name*/("上港集团"),
-	/*NamePinYin*/("SGJT")
+	/*NamePinYin*/("SGJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600019"),
-	/*Name*/("宝钢股份"),
-	/*NamePinYin*/("BGGF")
+	/*NamePinYin*/("BGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600020"),
-	/*Name*/("中原高速"),
-	/*NamePinYin*/("ZYGS")
+	/*NamePinYin*/("ZYGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600021"),
-	/*Name*/("上海电力"),
-	/*NamePinYin*/("SHDL")
+	/*NamePinYin*/("SHDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600022"),
-	/*Name*/("山东钢铁"),
-	/*NamePinYin*/("SDGT")
+	/*NamePinYin*/("SDGT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600023"),
-	/*Name*/("浙能电力"),
-	/*NamePinYin*/("ZNDL")
+	/*NamePinYin*/("ZNDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600026"),
-	/*Name*/("中海发展"),
-	/*NamePinYin*/("ZHFZ")
+	/*NamePinYin*/("ZHFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600027"),
-	/*Name*/("华电国际"),
-	/*NamePinYin*/("HDGJ")
+	/*NamePinYin*/("HDGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600028"),
-	/*Name*/("中国石化"),
-	/*NamePinYin*/("ZGDH")
+	/*NamePinYin*/("ZGDH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600029"),
-	/*Name*/("南方航空"),
-	/*NamePinYin*/("NFHK")
+	/*NamePinYin*/("NFHK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600030"),
-	/*Name*/("中信证券"),
-	/*NamePinYin*/("ZXZQ")
+	/*NamePinYin*/("ZXZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600031"),
-	/*Name*/("三一重工"),
-	/*NamePinYin*/("SYCG")
+	/*NamePinYin*/("SYCG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600033"),
-	/*Name*/("福建高速"),
-	/*NamePinYin*/("FJGS")
+	/*NamePinYin*/("FJGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600035"),
-	/*Name*/("楚天高速"),
-	/*NamePinYin*/("CTGS")
+	/*NamePinYin*/("CTGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600036"),
-	/*Name*/("招商银行"),
-	/*NamePinYin*/("QSYH")
+	/*NamePinYin*/("QSYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600037"),
-	/*Name*/("歌华有线"),
-	/*NamePinYin*/("GHYX")
+	/*NamePinYin*/("GHYX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600038"),
-	/*Name*/("哈飞股份"),
-	/*NamePinYin*/("HFGF")
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600039"),
-	/*Name*/("四川路桥"),
-	/*NamePinYin*/("SCLQ")
+	/*NamePinYin*/("SCLQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600048"),
-	/*Name*/("保利地产"),
-	/*NamePinYin*/("BLDC")
+	/*NamePinYin*/("BLDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600050"),
-	/*Name*/("中国联通"),
-	/*NamePinYin*/("ZGLT")
+	/*NamePinYin*/("ZGLT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600051"),
-	/*Name*/("宁波联合"),
-	/*NamePinYin*/("NBLG")
+	/*NamePinYin*/("NBLG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600052"),
-	/*Name*/("浙江广厦"),
-	/*NamePinYin*/("ZJAS")
+	/*NamePinYin*/("ZJAS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600053"),
-	/*Name*/("中江地产"),
-	/*NamePinYin*/("ZJDC")
+	/*NamePinYin*/("ZJDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600054"),
-	/*Name*/("黄山旅游"),
-	/*NamePinYin*/("HSLY")
+	/*NamePinYin*/("HSLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600055"),
-	/*Name*/("华润万东"),
-	/*NamePinYin*/("HRMD")
+	/*NamePinYin*/("HRMD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600056"),
-	/*Name*/("中国医药"),
-	/*NamePinYin*/("ZGYY")
+	/*NamePinYin*/("ZGYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600057"),
-	/*Name*/("象屿股份"),
-	/*NamePinYin*/("XYGF")
+	/*NamePinYin*/("XYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600058"),
-	/*Name*/("五矿发展"),
-	/*NamePinYin*/("WKFZ")
+	/*NamePinYin*/("WKFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600059"),
-	/*Name*/("古越龙山"),
-	/*NamePinYin*/("GYLS")
+	/*NamePinYin*/("GYLS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600060"),
-	/*Name*/("海信电器"),
-	/*NamePinYin*/("HXDQ")
+	/*NamePinYin*/("HXDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600061"),
-	/*Name*/("中纺投资"),
-	/*NamePinYin*/("ZFTZ")
+	/*NamePinYin*/("ZFTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600062"),
-	/*Name*/("华润双鹤"),
-	/*NamePinYin*/("HRSH")
+	/*NamePinYin*/("HRSH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600063"),
-	/*Name*/("皖维高新"),
-	/*NamePinYin*/("WWGX")
+	/*NamePinYin*/("WWGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600064"),
-	/*Name*/("南京高科"),
-	/*NamePinYin*/("NJGK")
+	/*NamePinYin*/("NJGK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600065"),
-	/*Name*/("*ST联谊"),
-	/*NamePinYin*/("*STLY")
+	/*NamePinYin*/("*STLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600066"),
-	/*Name*/("宇通客车"),
-	/*NamePinYin*/("YTKC")
+	/*NamePinYin*/("YTKC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600067"),
-	/*Name*/("冠城大通"),
-	/*NamePinYin*/("GCDT")
+	/*NamePinYin*/("GCDT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600068"),
-	/*Name*/("葛洲坝"),
-	/*NamePinYin*/("GZB")
+	/*NamePinYin*/("GZB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600069"),
-	/*Name*/("银鸽投资"),
-	/*NamePinYin*/("YGTZ")
+	/*NamePinYin*/("YGTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600070"),
-	/*Name*/("浙江富润"),
-	/*NamePinYin*/("ZJFR")
+	/*NamePinYin*/("ZJFR"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600071"),
-	/*Name*/("凤凰光学"),
-	/*NamePinYin*/("FHGX")
+	/*NamePinYin*/("FHGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600072"),
-	/*Name*/("*ST钢构"),
-	/*NamePinYin*/("*STGG")
+	/*NamePinYin*/("*STGG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600073"),
-	/*Name*/("上海梅林"),
-	/*NamePinYin*/("SHML")
+	/*NamePinYin*/("SHML"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600074"),
-	/*Name*/("中达股份"),
-	/*NamePinYin*/("ZDGF")
+	/*NamePinYin*/("ZDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600075"),
-	/*Name*/("*ST新业"),
-	/*NamePinYin*/("*STXY")
+	/*NamePinYin*/("*STXY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600076"),
-	/*Name*/("青鸟华光"),
-	/*NamePinYin*/("QDHG")
+	/*NamePinYin*/("QDHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600077"),
-	/*Name*/("宋都股份"),
-	/*NamePinYin*/("SDGF")
+	/*NamePinYin*/("SDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600078"),
-	/*Name*/("澄星股份"),
-	/*NamePinYin*/("CXGF")
+	/*NamePinYin*/("CXGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600079"),
-	/*Name*/("人福医药"),
-	/*NamePinYin*/("RFYY")
+	/*NamePinYin*/("RFYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600080"),
-	/*Name*/("金花股份"),
-	/*NamePinYin*/("JHGF")
+	/*NamePinYin*/("JHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600081"),
-	/*Name*/("东风科技"),
-	/*NamePinYin*/("DFKJ")
+	/*NamePinYin*/("DFKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600082"),
-	/*Name*/("海泰发展"),
-	/*NamePinYin*/("HTFZ")
+	/*NamePinYin*/("HTFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600083"),
-	/*Name*/("博信股份"),
-	/*NamePinYin*/("BXGF")
+	/*NamePinYin*/("BXGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600084"),
-	/*Name*/("中葡股份"),
-	/*NamePinYin*/("ZPGF")
+	/*NamePinYin*/("ZPGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600085"),
-	/*Name*/("同仁堂"),
-	/*NamePinYin*/("TRT")
+	/*NamePinYin*/("TRT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600086"),
-	/*Name*/("东方金钰"),
-	/*NamePinYin*/("DFJY")
+	/*NamePinYin*/("DFJY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600087"),
-	/*Name*/("退市长油"),
-	/*NamePinYin*/("TSCY")
+	/*NamePinYin*/("TSCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600088"),
-	/*Name*/("中视传媒"),
-	/*NamePinYin*/("ZSCM")
+	/*NamePinYin*/("ZSCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600089"),
-	/*Name*/("特变电工"),
-	/*NamePinYin*/("TBDG")
+	/*NamePinYin*/("TBDG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600090"),
-	/*Name*/("啤酒花"),
-	/*NamePinYin*/("PJH")
+	/*NamePinYin*/("PJH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600091"),
-	/*Name*/("ST明科"),
-	/*NamePinYin*/("STMK")
+	/*NamePinYin*/("STMK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600092"),
-	/*Name*/("S*ST精密"),
-	/*NamePinYin*/("S*STJM")
+	/*NamePinYin*/("S*STJM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600093"),
-	/*Name*/("禾嘉股份"),
-	/*NamePinYin*/("HJGF")
+	/*NamePinYin*/("HJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600094"),
-	/*Name*/("大名城"),
-	/*NamePinYin*/("DMC")
+	/*NamePinYin*/("DMC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600095"),
-	/*Name*/("哈高科"),
-	/*NamePinYin*/("HGK")
+	/*NamePinYin*/("HGK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600096"),
-	/*Name*/("云天化"),
-	/*NamePinYin*/("YTH")
+	/*NamePinYin*/("YTH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600097"),
-	/*Name*/("开创国际"),
-	/*NamePinYin*/("KCGJ")
+	/*NamePinYin*/("KCGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600098"),
-	/*Name*/("广州发展"),
-	/*NamePinYin*/("AZFZ")
+	/*NamePinYin*/("AZFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600099"),
-	/*Name*/("林海股份"),
-	/*NamePinYin*/("LHGF")
+	/*NamePinYin*/("LHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600100"),
-	/*Name*/("同方股份"),
-	/*NamePinYin*/("TFGF")
+	/*NamePinYin*/("TFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600101"),
-	/*Name*/("明星电力"),
-	/*NamePinYin*/("MXDL")
+	/*NamePinYin*/("MXDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600102"),
-	/*Name*/("莱钢股份"),
-	/*NamePinYin*/("LGGF")
+	/*NamePinYin*/("LGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600103"),
-	/*Name*/("青山纸业"),
-	/*NamePinYin*/("QSZY")
+	/*NamePinYin*/("QSZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600104"),
-	/*Name*/("上汽集团"),
-	/*NamePinYin*/("SQJT")
+	/*NamePinYin*/("SQJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600105"),
-	/*Name*/("永鼎股份"),
-	/*NamePinYin*/("YDGF")
+	/*NamePinYin*/("YDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600106"),
-	/*Name*/("重庆路桥"),
-	/*NamePinYin*/("CQLQ")
+	/*NamePinYin*/("CQLQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600107"),
-	/*Name*/("美尔雅"),
-	/*NamePinYin*/("MEY")
+	/*NamePinYin*/("MEY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600108"),
-	/*Name*/("亚盛集团"),
-	/*NamePinYin*/("YCJT")
+	/*NamePinYin*/("YCJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600109"),
-	/*Name*/("国金证券"),
-	/*NamePinYin*/("GJZQ")
+	/*NamePinYin*/("GJZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600110"),
-	/*Name*/("中科英华"),
-	/*NamePinYin*/("ZKYH")
+	/*NamePinYin*/("ZKYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600111"),
-	/*Name*/("包钢稀土"),
-	/*NamePinYin*/("BGXT")
+	/*NamePinYin*/("BGXT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600112"),
-	/*Name*/("天成控股"),
-	/*NamePinYin*/("TCKG")
+	/*NamePinYin*/("TCKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600113"),
-	/*Name*/("浙江东日"),
-	/*NamePinYin*/("ZJDR")
+	/*NamePinYin*/("ZJDR"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600114"),
-	/*Name*/("东睦股份"),
-	/*NamePinYin*/("DMGF")
+	/*NamePinYin*/("DMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600115"),
-	/*Name*/("东方航空"),
-	/*NamePinYin*/("DFHK")
+	/*NamePinYin*/("DFHK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600116"),
-	/*Name*/("三峡水利"),
-	/*NamePinYin*/("SXSL")
+	/*NamePinYin*/("SXSL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600117"),
-	/*Name*/("西宁特钢"),
-	/*NamePinYin*/("XNTG")
+	/*NamePinYin*/("XNTG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600118"),
-	/*Name*/("中国卫星"),
-	/*NamePinYin*/("ZGWX")
+	/*NamePinYin*/("ZGWX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600119"),
-	/*Name*/("长江投资"),
-	/*NamePinYin*/("CJTZ")
+	/*NamePinYin*/("CJTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600120"),
-	/*Name*/("浙江东方"),
-	/*NamePinYin*/("ZJDF")
+	/*NamePinYin*/("ZJDF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600121"),
-	/*Name*/("郑州煤电"),
-	/*NamePinYin*/("ZZMD")
+	/*NamePinYin*/("ZZMD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600122"),
-	/*Name*/("宏图高科"),
-	/*NamePinYin*/("HTGK")
+	/*NamePinYin*/("HTGK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600123"),
-	/*Name*/("兰花科创"),
-	/*NamePinYin*/("LHKC")
+	/*NamePinYin*/("LHKC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600125"),
-	/*Name*/("铁龙物流"),
-	/*NamePinYin*/("TLWL")
+	/*NamePinYin*/("TLWL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600126"),
-	/*Name*/("杭钢股份"),
-	/*NamePinYin*/("HGGF")
+	/*NamePinYin*/("HGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600127"),
-	/*Name*/("金健米业"),
-	/*NamePinYin*/("JJMY")
+	/*NamePinYin*/("JJMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600128"),
-	/*Name*/("弘业股份"),
-	/*NamePinYin*/("HYGF")
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600129"),
-	/*Name*/("太极集团"),
-	/*NamePinYin*/("TJJT")
+	/*NamePinYin*/("TJJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600130"),
-	/*Name*/("波导股份"),
-	/*NamePinYin*/("BDGF")
+	/*NamePinYin*/("BDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600131"),
-	/*Name*/("岷江水电"),
-	/*NamePinYin*/("MJSD")
+	/*NamePinYin*/("MJSD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600132"),
-	/*Name*/("重庆啤酒"),
-	/*NamePinYin*/("CQPJ")
+	/*NamePinYin*/("CQPJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600133"),
-	/*Name*/("东湖高新"),
-	/*NamePinYin*/("DHGX")
+	/*NamePinYin*/("DHGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600135"),
-	/*Name*/("乐凯胶片"),
-	/*NamePinYin*/("LKJP")
+	/*NamePinYin*/("LKJP"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600136"),
-	/*Name*/("道博股份"),
-	/*NamePinYin*/("DBGF")
+	/*NamePinYin*/("DBGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600137"),
-	/*Name*/("浪莎股份"),
-	/*NamePinYin*/("LSGF")
+	/*NamePinYin*/("LSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600138"),
-	/*Name*/("中青旅"),
-	/*NamePinYin*/("ZQL")
+	/*NamePinYin*/("ZQL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600139"),
-	/*Name*/("西部资源"),
-	/*NamePinYin*/("XBZY")
+	/*NamePinYin*/("XBZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600141"),
-	/*Name*/("兴发集团"),
-	/*NamePinYin*/("XFJT")
+	/*NamePinYin*/("XFJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600143"),
-	/*Name*/("金发科技"),
-	/*NamePinYin*/("JFKJ")
+	/*NamePinYin*/("JFKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600145"),
-	/*Name*/("*ST国创"),
-	/*NamePinYin*/("*STGC")
+	/*NamePinYin*/("*STGC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600146"),
-	/*Name*/("大元股份"),
-	/*NamePinYin*/("DYGF")
+	/*NamePinYin*/("DYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600148"),
-	/*Name*/("长春一东"),
-	/*NamePinYin*/("CCYD")
+	/*NamePinYin*/("CCYD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600149"),
-	/*Name*/("廊坊发展"),
-	/*NamePinYin*/("LFFZ")
+	/*NamePinYin*/("LFFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600150"),
-	/*Name*/("中国船舶"),
-	/*NamePinYin*/("ZGCB")
+	/*NamePinYin*/("ZGCB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600151"),
-	/*Name*/("航天机电"),
-	/*NamePinYin*/("HTJD")
+	/*NamePinYin*/("HTJD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600152"),
-	/*Name*/("维科精华"),
-	/*NamePinYin*/("WKJH")
+	/*NamePinYin*/("WKJH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600153"),
-	/*Name*/("建发股份"),
-	/*NamePinYin*/("JFGF")
+	/*NamePinYin*/("JFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600155"),
-	/*Name*/("宝硕股份"),
-	/*NamePinYin*/("BSGF")
+	/*NamePinYin*/("BSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600156"),
-	/*Name*/("华升股份"),
-	/*NamePinYin*/("HSGF")
+	/*NamePinYin*/("HSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600157"),
-	/*Name*/("永泰能源"),
-	/*NamePinYin*/("YTNY")
+	/*NamePinYin*/("YTNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600158"),
-	/*Name*/("中体产业"),
-	/*NamePinYin*/("ZTCY")
+	/*NamePinYin*/("ZTCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600159"),
-	/*Name*/("大龙地产"),
-	/*NamePinYin*/("DLDC")
+	/*NamePinYin*/("DLDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600160"),
-	/*Name*/("巨化股份"),
-	/*NamePinYin*/("JHGF")
+	/*NamePinYin*/("JHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600161"),
-	/*Name*/("天坛生物"),
-	/*NamePinYin*/("TTSW")
+	/*NamePinYin*/("TTSW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600162"),
-	/*Name*/("香江控股"),
-	/*NamePinYin*/("XJKG")
+	/*NamePinYin*/("XJKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600163"),
-	/*Name*/("福建南纸"),
-	/*NamePinYin*/("FJNZ")
+	/*NamePinYin*/("FJNZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600165"),
-	/*Name*/("新日恒力"),
-	/*NamePinYin*/("XRHL")
+	/*NamePinYin*/("XRHL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600166"),
-	/*Name*/("福田汽车"),
-	/*NamePinYin*/("FTQC")
+	/*NamePinYin*/("FTQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600167"),
-	/*Name*/("联美控股"),
-	/*NamePinYin*/("LMKG")
+	/*NamePinYin*/("LMKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600168"),
-	/*Name*/("武汉控股"),
-	/*NamePinYin*/("WHKG")
+	/*NamePinYin*/("WHKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600169"),
-	/*Name*/("太原重工"),
-	/*NamePinYin*/("TYCG")
+	/*NamePinYin*/("TYCG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600170"),
-	/*Name*/("上海建工"),
-	/*NamePinYin*/("SHJG")
+	/*NamePinYin*/("SHJG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600171"),
-	/*Name*/("上海贝岭"),
-	/*NamePinYin*/("SHBL")
+	/*NamePinYin*/("SHBL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600172"),
-	/*Name*/("黄河旋风"),
-	/*NamePinYin*/("HHXF")
+	/*NamePinYin*/("HHXF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600173"),
-	/*Name*/("卧龙地产"),
-	/*NamePinYin*/("WLDC")
+	/*NamePinYin*/("WLDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600175"),
-	/*Name*/("美都能源"),
-	/*NamePinYin*/("MDNY")
+	/*NamePinYin*/("MDNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600176"),
-	/*Name*/("中国玻纤"),
-	/*NamePinYin*/("ZGBQ")
+	/*NamePinYin*/("ZGBQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600177"),
-	/*Name*/("雅戈尔"),
-	/*NamePinYin*/("YGE")
+	/*NamePinYin*/("YGE"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600178"),
-	/*Name*/("*ST东安"),
-	/*NamePinYin*/("*STDA")
+	/*NamePinYin*/("*STDA"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600179"),
-	/*Name*/("黑化股份"),
-	/*NamePinYin*/("HHGF")
+	/*NamePinYin*/("HHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600180"),
-	/*Name*/("XD瑞茂通"),
-	/*NamePinYin*/("XDRMT")
+	/*NamePinYin*/("XDRMT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600181"),
-	/*Name*/("*ST云大"),
-	/*NamePinYin*/("*STYD")
+	/*NamePinYin*/("*STYD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600182"),
-	/*Name*/("S佳通"),
-	/*NamePinYin*/("SJT")
+	/*NamePinYin*/("SJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600183"),
-	/*Name*/("生益科技"),
-	/*NamePinYin*/("SYKJ")
+	/*NamePinYin*/("SYKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600184"),
-	/*Name*/("光电股份"),
-	/*NamePinYin*/("GDGF")
+	/*NamePinYin*/("GDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600185"),
-	/*Name*/("格力地产"),
-	/*NamePinYin*/("GLDC")
+	/*NamePinYin*/("GLDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600186"),
-	/*Name*/("莲花味精"),
-	/*NamePinYin*/("LHWJ")
+	/*NamePinYin*/("LHWJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600187"),
-	/*Name*/("国中水务"),
-	/*NamePinYin*/("GZSW")
+	/*NamePinYin*/("GZSW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600188"),
-	/*Name*/("兖州煤业"),
-	/*NamePinYin*/("YZMY")
+	/*NamePinYin*/("YZMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600189"),
-	/*Name*/("吉林森工"),
-	/*NamePinYin*/("JLSG")
+	/*NamePinYin*/("JLSG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600190"),
-	/*Name*/("锦州港"),
-	/*NamePinYin*/("JZG")
+	/*NamePinYin*/("JZG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600191"),
-	/*Name*/("华资实业"),
-	/*NamePinYin*/("HZSY")
+	/*NamePinYin*/("HZSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600192"),
-	/*Name*/("长城电工"),
-	/*NamePinYin*/("CCDG")
+	/*NamePinYin*/("CCDG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600193"),
-	/*Name*/("创兴资源"),
-	/*NamePinYin*/("CXZY")
+	/*NamePinYin*/("CXZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600195"),
-	/*Name*/("中牧股份"),
-	/*NamePinYin*/("ZMGF")
+	/*NamePinYin*/("ZMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600196"),
-	/*Name*/("复星医药"),
-	/*NamePinYin*/("FXYY")
+	/*NamePinYin*/("FXYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600197"),
-	/*Name*/("伊力特"),
-	/*NamePinYin*/("YLT")
+	/*NamePinYin*/("YLT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600198"),
-	/*Name*/("大唐电信"),
-	/*NamePinYin*/("DTDX")
+	/*NamePinYin*/("DTDX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600199"),
-	/*Name*/("金种子酒"),
-	/*NamePinYin*/("JCZJ")
+	/*NamePinYin*/("JCZJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600200"),
-	/*Name*/("江苏吴中"),
-	/*NamePinYin*/("JSWZ")
+	/*NamePinYin*/("JSWZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600201"),
-	/*Name*/("金宇集团"),
-	/*NamePinYin*/("JYJT")
+	/*NamePinYin*/("JYJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600202"),
-	/*Name*/("哈空调"),
-	/*NamePinYin*/("HKD")
+	/*NamePinYin*/("HKD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600203"),
-	/*Name*/("福日电子"),
-	/*NamePinYin*/("FRDZ")
+	/*NamePinYin*/("FRDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600205"),
-	/*Name*/("S山东铝"),
-	/*NamePinYin*/("SSDL")
+	/*NamePinYin*/("SSDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600206"),
-	/*Name*/("有研新材"),
-	/*NamePinYin*/("YYXC")
+	/*NamePinYin*/("YYXC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600207"),
-	/*Name*/("安彩高科"),
-	/*NamePinYin*/("ACGK")
+	/*NamePinYin*/("ACGK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600208"),
-	/*Name*/("新湖中宝"),
-	/*NamePinYin*/("XHZB")
+	/*NamePinYin*/("XHZB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600209"),
-	/*Name*/("罗顿发展"),
-	/*NamePinYin*/("LDFZ")
+	/*NamePinYin*/("LDFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600210"),
-	/*Name*/("紫江企业"),
-	/*NamePinYin*/("ZJQY")
+	/*NamePinYin*/("ZJQY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600211"),
-	/*Name*/("西藏药业"),
-	/*NamePinYin*/("XCYY")
+	/*NamePinYin*/("XCYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600212"),
-	/*Name*/("江泉实业"),
-	/*NamePinYin*/("JQSY")
+	/*NamePinYin*/("JQSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600213"),
-	/*Name*/("亚星客车"),
-	/*NamePinYin*/("YXKC")
+	/*NamePinYin*/("YXKC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600215"),
-	/*Name*/("长春经开"),
-	/*NamePinYin*/("CCJK")
+	/*NamePinYin*/("CCJK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600216"),
-	/*Name*/("浙江医药"),
-	/*NamePinYin*/("ZJYY")
+	/*NamePinYin*/("ZJYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600217"),
-	/*Name*/("秦岭水泥"),
-	/*NamePinYin*/("QLSN")
+	/*NamePinYin*/("QLSN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600218"),
-	/*Name*/("全柴动力"),
-	/*NamePinYin*/("QCDL")
+	/*NamePinYin*/("QCDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600219"),
-	/*Name*/("南山铝业"),
-	/*NamePinYin*/("NSLY")
+	/*NamePinYin*/("NSLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600220"),
-	/*Name*/("江苏阳光"),
-	/*NamePinYin*/("JSYG")
+	/*NamePinYin*/("JSYG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600221"),
-	/*Name*/("海南航空"),
-	/*NamePinYin*/("HNHK")
+	/*NamePinYin*/("HNHK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600222"),
-	/*Name*/("太龙药业"),
-	/*NamePinYin*/("TLYY")
+	/*NamePinYin*/("TLYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600223"),
-	/*Name*/("鲁商置业"),
-	/*NamePinYin*/("LSZY")
+	/*NamePinYin*/("LSZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600225"),
-	/*Name*/("天津松江"),
-	/*NamePinYin*/("TJSJ")
+	/*NamePinYin*/("TJSJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600226"),
-	/*Name*/("升华拜克"),
-	/*NamePinYin*/("SHBK")
+	/*NamePinYin*/("SHBK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600227"),
-	/*Name*/("赤天化"),
-	/*NamePinYin*/("CTH")
+	/*NamePinYin*/("CTH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600228"),
-	/*Name*/("*ST昌九"),
-	/*NamePinYin*/("*STCJ")
+	/*NamePinYin*/("*STCJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600229"),
-	/*Name*/("青岛碱业"),
-	/*NamePinYin*/("QDJY")
+	/*NamePinYin*/("QDJY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600230"),
-	/*Name*/("沧州大化"),
-	/*NamePinYin*/("CZDH")
+	/*NamePinYin*/("CZDH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600231"),
-	/*Name*/("凌钢股份"),
-	/*NamePinYin*/("LGGF")
+	/*NamePinYin*/("LGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600232"),
-	/*Name*/("金鹰股份"),
-	/*NamePinYin*/("JYGF")
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600233"),
-	/*Name*/("大杨创世"),
-	/*NamePinYin*/("DYCS")
+	/*NamePinYin*/("DYCS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600234"),
-	/*Name*/("山水文化"),
-	/*NamePinYin*/("SSWH")
+	/*NamePinYin*/("SSWH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600235"),
-	/*Name*/("民丰特纸"),
-	/*NamePinYin*/("MFTZ")
+	/*NamePinYin*/("MFTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600236"),
-	/*Name*/("桂冠电力"),
-	/*NamePinYin*/("GGDL")
+	/*NamePinYin*/("GGDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600237"),
-	/*Name*/("铜峰电子"),
-	/*NamePinYin*/("TFDZ")
+	/*NamePinYin*/("TFDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600238"),
-	/*Name*/("海南椰岛"),
-	/*NamePinYin*/("HNYD")
+	/*NamePinYin*/("HNYD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600239"),
-	/*Name*/("云南城投"),
-	/*NamePinYin*/("YNCT")
+	/*NamePinYin*/("YNCT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600240"),
-	/*Name*/("华业地产"),
-	/*NamePinYin*/("HYDC")
+	/*NamePinYin*/("HYDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600241"),
-	/*Name*/("时代万恒"),
-	/*NamePinYin*/("SDMH")
+	/*NamePinYin*/("SDMH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600242"),
-	/*Name*/("中昌海运"),
-	/*NamePinYin*/("ZCHY")
+	/*NamePinYin*/("ZCHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600243"),
-	/*Name*/("青海华鼎"),
-	/*NamePinYin*/("QHHD")
+	/*NamePinYin*/("QHHD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600246"),
-	/*Name*/("万通地产"),
-	/*NamePinYin*/("MTDC")
+	/*NamePinYin*/("MTDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600247"),
-	/*Name*/("*ST成城"),
-	/*NamePinYin*/("*STCC")
+	/*NamePinYin*/("*STCC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600248"),
-	/*Name*/("延长化建"),
-	/*NamePinYin*/("YCHJ")
+	/*NamePinYin*/("YCHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600249"),
-	/*Name*/("两面针"),
-	/*NamePinYin*/("LMZ")
+	/*NamePinYin*/("LMZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600250"),
-	/*Name*/("南纺股份"),
-	/*NamePinYin*/("NFGF")
+	/*NamePinYin*/("NFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600251"),
-	/*Name*/("冠农股份"),
-	/*NamePinYin*/("GNGF")
+	/*NamePinYin*/("GNGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600252"),
-	/*Name*/("中恒集团"),
-	/*NamePinYin*/("ZHJT")
+	/*NamePinYin*/("ZHJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600253"),
-	/*Name*/("天方药业"),
-	/*NamePinYin*/("TFYY")
+	/*NamePinYin*/("TFYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600255"),
-	/*Name*/("鑫科材料"),
-	/*NamePinYin*/("XKCL")
+	/*NamePinYin*/("XKCL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600256"),
-	/*Name*/("广汇能源"),
-	/*NamePinYin*/("AHNY")
+	/*NamePinYin*/("AHNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600257"),
-	/*Name*/("大湖股份"),
-	/*NamePinYin*/("DHGF")
+	/*NamePinYin*/("DHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600258"),
-	/*Name*/("首旅酒店"),
-	/*NamePinYin*/("SLJD")
+	/*NamePinYin*/("SLJD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600259"),
-	/*Name*/("广晟有色"),
-	/*NamePinYin*/("ACYS")
+	/*NamePinYin*/("ACYS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600260"),
-	/*Name*/("凯乐科技"),
-	/*NamePinYin*/("KLKJ")
+	/*NamePinYin*/("KLKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600261"),
-	/*Name*/("阳光照明"),
-	/*NamePinYin*/("YGZM")
+	/*NamePinYin*/("YGZM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600262"),
-	/*Name*/("北方股份"),
-	/*NamePinYin*/("BFGF")
+	/*NamePinYin*/("BFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600263"),
-	/*Name*/("路桥建设"),
-	/*NamePinYin*/("LQJS")
+	/*NamePinYin*/("LQJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600265"),
-	/*Name*/("ST景谷"),
-	/*NamePinYin*/("STJG")
+	/*NamePinYin*/("STJG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600266"),
-	/*Name*/("北京城建"),
-	/*NamePinYin*/("BJCJ")
+	/*NamePinYin*/("BJCJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600267"),
-	/*Name*/("海正药业"),
-	/*NamePinYin*/("HZYY")
+	/*NamePinYin*/("HZYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600268"),
-	/*Name*/("国电南自"),
-	/*NamePinYin*/("GDNZ")
+	/*NamePinYin*/("GDNZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600269"),
-	/*Name*/("赣粤高速"),
-	/*NamePinYin*/("GYGS")
+	/*NamePinYin*/("GYGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600270"),
-	/*Name*/("外运发展"),
-	/*NamePinYin*/("WYFZ")
+	/*NamePinYin*/("WYFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600271"),
-	/*Name*/("航天信息"),
-	/*NamePinYin*/("HTXX")
+	/*NamePinYin*/("HTXX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600272"),
-	/*Name*/("开开实业"),
-	/*NamePinYin*/("KKSY")
+	/*NamePinYin*/("KKSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600273"),
-	/*Name*/("华芳纺织"),
-	/*NamePinYin*/("HFFZ")
+	/*NamePinYin*/("HFFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600275"),
-	/*Name*/("武昌鱼"),
-	/*NamePinYin*/("WCY")
+	/*NamePinYin*/("WCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600276"),
-	/*Name*/("恒瑞医药"),
-	/*NamePinYin*/("HRYY")
+	/*NamePinYin*/("HRYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600277"),
-	/*Name*/("亿利能源"),
-	/*NamePinYin*/("YLNY")
+	/*NamePinYin*/("YLNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600278"),
-	/*Name*/("东方创业"),
-	/*NamePinYin*/("DFCY")
+	/*NamePinYin*/("DFCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600279"),
-	/*Name*/("重庆港九"),
-	/*NamePinYin*/("CQGJ")
+	/*NamePinYin*/("CQGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600280"),
-	/*Name*/("中央商场"),
-	/*NamePinYin*/("ZYSC")
+	/*NamePinYin*/("ZYSC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600281"),
-	/*Name*/("太化股份"),
-	/*NamePinYin*/("THGF")
+	/*NamePinYin*/("THGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600282"),
-	/*Name*/("*ST南钢"),
-	/*NamePinYin*/("*STNG")
+	/*NamePinYin*/("*STNG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600283"),
-	/*Name*/("钱江水利"),
-	/*NamePinYin*/("QJSL")
+	/*NamePinYin*/("QJSL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600284"),
-	/*Name*/("浦东建设"),
-	/*NamePinYin*/("PDJS")
+	/*NamePinYin*/("PDJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600285"),
-	/*Name*/("羚锐制药"),
-	/*NamePinYin*/("LRZY")
+	/*NamePinYin*/("LRZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600286"),
-	/*Name*/("S*ST国瓷"),
-	/*NamePinYin*/("S*STGC")
+	/*NamePinYin*/("S*STGC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600287"),
-	/*Name*/("江苏舜天"),
-	/*NamePinYin*/("JSST")
+	/*NamePinYin*/("JSST"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600288"),
-	/*Name*/("大恒科技"),
-	/*NamePinYin*/("DHKJ")
+	/*NamePinYin*/("DHKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600289"),
-	/*Name*/("亿阳信通"),
-	/*NamePinYin*/("YYXT")
+	/*NamePinYin*/("YYXT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600290"),
-	/*Name*/("华仪电气"),
-	/*NamePinYin*/("HYDQ")
+	/*NamePinYin*/("HYDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600291"),
-	/*Name*/("西水股份"),
-	/*NamePinYin*/("XSGF")
+	/*NamePinYin*/("XSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600292"),
-	/*Name*/("中电远达"),
-	/*NamePinYin*/("ZDYD")
+	/*NamePinYin*/("ZDYD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600293"),
-	/*Name*/("三峡新材"),
-	/*NamePinYin*/("SXXC")
+	/*NamePinYin*/("SXXC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600295"),
-	/*Name*/("鄂尔多斯"),
-	/*NamePinYin*/("EEDS")
+	/*NamePinYin*/("EEDS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600296"),
-	/*Name*/("S兰铝"),
-	/*NamePinYin*/("SLL")
+	/*NamePinYin*/("SLL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600297"),
-	/*Name*/("美罗药业"),
-	/*NamePinYin*/("MLYY")
+	/*NamePinYin*/("MLYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600298"),
-	/*Name*/("安琪酵母"),
-	/*NamePinYin*/("AQJM")
+	/*NamePinYin*/("AQJM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600299"),
-	/*Name*/("*ST新材"),
-	/*NamePinYin*/("*STXC")
+	/*NamePinYin*/("*STXC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600300"),
-	/*Name*/("维维股份"),
-	/*NamePinYin*/("WWGF")
+	/*NamePinYin*/("WWGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600301"),
-	/*Name*/("ST南化"),
-	/*NamePinYin*/("STNH")
+	/*NamePinYin*/("STNH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600302"),
-	/*Name*/("标准股份"),
-	/*NamePinYin*/("BZGF")
+	/*NamePinYin*/("BZGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600303"),
-	/*Name*/("曙光股份"),
-	/*NamePinYin*/("SGGF")
+	/*NamePinYin*/("SGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600305"),
-	/*Name*/("恒顺醋业"),
-	/*NamePinYin*/("HSCY")
+	/*NamePinYin*/("HSCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600306"),
-	/*Name*/("*ST商城"),
-	/*NamePinYin*/("*STSC")
+	/*NamePinYin*/("*STSC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600307"),
-	/*Name*/("酒钢宏兴"),
-	/*NamePinYin*/("JGHX")
+	/*NamePinYin*/("JGHX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600308"),
-	/*Name*/("华泰股份"),
-	/*NamePinYin*/("HTGF")
+	/*NamePinYin*/("HTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600309"),
-	/*Name*/("万华化学"),
-	/*NamePinYin*/("MHHX")
+	/*NamePinYin*/("MHHX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600310"),
-	/*Name*/("桂东电力"),
-	/*NamePinYin*/("GDDL")
+	/*NamePinYin*/("GDDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600311"),
-	/*Name*/("荣华实业"),
-	/*NamePinYin*/("RHSY")
+	/*NamePinYin*/("RHSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600312"),
-	/*Name*/("平高电气"),
-	/*NamePinYin*/("PGDQ")
+	/*NamePinYin*/("PGDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600313"),
-	/*Name*/("农发种业"),
-	/*NamePinYin*/("NFCY")
+	/*NamePinYin*/("NFCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600315"),
-	/*Name*/("上海家化"),
-	/*NamePinYin*/("SHGH")
+	/*NamePinYin*/("SHGH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600316"),
-	/*Name*/("洪都航空"),
-	/*NamePinYin*/("HDHK")
+	/*NamePinYin*/("HDHK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600317"),
-	/*Name*/("营口港"),
-	/*NamePinYin*/("YKG")
+	/*NamePinYin*/("YKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600318"),
-	/*Name*/("巢东股份"),
-	/*NamePinYin*/("CDGF")
+	/*NamePinYin*/("CDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600319"),
-	/*Name*/("亚星化学"),
-	/*NamePinYin*/("YXHX")
+	/*NamePinYin*/("YXHX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600320"),
-	/*Name*/("振华重工"),
-	/*NamePinYin*/("ZHCG")
+	/*NamePinYin*/("ZHCG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600321"),
-	/*Name*/("国栋建设"),
-	/*NamePinYin*/("GDJS")
+	/*NamePinYin*/("GDJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600322"),
-	/*Name*/("天房发展"),
-	/*NamePinYin*/("TFFZ")
+	/*NamePinYin*/("TFFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600323"),
-	/*Name*/("瀚蓝环境"),
-	/*NamePinYin*/("HLHJ")
+	/*NamePinYin*/("HLHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600325"),
-	/*Name*/("华发股份"),
-	/*NamePinYin*/("HFGF")
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600326"),
-	/*Name*/("西藏天路"),
-	/*NamePinYin*/("XCTL")
+	/*NamePinYin*/("XCTL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600327"),
-	/*Name*/("大东方"),
-	/*NamePinYin*/("DDF")
+	/*NamePinYin*/("DDF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600328"),
-	/*Name*/("兰太实业"),
-	/*NamePinYin*/("LTSY")
+	/*NamePinYin*/("LTSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600329"),
-	/*Name*/("中新药业"),
-	/*NamePinYin*/("ZXYY")
+	/*NamePinYin*/("ZXYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600330"),
-	/*Name*/("天通股份"),
-	/*NamePinYin*/("TTGF")
+	/*NamePinYin*/("TTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600331"),
-	/*Name*/("宏达股份"),
-	/*NamePinYin*/("HDGF")
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600332"),
-	/*Name*/("白云山"),
-	/*NamePinYin*/("BYS")
+	/*NamePinYin*/("BYS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600333"),
-	/*Name*/("长春燃气"),
-	/*NamePinYin*/("CCRQ")
+	/*NamePinYin*/("CCRQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600335"),
-	/*Name*/("国机汽车"),
-	/*NamePinYin*/("GJQC")
+	/*NamePinYin*/("GJQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600336"),
-	/*Name*/("澳柯玛"),
-	/*NamePinYin*/("AKM")
+	/*NamePinYin*/("AKM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600337"),
-	/*Name*/("美克家居"),
-	/*NamePinYin*/("MKGJ")
+	/*NamePinYin*/("MKGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600338"),
-	/*Name*/("西藏珠峰"),
-	/*NamePinYin*/("XCZF")
+	/*NamePinYin*/("XCZF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600339"),
-	/*Name*/("天利高新"),
-	/*NamePinYin*/("TLGX")
+	/*NamePinYin*/("TLGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600340"),
-	/*Name*/("华夏幸福"),
-	/*NamePinYin*/("HXXF")
+	/*NamePinYin*/("HXXF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600343"),
-	/*Name*/("航天动力"),
-	/*NamePinYin*/("HTDL")
+	/*NamePinYin*/("HTDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600345"),
-	/*Name*/("长江通信"),
-	/*NamePinYin*/("CJTX")
+	/*NamePinYin*/("CJTX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600346"),
-	/*Name*/("大橡塑"),
-	/*NamePinYin*/("DXS")
+	/*NamePinYin*/("DXS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600348"),
-	/*Name*/("阳泉煤业"),
-	/*NamePinYin*/("YQMY")
+	/*NamePinYin*/("YQMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600350"),
-	/*Name*/("山东高速"),
-	/*NamePinYin*/("SDGS")
+	/*NamePinYin*/("SDGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600351"),
-	/*Name*/("亚宝药业"),
-	/*NamePinYin*/("YBYY")
+	/*NamePinYin*/("YBYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600352"),
-	/*Name*/("浙江龙盛"),
-	/*NamePinYin*/("ZJLC")
+	/*NamePinYin*/("ZJLC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600353"),
-	/*Name*/("旭光股份"),
-	/*NamePinYin*/("XGGF")
+	/*NamePinYin*/("XGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600354"),
-	/*Name*/("敦煌种业"),
-	/*NamePinYin*/("DHCY")
+	/*NamePinYin*/("DHCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600355"),
-	/*Name*/("精伦电子"),
-	/*NamePinYin*/("JLDZ")
+	/*NamePinYin*/("JLDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600356"),
-	/*Name*/("恒丰纸业"),
-	/*NamePinYin*/("HFZY")
+	/*NamePinYin*/("HFZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600357"),
-	/*Name*/("承德钒钛"),
-	/*NamePinYin*/("CDFT")
+	/*NamePinYin*/("CDFT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600358"),
-	/*Name*/("国旅联合"),
-	/*NamePinYin*/("GLLG")
+	/*NamePinYin*/("GLLG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600359"),
-	/*Name*/("新农开发"),
-	/*NamePinYin*/("XNKF")
+	/*NamePinYin*/("XNKF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600360"),
-	/*Name*/("华微电子"),
-	/*NamePinYin*/("HWDZ")
+	/*NamePinYin*/("HWDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600361"),
-	/*Name*/("华联综超"),
-	/*NamePinYin*/("HLZC")
+	/*NamePinYin*/("HLZC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600362"),
-	/*Name*/("江西铜业"),
-	/*NamePinYin*/("JXTY")
+	/*NamePinYin*/("JXTY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600363"),
-	/*Name*/("联创光电"),
-	/*NamePinYin*/("LCGD")
+	/*NamePinYin*/("LCGD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600365"),
-	/*Name*/("通葡股份"),
-	/*NamePinYin*/("TPGF")
+	/*NamePinYin*/("TPGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600366"),
-	/*Name*/("宁波韵升"),
-	/*NamePinYin*/("NBYS")
+	/*NamePinYin*/("NBYS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600367"),
-	/*Name*/("红星发展"),
-	/*NamePinYin*/("GXFZ")
+	/*NamePinYin*/("GXFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600368"),
-	/*Name*/("五洲交通"),
-	/*NamePinYin*/("WZJT")
+	/*NamePinYin*/("WZJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600369"),
-	/*Name*/("西南证券"),
-	/*NamePinYin*/("XNZQ")
+	/*NamePinYin*/("XNZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600370"),
-	/*Name*/("三房巷"),
-	/*NamePinYin*/("SFH")
+	/*NamePinYin*/("SFH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600371"),
-	/*Name*/("万向德农"),
-	/*NamePinYin*/("MXDN")
+	/*NamePinYin*/("MXDN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600372"),
-	/*Name*/("中航电子"),
-	/*NamePinYin*/("ZHDZ")
+	/*NamePinYin*/("ZHDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600373"),
-	/*Name*/("中文传媒"),
-	/*NamePinYin*/("ZWCM")
+	/*NamePinYin*/("ZWCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600375"),
-	/*Name*/("华菱星马"),
-	/*NamePinYin*/("HLXM")
+	/*NamePinYin*/("HLXM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600376"),
-	/*Name*/("首开股份"),
-	/*NamePinYin*/("SKGF")
+	/*NamePinYin*/("SKGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600377"),
-	/*Name*/("宁沪高速"),
-	/*NamePinYin*/("NHGS")
+	/*NamePinYin*/("NHGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600378"),
-	/*Name*/("天科股份"),
-	/*NamePinYin*/("TKGF")
+	/*NamePinYin*/("TKGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600379"),
-	/*Name*/("宝光股份"),
-	/*NamePinYin*/("BGGF")
+	/*NamePinYin*/("BGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600380"),
-	/*Name*/("健康元"),
-	/*NamePinYin*/("JKY")
+	/*NamePinYin*/("JKY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600381"),
-	/*Name*/("*ST贤成"),
-	/*NamePinYin*/("*STXC")
+	/*NamePinYin*/("*STXC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600382"),
-	/*Name*/("广东明珠"),
-	/*NamePinYin*/("ADMZ")
+	/*NamePinYin*/("ADMZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600383"),
-	/*Name*/("金地集团"),
-	/*NamePinYin*/("JDJT")
+	/*NamePinYin*/("JDJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600385"),
-	/*Name*/("ST金泰"),
-	/*NamePinYin*/("STJT")
+	/*NamePinYin*/("STJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600386"),
-	/*Name*/("北巴传媒"),
-	/*NamePinYin*/("BBCM")
+	/*NamePinYin*/("BBCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600387"),
-	/*Name*/("海越股份"),
-	/*NamePinYin*/("HYGF")
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600388"),
-	/*Name*/("龙净环保"),
-	/*NamePinYin*/("LJHB")
+	/*NamePinYin*/("LJHB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600389"),
-	/*Name*/("江山股份"),
-	/*NamePinYin*/("JSGF")
+	/*NamePinYin*/("JSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600390"),
-	/*Name*/("金瑞科技"),
-	/*NamePinYin*/("JRKJ")
+	/*NamePinYin*/("JRKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600391"),
-	/*Name*/("成发科技"),
-	/*NamePinYin*/("CFKJ")
+	/*NamePinYin*/("CFKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600392"),
-	/*Name*/("盛和资源"),
-	/*NamePinYin*/("CHZY")
+	/*NamePinYin*/("CHZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600393"),
-	/*Name*/("东华实业"),
-	/*NamePinYin*/("DHSY")
+	/*NamePinYin*/("DHSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600395"),
-	/*Name*/("盘江股份"),
-	/*NamePinYin*/("PJGF")
+	/*NamePinYin*/("PJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600396"),
-	/*Name*/("金山股份"),
-	/*NamePinYin*/("JSGF")
+	/*NamePinYin*/("JSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600397"),
-	/*Name*/("安源煤业"),
-	/*NamePinYin*/("AYMY")
+	/*NamePinYin*/("AYMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600398"),
-	/*Name*/("海澜之家"),
-	/*NamePinYin*/("HLZG")
+	/*NamePinYin*/("HLZG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600399"),
-	/*Name*/("抚顺特钢"),
-	/*NamePinYin*/("FSTG")
+	/*NamePinYin*/("FSTG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600400"),
-	/*Name*/("红豆股份"),
-	/*NamePinYin*/("GDGF")
+	/*NamePinYin*/("GDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600401"),
-	/*Name*/("海润光伏"),
-	/*NamePinYin*/("HRGF")
+	/*NamePinYin*/("HRGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600403"),
-	/*Name*/("大有能源"),
-	/*NamePinYin*/("DYNY")
+	/*NamePinYin*/("DYNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600405"),
-	/*Name*/("动力源"),
-	/*NamePinYin*/("DLY")
+	/*NamePinYin*/("DLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600406"),
-	/*Name*/("国电南瑞"),
-	/*NamePinYin*/("GDNR")
+	/*NamePinYin*/("GDNR"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600408"),
-	/*Name*/("安泰集团"),
-	/*NamePinYin*/("ATJT")
+	/*NamePinYin*/("ATJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600409"),
-	/*Name*/("三友化工"),
-	/*NamePinYin*/("SYHG")
+	/*NamePinYin*/("SYHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600410"),
-	/*Name*/("华胜天成"),
-	/*NamePinYin*/("HSTC")
+	/*NamePinYin*/("HSTC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600415"),
-	/*Name*/("小商品城"),
-	/*NamePinYin*/("XSPC")
+	/*NamePinYin*/("XSPC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600416"),
-	/*Name*/("湘电股份"),
-	/*NamePinYin*/("XDGF")
+	/*NamePinYin*/("XDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600418"),
-	/*Name*/("江淮汽车"),
-	/*NamePinYin*/("JHQC")
+	/*NamePinYin*/("JHQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600419"),
-	/*Name*/("天润乳业"),
-	/*NamePinYin*/("TRRY")
+	/*NamePinYin*/("TRRY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600420"),
-	/*Name*/("现代制药"),
-	/*NamePinYin*/("XDZY")
+	/*NamePinYin*/("XDZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600421"),
-	/*Name*/("仰帆控股"),
-	/*NamePinYin*/("YFKG")
+	/*NamePinYin*/("YFKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600422"),
-	/*Name*/("昆明制药"),
-	/*NamePinYin*/("KMZY")
+	/*NamePinYin*/("KMZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600423"),
-	/*Name*/("柳化股份"),
-	/*NamePinYin*/("LHGF")
+	/*NamePinYin*/("LHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600425"),
-	/*Name*/("青松建化"),
-	/*NamePinYin*/("QSJH")
+	/*NamePinYin*/("QSJH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600426"),
-	/*Name*/("华鲁恒升"),
-	/*NamePinYin*/("HLHS")
+	/*NamePinYin*/("HLHS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600428"),
-	/*Name*/("中远航运"),
-	/*NamePinYin*/("ZYHY")
+	/*NamePinYin*/("ZYHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600429"),
-	/*Name*/("三元股份"),
-	/*NamePinYin*/("SYGF")
+	/*NamePinYin*/("SYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600432"),
-	/*Name*/("吉恩镍业"),
-	/*NamePinYin*/("JENY")
+	/*NamePinYin*/("JENY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600433"),
-	/*Name*/("冠豪高新"),
-	/*NamePinYin*/("GHGX")
+	/*NamePinYin*/("GHGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600435"),
-	/*Name*/("北方导航"),
-	/*NamePinYin*/("BFDH")
+	/*NamePinYin*/("BFDH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600436"),
-	/*Name*/("片仔癀"),
-	/*NamePinYin*/("PZH")
+	/*NamePinYin*/("PZH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600438"),
-	/*Name*/("通威股份"),
-	/*NamePinYin*/("TWGF")
+	/*NamePinYin*/("TWGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600439"),
-	/*Name*/("瑞贝卡"),
-	/*NamePinYin*/("RBK")
+	/*NamePinYin*/("RBK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600444"),
-	/*Name*/("国通管业"),
-	/*NamePinYin*/("GTGY")
+	/*NamePinYin*/("GTGY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600446"),
-	/*Name*/("金证股份"),
-	/*NamePinYin*/("JZGF")
+	/*NamePinYin*/("JZGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600448"),
-	/*Name*/("华纺股份"),
-	/*NamePinYin*/("HFGF")
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600449"),
-	/*Name*/("宁夏建材"),
-	/*NamePinYin*/("NXJC")
+	/*NamePinYin*/("NXJC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600452"),
-	/*Name*/("涪陵电力"),
-	/*NamePinYin*/("FLDL")
+	/*NamePinYin*/("FLDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600455"),
-	/*Name*/("博通股份"),
-	/*NamePinYin*/("BTGF")
+	/*NamePinYin*/("BTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600456"),
-	/*Name*/("宝钛股份"),
-	/*NamePinYin*/("BTGF")
+	/*NamePinYin*/("BTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600458"),
-	/*Name*/("时代新材"),
-	/*NamePinYin*/("SDXC")
+	/*NamePinYin*/("SDXC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600459"),
-	/*Name*/("贵研铂业"),
-	/*NamePinYin*/("GYBY")
+	/*NamePinYin*/("GYBY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600460"),
-	/*Name*/("士兰微"),
-	/*NamePinYin*/("SLW")
+	/*NamePinYin*/("SLW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600461"),
-	/*Name*/("洪城水业"),
-	/*NamePinYin*/("HCSY")
+	/*NamePinYin*/("HCSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600462"),
-	/*Name*/("石岘纸业"),
-	/*NamePinYin*/("DXZY")
+	/*NamePinYin*/("DXZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600463"),
-	/*Name*/("空港股份"),
-	/*NamePinYin*/("KGGF")
+	/*NamePinYin*/("KGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600466"),
-	/*Name*/("迪康药业"),
-	/*NamePinYin*/("DKYY")
+	/*NamePinYin*/("DKYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600467"),
-	/*Name*/("好当家"),
-	/*NamePinYin*/("HDG")
+	/*NamePinYin*/("HDG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600468"),
-	/*Name*/("百利电气"),
-	/*NamePinYin*/("BLDQ")
+	/*NamePinYin*/("BLDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600469"),
-	/*Name*/("风神股份"),
-	/*NamePinYin*/("FSGF")
+	/*NamePinYin*/("FSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600470"),
-	/*Name*/("六国化工"),
-	/*NamePinYin*/("LGHG")
+	/*NamePinYin*/("LGHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600472"),
-	/*Name*/("包头铝业"),
-	/*NamePinYin*/("BTLY")
+	/*NamePinYin*/("BTLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600475"),
-	/*Name*/("华光股份"),
-	/*NamePinYin*/("HGGF")
+	/*NamePinYin*/("HGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600476"),
-	/*Name*/("湘邮科技"),
-	/*NamePinYin*/("XYKJ")
+	/*NamePinYin*/("XYKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600477"),
-	/*Name*/("杭萧钢构"),
-	/*NamePinYin*/("HXGG")
+	/*NamePinYin*/("HXGG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600478"),
-	/*Name*/("科力远"),
-	/*NamePinYin*/("KLY")
+	/*NamePinYin*/("KLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600479"),
-	/*Name*/("千金药业"),
-	/*NamePinYin*/("QJYY")
+	/*NamePinYin*/("QJYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600480"),
-	/*Name*/("凌云股份"),
-	/*NamePinYin*/("LYGF")
+	/*NamePinYin*/("LYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600481"),
-	/*Name*/("双良节能"),
-	/*NamePinYin*/("SLJN")
+	/*NamePinYin*/("SLJN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600482"),
-	/*Name*/("风帆股份"),
-	/*NamePinYin*/("FFGF")
+	/*NamePinYin*/("FFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600483"),
-	/*Name*/("福建南纺"),
-	/*NamePinYin*/("FJNF")
+	/*NamePinYin*/("FJNF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600485"),
-	/*Name*/("信威集团"),
-	/*NamePinYin*/("XWJT")
+	/*NamePinYin*/("XWJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600486"),
-	/*Name*/("扬农化工"),
-	/*NamePinYin*/("YNHG")
+	/*NamePinYin*/("YNHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600487"),
-	/*Name*/("亨通光电"),
-	/*NamePinYin*/("HTGD")
+	/*NamePinYin*/("HTGD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600488"),
-	/*Name*/("天药股份"),
-	/*NamePinYin*/("TYGF")
+	/*NamePinYin*/("TYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600489"),
-	/*Name*/("中金黄金"),
-	/*NamePinYin*/("ZJHJ")
+	/*NamePinYin*/("ZJHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600490"),
-	/*Name*/("鹏欣资源"),
-	/*NamePinYin*/("PXZY")
+	/*NamePinYin*/("PXZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600491"),
-	/*Name*/("龙元建设"),
-	/*NamePinYin*/("LYJS")
+	/*NamePinYin*/("LYJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600493"),
-	/*Name*/("凤竹纺织"),
-	/*NamePinYin*/("FZFZ")
+	/*NamePinYin*/("FZFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600495"),
-	/*Name*/("晋西车轴"),
-	/*NamePinYin*/("JXCZ")
+	/*NamePinYin*/("JXCZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600496"),
-	/*Name*/("精工钢构"),
-	/*NamePinYin*/("JGGG")
+	/*NamePinYin*/("JGGG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600497"),
-	/*Name*/("驰宏锌锗"),
-	/*NamePinYin*/("CHXD")
+	/*NamePinYin*/("CHXD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600498"),
-	/*Name*/("烽火通信"),
-	/*NamePinYin*/("FHTX")
+	/*NamePinYin*/("FHTX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600499"),
-	/*Name*/("科达洁能"),
-	/*NamePinYin*/("KDJN")
+	/*NamePinYin*/("KDJN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600500"),
-	/*Name*/("中化国际"),
-	/*NamePinYin*/("ZHGJ")
+	/*NamePinYin*/("ZHGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600501"),
-	/*Name*/("航天晨光"),
-	/*NamePinYin*/("HTCG")
+	/*NamePinYin*/("HTCG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600502"),
-	/*Name*/("安徽水利"),
-	/*NamePinYin*/("AHSL")
+	/*NamePinYin*/("AHSL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600503"),
-	/*Name*/("华丽家族"),
-	/*NamePinYin*/("HLGZ")
+	/*NamePinYin*/("HLGZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600505"),
-	/*Name*/("西昌电力"),
-	/*NamePinYin*/("XCDL")
+	/*NamePinYin*/("XCDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600506"),
-	/*Name*/("香梨股份"),
-	/*NamePinYin*/("XLGF")
+	/*NamePinYin*/("XLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600507"),
-	/*Name*/("方大特钢"),
-	/*NamePinYin*/("FDTG")
+	/*NamePinYin*/("FDTG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600508"),
-	/*Name*/("上海能源"),
-	/*NamePinYin*/("SHNY")
+	/*NamePinYin*/("SHNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600509"),
-	/*Name*/("天富能源"),
-	/*NamePinYin*/("TFNY")
+	/*NamePinYin*/("TFNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600510"),
-	/*Name*/("黑牡丹"),
-	/*NamePinYin*/("HMD")
+	/*NamePinYin*/("HMD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600511"),
-	/*Name*/("国药股份"),
-	/*NamePinYin*/("GYGF")
+	/*NamePinYin*/("GYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600512"),
-	/*Name*/("腾达建设"),
-	/*NamePinYin*/("TDJS")
+	/*NamePinYin*/("TDJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600513"),
-	/*Name*/("联环药业"),
-	/*NamePinYin*/("LHYY")
+	/*NamePinYin*/("LHYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600515"),
-	/*Name*/("海岛建设"),
-	/*NamePinYin*/("HDJS")
+	/*NamePinYin*/("HDJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600516"),
-	/*Name*/("方大炭素"),
-	/*NamePinYin*/("FDTS")
+	/*NamePinYin*/("FDTS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600517"),
-	/*Name*/("置信电气"),
-	/*NamePinYin*/("ZXDQ")
+	/*NamePinYin*/("ZXDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600518"),
-	/*Name*/("康美药业"),
-	/*NamePinYin*/("KMYY")
+	/*NamePinYin*/("KMYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600519"),
-	/*Name*/("贵州茅台"),
-	/*NamePinYin*/("GZMT")
+	/*NamePinYin*/("GZMT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600520"),
-	/*Name*/("中发科技"),
-	/*NamePinYin*/("ZFKJ")
+	/*NamePinYin*/("ZFKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600521"),
-	/*Name*/("华海药业"),
-	/*NamePinYin*/("HHYY")
+	/*NamePinYin*/("HHYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600522"),
-	/*Name*/("中天科技"),
-	/*NamePinYin*/("ZTKJ")
+	/*NamePinYin*/("ZTKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600523"),
-	/*Name*/("贵航股份"),
-	/*NamePinYin*/("GHGF")
+	/*NamePinYin*/("GHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600525"),
-	/*Name*/("长园集团"),
-	/*NamePinYin*/("CYJT")
+	/*NamePinYin*/("CYJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600526"),
-	/*Name*/("菲达环保"),
-	/*NamePinYin*/("FDHB")
+	/*NamePinYin*/("FDHB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600527"),
-	/*Name*/("江南高纤"),
-	/*NamePinYin*/("JNGQ")
+	/*NamePinYin*/("JNGQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600528"),
-	/*Name*/("中铁二局"),
-	/*NamePinYin*/("ZTEJ")
+	/*NamePinYin*/("ZTEJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600529"),
-	/*Name*/("山东药玻"),
-	/*NamePinYin*/("SDYB")
+	/*NamePinYin*/("SDYB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600530"),
-	/*Name*/("交大昂立"),
-	/*NamePinYin*/("JDAL")
+	/*NamePinYin*/("JDAL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600531"),
-	/*Name*/("豫光金铅"),
-	/*NamePinYin*/("YGJQ")
+	/*NamePinYin*/("YGJQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600532"),
-	/*Name*/("宏达矿业"),
-	/*NamePinYin*/("HDKY")
+	/*NamePinYin*/("HDKY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600533"),
-	/*Name*/("栖霞建设"),
-	/*NamePinYin*/("QXJS")
+	/*NamePinYin*/("QXJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600535"),
-	/*Name*/("天士力"),
-	/*NamePinYin*/("TSL")
+	/*NamePinYin*/("TSL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600536"),
-	/*Name*/("中国软件"),
-	/*NamePinYin*/("ZGRJ")
+	/*NamePinYin*/("ZGRJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600537"),
-	/*Name*/("亿晶光电"),
-	/*NamePinYin*/("YJGD")
+	/*NamePinYin*/("YJGD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600538"),
-	/*Name*/("国发股份"),
-	/*NamePinYin*/("GFGF")
+	/*NamePinYin*/("GFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600539"),
-	/*Name*/("狮头股份"),
-	/*NamePinYin*/("STGF")
+	/*NamePinYin*/("STGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600540"),
-	/*Name*/("新赛股份"),
-	/*NamePinYin*/("XSGF")
+	/*NamePinYin*/("XSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600543"),
-	/*Name*/("莫高股份"),
-	/*NamePinYin*/("MGGF")
+	/*NamePinYin*/("MGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600545"),
-	/*Name*/("新疆城建"),
-	/*NamePinYin*/("XJCJ")
+	/*NamePinYin*/("XJCJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600546"),
-	/*Name*/("山煤国际"),
-	/*NamePinYin*/("SMGJ")
+	/*NamePinYin*/("SMGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600547"),
-	/*Name*/("山东黄金"),
-	/*NamePinYin*/("SDHJ")
+	/*NamePinYin*/("SDHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600548"),
-	/*Name*/("深高速"),
-	/*NamePinYin*/("SGS")
+	/*NamePinYin*/("SGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600549"),
-	/*Name*/("厦门钨业"),
-	/*NamePinYin*/("SMWY")
+	/*NamePinYin*/("SMWY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600550"),
-	/*Name*/("﹡ST天威"),
-	/*NamePinYin*/("﹡STTW")
+	/*NamePinYin*/("﹡STTW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600551"),
-	/*Name*/("时代出版"),
-	/*NamePinYin*/("SDCB")
+	/*NamePinYin*/("SDCB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600552"),
-	/*Name*/("方兴科技"),
-	/*NamePinYin*/("FXKJ")
+	/*NamePinYin*/("FXKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600553"),
-	/*Name*/("太行水泥"),
-	/*NamePinYin*/("THSN")
+	/*NamePinYin*/("THSN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600555"),
-	/*Name*/("九龙山"),
-	/*NamePinYin*/("JLS")
+	/*NamePinYin*/("JLS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600556"),
-	/*Name*/("北生药业"),
-	/*NamePinYin*/("BSYY")
+	/*NamePinYin*/("BSYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600557"),
-	/*Name*/("康缘药业"),
-	/*NamePinYin*/("KYYY")
+	/*NamePinYin*/("KYYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600558"),
-	/*Name*/("大西洋"),
-	/*NamePinYin*/("DXX")
+	/*NamePinYin*/("DXX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600559"),
-	/*Name*/("老白干酒"),
-	/*NamePinYin*/("LBGJ")
+	/*NamePinYin*/("LBGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600560"),
-	/*Name*/("金自天正"),
-	/*NamePinYin*/("JZTZ")
+	/*NamePinYin*/("JZTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600561"),
-	/*Name*/("江西长运"),
-	/*NamePinYin*/("JXCY")
+	/*NamePinYin*/("JXCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600562"),
-	/*Name*/("国睿科技"),
-	/*NamePinYin*/("GRKJ")
+	/*NamePinYin*/("GRKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600563"),
-	/*Name*/("法拉电子"),
-	/*NamePinYin*/("FLDZ")
+	/*NamePinYin*/("FLDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600565"),
-	/*Name*/("迪马股份"),
-	/*NamePinYin*/("DMGF")
+	/*NamePinYin*/("DMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600566"),
-	/*Name*/("洪城股份"),
-	/*NamePinYin*/("HCGF")
+	/*NamePinYin*/("HCGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600567"),
-	/*Name*/("山鹰纸业"),
-	/*NamePinYin*/("SYZY")
+	/*NamePinYin*/("SYZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600568"),
-	/*Name*/("中珠控股"),
-	/*NamePinYin*/("ZZKG")
+	/*NamePinYin*/("ZZKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600569"),
-	/*Name*/("安阳钢铁"),
-	/*NamePinYin*/("AYGT")
+	/*NamePinYin*/("AYGT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600570"),
-	/*Name*/("恒生电子"),
-	/*NamePinYin*/("HSDZ")
+	/*NamePinYin*/("HSDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600571"),
-	/*Name*/("信雅达"),
-	/*NamePinYin*/("XYD")
+	/*NamePinYin*/("XYD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600572"),
-	/*Name*/("康恩贝"),
-	/*NamePinYin*/("KEB")
+	/*NamePinYin*/("KEB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600573"),
-	/*Name*/("惠泉啤酒"),
-	/*NamePinYin*/("HQPJ")
+	/*NamePinYin*/("HQPJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600575"),
-	/*Name*/("皖江物流"),
-	/*NamePinYin*/("WJWL")
+	/*NamePinYin*/("WJWL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600576"),
-	/*Name*/("万好万家"),
-	/*NamePinYin*/("MHMG")
+	/*NamePinYin*/("MHMG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600577"),
-	/*Name*/("精达股份"),
-	/*NamePinYin*/("JDGF")
+	/*NamePinYin*/("JDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600578"),
-	/*Name*/("京能电力"),
-	/*NamePinYin*/("JNDL")
+	/*NamePinYin*/("JNDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600579"),
-	/*Name*/("天华院"),
-	/*NamePinYin*/("THY")
+	/*NamePinYin*/("THY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600580"),
-	/*Name*/("卧龙电气"),
-	/*NamePinYin*/("WLDQ")
+	/*NamePinYin*/("WLDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600581"),
-	/*Name*/("八一钢铁"),
-	/*NamePinYin*/("BYGT")
+	/*NamePinYin*/("BYGT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600582"),
-	/*Name*/("天地科技"),
-	/*NamePinYin*/("TDKJ")
+	/*NamePinYin*/("TDKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600583"),
-	/*Name*/("海油工程"),
-	/*NamePinYin*/("HYGC")
+	/*NamePinYin*/("HYGC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600584"),
-	/*Name*/("长电科技"),
-	/*NamePinYin*/("CDKJ")
+	/*NamePinYin*/("CDKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600585"),
-	/*Name*/("海螺水泥"),
-	/*NamePinYin*/("HLSN")
+	/*NamePinYin*/("HLSN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600586"),
-	/*Name*/("金晶科技"),
-	/*NamePinYin*/("JJKJ")
+	/*NamePinYin*/("JJKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600587"),
-	/*Name*/("新华医疗"),
-	/*NamePinYin*/("XHYL")
+	/*NamePinYin*/("XHYL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600588"),
-	/*Name*/("用友软件"),
-	/*NamePinYin*/("YYRJ")
+	/*NamePinYin*/("YYRJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600589"),
-	/*Name*/("广东榕泰"),
-	/*NamePinYin*/("ADRT")
+	/*NamePinYin*/("ADRT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600590"),
-	/*Name*/("泰豪科技"),
-	/*NamePinYin*/("THKJ")
+	/*NamePinYin*/("THKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600591"),
-	/*Name*/("*ST上航"),
-	/*NamePinYin*/("*STSH")
+	/*NamePinYin*/("*STSH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600592"),
-	/*Name*/("龙溪股份"),
-	/*NamePinYin*/("LXGF")
+	/*NamePinYin*/("LXGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600593"),
-	/*Name*/("大连圣亚"),
-	/*NamePinYin*/("DLSY")
+	/*NamePinYin*/("DLSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600594"),
-	/*Name*/("益佰制药"),
-	/*NamePinYin*/("YBZY")
+	/*NamePinYin*/("YBZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600595"),
-	/*Name*/("中孚实业"),
-	/*NamePinYin*/("ZFSY")
+	/*NamePinYin*/("ZFSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600596"),
-	/*Name*/("新安股份"),
-	/*NamePinYin*/("XAGF")
+	/*NamePinYin*/("XAGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600597"),
-	/*Name*/("光明乳业"),
-	/*NamePinYin*/("GMRY")
+	/*NamePinYin*/("GMRY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600598"),
-	/*Name*/("*ST大荒"),
-	/*NamePinYin*/("*STDH")
+	/*NamePinYin*/("*STDH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600599"),
-	/*Name*/("熊猫烟花"),
-	/*NamePinYin*/("XMYH")
+	/*NamePinYin*/("XMYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600600"),
-	/*Name*/("青岛啤酒"),
-	/*NamePinYin*/("QDPJ")
+	/*NamePinYin*/("QDPJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600601"),
-	/*Name*/("方正科技"),
-	/*NamePinYin*/("FZKJ")
+	/*NamePinYin*/("FZKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600602"),
-	/*Name*/("仪电电子"),
-	/*NamePinYin*/("YDDZ")
+	/*NamePinYin*/("YDDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600603"),
-	/*Name*/("大洲兴业"),
-	/*NamePinYin*/("DZXY")
+	/*NamePinYin*/("DZXY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600604"),
-	/*Name*/("市北高新"),
-	/*NamePinYin*/("SBGX")
+	/*NamePinYin*/("SBGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600605"),
-	/*Name*/("汇通能源"),
-	/*NamePinYin*/("HTNY")
+	/*NamePinYin*/("HTNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600606"),
-	/*Name*/("金丰投资"),
-	/*NamePinYin*/("JFTZ")
+	/*NamePinYin*/("JFTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600607"),
-	/*Name*/("上实医药"),
-	/*NamePinYin*/("SSYY")
+	/*NamePinYin*/("SSYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600608"),
-	/*Name*/("上海科技"),
-	/*NamePinYin*/("SHKJ")
+	/*NamePinYin*/("SHKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600609"),
-	/*Name*/("金杯汽车"),
-	/*NamePinYin*/("JBQC")
+	/*NamePinYin*/("JBQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600610"),
-	/*Name*/("S*ST中纺"),
-	/*NamePinYin*/("S*STZF")
+	/*NamePinYin*/("S*STZF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600611"),
-	/*Name*/("大众交通"),
-	/*NamePinYin*/("DZJT")
+	/*NamePinYin*/("DZJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600612"),
-	/*Name*/("老凤祥"),
-	/*NamePinYin*/("LFX")
+	/*NamePinYin*/("LFX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600613"),
-	/*Name*/("神奇制药"),
-	/*NamePinYin*/("SJZY")
+	/*NamePinYin*/("SJZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600614"),
-	/*Name*/("鼎立股份"),
-	/*NamePinYin*/("DLGF")
+	/*NamePinYin*/("DLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600615"),
-	/*Name*/("丰华股份"),
-	/*NamePinYin*/("FHGF")
+	/*NamePinYin*/("FHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600616"),
-	/*Name*/("金枫酒业"),
-	/*NamePinYin*/("JFJY")
+	/*NamePinYin*/("JFJY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600617"),
-	/*Name*/("国新能源"),
-	/*NamePinYin*/("GXNY")
+	/*NamePinYin*/("GXNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600618"),
-	/*Name*/("氯碱化工"),
-	/*NamePinYin*/("LJHG")
+	/*NamePinYin*/("LJHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600619"),
-	/*Name*/("海立股份"),
-	/*NamePinYin*/("HLGF")
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600620"),
-	/*Name*/("天宸股份"),
-	/*NamePinYin*/("TCGF")
+	/*NamePinYin*/("TCGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600621"),
-	/*Name*/("华鑫股份"),
-	/*NamePinYin*/("HXGF")
+	/*NamePinYin*/("HXGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600622"),
-	/*Name*/("嘉宝集团"),
-	/*NamePinYin*/("JBJT")
+	/*NamePinYin*/("JBJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600623"),
-	/*Name*/("双钱股份"),
-	/*NamePinYin*/("SQGF")
+	/*NamePinYin*/("SQGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600624"),
-	/*Name*/("复旦复华"),
-	/*NamePinYin*/("FDFH")
+	/*NamePinYin*/("FDFH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600625"),
-	/*Name*/("PT水仙"),
-	/*NamePinYin*/("PTSX")
+	/*NamePinYin*/("PTSX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600626"),
-	/*Name*/("申达股份"),
-	/*NamePinYin*/("SDGF")
+	/*NamePinYin*/("SDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600627"),
-	/*Name*/("上电股份"),
-	/*NamePinYin*/("SDGF")
+	/*NamePinYin*/("SDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600628"),
-	/*Name*/("新世界"),
-	/*NamePinYin*/("XSJ")
+	/*NamePinYin*/("XSJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600629"),
-	/*Name*/("棱光实业"),
-	/*NamePinYin*/("LGSY")
+	/*NamePinYin*/("LGSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600630"),
-	/*Name*/("龙头股份"),
-	/*NamePinYin*/("LTGF")
+	/*NamePinYin*/("LTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600631"),
-	/*Name*/("百联股份"),
-	/*NamePinYin*/("BLGF")
+	/*NamePinYin*/("BLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600632"),
-	/*Name*/("华联商厦"),
-	/*NamePinYin*/("HLSS")
+	/*NamePinYin*/("HLSS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600633"),
-	/*Name*/("浙报传媒"),
-	/*NamePinYin*/("ZBCM")
+	/*NamePinYin*/("ZBCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600634"),
-	/*Name*/("中技控股"),
-	/*NamePinYin*/("ZJKG")
+	/*NamePinYin*/("ZJKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600635"),
-	/*Name*/("大众公用"),
-	/*NamePinYin*/("DZGY")
+	/*NamePinYin*/("DZGY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600636"),
-	/*Name*/("三爱富"),
-	/*NamePinYin*/("SAF")
+	/*NamePinYin*/("SAF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600637"),
-	/*Name*/("百视通"),
-	/*NamePinYin*/("BST")
+	/*NamePinYin*/("BST"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600638"),
-	/*Name*/("新黄浦"),
-	/*NamePinYin*/("XHP")
+	/*NamePinYin*/("XHP"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600639"),
-	/*Name*/("浦东金桥"),
-	/*NamePinYin*/("PDJQ")
+	/*NamePinYin*/("PDJQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600640"),
-	/*Name*/("号百控股"),
-	/*NamePinYin*/("HBKG")
+	/*NamePinYin*/("HBKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600641"),
-	/*Name*/("万业企业"),
-	/*NamePinYin*/("MYQY")
+	/*NamePinYin*/("MYQY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600642"),
-	/*Name*/("申能股份"),
-	/*NamePinYin*/("SNGF")
+	/*NamePinYin*/("SNGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600643"),
-	/*Name*/("爱建股份"),
-	/*NamePinYin*/("AJGF")
+	/*NamePinYin*/("AJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600644"),
-	/*Name*/("乐山电力"),
-	/*NamePinYin*/("LSDL")
+	/*NamePinYin*/("LSDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600645"),
-	/*Name*/("中源协和"),
-	/*NamePinYin*/("ZYXH")
+	/*NamePinYin*/("ZYXH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600646"),
-	/*Name*/("ST国嘉"),
-	/*NamePinYin*/("STGJ")
+	/*NamePinYin*/("STGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600647"),
-	/*Name*/("同达创业"),
-	/*NamePinYin*/("TDCY")
+	/*NamePinYin*/("TDCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600648"),
-	/*Name*/("外高桥"),
-	/*NamePinYin*/("WGQ")
+	/*NamePinYin*/("WGQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600649"),
-	/*Name*/("城投控股"),
-	/*NamePinYin*/("CTKG")
+	/*NamePinYin*/("CTKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600650"),
-	/*Name*/("锦江投资"),
-	/*NamePinYin*/("JJTZ")
+	/*NamePinYin*/("JJTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600651"),
-	/*Name*/("飞乐音响"),
-	/*NamePinYin*/("FLYX")
+	/*NamePinYin*/("FLYX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600652"),
-	/*Name*/("爱使股份"),
-	/*NamePinYin*/("ASGF")
+	/*NamePinYin*/("ASGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600653"),
-	/*Name*/("申华控股"),
-	/*NamePinYin*/("SHKG")
+	/*NamePinYin*/("SHKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600654"),
-	/*Name*/("飞乐股份"),
-	/*NamePinYin*/("FLGF")
+	/*NamePinYin*/("FLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600655"),
-	/*Name*/("豫园商城"),
-	/*NamePinYin*/("YYSC")
+	/*NamePinYin*/("YYSC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600656"),
-	/*Name*/("博元投资"),
-	/*NamePinYin*/("BYTZ")
+	/*NamePinYin*/("BYTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600657"),
-	/*Name*/("信达地产"),
-	/*NamePinYin*/("XDDC")
+	/*NamePinYin*/("XDDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600658"),
-	/*Name*/("电子城"),
-	/*NamePinYin*/("DZC")
+	/*NamePinYin*/("DZC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600659"),
-	/*Name*/("*ST花雕"),
-	/*NamePinYin*/("*STHD")
+	/*NamePinYin*/("*STHD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600660"),
-	/*Name*/("福耀玻璃"),
-	/*NamePinYin*/("FYBL")
+	/*NamePinYin*/("FYBL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600661"),
-	/*Name*/("新南洋"),
-	/*NamePinYin*/("XNX")
+	/*NamePinYin*/("XNX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600662"),
-	/*Name*/("强生控股"),
-	/*NamePinYin*/("JSKG")
+	/*NamePinYin*/("JSKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600663"),
-	/*Name*/("陆家嘴"),
-	/*NamePinYin*/("LGZ")
+	/*NamePinYin*/("LGZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600664"),
-	/*Name*/("哈药股份"),
-	/*NamePinYin*/("HYGF")
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600665"),
-	/*Name*/("天地源"),
-	/*NamePinYin*/("TDY")
+	/*NamePinYin*/("TDY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600666"),
-	/*Name*/("西南药业"),
-	/*NamePinYin*/("XNYY")
+	/*NamePinYin*/("XNYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600667"),
-	/*Name*/("太极实业"),
-	/*NamePinYin*/("TJSY")
+	/*NamePinYin*/("TJSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600668"),
-	/*Name*/("尖峰集团"),
-	/*NamePinYin*/("JFJT")
+	/*NamePinYin*/("JFJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600669"),
-	/*Name*/("*ST鞍成"),
-	/*NamePinYin*/("*STAC")
+	/*NamePinYin*/("*STAC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600670"),
-	/*Name*/("*ST斯达"),
-	/*NamePinYin*/("*STSD")
+	/*NamePinYin*/("*STSD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600671"),
-	/*Name*/("天目药业"),
-	/*NamePinYin*/("TMYY")
+	/*NamePinYin*/("TMYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600672"),
-	/*Name*/("*ST华圣"),
-	/*NamePinYin*/("*STHS")
+	/*NamePinYin*/("*STHS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600673"),
-	/*Name*/("东阳光科"),
-	/*NamePinYin*/("DYGK")
+	/*NamePinYin*/("DYGK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600674"),
-	/*Name*/("川投能源"),
-	/*NamePinYin*/("CTNY")
+	/*NamePinYin*/("CTNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600675"),
-	/*Name*/("中华企业"),
-	/*NamePinYin*/("ZHQY")
+	/*NamePinYin*/("ZHQY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600676"),
-	/*Name*/("交运股份"),
-	/*NamePinYin*/("JYGF")
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600677"),
-	/*Name*/("航天通信"),
-	/*NamePinYin*/("HTTX")
+	/*NamePinYin*/("HTTX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600678"),
-	/*Name*/("四川金顶"),
-	/*NamePinYin*/("SCJD")
+	/*NamePinYin*/("SCJD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600679"),
-	/*Name*/("金山开发"),
-	/*NamePinYin*/("JSKF")
+	/*NamePinYin*/("JSKF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600680"),
-	/*Name*/("上海普天"),
-	/*NamePinYin*/("SHPT")
+	/*NamePinYin*/("SHPT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600681"),
-	/*Name*/("万鸿集团"),
-	/*NamePinYin*/("MHJT")
+	/*NamePinYin*/("MHJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600682"),
-	/*Name*/("南京新百"),
-	/*NamePinYin*/("NJXB")
+	/*NamePinYin*/("NJXB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600683"),
-	/*Name*/("京投银泰"),
-	/*NamePinYin*/("JTYT")
+	/*NamePinYin*/("JTYT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600684"),
-	/*Name*/("珠江实业"),
-	/*NamePinYin*/("ZJSY")
+	/*NamePinYin*/("ZJSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600685"),
-	/*Name*/("广船国际"),
-	/*NamePinYin*/("ACGJ")
+	/*NamePinYin*/("ACGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600686"),
-	/*Name*/("金龙汽车"),
-	/*NamePinYin*/("JLQC")
+	/*NamePinYin*/("JLQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600687"),
-	/*Name*/("刚泰控股"),
-	/*NamePinYin*/("GTKG")
+	/*NamePinYin*/("GTKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600688"),
-	/*Name*/("上海石化"),
-	/*NamePinYin*/("SHDH")
+	/*NamePinYin*/("SHDH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600689"),
-	/*Name*/("*ST三毛"),
-	/*NamePinYin*/("*STSM")
+	/*NamePinYin*/("*STSM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600690"),
-	/*Name*/("青岛海尔"),
-	/*NamePinYin*/("QDHE")
+	/*NamePinYin*/("QDHE"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600691"),
-	/*Name*/("阳煤化工"),
-	/*NamePinYin*/("YMHG")
+	/*NamePinYin*/("YMHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600692"),
-	/*Name*/("亚通股份"),
-	/*NamePinYin*/("YTGF")
+	/*NamePinYin*/("YTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600693"),
-	/*Name*/("东百集团"),
-	/*NamePinYin*/("DBJT")
+	/*NamePinYin*/("DBJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600694"),
-	/*Name*/("大商股份"),
-	/*NamePinYin*/("DSGF")
+	/*NamePinYin*/("DSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600695"),
-	/*Name*/("大江股份"),
-	/*NamePinYin*/("DJGF")
+	/*NamePinYin*/("DJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600696"),
-	/*Name*/("多伦股份"),
-	/*NamePinYin*/("DLGF")
+	/*NamePinYin*/("DLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600697"),
-	/*Name*/("欧亚集团"),
-	/*NamePinYin*/("OYJT")
+	/*NamePinYin*/("OYJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600698"),
-	/*Name*/("湖南天雁"),
-	/*NamePinYin*/("HNTY")
+	/*NamePinYin*/("HNTY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600699"),
-	/*Name*/("均胜电子"),
-	/*NamePinYin*/("JSDZ")
+	/*NamePinYin*/("JSDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600700"),
-	/*Name*/("*ST数码"),
-	/*NamePinYin*/("*STSM")
+	/*NamePinYin*/("*STSM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600701"),
-	/*Name*/("工大高新"),
-	/*NamePinYin*/("GDGX")
+	/*NamePinYin*/("GDGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600702"),
-	/*Name*/("沱牌舍得"),
-	/*NamePinYin*/("DPSD")
+	/*NamePinYin*/("DPSD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600703"),
-	/*Name*/("三安光电"),
-	/*NamePinYin*/("SAGD")
+	/*NamePinYin*/("SAGD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600704"),
-	/*Name*/("物产中大"),
-	/*NamePinYin*/("WCZD")
+	/*NamePinYin*/("WCZD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600705"),
-	/*Name*/("中航资本"),
-	/*NamePinYin*/("ZHZB")
+	/*NamePinYin*/("ZHZB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600706"),
-	/*Name*/("曲江文旅"),
-	/*NamePinYin*/("QJWL")
+	/*NamePinYin*/("QJWL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600707"),
-	/*Name*/("彩虹股份"),
-	/*NamePinYin*/("CHGF")
+	/*NamePinYin*/("CHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600708"),
-	/*Name*/("海博股份"),
-	/*NamePinYin*/("HBGF")
+	/*NamePinYin*/("HBGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600709"),
-	/*Name*/("ST生态"),
-	/*NamePinYin*/("STST")
+	/*NamePinYin*/("STST"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600710"),
-	/*Name*/("常林股份"),
-	/*NamePinYin*/("CLGF")
+	/*NamePinYin*/("CLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600711"),
-	/*Name*/("盛屯矿业"),
-	/*NamePinYin*/("CTKY")
+	/*NamePinYin*/("CTKY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600712"),
-	/*Name*/("南宁百货"),
-	/*NamePinYin*/("NNBH")
+	/*NamePinYin*/("NNBH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600713"),
-	/*Name*/("南京医药"),
-	/*NamePinYin*/("NJYY")
+	/*NamePinYin*/("NJYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600714"),
-	/*Name*/("金瑞矿业"),
-	/*NamePinYin*/("JRKY")
+	/*NamePinYin*/("JRKY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600715"),
-	/*Name*/("松辽汽车"),
-	/*NamePinYin*/("SLQC")
+	/*NamePinYin*/("SLQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600716"),
-	/*Name*/("凤凰股份"),
-	/*NamePinYin*/("FHGF")
+	/*NamePinYin*/("FHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600717"),
-	/*Name*/("天津港"),
-	/*NamePinYin*/("TJG")
+	/*NamePinYin*/("TJG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600718"),
-	/*Name*/("东软集团"),
-	/*NamePinYin*/("DRJT")
+	/*NamePinYin*/("DRJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600719"),
-	/*Name*/("大连热电"),
-	/*NamePinYin*/("DLRD")
+	/*NamePinYin*/("DLRD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600720"),
-	/*Name*/("祁连山"),
-	/*NamePinYin*/("QLS")
+	/*NamePinYin*/("QLS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600721"),
-	/*Name*/("百花村"),
-	/*NamePinYin*/("BHC")
+	/*NamePinYin*/("BHC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600722"),
-	/*Name*/("金牛化工"),
-	/*NamePinYin*/("JNHG")
+	/*NamePinYin*/("JNHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600723"),
-	/*Name*/("首商股份"),
-	/*NamePinYin*/("SSGF")
+	/*NamePinYin*/("SSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600724"),
-	/*Name*/("宁波富达"),
-	/*NamePinYin*/("NBFD")
+	/*NamePinYin*/("NBFD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600725"),
-	/*Name*/("云维股份"),
-	/*NamePinYin*/("YWGF")
+	/*NamePinYin*/("YWGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600726"),
-	/*Name*/("华电能源"),
-	/*NamePinYin*/("HDNY")
+	/*NamePinYin*/("HDNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600727"),
-	/*Name*/("鲁北化工"),
-	/*NamePinYin*/("LBHG")
+	/*NamePinYin*/("LBHG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600728"),
-	/*Name*/("佳都科技"),
-	/*NamePinYin*/("JDKJ")
+	/*NamePinYin*/("JDKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600729"),
-	/*Name*/("重庆百货"),
-	/*NamePinYin*/("CQBH")
+	/*NamePinYin*/("CQBH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600730"),
-	/*Name*/("中国高科"),
-	/*NamePinYin*/("ZGGK")
+	/*NamePinYin*/("ZGGK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600731"),
-	/*Name*/("湖南海利"),
-	/*NamePinYin*/("HNHL")
+	/*NamePinYin*/("HNHL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600732"),
-	/*Name*/("上海新梅"),
-	/*NamePinYin*/("SHXM")
+	/*NamePinYin*/("SHXM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600733"),
-	/*Name*/("S前锋"),
-	/*NamePinYin*/("SQF")
+	/*NamePinYin*/("SQF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600734"),
-	/*Name*/("实达集团"),
-	/*NamePinYin*/("SDJT")
+	/*NamePinYin*/("SDJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600735"),
-	/*Name*/("新华锦"),
-	/*NamePinYin*/("XHJ")
+	/*NamePinYin*/("XHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600736"),
-	/*Name*/("苏州高新"),
-	/*NamePinYin*/("SZGX")
+	/*NamePinYin*/("SZGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600737"),
-	/*Name*/("中粮屯河"),
-	/*NamePinYin*/("ZLTH")
+	/*NamePinYin*/("ZLTH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600738"),
-	/*Name*/("兰州民百"),
-	/*NamePinYin*/("LZMB")
+	/*NamePinYin*/("LZMB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600739"),
-	/*Name*/("辽宁成大"),
-	/*NamePinYin*/("LNCD")
+	/*NamePinYin*/("LNCD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600740"),
-	/*Name*/("山西焦化"),
-	/*NamePinYin*/("SXJH")
+	/*NamePinYin*/("SXJH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600741"),
-	/*Name*/("华域汽车"),
-	/*NamePinYin*/("HYQC")
+	/*NamePinYin*/("HYQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600742"),
-	/*Name*/("一汽富维"),
-	/*NamePinYin*/("YQFW")
+	/*NamePinYin*/("YQFW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600743"),
-	/*Name*/("华远地产"),
-	/*NamePinYin*/("HYDC")
+	/*NamePinYin*/("HYDC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600744"),
-	/*Name*/("华银电力"),
-	/*NamePinYin*/("HYDL")
+	/*NamePinYin*/("HYDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600745"),
-	/*Name*/("中茵股份"),
-	/*NamePinYin*/("ZYGF")
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600746"),
-	/*Name*/("江苏索普"),
-	/*NamePinYin*/("JSSP")
+	/*NamePinYin*/("JSSP"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600747"),
-	/*Name*/("大连控股"),
-	/*NamePinYin*/("DLKG")
+	/*NamePinYin*/("DLKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600748"),
-	/*Name*/("上实发展"),
-	/*NamePinYin*/("SSFZ")
+	/*NamePinYin*/("SSFZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600749"),
-	/*Name*/("西藏旅游"),
-	/*NamePinYin*/("XCLY")
+	/*NamePinYin*/("XCLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600750"),
-	/*Name*/("江中药业"),
-	/*NamePinYin*/("JZYY")
+	/*NamePinYin*/("JZYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600751"),
-	/*Name*/("天津海运"),
-	/*NamePinYin*/("TJHY")
+	/*NamePinYin*/("TJHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600752"),
-	/*Name*/("*ST哈慈"),
-	/*NamePinYin*/("*STHC")
+	/*NamePinYin*/("*STHC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600753"),
-	/*Name*/("东方银星"),
-	/*NamePinYin*/("DFYX")
+	/*NamePinYin*/("DFYX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600754"),
-	/*Name*/("锦江股份"),
-	/*NamePinYin*/("JJGF")
+	/*NamePinYin*/("JJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600755"),
-	/*Name*/("厦门国贸"),
-	/*NamePinYin*/("SMGM")
+	/*NamePinYin*/("SMGM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600756"),
-	/*Name*/("浪潮软件"),
-	/*NamePinYin*/("LCRJ")
+	/*NamePinYin*/("LCRJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600757"),
-	/*Name*/("长江传媒"),
-	/*NamePinYin*/("CJCM")
+	/*NamePinYin*/("CJCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600758"),
-	/*Name*/("红阳能源"),
-	/*NamePinYin*/("GYNY")
+	/*NamePinYin*/("GYNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600759"),
-	/*Name*/("洲际油气"),
-	/*NamePinYin*/("ZJYQ")
+	/*NamePinYin*/("ZJYQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600760"),
-	/*Name*/("中航黑豹"),
-	/*NamePinYin*/("ZHHB")
+	/*NamePinYin*/("ZHHB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600761"),
-	/*Name*/("安徽合力"),
-	/*NamePinYin*/("AHGL")
+	/*NamePinYin*/("AHGL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600762"),
-	/*Name*/("S*ST金荔"),
-	/*NamePinYin*/("S*STJL")
+	/*NamePinYin*/("S*STJL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600763"),
-	/*Name*/("通策医疗"),
-	/*NamePinYin*/("TCYL")
+	/*NamePinYin*/("TCYL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600764"),
-	/*Name*/("中电广通"),
-	/*NamePinYin*/("ZDAT")
+	/*NamePinYin*/("ZDAT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600765"),
-	/*Name*/("中航重机"),
-	/*NamePinYin*/("ZHCJ")
+	/*NamePinYin*/("ZHCJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600766"),
-	/*Name*/("园城黄金"),
-	/*NamePinYin*/("YCHJ")
+	/*NamePinYin*/("YCHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600767"),
-	/*Name*/("运盛实业"),
-	/*NamePinYin*/("YCSY")
+	/*NamePinYin*/("YCSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600768"),
-	/*Name*/("宁波富邦"),
-	/*NamePinYin*/("NBFB")
+	/*NamePinYin*/("NBFB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600769"),
-	/*Name*/("祥龙电业"),
-	/*NamePinYin*/("XLDY")
+	/*NamePinYin*/("XLDY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600770"),
-	/*Name*/("综艺股份"),
-	/*NamePinYin*/("ZYGF")
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600771"),
-	/*Name*/("广誉远"),
-	/*NamePinYin*/("AYY")
+	/*NamePinYin*/("AYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600772"),
-	/*Name*/("S*ST龙昌"),
-	/*NamePinYin*/("S*STLC")
+	/*NamePinYin*/("S*STLC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600773"),
-	/*Name*/("西藏城投"),
-	/*NamePinYin*/("XCCT")
+	/*NamePinYin*/("XCCT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600774"),
-	/*Name*/("汉商集团"),
-	/*NamePinYin*/("HSJT")
+	/*NamePinYin*/("HSJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600775"),
-	/*Name*/("南京熊猫"),
-	/*NamePinYin*/("NJXM")
+	/*NamePinYin*/("NJXM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600776"),
-	/*Name*/("东方通信"),
-	/*NamePinYin*/("DFTX")
+	/*NamePinYin*/("DFTX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600777"),
-	/*Name*/("新潮实业"),
-	/*NamePinYin*/("XCSY")
+	/*NamePinYin*/("XCSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600778"),
-	/*Name*/("友好集团"),
-	/*NamePinYin*/("YHJT")
+	/*NamePinYin*/("YHJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600779"),
-	/*Name*/("水井坊"),
-	/*NamePinYin*/("SJF")
+	/*NamePinYin*/("SJF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600780"),
-	/*Name*/("通宝能源"),
-	/*NamePinYin*/("TBNY")
+	/*NamePinYin*/("TBNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600781"),
-	/*Name*/("辅仁药业"),
-	/*NamePinYin*/("FRYY")
+	/*NamePinYin*/("FRYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600782"),
-	/*Name*/("新钢股份"),
-	/*NamePinYin*/("XGGF")
+	/*NamePinYin*/("XGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600783"),
-	/*Name*/("鲁信创投"),
-	/*NamePinYin*/("LXCT")
+	/*NamePinYin*/("LXCT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600784"),
-	/*Name*/("鲁银投资"),
-	/*NamePinYin*/("LYTZ")
+	/*NamePinYin*/("LYTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600785"),
-	/*Name*/("新华百货"),
-	/*NamePinYin*/("XHBH")
+	/*NamePinYin*/("XHBH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600786"),
-	/*Name*/("东方锅炉"),
-	/*NamePinYin*/("DFGL")
+	/*NamePinYin*/("DFGL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600787"),
-	/*Name*/("中储股份"),
-	/*NamePinYin*/("ZCGF")
+	/*NamePinYin*/("ZCGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600788"),
-	/*Name*/("*ST达曼"),
-	/*NamePinYin*/("*STDM")
+	/*NamePinYin*/("*STDM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600789"),
-	/*Name*/("鲁抗医药"),
-	/*NamePinYin*/("LKYY")
+	/*NamePinYin*/("LKYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600790"),
-	/*Name*/("轻纺城"),
-	/*NamePinYin*/("QFC")
+	/*NamePinYin*/("QFC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600791"),
-	/*Name*/("京能置业"),
-	/*NamePinYin*/("JNZY")
+	/*NamePinYin*/("JNZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600792"),
-	/*Name*/("云煤能源"),
-	/*NamePinYin*/("YMNY")
+	/*NamePinYin*/("YMNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600793"),
-	/*Name*/("ST宜纸"),
-	/*NamePinYin*/("STYZ")
+	/*NamePinYin*/("STYZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600794"),
-	/*Name*/("保税科技"),
-	/*NamePinYin*/("BSKJ")
+	/*NamePinYin*/("BSKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600795"),
-	/*Name*/("国电电力"),
-	/*NamePinYin*/("GDDL")
+	/*NamePinYin*/("GDDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600796"),
-	/*Name*/("钱江生化"),
-	/*NamePinYin*/("QJSH")
+	/*NamePinYin*/("QJSH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600797"),
-	/*Name*/("浙大网新"),
-	/*NamePinYin*/("ZDWX")
+	/*NamePinYin*/("ZDWX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600798"),
-	/*Name*/("宁波海运"),
-	/*NamePinYin*/("NBHY")
+	/*NamePinYin*/("NBHY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600799"),
-	/*Name*/("*ST龙科"),
-	/*NamePinYin*/("*STLK")
+	/*NamePinYin*/("*STLK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600800"),
-	/*Name*/("天津磁卡"),
-	/*NamePinYin*/("TJCK")
+	/*NamePinYin*/("TJCK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600801"),
-	/*Name*/("华新水泥"),
-	/*NamePinYin*/("HXSN")
+	/*NamePinYin*/("HXSN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600802"),
-	/*Name*/("福建水泥"),
-	/*NamePinYin*/("FJSN")
+	/*NamePinYin*/("FJSN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600803"),
-	/*Name*/("威远生化"),
-	/*NamePinYin*/("WYSH")
+	/*NamePinYin*/("WYSH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600804"),
-	/*Name*/("鹏博士"),
-	/*NamePinYin*/("PBS")
+	/*NamePinYin*/("PBS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600805"),
-	/*Name*/("悦达投资"),
-	/*NamePinYin*/("YDTZ")
+	/*NamePinYin*/("YDTZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600806"),
-	/*Name*/("昆明机床"),
-	/*NamePinYin*/("KMJC")
+	/*NamePinYin*/("KMJC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600807"),
-	/*Name*/("天业股份"),
-	/*NamePinYin*/("TYGF")
+	/*NamePinYin*/("TYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600808"),
-	/*Name*/("马钢股份"),
-	/*NamePinYin*/("MGGF")
+	/*NamePinYin*/("MGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600809"),
-	/*Name*/("山西汾酒"),
-	/*NamePinYin*/("SXFJ")
+	/*NamePinYin*/("SXFJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600810"),
-	/*Name*/("神马股份"),
-	/*NamePinYin*/("SMGF")
+	/*NamePinYin*/("SMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600811"),
-	/*Name*/("东方集团"),
-	/*NamePinYin*/("DFJT")
+	/*NamePinYin*/("DFJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600812"),
-	/*Name*/("华北制药"),
-	/*NamePinYin*/("HBZY")
+	/*NamePinYin*/("HBZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600813"),
-	/*Name*/("ST鞍一工"),
-	/*NamePinYin*/("STAYG")
+	/*NamePinYin*/("STAYG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600814"),
-	/*Name*/("杭州解百"),
-	/*NamePinYin*/("HZJB")
+	/*NamePinYin*/("HZJB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600815"),
-	/*Name*/("厦工股份"),
-	/*NamePinYin*/("SGGF")
+	/*NamePinYin*/("SGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600816"),
-	/*Name*/("安信信托"),
-	/*NamePinYin*/("AXXT")
+	/*NamePinYin*/("AXXT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600817"),
-	/*Name*/("ST宏盛"),
-	/*NamePinYin*/("STHC")
+	/*NamePinYin*/("STHC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600818"),
-	/*Name*/("中路股份"),
-	/*NamePinYin*/("ZLGF")
+	/*NamePinYin*/("ZLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600819"),
-	/*Name*/("耀皮玻璃"),
-	/*NamePinYin*/("YPBL")
+	/*NamePinYin*/("YPBL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600820"),
-	/*Name*/("隧道股份"),
-	/*NamePinYin*/("SDGF")
+	/*NamePinYin*/("SDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600821"),
-	/*Name*/("津劝业"),
-	/*NamePinYin*/("JQY")
+	/*NamePinYin*/("JQY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600822"),
-	/*Name*/("上海物贸"),
-	/*NamePinYin*/("SHWM")
+	/*NamePinYin*/("SHWM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600823"),
-	/*Name*/("世茂股份"),
-	/*NamePinYin*/("SMGF")
+	/*NamePinYin*/("SMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600824"),
-	/*Name*/("益民集团"),
-	/*NamePinYin*/("YMJT")
+	/*NamePinYin*/("YMJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600825"),
-	/*Name*/("新华传媒"),
-	/*NamePinYin*/("XHCM")
+	/*NamePinYin*/("XHCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600826"),
-	/*Name*/("兰生股份"),
-	/*NamePinYin*/("LSGF")
+	/*NamePinYin*/("LSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600827"),
-	/*Name*/("百联股份"),
-	/*NamePinYin*/("BLGF")
+	/*NamePinYin*/("BLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600828"),
-	/*Name*/("成商集团"),
-	/*NamePinYin*/("CSJT")
+	/*NamePinYin*/("CSJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600829"),
-	/*Name*/("三精制药"),
-	/*NamePinYin*/("SJZY")
+	/*NamePinYin*/("SJZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600830"),
-	/*Name*/("香溢融通"),
-	/*NamePinYin*/("XYRT")
+	/*NamePinYin*/("XYRT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600831"),
-	/*Name*/("广电网络"),
-	/*NamePinYin*/("ADWL")
+	/*NamePinYin*/("ADWL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600832"),
-	/*Name*/("东方明珠"),
-	/*NamePinYin*/("DFMZ")
+	/*NamePinYin*/("DFMZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600833"),
-	/*Name*/("第一医药"),
-	/*NamePinYin*/("DYYY")
+	/*NamePinYin*/("DYYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600834"),
-	/*Name*/("申通地铁"),
-	/*NamePinYin*/("STDT")
+	/*NamePinYin*/("STDT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600835"),
-	/*Name*/("上海机电"),
-	/*NamePinYin*/("SHJD")
+	/*NamePinYin*/("SHJD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600836"),
-	/*Name*/("界龙实业"),
-	/*NamePinYin*/("JLSY")
+	/*NamePinYin*/("JLSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600837"),
-	/*Name*/("海通证券"),
-	/*NamePinYin*/("HTZQ")
+	/*NamePinYin*/("HTZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600838"),
-	/*Name*/("上海九百"),
-	/*NamePinYin*/("SHJB")
+	/*NamePinYin*/("SHJB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600839"),
-	/*Name*/("四川长虹"),
-	/*NamePinYin*/("SCCH")
+	/*NamePinYin*/("SCCH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600840"),
-	/*Name*/("新湖创业"),
-	/*NamePinYin*/("XHCY")
+	/*NamePinYin*/("XHCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600841"),
-	/*Name*/("上柴股份"),
-	/*NamePinYin*/("SCGF")
+	/*NamePinYin*/("SCGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600842"),
-	/*Name*/("中西药业"),
-	/*NamePinYin*/("ZXYY")
+	/*NamePinYin*/("ZXYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600843"),
-	/*Name*/("上工申贝"),
-	/*NamePinYin*/("SGSB")
+	/*NamePinYin*/("SGSB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600844"),
-	/*Name*/("丹化科技"),
-	/*NamePinYin*/("DHKJ")
+	/*NamePinYin*/("DHKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600845"),
-	/*Name*/("宝信软件"),
-	/*NamePinYin*/("BXRJ")
+	/*NamePinYin*/("BXRJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600846"),
-	/*Name*/("同济科技"),
-	/*NamePinYin*/("TJKJ")
+	/*NamePinYin*/("TJKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600847"),
-	/*Name*/("万里股份"),
-	/*NamePinYin*/("MLGF")
+	/*NamePinYin*/("MLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600848"),
-	/*Name*/("自仪股份"),
-	/*NamePinYin*/("ZYGF")
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600849"),
-	/*Name*/("上药转换"),
-	/*NamePinYin*/("SYZH")
+	/*NamePinYin*/("SYZH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600850"),
-	/*Name*/("华东电脑"),
-	/*NamePinYin*/("HDDN")
+	/*NamePinYin*/("HDDN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600851"),
-	/*Name*/("海欣股份"),
-	/*NamePinYin*/("HXGF")
+	/*NamePinYin*/("HXGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600852"),
-	/*Name*/("*ST中川"),
-	/*NamePinYin*/("*STZC")
+	/*NamePinYin*/("*STZC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600853"),
-	/*Name*/("龙建股份"),
-	/*NamePinYin*/("LJGF")
+	/*NamePinYin*/("LJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600854"),
-	/*Name*/("春兰股份"),
-	/*NamePinYin*/("CLGF")
+	/*NamePinYin*/("CLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600855"),
-	/*Name*/("航天长峰"),
-	/*NamePinYin*/("HTCF")
+	/*NamePinYin*/("HTCF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600856"),
-	/*Name*/("长百集团"),
-	/*NamePinYin*/("CBJT")
+	/*NamePinYin*/("CBJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600857"),
-	/*Name*/("工大首创"),
-	/*NamePinYin*/("GDSC")
+	/*NamePinYin*/("GDSC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600858"),
-	/*Name*/("银座股份"),
-	/*NamePinYin*/("YZGF")
+	/*NamePinYin*/("YZGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600859"),
-	/*Name*/("王府井"),
-	/*NamePinYin*/("WFJ")
+	/*NamePinYin*/("WFJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600860"),
-	/*Name*/("*ST京城"),
-	/*NamePinYin*/("*STJC")
+	/*NamePinYin*/("*STJC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600861"),
-	/*Name*/("北京城乡"),
-	/*NamePinYin*/("BJCX")
+	/*NamePinYin*/("BJCX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600862"),
-	/*Name*/("南通科技"),
-	/*NamePinYin*/("NTKJ")
+	/*NamePinYin*/("NTKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600863"),
-	/*Name*/("内蒙华电"),
-	/*NamePinYin*/("NMHD")
+	/*NamePinYin*/("NMHD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600864"),
-	/*Name*/("哈投股份"),
-	/*NamePinYin*/("HTGF")
+	/*NamePinYin*/("HTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600865"),
-	/*Name*/("百大集团"),
-	/*NamePinYin*/("BDJT")
+	/*NamePinYin*/("BDJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600866"),
-	/*Name*/("星湖科技"),
-	/*NamePinYin*/("XHKJ")
+	/*NamePinYin*/("XHKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600867"),
-	/*Name*/("通化东宝"),
-	/*NamePinYin*/("THDB")
+	/*NamePinYin*/("THDB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600868"),
-	/*Name*/("梅雁吉祥"),
-	/*NamePinYin*/("MYJX")
+	/*NamePinYin*/("MYJX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600869"),
-	/*Name*/("智慧能源"),
-	/*NamePinYin*/("ZHNY")
+	/*NamePinYin*/("ZHNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600870"),
-	/*Name*/("厦华电子"),
-	/*NamePinYin*/("SHDZ")
+	/*NamePinYin*/("SHDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600871"),
-	/*Name*/("*ST仪化"),
-	/*NamePinYin*/("*STYH")
+	/*NamePinYin*/("*STYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600872"),
-	/*Name*/("中炬高新"),
-	/*NamePinYin*/("ZJGX")
+	/*NamePinYin*/("ZJGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600873"),
-	/*Name*/("梅花生物"),
-	/*NamePinYin*/("MHSW")
+	/*NamePinYin*/("MHSW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600874"),
-	/*Name*/("创业环保"),
-	/*NamePinYin*/("CYHB")
+	/*NamePinYin*/("CYHB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600875"),
-	/*Name*/("东方电气"),
-	/*NamePinYin*/("DFDQ")
+	/*NamePinYin*/("DFDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600876"),
-	/*Name*/("洛阳玻璃"),
-	/*NamePinYin*/("LYBL")
+	/*NamePinYin*/("LYBL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600877"),
-	/*Name*/("中国嘉陵"),
-	/*NamePinYin*/("ZGJL")
+	/*NamePinYin*/("ZGJL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600878"),
-	/*Name*/("*ST北科"),
-	/*NamePinYin*/("*STBK")
+	/*NamePinYin*/("*STBK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600879"),
-	/*Name*/("航天电子"),
-	/*NamePinYin*/("HTDZ")
+	/*NamePinYin*/("HTDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600880"),
-	/*Name*/("博瑞传播"),
-	/*NamePinYin*/("BRCB")
+	/*NamePinYin*/("BRCB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600881"),
-	/*Name*/("亚泰集团"),
-	/*NamePinYin*/("YTJT")
+	/*NamePinYin*/("YTJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600882"),
-	/*Name*/("华联矿业"),
-	/*NamePinYin*/("HLKY")
+	/*NamePinYin*/("HLKY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600883"),
-	/*Name*/("博闻科技"),
-	/*NamePinYin*/("BWKJ")
+	/*NamePinYin*/("BWKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600884"),
-	/*Name*/("杉杉股份"),
-	/*NamePinYin*/("SSGF")
+	/*NamePinYin*/("SSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600885"),
-	/*Name*/("宏发股份"),
-	/*NamePinYin*/("HFGF")
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600886"),
-	/*Name*/("国投电力"),
-	/*NamePinYin*/("GTDL")
+	/*NamePinYin*/("GTDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600887"),
-	/*Name*/("伊利股份"),
-	/*NamePinYin*/("YLGF")
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600888"),
-	/*Name*/("新疆众和"),
-	/*NamePinYin*/("XJZH")
+	/*NamePinYin*/("XJZH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600889"),
-	/*Name*/("南京化纤"),
-	/*NamePinYin*/("NJHQ")
+	/*NamePinYin*/("NJHQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600890"),
-	/*Name*/("中房股份"),
-	/*NamePinYin*/("ZFGF")
+	/*NamePinYin*/("ZFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600891"),
-	/*Name*/("秋林集团"),
-	/*NamePinYin*/("QLJT")
+	/*NamePinYin*/("QLJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600892"),
-	/*Name*/("宝诚股份"),
-	/*NamePinYin*/("BCGF")
+	/*NamePinYin*/("BCGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600893"),
-	/*Name*/("航空动力"),
-	/*NamePinYin*/("HKDL")
+	/*NamePinYin*/("HKDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600894"),
-	/*Name*/("广日股份"),
-	/*NamePinYin*/("ARGF")
+	/*NamePinYin*/("ARGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600895"),
-	/*Name*/("张江高科"),
-	/*NamePinYin*/("ZJGK")
+	/*NamePinYin*/("ZJGK"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600896"),
-	/*Name*/("中海海盛"),
-	/*NamePinYin*/("ZHHC")
+	/*NamePinYin*/("ZHHC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600897"),
-	/*Name*/("厦门空港"),
-	/*NamePinYin*/("SMKG")
+	/*NamePinYin*/("SMKG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600898"),
-	/*Name*/("三联商社"),
-	/*NamePinYin*/("SLSS")
+	/*NamePinYin*/("SLSS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600899"),
-	/*Name*/("*ST信联"),
-	/*NamePinYin*/("*STXL")
+	/*NamePinYin*/("*STXL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600900"),
-	/*Name*/("长江电力"),
-	/*NamePinYin*/("CJDL")
+	/*NamePinYin*/("CJDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600917"),
-	/*Name*/("重庆燃气"),
-	/*NamePinYin*/("CQRQ")
+	/*NamePinYin*/("CQRQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600960"),
-	/*Name*/("渤海活塞"),
-	/*NamePinYin*/("BHHS")
+	/*NamePinYin*/("BHHS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600961"),
-	/*Name*/("株冶集团"),
-	/*NamePinYin*/("ZYJT")
+	/*NamePinYin*/("ZYJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600962"),
-	/*Name*/("国投中鲁"),
-	/*NamePinYin*/("GTZL")
+	/*NamePinYin*/("GTZL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600963"),
-	/*Name*/("岳阳林纸"),
-	/*NamePinYin*/("YYLZ")
+	/*NamePinYin*/("YYLZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600965"),
-	/*Name*/("福成五丰"),
-	/*NamePinYin*/("FCWF")
+	/*NamePinYin*/("FCWF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600966"),
-	/*Name*/("博汇纸业"),
-	/*NamePinYin*/("BHZY")
+	/*NamePinYin*/("BHZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600967"),
-	/*Name*/("北方创业"),
-	/*NamePinYin*/("BFCY")
+	/*NamePinYin*/("BFCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600969"),
-	/*Name*/("郴电国际"),
-	/*NamePinYin*/("CDGJ")
+	/*NamePinYin*/("CDGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600970"),
-	/*Name*/("中材国际"),
-	/*NamePinYin*/("ZCGJ")
+	/*NamePinYin*/("ZCGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600971"),
-	/*Name*/("恒源煤电"),
-	/*NamePinYin*/("HYMD")
+	/*NamePinYin*/("HYMD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600973"),
-	/*Name*/("宝胜股份"),
-	/*NamePinYin*/("BSGF")
+	/*NamePinYin*/("BSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600975"),
-	/*Name*/("新五丰"),
-	/*NamePinYin*/("XWF")
+	/*NamePinYin*/("XWF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600976"),
-	/*Name*/("武汉健民"),
-	/*NamePinYin*/("WHJM")
+	/*NamePinYin*/("WHJM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600978"),
-	/*Name*/("宜华木业"),
-	/*NamePinYin*/("YHMY")
+	/*NamePinYin*/("YHMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600979"),
-	/*Name*/("广安爱众"),
-	/*NamePinYin*/("AAAZ")
+	/*NamePinYin*/("AAAZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600980"),
-	/*Name*/("北矿磁材"),
-	/*NamePinYin*/("BKCC")
+	/*NamePinYin*/("BKCC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600981"),
-	/*Name*/("汇鸿股份"),
-	/*NamePinYin*/("HHGF")
+	/*NamePinYin*/("HHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600982"),
-	/*Name*/("宁波热电"),
-	/*NamePinYin*/("NBRD")
+	/*NamePinYin*/("NBRD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600983"),
-	/*Name*/("合肥三洋"),
-	/*NamePinYin*/("GFSX")
+	/*NamePinYin*/("GFSX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600984"),
-	/*Name*/("建设机械"),
-	/*NamePinYin*/("JSJX")
+	/*NamePinYin*/("JSJX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600985"),
-	/*Name*/("雷鸣科化"),
-	/*NamePinYin*/("LMKH")
+	/*NamePinYin*/("LMKH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600986"),
-	/*Name*/("科达股份"),
-	/*NamePinYin*/("KDGF")
+	/*NamePinYin*/("KDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600987"),
-	/*Name*/("航民股份"),
-	/*NamePinYin*/("HMGF")
+	/*NamePinYin*/("HMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600988"),
-	/*Name*/("赤峰黄金"),
-	/*NamePinYin*/("CFHJ")
+	/*NamePinYin*/("CFHJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600990"),
-	/*Name*/("四创电子"),
-	/*NamePinYin*/("SCDZ")
+	/*NamePinYin*/("SCDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600991"),
-	/*Name*/("广汽长丰"),
-	/*NamePinYin*/("AQCF")
+	/*NamePinYin*/("AQCF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600992"),
-	/*Name*/("贵绳股份"),
-	/*NamePinYin*/("GSGF")
+	/*NamePinYin*/("GSGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600993"),
-	/*Name*/("马应龙"),
-	/*NamePinYin*/("MYL")
+	/*NamePinYin*/("MYL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600995"),
-	/*Name*/("文山电力"),
-	/*NamePinYin*/("WSDL")
+	/*NamePinYin*/("WSDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600997"),
-	/*Name*/("开滦股份"),
-	/*NamePinYin*/("KLGF")
+	/*NamePinYin*/("KLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600998"),
-	/*Name*/("九州通"),
-	/*NamePinYin*/("JZT")
+	/*NamePinYin*/("JZT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("600999"),
-	/*Name*/("招商证券"),
-	/*NamePinYin*/("QSZQ")
+	/*NamePinYin*/("QSZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601000"),
-	/*Name*/("唐山港"),
-	/*NamePinYin*/("TSG")
+	/*NamePinYin*/("TSG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601001"),
-	/*Name*/("大同煤业"),
-	/*NamePinYin*/("DTMY")
+	/*NamePinYin*/("DTMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601002"),
-	/*Name*/("晋亿实业"),
-	/*NamePinYin*/("JYSY")
+	/*NamePinYin*/("JYSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601003"),
-	/*Name*/("柳钢股份"),
-	/*NamePinYin*/("LGGF")
+	/*NamePinYin*/("LGGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601005"),
-	/*Name*/("重庆钢铁"),
-	/*NamePinYin*/("CQGT")
+	/*NamePinYin*/("CQGT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601006"),
-	/*Name*/("大秦铁路"),
-	/*NamePinYin*/("DQTL")
+	/*NamePinYin*/("DQTL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601007"),
-	/*Name*/("金陵饭店"),
-	/*NamePinYin*/("JLFD")
+	/*NamePinYin*/("JLFD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601008"),
-	/*Name*/("连云港"),
-	/*NamePinYin*/("LYG")
+	/*NamePinYin*/("LYG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601009"),
-	/*Name*/("南京银行"),
-	/*NamePinYin*/("NJYH")
+	/*NamePinYin*/("NJYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601010"),
-	/*Name*/("文峰股份"),
-	/*NamePinYin*/("WFGF")
+	/*NamePinYin*/("WFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601011"),
-	/*Name*/("宝泰隆"),
-	/*NamePinYin*/("BTL")
+	/*NamePinYin*/("BTL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601012"),
-	/*Name*/("隆基股份"),
-	/*NamePinYin*/("LJGF")
+	/*NamePinYin*/("LJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601015"),
-	/*Name*/("陕西黑猫"),
-	/*NamePinYin*/("SXHM")
+	/*NamePinYin*/("SXHM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601016"),
-	/*Name*/("节能风电"),
-	/*NamePinYin*/("JNFD")
+	/*NamePinYin*/("JNFD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601018"),
-	/*Name*/("宁波港"),
-	/*NamePinYin*/("NBG")
+	/*NamePinYin*/("NBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601028"),
-	/*Name*/("玉龙股份"),
-	/*NamePinYin*/("YLGF")
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601038"),
-	/*Name*/("一拖股份"),
-	/*NamePinYin*/("YTGF")
+	/*NamePinYin*/("YTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601058"),
-	/*Name*/("赛轮股份"),
-	/*NamePinYin*/("SLGF")
+	/*NamePinYin*/("SLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601088"),
-	/*Name*/("中国神华"),
-	/*NamePinYin*/("ZGSH")
+	/*NamePinYin*/("ZGSH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601098"),
-	/*Name*/("中南传媒"),
-	/*NamePinYin*/("ZNCM")
+	/*NamePinYin*/("ZNCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601099"),
-	/*Name*/("太平洋"),
-	/*NamePinYin*/("TPX")
+	/*NamePinYin*/("TPX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601100"),
-	/*Name*/("恒立油缸"),
-	/*NamePinYin*/("HLYG")
+	/*NamePinYin*/("HLYG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601101"),
-	/*Name*/("昊华能源"),
-	/*NamePinYin*/("HHNY")
+	/*NamePinYin*/("HHNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601106"),
-	/*Name*/("中国一重"),
-	/*NamePinYin*/("ZGYC")
+	/*NamePinYin*/("ZGYC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601107"),
-	/*Name*/("四川成渝"),
-	/*NamePinYin*/("SCCY")
+	/*NamePinYin*/("SCCY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601111"),
-	/*Name*/("中国国航"),
-	/*NamePinYin*/("ZGGH")
+	/*NamePinYin*/("ZGGH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601113"),
-	/*Name*/("华鼎股份"),
-	/*NamePinYin*/("HDGF")
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601116"),
-	/*Name*/("三江购物"),
-	/*NamePinYin*/("SJGW")
+	/*NamePinYin*/("SJGW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601117"),
-	/*Name*/("中国化学"),
-	/*NamePinYin*/("ZGHX")
+	/*NamePinYin*/("ZGHX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601118"),
-	/*Name*/("海南橡胶"),
-	/*NamePinYin*/("HNXJ")
+	/*NamePinYin*/("HNXJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601126"),
-	/*Name*/("四方股份"),
-	/*NamePinYin*/("SFGF")
+	/*NamePinYin*/("SFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601137"),
-	/*Name*/("博威合金"),
-	/*NamePinYin*/("BWGJ")
+	/*NamePinYin*/("BWGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601139"),
-	/*Name*/("深圳燃气"),
-	/*NamePinYin*/("SZRQ")
+	/*NamePinYin*/("SZRQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601158"),
-	/*Name*/("重庆水务"),
-	/*NamePinYin*/("CQSW")
+	/*NamePinYin*/("CQSW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601166"),
-	/*Name*/("兴业银行"),
-	/*NamePinYin*/("XYYH")
+	/*NamePinYin*/("XYYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601168"),
-	/*Name*/("西部矿业"),
-	/*NamePinYin*/("XBKY")
+	/*NamePinYin*/("XBKY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601169"),
-	/*Name*/("北京银行"),
-	/*NamePinYin*/("BJYH")
+	/*NamePinYin*/("BJYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601177"),
-	/*Name*/("杭齿前进"),
-	/*NamePinYin*/("HCQJ")
+	/*NamePinYin*/("HCQJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601179"),
-	/*Name*/("中国西电"),
-	/*NamePinYin*/("ZGXD")
+	/*NamePinYin*/("ZGXD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601186"),
-	/*Name*/("中国铁建"),
-	/*NamePinYin*/("ZGTJ")
+	/*NamePinYin*/("ZGTJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601188"),
-	/*Name*/("龙江交通"),
-	/*NamePinYin*/("LJJT")
+	/*NamePinYin*/("LJJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601199"),
-	/*Name*/("江南水务"),
-	/*NamePinYin*/("JNSW")
+	/*NamePinYin*/("JNSW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601208"),
-	/*Name*/("东材科技"),
-	/*NamePinYin*/("DCKJ")
+	/*NamePinYin*/("DCKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601216"),
-	/*Name*/("内蒙君正"),
-	/*NamePinYin*/("NMJZ")
+	/*NamePinYin*/("NMJZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601218"),
-	/*Name*/("吉鑫科技"),
-	/*NamePinYin*/("JXKJ")
+	/*NamePinYin*/("JXKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601222"),
-	/*Name*/("林洋电子"),
-	/*NamePinYin*/("LXDZ")
+	/*NamePinYin*/("LXDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601225"),
-	/*Name*/("陕西煤业"),
-	/*NamePinYin*/("SXMY")
+	/*NamePinYin*/("SXMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601231"),
-	/*Name*/("环旭电子"),
-	/*NamePinYin*/("HXDZ")
+	/*NamePinYin*/("HXDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601233"),
-	/*Name*/("桐昆股份"),
-	/*NamePinYin*/("TKGF")
+	/*NamePinYin*/("TKGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601238"),
-	/*Name*/("广汽集团"),
-	/*NamePinYin*/("AQJT")
+	/*NamePinYin*/("AQJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601258"),
-	/*Name*/("庞大集团"),
-	/*NamePinYin*/("PDJT")
+	/*NamePinYin*/("PDJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601268"),
-	/*Name*/("*ST二重"),
-	/*NamePinYin*/("*STEC")
+	/*NamePinYin*/("*STEC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601288"),
-	/*Name*/("农业银行"),
-	/*NamePinYin*/("NYYH")
+	/*NamePinYin*/("NYYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601299"),
-	/*Name*/("中国北车"),
-	/*NamePinYin*/("ZGBC")
+	/*NamePinYin*/("ZGBC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601311"),
-	/*Name*/("骆驼股份"),
-	/*NamePinYin*/("JTGF")
+	/*NamePinYin*/("JTGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601313"),
-	/*Name*/("江南嘉捷"),
-	/*NamePinYin*/("JNJJ")
+	/*NamePinYin*/("JNJJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601318"),
-	/*Name*/("中国平安"),
-	/*NamePinYin*/("ZGPA")
+	/*NamePinYin*/("ZGPA"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601328"),
-	/*Name*/("交通银行"),
-	/*NamePinYin*/("JTYH")
+	/*NamePinYin*/("JTYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601333"),
-	/*Name*/("广深铁路"),
-	/*NamePinYin*/("ASTL")
+	/*NamePinYin*/("ASTL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601336"),
-	/*Name*/("新华保险"),
-	/*NamePinYin*/("XHBX")
+	/*NamePinYin*/("XHBX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601339"),
-	/*Name*/("百隆东方"),
-	/*NamePinYin*/("BLDF")
+	/*NamePinYin*/("BLDF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601369"),
-	/*Name*/("陕鼓动力"),
-	/*NamePinYin*/("SGDL")
+	/*NamePinYin*/("SGDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601377"),
-	/*Name*/("兴业证券"),
-	/*NamePinYin*/("XYZQ")
+	/*NamePinYin*/("XYZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601388"),
-	/*Name*/("怡球资源"),
-	/*NamePinYin*/("YQZY")
+	/*NamePinYin*/("YQZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601390"),
-	/*Name*/("中国中铁"),
-	/*NamePinYin*/("ZGZT")
+	/*NamePinYin*/("ZGZT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601398"),
-	/*Name*/("工商银行"),
-	/*NamePinYin*/("GSYH")
+	/*NamePinYin*/("GSYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601515"),
-	/*Name*/("东风股份"),
-	/*NamePinYin*/("DFGF")
+	/*NamePinYin*/("DFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601518"),
-	/*Name*/("吉林高速"),
-	/*NamePinYin*/("JLGS")
+	/*NamePinYin*/("JLGS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601519"),
-	/*Name*/("大智慧"),
-	/*NamePinYin*/("DZH")
+	/*NamePinYin*/("DZH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601555"),
-	/*Name*/("东吴证券"),
-	/*NamePinYin*/("DWZQ")
+	/*NamePinYin*/("DWZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601558"),
-	/*Name*/("*ST锐电"),
-	/*NamePinYin*/("*STRD")
+	/*NamePinYin*/("*STRD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601566"),
-	/*Name*/("九牧王"),
-	/*NamePinYin*/("JMW")
+	/*NamePinYin*/("JMW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601567"),
-	/*Name*/("三星电气"),
-	/*NamePinYin*/("SXDQ")
+	/*NamePinYin*/("SXDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601579"),
-	/*Name*/("会稽山"),
-	/*NamePinYin*/("HJS")
+	/*NamePinYin*/("HJS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601588"),
-	/*Name*/("北辰实业"),
-	/*NamePinYin*/("BCSY")
+	/*NamePinYin*/("BCSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601599"),
-	/*Name*/("鹿港科技"),
-	/*NamePinYin*/("LGKJ")
+	/*NamePinYin*/("LGKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601600"),
-	/*Name*/("中国铝业"),
-	/*NamePinYin*/("ZGLY")
+	/*NamePinYin*/("ZGLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601601"),
-	/*Name*/("中国太保"),
-	/*NamePinYin*/("ZGTB")
+	/*NamePinYin*/("ZGTB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601607"),
-	/*Name*/("上海医药"),
-	/*NamePinYin*/("SHYY")
+	/*NamePinYin*/("SHYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601608"),
-	/*Name*/("中信重工"),
-	/*NamePinYin*/("ZXCG")
+	/*NamePinYin*/("ZXCG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601616"),
-	/*Name*/("广电电气"),
-	/*NamePinYin*/("ADDQ")
+	/*NamePinYin*/("ADDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601618"),
-	/*Name*/("中国中冶"),
-	/*NamePinYin*/("ZGZY")
+	/*NamePinYin*/("ZGZY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601628"),
-	/*Name*/("中国人寿"),
-	/*NamePinYin*/("ZGRS")
+	/*NamePinYin*/("ZGRS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601633"),
-	/*Name*/("长城汽车"),
-	/*NamePinYin*/("CCQC")
+	/*NamePinYin*/("CCQC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601636"),
-	/*Name*/("旗滨集团"),
-	/*NamePinYin*/("QBJT")
+	/*NamePinYin*/("QBJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601666"),
-	/*Name*/("平煤股份"),
-	/*NamePinYin*/("PMGF")
+	/*NamePinYin*/("PMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601668"),
-	/*Name*/("中国建筑"),
-	/*NamePinYin*/("ZGJZ")
+	/*NamePinYin*/("ZGJZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601669"),
-	/*Name*/("中国电建"),
-	/*NamePinYin*/("ZGDJ")
+	/*NamePinYin*/("ZGDJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601677"),
-	/*Name*/("明泰铝业"),
-	/*NamePinYin*/("MTLY")
+	/*NamePinYin*/("MTLY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601678"),
-	/*Name*/("滨化股份"),
-	/*NamePinYin*/("BHGF")
+	/*NamePinYin*/("BHGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601688"),
-	/*Name*/("华泰证券"),
-	/*NamePinYin*/("HTZQ")
+	/*NamePinYin*/("HTZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601699"),
-	/*Name*/("潞安环能"),
-	/*NamePinYin*/("LAHN")
+	/*NamePinYin*/("LAHN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601700"),
-	/*Name*/("风范股份"),
-	/*NamePinYin*/("FFGF")
+	/*NamePinYin*/("FFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601717"),
-	/*Name*/("郑煤机"),
-	/*NamePinYin*/("ZMJ")
+	/*NamePinYin*/("ZMJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601718"),
-	/*Name*/("际华集团"),
-	/*NamePinYin*/("JHJT")
+	/*NamePinYin*/("JHJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601727"),
-	/*Name*/("上海电气"),
-	/*NamePinYin*/("SHDQ")
+	/*NamePinYin*/("SHDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601766"),
-	/*Name*/("中国南车"),
-	/*NamePinYin*/("ZGNC")
+	/*NamePinYin*/("ZGNC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601777"),
-	/*Name*/("力帆股份"),
-	/*NamePinYin*/("LFGF")
+	/*NamePinYin*/("LFGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601788"),
-	/*Name*/("光大证券"),
-	/*NamePinYin*/("GDZQ")
+	/*NamePinYin*/("GDZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601789"),
-	/*Name*/("宁波建工"),
-	/*NamePinYin*/("NBJG")
+	/*NamePinYin*/("NBJG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601798"),
-	/*Name*/("蓝科高新"),
-	/*NamePinYin*/("LKGX")
+	/*NamePinYin*/("LKGX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601799"),
-	/*Name*/("星宇股份"),
-	/*NamePinYin*/("XYGF")
+	/*NamePinYin*/("XYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601800"),
-	/*Name*/("中国交建"),
-	/*NamePinYin*/("ZGJJ")
+	/*NamePinYin*/("ZGJJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601801"),
-	/*Name*/("皖新传媒"),
-	/*NamePinYin*/("WXCM")
+	/*NamePinYin*/("WXCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601808"),
-	/*Name*/("中海油服"),
-	/*NamePinYin*/("ZHYF")
+	/*NamePinYin*/("ZHYF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601818"),
-	/*Name*/("光大银行"),
-	/*NamePinYin*/("GDYH")
+	/*NamePinYin*/("GDYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601857"),
-	/*Name*/("中国石油"),
-	/*NamePinYin*/("ZGDY")
+	/*NamePinYin*/("ZGDY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601866"),
-	/*Name*/("中海集运"),
-	/*NamePinYin*/("ZHJY")
+	/*NamePinYin*/("ZHJY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601872"),
-	/*Name*/("招商轮船"),
-	/*NamePinYin*/("QSLC")
+	/*NamePinYin*/("QSLC"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601877"),
-	/*Name*/("正泰电器"),
-	/*NamePinYin*/("ZTDQ")
+	/*NamePinYin*/("ZTDQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601880"),
-	/*Name*/("大连港"),
-	/*NamePinYin*/("DLG")
+	/*NamePinYin*/("DLG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601886"),
-	/*Name*/("江河创建"),
-	/*NamePinYin*/("JHCJ")
+	/*NamePinYin*/("JHCJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601888"),
-	/*Name*/("中国国旅"),
-	/*NamePinYin*/("ZGGL")
+	/*NamePinYin*/("ZGGL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601890"),
-	/*Name*/("亚星锚链"),
-	/*NamePinYin*/("YXML")
+	/*NamePinYin*/("YXML"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601898"),
-	/*Name*/("中煤能源"),
-	/*NamePinYin*/("ZMNY")
+	/*NamePinYin*/("ZMNY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601899"),
-	/*Name*/("紫金矿业"),
-	/*NamePinYin*/("ZJKY")
+	/*NamePinYin*/("ZJKY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601901"),
-	/*Name*/("方正证券"),
-	/*NamePinYin*/("FZZQ")
+	/*NamePinYin*/("FZZQ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601908"),
-	/*Name*/("京运通"),
-	/*NamePinYin*/("JYT")
+	/*NamePinYin*/("JYT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601918"),
-	/*Name*/("国投新集"),
-	/*NamePinYin*/("GTXJ")
+	/*NamePinYin*/("GTXJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601919"),
-	/*Name*/("中国远洋"),
-	/*NamePinYin*/("ZGYX")
+	/*NamePinYin*/("ZGYX"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601928"),
-	/*Name*/("凤凰传媒"),
-	/*NamePinYin*/("FHCM")
+	/*NamePinYin*/("FHCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601929"),
-	/*Name*/("吉视传媒"),
-	/*NamePinYin*/("JSCM")
+	/*NamePinYin*/("JSCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601933"),
-	/*Name*/("永辉超市"),
-	/*NamePinYin*/("YHCS")
+	/*NamePinYin*/("YHCS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601939"),
-	/*Name*/("建设银行"),
-	/*NamePinYin*/("JSYH")
+	/*NamePinYin*/("JSYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601958"),
-	/*Name*/("金钼股份"),
-	/*NamePinYin*/("JMGF")
+	/*NamePinYin*/("JMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601965"),
-	/*Name*/("中国汽研"),
-	/*NamePinYin*/("ZGQY")
+	/*NamePinYin*/("ZGQY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601988"),
-	/*Name*/("中国银行"),
-	/*NamePinYin*/("ZGYH")
+	/*NamePinYin*/("ZGYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601989"),
-	/*Name*/("中国重工"),
-	/*NamePinYin*/("ZGCG")
+	/*NamePinYin*/("ZGCG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601991"),
-	/*Name*/("大唐发电"),
-	/*NamePinYin*/("DTFD")
+	/*NamePinYin*/("DTFD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601992"),
-	/*Name*/("金隅股份"),
-	/*NamePinYin*/("JYGF")
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601996"),
-	/*Name*/("丰林集团"),
-	/*NamePinYin*/("FLJT")
+	/*NamePinYin*/("FLJT"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601998"),
-	/*Name*/("中信银行"),
-	/*NamePinYin*/("ZXYH")
+	/*NamePinYin*/("ZXYH"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("601999"),
-	/*Name*/("出版传媒"),
-	/*NamePinYin*/("CBCM")
+	/*NamePinYin*/("CBCM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603000"),
-	/*Name*/("人民网"),
-	/*NamePinYin*/("RMW")
+	/*NamePinYin*/("RMW"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603001"),
-	/*Name*/("奥康国际"),
-	/*NamePinYin*/("AKGJ")
+	/*NamePinYin*/("AKGJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603002"),
-	/*Name*/("宏昌电子"),
-	/*NamePinYin*/("HCDZ")
+	/*NamePinYin*/("HCDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603003"),
-	/*Name*/("龙宇燃油"),
-	/*NamePinYin*/("LYRY")
+	/*NamePinYin*/("LYRY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603005"),
-	/*Name*/("晶方科技"),
-	/*NamePinYin*/("JFKJ")
+	/*NamePinYin*/("JFKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603006"),
-	/*Name*/("联明股份"),
-	/*NamePinYin*/("LMGF")
+	/*NamePinYin*/("LMGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603008"),
-	/*Name*/("喜临门"),
-	/*NamePinYin*/("XLM")
+	/*NamePinYin*/("XLM"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603009"),
-	/*Name*/("北特科技"),
-	/*NamePinYin*/("BTKJ")
+	/*NamePinYin*/("BTKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603010"),
-	/*Name*/("万盛股份"),
-	/*NamePinYin*/("MCGF")
+	/*NamePinYin*/("MCGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603011"),
-	/*Name*/("合锻股份"),
-	/*NamePinYin*/("GDGF")
+	/*NamePinYin*/("GDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603018"),
-	/*Name*/("设计股份"),
-	/*NamePinYin*/("SJGF")
+	/*NamePinYin*/("SJGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603019"),
-	/*Name*/("中科曙光"),
-	/*NamePinYin*/("ZKSG")
+	/*NamePinYin*/("ZKSG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603077"),
-	/*Name*/("和邦股份"),
-	/*NamePinYin*/("HBGF")
+	/*NamePinYin*/("HBGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603088"),
-	/*Name*/("宁波精达"),
-	/*NamePinYin*/("NBJD")
+	/*NamePinYin*/("NBJD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603099"),
-	/*Name*/("长白山"),
-	/*NamePinYin*/("CBS")
+	/*NamePinYin*/("CBS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603100"),
-	/*Name*/("川仪股份"),
-	/*NamePinYin*/("CYGF")
+	/*NamePinYin*/("CYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603111"),
-	/*Name*/("康尼机电"),
-	/*NamePinYin*/("KNJD")
+	/*NamePinYin*/("KNJD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603123"),
-	/*Name*/("翠微股份"),
-	/*NamePinYin*/("CWGF")
+	/*NamePinYin*/("CWGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603126"),
-	/*Name*/("中材节能"),
-	/*NamePinYin*/("ZCJN")
+	/*NamePinYin*/("ZCJN"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603128"),
-	/*Name*/("华贸物流"),
-	/*NamePinYin*/("HMWL")
+	/*NamePinYin*/("HMWL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603166"),
-	/*Name*/("福达股份"),
-	/*NamePinYin*/("FDGF")
+	/*NamePinYin*/("FDGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603167"),
-	/*Name*/("渤海轮渡"),
-	/*NamePinYin*/("BHLD")
+	/*NamePinYin*/("BHLD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603168"),
-	/*Name*/("莎普爱思"),
-	/*NamePinYin*/("SPAS")
+	/*NamePinYin*/("SPAS"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603169"),
-	/*Name*/("兰石重装"),
-	/*NamePinYin*/("LDCZ")
+	/*NamePinYin*/("LDCZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603188"),
-	/*Name*/("亚邦股份"),
-	/*NamePinYin*/("YBGF")
+	/*NamePinYin*/("YBGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603288"),
-	/*Name*/("海天味业"),
-	/*NamePinYin*/("HTWY")
+	/*NamePinYin*/("HTWY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603306"),
-	/*Name*/("华懋科技"),
-	/*NamePinYin*/("HMKJ")
+	/*NamePinYin*/("HMKJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603308"),
-	/*Name*/("应流股份"),
-	/*NamePinYin*/("YLGF")
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603328"),
-	/*Name*/("依顿电子"),
-	/*NamePinYin*/("YDDZ")
+	/*NamePinYin*/("YDDZ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603333"),
-	/*Name*/("明星电缆"),
-	/*NamePinYin*/("MXDL")
+	/*NamePinYin*/("MXDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603366"),
-	/*Name*/("日出东方"),
-	/*NamePinYin*/("RCDF")
+	/*NamePinYin*/("RCDF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603369"),
-	/*Name*/("今世缘"),
-	/*NamePinYin*/("JSY")
+	/*NamePinYin*/("JSY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603399"),
-	/*Name*/("新华龙"),
-	/*NamePinYin*/("XHL")
+	/*NamePinYin*/("XHL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603456"),
-	/*Name*/("九洲药业"),
-	/*NamePinYin*/("JZYY")
+	/*NamePinYin*/("JZYY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603555"),
-	/*Name*/("贵人鸟"),
-	/*NamePinYin*/("GRD")
+	/*NamePinYin*/("GRD"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603606"),
-	/*Name*/("东方电缆"),
-	/*NamePinYin*/("DFDL")
+	/*NamePinYin*/("DFDL"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603609"),
-	/*Name*/("禾丰牧业"),
-	/*NamePinYin*/("HFMY")
+	/*NamePinYin*/("HFMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603688"),
-	/*Name*/("石英股份"),
-	/*NamePinYin*/("DYGF")
+	/*NamePinYin*/("DYGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603699"),
-	/*Name*/("纽威股份"),
-	/*NamePinYin*/("NWGF")
+	/*NamePinYin*/("NWGF"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603766"),
-	/*Name*/("隆鑫通用"),
-	/*NamePinYin*/("LXTY")
+	/*NamePinYin*/("LXTY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603806"),
-	/*Name*/("福斯特"),
-	/*NamePinYin*/("FST")
+	/*NamePinYin*/("FST"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603988"),
-	/*Name*/("中电电机"),
-	/*NamePinYin*/("ZDDJ")
+	/*NamePinYin*/("ZDDJ"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("603993"),
-	/*Name*/("洛阳钼业"),
-	/*NamePinYin*/("LYMY")
+	/*NamePinYin*/("LYMY"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900901"),
-	/*Name*/("仪电B股"),
-	/*NamePinYin*/("YDBG")
+	/*NamePinYin*/("YDBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900902"),
-	/*Name*/("市北B股"),
-	/*NamePinYin*/("SBBG")
+	/*NamePinYin*/("SBBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900903"),
-	/*Name*/("大众B股"),
-	/*NamePinYin*/("DZBG")
+	/*NamePinYin*/("DZBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900904"),
-	/*Name*/("神奇B股"),
-	/*NamePinYin*/("SJBG")
+	/*NamePinYin*/("SJBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900905"),
-	/*Name*/("老凤祥B"),
-	/*NamePinYin*/("LFXB")
+	/*NamePinYin*/("LFXB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900906"),
-	/*Name*/("*ST中纺B"),
-	/*NamePinYin*/("*STZFB")
+	/*NamePinYin*/("*STZFB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900907"),
-	/*Name*/("鼎立B股"),
-	/*NamePinYin*/("DLBG")
+	/*NamePinYin*/("DLBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900908"),
-	/*Name*/("氯碱B股"),
-	/*NamePinYin*/("LJBG")
+	/*NamePinYin*/("LJBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900909"),
-	/*Name*/("双钱B股"),
-	/*NamePinYin*/("SQBG")
+	/*NamePinYin*/("SQBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900910"),
-	/*Name*/("海立B股"),
-	/*NamePinYin*/("HLBG")
+	/*NamePinYin*/("HLBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900911"),
-	/*Name*/("金桥B股"),
-	/*NamePinYin*/("JQBG")
+	/*NamePinYin*/("JQBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900912"),
-	/*Name*/("外高B股"),
-	/*NamePinYin*/("WGBG")
+	/*NamePinYin*/("WGBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900913"),
-	/*Name*/("国新B股"),
-	/*NamePinYin*/("GXBG")
+	/*NamePinYin*/("GXBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900914"),
-	/*Name*/("锦投B股"),
-	/*NamePinYin*/("JTBG")
+	/*NamePinYin*/("JTBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900915"),
-	/*Name*/("中路B股"),
-	/*NamePinYin*/("ZLBG")
+	/*NamePinYin*/("ZLBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900916"),
-	/*Name*/("金山B股"),
-	/*NamePinYin*/("JSBG")
+	/*NamePinYin*/("JSBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900917"),
-	/*Name*/("海欣B股"),
-	/*NamePinYin*/("HXBG")
+	/*NamePinYin*/("HXBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900918"),
-	/*Name*/("耀皮B股"),
-	/*NamePinYin*/("YPBG")
+	/*NamePinYin*/("YPBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900919"),
-	/*Name*/("大江B股"),
-	/*NamePinYin*/("DJBG")
+	/*NamePinYin*/("DJBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900920"),
-	/*Name*/("上柴B股"),
-	/*NamePinYin*/("SCBG")
+	/*NamePinYin*/("SCBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900921"),
-	/*Name*/("丹科B股"),
-	/*NamePinYin*/("DKBG")
+	/*NamePinYin*/("DKBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900922"),
-	/*Name*/("*ST三毛B"),
-	/*NamePinYin*/("*STSMB")
+	/*NamePinYin*/("*STSMB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900923"),
-	/*Name*/("百联B股"),
-	/*NamePinYin*/("BLBG")
+	/*NamePinYin*/("BLBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900924"),
-	/*Name*/("上工B股"),
-	/*NamePinYin*/("SGBG")
+	/*NamePinYin*/("SGBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900925"),
-	/*Name*/("机电B股"),
-	/*NamePinYin*/("JDBG")
+	/*NamePinYin*/("JDBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900926"),
-	/*Name*/("宝信B"),
-	/*NamePinYin*/("BXB")
+	/*NamePinYin*/("BXB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900927"),
-	/*Name*/("物贸B股"),
-	/*NamePinYin*/("WMBG")
+	/*NamePinYin*/("WMBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900928"),
-	/*Name*/("自仪B股"),
-	/*NamePinYin*/("ZYBG")
+	/*NamePinYin*/("ZYBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900929"),
-	/*Name*/("锦旅B股"),
-	/*NamePinYin*/("JLBG")
+	/*NamePinYin*/("JLBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900930"),
-	/*Name*/("沪普天B"),
-	/*NamePinYin*/("HPTB")
+	/*NamePinYin*/("HPTB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900931"),
-	/*Name*/("PT水仙B"),
-	/*NamePinYin*/("PTSXB")
+	/*NamePinYin*/("PTSXB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900932"),
-	/*Name*/("陆家B股"),
-	/*NamePinYin*/("LGBG")
+	/*NamePinYin*/("LGBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900933"),
-	/*Name*/("华新B股"),
-	/*NamePinYin*/("HXBG")
+	/*NamePinYin*/("HXBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900934"),
-	/*Name*/("锦江B股"),
-	/*NamePinYin*/("JJBG")
+	/*NamePinYin*/("JJBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900935"),
-	/*Name*/("阳晨B股"),
-	/*NamePinYin*/("YCBG")
+	/*NamePinYin*/("YCBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900936"),
-	/*Name*/("鄂资B股"),
-	/*NamePinYin*/("EZBG")
+	/*NamePinYin*/("EZBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900937"),
-	/*Name*/("华电B股"),
-	/*NamePinYin*/("HDBG")
+	/*NamePinYin*/("HDBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900938"),
-	/*Name*/("天海B"),
-	/*NamePinYin*/("THB")
+	/*NamePinYin*/("THB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900939"),
-	/*Name*/("汇丽B"),
-	/*NamePinYin*/("HLB")
+	/*NamePinYin*/("HLB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900940"),
-	/*Name*/("大名城B"),
-	/*NamePinYin*/("DMCB")
+	/*NamePinYin*/("DMCB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900941"),
-	/*Name*/("东信B股"),
-	/*NamePinYin*/("DXBG")
+	/*NamePinYin*/("DXBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900942"),
-	/*Name*/("黄山B股"),
-	/*NamePinYin*/("HSBG")
+	/*NamePinYin*/("HSBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900943"),
-	/*Name*/("开开B股"),
-	/*NamePinYin*/("KKBG")
+	/*NamePinYin*/("KKBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900945"),
-	/*Name*/("海航B股"),
-	/*NamePinYin*/("HHBG")
+	/*NamePinYin*/("HHBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900946"),
-	/*Name*/("天雁B股"),
-	/*NamePinYin*/("TYBG")
+	/*NamePinYin*/("TYBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900947"),
-	/*Name*/("振华B股"),
-	/*NamePinYin*/("ZHBG")
+	/*NamePinYin*/("ZHBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900948"),
-	/*Name*/("伊泰B股"),
-	/*NamePinYin*/("YTBG")
+	/*NamePinYin*/("YTBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900949"),
-	/*Name*/("东电B股"),
-	/*NamePinYin*/("DDBG")
+	/*NamePinYin*/("DDBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900950"),
-	/*Name*/("新城B股"),
-	/*NamePinYin*/("XCBG")
+	/*NamePinYin*/("XCBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900951"),
-	/*Name*/("*ST大化B"),
-	/*NamePinYin*/("*STDHB")
+	/*NamePinYin*/("*STDHB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900952"),
-	/*Name*/("锦港B股"),
-	/*NamePinYin*/("JGBG")
+	/*NamePinYin*/("JGBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900953"),
-	/*Name*/("凯马B"),
-	/*NamePinYin*/("KMB")
+	/*NamePinYin*/("KMB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900955"),
-	/*Name*/("九龙山B"),
-	/*NamePinYin*/("JLSB")
+	/*NamePinYin*/("JLSB"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900956"),
-	/*Name*/("东贝B股"),
-	/*NamePinYin*/("DBBG")
+	/*NamePinYin*/("DBBG"),
+	/*SymbolExtern*/(".SS")
 },
 {
 	/*Symbol*/("900957"),
-	/*Name*/("凌云B股"),
-	/*NamePinYin*/("LYBG")
+	/*NamePinYin*/("LYBG"),
+	/*SymbolExtern*/(".SS")
 },
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
 	/*Symbol*/("000001"),
-	/*Name*/("平安银行"),
-	/*NamePinYin*/("PAYH")
+	/*NamePinYin*/("PAYH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000002"),
-	/*Name*/("万科A"),
-	/*NamePinYin*/("MKA")
+	/*NamePinYin*/("MKA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000003"),
-	/*Name*/("PT金田A"),
-	/*NamePinYin*/("PTJTA")
+	/*NamePinYin*/("PTJTA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000004"),
-	/*Name*/("国农科技"),
-	/*NamePinYin*/("GNKJ")
+	/*NamePinYin*/("GNKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000005"),
-	/*Name*/("世纪星源"),
-	/*NamePinYin*/("SJXY")
+	/*NamePinYin*/("SJXY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000006"),
-	/*Name*/("深振业A"),
-	/*NamePinYin*/("SZYA")
+	/*NamePinYin*/("SZYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000007"),
-	/*Name*/("零七股份"),
-	/*NamePinYin*/("LQGF")
+	/*NamePinYin*/("LQGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000008"),
-	/*Name*/("宝利来"),
-	/*NamePinYin*/("BLL")
+	/*NamePinYin*/("BLL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000009"),
-	/*Name*/("中国宝安"),
-	/*NamePinYin*/("ZGBA")
+	/*NamePinYin*/("ZGBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000010"),
-	/*Name*/("深华新"),
-	/*NamePinYin*/("SHX")
+	/*NamePinYin*/("SHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000011"),
-	/*Name*/("深物业A"),
-	/*NamePinYin*/("SWYA")
+	/*NamePinYin*/("SWYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000012"),
-	/*Name*/("南玻A"),
-	/*NamePinYin*/("NBA")
+	/*NamePinYin*/("NBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000013"),
-	/*Name*/("*ST石化A"),
-	/*NamePinYin*/("*STDHA")
+	/*NamePinYin*/("*STDHA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000014"),
-	/*Name*/("沙河股份"),
-	/*NamePinYin*/("SHGF")
+	/*NamePinYin*/("SHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000015"),
-	/*Name*/("PT中浩A"),
-	/*NamePinYin*/("PTZHA")
+	/*NamePinYin*/("PTZHA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000016"),
-	/*Name*/("深康佳A"),
-	/*NamePinYin*/("SKJA")
+	/*NamePinYin*/("SKJA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000017"),
-	/*Name*/("深中华A"),
-	/*NamePinYin*/("SZHA")
+	/*NamePinYin*/("SZHA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000018"),
-	/*Name*/("中冠A"),
-	/*NamePinYin*/("ZGA")
+	/*NamePinYin*/("ZGA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000019"),
-	/*Name*/("深深宝A"),
-	/*NamePinYin*/("SSBA")
+	/*NamePinYin*/("SSBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000020"),
-	/*Name*/("深华发A"),
-	/*NamePinYin*/("SHFA")
+	/*NamePinYin*/("SHFA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000021"),
-	/*Name*/("长城开发"),
-	/*NamePinYin*/("CCKF")
+	/*NamePinYin*/("CCKF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000022"),
-	/*Name*/("深赤湾A"),
-	/*NamePinYin*/("SCWA")
+	/*NamePinYin*/("SCWA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000023"),
-	/*Name*/("深天地A"),
-	/*NamePinYin*/("STDA")
+	/*NamePinYin*/("STDA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000024"),
-	/*Name*/("招商地产"),
-	/*NamePinYin*/("QSDC")
+	/*NamePinYin*/("QSDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000025"),
-	/*Name*/("特力A"),
-	/*NamePinYin*/("TLA")
+	/*NamePinYin*/("TLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000026"),
-	/*Name*/("飞亚达A"),
-	/*NamePinYin*/("FYDA")
+	/*NamePinYin*/("FYDA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000027"),
-	/*Name*/("深圳能源"),
-	/*NamePinYin*/("SZNY")
+	/*NamePinYin*/("SZNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000028"),
-	/*Name*/("国药一致"),
-	/*NamePinYin*/("GYYZ")
+	/*NamePinYin*/("GYYZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000029"),
-	/*Name*/("深深房A"),
-	/*NamePinYin*/("SSFA")
+	/*NamePinYin*/("SSFA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000030"),
-	/*Name*/("富奥股份"),
-	/*NamePinYin*/("FAGF")
+	/*NamePinYin*/("FAGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000031"),
-	/*Name*/("中粮地产"),
-	/*NamePinYin*/("ZLDC")
+	/*NamePinYin*/("ZLDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000032"),
-	/*Name*/("深桑达A"),
-	/*NamePinYin*/("SSDA")
+	/*NamePinYin*/("SSDA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000033"),
-	/*Name*/("*ST新都"),
-	/*NamePinYin*/("*STXD")
+	/*NamePinYin*/("*STXD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000034"),
-	/*Name*/("深信泰丰"),
-	/*NamePinYin*/("SXTF")
+	/*NamePinYin*/("SXTF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000035"),
-	/*Name*/("中国天楹"),
-	/*NamePinYin*/("ZGTY")
+	/*NamePinYin*/("ZGTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000036"),
-	/*Name*/("华联控股"),
-	/*NamePinYin*/("HLKG")
+	/*NamePinYin*/("HLKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000037"),
-	/*Name*/("深南电A"),
-	/*NamePinYin*/("SNDA")
+	/*NamePinYin*/("SNDA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000038"),
-	/*Name*/("深大通"),
-	/*NamePinYin*/("SDT")
+	/*NamePinYin*/("SDT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000039"),
-	/*Name*/("中集集团"),
-	/*NamePinYin*/("ZJJT")
+	/*NamePinYin*/("ZJJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000040"),
-	/*Name*/("宝安地产"),
-	/*NamePinYin*/("BADC")
+	/*NamePinYin*/("BADC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000042"),
-	/*Name*/("中洲控股"),
-	/*NamePinYin*/("ZZKG")
+	/*NamePinYin*/("ZZKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000043"),
-	/*Name*/("中航地产"),
-	/*NamePinYin*/("ZHDC")
+	/*NamePinYin*/("ZHDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000045"),
-	/*Name*/("深纺织A"),
-	/*NamePinYin*/("SFZA")
+	/*NamePinYin*/("SFZA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000046"),
-	/*Name*/("泛海控股"),
-	/*NamePinYin*/("FHKG")
+	/*NamePinYin*/("FHKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000047"),
-	/*Name*/("ST中侨"),
-	/*NamePinYin*/("STZQ")
+	/*NamePinYin*/("STZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000048"),
-	/*Name*/("康达尔"),
-	/*NamePinYin*/("KDE")
+	/*NamePinYin*/("KDE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000049"),
-	/*Name*/("德赛电池"),
-	/*NamePinYin*/("DSDC")
+	/*NamePinYin*/("DSDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000050"),
-	/*Name*/("深天马A"),
-	/*NamePinYin*/("STMA")
+	/*NamePinYin*/("STMA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000055"),
-	/*Name*/("方大集团"),
-	/*NamePinYin*/("FDJT")
+	/*NamePinYin*/("FDJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000056"),
-	/*Name*/("深国商"),
-	/*NamePinYin*/("SGS")
+	/*NamePinYin*/("SGS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000058"),
-	/*Name*/("深赛格"),
-	/*NamePinYin*/("SSG")
+	/*NamePinYin*/("SSG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000059"),
-	/*Name*/("华锦股份"),
-	/*NamePinYin*/("HJGF")
+	/*NamePinYin*/("HJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000060"),
-	/*Name*/("中金岭南"),
-	/*NamePinYin*/("ZJLN")
+	/*NamePinYin*/("ZJLN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000061"),
-	/*Name*/("农产品"),
-	/*NamePinYin*/("NCP")
+	/*NamePinYin*/("NCP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000062"),
-	/*Name*/("深圳华强"),
-	/*NamePinYin*/("SZHJ")
+	/*NamePinYin*/("SZHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000063"),
-	/*Name*/("中兴通讯"),
-	/*NamePinYin*/("ZXTX")
+	/*NamePinYin*/("ZXTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000065"),
-	/*Name*/("北方国际"),
-	/*NamePinYin*/("BFGJ")
+	/*NamePinYin*/("BFGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000066"),
-	/*Name*/("长城电脑"),
-	/*NamePinYin*/("CCDN")
+	/*NamePinYin*/("CCDN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000068"),
-	/*Name*/("华控赛格"),
-	/*NamePinYin*/("HKSG")
+	/*NamePinYin*/("HKSG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000069"),
-	/*Name*/("华侨城A"),
-	/*NamePinYin*/("HQCA")
+	/*NamePinYin*/("HQCA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000070"),
-	/*Name*/("特发信息"),
-	/*NamePinYin*/("TFXX")
+	/*NamePinYin*/("TFXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000078"),
-	/*Name*/("海王生物"),
-	/*NamePinYin*/("HWSW")
+	/*NamePinYin*/("HWSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000088"),
-	/*Name*/("盐田港"),
-	/*NamePinYin*/("YTG")
+	/*NamePinYin*/("YTG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000089"),
-	/*Name*/("深圳机场"),
-	/*NamePinYin*/("SZJC")
+	/*NamePinYin*/("SZJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000090"),
-	/*Name*/("天健集团"),
-	/*NamePinYin*/("TJJT")
+	/*NamePinYin*/("TJJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000096"),
-	/*Name*/("广聚能源"),
-	/*NamePinYin*/("AJNY")
+	/*NamePinYin*/("AJNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000099"),
-	/*Name*/("中信海直"),
-	/*NamePinYin*/("ZXHZ")
+	/*NamePinYin*/("ZXHZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000100"),
-	/*Name*/("TCL集团"),
-	/*NamePinYin*/("TCLJT")
+	/*NamePinYin*/("TCLJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000150"),
-	/*Name*/("宜华地产"),
-	/*NamePinYin*/("YHDC")
+	/*NamePinYin*/("YHDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000151"),
-	/*Name*/("中成股份"),
-	/*NamePinYin*/("ZCGF")
+	/*NamePinYin*/("ZCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000153"),
-	/*Name*/("丰原药业"),
-	/*NamePinYin*/("FYYY")
+	/*NamePinYin*/("FYYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000155"),
-	/*Name*/("川化股份"),
-	/*NamePinYin*/("CHGF")
+	/*NamePinYin*/("CHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000156"),
-	/*Name*/("华数传媒"),
-	/*NamePinYin*/("HSCM")
+	/*NamePinYin*/("HSCM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000157"),
-	/*Name*/("中联重科"),
-	/*NamePinYin*/("ZLCK")
+	/*NamePinYin*/("ZLCK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000158"),
-	/*Name*/("常山股份"),
-	/*NamePinYin*/("CSGF")
+	/*NamePinYin*/("CSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000159"),
-	/*Name*/("国际实业"),
-	/*NamePinYin*/("GJSY")
+	/*NamePinYin*/("GJSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000301"),
-	/*Name*/("东方市场"),
-	/*NamePinYin*/("DFSC")
+	/*NamePinYin*/("DFSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000333"),
-	/*Name*/("美的集团"),
-	/*NamePinYin*/("MDJT")
+	/*NamePinYin*/("MDJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000338"),
-	/*Name*/("潍柴动力"),
-	/*NamePinYin*/("WCDL")
+	/*NamePinYin*/("WCDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000400"),
-	/*Name*/("许继电气"),
-	/*NamePinYin*/("HJDQ")
+	/*NamePinYin*/("HJDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000401"),
-	/*Name*/("冀东水泥"),
-	/*NamePinYin*/("JDSN")
+	/*NamePinYin*/("JDSN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000402"),
-	/*Name*/("金融街"),
-	/*NamePinYin*/("JRJ")
+	/*NamePinYin*/("JRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000403"),
-	/*Name*/("*ST生化"),
-	/*NamePinYin*/("*STSH")
+	/*NamePinYin*/("*STSH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000404"),
-	/*Name*/("华意压缩"),
-	/*NamePinYin*/("HYYS")
+	/*NamePinYin*/("HYYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000405"),
-	/*Name*/("ST鑫光"),
-	/*NamePinYin*/("STXG")
+	/*NamePinYin*/("STXG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000406"),
-	/*Name*/("大明退市"),
-	/*NamePinYin*/("DMTS")
+	/*NamePinYin*/("DMTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000407"),
-	/*Name*/("胜利股份"),
-	/*NamePinYin*/("SLGF")
+	/*NamePinYin*/("SLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000408"),
-	/*Name*/("金谷源"),
-	/*NamePinYin*/("JGY")
+	/*NamePinYin*/("JGY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000409"),
-	/*Name*/("山东地矿"),
-	/*NamePinYin*/("SDDK")
+	/*NamePinYin*/("SDDK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000410"),
-	/*Name*/("沈阳机床"),
-	/*NamePinYin*/("SYJC")
+	/*NamePinYin*/("SYJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000411"),
-	/*Name*/("英特集团"),
-	/*NamePinYin*/("YTJT")
+	/*NamePinYin*/("YTJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000412"),
-	/*Name*/("ST五环"),
-	/*NamePinYin*/("STWH")
+	/*NamePinYin*/("STWH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000413"),
-	/*Name*/("东旭光电"),
-	/*NamePinYin*/("DXGD")
+	/*NamePinYin*/("DXGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000415"),
-	/*Name*/("渤海租赁"),
-	/*NamePinYin*/("BHZL")
+	/*NamePinYin*/("BHZL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000416"),
-	/*Name*/("民生控股"),
-	/*NamePinYin*/("MSKG")
+	/*NamePinYin*/("MSKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000417"),
-	/*Name*/("合肥百货"),
-	/*NamePinYin*/("GFBH")
+	/*NamePinYin*/("GFBH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000418"),
-	/*Name*/("小天鹅A"),
-	/*NamePinYin*/("XTEA")
+	/*NamePinYin*/("XTEA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000419"),
-	/*Name*/("通程控股"),
-	/*NamePinYin*/("TCKG")
+	/*NamePinYin*/("TCKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000420"),
-	/*Name*/("吉林化纤"),
-	/*NamePinYin*/("JLHQ")
+	/*NamePinYin*/("JLHQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000421"),
-	/*Name*/("南京中北"),
-	/*NamePinYin*/("NJZB")
+	/*NamePinYin*/("NJZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000422"),
-	/*Name*/("湖北宜化"),
-	/*NamePinYin*/("HBYH")
+	/*NamePinYin*/("HBYH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000423"),
-	/*Name*/("东阿阿胶"),
-	/*NamePinYin*/("DAAJ")
+	/*NamePinYin*/("DAAJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000425"),
-	/*Name*/("徐工机械"),
-	/*NamePinYin*/("XGJX")
+	/*NamePinYin*/("XGJX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000426"),
-	/*Name*/("兴业矿业"),
-	/*NamePinYin*/("XYKY")
+	/*NamePinYin*/("XYKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000428"),
-	/*Name*/("华天酒店"),
-	/*NamePinYin*/("HTJD")
+	/*NamePinYin*/("HTJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000429"),
-	/*Name*/("粤高速A"),
-	/*NamePinYin*/("YGSA")
+	/*NamePinYin*/("YGSA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000430"),
-	/*Name*/("张家界"),
-	/*NamePinYin*/("ZGJ")
+	/*NamePinYin*/("ZGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000488"),
-	/*Name*/("晨鸣纸业"),
-	/*NamePinYin*/("CMZY")
+	/*NamePinYin*/("CMZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000498"),
-	/*Name*/("山东路桥"),
-	/*NamePinYin*/("SDLQ")
+	/*NamePinYin*/("SDLQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000501"),
-	/*Name*/("鄂武商A"),
-	/*NamePinYin*/("EWSA")
+	/*NamePinYin*/("EWSA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000502"),
-	/*Name*/("绿景控股"),
-	/*NamePinYin*/("LJKG")
+	/*NamePinYin*/("LJKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000503"),
-	/*Name*/("海虹控股"),
-	/*NamePinYin*/("HHKG")
+	/*NamePinYin*/("HHKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000504"),
-	/*Name*/("*ST传媒"),
-	/*NamePinYin*/("*STCM")
+	/*NamePinYin*/("*STCM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000505"),
-	/*Name*/("珠江控股"),
-	/*NamePinYin*/("ZJKG")
+	/*NamePinYin*/("ZJKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000506"),
-	/*Name*/("中润资源"),
-	/*NamePinYin*/("ZRZY")
+	/*NamePinYin*/("ZRZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000507"),
-	/*Name*/("珠海港"),
-	/*NamePinYin*/("ZHG")
+	/*NamePinYin*/("ZHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000508"),
-	/*Name*/("琼民源"),
-	/*NamePinYin*/("QMY")
+	/*NamePinYin*/("QMY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000509"),
-	/*Name*/("华塑控股"),
-	/*NamePinYin*/("HSKG")
+	/*NamePinYin*/("HSKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000510"),
-	/*Name*/("金路集团"),
-	/*NamePinYin*/("JLJT")
+	/*NamePinYin*/("JLJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000511"),
-	/*Name*/("烯碳新材"),
-	/*NamePinYin*/("XTXC")
+	/*NamePinYin*/("XTXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000513"),
-	/*Name*/("丽珠集团"),
-	/*NamePinYin*/("LZJT")
+	/*NamePinYin*/("LZJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000514"),
-	/*Name*/("渝开发"),
-	/*NamePinYin*/("YKF")
+	/*NamePinYin*/("YKF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000515"),
-	/*Name*/("攀渝钛业"),
-	/*NamePinYin*/("PYTY")
+	/*NamePinYin*/("PYTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000516"),
-	/*Name*/("开元投资"),
-	/*NamePinYin*/("KYTZ")
+	/*NamePinYin*/("KYTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000517"),
-	/*Name*/("荣安地产"),
-	/*NamePinYin*/("RADC")
+	/*NamePinYin*/("RADC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000518"),
-	/*Name*/("四环生物"),
-	/*NamePinYin*/("SHSW")
+	/*NamePinYin*/("SHSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000519"),
-	/*Name*/("江南红箭"),
-	/*NamePinYin*/("JNGJ")
+	/*NamePinYin*/("JNGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000520"),
-	/*Name*/("*ST凤凰"),
-	/*NamePinYin*/("*STFH")
+	/*NamePinYin*/("*STFH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000521"),
-	/*Name*/("美菱电器"),
-	/*NamePinYin*/("MLDQ")
+	/*NamePinYin*/("MLDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000522"),
-	/*Name*/("白云山A"),
-	/*NamePinYin*/("BYSA")
+	/*NamePinYin*/("BYSA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000523"),
-	/*Name*/("广州浪奇"),
-	/*NamePinYin*/("AZLJ")
+	/*NamePinYin*/("AZLJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000524"),
-	/*Name*/("东方宾馆"),
-	/*NamePinYin*/("DFBG")
+	/*NamePinYin*/("DFBG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000525"),
-	/*Name*/("红太阳"),
-	/*NamePinYin*/("GTY")
+	/*NamePinYin*/("GTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000526"),
-	/*Name*/("银润投资"),
-	/*NamePinYin*/("YRTZ")
+	/*NamePinYin*/("YRTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000527"),
-	/*Name*/("美的电器"),
-	/*NamePinYin*/("MDDQ")
+	/*NamePinYin*/("MDDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000528"),
-	/*Name*/("柳工"),
-	/*NamePinYin*/("LG")
+	/*NamePinYin*/("LG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000529"),
-	/*Name*/("广弘控股"),
-	/*NamePinYin*/("AHKG")
+	/*NamePinYin*/("AHKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000530"),
-	/*Name*/("大冷股份"),
-	/*NamePinYin*/("DLGF")
+	/*NamePinYin*/("DLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000531"),
-	/*Name*/("穗恒运A"),
-	/*NamePinYin*/("SHYA")
+	/*NamePinYin*/("SHYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000532"),
-	/*Name*/("力合股份"),
-	/*NamePinYin*/("LGGF")
+	/*NamePinYin*/("LGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000533"),
-	/*Name*/("万家乐"),
-	/*NamePinYin*/("MGL")
+	/*NamePinYin*/("MGL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000534"),
-	/*Name*/("万泽股份"),
-	/*NamePinYin*/("MZGF")
+	/*NamePinYin*/("MZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000535"),
-	/*Name*/("*ST猴王"),
-	/*NamePinYin*/("*STHW")
+	/*NamePinYin*/("*STHW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000536"),
-	/*Name*/("华映科技"),
-	/*NamePinYin*/("HYKJ")
+	/*NamePinYin*/("HYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000537"),
-	/*Name*/("广宇发展"),
-	/*NamePinYin*/("AYFZ")
+	/*NamePinYin*/("AYFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000538"),
-	/*Name*/("云南白药"),
-	/*NamePinYin*/("YNBY")
+	/*NamePinYin*/("YNBY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000539"),
-	/*Name*/("粤电力A"),
-	/*NamePinYin*/("YDLA")
+	/*NamePinYin*/("YDLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000540"),
-	/*Name*/("中天城投"),
-	/*NamePinYin*/("ZTCT")
+	/*NamePinYin*/("ZTCT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000541"),
-	/*Name*/("佛山照明"),
-	/*NamePinYin*/("FSZM")
+	/*NamePinYin*/("FSZM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000542"),
-	/*Name*/("TCL通讯"),
-	/*NamePinYin*/("TCLTX")
+	/*NamePinYin*/("TCLTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000543"),
-	/*Name*/("皖能电力"),
-	/*NamePinYin*/("WNDL")
+	/*NamePinYin*/("WNDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000544"),
-	/*Name*/("中原环保"),
-	/*NamePinYin*/("ZYHB")
+	/*NamePinYin*/("ZYHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000545"),
-	/*Name*/("金浦钛业"),
-	/*NamePinYin*/("JPTY")
+	/*NamePinYin*/("JPTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000546"),
-	/*Name*/("光华控股"),
-	/*NamePinYin*/("GHKG")
+	/*NamePinYin*/("GHKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000547"),
-	/*Name*/("闽福发A"),
-	/*NamePinYin*/("MFFA")
+	/*NamePinYin*/("MFFA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000548"),
-	/*Name*/("湖南投资"),
-	/*NamePinYin*/("HNTZ")
+	/*NamePinYin*/("HNTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000549"),
-	/*Name*/("S湘火炬"),
-	/*NamePinYin*/("SXHJ")
+	/*NamePinYin*/("SXHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000550"),
-	/*Name*/("江铃汽车"),
-	/*NamePinYin*/("JLQC")
+	/*NamePinYin*/("JLQC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000551"),
-	/*Name*/("创元科技"),
-	/*NamePinYin*/("CYKJ")
+	/*NamePinYin*/("CYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000552"),
-	/*Name*/("靖远煤电"),
-	/*NamePinYin*/("JYMD")
+	/*NamePinYin*/("JYMD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000553"),
-	/*Name*/("沙隆达A"),
-	/*NamePinYin*/("SLDA")
+	/*NamePinYin*/("SLDA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000554"),
-	/*Name*/("泰山石油"),
-	/*NamePinYin*/("TSDY")
+	/*NamePinYin*/("TSDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000555"),
-	/*Name*/("神州信息"),
-	/*NamePinYin*/("SZXX")
+	/*NamePinYin*/("SZXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000556"),
-	/*Name*/("PT南洋"),
-	/*NamePinYin*/("PTNX")
+	/*NamePinYin*/("PTNX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000557"),
-	/*Name*/("*ST广夏"),
-	/*NamePinYin*/("*STAX")
+	/*NamePinYin*/("*STAX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000558"),
-	/*Name*/("莱茵置业"),
-	/*NamePinYin*/("LYZY")
+	/*NamePinYin*/("LYZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000559"),
-	/*Name*/("万向钱潮"),
-	/*NamePinYin*/("MXQC")
+	/*NamePinYin*/("MXQC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000560"),
-	/*Name*/("昆百大A"),
-	/*NamePinYin*/("KBDA")
+	/*NamePinYin*/("KBDA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000561"),
-	/*Name*/("烽火电子"),
-	/*NamePinYin*/("FHDZ")
+	/*NamePinYin*/("FHDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000562"),
-	/*Name*/("宏源证券"),
-	/*NamePinYin*/("HYZQ")
+	/*NamePinYin*/("HYZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000563"),
-	/*Name*/("陕国投A"),
-	/*NamePinYin*/("SGTA")
+	/*NamePinYin*/("SGTA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000564"),
-	/*Name*/("西安民生"),
-	/*NamePinYin*/("XAMS")
+	/*NamePinYin*/("XAMS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000565"),
-	/*Name*/("渝三峡A"),
-	/*NamePinYin*/("YSXA")
+	/*NamePinYin*/("YSXA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000566"),
-	/*Name*/("海南海药"),
-	/*NamePinYin*/("HNHY")
+	/*NamePinYin*/("HNHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000567"),
-	/*Name*/("海德股份"),
-	/*NamePinYin*/("HDGF")
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000568"),
-	/*Name*/("泸州老窖"),
-	/*NamePinYin*/("LZLJ")
+	/*NamePinYin*/("LZLJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000569"),
-	/*Name*/("长城股份"),
-	/*NamePinYin*/("CCGF")
+	/*NamePinYin*/("CCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000570"),
-	/*Name*/("苏常柴A"),
-	/*NamePinYin*/("SCCA")
+	/*NamePinYin*/("SCCA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000571"),
-	/*Name*/("新大洲A"),
-	/*NamePinYin*/("XDZA")
+	/*NamePinYin*/("XDZA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000572"),
-	/*Name*/("海马汽车"),
-	/*NamePinYin*/("HMQC")
+	/*NamePinYin*/("HMQC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000573"),
-	/*Name*/("粤宏远A"),
-	/*NamePinYin*/("YHYA")
+	/*NamePinYin*/("YHYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000576"),
-	/*Name*/("广东甘化"),
-	/*NamePinYin*/("ADGH")
+	/*NamePinYin*/("ADGH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000578"),
-	/*Name*/("盐湖集团"),
-	/*NamePinYin*/("YHJT")
+	/*NamePinYin*/("YHJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000581"),
-	/*Name*/("威孚高科"),
-	/*NamePinYin*/("WFGK")
+	/*NamePinYin*/("WFGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000582"),
-	/*Name*/("北部湾港"),
-	/*NamePinYin*/("BBWG")
+	/*NamePinYin*/("BBWG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000583"),
-	/*Name*/("S*ST托普"),
-	/*NamePinYin*/("S*STTP")
+	/*NamePinYin*/("S*STTP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000584"),
-	/*Name*/("友利控股"),
-	/*NamePinYin*/("YLKG")
+	/*NamePinYin*/("YLKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000585"),
-	/*Name*/("东北电气"),
-	/*NamePinYin*/("DBDQ")
+	/*NamePinYin*/("DBDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000586"),
-	/*Name*/("汇源通信"),
-	/*NamePinYin*/("HYTX")
+	/*NamePinYin*/("HYTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000587"),
-	/*Name*/("金叶珠宝"),
-	/*NamePinYin*/("JXZB")
+	/*NamePinYin*/("JXZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000588"),
-	/*Name*/("PT粤金曼"),
-	/*NamePinYin*/("PTYJM")
+	/*NamePinYin*/("PTYJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000589"),
-	/*Name*/("黔轮胎A"),
-	/*NamePinYin*/("QLTA")
+	/*NamePinYin*/("QLTA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000590"),
-	/*Name*/("紫光古汉"),
-	/*NamePinYin*/("ZGGH")
+	/*NamePinYin*/("ZGGH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000591"),
-	/*Name*/("桐君阁"),
-	/*NamePinYin*/("TJG")
+	/*NamePinYin*/("TJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000592"),
-	/*Name*/("平潭发展"),
-	/*NamePinYin*/("PTFZ")
+	/*NamePinYin*/("PTFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000593"),
-	/*Name*/("大通燃气"),
-	/*NamePinYin*/("DTRQ")
+	/*NamePinYin*/("DTRQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000594"),
-	/*Name*/("*ST国恒"),
-	/*NamePinYin*/("*STGH")
+	/*NamePinYin*/("*STGH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000595"),
-	/*Name*/("西北轴承"),
-	/*NamePinYin*/("XBZC")
+	/*NamePinYin*/("XBZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000596"),
-	/*Name*/("古井贡酒"),
-	/*NamePinYin*/("GJGJ")
+	/*NamePinYin*/("GJGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000597"),
-	/*Name*/("东北制药"),
-	/*NamePinYin*/("DBZY")
+	/*NamePinYin*/("DBZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000598"),
-	/*Name*/("兴蓉投资"),
-	/*NamePinYin*/("XRTZ")
+	/*NamePinYin*/("XRTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000599"),
-	/*Name*/("青岛双星"),
-	/*NamePinYin*/("QDSX")
+	/*NamePinYin*/("QDSX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000600"),
-	/*Name*/("建投能源"),
-	/*NamePinYin*/("JTNY")
+	/*NamePinYin*/("JTNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000601"),
-	/*Name*/("韶能股份"),
-	/*NamePinYin*/("SNGF")
+	/*NamePinYin*/("SNGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000602"),
-	/*Name*/("金马退市"),
-	/*NamePinYin*/("JMTS")
+	/*NamePinYin*/("JMTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000603"),
-	/*Name*/("盛达矿业"),
-	/*NamePinYin*/("CDKY")
+	/*NamePinYin*/("CDKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000605"),
-	/*Name*/("渤海股份"),
-	/*NamePinYin*/("BHGF")
+	/*NamePinYin*/("BHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000606"),
-	/*Name*/("青海明胶"),
-	/*NamePinYin*/("QHMJ")
+	/*NamePinYin*/("QHMJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000607"),
-	/*Name*/("华智控股"),
-	/*NamePinYin*/("HZKG")
+	/*NamePinYin*/("HZKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000608"),
-	/*Name*/("阳光股份"),
-	/*NamePinYin*/("YGGF")
+	/*NamePinYin*/("YGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000609"),
-	/*Name*/("绵世股份"),
-	/*NamePinYin*/("MSGF")
+	/*NamePinYin*/("MSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000610"),
-	/*Name*/("西安旅游"),
-	/*NamePinYin*/("XALY")
+	/*NamePinYin*/("XALY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000611"),
-	/*Name*/("内蒙发展"),
-	/*NamePinYin*/("NMFZ")
+	/*NamePinYin*/("NMFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000612"),
-	/*Name*/("焦作万方"),
-	/*NamePinYin*/("JZMF")
+	/*NamePinYin*/("JZMF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000613"),
-	/*Name*/("大东海A"),
-	/*NamePinYin*/("DDHA")
+	/*NamePinYin*/("DDHA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000615"),
-	/*Name*/("湖北金环"),
-	/*NamePinYin*/("HBJH")
+	/*NamePinYin*/("HBJH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000616"),
-	/*Name*/("亿城投资"),
-	/*NamePinYin*/("YCTZ")
+	/*NamePinYin*/("YCTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000617"),
-	/*Name*/("石油济柴"),
-	/*NamePinYin*/("DYJC")
+	/*NamePinYin*/("DYJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000618"),
-	/*Name*/("吉化退市"),
-	/*NamePinYin*/("JHTS")
+	/*NamePinYin*/("JHTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000619"),
-	/*Name*/("海螺型材"),
-	/*NamePinYin*/("HLXC")
+	/*NamePinYin*/("HLXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000620"),
-	/*Name*/("新华联"),
-	/*NamePinYin*/("XHL")
+	/*NamePinYin*/("XHL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000621"),
-	/*Name*/("*ST比特"),
-	/*NamePinYin*/("*STBT")
+	/*NamePinYin*/("*STBT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000622"),
-	/*Name*/("恒立实业"),
-	/*NamePinYin*/("HLSY")
+	/*NamePinYin*/("HLSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000623"),
-	/*Name*/("吉林敖东"),
-	/*NamePinYin*/("JLAD")
+	/*NamePinYin*/("JLAD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000625"),
-	/*Name*/("长安汽车"),
-	/*NamePinYin*/("CAQC")
+	/*NamePinYin*/("CAQC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000626"),
-	/*Name*/("如意集团"),
-	/*NamePinYin*/("RYJT")
+	/*NamePinYin*/("RYJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000627"),
-	/*Name*/("天茂集团"),
-	/*NamePinYin*/("TMJT")
+	/*NamePinYin*/("TMJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000628"),
-	/*Name*/("高新发展"),
-	/*NamePinYin*/("GXFZ")
+	/*NamePinYin*/("GXFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000629"),
-	/*Name*/("攀钢钒钛"),
-	/*NamePinYin*/("PGFT")
+	/*NamePinYin*/("PGFT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000630"),
-	/*Name*/("铜陵有色"),
-	/*NamePinYin*/("TLYS")
+	/*NamePinYin*/("TLYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000631"),
-	/*Name*/("顺发恒业"),
-	/*NamePinYin*/("SFHY")
+	/*NamePinYin*/("SFHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000632"),
-	/*Name*/("三木集团"),
-	/*NamePinYin*/("SMJT")
+	/*NamePinYin*/("SMJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000633"),
-	/*Name*/("合金投资"),
-	/*NamePinYin*/("GJTZ")
+	/*NamePinYin*/("GJTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000635"),
-	/*Name*/("英力特"),
-	/*NamePinYin*/("YLT")
+	/*NamePinYin*/("YLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000636"),
-	/*Name*/("风华高科"),
-	/*NamePinYin*/("FHGK")
+	/*NamePinYin*/("FHGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000637"),
-	/*Name*/("茂化实华"),
-	/*NamePinYin*/("MHSH")
+	/*NamePinYin*/("MHSH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000638"),
-	/*Name*/("万方发展"),
-	/*NamePinYin*/("MFFZ")
+	/*NamePinYin*/("MFFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000639"),
-	/*Name*/("西王食品"),
-	/*NamePinYin*/("XWSP")
+	/*NamePinYin*/("XWSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000650"),
-	/*Name*/("仁和药业"),
-	/*NamePinYin*/("RHYY")
+	/*NamePinYin*/("RHYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000651"),
-	/*Name*/("格力电器"),
-	/*NamePinYin*/("GLDQ")
+	/*NamePinYin*/("GLDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000652"),
-	/*Name*/("泰达股份"),
-	/*NamePinYin*/("TDGF")
+	/*NamePinYin*/("TDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000653"),
-	/*Name*/("ST九州"),
-	/*NamePinYin*/("STJZ")
+	/*NamePinYin*/("STJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000655"),
-	/*Name*/("金岭矿业"),
-	/*NamePinYin*/("JLKY")
+	/*NamePinYin*/("JLKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000656"),
-	/*Name*/("金科股份"),
-	/*NamePinYin*/("JKGF")
+	/*NamePinYin*/("JKGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000657"),
-	/*Name*/("中钨高新"),
-	/*NamePinYin*/("ZWGX")
+	/*NamePinYin*/("ZWGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000658"),
-	/*Name*/("ST海洋"),
-	/*NamePinYin*/("STHX")
+	/*NamePinYin*/("STHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000659"),
-	/*Name*/("*ST中富"),
-	/*NamePinYin*/("*STZF")
+	/*NamePinYin*/("*STZF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000660"),
-	/*Name*/("*ST南华"),
-	/*NamePinYin*/("*STNH")
+	/*NamePinYin*/("*STNH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000661"),
-	/*Name*/("长春高新"),
-	/*NamePinYin*/("CCGX")
+	/*NamePinYin*/("CCGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000662"),
-	/*Name*/("索芙特"),
-	/*NamePinYin*/("SFT")
+	/*NamePinYin*/("SFT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000663"),
-	/*Name*/("永安林业"),
-	/*NamePinYin*/("YALY")
+	/*NamePinYin*/("YALY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000665"),
-	/*Name*/("湖北广电"),
-	/*NamePinYin*/("HBAD")
+	/*NamePinYin*/("HBAD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000666"),
-	/*Name*/("经纬纺机"),
-	/*NamePinYin*/("JWFJ")
+	/*NamePinYin*/("JWFJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000667"),
-	/*Name*/("美好集团"),
-	/*NamePinYin*/("MHJT")
+	/*NamePinYin*/("MHJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000668"),
-	/*Name*/("荣丰控股"),
-	/*NamePinYin*/("RFKG")
+	/*NamePinYin*/("RFKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000669"),
-	/*Name*/("金鸿能源"),
-	/*NamePinYin*/("JHNY")
+	/*NamePinYin*/("JHNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000670"),
-	/*Name*/("盈方微"),
-	/*NamePinYin*/("YFW")
+	/*NamePinYin*/("YFW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000671"),
-	/*Name*/("阳光城"),
-	/*NamePinYin*/("YGC")
+	/*NamePinYin*/("YGC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000672"),
-	/*Name*/("上峰水泥"),
-	/*NamePinYin*/("SFSN")
+	/*NamePinYin*/("SFSN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000673"),
-	/*Name*/("当代东方"),
-	/*NamePinYin*/("DDDF")
+	/*NamePinYin*/("DDDF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000675"),
-	/*Name*/("ST银山"),
-	/*NamePinYin*/("STYS")
+	/*NamePinYin*/("STYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000676"),
-	/*Name*/("思达高科"),
-	/*NamePinYin*/("SDGK")
+	/*NamePinYin*/("SDGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000677"),
-	/*Name*/("恒天海龙"),
-	/*NamePinYin*/("HTHL")
+	/*NamePinYin*/("HTHL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000678"),
-	/*Name*/("襄阳轴承"),
-	/*NamePinYin*/("XYZC")
+	/*NamePinYin*/("XYZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000679"),
-	/*Name*/("大连友谊"),
-	/*NamePinYin*/("DLYY")
+	/*NamePinYin*/("DLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000680"),
-	/*Name*/("山推股份"),
-	/*NamePinYin*/("STGF")
+	/*NamePinYin*/("STGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000681"),
-	/*Name*/("视觉中国"),
-	/*NamePinYin*/("SJZG")
+	/*NamePinYin*/("SJZG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000682"),
-	/*Name*/("东方电子"),
-	/*NamePinYin*/("DFDZ")
+	/*NamePinYin*/("DFDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000683"),
-	/*Name*/("远兴能源"),
-	/*NamePinYin*/("YXNY")
+	/*NamePinYin*/("YXNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000685"),
-	/*Name*/("中山公用"),
-	/*NamePinYin*/("ZSGY")
+	/*NamePinYin*/("ZSGY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000686"),
-	/*Name*/("东北证券"),
-	/*NamePinYin*/("DBZQ")
+	/*NamePinYin*/("DBZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000687"),
-	/*Name*/("恒天天鹅"),
-	/*NamePinYin*/("HTTE")
+	/*NamePinYin*/("HTTE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000688"),
-	/*Name*/("建新矿业"),
-	/*NamePinYin*/("JXKY")
+	/*NamePinYin*/("JXKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000689"),
-	/*Name*/("ST宏业"),
-	/*NamePinYin*/("STHY")
+	/*NamePinYin*/("STHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000690"),
-	/*Name*/("宝新能源"),
-	/*NamePinYin*/("BXNY")
+	/*NamePinYin*/("BXNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000691"),
-	/*Name*/("亚太实业"),
-	/*NamePinYin*/("YTSY")
+	/*NamePinYin*/("YTSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000692"),
-	/*Name*/("惠天热电"),
-	/*NamePinYin*/("HTRD")
+	/*NamePinYin*/("HTRD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000693"),
-	/*Name*/("华泽钴镍"),
-	/*NamePinYin*/("HZGN")
+	/*NamePinYin*/("HZGN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000695"),
-	/*Name*/("滨海能源"),
-	/*NamePinYin*/("BHNY")
+	/*NamePinYin*/("BHNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000697"),
-	/*Name*/("炼石有色"),
-	/*NamePinYin*/("LDYS")
+	/*NamePinYin*/("LDYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000698"),
-	/*Name*/("沈阳化工"),
-	/*NamePinYin*/("SYHG")
+	/*NamePinYin*/("SYHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000699"),
-	/*Name*/("S*ST佳纸"),
-	/*NamePinYin*/("S*STJZ")
+	/*NamePinYin*/("S*STJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000700"),
-	/*Name*/("模塑科技"),
-	/*NamePinYin*/("MSKJ")
+	/*NamePinYin*/("MSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000701"),
-	/*Name*/("厦门信达"),
-	/*NamePinYin*/("SMXD")
+	/*NamePinYin*/("SMXD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000702"),
-	/*Name*/("正虹科技"),
-	/*NamePinYin*/("ZHKJ")
+	/*NamePinYin*/("ZHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000703"),
-	/*Name*/("恒逸石化"),
-	/*NamePinYin*/("HYDH")
+	/*NamePinYin*/("HYDH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000705"),
-	/*Name*/("浙江震元"),
-	/*NamePinYin*/("ZJZY")
+	/*NamePinYin*/("ZJZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000707"),
-	/*Name*/("双环科技"),
-	/*NamePinYin*/("SHKJ")
+	/*NamePinYin*/("SHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000708"),
-	/*Name*/("大冶特钢"),
-	/*NamePinYin*/("DYTG")
+	/*NamePinYin*/("DYTG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000709"),
-	/*Name*/("河北钢铁"),
-	/*NamePinYin*/("HBGT")
+	/*NamePinYin*/("HBGT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000710"),
-	/*Name*/("天兴仪表"),
-	/*NamePinYin*/("TXYB")
+	/*NamePinYin*/("TXYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000711"),
-	/*Name*/("天伦置业"),
-	/*NamePinYin*/("TLZY")
+	/*NamePinYin*/("TLZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000712"),
-	/*Name*/("锦龙股份"),
-	/*NamePinYin*/("JLGF")
+	/*NamePinYin*/("JLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000713"),
-	/*Name*/("丰乐种业"),
-	/*NamePinYin*/("FLCY")
+	/*NamePinYin*/("FLCY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000715"),
-	/*Name*/("中兴商业"),
-	/*NamePinYin*/("ZXSY")
+	/*NamePinYin*/("ZXSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000716"),
-	/*Name*/("南方食品"),
-	/*NamePinYin*/("NFSP")
+	/*NamePinYin*/("NFSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000717"),
-	/*Name*/("*ST韶钢"),
-	/*NamePinYin*/("*STSG")
+	/*NamePinYin*/("*STSG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000718"),
-	/*Name*/("苏宁环球"),
-	/*NamePinYin*/("SNHQ")
+	/*NamePinYin*/("SNHQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000719"),
-	/*Name*/("大地传媒"),
-	/*NamePinYin*/("DDCM")
+	/*NamePinYin*/("DDCM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000720"),
-	/*Name*/("新能泰山"),
-	/*NamePinYin*/("XNTS")
+	/*NamePinYin*/("XNTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000721"),
-	/*Name*/("西安饮食"),
-	/*NamePinYin*/("XAYS")
+	/*NamePinYin*/("XAYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000722"),
-	/*Name*/("湖南发展"),
-	/*NamePinYin*/("HNFZ")
+	/*NamePinYin*/("HNFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000723"),
-	/*Name*/("美锦能源"),
-	/*NamePinYin*/("MJNY")
+	/*NamePinYin*/("MJNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000725"),
-	/*Name*/("京东方A"),
-	/*NamePinYin*/("JDFA")
+	/*NamePinYin*/("JDFA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000726"),
-	/*Name*/("鲁泰A"),
-	/*NamePinYin*/("LTA")
+	/*NamePinYin*/("LTA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000727"),
-	/*Name*/("华东科技"),
-	/*NamePinYin*/("HDKJ")
+	/*NamePinYin*/("HDKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000728"),
-	/*Name*/("国元证券"),
-	/*NamePinYin*/("GYZQ")
+	/*NamePinYin*/("GYZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000729"),
-	/*Name*/("燕京啤酒"),
-	/*NamePinYin*/("YJPJ")
+	/*NamePinYin*/("YJPJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000730"),
-	/*Name*/("*ST环保"),
-	/*NamePinYin*/("*STHB")
+	/*NamePinYin*/("*STHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000731"),
-	/*Name*/("四川美丰"),
-	/*NamePinYin*/("SCMF")
+	/*NamePinYin*/("SCMF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000732"),
-	/*Name*/("泰禾集团"),
-	/*NamePinYin*/("THJT")
+	/*NamePinYin*/("THJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000733"),
-	/*Name*/("振华科技"),
-	/*NamePinYin*/("ZHKJ")
+	/*NamePinYin*/("ZHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000735"),
-	/*Name*/("罗牛山"),
-	/*NamePinYin*/("LNS")
+	/*NamePinYin*/("LNS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000736"),
-	/*Name*/("中房地产"),
-	/*NamePinYin*/("ZFDC")
+	/*NamePinYin*/("ZFDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000737"),
-	/*Name*/("南风化工"),
-	/*NamePinYin*/("NFHG")
+	/*NamePinYin*/("NFHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000738"),
-	/*Name*/("中航动控"),
-	/*NamePinYin*/("ZHDK")
+	/*NamePinYin*/("ZHDK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000739"),
-	/*Name*/("普洛药业"),
-	/*NamePinYin*/("PLYY")
+	/*NamePinYin*/("PLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000748"),
-	/*Name*/("长城信息"),
-	/*NamePinYin*/("CCXX")
+	/*NamePinYin*/("CCXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000750"),
-	/*Name*/("国海证券"),
-	/*NamePinYin*/("GHZQ")
+	/*NamePinYin*/("GHZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000751"),
-	/*Name*/("锌业股份"),
-	/*NamePinYin*/("XYGF")
+	/*NamePinYin*/("XYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000752"),
-	/*Name*/("西藏发展"),
-	/*NamePinYin*/("XCFZ")
+	/*NamePinYin*/("XCFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000753"),
-	/*Name*/("漳州发展"),
-	/*NamePinYin*/("ZZFZ")
+	/*NamePinYin*/("ZZFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000755"),
-	/*Name*/("*ST三维"),
-	/*NamePinYin*/("*STSW")
+	/*NamePinYin*/("*STSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000756"),
-	/*Name*/("新华制药"),
-	/*NamePinYin*/("XHZY")
+	/*NamePinYin*/("XHZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000757"),
-	/*Name*/("浩物股份"),
-	/*NamePinYin*/("HWGF")
+	/*NamePinYin*/("HWGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000758"),
-	/*Name*/("中色股份"),
-	/*NamePinYin*/("ZSGF")
+	/*NamePinYin*/("ZSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000759"),
-	/*Name*/("中百集团"),
-	/*NamePinYin*/("ZBJT")
+	/*NamePinYin*/("ZBJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000760"),
-	/*Name*/("斯太尔"),
-	/*NamePinYin*/("STE")
+	/*NamePinYin*/("STE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000761"),
-	/*Name*/("本钢板材"),
-	/*NamePinYin*/("BGBC")
+	/*NamePinYin*/("BGBC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000762"),
-	/*Name*/("西藏矿业"),
-	/*NamePinYin*/("XCKY")
+	/*NamePinYin*/("XCKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000763"),
-	/*Name*/("锦化退市"),
-	/*NamePinYin*/("JHTS")
+	/*NamePinYin*/("JHTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000765"),
-	/*Name*/("*ST华信"),
-	/*NamePinYin*/("*STHX")
+	/*NamePinYin*/("*STHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000766"),
-	/*Name*/("通化金马"),
-	/*NamePinYin*/("THJM")
+	/*NamePinYin*/("THJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000767"),
-	/*Name*/("漳泽电力"),
-	/*NamePinYin*/("ZZDL")
+	/*NamePinYin*/("ZZDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000768"),
-	/*Name*/("中航飞机"),
-	/*NamePinYin*/("ZHFJ")
+	/*NamePinYin*/("ZHFJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000769"),
-	/*Name*/("*ST大菲"),
-	/*NamePinYin*/("*STDF")
+	/*NamePinYin*/("*STDF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000776"),
-	/*Name*/("广发证券"),
-	/*NamePinYin*/("AFZQ")
+	/*NamePinYin*/("AFZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000777"),
-	/*Name*/("中核科技"),
-	/*NamePinYin*/("ZHKJ")
+	/*NamePinYin*/("ZHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000778"),
-	/*Name*/("新兴铸管"),
-	/*NamePinYin*/("XXZG")
+	/*NamePinYin*/("XXZG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000779"),
-	/*Name*/("*ST派神"),
-	/*NamePinYin*/("*STPS")
+	/*NamePinYin*/("*STPS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000780"),
-	/*Name*/("平庄能源"),
-	/*NamePinYin*/("PZNY")
+	/*NamePinYin*/("PZNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000782"),
-	/*Name*/("美达股份"),
-	/*NamePinYin*/("MDGF")
+	/*NamePinYin*/("MDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000783"),
-	/*Name*/("长江证券"),
-	/*NamePinYin*/("CJZQ")
+	/*NamePinYin*/("CJZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000785"),
-	/*Name*/("武汉中商"),
-	/*NamePinYin*/("WHZS")
+	/*NamePinYin*/("WHZS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000786"),
-	/*Name*/("北新建材"),
-	/*NamePinYin*/("BXJC")
+	/*NamePinYin*/("BXJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000787"),
-	/*Name*/("*ST创智"),
-	/*NamePinYin*/("*STCZ")
+	/*NamePinYin*/("*STCZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000788"),
-	/*Name*/("北大医药"),
-	/*NamePinYin*/("BDYY")
+	/*NamePinYin*/("BDYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000789"),
-	/*Name*/("江西水泥"),
-	/*NamePinYin*/("JXSN")
+	/*NamePinYin*/("JXSN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000790"),
-	/*Name*/("华神集团"),
-	/*NamePinYin*/("HSJT")
+	/*NamePinYin*/("HSJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000791"),
-	/*Name*/("甘肃电投"),
-	/*NamePinYin*/("GSDT")
+	/*NamePinYin*/("GSDT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000792"),
-	/*Name*/("盐湖股份"),
-	/*NamePinYin*/("YHGF")
+	/*NamePinYin*/("YHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000793"),
-	/*Name*/("华闻传媒"),
-	/*NamePinYin*/("HWCM")
+	/*NamePinYin*/("HWCM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000795"),
-	/*Name*/("太原刚玉"),
-	/*NamePinYin*/("TYGY")
+	/*NamePinYin*/("TYGY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000796"),
-	/*Name*/("易食股份"),
-	/*NamePinYin*/("YSGF")
+	/*NamePinYin*/("YSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000797"),
-	/*Name*/("中国武夷"),
-	/*NamePinYin*/("ZGWY")
+	/*NamePinYin*/("ZGWY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000798"),
-	/*Name*/("中水渔业"),
-	/*NamePinYin*/("ZSYY")
+	/*NamePinYin*/("ZSYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000799"),
-	/*Name*/("酒鬼酒"),
-	/*NamePinYin*/("JGJ")
+	/*NamePinYin*/("JGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000800"),
-	/*Name*/("一汽轿车"),
-	/*NamePinYin*/("YQJC")
+	/*NamePinYin*/("YQJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000801"),
-	/*Name*/("四川九洲"),
-	/*NamePinYin*/("SCJZ")
+	/*NamePinYin*/("SCJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000802"),
-	/*Name*/("北京文化"),
-	/*NamePinYin*/("BJWH")
+	/*NamePinYin*/("BJWH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000803"),
-	/*Name*/("金宇车城"),
-	/*NamePinYin*/("JYCC")
+	/*NamePinYin*/("JYCC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000805"),
-	/*Name*/("*ST炎黄"),
-	/*NamePinYin*/("*STYH")
+	/*NamePinYin*/("*STYH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000806"),
-	/*Name*/("银河投资"),
-	/*NamePinYin*/("YHTZ")
+	/*NamePinYin*/("YHTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000807"),
-	/*Name*/("云铝股份"),
-	/*NamePinYin*/("YLGF")
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000809"),
-	/*Name*/("铁岭新城"),
-	/*NamePinYin*/("TLXC")
+	/*NamePinYin*/("TLXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000810"),
-	/*Name*/("华润锦华"),
-	/*NamePinYin*/("HRJH")
+	/*NamePinYin*/("HRJH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000811"),
-	/*Name*/("烟台冰轮"),
-	/*NamePinYin*/("YTBL")
+	/*NamePinYin*/("YTBL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000812"),
-	/*Name*/("陕西金叶"),
-	/*NamePinYin*/("SXJX")
+	/*NamePinYin*/("SXJX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000813"),
-	/*Name*/("天山纺织"),
-	/*NamePinYin*/("TSFZ")
+	/*NamePinYin*/("TSFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000815"),
-	/*Name*/("美利纸业"),
-	/*NamePinYin*/("MLZY")
+	/*NamePinYin*/("MLZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000816"),
-	/*Name*/("江淮动力"),
-	/*NamePinYin*/("JHDL")
+	/*NamePinYin*/("JHDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000817"),
-	/*Name*/("辽油退市"),
-	/*NamePinYin*/("LYTS")
+	/*NamePinYin*/("LYTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000818"),
-	/*Name*/("方大化工"),
-	/*NamePinYin*/("FDHG")
+	/*NamePinYin*/("FDHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000819"),
-	/*Name*/("岳阳兴长"),
-	/*NamePinYin*/("YYXC")
+	/*NamePinYin*/("YYXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000820"),
-	/*Name*/("金城股份"),
-	/*NamePinYin*/("JCGF")
+	/*NamePinYin*/("JCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000821"),
-	/*Name*/("京山轻机"),
-	/*NamePinYin*/("JSQJ")
+	/*NamePinYin*/("JSQJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000822"),
-	/*Name*/("*ST海化"),
-	/*NamePinYin*/("*STHH")
+	/*NamePinYin*/("*STHH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000823"),
-	/*Name*/("超声电子"),
-	/*NamePinYin*/("CSDZ")
+	/*NamePinYin*/("CSDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000825"),
-	/*Name*/("太钢不锈"),
-	/*NamePinYin*/("TGBX")
+	/*NamePinYin*/("TGBX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000826"),
-	/*Name*/("桑德环境"),
-	/*NamePinYin*/("SDHJ")
+	/*NamePinYin*/("SDHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000827"),
-	/*Name*/("*ST长兴"),
-	/*NamePinYin*/("*STCX")
+	/*NamePinYin*/("*STCX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000828"),
-	/*Name*/("东莞控股"),
-	/*NamePinYin*/("DGKG")
+	/*NamePinYin*/("DGKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000829"),
-	/*Name*/("天音控股"),
-	/*NamePinYin*/("TYKG")
+	/*NamePinYin*/("TYKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000830"),
-	/*Name*/("鲁西化工"),
-	/*NamePinYin*/("LXHG")
+	/*NamePinYin*/("LXHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000831"),
-	/*Name*/("五矿稀土"),
-	/*NamePinYin*/("WKXT")
+	/*NamePinYin*/("WKXT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000832"),
-	/*Name*/("*ST龙涤"),
-	/*NamePinYin*/("*STLD")
+	/*NamePinYin*/("*STLD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000833"),
-	/*Name*/("贵糖股份"),
-	/*NamePinYin*/("GTGF")
+	/*NamePinYin*/("GTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000835"),
-	/*Name*/("四川圣达"),
-	/*NamePinYin*/("SCSD")
+	/*NamePinYin*/("SCSD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000836"),
-	/*Name*/("鑫茂科技"),
-	/*NamePinYin*/("XMKJ")
+	/*NamePinYin*/("XMKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000837"),
-	/*Name*/("秦川发展"),
-	/*NamePinYin*/("QCFZ")
+	/*NamePinYin*/("QCFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000838"),
-	/*Name*/("国兴地产"),
-	/*NamePinYin*/("GXDC")
+	/*NamePinYin*/("GXDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000839"),
-	/*Name*/("中信国安"),
-	/*NamePinYin*/("ZXGA")
+	/*NamePinYin*/("ZXGA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000848"),
-	/*Name*/("承德露露"),
-	/*NamePinYin*/("CDLL")
+	/*NamePinYin*/("CDLL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000850"),
-	/*Name*/("华茂股份"),
-	/*NamePinYin*/("HMGF")
+	/*NamePinYin*/("HMGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000851"),
-	/*Name*/("高鸿股份"),
-	/*NamePinYin*/("GHGF")
+	/*NamePinYin*/("GHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000852"),
-	/*Name*/("江钻股份"),
-	/*NamePinYin*/("JZGF")
+	/*NamePinYin*/("JZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000856"),
-	/*Name*/("冀东装备"),
-	/*NamePinYin*/("JDZB")
+	/*NamePinYin*/("JDZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000858"),
-	/*Name*/("五粮液"),
-	/*NamePinYin*/("WLY")
+	/*NamePinYin*/("WLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000859"),
-	/*Name*/("国风塑业"),
-	/*NamePinYin*/("GFSY")
+	/*NamePinYin*/("GFSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000860"),
-	/*Name*/("顺鑫农业"),
-	/*NamePinYin*/("SXNY")
+	/*NamePinYin*/("SXNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000861"),
-	/*Name*/("海印股份"),
-	/*NamePinYin*/("HYGF")
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000862"),
-	/*Name*/("银星能源"),
-	/*NamePinYin*/("YXNY")
+	/*NamePinYin*/("YXNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000863"),
-	/*Name*/("三湘股份"),
-	/*NamePinYin*/("SXGF")
+	/*NamePinYin*/("SXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000866"),
-	/*Name*/("扬子退市"),
-	/*NamePinYin*/("YZTS")
+	/*NamePinYin*/("YZTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000868"),
-	/*Name*/("安凯客车"),
-	/*NamePinYin*/("AKKC")
+	/*NamePinYin*/("AKKC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000869"),
-	/*Name*/("张裕A"),
-	/*NamePinYin*/("ZYA")
+	/*NamePinYin*/("ZYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000875"),
-	/*Name*/("吉电股份"),
-	/*NamePinYin*/("JDGF")
+	/*NamePinYin*/("JDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000876"),
-	/*Name*/("新希望"),
-	/*NamePinYin*/("XXW")
+	/*NamePinYin*/("XXW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000877"),
-	/*Name*/("天山股份"),
-	/*NamePinYin*/("TSGF")
+	/*NamePinYin*/("TSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000878"),
-	/*Name*/("云南铜业"),
-	/*NamePinYin*/("YNTY")
+	/*NamePinYin*/("YNTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000880"),
-	/*Name*/("潍柴重机"),
-	/*NamePinYin*/("WCCJ")
+	/*NamePinYin*/("WCCJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000881"),
-	/*Name*/("大连国际"),
-	/*NamePinYin*/("DLGJ")
+	/*NamePinYin*/("DLGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000882"),
-	/*Name*/("华联股份"),
-	/*NamePinYin*/("HLGF")
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000883"),
-	/*Name*/("湖北能源"),
-	/*NamePinYin*/("HBNY")
+	/*NamePinYin*/("HBNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000885"),
-	/*Name*/("同力水泥"),
-	/*NamePinYin*/("TLSN")
+	/*NamePinYin*/("TLSN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000886"),
-	/*Name*/("海南高速"),
-	/*NamePinYin*/("HNGS")
+	/*NamePinYin*/("HNGS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000887"),
-	/*Name*/("中鼎股份"),
-	/*NamePinYin*/("ZDGF")
+	/*NamePinYin*/("ZDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000888"),
-	/*Name*/("峨眉山A"),
-	/*NamePinYin*/("EMSA")
+	/*NamePinYin*/("EMSA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000889"),
-	/*Name*/("茂业物流"),
-	/*NamePinYin*/("MYWL")
+	/*NamePinYin*/("MYWL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000890"),
-	/*Name*/("法尔胜"),
-	/*NamePinYin*/("FES")
+	/*NamePinYin*/("FES"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000892"),
-	/*Name*/("星美联合"),
-	/*NamePinYin*/("XMLG")
+	/*NamePinYin*/("XMLG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000893"),
-	/*Name*/("东凌粮油"),
-	/*NamePinYin*/("DLLY")
+	/*NamePinYin*/("DLLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000895"),
-	/*Name*/("双汇发展"),
-	/*NamePinYin*/("SHFZ")
+	/*NamePinYin*/("SHFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000897"),
-	/*Name*/("津滨发展"),
-	/*NamePinYin*/("JBFZ")
+	/*NamePinYin*/("JBFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000898"),
-	/*Name*/("鞍钢股份"),
-	/*NamePinYin*/("AGGF")
+	/*NamePinYin*/("AGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000899"),
-	/*Name*/("赣能股份"),
-	/*NamePinYin*/("GNGF")
+	/*NamePinYin*/("GNGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000900"),
-	/*Name*/("现代投资"),
-	/*NamePinYin*/("XDTZ")
+	/*NamePinYin*/("XDTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000901"),
-	/*Name*/("航天科技"),
-	/*NamePinYin*/("HTKJ")
+	/*NamePinYin*/("HTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000902"),
-	/*Name*/("新洋丰"),
-	/*NamePinYin*/("XXF")
+	/*NamePinYin*/("XXF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000903"),
-	/*Name*/("云内动力"),
-	/*NamePinYin*/("YNDL")
+	/*NamePinYin*/("YNDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000905"),
-	/*Name*/("厦门港务"),
-	/*NamePinYin*/("SMGW")
+	/*NamePinYin*/("SMGW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000906"),
-	/*Name*/("物产中拓"),
-	/*NamePinYin*/("WCZT")
+	/*NamePinYin*/("WCZT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000908"),
-	/*Name*/("天一科技"),
-	/*NamePinYin*/("TYKJ")
+	/*NamePinYin*/("TYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000909"),
-	/*Name*/("数源科技"),
-	/*NamePinYin*/("SYKJ")
+	/*NamePinYin*/("SYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000910"),
-	/*Name*/("大亚科技"),
-	/*NamePinYin*/("DYKJ")
+	/*NamePinYin*/("DYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000911"),
-	/*Name*/("南宁糖业"),
-	/*NamePinYin*/("NNTY")
+	/*NamePinYin*/("NNTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000912"),
-	/*Name*/("泸天化"),
-	/*NamePinYin*/("LTH")
+	/*NamePinYin*/("LTH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000913"),
-	/*Name*/("钱江摩托"),
-	/*NamePinYin*/("QJMT")
+	/*NamePinYin*/("QJMT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000915"),
-	/*Name*/("山大华特"),
-	/*NamePinYin*/("SDHT")
+	/*NamePinYin*/("SDHT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000916"),
-	/*Name*/("华北高速"),
-	/*NamePinYin*/("HBGS")
+	/*NamePinYin*/("HBGS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000917"),
-	/*Name*/("电广传媒"),
-	/*NamePinYin*/("DACM")
+	/*NamePinYin*/("DACM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000918"),
-	/*Name*/("嘉凯城"),
-	/*NamePinYin*/("JKC")
+	/*NamePinYin*/("JKC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000919"),
-	/*Name*/("金陵药业"),
-	/*NamePinYin*/("JLYY")
+	/*NamePinYin*/("JLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000920"),
-	/*Name*/("南方汇通"),
-	/*NamePinYin*/("NFHT")
+	/*NamePinYin*/("NFHT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000921"),
-	/*Name*/("海信科龙"),
-	/*NamePinYin*/("HXKL")
+	/*NamePinYin*/("HXKL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000922"),
-	/*Name*/("佳电股份"),
-	/*NamePinYin*/("JDGF")
+	/*NamePinYin*/("JDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000923"),
-	/*Name*/("河北宣工"),
-	/*NamePinYin*/("HBXG")
+	/*NamePinYin*/("HBXG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000925"),
-	/*Name*/("众合机电"),
-	/*NamePinYin*/("ZGJD")
+	/*NamePinYin*/("ZGJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000926"),
-	/*Name*/("福星股份"),
-	/*NamePinYin*/("FXGF")
+	/*NamePinYin*/("FXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000927"),
-	/*Name*/("一汽夏利"),
-	/*NamePinYin*/("YQXL")
+	/*NamePinYin*/("YQXL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000928"),
-	/*Name*/("中钢国际"),
-	/*NamePinYin*/("ZGGJ")
+	/*NamePinYin*/("ZGGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000929"),
-	/*Name*/("兰州黄河"),
-	/*NamePinYin*/("LZHH")
+	/*NamePinYin*/("LZHH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000930"),
-	/*Name*/("中粮生化"),
-	/*NamePinYin*/("ZLSH")
+	/*NamePinYin*/("ZLSH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000931"),
-	/*Name*/("中关村"),
-	/*NamePinYin*/("ZGC")
+	/*NamePinYin*/("ZGC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000932"),
-	/*Name*/("华菱钢铁"),
-	/*NamePinYin*/("HLGT")
+	/*NamePinYin*/("HLGT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000933"),
-	/*Name*/("神火股份"),
-	/*NamePinYin*/("SHGF")
+	/*NamePinYin*/("SHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000935"),
-	/*Name*/("四川双马"),
-	/*NamePinYin*/("SCSM")
+	/*NamePinYin*/("SCSM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000936"),
-	/*Name*/("华西股份"),
-	/*NamePinYin*/("HXGF")
+	/*NamePinYin*/("HXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000937"),
-	/*Name*/("冀中能源"),
-	/*NamePinYin*/("JZNY")
+	/*NamePinYin*/("JZNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000938"),
-	/*Name*/("紫光股份"),
-	/*NamePinYin*/("ZGGF")
+	/*NamePinYin*/("ZGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000939"),
-	/*Name*/("凯迪电力"),
-	/*NamePinYin*/("KDDL")
+	/*NamePinYin*/("KDDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000948"),
-	/*Name*/("南天信息"),
-	/*NamePinYin*/("NTXX")
+	/*NamePinYin*/("NTXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000949"),
-	/*Name*/("新乡化纤"),
-	/*NamePinYin*/("XXHQ")
+	/*NamePinYin*/("XXHQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000950"),
-	/*Name*/("建峰化工"),
-	/*NamePinYin*/("JFHG")
+	/*NamePinYin*/("JFHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000951"),
-	/*Name*/("中国重汽"),
-	/*NamePinYin*/("ZGCQ")
+	/*NamePinYin*/("ZGCQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000952"),
-	/*Name*/("广济药业"),
-	/*NamePinYin*/("AJYY")
+	/*NamePinYin*/("AJYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000953"),
-	/*Name*/("河池化工"),
-	/*NamePinYin*/("HCHG")
+	/*NamePinYin*/("HCHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000955"),
-	/*Name*/("欣龙控股"),
-	/*NamePinYin*/("XLKG")
+	/*NamePinYin*/("XLKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000956"),
-	/*Name*/("中原退市"),
-	/*NamePinYin*/("ZYTS")
+	/*NamePinYin*/("ZYTS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000957"),
-	/*Name*/("中通客车"),
-	/*NamePinYin*/("ZTKC")
+	/*NamePinYin*/("ZTKC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000958"),
-	/*Name*/("东方能源"),
-	/*NamePinYin*/("DFNY")
+	/*NamePinYin*/("DFNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000959"),
-	/*Name*/("首钢股份"),
-	/*NamePinYin*/("SGGF")
+	/*NamePinYin*/("SGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000960"),
-	/*Name*/("锡业股份"),
-	/*NamePinYin*/("XYGF")
+	/*NamePinYin*/("XYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000961"),
-	/*Name*/("中南建设"),
-	/*NamePinYin*/("ZNJS")
+	/*NamePinYin*/("ZNJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000962"),
-	/*Name*/("东方钽业"),
-	/*NamePinYin*/("DFTY")
+	/*NamePinYin*/("DFTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000963"),
-	/*Name*/("华东医药"),
-	/*NamePinYin*/("HDYY")
+	/*NamePinYin*/("HDYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000965"),
-	/*Name*/("天保基建"),
-	/*NamePinYin*/("TBJJ")
+	/*NamePinYin*/("TBJJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000966"),
-	/*Name*/("长源电力"),
-	/*NamePinYin*/("CYDL")
+	/*NamePinYin*/("CYDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000967"),
-	/*Name*/("上风高科"),
-	/*NamePinYin*/("SFGK")
+	/*NamePinYin*/("SFGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000968"),
-	/*Name*/("煤气化"),
-	/*NamePinYin*/("MQH")
+	/*NamePinYin*/("MQH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000969"),
-	/*Name*/("安泰科技"),
-	/*NamePinYin*/("ATKJ")
+	/*NamePinYin*/("ATKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000970"),
-	/*Name*/("中科三环"),
-	/*NamePinYin*/("ZKSH")
+	/*NamePinYin*/("ZKSH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000971"),
-	/*Name*/("蓝鼎控股"),
-	/*NamePinYin*/("LDKG")
+	/*NamePinYin*/("LDKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000972"),
-	/*Name*/("新中基"),
-	/*NamePinYin*/("XZJ")
+	/*NamePinYin*/("XZJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000973"),
-	/*Name*/("佛塑科技"),
-	/*NamePinYin*/("FSKJ")
+	/*NamePinYin*/("FSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000975"),
-	/*Name*/("银泰资源"),
-	/*NamePinYin*/("YTZY")
+	/*NamePinYin*/("YTZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000976"),
-	/*Name*/("春晖股份"),
-	/*NamePinYin*/("CHGF")
+	/*NamePinYin*/("CHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000977"),
-	/*Name*/("浪潮信息"),
-	/*NamePinYin*/("LCXX")
+	/*NamePinYin*/("LCXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000978"),
-	/*Name*/("桂林旅游"),
-	/*NamePinYin*/("GLLY")
+	/*NamePinYin*/("GLLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000979"),
-	/*Name*/("中弘股份"),
-	/*NamePinYin*/("ZHGF")
+	/*NamePinYin*/("ZHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000980"),
-	/*Name*/("金马股份"),
-	/*NamePinYin*/("JMGF")
+	/*NamePinYin*/("JMGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000981"),
-	/*Name*/("银亿股份"),
-	/*NamePinYin*/("YYGF")
+	/*NamePinYin*/("YYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000982"),
-	/*Name*/("中银绒业"),
-	/*NamePinYin*/("ZYRY")
+	/*NamePinYin*/("ZYRY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000983"),
-	/*Name*/("西山煤电"),
-	/*NamePinYin*/("XSMD")
+	/*NamePinYin*/("XSMD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000985"),
-	/*Name*/("大庆华科"),
-	/*NamePinYin*/("DQHK")
+	/*NamePinYin*/("DQHK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000987"),
-	/*Name*/("广州友谊"),
-	/*NamePinYin*/("AZYY")
+	/*NamePinYin*/("AZYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000988"),
-	/*Name*/("华工科技"),
-	/*NamePinYin*/("HGKJ")
+	/*NamePinYin*/("HGKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000989"),
-	/*Name*/("九芝堂"),
-	/*NamePinYin*/("JZT")
+	/*NamePinYin*/("JZT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000990"),
-	/*Name*/("诚志股份"),
-	/*NamePinYin*/("CZGF")
+	/*NamePinYin*/("CZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000993"),
-	/*Name*/("闽东电力"),
-	/*NamePinYin*/("MDDL")
+	/*NamePinYin*/("MDDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000995"),
-	/*Name*/("皇台酒业"),
-	/*NamePinYin*/("HTJY")
+	/*NamePinYin*/("HTJY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000996"),
-	/*Name*/("中国中期"),
-	/*NamePinYin*/("ZGZJ")
+	/*NamePinYin*/("ZGZJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000997"),
-	/*Name*/("新大陆"),
-	/*NamePinYin*/("XDL")
+	/*NamePinYin*/("XDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000998"),
-	/*Name*/("隆平高科"),
-	/*NamePinYin*/("LPGK")
+	/*NamePinYin*/("LPGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("000999"),
-	/*Name*/("华润三九"),
-	/*NamePinYin*/("HRSJ")
+	/*NamePinYin*/("HRSJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("001696"),
-	/*Name*/("宗申动力"),
-	/*NamePinYin*/("ZSDL")
+	/*NamePinYin*/("ZSDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("001896"),
-	/*Name*/("豫能控股"),
-	/*NamePinYin*/("YNKG")
+	/*NamePinYin*/("YNKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002001"),
-	/*Name*/("新和成"),
-	/*NamePinYin*/("XHC")
+	/*NamePinYin*/("XHC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002002"),
-	/*Name*/("鸿达兴业"),
-	/*NamePinYin*/("HDXY")
+	/*NamePinYin*/("HDXY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002003"),
-	/*Name*/("伟星股份"),
-	/*NamePinYin*/("WXGF")
+	/*NamePinYin*/("WXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002004"),
-	/*Name*/("华邦颖泰"),
-	/*NamePinYin*/("HBYT")
+	/*NamePinYin*/("HBYT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002005"),
-	/*Name*/("德豪润达"),
-	/*NamePinYin*/("DHRD")
+	/*NamePinYin*/("DHRD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002006"),
-	/*Name*/("*ST精功"),
-	/*NamePinYin*/("*STJG")
+	/*NamePinYin*/("*STJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002007"),
-	/*Name*/("华兰生物"),
-	/*NamePinYin*/("HLSW")
+	/*NamePinYin*/("HLSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002008"),
-	/*Name*/("大族激光"),
-	/*NamePinYin*/("DZJG")
+	/*NamePinYin*/("DZJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002009"),
-	/*Name*/("天奇股份"),
-	/*NamePinYin*/("TJGF")
+	/*NamePinYin*/("TJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002010"),
-	/*Name*/("传化股份"),
-	/*NamePinYin*/("CHGF")
+	/*NamePinYin*/("CHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002011"),
-	/*Name*/("盾安环境"),
-	/*NamePinYin*/("DAHJ")
+	/*NamePinYin*/("DAHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002012"),
-	/*Name*/("凯恩股份"),
-	/*NamePinYin*/("KEGF")
+	/*NamePinYin*/("KEGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002013"),
-	/*Name*/("中航机电"),
-	/*NamePinYin*/("ZHJD")
+	/*NamePinYin*/("ZHJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002014"),
-	/*Name*/("永新股份"),
-	/*NamePinYin*/("YXGF")
+	/*NamePinYin*/("YXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002015"),
-	/*Name*/("*ST霞客"),
-	/*NamePinYin*/("*STXK")
+	/*NamePinYin*/("*STXK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002016"),
-	/*Name*/("世荣兆业"),
-	/*NamePinYin*/("SRZY")
+	/*NamePinYin*/("SRZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002017"),
-	/*Name*/("东信和平"),
-	/*NamePinYin*/("DXHP")
+	/*NamePinYin*/("DXHP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002018"),
-	/*Name*/("华星化工"),
-	/*NamePinYin*/("HXHG")
+	/*NamePinYin*/("HXHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002019"),
-	/*Name*/("鑫富药业"),
-	/*NamePinYin*/("XFYY")
+	/*NamePinYin*/("XFYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002020"),
-	/*Name*/("京新药业"),
-	/*NamePinYin*/("JXYY")
+	/*NamePinYin*/("JXYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002021"),
-	/*Name*/("中捷股份"),
-	/*NamePinYin*/("ZJGF")
+	/*NamePinYin*/("ZJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002022"),
-	/*Name*/("科华生物"),
-	/*NamePinYin*/("KHSW")
+	/*NamePinYin*/("KHSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002023"),
-	/*Name*/("海特高新"),
-	/*NamePinYin*/("HTGX")
+	/*NamePinYin*/("HTGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002024"),
-	/*Name*/("苏宁云商"),
-	/*NamePinYin*/("SNYS")
+	/*NamePinYin*/("SNYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002025"),
-	/*Name*/("航天电器"),
-	/*NamePinYin*/("HTDQ")
+	/*NamePinYin*/("HTDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002026"),
-	/*Name*/("山东威达"),
-	/*NamePinYin*/("SDWD")
+	/*NamePinYin*/("SDWD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002027"),
-	/*Name*/("七喜控股"),
-	/*NamePinYin*/("QXKG")
+	/*NamePinYin*/("QXKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002028"),
-	/*Name*/("思源电气"),
-	/*NamePinYin*/("SYDQ")
+	/*NamePinYin*/("SYDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002029"),
-	/*Name*/("七匹狼"),
-	/*NamePinYin*/("QPL")
+	/*NamePinYin*/("QPL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002030"),
-	/*Name*/("达安基因"),
-	/*NamePinYin*/("DAJY")
+	/*NamePinYin*/("DAJY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002031"),
-	/*Name*/("巨轮股份"),
-	/*NamePinYin*/("JLGF")
+	/*NamePinYin*/("JLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002032"),
-	/*Name*/("苏泊尔"),
-	/*NamePinYin*/("SBE")
+	/*NamePinYin*/("SBE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002033"),
-	/*Name*/("丽江旅游"),
-	/*NamePinYin*/("LJLY")
+	/*NamePinYin*/("LJLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002034"),
-	/*Name*/("美欣达"),
-	/*NamePinYin*/("MXD")
+	/*NamePinYin*/("MXD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002035"),
-	/*Name*/("华帝股份"),
-	/*NamePinYin*/("HDGF")
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002036"),
-	/*Name*/("宜科科技"),
-	/*NamePinYin*/("YKKJ")
+	/*NamePinYin*/("YKKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002037"),
-	/*Name*/("久联发展"),
-	/*NamePinYin*/("JLFZ")
+	/*NamePinYin*/("JLFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002038"),
-	/*Name*/("双鹭药业"),
-	/*NamePinYin*/("SLYY")
+	/*NamePinYin*/("SLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002039"),
-	/*Name*/("黔源电力"),
-	/*NamePinYin*/("QYDL")
+	/*NamePinYin*/("QYDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002040"),
-	/*Name*/("南京港"),
-	/*NamePinYin*/("NJG")
+	/*NamePinYin*/("NJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002041"),
-	/*Name*/("登海种业"),
-	/*NamePinYin*/("DHCY")
+	/*NamePinYin*/("DHCY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002042"),
-	/*Name*/("华孚色纺"),
-	/*NamePinYin*/("HFSF")
+	/*NamePinYin*/("HFSF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002043"),
-	/*Name*/("兔宝宝"),
-	/*NamePinYin*/("TBB")
+	/*NamePinYin*/("TBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002044"),
-	/*Name*/("江苏三友"),
-	/*NamePinYin*/("JSSY")
+	/*NamePinYin*/("JSSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002045"),
-	/*Name*/("国光电器"),
-	/*NamePinYin*/("GGDQ")
+	/*NamePinYin*/("GGDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002046"),
-	/*Name*/("轴研科技"),
-	/*NamePinYin*/("ZYKJ")
+	/*NamePinYin*/("ZYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002047"),
-	/*Name*/("宝鹰股份"),
-	/*NamePinYin*/("BYGF")
+	/*NamePinYin*/("BYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002048"),
-	/*Name*/("宁波华翔"),
-	/*NamePinYin*/("NBHX")
+	/*NamePinYin*/("NBHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002049"),
-	/*Name*/("同方国芯"),
-	/*NamePinYin*/("TFGX")
+	/*NamePinYin*/("TFGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002050"),
-	/*Name*/("三花股份"),
-	/*NamePinYin*/("SHGF")
+	/*NamePinYin*/("SHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002051"),
-	/*Name*/("中工国际"),
-	/*NamePinYin*/("ZGGJ")
+	/*NamePinYin*/("ZGGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002052"),
-	/*Name*/("同洲电子"),
-	/*NamePinYin*/("TZDZ")
+	/*NamePinYin*/("TZDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002053"),
-	/*Name*/("云南盐化"),
-	/*NamePinYin*/("YNYH")
+	/*NamePinYin*/("YNYH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002054"),
-	/*Name*/("德美化工"),
-	/*NamePinYin*/("DMHG")
+	/*NamePinYin*/("DMHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002055"),
-	/*Name*/("得润电子"),
-	/*NamePinYin*/("DRDZ")
+	/*NamePinYin*/("DRDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002056"),
-	/*Name*/("横店东磁"),
-	/*NamePinYin*/("HDDC")
+	/*NamePinYin*/("HDDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002057"),
-	/*Name*/("中钢天源"),
-	/*NamePinYin*/("ZGTY")
+	/*NamePinYin*/("ZGTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002058"),
-	/*Name*/("威尔泰"),
-	/*NamePinYin*/("WET")
+	/*NamePinYin*/("WET"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002059"),
-	/*Name*/("云南旅游"),
-	/*NamePinYin*/("YNLY")
+	/*NamePinYin*/("YNLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002060"),
-	/*Name*/("粤水电"),
-	/*NamePinYin*/("YSD")
+	/*NamePinYin*/("YSD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002061"),
-	/*Name*/("江山化工"),
-	/*NamePinYin*/("JSHG")
+	/*NamePinYin*/("JSHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002062"),
-	/*Name*/("宏润建设"),
-	/*NamePinYin*/("HRJS")
+	/*NamePinYin*/("HRJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002063"),
-	/*Name*/("远光软件"),
-	/*NamePinYin*/("YGRJ")
+	/*NamePinYin*/("YGRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002064"),
-	/*Name*/("华峰氨纶"),
-	/*NamePinYin*/("HFAG")
+	/*NamePinYin*/("HFAG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002065"),
-	/*Name*/("东华软件"),
-	/*NamePinYin*/("DHRJ")
+	/*NamePinYin*/("DHRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002066"),
-	/*Name*/("瑞泰科技"),
-	/*NamePinYin*/("RTKJ")
+	/*NamePinYin*/("RTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002067"),
-	/*Name*/("景兴纸业"),
-	/*NamePinYin*/("JXZY")
+	/*NamePinYin*/("JXZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002068"),
-	/*Name*/("黑猫股份"),
-	/*NamePinYin*/("HMGF")
+	/*NamePinYin*/("HMGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002069"),
-	/*Name*/("獐子岛"),
-	/*NamePinYin*/("ZZD")
+	/*NamePinYin*/("ZZD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002070"),
-	/*Name*/("众和股份"),
-	/*NamePinYin*/("ZHGF")
+	/*NamePinYin*/("ZHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002071"),
-	/*Name*/("长城影视"),
-	/*NamePinYin*/("CCYS")
+	/*NamePinYin*/("CCYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002072"),
-	/*Name*/("德棉股份"),
-	/*NamePinYin*/("DMGF")
+	/*NamePinYin*/("DMGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002073"),
-	/*Name*/("软控股份"),
-	/*NamePinYin*/("RKGF")
+	/*NamePinYin*/("RKGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002074"),
-	/*Name*/("东源电器"),
-	/*NamePinYin*/("DYDQ")
+	/*NamePinYin*/("DYDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002075"),
-	/*Name*/("沙钢股份"),
-	/*NamePinYin*/("SGGF")
+	/*NamePinYin*/("SGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002076"),
-	/*Name*/("雪莱特"),
-	/*NamePinYin*/("XLT")
+	/*NamePinYin*/("XLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002077"),
-	/*Name*/("大港股份"),
-	/*NamePinYin*/("DGGF")
+	/*NamePinYin*/("DGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002078"),
-	/*Name*/("太阳纸业"),
-	/*NamePinYin*/("TYZY")
+	/*NamePinYin*/("TYZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002079"),
-	/*Name*/("苏州固锝"),
-	/*NamePinYin*/("SZGD")
+	/*NamePinYin*/("SZGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002080"),
-	/*Name*/("中材科技"),
-	/*NamePinYin*/("ZCKJ")
+	/*NamePinYin*/("ZCKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002081"),
-	/*Name*/("金螳螂"),
-	/*NamePinYin*/("JTL")
+	/*NamePinYin*/("JTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002082"),
-	/*Name*/("栋梁新材"),
-	/*NamePinYin*/("DLXC")
+	/*NamePinYin*/("DLXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002083"),
-	/*Name*/("孚日股份"),
-	/*NamePinYin*/("FRGF")
+	/*NamePinYin*/("FRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002084"),
-	/*Name*/("海鸥卫浴"),
-	/*NamePinYin*/("HOWY")
+	/*NamePinYin*/("HOWY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002085"),
-	/*Name*/("万丰奥威"),
-	/*NamePinYin*/("MFAW")
+	/*NamePinYin*/("MFAW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002086"),
-	/*Name*/("东方海洋"),
-	/*NamePinYin*/("DFHX")
+	/*NamePinYin*/("DFHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002087"),
-	/*Name*/("新野纺织"),
-	/*NamePinYin*/("XYFZ")
+	/*NamePinYin*/("XYFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002088"),
-	/*Name*/("鲁阳股份"),
-	/*NamePinYin*/("LYGF")
+	/*NamePinYin*/("LYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002089"),
-	/*Name*/("新海宜"),
-	/*NamePinYin*/("XHY")
+	/*NamePinYin*/("XHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002090"),
-	/*Name*/("金智科技"),
-	/*NamePinYin*/("JZKJ")
+	/*NamePinYin*/("JZKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002091"),
-	/*Name*/("江苏国泰"),
-	/*NamePinYin*/("JSGT")
+	/*NamePinYin*/("JSGT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002092"),
-	/*Name*/("中泰化学"),
-	/*NamePinYin*/("ZTHX")
+	/*NamePinYin*/("ZTHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002093"),
-	/*Name*/("国脉科技"),
-	/*NamePinYin*/("GMKJ")
+	/*NamePinYin*/("GMKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002094"),
-	/*Name*/("青岛金王"),
-	/*NamePinYin*/("QDJW")
+	/*NamePinYin*/("QDJW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002095"),
-	/*Name*/("生意宝"),
-	/*NamePinYin*/("SYB")
+	/*NamePinYin*/("SYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002096"),
-	/*Name*/("南岭民爆"),
-	/*NamePinYin*/("NLMB")
+	/*NamePinYin*/("NLMB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002097"),
-	/*Name*/("山河智能"),
-	/*NamePinYin*/("SHZN")
+	/*NamePinYin*/("SHZN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002098"),
-	/*Name*/("浔兴股份"),
-	/*NamePinYin*/("XXGF")
+	/*NamePinYin*/("XXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002099"),
-	/*Name*/("海翔药业"),
-	/*NamePinYin*/("HXYY")
+	/*NamePinYin*/("HXYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002100"),
-	/*Name*/("天康生物"),
-	/*NamePinYin*/("TKSW")
+	/*NamePinYin*/("TKSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002101"),
-	/*Name*/("广东鸿图"),
-	/*NamePinYin*/("ADHT")
+	/*NamePinYin*/("ADHT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002102"),
-	/*Name*/("冠福股份"),
-	/*NamePinYin*/("GFGF")
+	/*NamePinYin*/("GFGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002103"),
-	/*Name*/("广博股份"),
-	/*NamePinYin*/("ABGF")
+	/*NamePinYin*/("ABGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002104"),
-	/*Name*/("恒宝股份"),
-	/*NamePinYin*/("HBGF")
+	/*NamePinYin*/("HBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002105"),
-	/*Name*/("信隆实业"),
-	/*NamePinYin*/("XLSY")
+	/*NamePinYin*/("XLSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002106"),
-	/*Name*/("莱宝高科"),
-	/*NamePinYin*/("LBGK")
+	/*NamePinYin*/("LBGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002107"),
-	/*Name*/("沃华医药"),
-	/*NamePinYin*/("WHYY")
+	/*NamePinYin*/("WHYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002108"),
-	/*Name*/("沧州明珠"),
-	/*NamePinYin*/("CZMZ")
+	/*NamePinYin*/("CZMZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002109"),
-	/*Name*/("兴化股份"),
-	/*NamePinYin*/("XHGF")
+	/*NamePinYin*/("XHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002110"),
-	/*Name*/("三钢闽光"),
-	/*NamePinYin*/("SGMG")
+	/*NamePinYin*/("SGMG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002111"),
-	/*Name*/("威海广泰"),
-	/*NamePinYin*/("WHAT")
+	/*NamePinYin*/("WHAT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002112"),
-	/*Name*/("三变科技"),
-	/*NamePinYin*/("SBKJ")
+	/*NamePinYin*/("SBKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002113"),
-	/*Name*/("天润控股"),
-	/*NamePinYin*/("TRKG")
+	/*NamePinYin*/("TRKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002114"),
-	/*Name*/("罗平锌电"),
-	/*NamePinYin*/("LPXD")
+	/*NamePinYin*/("LPXD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002115"),
-	/*Name*/("三维通信"),
-	/*NamePinYin*/("SWTX")
+	/*NamePinYin*/("SWTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002116"),
-	/*Name*/("中国海诚"),
-	/*NamePinYin*/("ZGHC")
+	/*NamePinYin*/("ZGHC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002117"),
-	/*Name*/("东港股份"),
-	/*NamePinYin*/("DGGF")
+	/*NamePinYin*/("DGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002118"),
-	/*Name*/("紫鑫药业"),
-	/*NamePinYin*/("ZXYY")
+	/*NamePinYin*/("ZXYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002119"),
-	/*Name*/("康强电子"),
-	/*NamePinYin*/("KJDZ")
+	/*NamePinYin*/("KJDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002120"),
-	/*Name*/("新海股份"),
-	/*NamePinYin*/("XHGF")
+	/*NamePinYin*/("XHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002121"),
-	/*Name*/("科陆电子"),
-	/*NamePinYin*/("KLDZ")
+	/*NamePinYin*/("KLDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002122"),
-	/*Name*/("天马股份"),
-	/*NamePinYin*/("TMGF")
+	/*NamePinYin*/("TMGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002123"),
-	/*Name*/("荣信股份"),
-	/*NamePinYin*/("RXGF")
+	/*NamePinYin*/("RXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002124"),
-	/*Name*/("天邦股份"),
-	/*NamePinYin*/("TBGF")
+	/*NamePinYin*/("TBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002125"),
-	/*Name*/("湘潭电化"),
-	/*NamePinYin*/("XTDH")
+	/*NamePinYin*/("XTDH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002126"),
-	/*Name*/("银轮股份"),
-	/*NamePinYin*/("YLGF")
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002127"),
-	/*Name*/("*ST新民"),
-	/*NamePinYin*/("*STXM")
+	/*NamePinYin*/("*STXM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002128"),
-	/*Name*/("露天煤业"),
-	/*NamePinYin*/("LTMY")
+	/*NamePinYin*/("LTMY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002129"),
-	/*Name*/("中环股份"),
-	/*NamePinYin*/("ZHGF")
+	/*NamePinYin*/("ZHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002130"),
-	/*Name*/("沃尔核材"),
-	/*NamePinYin*/("WEHC")
+	/*NamePinYin*/("WEHC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002131"),
-	/*Name*/("利欧股份"),
-	/*NamePinYin*/("LOGF")
+	/*NamePinYin*/("LOGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002132"),
-	/*Name*/("恒星科技"),
-	/*NamePinYin*/("HXKJ")
+	/*NamePinYin*/("HXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002133"),
-	/*Name*/("广宇集团"),
-	/*NamePinYin*/("AYJT")
+	/*NamePinYin*/("AYJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002134"),
-	/*Name*/("*ST普林"),
-	/*NamePinYin*/("*STPL")
+	/*NamePinYin*/("*STPL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002135"),
-	/*Name*/("东南网架"),
-	/*NamePinYin*/("DNWJ")
+	/*NamePinYin*/("DNWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002136"),
-	/*Name*/("安纳达"),
-	/*NamePinYin*/("AND")
+	/*NamePinYin*/("AND"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002137"),
-	/*Name*/("实益达"),
-	/*NamePinYin*/("SYD")
+	/*NamePinYin*/("SYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002138"),
-	/*Name*/("顺络电子"),
-	/*NamePinYin*/("SLDZ")
+	/*NamePinYin*/("SLDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002139"),
-	/*Name*/("拓邦股份"),
-	/*NamePinYin*/("TBGF")
+	/*NamePinYin*/("TBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002140"),
-	/*Name*/("东华科技"),
-	/*NamePinYin*/("DHKJ")
+	/*NamePinYin*/("DHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002141"),
-	/*Name*/("蓉胜超微"),
-	/*NamePinYin*/("RSCW")
+	/*NamePinYin*/("RSCW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002142"),
-	/*Name*/("宁波银行"),
-	/*NamePinYin*/("NBYH")
+	/*NamePinYin*/("NBYH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002143"),
-	/*Name*/("高金食品"),
-	/*NamePinYin*/("GJSP")
+	/*NamePinYin*/("GJSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002144"),
-	/*Name*/("宏达高科"),
-	/*NamePinYin*/("HDGK")
+	/*NamePinYin*/("HDGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002145"),
-	/*Name*/("中核钛白"),
-	/*NamePinYin*/("ZHTB")
+	/*NamePinYin*/("ZHTB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002146"),
-	/*Name*/("荣盛发展"),
-	/*NamePinYin*/("RCFZ")
+	/*NamePinYin*/("RCFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002147"),
-	/*Name*/("方圆支承"),
-	/*NamePinYin*/("FYZC")
+	/*NamePinYin*/("FYZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002148"),
-	/*Name*/("北纬通信"),
-	/*NamePinYin*/("BWTX")
+	/*NamePinYin*/("BWTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002149"),
-	/*Name*/("西部材料"),
-	/*NamePinYin*/("XBCL")
+	/*NamePinYin*/("XBCL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002150"),
-	/*Name*/("通润装备"),
-	/*NamePinYin*/("TRZB")
+	/*NamePinYin*/("TRZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002151"),
-	/*Name*/("北斗星通"),
-	/*NamePinYin*/("BDXT")
+	/*NamePinYin*/("BDXT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002152"),
-	/*Name*/("广电运通"),
-	/*NamePinYin*/("ADYT")
+	/*NamePinYin*/("ADYT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002153"),
-	/*Name*/("石基信息"),
-	/*NamePinYin*/("DJXX")
+	/*NamePinYin*/("DJXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002154"),
-	/*Name*/("报喜鸟"),
-	/*NamePinYin*/("BXD")
+	/*NamePinYin*/("BXD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002155"),
-	/*Name*/("辰州矿业"),
-	/*NamePinYin*/("CZKY")
+	/*NamePinYin*/("CZKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002156"),
-	/*Name*/("通富微电"),
-	/*NamePinYin*/("TFWD")
+	/*NamePinYin*/("TFWD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002157"),
-	/*Name*/("正邦科技"),
-	/*NamePinYin*/("ZBKJ")
+	/*NamePinYin*/("ZBKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002158"),
-	/*Name*/("汉钟精机"),
-	/*NamePinYin*/("HZJJ")
+	/*NamePinYin*/("HZJJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002159"),
-	/*Name*/("三特索道"),
-	/*NamePinYin*/("STSD")
+	/*NamePinYin*/("STSD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002160"),
-	/*Name*/("*ST常铝"),
-	/*NamePinYin*/("*STCL")
+	/*NamePinYin*/("*STCL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002161"),
-	/*Name*/("远望谷"),
-	/*NamePinYin*/("YWG")
+	/*NamePinYin*/("YWG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002162"),
-	/*Name*/("斯米克"),
-	/*NamePinYin*/("SMK")
+	/*NamePinYin*/("SMK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002163"),
-	/*Name*/("*ST三鑫"),
-	/*NamePinYin*/("*STSX")
+	/*NamePinYin*/("*STSX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002164"),
-	/*Name*/("*ST东力"),
-	/*NamePinYin*/("*STDL")
+	/*NamePinYin*/("*STDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002165"),
-	/*Name*/("红宝丽"),
-	/*NamePinYin*/("GBL")
+	/*NamePinYin*/("GBL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002166"),
-	/*Name*/("莱茵生物"),
-	/*NamePinYin*/("LYSW")
+	/*NamePinYin*/("LYSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002167"),
-	/*Name*/("东方锆业"),
-	/*NamePinYin*/("DFGY")
+	/*NamePinYin*/("DFGY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002168"),
-	/*Name*/("深圳惠程"),
-	/*NamePinYin*/("SZHC")
+	/*NamePinYin*/("SZHC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002169"),
-	/*Name*/("智光电气"),
-	/*NamePinYin*/("ZGDQ")
+	/*NamePinYin*/("ZGDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002170"),
-	/*Name*/("芭田股份"),
-	/*NamePinYin*/("BTGF")
+	/*NamePinYin*/("BTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002171"),
-	/*Name*/("精诚铜业"),
-	/*NamePinYin*/("JCTY")
+	/*NamePinYin*/("JCTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002172"),
-	/*Name*/("澳洋科技"),
-	/*NamePinYin*/("AXKJ")
+	/*NamePinYin*/("AXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002173"),
-	/*Name*/("千足珍珠"),
-	/*NamePinYin*/("QZZZ")
+	/*NamePinYin*/("QZZZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002174"),
-	/*Name*/("游族网络"),
-	/*NamePinYin*/("YZWL")
+	/*NamePinYin*/("YZWL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002175"),
-	/*Name*/("广陆数测"),
-	/*NamePinYin*/("ALSC")
+	/*NamePinYin*/("ALSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002176"),
-	/*Name*/("江特电机"),
-	/*NamePinYin*/("JTDJ")
+	/*NamePinYin*/("JTDJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002177"),
-	/*Name*/("御银股份"),
-	/*NamePinYin*/("YYGF")
+	/*NamePinYin*/("YYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002178"),
-	/*Name*/("延华智能"),
-	/*NamePinYin*/("YHZN")
+	/*NamePinYin*/("YHZN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002179"),
-	/*Name*/("中航光电"),
-	/*NamePinYin*/("ZHGD")
+	/*NamePinYin*/("ZHGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002180"),
-	/*Name*/("万力达"),
-	/*NamePinYin*/("MLD")
+	/*NamePinYin*/("MLD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002181"),
-	/*Name*/("粤传媒"),
-	/*NamePinYin*/("YCM")
+	/*NamePinYin*/("YCM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002182"),
-	/*Name*/("云海金属"),
-	/*NamePinYin*/("YHJS")
+	/*NamePinYin*/("YHJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002183"),
-	/*Name*/("怡亚通"),
-	/*NamePinYin*/("YYT")
+	/*NamePinYin*/("YYT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002184"),
-	/*Name*/("海得控制"),
-	/*NamePinYin*/("HDKZ")
+	/*NamePinYin*/("HDKZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002185"),
-	/*Name*/("华天科技"),
-	/*NamePinYin*/("HTKJ")
+	/*NamePinYin*/("HTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002186"),
-	/*Name*/("全聚德"),
-	/*NamePinYin*/("QJD")
+	/*NamePinYin*/("QJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002187"),
-	/*Name*/("广百股份"),
-	/*NamePinYin*/("ABGF")
+	/*NamePinYin*/("ABGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002188"),
-	/*Name*/("新嘉联"),
-	/*NamePinYin*/("XJL")
+	/*NamePinYin*/("XJL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002189"),
-	/*Name*/("利达光电"),
-	/*NamePinYin*/("LDGD")
+	/*NamePinYin*/("LDGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002190"),
-	/*Name*/("成飞集成"),
-	/*NamePinYin*/("CFJC")
+	/*NamePinYin*/("CFJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002191"),
-	/*Name*/("劲嘉股份"),
-	/*NamePinYin*/("JJGF")
+	/*NamePinYin*/("JJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002192"),
-	/*Name*/("路翔股份"),
-	/*NamePinYin*/("LXGF")
+	/*NamePinYin*/("LXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002193"),
-	/*Name*/("山东如意"),
-	/*NamePinYin*/("SDRY")
+	/*NamePinYin*/("SDRY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002194"),
-	/*Name*/("武汉凡谷"),
-	/*NamePinYin*/("WHFG")
+	/*NamePinYin*/("WHFG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002195"),
-	/*Name*/("海隆软件"),
-	/*NamePinYin*/("HLRJ")
+	/*NamePinYin*/("HLRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002196"),
-	/*Name*/("方正电机"),
-	/*NamePinYin*/("FZDJ")
+	/*NamePinYin*/("FZDJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002197"),
-	/*Name*/("证通电子"),
-	/*NamePinYin*/("ZTDZ")
+	/*NamePinYin*/("ZTDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002198"),
-	/*Name*/("嘉应制药"),
-	/*NamePinYin*/("JYZY")
+	/*NamePinYin*/("JYZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002199"),
-	/*Name*/("东晶电子"),
-	/*NamePinYin*/("DJDZ")
+	/*NamePinYin*/("DJDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002200"),
-	/*Name*/("云投生态"),
-	/*NamePinYin*/("YTST")
+	/*NamePinYin*/("YTST"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002201"),
-	/*Name*/("九鼎新材"),
-	/*NamePinYin*/("JDXC")
+	/*NamePinYin*/("JDXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002202"),
-	/*Name*/("金风科技"),
-	/*NamePinYin*/("JFKJ")
+	/*NamePinYin*/("JFKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002203"),
-	/*Name*/("海亮股份"),
-	/*NamePinYin*/("HLGF")
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002204"),
-	/*Name*/("大连重工"),
-	/*NamePinYin*/("DLCG")
+	/*NamePinYin*/("DLCG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002205"),
-	/*Name*/("国统股份"),
-	/*NamePinYin*/("GTGF")
+	/*NamePinYin*/("GTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002206"),
-	/*Name*/("海利得"),
-	/*NamePinYin*/("HLD")
+	/*NamePinYin*/("HLD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002207"),
-	/*Name*/("准油股份"),
-	/*NamePinYin*/("ZYGF")
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002208"),
-	/*Name*/("合肥城建"),
-	/*NamePinYin*/("GFCJ")
+	/*NamePinYin*/("GFCJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002209"),
-	/*Name*/("达意隆"),
-	/*NamePinYin*/("DYL")
+	/*NamePinYin*/("DYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002210"),
-	/*Name*/("飞马国际"),
-	/*NamePinYin*/("FMGJ")
+	/*NamePinYin*/("FMGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002211"),
-	/*Name*/("宏达新材"),
-	/*NamePinYin*/("HDXC")
+	/*NamePinYin*/("HDXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002212"),
-	/*Name*/("南洋股份"),
-	/*NamePinYin*/("NXGF")
+	/*NamePinYin*/("NXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002213"),
-	/*Name*/("特尔佳"),
-	/*NamePinYin*/("TEJ")
+	/*NamePinYin*/("TEJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002214"),
-	/*Name*/("大立科技"),
-	/*NamePinYin*/("DLKJ")
+	/*NamePinYin*/("DLKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002215"),
-	/*Name*/("诺普信"),
-	/*NamePinYin*/("NPX")
+	/*NamePinYin*/("NPX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002216"),
-	/*Name*/("三全食品"),
-	/*NamePinYin*/("SQSP")
+	/*NamePinYin*/("SQSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002217"),
-	/*Name*/("*ST合泰"),
-	/*NamePinYin*/("*STGT")
+	/*NamePinYin*/("*STGT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002218"),
-	/*Name*/("拓日新能"),
-	/*NamePinYin*/("TRXN")
+	/*NamePinYin*/("TRXN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002219"),
-	/*Name*/("恒康医疗"),
-	/*NamePinYin*/("HKYL")
+	/*NamePinYin*/("HKYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002220"),
-	/*Name*/("天宝股份"),
-	/*NamePinYin*/("TBGF")
+	/*NamePinYin*/("TBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002221"),
-	/*Name*/("东华能源"),
-	/*NamePinYin*/("DHNY")
+	/*NamePinYin*/("DHNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002222"),
-	/*Name*/("福晶科技"),
-	/*NamePinYin*/("FJKJ")
+	/*NamePinYin*/("FJKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002223"),
-	/*Name*/("鱼跃医疗"),
-	/*NamePinYin*/("YYYL")
+	/*NamePinYin*/("YYYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002224"),
-	/*Name*/("三力士"),
-	/*NamePinYin*/("SLS")
+	/*NamePinYin*/("SLS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002225"),
-	/*Name*/("濮耐股份"),
-	/*NamePinYin*/("PNGF")
+	/*NamePinYin*/("PNGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002226"),
-	/*Name*/("江南化工"),
-	/*NamePinYin*/("JNHG")
+	/*NamePinYin*/("JNHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002227"),
-	/*Name*/("奥特迅"),
-	/*NamePinYin*/("ATX")
+	/*NamePinYin*/("ATX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002228"),
-	/*Name*/("合兴包装"),
-	/*NamePinYin*/("GXBZ")
+	/*NamePinYin*/("GXBZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002229"),
-	/*Name*/("鸿博股份"),
-	/*NamePinYin*/("HBGF")
+	/*NamePinYin*/("HBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002230"),
-	/*Name*/("科大讯飞"),
-	/*NamePinYin*/("KDXF")
+	/*NamePinYin*/("KDXF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002231"),
-	/*Name*/("奥维通信"),
-	/*NamePinYin*/("AWTX")
+	/*NamePinYin*/("AWTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002232"),
-	/*Name*/("启明信息"),
-	/*NamePinYin*/("QMXX")
+	/*NamePinYin*/("QMXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002233"),
-	/*Name*/("塔牌集团"),
-	/*NamePinYin*/("DPJT")
+	/*NamePinYin*/("DPJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002234"),
-	/*Name*/("*ST民和"),
-	/*NamePinYin*/("*STMH")
+	/*NamePinYin*/("*STMH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002235"),
-	/*Name*/("安妮股份"),
-	/*NamePinYin*/("ANGF")
+	/*NamePinYin*/("ANGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002236"),
-	/*Name*/("大华股份"),
-	/*NamePinYin*/("DHGF")
+	/*NamePinYin*/("DHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002237"),
-	/*Name*/("恒邦股份"),
-	/*NamePinYin*/("HBGF")
+	/*NamePinYin*/("HBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002238"),
-	/*Name*/("天威视讯"),
-	/*NamePinYin*/("TWSX")
+	/*NamePinYin*/("TWSX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002239"),
-	/*Name*/("金飞达"),
-	/*NamePinYin*/("JFD")
+	/*NamePinYin*/("JFD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002240"),
-	/*Name*/("威华股份"),
-	/*NamePinYin*/("WHGF")
+	/*NamePinYin*/("WHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002241"),
-	/*Name*/("歌尔声学"),
-	/*NamePinYin*/("GESX")
+	/*NamePinYin*/("GESX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002242"),
-	/*Name*/("九阳股份"),
-	/*NamePinYin*/("JYGF")
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002243"),
-	/*Name*/("通产丽星"),
-	/*NamePinYin*/("TCLX")
+	/*NamePinYin*/("TCLX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002244"),
-	/*Name*/("滨江集团"),
-	/*NamePinYin*/("BJJT")
+	/*NamePinYin*/("BJJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002245"),
-	/*Name*/("澳洋顺昌"),
-	/*NamePinYin*/("AXSC")
+	/*NamePinYin*/("AXSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002246"),
-	/*Name*/("北化股份"),
-	/*NamePinYin*/("BHGF")
+	/*NamePinYin*/("BHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002247"),
-	/*Name*/("帝龙新材"),
-	/*NamePinYin*/("DLXC")
+	/*NamePinYin*/("DLXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002248"),
-	/*Name*/("*ST东数"),
-	/*NamePinYin*/("*STDS")
+	/*NamePinYin*/("*STDS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002249"),
-	/*Name*/("大洋电机"),
-	/*NamePinYin*/("DXDJ")
+	/*NamePinYin*/("DXDJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002250"),
-	/*Name*/("联化科技"),
-	/*NamePinYin*/("LHKJ")
+	/*NamePinYin*/("LHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002251"),
-	/*Name*/("步步高"),
-	/*NamePinYin*/("BBG")
+	/*NamePinYin*/("BBG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002252"),
-	/*Name*/("上海莱士"),
-	/*NamePinYin*/("SHLS")
+	/*NamePinYin*/("SHLS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002253"),
-	/*Name*/("川大智胜"),
-	/*NamePinYin*/("CDZS")
+	/*NamePinYin*/("CDZS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002254"),
-	/*Name*/("泰和新材"),
-	/*NamePinYin*/("THXC")
+	/*NamePinYin*/("THXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002255"),
-	/*Name*/("海陆重工"),
-	/*NamePinYin*/("HLCG")
+	/*NamePinYin*/("HLCG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002256"),
-	/*Name*/("彩虹精化"),
-	/*NamePinYin*/("CHJH")
+	/*NamePinYin*/("CHJH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002258"),
-	/*Name*/("利尔化学"),
-	/*NamePinYin*/("LEHX")
+	/*NamePinYin*/("LEHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002259"),
-	/*Name*/("升达林业"),
-	/*NamePinYin*/("SDLY")
+	/*NamePinYin*/("SDLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002260"),
-	/*Name*/("伊立浦"),
-	/*NamePinYin*/("YLP")
+	/*NamePinYin*/("YLP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002261"),
-	/*Name*/("拓维信息"),
-	/*NamePinYin*/("TWXX")
+	/*NamePinYin*/("TWXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002262"),
-	/*Name*/("恩华药业"),
-	/*NamePinYin*/("EHYY")
+	/*NamePinYin*/("EHYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002263"),
-	/*Name*/("大东南"),
-	/*NamePinYin*/("DDN")
+	/*NamePinYin*/("DDN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002264"),
-	/*Name*/("新华都"),
-	/*NamePinYin*/("XHD")
+	/*NamePinYin*/("XHD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002265"),
-	/*Name*/("西仪股份"),
-	/*NamePinYin*/("XYGF")
+	/*NamePinYin*/("XYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002266"),
-	/*Name*/("浙富控股"),
-	/*NamePinYin*/("ZFKG")
+	/*NamePinYin*/("ZFKG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002267"),
-	/*Name*/("陕天然气"),
-	/*NamePinYin*/("STRQ")
+	/*NamePinYin*/("STRQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002268"),
-	/*Name*/("卫士通"),
-	/*NamePinYin*/("WST")
+	/*NamePinYin*/("WST"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002269"),
-	/*Name*/("美邦服饰"),
-	/*NamePinYin*/("MBFS")
+	/*NamePinYin*/("MBFS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002270"),
-	/*Name*/("法因数控"),
-	/*NamePinYin*/("FYSK")
+	/*NamePinYin*/("FYSK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002271"),
-	/*Name*/("东方雨虹"),
-	/*NamePinYin*/("DFYH")
+	/*NamePinYin*/("DFYH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002272"),
-	/*Name*/("川润股份"),
-	/*NamePinYin*/("CRGF")
+	/*NamePinYin*/("CRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002273"),
-	/*Name*/("水晶光电"),
-	/*NamePinYin*/("SJGD")
+	/*NamePinYin*/("SJGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002274"),
-	/*Name*/("华昌化工"),
-	/*NamePinYin*/("HCHG")
+	/*NamePinYin*/("HCHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002275"),
-	/*Name*/("桂林三金"),
-	/*NamePinYin*/("GLSJ")
+	/*NamePinYin*/("GLSJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002276"),
-	/*Name*/("万马股份"),
-	/*NamePinYin*/("MMGF")
+	/*NamePinYin*/("MMGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002277"),
-	/*Name*/("友阿股份"),
-	/*NamePinYin*/("YAGF")
+	/*NamePinYin*/("YAGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002278"),
-	/*Name*/("神开股份"),
-	/*NamePinYin*/("SKGF")
+	/*NamePinYin*/("SKGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002279"),
-	/*Name*/("久其软件"),
-	/*NamePinYin*/("JJRJ")
+	/*NamePinYin*/("JJRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002280"),
-	/*Name*/("新世纪"),
-	/*NamePinYin*/("XSJ")
+	/*NamePinYin*/("XSJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002281"),
-	/*Name*/("光迅科技"),
-	/*NamePinYin*/("GXKJ")
+	/*NamePinYin*/("GXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002282"),
-	/*Name*/("博深工具"),
-	/*NamePinYin*/("BSGJ")
+	/*NamePinYin*/("BSGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002283"),
-	/*Name*/("天润曲轴"),
-	/*NamePinYin*/("TRQZ")
+	/*NamePinYin*/("TRQZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002284"),
-	/*Name*/("亚太股份"),
-	/*NamePinYin*/("YTGF")
+	/*NamePinYin*/("YTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002285"),
-	/*Name*/("世联行"),
-	/*NamePinYin*/("SLH")
+	/*NamePinYin*/("SLH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002286"),
-	/*Name*/("保龄宝"),
-	/*NamePinYin*/("BLB")
+	/*NamePinYin*/("BLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002287"),
-	/*Name*/("奇正藏药"),
-	/*NamePinYin*/("JZCY")
+	/*NamePinYin*/("JZCY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002288"),
-	/*Name*/("超华科技"),
-	/*NamePinYin*/("CHKJ")
+	/*NamePinYin*/("CHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002289"),
-	/*Name*/("宇顺电子"),
-	/*NamePinYin*/("YSDZ")
+	/*NamePinYin*/("YSDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002290"),
-	/*Name*/("禾盛新材"),
-	/*NamePinYin*/("HCXC")
+	/*NamePinYin*/("HCXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002291"),
-	/*Name*/("星期六"),
-	/*NamePinYin*/("XJL")
+	/*NamePinYin*/("XJL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002292"),
-	/*Name*/("奥飞动漫"),
-	/*NamePinYin*/("AFDM")
+	/*NamePinYin*/("AFDM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002293"),
-	/*Name*/("罗莱家纺"),
-	/*NamePinYin*/("LLGF")
+	/*NamePinYin*/("LLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002294"),
-	/*Name*/("信立泰"),
-	/*NamePinYin*/("XLT")
+	/*NamePinYin*/("XLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002295"),
-	/*Name*/("精艺股份"),
-	/*NamePinYin*/("JYGF")
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002296"),
-	/*Name*/("辉煌科技"),
-	/*NamePinYin*/("HHKJ")
+	/*NamePinYin*/("HHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002297"),
-	/*Name*/("博云新材"),
-	/*NamePinYin*/("BYXC")
+	/*NamePinYin*/("BYXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002298"),
-	/*Name*/("鑫龙电器"),
-	/*NamePinYin*/("XLDQ")
+	/*NamePinYin*/("XLDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002299"),
-	/*Name*/("圣农发展"),
-	/*NamePinYin*/("SNFZ")
+	/*NamePinYin*/("SNFZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002300"),
-	/*Name*/("太阳电缆"),
-	/*NamePinYin*/("TYDL")
+	/*NamePinYin*/("TYDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002301"),
-	/*Name*/("齐心集团"),
-	/*NamePinYin*/("JXJT")
+	/*NamePinYin*/("JXJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002302"),
-	/*Name*/("西部建设"),
-	/*NamePinYin*/("XBJS")
+	/*NamePinYin*/("XBJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002303"),
-	/*Name*/("美盈森"),
-	/*NamePinYin*/("MYS")
+	/*NamePinYin*/("MYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002304"),
-	/*Name*/("洋河股份"),
-	/*NamePinYin*/("XHGF")
+	/*NamePinYin*/("XHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002305"),
-	/*Name*/("南国置业"),
-	/*NamePinYin*/("NGZY")
+	/*NamePinYin*/("NGZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002306"),
-	/*Name*/("中科云网"),
-	/*NamePinYin*/("ZKYW")
+	/*NamePinYin*/("ZKYW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002307"),
-	/*Name*/("北新路桥"),
-	/*NamePinYin*/("BXLQ")
+	/*NamePinYin*/("BXLQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002308"),
-	/*Name*/("威创股份"),
-	/*NamePinYin*/("WCGF")
+	/*NamePinYin*/("WCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002309"),
-	/*Name*/("中利科技"),
-	/*NamePinYin*/("ZLKJ")
+	/*NamePinYin*/("ZLKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002310"),
-	/*Name*/("东方园林"),
-	/*NamePinYin*/("DFYL")
+	/*NamePinYin*/("DFYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002311"),
-	/*Name*/("海大集团"),
-	/*NamePinYin*/("HDJT")
+	/*NamePinYin*/("HDJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002312"),
-	/*Name*/("三泰电子"),
-	/*NamePinYin*/("STDZ")
+	/*NamePinYin*/("STDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002313"),
-	/*Name*/("日海通讯"),
-	/*NamePinYin*/("RHTX")
+	/*NamePinYin*/("RHTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002314"),
-	/*Name*/("雅致股份"),
-	/*NamePinYin*/("YZGF")
+	/*NamePinYin*/("YZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002315"),
-	/*Name*/("焦点科技"),
-	/*NamePinYin*/("JDKJ")
+	/*NamePinYin*/("JDKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002316"),
-	/*Name*/("键桥通讯"),
-	/*NamePinYin*/("JQTX")
+	/*NamePinYin*/("JQTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002317"),
-	/*Name*/("众生药业"),
-	/*NamePinYin*/("ZSYY")
+	/*NamePinYin*/("ZSYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002318"),
-	/*Name*/("久立特材"),
-	/*NamePinYin*/("JLTC")
+	/*NamePinYin*/("JLTC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002319"),
-	/*Name*/("乐通股份"),
-	/*NamePinYin*/("LTGF")
+	/*NamePinYin*/("LTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002320"),
-	/*Name*/("海峡股份"),
-	/*NamePinYin*/("HXGF")
+	/*NamePinYin*/("HXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002321"),
-	/*Name*/("华英农业"),
-	/*NamePinYin*/("HYNY")
+	/*NamePinYin*/("HYNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002322"),
-	/*Name*/("理工监测"),
-	/*NamePinYin*/("LGJC")
+	/*NamePinYin*/("LGJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002323"),
-	/*Name*/("中联电气"),
-	/*NamePinYin*/("ZLDQ")
+	/*NamePinYin*/("ZLDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002324"),
-	/*Name*/("普利特"),
-	/*NamePinYin*/("PLT")
+	/*NamePinYin*/("PLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002325"),
-	/*Name*/("洪涛股份"),
-	/*NamePinYin*/("HTGF")
+	/*NamePinYin*/("HTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002326"),
-	/*Name*/("永太科技"),
-	/*NamePinYin*/("YTKJ")
+	/*NamePinYin*/("YTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002327"),
-	/*Name*/("富安娜"),
-	/*NamePinYin*/("FAN")
+	/*NamePinYin*/("FAN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002328"),
-	/*Name*/("新朋股份"),
-	/*NamePinYin*/("XPGF")
+	/*NamePinYin*/("XPGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002329"),
-	/*Name*/("皇氏乳业"),
-	/*NamePinYin*/("HSRY")
+	/*NamePinYin*/("HSRY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002330"),
-	/*Name*/("得利斯"),
-	/*NamePinYin*/("DLS")
+	/*NamePinYin*/("DLS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002331"),
-	/*Name*/("皖通科技"),
-	/*NamePinYin*/("WTKJ")
+	/*NamePinYin*/("WTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002332"),
-	/*Name*/("仙琚制药"),
-	/*NamePinYin*/("XJZY")
+	/*NamePinYin*/("XJZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002333"),
-	/*Name*/("罗普斯金"),
-	/*NamePinYin*/("LPSJ")
+	/*NamePinYin*/("LPSJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002334"),
-	/*Name*/("英威腾"),
-	/*NamePinYin*/("YWT")
+	/*NamePinYin*/("YWT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002335"),
-	/*Name*/("科华恒盛"),
-	/*NamePinYin*/("KHHC")
+	/*NamePinYin*/("KHHC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002336"),
-	/*Name*/("人人乐"),
-	/*NamePinYin*/("RRL")
+	/*NamePinYin*/("RRL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002337"),
-	/*Name*/("赛象科技"),
-	/*NamePinYin*/("SXKJ")
+	/*NamePinYin*/("SXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002338"),
-	/*Name*/("奥普光电"),
-	/*NamePinYin*/("APGD")
+	/*NamePinYin*/("APGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002339"),
-	/*Name*/("积成电子"),
-	/*NamePinYin*/("JCDZ")
+	/*NamePinYin*/("JCDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002340"),
-	/*Name*/("格林美"),
-	/*NamePinYin*/("GLM")
+	/*NamePinYin*/("GLM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002341"),
-	/*Name*/("新纶科技"),
-	/*NamePinYin*/("XGKJ")
+	/*NamePinYin*/("XGKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002342"),
-	/*Name*/("巨力索具"),
-	/*NamePinYin*/("JLSJ")
+	/*NamePinYin*/("JLSJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002343"),
-	/*Name*/("禾欣股份"),
-	/*NamePinYin*/("HXGF")
+	/*NamePinYin*/("HXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002344"),
-	/*Name*/("海宁皮城"),
-	/*NamePinYin*/("HNPC")
+	/*NamePinYin*/("HNPC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002345"),
-	/*Name*/("潮宏基"),
-	/*NamePinYin*/("CHJ")
+	/*NamePinYin*/("CHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002346"),
-	/*Name*/("柘中建设"),
-	/*NamePinYin*/("ZZJS")
+	/*NamePinYin*/("ZZJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002347"),
-	/*Name*/("泰尔重工"),
-	/*NamePinYin*/("TECG")
+	/*NamePinYin*/("TECG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002348"),
-	/*Name*/("高乐股份"),
-	/*NamePinYin*/("GLGF")
+	/*NamePinYin*/("GLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002349"),
-	/*Name*/("精华制药"),
-	/*NamePinYin*/("JHZY")
+	/*NamePinYin*/("JHZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002350"),
-	/*Name*/("北京科锐"),
-	/*NamePinYin*/("BJKR")
+	/*NamePinYin*/("BJKR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002351"),
-	/*Name*/("漫步者"),
-	/*NamePinYin*/("MBZ")
+	/*NamePinYin*/("MBZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002352"),
-	/*Name*/("鼎泰新材"),
-	/*NamePinYin*/("DTXC")
+	/*NamePinYin*/("DTXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002353"),
-	/*Name*/("杰瑞股份"),
-	/*NamePinYin*/("JRGF")
+	/*NamePinYin*/("JRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002354"),
-	/*Name*/("科冕木业"),
-	/*NamePinYin*/("KMMY")
+	/*NamePinYin*/("KMMY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002355"),
-	/*Name*/("兴民钢圈"),
-	/*NamePinYin*/("XMGJ")
+	/*NamePinYin*/("XMGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002356"),
-	/*Name*/("浩宁达"),
-	/*NamePinYin*/("HND")
+	/*NamePinYin*/("HND"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002357"),
-	/*Name*/("富临运业"),
-	/*NamePinYin*/("FLYY")
+	/*NamePinYin*/("FLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002358"),
-	/*Name*/("森源电气"),
-	/*NamePinYin*/("SYDQ")
+	/*NamePinYin*/("SYDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002359"),
-	/*Name*/("齐星铁塔"),
-	/*NamePinYin*/("JXTD")
+	/*NamePinYin*/("JXTD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002360"),
-	/*Name*/("同德化工"),
-	/*NamePinYin*/("TDHG")
+	/*NamePinYin*/("TDHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002361"),
-	/*Name*/("神剑股份"),
-	/*NamePinYin*/("SJGF")
+	/*NamePinYin*/("SJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002362"),
-	/*Name*/("汉王科技"),
-	/*NamePinYin*/("HWKJ")
+	/*NamePinYin*/("HWKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002363"),
-	/*Name*/("隆基机械"),
-	/*NamePinYin*/("LJJX")
+	/*NamePinYin*/("LJJX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002364"),
-	/*Name*/("中恒电气"),
-	/*NamePinYin*/("ZHDQ")
+	/*NamePinYin*/("ZHDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002365"),
-	/*Name*/("永安药业"),
-	/*NamePinYin*/("YAYY")
+	/*NamePinYin*/("YAYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002366"),
-	/*Name*/("丹甫股份"),
-	/*NamePinYin*/("DFGF")
+	/*NamePinYin*/("DFGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002367"),
-	/*Name*/("康力电梯"),
-	/*NamePinYin*/("KLDT")
+	/*NamePinYin*/("KLDT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002368"),
-	/*Name*/("太极股份"),
-	/*NamePinYin*/("TJGF")
+	/*NamePinYin*/("TJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002369"),
-	/*Name*/("卓翼科技"),
-	/*NamePinYin*/("ZYKJ")
+	/*NamePinYin*/("ZYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002370"),
-	/*Name*/("亚太药业"),
-	/*NamePinYin*/("YTYY")
+	/*NamePinYin*/("YTYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002371"),
-	/*Name*/("七星电子"),
-	/*NamePinYin*/("QXDZ")
+	/*NamePinYin*/("QXDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002372"),
-	/*Name*/("伟星新材"),
-	/*NamePinYin*/("WXXC")
+	/*NamePinYin*/("WXXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002373"),
-	/*Name*/("千方科技"),
-	/*NamePinYin*/("QFKJ")
+	/*NamePinYin*/("QFKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002374"),
-	/*Name*/("丽鹏股份"),
-	/*NamePinYin*/("LPGF")
+	/*NamePinYin*/("LPGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002375"),
-	/*Name*/("亚厦股份"),
-	/*NamePinYin*/("YSGF")
+	/*NamePinYin*/("YSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002376"),
-	/*Name*/("新北洋"),
-	/*NamePinYin*/("XBX")
+	/*NamePinYin*/("XBX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002377"),
-	/*Name*/("国创高新"),
-	/*NamePinYin*/("GCGX")
+	/*NamePinYin*/("GCGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002378"),
-	/*Name*/("章源钨业"),
-	/*NamePinYin*/("ZYWY")
+	/*NamePinYin*/("ZYWY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002379"),
-	/*Name*/("鲁丰环保"),
-	/*NamePinYin*/("LFHB")
+	/*NamePinYin*/("LFHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002380"),
-	/*Name*/("科远股份"),
-	/*NamePinYin*/("KYGF")
+	/*NamePinYin*/("KYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002381"),
-	/*Name*/("双箭股份"),
-	/*NamePinYin*/("SJGF")
+	/*NamePinYin*/("SJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002382"),
-	/*Name*/("蓝帆医疗"),
-	/*NamePinYin*/("LFYL")
+	/*NamePinYin*/("LFYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002383"),
-	/*Name*/("合众思壮"),
-	/*NamePinYin*/("GZSZ")
+	/*NamePinYin*/("GZSZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002384"),
-	/*Name*/("东山精密"),
-	/*NamePinYin*/("DSJM")
+	/*NamePinYin*/("DSJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002385"),
-	/*Name*/("大北农"),
-	/*NamePinYin*/("DBN")
+	/*NamePinYin*/("DBN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002386"),
-	/*Name*/("天原集团"),
-	/*NamePinYin*/("TYJT")
+	/*NamePinYin*/("TYJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002387"),
-	/*Name*/("黑牛食品"),
-	/*NamePinYin*/("HNSP")
+	/*NamePinYin*/("HNSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002388"),
-	/*Name*/("新亚制程"),
-	/*NamePinYin*/("XYZC")
+	/*NamePinYin*/("XYZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002389"),
-	/*Name*/("南洋科技"),
-	/*NamePinYin*/("NXKJ")
+	/*NamePinYin*/("NXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002390"),
-	/*Name*/("信邦制药"),
-	/*NamePinYin*/("XBZY")
+	/*NamePinYin*/("XBZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002391"),
-	/*Name*/("长青股份"),
-	/*NamePinYin*/("CQGF")
+	/*NamePinYin*/("CQGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002392"),
-	/*Name*/("北京利尔"),
-	/*NamePinYin*/("BJLE")
+	/*NamePinYin*/("BJLE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002393"),
-	/*Name*/("力生制药"),
-	/*NamePinYin*/("LSZY")
+	/*NamePinYin*/("LSZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002394"),
-	/*Name*/("联发股份"),
-	/*NamePinYin*/("LFGF")
+	/*NamePinYin*/("LFGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002395"),
-	/*Name*/("双象股份"),
-	/*NamePinYin*/("SXGF")
+	/*NamePinYin*/("SXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002396"),
-	/*Name*/("星网锐捷"),
-	/*NamePinYin*/("XWRJ")
+	/*NamePinYin*/("XWRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002397"),
-	/*Name*/("梦洁家纺"),
-	/*NamePinYin*/("MJGF")
+	/*NamePinYin*/("MJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002398"),
-	/*Name*/("建研集团"),
-	/*NamePinYin*/("JYJT")
+	/*NamePinYin*/("JYJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002399"),
-	/*Name*/("海普瑞"),
-	/*NamePinYin*/("HPR")
+	/*NamePinYin*/("HPR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002400"),
-	/*Name*/("省广股份"),
-	/*NamePinYin*/("SAGF")
+	/*NamePinYin*/("SAGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002401"),
-	/*Name*/("中海科技"),
-	/*NamePinYin*/("ZHKJ")
+	/*NamePinYin*/("ZHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002402"),
-	/*Name*/("和而泰"),
-	/*NamePinYin*/("HET")
+	/*NamePinYin*/("HET"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002403"),
-	/*Name*/("爱仕达"),
-	/*NamePinYin*/("ASD")
+	/*NamePinYin*/("ASD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002404"),
-	/*Name*/("嘉欣丝绸"),
-	/*NamePinYin*/("JXSC")
+	/*NamePinYin*/("JXSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002405"),
-	/*Name*/("四维图新"),
-	/*NamePinYin*/("SWTX")
+	/*NamePinYin*/("SWTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002406"),
-	/*Name*/("远东传动"),
-	/*NamePinYin*/("YDCD")
+	/*NamePinYin*/("YDCD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002407"),
-	/*Name*/("多氟多"),
-	/*NamePinYin*/("DFD")
+	/*NamePinYin*/("DFD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002408"),
-	/*Name*/("齐翔腾达"),
-	/*NamePinYin*/("JXTD")
+	/*NamePinYin*/("JXTD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002409"),
-	/*Name*/("雅克科技"),
-	/*NamePinYin*/("YKKJ")
+	/*NamePinYin*/("YKKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002410"),
-	/*Name*/("广联达"),
-	/*NamePinYin*/("ALD")
+	/*NamePinYin*/("ALD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002411"),
-	/*Name*/("九九久"),
-	/*NamePinYin*/("JJJ")
+	/*NamePinYin*/("JJJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002412"),
-	/*Name*/("汉森制药"),
-	/*NamePinYin*/("HSZY")
+	/*NamePinYin*/("HSZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002413"),
-	/*Name*/("常发股份"),
-	/*NamePinYin*/("CFGF")
+	/*NamePinYin*/("CFGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002414"),
-	/*Name*/("高德红外"),
-	/*NamePinYin*/("GDGW")
+	/*NamePinYin*/("GDGW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002415"),
-	/*Name*/("海康威视"),
-	/*NamePinYin*/("HKWS")
+	/*NamePinYin*/("HKWS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002416"),
-	/*Name*/("爱施德"),
-	/*NamePinYin*/("ASD")
+	/*NamePinYin*/("ASD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002417"),
-	/*Name*/("三元达"),
-	/*NamePinYin*/("SYD")
+	/*NamePinYin*/("SYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002418"),
-	/*Name*/("康盛股份"),
-	/*NamePinYin*/("KCGF")
+	/*NamePinYin*/("KCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002419"),
-	/*Name*/("天虹商场"),
-	/*NamePinYin*/("THSC")
+	/*NamePinYin*/("THSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002420"),
-	/*Name*/("毅昌股份"),
-	/*NamePinYin*/("YCGF")
+	/*NamePinYin*/("YCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002421"),
-	/*Name*/("达实智能"),
-	/*NamePinYin*/("DSZN")
+	/*NamePinYin*/("DSZN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002422"),
-	/*Name*/("科伦药业"),
-	/*NamePinYin*/("KLYY")
+	/*NamePinYin*/("KLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002423"),
-	/*Name*/("中原特钢"),
-	/*NamePinYin*/("ZYTG")
+	/*NamePinYin*/("ZYTG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002424"),
-	/*Name*/("贵州百灵"),
-	/*NamePinYin*/("GZBL")
+	/*NamePinYin*/("GZBL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002425"),
-	/*Name*/("凯撒股份"),
-	/*NamePinYin*/("KSGF")
+	/*NamePinYin*/("KSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002426"),
-	/*Name*/("胜利精密"),
-	/*NamePinYin*/("SLJM")
+	/*NamePinYin*/("SLJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002427"),
-	/*Name*/("尤夫股份"),
-	/*NamePinYin*/("YFGF")
+	/*NamePinYin*/("YFGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002428"),
-	/*Name*/("云南锗业"),
-	/*NamePinYin*/("YNDY")
+	/*NamePinYin*/("YNDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002429"),
-	/*Name*/("兆驰股份"),
-	/*NamePinYin*/("ZCGF")
+	/*NamePinYin*/("ZCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002430"),
-	/*Name*/("杭氧股份"),
-	/*NamePinYin*/("HYGF")
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002431"),
-	/*Name*/("棕榈园林"),
-	/*NamePinYin*/("ZLYL")
+	/*NamePinYin*/("ZLYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002432"),
-	/*Name*/("九安医疗"),
-	/*NamePinYin*/("JAYL")
+	/*NamePinYin*/("JAYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002433"),
-	/*Name*/("太安堂"),
-	/*NamePinYin*/("TAT")
+	/*NamePinYin*/("TAT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002434"),
-	/*Name*/("万里扬"),
-	/*NamePinYin*/("MLY")
+	/*NamePinYin*/("MLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002435"),
-	/*Name*/("长江润发"),
-	/*NamePinYin*/("CJRF")
+	/*NamePinYin*/("CJRF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002436"),
-	/*Name*/("兴森科技"),
-	/*NamePinYin*/("XSKJ")
+	/*NamePinYin*/("XSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002437"),
-	/*Name*/("誉衡药业"),
-	/*NamePinYin*/("YHYY")
+	/*NamePinYin*/("YHYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002438"),
-	/*Name*/("江苏神通"),
-	/*NamePinYin*/("JSST")
+	/*NamePinYin*/("JSST"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002439"),
-	/*Name*/("启明星辰"),
-	/*NamePinYin*/("QMXC")
+	/*NamePinYin*/("QMXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002440"),
-	/*Name*/("闰土股份"),
-	/*NamePinYin*/("RTGF")
+	/*NamePinYin*/("RTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002441"),
-	/*Name*/("众业达"),
-	/*NamePinYin*/("ZYD")
+	/*NamePinYin*/("ZYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002442"),
-	/*Name*/("龙星化工"),
-	/*NamePinYin*/("LXHG")
+	/*NamePinYin*/("LXHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002443"),
-	/*Name*/("金洲管道"),
-	/*NamePinYin*/("JZGD")
+	/*NamePinYin*/("JZGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002444"),
-	/*Name*/("巨星科技"),
-	/*NamePinYin*/("JXKJ")
+	/*NamePinYin*/("JXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002445"),
-	/*Name*/("中南重工"),
-	/*NamePinYin*/("ZNCG")
+	/*NamePinYin*/("ZNCG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002446"),
-	/*Name*/("盛路通信"),
-	/*NamePinYin*/("CLTX")
+	/*NamePinYin*/("CLTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002447"),
-	/*Name*/("壹桥苗业"),
-	/*NamePinYin*/("YQMY")
+	/*NamePinYin*/("YQMY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002448"),
-	/*Name*/("中原内配"),
-	/*NamePinYin*/("ZYNP")
+	/*NamePinYin*/("ZYNP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002449"),
-	/*Name*/("国星光电"),
-	/*NamePinYin*/("GXGD")
+	/*NamePinYin*/("GXGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002450"),
-	/*Name*/("康得新"),
-	/*NamePinYin*/("KDX")
+	/*NamePinYin*/("KDX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002451"),
-	/*Name*/("摩恩电气"),
-	/*NamePinYin*/("MEDQ")
+	/*NamePinYin*/("MEDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002452"),
-	/*Name*/("长高集团"),
-	/*NamePinYin*/("CGJT")
+	/*NamePinYin*/("CGJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002453"),
-	/*Name*/("天马精化"),
-	/*NamePinYin*/("TMJH")
+	/*NamePinYin*/("TMJH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002454"),
-	/*Name*/("松芝股份"),
-	/*NamePinYin*/("SZGF")
+	/*NamePinYin*/("SZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002455"),
-	/*Name*/("百川股份"),
-	/*NamePinYin*/("BCGF")
+	/*NamePinYin*/("BCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002456"),
-	/*Name*/("欧菲光"),
-	/*NamePinYin*/("OFG")
+	/*NamePinYin*/("OFG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002457"),
-	/*Name*/("青龙管业"),
-	/*NamePinYin*/("QLGY")
+	/*NamePinYin*/("QLGY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002458"),
-	/*Name*/("益生股份"),
-	/*NamePinYin*/("YSGF")
+	/*NamePinYin*/("YSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002459"),
-	/*Name*/("*ST天业"),
-	/*NamePinYin*/("*STTY")
+	/*NamePinYin*/("*STTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002460"),
-	/*Name*/("赣锋锂业"),
-	/*NamePinYin*/("GFLY")
+	/*NamePinYin*/("GFLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002461"),
-	/*Name*/("珠江啤酒"),
-	/*NamePinYin*/("ZJPJ")
+	/*NamePinYin*/("ZJPJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002462"),
-	/*Name*/("嘉事堂"),
-	/*NamePinYin*/("JST")
+	/*NamePinYin*/("JST"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002463"),
-	/*Name*/("沪电股份"),
-	/*NamePinYin*/("HDGF")
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002464"),
-	/*Name*/("金利科技"),
-	/*NamePinYin*/("JLKJ")
+	/*NamePinYin*/("JLKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002465"),
-	/*Name*/("海格通信"),
-	/*NamePinYin*/("HGTX")
+	/*NamePinYin*/("HGTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002466"),
-	/*Name*/("天齐锂业"),
-	/*NamePinYin*/("TJLY")
+	/*NamePinYin*/("TJLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002467"),
-	/*Name*/("二六三"),
-	/*NamePinYin*/("ELS")
+	/*NamePinYin*/("ELS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002468"),
-	/*Name*/("艾迪西"),
-	/*NamePinYin*/("ADX")
+	/*NamePinYin*/("ADX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002469"),
-	/*Name*/("三维工程"),
-	/*NamePinYin*/("SWGC")
+	/*NamePinYin*/("SWGC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002470"),
-	/*Name*/("金正大"),
-	/*NamePinYin*/("JZD")
+	/*NamePinYin*/("JZD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002471"),
-	/*Name*/("中超电缆"),
-	/*NamePinYin*/("ZCDL")
+	/*NamePinYin*/("ZCDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002472"),
-	/*Name*/("双环传动"),
-	/*NamePinYin*/("SHCD")
+	/*NamePinYin*/("SHCD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002473"),
-	/*Name*/("圣莱达"),
-	/*NamePinYin*/("SLD")
+	/*NamePinYin*/("SLD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002474"),
-	/*Name*/("榕基软件"),
-	/*NamePinYin*/("RJRJ")
+	/*NamePinYin*/("RJRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002475"),
-	/*Name*/("立讯精密"),
-	/*NamePinYin*/("LXJM")
+	/*NamePinYin*/("LXJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002476"),
-	/*Name*/("宝莫股份"),
-	/*NamePinYin*/("BMGF")
+	/*NamePinYin*/("BMGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002477"),
-	/*Name*/("雏鹰农牧"),
-	/*NamePinYin*/("CYNM")
+	/*NamePinYin*/("CYNM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002478"),
-	/*Name*/("常宝股份"),
-	/*NamePinYin*/("CBGF")
+	/*NamePinYin*/("CBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002479"),
-	/*Name*/("富春环保"),
-	/*NamePinYin*/("FCHB")
+	/*NamePinYin*/("FCHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002480"),
-	/*Name*/("新筑股份"),
-	/*NamePinYin*/("XZGF")
+	/*NamePinYin*/("XZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002481"),
-	/*Name*/("双塔食品"),
-	/*NamePinYin*/("SDSP")
+	/*NamePinYin*/("SDSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002482"),
-	/*Name*/("广田股份"),
-	/*NamePinYin*/("ATGF")
+	/*NamePinYin*/("ATGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002483"),
-	/*Name*/("润邦股份"),
-	/*NamePinYin*/("RBGF")
+	/*NamePinYin*/("RBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002484"),
-	/*Name*/("江海股份"),
-	/*NamePinYin*/("JHGF")
+	/*NamePinYin*/("JHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002485"),
-	/*Name*/("希努尔"),
-	/*NamePinYin*/("XNE")
+	/*NamePinYin*/("XNE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002486"),
-	/*Name*/("嘉麟杰"),
-	/*NamePinYin*/("JLJ")
+	/*NamePinYin*/("JLJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002487"),
-	/*Name*/("大金重工"),
-	/*NamePinYin*/("DJCG")
+	/*NamePinYin*/("DJCG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002488"),
-	/*Name*/("金固股份"),
-	/*NamePinYin*/("JGGF")
+	/*NamePinYin*/("JGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002489"),
-	/*Name*/("浙江永强"),
-	/*NamePinYin*/("ZJYJ")
+	/*NamePinYin*/("ZJYJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002490"),
-	/*Name*/("山东墨龙"),
-	/*NamePinYin*/("SDML")
+	/*NamePinYin*/("SDML"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002491"),
-	/*Name*/("通鼎光电"),
-	/*NamePinYin*/("TDGD")
+	/*NamePinYin*/("TDGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002492"),
-	/*Name*/("恒基达鑫"),
-	/*NamePinYin*/("HJDX")
+	/*NamePinYin*/("HJDX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002493"),
-	/*Name*/("荣盛石化"),
-	/*NamePinYin*/("RCDH")
+	/*NamePinYin*/("RCDH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002494"),
-	/*Name*/("华斯股份"),
-	/*NamePinYin*/("HSGF")
+	/*NamePinYin*/("HSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002495"),
-	/*Name*/("佳隆股份"),
-	/*NamePinYin*/("JLGF")
+	/*NamePinYin*/("JLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002496"),
-	/*Name*/("辉丰股份"),
-	/*NamePinYin*/("HFGF")
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002497"),
-	/*Name*/("雅化集团"),
-	/*NamePinYin*/("YHJT")
+	/*NamePinYin*/("YHJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002498"),
-	/*Name*/("汉缆股份"),
-	/*NamePinYin*/("HLGF")
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002499"),
-	/*Name*/("科林环保"),
-	/*NamePinYin*/("KLHB")
+	/*NamePinYin*/("KLHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002500"),
-	/*Name*/("山西证券"),
-	/*NamePinYin*/("SXZQ")
+	/*NamePinYin*/("SXZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002501"),
-	/*Name*/("利源精制"),
-	/*NamePinYin*/("LYJZ")
+	/*NamePinYin*/("LYJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002502"),
-	/*Name*/("骅威股份"),
-	/*NamePinYin*/("HWGF")
+	/*NamePinYin*/("HWGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002503"),
-	/*Name*/("搜于特"),
-	/*NamePinYin*/("SYT")
+	/*NamePinYin*/("SYT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002504"),
-	/*Name*/("东光微电"),
-	/*NamePinYin*/("DGWD")
+	/*NamePinYin*/("DGWD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002505"),
-	/*Name*/("大康牧业"),
-	/*NamePinYin*/("DKMY")
+	/*NamePinYin*/("DKMY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002506"),
-	/*Name*/("*ST超日"),
-	/*NamePinYin*/("*STCR")
+	/*NamePinYin*/("*STCR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002507"),
-	/*Name*/("涪陵榨菜"),
-	/*NamePinYin*/("FLZC")
+	/*NamePinYin*/("FLZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002508"),
-	/*Name*/("老板电器"),
-	/*NamePinYin*/("LBDQ")
+	/*NamePinYin*/("LBDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002509"),
-	/*Name*/("天广消防"),
-	/*NamePinYin*/("TAXF")
+	/*NamePinYin*/("TAXF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002510"),
-	/*Name*/("天汽模"),
-	/*NamePinYin*/("TQM")
+	/*NamePinYin*/("TQM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002511"),
-	/*Name*/("中顺洁柔"),
-	/*NamePinYin*/("ZSJR")
+	/*NamePinYin*/("ZSJR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002512"),
-	/*Name*/("达华智能"),
-	/*NamePinYin*/("DHZN")
+	/*NamePinYin*/("DHZN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002513"),
-	/*Name*/("蓝丰生化"),
-	/*NamePinYin*/("LFSH")
+	/*NamePinYin*/("LFSH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002514"),
-	/*Name*/("宝馨科技"),
-	/*NamePinYin*/("BXKJ")
+	/*NamePinYin*/("BXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002515"),
-	/*Name*/("金字火腿"),
-	/*NamePinYin*/("JZHT")
+	/*NamePinYin*/("JZHT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002516"),
-	/*Name*/("江苏旷达"),
-	/*NamePinYin*/("JSKD")
+	/*NamePinYin*/("JSKD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002517"),
-	/*Name*/("泰亚股份"),
-	/*NamePinYin*/("TYGF")
+	/*NamePinYin*/("TYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002518"),
-	/*Name*/("科士达"),
-	/*NamePinYin*/("KSD")
+	/*NamePinYin*/("KSD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002519"),
-	/*Name*/("银河电子"),
-	/*NamePinYin*/("YHDZ")
+	/*NamePinYin*/("YHDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002520"),
-	/*Name*/("日发精机"),
-	/*NamePinYin*/("RFJJ")
+	/*NamePinYin*/("RFJJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002521"),
-	/*Name*/("齐峰新材"),
-	/*NamePinYin*/("JFXC")
+	/*NamePinYin*/("JFXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002522"),
-	/*Name*/("浙江众成"),
-	/*NamePinYin*/("ZJZC")
+	/*NamePinYin*/("ZJZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002523"),
-	/*Name*/("天桥起重"),
-	/*NamePinYin*/("TQQC")
+	/*NamePinYin*/("TQQC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002524"),
-	/*Name*/("光正集团"),
-	/*NamePinYin*/("GZJT")
+	/*NamePinYin*/("GZJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002525"),
-	/*Name*/("胜景山河"),
-	/*NamePinYin*/("SJSH")
+	/*NamePinYin*/("SJSH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002526"),
-	/*Name*/("山东矿机"),
-	/*NamePinYin*/("SDKJ")
+	/*NamePinYin*/("SDKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002527"),
-	/*Name*/("新时达"),
-	/*NamePinYin*/("XSD")
+	/*NamePinYin*/("XSD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002528"),
-	/*Name*/("英飞拓"),
-	/*NamePinYin*/("YFT")
+	/*NamePinYin*/("YFT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002529"),
-	/*Name*/("海源机械"),
-	/*NamePinYin*/("HYJX")
+	/*NamePinYin*/("HYJX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002530"),
-	/*Name*/("丰东股份"),
-	/*NamePinYin*/("FDGF")
+	/*NamePinYin*/("FDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002531"),
-	/*Name*/("天顺风能"),
-	/*NamePinYin*/("TSFN")
+	/*NamePinYin*/("TSFN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002532"),
-	/*Name*/("新界泵业"),
-	/*NamePinYin*/("XJBY")
+	/*NamePinYin*/("XJBY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002533"),
-	/*Name*/("金杯电工"),
-	/*NamePinYin*/("JBDG")
+	/*NamePinYin*/("JBDG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002534"),
-	/*Name*/("杭锅股份"),
-	/*NamePinYin*/("HGGF")
+	/*NamePinYin*/("HGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002535"),
-	/*Name*/("林州重机"),
-	/*NamePinYin*/("LZCJ")
+	/*NamePinYin*/("LZCJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002536"),
-	/*Name*/("西泵股份"),
-	/*NamePinYin*/("XBGF")
+	/*NamePinYin*/("XBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002537"),
-	/*Name*/("海立美达"),
-	/*NamePinYin*/("HLMD")
+	/*NamePinYin*/("HLMD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002538"),
-	/*Name*/("司尔特"),
-	/*NamePinYin*/("SET")
+	/*NamePinYin*/("SET"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002539"),
-	/*Name*/("新都化工"),
-	/*NamePinYin*/("XDHG")
+	/*NamePinYin*/("XDHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002540"),
-	/*Name*/("亚太科技"),
-	/*NamePinYin*/("YTKJ")
+	/*NamePinYin*/("YTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002541"),
-	/*Name*/("鸿路钢构"),
-	/*NamePinYin*/("HLGG")
+	/*NamePinYin*/("HLGG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002542"),
-	/*Name*/("中化岩土"),
-	/*NamePinYin*/("ZHYT")
+	/*NamePinYin*/("ZHYT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002543"),
-	/*Name*/("万和电气"),
-	/*NamePinYin*/("MHDQ")
+	/*NamePinYin*/("MHDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002544"),
-	/*Name*/("杰赛科技"),
-	/*NamePinYin*/("JSKJ")
+	/*NamePinYin*/("JSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002545"),
-	/*Name*/("东方铁塔"),
-	/*NamePinYin*/("DFTD")
+	/*NamePinYin*/("DFTD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002546"),
-	/*Name*/("新联电子"),
-	/*NamePinYin*/("XLDZ")
+	/*NamePinYin*/("XLDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002547"),
-	/*Name*/("春兴精工"),
-	/*NamePinYin*/("CXJG")
+	/*NamePinYin*/("CXJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002548"),
-	/*Name*/("金新农"),
-	/*NamePinYin*/("JXN")
+	/*NamePinYin*/("JXN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002549"),
-	/*Name*/("凯美特气"),
-	/*NamePinYin*/("KMTQ")
+	/*NamePinYin*/("KMTQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002550"),
-	/*Name*/("千红制药"),
-	/*NamePinYin*/("QGZY")
+	/*NamePinYin*/("QGZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002551"),
-	/*Name*/("尚荣医疗"),
-	/*NamePinYin*/("SRYL")
+	/*NamePinYin*/("SRYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002552"),
-	/*Name*/("宝鼎重工"),
-	/*NamePinYin*/("BDCG")
+	/*NamePinYin*/("BDCG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002553"),
-	/*Name*/("南方轴承"),
-	/*NamePinYin*/("NFZC")
+	/*NamePinYin*/("NFZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002554"),
-	/*Name*/("惠博普"),
-	/*NamePinYin*/("HBP")
+	/*NamePinYin*/("HBP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002555"),
-	/*Name*/("顺荣股份"),
-	/*NamePinYin*/("SRGF")
+	/*NamePinYin*/("SRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002556"),
-	/*Name*/("辉隆股份"),
-	/*NamePinYin*/("HLGF")
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002557"),
-	/*Name*/("洽洽食品"),
-	/*NamePinYin*/("QQSP")
+	/*NamePinYin*/("QQSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002558"),
-	/*Name*/("世纪游轮"),
-	/*NamePinYin*/("SJYL")
+	/*NamePinYin*/("SJYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002559"),
-	/*Name*/("亚威股份"),
-	/*NamePinYin*/("YWGF")
+	/*NamePinYin*/("YWGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002560"),
-	/*Name*/("通达股份"),
-	/*NamePinYin*/("TDGF")
+	/*NamePinYin*/("TDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002561"),
-	/*Name*/("徐家汇"),
-	/*NamePinYin*/("XGH")
+	/*NamePinYin*/("XGH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002562"),
-	/*Name*/("兄弟科技"),
-	/*NamePinYin*/("XDKJ")
+	/*NamePinYin*/("XDKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002563"),
-	/*Name*/("森马服饰"),
-	/*NamePinYin*/("SMFS")
+	/*NamePinYin*/("SMFS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002564"),
-	/*Name*/("张化机"),
-	/*NamePinYin*/("ZHJ")
+	/*NamePinYin*/("ZHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002565"),
-	/*Name*/("上海绿新"),
-	/*NamePinYin*/("SHLX")
+	/*NamePinYin*/("SHLX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002566"),
-	/*Name*/("益盛药业"),
-	/*NamePinYin*/("YCYY")
+	/*NamePinYin*/("YCYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002567"),
-	/*Name*/("唐人神"),
-	/*NamePinYin*/("TRS")
+	/*NamePinYin*/("TRS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002568"),
-	/*Name*/("百润股份"),
-	/*NamePinYin*/("BRGF")
+	/*NamePinYin*/("BRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002569"),
-	/*Name*/("步森股份"),
-	/*NamePinYin*/("BSGF")
+	/*NamePinYin*/("BSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002570"),
-	/*Name*/("贝因美"),
-	/*NamePinYin*/("BYM")
+	/*NamePinYin*/("BYM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002571"),
-	/*Name*/("德力股份"),
-	/*NamePinYin*/("DLGF")
+	/*NamePinYin*/("DLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002572"),
-	/*Name*/("索菲亚"),
-	/*NamePinYin*/("SFY")
+	/*NamePinYin*/("SFY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002573"),
-	/*Name*/("国电清新"),
-	/*NamePinYin*/("GDQX")
+	/*NamePinYin*/("GDQX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002574"),
-	/*Name*/("明牌珠宝"),
-	/*NamePinYin*/("MPZB")
+	/*NamePinYin*/("MPZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002575"),
-	/*Name*/("群兴玩具"),
-	/*NamePinYin*/("QXWJ")
+	/*NamePinYin*/("QXWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002576"),
-	/*Name*/("通达动力"),
-	/*NamePinYin*/("TDDL")
+	/*NamePinYin*/("TDDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002577"),
-	/*Name*/("雷柏科技"),
-	/*NamePinYin*/("LBKJ")
+	/*NamePinYin*/("LBKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002578"),
-	/*Name*/("闽发铝业"),
-	/*NamePinYin*/("MFLY")
+	/*NamePinYin*/("MFLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002579"),
-	/*Name*/("中京电子"),
-	/*NamePinYin*/("ZJDZ")
+	/*NamePinYin*/("ZJDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002580"),
-	/*Name*/("圣阳股份"),
-	/*NamePinYin*/("SYGF")
+	/*NamePinYin*/("SYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002581"),
-	/*Name*/("万昌科技"),
-	/*NamePinYin*/("MCKJ")
+	/*NamePinYin*/("MCKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002582"),
-	/*Name*/("好想你"),
-	/*NamePinYin*/("HXN")
+	/*NamePinYin*/("HXN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002583"),
-	/*Name*/("海能达"),
-	/*NamePinYin*/("HND")
+	/*NamePinYin*/("HND"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002584"),
-	/*Name*/("西陇化工"),
-	/*NamePinYin*/("XLHG")
+	/*NamePinYin*/("XLHG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002585"),
-	/*Name*/("双星新材"),
-	/*NamePinYin*/("SXXC")
+	/*NamePinYin*/("SXXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002586"),
-	/*Name*/("围海股份"),
-	/*NamePinYin*/("WHGF")
+	/*NamePinYin*/("WHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002587"),
-	/*Name*/("奥拓电子"),
-	/*NamePinYin*/("ATDZ")
+	/*NamePinYin*/("ATDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002588"),
-	/*Name*/("史丹利"),
-	/*NamePinYin*/("SDL")
+	/*NamePinYin*/("SDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002589"),
-	/*Name*/("瑞康医药"),
-	/*NamePinYin*/("RKYY")
+	/*NamePinYin*/("RKYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002590"),
-	/*Name*/("万安科技"),
-	/*NamePinYin*/("MAKJ")
+	/*NamePinYin*/("MAKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002591"),
-	/*Name*/("恒大高新"),
-	/*NamePinYin*/("HDGX")
+	/*NamePinYin*/("HDGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002592"),
-	/*Name*/("八菱科技"),
-	/*NamePinYin*/("BLKJ")
+	/*NamePinYin*/("BLKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002593"),
-	/*Name*/("日上集团"),
-	/*NamePinYin*/("RSJT")
+	/*NamePinYin*/("RSJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002594"),
-	/*Name*/("比亚迪"),
-	/*NamePinYin*/("BYD")
+	/*NamePinYin*/("BYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002595"),
-	/*Name*/("豪迈科技"),
-	/*NamePinYin*/("HMKJ")
+	/*NamePinYin*/("HMKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002596"),
-	/*Name*/("海南瑞泽"),
-	/*NamePinYin*/("HNRZ")
+	/*NamePinYin*/("HNRZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002597"),
-	/*Name*/("金禾实业"),
-	/*NamePinYin*/("JHSY")
+	/*NamePinYin*/("JHSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002598"),
-	/*Name*/("山东章鼓"),
-	/*NamePinYin*/("SDZG")
+	/*NamePinYin*/("SDZG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002599"),
-	/*Name*/("盛通股份"),
-	/*NamePinYin*/("CTGF")
+	/*NamePinYin*/("CTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002600"),
-	/*Name*/("江粉磁材"),
-	/*NamePinYin*/("JFCC")
+	/*NamePinYin*/("JFCC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002601"),
-	/*Name*/("佰利联"),
-	/*NamePinYin*/("BLL")
+	/*NamePinYin*/("BLL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002602"),
-	/*Name*/("世纪华通"),
-	/*NamePinYin*/("SJHT")
+	/*NamePinYin*/("SJHT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002603"),
-	/*Name*/("以岭药业"),
-	/*NamePinYin*/("YLYY")
+	/*NamePinYin*/("YLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002604"),
-	/*Name*/("龙力生物"),
-	/*NamePinYin*/("LLSW")
+	/*NamePinYin*/("LLSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002605"),
-	/*Name*/("姚记扑克"),
-	/*NamePinYin*/("YJPK")
+	/*NamePinYin*/("YJPK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002606"),
-	/*Name*/("大连电瓷"),
-	/*NamePinYin*/("DLDC")
+	/*NamePinYin*/("DLDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002607"),
-	/*Name*/("亚夏汽车"),
-	/*NamePinYin*/("YXQC")
+	/*NamePinYin*/("YXQC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002608"),
-	/*Name*/("舜天船舶"),
-	/*NamePinYin*/("STCB")
+	/*NamePinYin*/("STCB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002609"),
-	/*Name*/("捷顺科技"),
-	/*NamePinYin*/("JSKJ")
+	/*NamePinYin*/("JSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002610"),
-	/*Name*/("爱康科技"),
-	/*NamePinYin*/("AKKJ")
+	/*NamePinYin*/("AKKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002611"),
-	/*Name*/("东方精工"),
-	/*NamePinYin*/("DFJG")
+	/*NamePinYin*/("DFJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002612"),
-	/*Name*/("朗姿股份"),
-	/*NamePinYin*/("LZGF")
+	/*NamePinYin*/("LZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002613"),
-	/*Name*/("北玻股份"),
-	/*NamePinYin*/("BBGF")
+	/*NamePinYin*/("BBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002614"),
-	/*Name*/("蒙发利"),
-	/*NamePinYin*/("MFL")
+	/*NamePinYin*/("MFL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002615"),
-	/*Name*/("哈尔斯"),
-	/*NamePinYin*/("HES")
+	/*NamePinYin*/("HES"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002616"),
-	/*Name*/("长青集团"),
-	/*NamePinYin*/("CQJT")
+	/*NamePinYin*/("CQJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002617"),
-	/*Name*/("露笑科技"),
-	/*NamePinYin*/("LXKJ")
+	/*NamePinYin*/("LXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002618"),
-	/*Name*/("丹邦科技"),
-	/*NamePinYin*/("DBKJ")
+	/*NamePinYin*/("DBKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002619"),
-	/*Name*/("巨龙管业"),
-	/*NamePinYin*/("JLGY")
+	/*NamePinYin*/("JLGY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002620"),
-	/*Name*/("瑞和股份"),
-	/*NamePinYin*/("RHGF")
+	/*NamePinYin*/("RHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002621"),
-	/*Name*/("大连三垒"),
-	/*NamePinYin*/("DLSL")
+	/*NamePinYin*/("DLSL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002622"),
-	/*Name*/("永大集团"),
-	/*NamePinYin*/("YDJT")
+	/*NamePinYin*/("YDJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002623"),
-	/*Name*/("亚玛顿"),
-	/*NamePinYin*/("YMD")
+	/*NamePinYin*/("YMD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002624"),
-	/*Name*/("金磊股份"),
-	/*NamePinYin*/("JLGF")
+	/*NamePinYin*/("JLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002625"),
-	/*Name*/("龙生股份"),
-	/*NamePinYin*/("LSGF")
+	/*NamePinYin*/("LSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002626"),
-	/*Name*/("金达威"),
-	/*NamePinYin*/("JDW")
+	/*NamePinYin*/("JDW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002627"),
-	/*Name*/("宜昌交运"),
-	/*NamePinYin*/("YCJY")
+	/*NamePinYin*/("YCJY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002628"),
-	/*Name*/("成都路桥"),
-	/*NamePinYin*/("CDLQ")
+	/*NamePinYin*/("CDLQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002629"),
-	/*Name*/("仁智油服"),
-	/*NamePinYin*/("RZYF")
+	/*NamePinYin*/("RZYF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002630"),
-	/*Name*/("华西能源"),
-	/*NamePinYin*/("HXNY")
+	/*NamePinYin*/("HXNY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002631"),
-	/*Name*/("德尔家居"),
-	/*NamePinYin*/("DEGJ")
+	/*NamePinYin*/("DEGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002632"),
-	/*Name*/("道明光学"),
-	/*NamePinYin*/("DMGX")
+	/*NamePinYin*/("DMGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002633"),
-	/*Name*/("申科股份"),
-	/*NamePinYin*/("SKGF")
+	/*NamePinYin*/("SKGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002634"),
-	/*Name*/("棒杰股份"),
-	/*NamePinYin*/("BJGF")
+	/*NamePinYin*/("BJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002635"),
-	/*Name*/("安洁科技"),
-	/*NamePinYin*/("AJKJ")
+	/*NamePinYin*/("AJKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002636"),
-	/*Name*/("金安国纪"),
-	/*NamePinYin*/("JAGJ")
+	/*NamePinYin*/("JAGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002637"),
-	/*Name*/("赞宇科技"),
-	/*NamePinYin*/("ZYKJ")
+	/*NamePinYin*/("ZYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002638"),
-	/*Name*/("勤上光电"),
-	/*NamePinYin*/("QSGD")
+	/*NamePinYin*/("QSGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002639"),
-	/*Name*/("雪人股份"),
-	/*NamePinYin*/("XRGF")
+	/*NamePinYin*/("XRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002640"),
-	/*Name*/("百圆裤业"),
-	/*NamePinYin*/("BYKY")
+	/*NamePinYin*/("BYKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002641"),
-	/*Name*/("永高股份"),
-	/*NamePinYin*/("YGGF")
+	/*NamePinYin*/("YGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002642"),
-	/*Name*/("荣之联"),
-	/*NamePinYin*/("RZL")
+	/*NamePinYin*/("RZL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002643"),
-	/*Name*/("烟台万润"),
-	/*NamePinYin*/("YTMR")
+	/*NamePinYin*/("YTMR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002644"),
-	/*Name*/("佛慈制药"),
-	/*NamePinYin*/("FCZY")
+	/*NamePinYin*/("FCZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002645"),
-	/*Name*/("华宏科技"),
-	/*NamePinYin*/("HHKJ")
+	/*NamePinYin*/("HHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002646"),
-	/*Name*/("青青稞酒"),
-	/*NamePinYin*/("QQKJ")
+	/*NamePinYin*/("QQKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002647"),
-	/*Name*/("宏磊股份"),
-	/*NamePinYin*/("HLGF")
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002648"),
-	/*Name*/("卫星石化"),
-	/*NamePinYin*/("WXDH")
+	/*NamePinYin*/("WXDH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002649"),
-	/*Name*/("博彦科技"),
-	/*NamePinYin*/("BYKJ")
+	/*NamePinYin*/("BYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002650"),
-	/*Name*/("加加食品"),
-	/*NamePinYin*/("JJSP")
+	/*NamePinYin*/("JJSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002651"),
-	/*Name*/("利君股份"),
-	/*NamePinYin*/("LJGF")
+	/*NamePinYin*/("LJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002652"),
-	/*Name*/("扬子新材"),
-	/*NamePinYin*/("YZXC")
+	/*NamePinYin*/("YZXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002653"),
-	/*Name*/("海思科"),
-	/*NamePinYin*/("HSK")
+	/*NamePinYin*/("HSK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002654"),
-	/*Name*/("万润科技"),
-	/*NamePinYin*/("MRKJ")
+	/*NamePinYin*/("MRKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002655"),
-	/*Name*/("共达电声"),
-	/*NamePinYin*/("GDDS")
+	/*NamePinYin*/("GDDS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002656"),
-	/*Name*/("卡奴迪路"),
-	/*NamePinYin*/("KNDL")
+	/*NamePinYin*/("KNDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002657"),
-	/*Name*/("中科金财"),
-	/*NamePinYin*/("ZKJC")
+	/*NamePinYin*/("ZKJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002658"),
-	/*Name*/("雪迪龙"),
-	/*NamePinYin*/("XDL")
+	/*NamePinYin*/("XDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002659"),
-	/*Name*/("中泰桥梁"),
-	/*NamePinYin*/("ZTQL")
+	/*NamePinYin*/("ZTQL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002660"),
-	/*Name*/("茂硕电源"),
-	/*NamePinYin*/("MSDY")
+	/*NamePinYin*/("MSDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002661"),
-	/*Name*/("克明面业"),
-	/*NamePinYin*/("KMMY")
+	/*NamePinYin*/("KMMY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002662"),
-	/*Name*/("京威股份"),
-	/*NamePinYin*/("JWGF")
+	/*NamePinYin*/("JWGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002663"),
-	/*Name*/("普邦园林"),
-	/*NamePinYin*/("PBYL")
+	/*NamePinYin*/("PBYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002664"),
-	/*Name*/("信质电机"),
-	/*NamePinYin*/("XZDJ")
+	/*NamePinYin*/("XZDJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002665"),
-	/*Name*/("首航节能"),
-	/*NamePinYin*/("SHJN")
+	/*NamePinYin*/("SHJN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002666"),
-	/*Name*/("德联集团"),
-	/*NamePinYin*/("DLJT")
+	/*NamePinYin*/("DLJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002667"),
-	/*Name*/("鞍重股份"),
-	/*NamePinYin*/("ACGF")
+	/*NamePinYin*/("ACGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002668"),
-	/*Name*/("奥马电器"),
-	/*NamePinYin*/("AMDQ")
+	/*NamePinYin*/("AMDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002669"),
-	/*Name*/("康达新材"),
-	/*NamePinYin*/("KDXC")
+	/*NamePinYin*/("KDXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002670"),
-	/*Name*/("华声股份"),
-	/*NamePinYin*/("HSGF")
+	/*NamePinYin*/("HSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002671"),
-	/*Name*/("龙泉股份"),
-	/*NamePinYin*/("LQGF")
+	/*NamePinYin*/("LQGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002672"),
-	/*Name*/("东江环保"),
-	/*NamePinYin*/("DJHB")
+	/*NamePinYin*/("DJHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002673"),
-	/*Name*/("西部证券"),
-	/*NamePinYin*/("XBZQ")
+	/*NamePinYin*/("XBZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002674"),
-	/*Name*/("兴业科技"),
-	/*NamePinYin*/("XYKJ")
+	/*NamePinYin*/("XYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002675"),
-	/*Name*/("东诚药业"),
-	/*NamePinYin*/("DCYY")
+	/*NamePinYin*/("DCYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002676"),
-	/*Name*/("顺威股份"),
-	/*NamePinYin*/("SWGF")
+	/*NamePinYin*/("SWGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002677"),
-	/*Name*/("浙江美大"),
-	/*NamePinYin*/("ZJMD")
+	/*NamePinYin*/("ZJMD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002678"),
-	/*Name*/("珠江钢琴"),
-	/*NamePinYin*/("ZJGQ")
+	/*NamePinYin*/("ZJGQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002679"),
-	/*Name*/("福建金森"),
-	/*NamePinYin*/("FJJS")
+	/*NamePinYin*/("FJJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002680"),
-	/*Name*/("黄海机械"),
-	/*NamePinYin*/("HHJX")
+	/*NamePinYin*/("HHJX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002681"),
-	/*Name*/("奋达科技"),
-	/*NamePinYin*/("FDKJ")
+	/*NamePinYin*/("FDKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002682"),
-	/*Name*/("龙洲股份"),
-	/*NamePinYin*/("LZGF")
+	/*NamePinYin*/("LZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002683"),
-	/*Name*/("宏大爆破"),
-	/*NamePinYin*/("HDBP")
+	/*NamePinYin*/("HDBP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002684"),
-	/*Name*/("猛狮科技"),
-	/*NamePinYin*/("MSKJ")
+	/*NamePinYin*/("MSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002685"),
-	/*Name*/("华东重机"),
-	/*NamePinYin*/("HDCJ")
+	/*NamePinYin*/("HDCJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002686"),
-	/*Name*/("亿利达"),
-	/*NamePinYin*/("YLD")
+	/*NamePinYin*/("YLD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002687"),
-	/*Name*/("乔治白"),
-	/*NamePinYin*/("QZB")
+	/*NamePinYin*/("QZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002688"),
-	/*Name*/("金河生物"),
-	/*NamePinYin*/("JHSW")
+	/*NamePinYin*/("JHSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002689"),
-	/*Name*/("博林特"),
-	/*NamePinYin*/("BLT")
+	/*NamePinYin*/("BLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002690"),
-	/*Name*/("美亚光电"),
-	/*NamePinYin*/("MYGD")
+	/*NamePinYin*/("MYGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002691"),
-	/*Name*/("石中装备"),
-	/*NamePinYin*/("DZZB")
+	/*NamePinYin*/("DZZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002692"),
-	/*Name*/("远程电缆"),
-	/*NamePinYin*/("YCDL")
+	/*NamePinYin*/("YCDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002693"),
-	/*Name*/("双成药业"),
-	/*NamePinYin*/("SCYY")
+	/*NamePinYin*/("SCYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002694"),
-	/*Name*/("顾地科技"),
-	/*NamePinYin*/("GDKJ")
+	/*NamePinYin*/("GDKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002695"),
-	/*Name*/("煌上煌"),
-	/*NamePinYin*/("HSH")
+	/*NamePinYin*/("HSH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002696"),
-	/*Name*/("百洋股份"),
-	/*NamePinYin*/("BXGF")
+	/*NamePinYin*/("BXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002697"),
-	/*Name*/("红旗连锁"),
-	/*NamePinYin*/("GQLS")
+	/*NamePinYin*/("GQLS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002698"),
-	/*Name*/("博实股份"),
-	/*NamePinYin*/("BSGF")
+	/*NamePinYin*/("BSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002699"),
-	/*Name*/("美盛文化"),
-	/*NamePinYin*/("MCWH")
+	/*NamePinYin*/("MCWH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002700"),
-	/*Name*/("新疆浩源"),
-	/*NamePinYin*/("XJHY")
+	/*NamePinYin*/("XJHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002701"),
-	/*Name*/("奥瑞金"),
-	/*NamePinYin*/("ARJ")
+	/*NamePinYin*/("ARJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002702"),
-	/*Name*/("海欣食品"),
-	/*NamePinYin*/("HXSP")
+	/*NamePinYin*/("HXSP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002703"),
-	/*Name*/("浙江世宝"),
-	/*NamePinYin*/("ZJSB")
+	/*NamePinYin*/("ZJSB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002705"),
-	/*Name*/("新宝股份"),
-	/*NamePinYin*/("XBGF")
+	/*NamePinYin*/("XBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002706"),
-	/*Name*/("良信电器"),
-	/*NamePinYin*/("LXDQ")
+	/*NamePinYin*/("LXDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002707"),
-	/*Name*/("众信旅游"),
-	/*NamePinYin*/("ZXLY")
+	/*NamePinYin*/("ZXLY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002708"),
-	/*Name*/("光洋股份"),
-	/*NamePinYin*/("GXGF")
+	/*NamePinYin*/("GXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002709"),
-	/*Name*/("天赐材料"),
-	/*NamePinYin*/("TCCL")
+	/*NamePinYin*/("TCCL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002710"),
-	/*Name*/("慈铭体检"),
-	/*NamePinYin*/("CMTJ")
+	/*NamePinYin*/("CMTJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002711"),
-	/*Name*/("欧浦钢网"),
-	/*NamePinYin*/("OPGW")
+	/*NamePinYin*/("OPGW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002712"),
-	/*Name*/("思美传媒"),
-	/*NamePinYin*/("SMCM")
+	/*NamePinYin*/("SMCM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002713"),
-	/*Name*/("东易日盛"),
-	/*NamePinYin*/("DYRC")
+	/*NamePinYin*/("DYRC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002714"),
-	/*Name*/("牧原股份"),
-	/*NamePinYin*/("MYGF")
+	/*NamePinYin*/("MYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002715"),
-	/*Name*/("登云股份"),
-	/*NamePinYin*/("DYGF")
+	/*NamePinYin*/("DYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002716"),
-	/*Name*/("金贵银业"),
-	/*NamePinYin*/("JGYY")
+	/*NamePinYin*/("JGYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002717"),
-	/*Name*/("岭南园林"),
-	/*NamePinYin*/("LNYL")
+	/*NamePinYin*/("LNYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002718"),
-	/*Name*/("友邦吊顶"),
-	/*NamePinYin*/("YBDD")
+	/*NamePinYin*/("YBDD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002719"),
-	/*Name*/("麦趣尔"),
-	/*NamePinYin*/("MQE")
+	/*NamePinYin*/("MQE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002720"),
-	/*Name*/("宏良股份"),
-	/*NamePinYin*/("HLGF")
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002721"),
-	/*Name*/("金一文化"),
-	/*NamePinYin*/("JYWH")
+	/*NamePinYin*/("JYWH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002722"),
-	/*Name*/("金轮股份"),
-	/*NamePinYin*/("JLGF")
+	/*NamePinYin*/("JLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002723"),
-	/*Name*/("金莱特"),
-	/*NamePinYin*/("JLT")
+	/*NamePinYin*/("JLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002724"),
-	/*Name*/("海洋王"),
-	/*NamePinYin*/("HXW")
+	/*NamePinYin*/("HXW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002725"),
-	/*Name*/("跃岭股份"),
-	/*NamePinYin*/("YLGF")
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002726"),
-	/*Name*/("龙大肉食"),
-	/*NamePinYin*/("LDRS")
+	/*NamePinYin*/("LDRS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002727"),
-	/*Name*/("一心堂"),
-	/*NamePinYin*/("YXT")
+	/*NamePinYin*/("YXT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002728"),
-	/*Name*/("台城制药"),
-	/*NamePinYin*/("TCZY")
+	/*NamePinYin*/("TCZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002729"),
-	/*Name*/("好利来"),
-	/*NamePinYin*/("HLL")
+	/*NamePinYin*/("HLL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002730"),
-	/*Name*/("电光科技"),
-	/*NamePinYin*/("DGKJ")
+	/*NamePinYin*/("DGKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("002731"),
-	/*Name*/("萃华珠宝"),
-	/*NamePinYin*/("CHZB")
+	/*NamePinYin*/("CHZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("031005"),
-	/*Name*/("国安GAC1"),
-	/*NamePinYin*/("GAGAC1")
+	/*NamePinYin*/("GAGAC1"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("031007"),
-	/*Name*/("阿胶EJC1"),
-	/*NamePinYin*/("AJEJC1")
+	/*NamePinYin*/("AJEJC1"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("038011"),
-	/*Name*/("攀钢AGP1"),
-	/*NamePinYin*/("PGAGP1")
+	/*NamePinYin*/("PGAGP1"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("038014"),
-	/*Name*/("钾肥JFP1"),
-	/*NamePinYin*/("JFJFP1")
+	/*NamePinYin*/("JFJFP1"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("038015"),
-	/*Name*/("盐湖YHP1"),
-	/*NamePinYin*/("YHYHP1")
+	/*NamePinYin*/("YHYHP1"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("038016"),
-	/*Name*/("集琦JQP1"),
-	/*NamePinYin*/("JQJQP1")
+	/*NamePinYin*/("JQJQP1"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("038017"),
-	/*Name*/("深发SFP1"),
-	/*NamePinYin*/("SFSFP1")
+	/*NamePinYin*/("SFSFP1"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131800"),
-	/*Name*/("Ｒ-003"),
-	/*NamePinYin*/("Ｒ-003")
+	/*NamePinYin*/("Ｒ-003"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131801"),
-	/*Name*/("Ｒ-007"),
-	/*NamePinYin*/("Ｒ-007")
+	/*NamePinYin*/("Ｒ-007"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131802"),
-	/*Name*/("Ｒ-014"),
-	/*NamePinYin*/("Ｒ-014")
+	/*NamePinYin*/("Ｒ-014"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131803"),
-	/*Name*/("Ｒ-028"),
-	/*NamePinYin*/("Ｒ-028")
+	/*NamePinYin*/("Ｒ-028"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131805"),
-	/*Name*/("Ｒ-091"),
-	/*NamePinYin*/("Ｒ-091")
+	/*NamePinYin*/("Ｒ-091"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131806"),
-	/*Name*/("Ｒ-182"),
-	/*NamePinYin*/("Ｒ-182")
+	/*NamePinYin*/("Ｒ-182"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131809"),
-	/*Name*/("Ｒ-004"),
-	/*NamePinYin*/("Ｒ-004")
+	/*NamePinYin*/("Ｒ-004"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131810"),
-	/*Name*/("Ｒ-001"),
-	/*NamePinYin*/("Ｒ-001")
+	/*NamePinYin*/("Ｒ-001"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131811"),
-	/*Name*/("Ｒ-002"),
-	/*NamePinYin*/("Ｒ-002")
+	/*NamePinYin*/("Ｒ-002"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131900"),
-	/*Name*/("ＲＣ-003"),
-	/*NamePinYin*/("ＲＣ-003")
+	/*NamePinYin*/("ＲＣ-003"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131901"),
-	/*Name*/("ＲＣ-007"),
-	/*NamePinYin*/("ＲＣ-007")
+	/*NamePinYin*/("ＲＣ-007"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131910"),
-	/*Name*/("ＲＣ-001"),
-	/*NamePinYin*/("ＲＣ-001")
+	/*NamePinYin*/("ＲＣ-001"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("131911"),
-	/*Name*/("ＲＣ-002"),
-	/*NamePinYin*/("ＲＣ-002")
+	/*NamePinYin*/("ＲＣ-002"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150001"),
-	/*Name*/("瑞福进取"),
-	/*NamePinYin*/("RFJQ")
+	/*NamePinYin*/("RFJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150002"),
-	/*Name*/("大成优选"),
-	/*NamePinYin*/("DCYS")
+	/*NamePinYin*/("DCYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150003"),
-	/*Name*/("建信优势"),
-	/*NamePinYin*/("JXYS")
+	/*NamePinYin*/("JXYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150006"),
-	/*Name*/("同庆A"),
-	/*NamePinYin*/("TQA")
+	/*NamePinYin*/("TQA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150007"),
-	/*Name*/("同庆B"),
-	/*NamePinYin*/("TQB")
+	/*NamePinYin*/("TQB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150008"),
-	/*Name*/("瑞和小康"),
-	/*NamePinYin*/("RHXK")
+	/*NamePinYin*/("RHXK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150009"),
-	/*Name*/("瑞和远见"),
-	/*NamePinYin*/("RHYJ")
+	/*NamePinYin*/("RHYJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150010"),
-	/*Name*/("国泰优先"),
-	/*NamePinYin*/("GTYX")
+	/*NamePinYin*/("GTYX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150011"),
-	/*Name*/("国泰进取"),
-	/*NamePinYin*/("GTJQ")
+	/*NamePinYin*/("GTJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150012"),
-	/*Name*/("双禧A"),
-	/*NamePinYin*/("SXA")
+	/*NamePinYin*/("SXA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150013"),
-	/*Name*/("双禧B"),
-	/*NamePinYin*/("SXB")
+	/*NamePinYin*/("SXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150016"),
-	/*Name*/("合润A"),
-	/*NamePinYin*/("GRA")
+	/*NamePinYin*/("GRA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150017"),
-	/*Name*/("合润B"),
-	/*NamePinYin*/("GRB")
+	/*NamePinYin*/("GRB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150018"),
-	/*Name*/("银华稳进"),
-	/*NamePinYin*/("YHWJ")
+	/*NamePinYin*/("YHWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150019"),
-	/*Name*/("银华锐进"),
-	/*NamePinYin*/("YHRJ")
+	/*NamePinYin*/("YHRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150020"),
-	/*Name*/("汇利A"),
-	/*NamePinYin*/("HLA")
+	/*NamePinYin*/("HLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150021"),
-	/*Name*/("汇利B"),
-	/*NamePinYin*/("HLB")
+	/*NamePinYin*/("HLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150022"),
-	/*Name*/("申万收益"),
-	/*NamePinYin*/("SMSY")
+	/*NamePinYin*/("SMSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150023"),
-	/*Name*/("申万进取"),
-	/*NamePinYin*/("SMJQ")
+	/*NamePinYin*/("SMJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150025"),
-	/*Name*/("景丰A"),
-	/*NamePinYin*/("JFA")
+	/*NamePinYin*/("JFA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150026"),
-	/*Name*/("景丰B"),
-	/*NamePinYin*/("JFB")
+	/*NamePinYin*/("JFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150027"),
-	/*Name*/("添利B"),
-	/*NamePinYin*/("TLB")
+	/*NamePinYin*/("TLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150028"),
-	/*Name*/("信诚500A"),
-	/*NamePinYin*/("XC500A")
+	/*NamePinYin*/("XC500A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150029"),
-	/*Name*/("信诚500B"),
-	/*NamePinYin*/("XC500B")
+	/*NamePinYin*/("XC500B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150030"),
-	/*Name*/("银华金利"),
-	/*NamePinYin*/("YHJL")
+	/*NamePinYin*/("YHJL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150031"),
-	/*Name*/("银华鑫利"),
-	/*NamePinYin*/("YHXL")
+	/*NamePinYin*/("YHXL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150032"),
-	/*Name*/("多利优先"),
-	/*NamePinYin*/("DLYX")
+	/*NamePinYin*/("DLYX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150033"),
-	/*Name*/("多利进取"),
-	/*NamePinYin*/("DLJQ")
+	/*NamePinYin*/("DLJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150034"),
-	/*Name*/("聚利A"),
-	/*NamePinYin*/("JLA")
+	/*NamePinYin*/("JLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150036"),
-	/*Name*/("建信稳健"),
-	/*NamePinYin*/("JXWJ")
+	/*NamePinYin*/("JXWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150037"),
-	/*Name*/("建信进取"),
-	/*NamePinYin*/("JXJQ")
+	/*NamePinYin*/("JXJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150038"),
-	/*Name*/("万家利B"),
-	/*NamePinYin*/("MGLB")
+	/*NamePinYin*/("MGLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150039"),
-	/*Name*/("鼎利A"),
-	/*NamePinYin*/("DLA")
+	/*NamePinYin*/("DLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150040"),
-	/*Name*/("鼎利B"),
-	/*NamePinYin*/("DLB")
+	/*NamePinYin*/("DLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150041"),
-	/*Name*/("天盈B"),
-	/*NamePinYin*/("TYB")
+	/*NamePinYin*/("TYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150042"),
-	/*Name*/("利鑫B"),
-	/*NamePinYin*/("LXB")
+	/*NamePinYin*/("LXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150043"),
-	/*Name*/("裕祥B"),
-	/*NamePinYin*/("YXB")
+	/*NamePinYin*/("YXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150044"),
-	/*Name*/("增利A"),
-	/*NamePinYin*/("ZLA")
+	/*NamePinYin*/("ZLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150045"),
-	/*Name*/("增利B"),
-	/*NamePinYin*/("ZLB")
+	/*NamePinYin*/("ZLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150046"),
-	/*Name*/("丰利B"),
-	/*NamePinYin*/("FLB")
+	/*NamePinYin*/("FLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150047"),
-	/*Name*/("银华瑞吉"),
-	/*NamePinYin*/("YHRJ")
+	/*NamePinYin*/("YHRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150048"),
-	/*Name*/("银华瑞祥"),
-	/*NamePinYin*/("YHRX")
+	/*NamePinYin*/("YHRX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150049"),
-	/*Name*/("消费收益"),
-	/*NamePinYin*/("XFSY")
+	/*NamePinYin*/("XFSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150050"),
-	/*Name*/("消费进取"),
-	/*NamePinYin*/("XFJQ")
+	/*NamePinYin*/("XFJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150051"),
-	/*Name*/("信诚300A"),
-	/*NamePinYin*/("XC300A")
+	/*NamePinYin*/("XC300A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150052"),
-	/*Name*/("信诚300B"),
-	/*NamePinYin*/("XC300B")
+	/*NamePinYin*/("XC300B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150053"),
-	/*Name*/("泰达稳健"),
-	/*NamePinYin*/("TDWJ")
+	/*NamePinYin*/("TDWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150054"),
-	/*Name*/("泰达进取"),
-	/*NamePinYin*/("TDJQ")
+	/*NamePinYin*/("TDJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150055"),
-	/*Name*/("工银500A"),
-	/*NamePinYin*/("GY500A")
+	/*NamePinYin*/("GY500A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150056"),
-	/*Name*/("工银500B"),
-	/*NamePinYin*/("GY500B")
+	/*NamePinYin*/("GY500B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150057"),
-	/*Name*/("久兆稳健"),
-	/*NamePinYin*/("JZWJ")
+	/*NamePinYin*/("JZWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150058"),
-	/*Name*/("久兆积极"),
-	/*NamePinYin*/("JZJJ")
+	/*NamePinYin*/("JZJJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150059"),
-	/*Name*/("银华金瑞"),
-	/*NamePinYin*/("YHJR")
+	/*NamePinYin*/("YHJR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150060"),
-	/*Name*/("银华鑫瑞"),
-	/*NamePinYin*/("YHXR")
+	/*NamePinYin*/("YHXR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150061"),
-	/*Name*/("丰泽B"),
-	/*NamePinYin*/("FZB")
+	/*NamePinYin*/("FZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150062"),
-	/*Name*/("浦银增A"),
-	/*NamePinYin*/("PYZA")
+	/*NamePinYin*/("PYZA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150063"),
-	/*Name*/("浦银增B"),
-	/*NamePinYin*/("PYZB")
+	/*NamePinYin*/("PYZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150064"),
-	/*Name*/("同瑞A"),
-	/*NamePinYin*/("TRA")
+	/*NamePinYin*/("TRA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150065"),
-	/*Name*/("同瑞B"),
-	/*NamePinYin*/("TRB")
+	/*NamePinYin*/("TRB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150066"),
-	/*Name*/("互利A"),
-	/*NamePinYin*/("HLA")
+	/*NamePinYin*/("HLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150067"),
-	/*Name*/("互利B"),
-	/*NamePinYin*/("HLB")
+	/*NamePinYin*/("HLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150068"),
-	/*Name*/("双翼B"),
-	/*NamePinYin*/("SYB")
+	/*NamePinYin*/("SYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150069"),
-	/*Name*/("双力A"),
-	/*NamePinYin*/("SLA")
+	/*NamePinYin*/("SLA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150070"),
-	/*Name*/("双力B"),
-	/*NamePinYin*/("SLB")
+	/*NamePinYin*/("SLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150071"),
-	/*Name*/("中欧盛世A"),
-	/*NamePinYin*/("ZOCSA")
+	/*NamePinYin*/("ZOCSA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150072"),
-	/*Name*/("中欧盛世B"),
-	/*NamePinYin*/("ZOCSB")
+	/*NamePinYin*/("ZOCSB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150073"),
-	/*Name*/("诺安稳健"),
-	/*NamePinYin*/("NAWJ")
+	/*NamePinYin*/("NAWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150075"),
-	/*Name*/("诺安进取"),
-	/*NamePinYin*/("NAJQ")
+	/*NamePinYin*/("NAJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150076"),
-	/*Name*/("浙商稳健"),
-	/*NamePinYin*/("ZSWJ")
+	/*NamePinYin*/("ZSWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150077"),
-	/*Name*/("浙商进取"),
-	/*NamePinYin*/("ZSJQ")
+	/*NamePinYin*/("ZSJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150078"),
-	/*Name*/("金鹰回报B"),
-	/*NamePinYin*/("JYHBB")
+	/*NamePinYin*/("JYHBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150079"),
-	/*Name*/("通利债B"),
-	/*NamePinYin*/("TLZB")
+	/*NamePinYin*/("TLZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150080"),
-	/*Name*/("双佳B"),
-	/*NamePinYin*/("SJB")
+	/*NamePinYin*/("SJB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150081"),
-	/*Name*/("双盈B"),
-	/*NamePinYin*/("SYB")
+	/*NamePinYin*/("SYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150082"),
-	/*Name*/("信达利B"),
-	/*NamePinYin*/("XDLB")
+	/*NamePinYin*/("XDLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150083"),
-	/*Name*/("广发100A"),
-	/*NamePinYin*/("AF100A")
+	/*NamePinYin*/("AF100A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150084"),
-	/*Name*/("广发100B"),
-	/*NamePinYin*/("AF100B")
+	/*NamePinYin*/("AF100B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150085"),
-	/*Name*/("中小板A"),
-	/*NamePinYin*/("ZXBA")
+	/*NamePinYin*/("ZXBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150086"),
-	/*Name*/("中小板B"),
-	/*NamePinYin*/("ZXBB")
+	/*NamePinYin*/("ZXBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150087"),
-	/*Name*/("信用B"),
-	/*NamePinYin*/("XYB")
+	/*NamePinYin*/("XYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150088"),
-	/*Name*/("金鹰500A"),
-	/*NamePinYin*/("JY500A")
+	/*NamePinYin*/("JY500A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150089"),
-	/*Name*/("金鹰500B"),
-	/*NamePinYin*/("JY500B")
+	/*NamePinYin*/("JY500B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150090"),
-	/*Name*/("万家创A"),
-	/*NamePinYin*/("MGCA")
+	/*NamePinYin*/("MGCA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150091"),
-	/*Name*/("万家创B"),
-	/*NamePinYin*/("MGCB")
+	/*NamePinYin*/("MGCB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150092"),
-	/*Name*/("诺德300A"),
-	/*NamePinYin*/("ND300A")
+	/*NamePinYin*/("ND300A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150093"),
-	/*Name*/("诺德300B"),
-	/*NamePinYin*/("ND300B")
+	/*NamePinYin*/("ND300B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150094"),
-	/*Name*/("泰信400A"),
-	/*NamePinYin*/("TX400A")
+	/*NamePinYin*/("TX400A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150095"),
-	/*Name*/("泰信400B"),
-	/*NamePinYin*/("TX400B")
+	/*NamePinYin*/("TX400B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150096"),
-	/*Name*/("商品A"),
-	/*NamePinYin*/("SPA")
+	/*NamePinYin*/("SPA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150097"),
-	/*Name*/("商品B"),
-	/*NamePinYin*/("SPB")
+	/*NamePinYin*/("SPB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150098"),
-	/*Name*/("同庆800A"),
-	/*NamePinYin*/("TQ800A")
+	/*NamePinYin*/("TQ800A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150099"),
-	/*Name*/("同庆800B"),
-	/*NamePinYin*/("TQ800B")
+	/*NamePinYin*/("TQ800B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150100"),
-	/*Name*/("资源A"),
-	/*NamePinYin*/("ZYA")
+	/*NamePinYin*/("ZYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150101"),
-	/*Name*/("资源B"),
-	/*NamePinYin*/("ZYB")
+	/*NamePinYin*/("ZYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150102"),
-	/*Name*/("利众B"),
-	/*NamePinYin*/("LZB")
+	/*NamePinYin*/("LZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150104"),
-	/*Name*/("华安300A"),
-	/*NamePinYin*/("HA300A")
+	/*NamePinYin*/("HA300A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150105"),
-	/*Name*/("华安300B"),
-	/*NamePinYin*/("HA300B")
+	/*NamePinYin*/("HA300B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150106"),
-	/*Name*/("易基稳健"),
-	/*NamePinYin*/("YJWJ")
+	/*NamePinYin*/("YJWJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150107"),
-	/*Name*/("易基进取"),
-	/*NamePinYin*/("YJJQ")
+	/*NamePinYin*/("YJJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150108"),
-	/*Name*/("同辉100A"),
-	/*NamePinYin*/("TH100A")
+	/*NamePinYin*/("TH100A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150109"),
-	/*Name*/("同辉100B"),
-	/*NamePinYin*/("TH100B")
+	/*NamePinYin*/("TH100B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150110"),
-	/*Name*/("华商500A"),
-	/*NamePinYin*/("HS500A")
+	/*NamePinYin*/("HS500A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150111"),
-	/*Name*/("华商500B"),
-	/*NamePinYin*/("HS500B")
+	/*NamePinYin*/("HS500B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150112"),
-	/*Name*/("工银100A"),
-	/*NamePinYin*/("GY100A")
+	/*NamePinYin*/("GY100A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150113"),
-	/*Name*/("工银100B"),
-	/*NamePinYin*/("GY100B")
+	/*NamePinYin*/("GY100B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150114"),
-	/*Name*/("惠裕B"),
-	/*NamePinYin*/("HYB")
+	/*NamePinYin*/("HYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150115"),
-	/*Name*/("同丰B"),
-	/*NamePinYin*/("TFB")
+	/*NamePinYin*/("TFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150117"),
-	/*Name*/("房地产A"),
-	/*NamePinYin*/("FDCA")
+	/*NamePinYin*/("FDCA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150118"),
-	/*Name*/("房地产B"),
-	/*NamePinYin*/("FDCB")
+	/*NamePinYin*/("FDCB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150120"),
-	/*Name*/("鼎利进取"),
-	/*NamePinYin*/("DLJQ")
+	/*NamePinYin*/("DLJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150121"),
-	/*Name*/("银河优先"),
-	/*NamePinYin*/("YHYX")
+	/*NamePinYin*/("YHYX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150122"),
-	/*Name*/("银河进取"),
-	/*NamePinYin*/("YHJQ")
+	/*NamePinYin*/("YHJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150123"),
-	/*Name*/("建信50A"),
-	/*NamePinYin*/("JX50A")
+	/*NamePinYin*/("JX50A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150124"),
-	/*Name*/("建信50B"),
-	/*NamePinYin*/("JX50B")
+	/*NamePinYin*/("JX50B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150127"),
-	/*Name*/("双增B"),
-	/*NamePinYin*/("SZB")
+	/*NamePinYin*/("SZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150128"),
-	/*Name*/("工银增B"),
-	/*NamePinYin*/("GYZB")
+	/*NamePinYin*/("GYZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150129"),
-	/*Name*/("丰利债B"),
-	/*NamePinYin*/("FLZB")
+	/*NamePinYin*/("FLZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150130"),
-	/*Name*/("医药A"),
-	/*NamePinYin*/("YYA")
+	/*NamePinYin*/("YYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150131"),
-	/*Name*/("医药B"),
-	/*NamePinYin*/("YYB")
+	/*NamePinYin*/("YYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150132"),
-	/*Name*/("元盛B"),
-	/*NamePinYin*/("YCB")
+	/*NamePinYin*/("YCB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150133"),
-	/*Name*/("德信A"),
-	/*NamePinYin*/("DXA")
+	/*NamePinYin*/("DXA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150134"),
-	/*Name*/("德信B"),
-	/*NamePinYin*/("DXB")
+	/*NamePinYin*/("DXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150137"),
-	/*Name*/("宝利B"),
-	/*NamePinYin*/("BLB")
+	/*NamePinYin*/("BLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150138"),
-	/*Name*/("银华800A"),
-	/*NamePinYin*/("YH800A")
+	/*NamePinYin*/("YH800A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150139"),
-	/*Name*/("银华800B"),
-	/*NamePinYin*/("YH800B")
+	/*NamePinYin*/("YH800B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150140"),
-	/*Name*/("国金300A"),
-	/*NamePinYin*/("GJ300A")
+	/*NamePinYin*/("GJ300A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150141"),
-	/*Name*/("国金300B"),
-	/*NamePinYin*/("GJ300B")
+	/*NamePinYin*/("GJ300B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150142"),
-	/*Name*/("互利债B"),
-	/*NamePinYin*/("HLZB")
+	/*NamePinYin*/("HLZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150143"),
-	/*Name*/("转债A"),
-	/*NamePinYin*/("ZZA")
+	/*NamePinYin*/("ZZA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150144"),
-	/*Name*/("转债B"),
-	/*NamePinYin*/("ZZB")
+	/*NamePinYin*/("ZZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150145"),
-	/*Name*/("300高贝A"),
-	/*NamePinYin*/("300GBA")
+	/*NamePinYin*/("300GBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150146"),
-	/*Name*/("300高贝B"),
-	/*NamePinYin*/("300GBB")
+	/*NamePinYin*/("300GBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150147"),
-	/*Name*/("同利B"),
-	/*NamePinYin*/("TLB")
+	/*NamePinYin*/("TLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150148"),
-	/*Name*/("800医药A"),
-	/*NamePinYin*/("800YYA")
+	/*NamePinYin*/("800YYA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150149"),
-	/*Name*/("800医药B"),
-	/*NamePinYin*/("800YYB")
+	/*NamePinYin*/("800YYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150150"),
-	/*Name*/("800有色A"),
-	/*NamePinYin*/("800YSA")
+	/*NamePinYin*/("800YSA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150151"),
-	/*Name*/("800有色B"),
-	/*NamePinYin*/("800YSB")
+	/*NamePinYin*/("800YSB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150152"),
-	/*Name*/("创业板A"),
-	/*NamePinYin*/("CYBA")
+	/*NamePinYin*/("CYBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150153"),
-	/*Name*/("创业板B"),
-	/*NamePinYin*/("CYBB")
+	/*NamePinYin*/("CYBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150154"),
-	/*Name*/("惠丰B"),
-	/*NamePinYin*/("HFB")
+	/*NamePinYin*/("HFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150156"),
-	/*Name*/("中银互B"),
-	/*NamePinYin*/("ZYHB")
+	/*NamePinYin*/("ZYHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150157"),
-	/*Name*/("800金融A"),
-	/*NamePinYin*/("800JRA")
+	/*NamePinYin*/("800JRA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150158"),
-	/*Name*/("800金融B"),
-	/*NamePinYin*/("800JRB")
+	/*NamePinYin*/("800JRB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150160"),
-	/*Name*/("通福B"),
-	/*NamePinYin*/("TFB")
+	/*NamePinYin*/("TFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150161"),
-	/*Name*/("惠鑫B"),
-	/*NamePinYin*/("HXB")
+	/*NamePinYin*/("HXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150164"),
-	/*Name*/("可转债A"),
-	/*NamePinYin*/("KZZA")
+	/*NamePinYin*/("KZZA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150165"),
-	/*Name*/("可转债B"),
-	/*NamePinYin*/("KZZB")
+	/*NamePinYin*/("KZZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150167"),
-	/*Name*/("银华300A"),
-	/*NamePinYin*/("YH300A")
+	/*NamePinYin*/("YH300A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150168"),
-	/*Name*/("银华300B"),
-	/*NamePinYin*/("YH300B")
+	/*NamePinYin*/("YH300B"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150169"),
-	/*Name*/("恒生A"),
-	/*NamePinYin*/("HSA")
+	/*NamePinYin*/("HSA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150170"),
-	/*Name*/("恒生B"),
-	/*NamePinYin*/("HSB")
+	/*NamePinYin*/("HSB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150171"),
-	/*Name*/("申万证券A"),
-	/*NamePinYin*/("SMZQA")
+	/*NamePinYin*/("SMZQA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150172"),
-	/*Name*/("申万证券B"),
-	/*NamePinYin*/("SMZQB")
+	/*NamePinYin*/("SMZQB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150175"),
-	/*Name*/("银华H股A"),
-	/*NamePinYin*/("YHHGA")
+	/*NamePinYin*/("YHHGA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150176"),
-	/*Name*/("银华H股B"),
-	/*NamePinYin*/("YHHGB")
+	/*NamePinYin*/("YHHGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150177"),
-	/*Name*/("非银行A"),
-	/*NamePinYin*/("FYHA")
+	/*NamePinYin*/("FYHA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150178"),
-	/*Name*/("非银行B"),
-	/*NamePinYin*/("FYHB")
+	/*NamePinYin*/("FYHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150179"),
-	/*Name*/("信息A"),
-	/*NamePinYin*/("XXA")
+	/*NamePinYin*/("XXA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150180"),
-	/*Name*/("信息B"),
-	/*NamePinYin*/("XXB")
+	/*NamePinYin*/("XXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150181"),
-	/*Name*/("军工A"),
-	/*NamePinYin*/("JGA")
+	/*NamePinYin*/("JGA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150182"),
-	/*Name*/("军工B"),
-	/*NamePinYin*/("JGB")
+	/*NamePinYin*/("JGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150184"),
-	/*Name*/("环保A"),
-	/*NamePinYin*/("HBA")
+	/*NamePinYin*/("HBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150185"),
-	/*Name*/("环保B"),
-	/*NamePinYin*/("HBB")
+	/*NamePinYin*/("HBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150186"),
-	/*Name*/("SW军工A"),
-	/*NamePinYin*/("SWJGA")
+	/*NamePinYin*/("SWJGA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150187"),
-	/*Name*/("SW军工B"),
-	/*NamePinYin*/("SWJGB")
+	/*NamePinYin*/("SWJGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150188"),
-	/*Name*/("转债优先"),
-	/*NamePinYin*/("ZZYX")
+	/*NamePinYin*/("ZZYX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150189"),
-	/*Name*/("转债进取"),
-	/*NamePinYin*/("ZZJQ")
+	/*NamePinYin*/("ZZJQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150190"),
-	/*Name*/("NCF环保A"),
-	/*NamePinYin*/("NCFHBA")
+	/*NamePinYin*/("NCFHBA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150191"),
-	/*Name*/("NCF环保B"),
-	/*NamePinYin*/("NCFHBB")
+	/*NamePinYin*/("NCFHBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150192"),
-	/*Name*/("地产A"),
-	/*NamePinYin*/("DCA")
+	/*NamePinYin*/("DCA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150193"),
-	/*Name*/("地产B"),
-	/*NamePinYin*/("DCB")
+	/*NamePinYin*/("DCB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150194"),
-	/*Name*/("互联网A"),
-	/*NamePinYin*/("HLWA")
+	/*NamePinYin*/("HLWA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("150195"),
-	/*Name*/("互联网B"),
-	/*NamePinYin*/("HLWB")
+	/*NamePinYin*/("HLWB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159001"),
-	/*Name*/("保证金"),
-	/*NamePinYin*/("BZJ")
+	/*NamePinYin*/("BZJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159003"),
-	/*Name*/("招商快线"),
-	/*NamePinYin*/("QSKX")
+	/*NamePinYin*/("QSKX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159900"),
-	/*Name*/("申赎现金"),
-	/*NamePinYin*/("SSXJ")
+	/*NamePinYin*/("SSXJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159901"),
-	/*Name*/("深100ETF"),
-	/*NamePinYin*/("S100ETF")
+	/*NamePinYin*/("S100ETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159902"),
-	/*Name*/("中小板"),
-	/*NamePinYin*/("ZXB")
+	/*NamePinYin*/("ZXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159903"),
-	/*Name*/("深成ETF"),
-	/*NamePinYin*/("SCETF")
+	/*NamePinYin*/("SCETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159905"),
-	/*Name*/("深红利"),
-	/*NamePinYin*/("SGL")
+	/*NamePinYin*/("SGL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159906"),
-	/*Name*/("深成长"),
-	/*NamePinYin*/("SCC")
+	/*NamePinYin*/("SCC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159907"),
-	/*Name*/("中小300"),
-	/*NamePinYin*/("ZX300")
+	/*NamePinYin*/("ZX300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159908"),
-	/*Name*/("深F200"),
-	/*NamePinYin*/("SF200")
+	/*NamePinYin*/("SF200"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159909"),
-	/*Name*/("深TMT"),
-	/*NamePinYin*/("STMT")
+	/*NamePinYin*/("STMT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159910"),
-	/*Name*/("深F120"),
-	/*NamePinYin*/("SF120")
+	/*NamePinYin*/("SF120"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159911"),
-	/*Name*/("民营ETF"),
-	/*NamePinYin*/("MYETF")
+	/*NamePinYin*/("MYETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159912"),
-	/*Name*/("深300ETF"),
-	/*NamePinYin*/("S300ETF")
+	/*NamePinYin*/("S300ETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159913"),
-	/*Name*/("深价值"),
-	/*NamePinYin*/("SJZ")
+	/*NamePinYin*/("SJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159915"),
-	/*Name*/("创业板"),
-	/*NamePinYin*/("CYB")
+	/*NamePinYin*/("CYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159916"),
-	/*Name*/("深F60"),
-	/*NamePinYin*/("SF60")
+	/*NamePinYin*/("SF60"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159917"),
-	/*Name*/("中小成长"),
-	/*NamePinYin*/("ZXCC")
+	/*NamePinYin*/("ZXCC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159918"),
-	/*Name*/("中创400"),
-	/*NamePinYin*/("ZC400")
+	/*NamePinYin*/("ZC400"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159919"),
-	/*Name*/("300ETF"),
-	/*NamePinYin*/("300ETF")
+	/*NamePinYin*/("300ETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159920"),
-	/*Name*/("恒生ETF"),
-	/*NamePinYin*/("HSETF")
+	/*NamePinYin*/("HSETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159921"),
-	/*Name*/("中小等权"),
-	/*NamePinYin*/("ZXDQ")
+	/*NamePinYin*/("ZXDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159922"),
-	/*Name*/("500ETF"),
-	/*NamePinYin*/("500ETF")
+	/*NamePinYin*/("500ETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159923"),
-	/*Name*/("100ETF"),
-	/*NamePinYin*/("100ETF")
+	/*NamePinYin*/("100ETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159924"),
-	/*Name*/("300等权"),
-	/*NamePinYin*/("300DQ")
+	/*NamePinYin*/("300DQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159925"),
-	/*Name*/("南方300"),
-	/*NamePinYin*/("NF300")
+	/*NamePinYin*/("NF300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159926"),
-	/*Name*/("国债ETF"),
-	/*NamePinYin*/("GZETF")
+	/*NamePinYin*/("GZETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159927"),
-	/*Name*/("A300ETF"),
-	/*NamePinYin*/("A300ETF")
+	/*NamePinYin*/("A300ETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159928"),
-	/*Name*/("消费ETF"),
-	/*NamePinYin*/("XFETF")
+	/*NamePinYin*/("XFETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159929"),
-	/*Name*/("医药ETF"),
-	/*NamePinYin*/("YYETF")
+	/*NamePinYin*/("YYETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159930"),
-	/*Name*/("能源ETF"),
-	/*NamePinYin*/("NYETF")
+	/*NamePinYin*/("NYETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159931"),
-	/*Name*/("金融ETF"),
-	/*NamePinYin*/("JRETF")
+	/*NamePinYin*/("JRETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159932"),
-	/*Name*/("500深ETF"),
-	/*NamePinYin*/("500SETF")
+	/*NamePinYin*/("500SETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159933"),
-	/*Name*/("金地ETF"),
-	/*NamePinYin*/("JDETF")
+	/*NamePinYin*/("JDETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159934"),
-	/*Name*/("黄金ETF"),
-	/*NamePinYin*/("HJETF")
+	/*NamePinYin*/("HJETF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159935"),
-	/*Name*/("景顺500"),
-	/*NamePinYin*/("JS500")
+	/*NamePinYin*/("JS500"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159936"),
-	/*Name*/("可选消费"),
-	/*NamePinYin*/("KSXF")
+	/*NamePinYin*/("KSXF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("159937"),
-	/*Name*/("博时黄金"),
-	/*NamePinYin*/("BSHJ")
+	/*NamePinYin*/("BSHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160105"),
-	/*Name*/("南方积配"),
-	/*NamePinYin*/("NFJP")
+	/*NamePinYin*/("NFJP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160106"),
-	/*Name*/("南方高增"),
-	/*NamePinYin*/("NFGZ")
+	/*NamePinYin*/("NFGZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160119"),
-	/*Name*/("南方500"),
-	/*NamePinYin*/("NF500")
+	/*NamePinYin*/("NF500"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160128"),
-	/*Name*/("南方金利"),
-	/*NamePinYin*/("NFJL")
+	/*NamePinYin*/("NFJL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160130"),
-	/*Name*/("南方永利"),
-	/*NamePinYin*/("NFYL")
+	/*NamePinYin*/("NFYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160131"),
-	/*Name*/("南方聚利"),
-	/*NamePinYin*/("NFJL")
+	/*NamePinYin*/("NFJL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160133"),
-	/*Name*/("南方天元"),
-	/*NamePinYin*/("NFTY")
+	/*NamePinYin*/("NFTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160211"),
-	/*Name*/("国泰小盘"),
-	/*NamePinYin*/("GTXP")
+	/*NamePinYin*/("GTXP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160212"),
-	/*Name*/("国泰估值"),
-	/*NamePinYin*/("GTGZ")
+	/*NamePinYin*/("GTGZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160215"),
-	/*Name*/("国泰价值"),
-	/*NamePinYin*/("GTJZ")
+	/*NamePinYin*/("GTJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160220"),
-	/*Name*/("国泰淘新"),
-	/*NamePinYin*/("GTTX")
+	/*NamePinYin*/("GTTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160311"),
-	/*Name*/("华夏蓝筹"),
-	/*NamePinYin*/("HXLC")
+	/*NamePinYin*/("HXLC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160314"),
-	/*Name*/("华夏行业"),
-	/*NamePinYin*/("HXHY")
+	/*NamePinYin*/("HXHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160505"),
-	/*Name*/("博时主题"),
-	/*NamePinYin*/("BSZT")
+	/*NamePinYin*/("BSZT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160513"),
-	/*Name*/("稳健债A"),
-	/*NamePinYin*/("WJZA")
+	/*NamePinYin*/("WJZA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160515"),
-	/*Name*/("安丰18"),
-	/*NamePinYin*/("AF18")
+	/*NamePinYin*/("AF18"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160607"),
-	/*Name*/("鹏华价值"),
-	/*NamePinYin*/("PHJZ")
+	/*NamePinYin*/("PHJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160610"),
-	/*Name*/("鹏华动力"),
-	/*NamePinYin*/("PHDL")
+	/*NamePinYin*/("PHDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160611"),
-	/*Name*/("鹏华治理"),
-	/*NamePinYin*/("PHZL")
+	/*NamePinYin*/("PHZL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160613"),
-	/*Name*/("鹏华创新"),
-	/*NamePinYin*/("PHCX")
+	/*NamePinYin*/("PHCX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160615"),
-	/*Name*/("鹏华300"),
-	/*NamePinYin*/("PH300")
+	/*NamePinYin*/("PH300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160616"),
-	/*Name*/("鹏华500"),
-	/*NamePinYin*/("PH500")
+	/*NamePinYin*/("PH500"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160617"),
-	/*Name*/("鹏华丰润"),
-	/*NamePinYin*/("PHFR")
+	/*NamePinYin*/("PHFR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160621"),
-	/*Name*/("中小企债"),
-	/*NamePinYin*/("ZXQZ")
+	/*NamePinYin*/("ZXQZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160706"),
-	/*Name*/("嘉实300"),
-	/*NamePinYin*/("JS300")
+	/*NamePinYin*/("JS300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160716"),
-	/*Name*/("嘉实50"),
-	/*NamePinYin*/("JS50")
+	/*NamePinYin*/("JS50"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160717"),
-	/*Name*/("嘉实恒生"),
-	/*NamePinYin*/("JSHS")
+	/*NamePinYin*/("JSHS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160720"),
-	/*Name*/("中期企债"),
-	/*NamePinYin*/("ZJQZ")
+	/*NamePinYin*/("ZJQZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160805"),
-	/*Name*/("长盛同智"),
-	/*NamePinYin*/("CCTZ")
+	/*NamePinYin*/("CCTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160807"),
-	/*Name*/("长盛300"),
-	/*NamePinYin*/("CC300")
+	/*NamePinYin*/("CC300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160810"),
-	/*Name*/("长盛同丰"),
-	/*NamePinYin*/("CCTF")
+	/*NamePinYin*/("CCTF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160812"),
-	/*Name*/("长盛同益"),
-	/*NamePinYin*/("CCTY")
+	/*NamePinYin*/("CCTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160910"),
-	/*Name*/("大成创新"),
-	/*NamePinYin*/("DCCX")
+	/*NamePinYin*/("DCCX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160915"),
-	/*Name*/("大成景丰"),
-	/*NamePinYin*/("DCJF")
+	/*NamePinYin*/("DCJF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160916"),
-	/*Name*/("优选LOF"),
-	/*NamePinYin*/("YSLOF")
+	/*NamePinYin*/("YSLOF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("160918"),
-	/*Name*/("大成小盘"),
-	/*NamePinYin*/("DCXP")
+	/*NamePinYin*/("DCXP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161005"),
-	/*Name*/("富国天惠"),
-	/*NamePinYin*/("FGTH")
+	/*NamePinYin*/("FGTH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161010"),
-	/*Name*/("富国天丰"),
-	/*NamePinYin*/("FGTF")
+	/*NamePinYin*/("FGTF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161015"),
-	/*Name*/("富国天盈"),
-	/*NamePinYin*/("FGTY")
+	/*NamePinYin*/("FGTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161019"),
-	/*Name*/("富国天锋"),
-	/*NamePinYin*/("FGTF")
+	/*NamePinYin*/("FGTF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161117"),
-	/*Name*/("易基永旭"),
-	/*NamePinYin*/("YJYX")
+	/*NamePinYin*/("YJYX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161119"),
-	/*Name*/("易基综债"),
-	/*NamePinYin*/("YJZZ")
+	/*NamePinYin*/("YJZZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161210"),
-	/*Name*/("国投全球"),
-	/*NamePinYin*/("GTQQ")
+	/*NamePinYin*/("GTQQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161213"),
-	/*Name*/("国投消费"),
-	/*NamePinYin*/("GTXF")
+	/*NamePinYin*/("GTXF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161216"),
-	/*Name*/("双债A"),
-	/*NamePinYin*/("SZA")
+	/*NamePinYin*/("SZA"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161221"),
-	/*Name*/("双债C"),
-	/*NamePinYin*/("SZC")
+	/*NamePinYin*/("SZC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161505"),
-	/*Name*/("银河通利"),
-	/*NamePinYin*/("YHTL")
+	/*NamePinYin*/("YHTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161607"),
-	/*Name*/("融通巨潮"),
-	/*NamePinYin*/("RTJC")
+	/*NamePinYin*/("RTJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161610"),
-	/*Name*/("融通领先"),
-	/*NamePinYin*/("RTLX")
+	/*NamePinYin*/("RTLX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161614"),
-	/*Name*/("融通添利"),
-	/*NamePinYin*/("RTTL")
+	/*NamePinYin*/("RTTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161706"),
-	/*Name*/("招商成长"),
-	/*NamePinYin*/("QSCC")
+	/*NamePinYin*/("QSCC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161713"),
-	/*Name*/("招商信用"),
-	/*NamePinYin*/("QSXY")
+	/*NamePinYin*/("QSXY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161810"),
-	/*Name*/("银华内需"),
-	/*NamePinYin*/("YHNX")
+	/*NamePinYin*/("YHNX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161811"),
-	/*Name*/("银华300"),
-	/*NamePinYin*/("YH300")
+	/*NamePinYin*/("YH300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161813"),
-	/*Name*/("银华信用"),
-	/*NamePinYin*/("YHXY")
+	/*NamePinYin*/("YHXY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161820"),
-	/*Name*/("银华纯债"),
-	/*NamePinYin*/("YHCZ")
+	/*NamePinYin*/("YHCZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161821"),
-	/*Name*/("银华50A"),
-	/*NamePinYin*/("YH50A")
+	/*NamePinYin*/("YH50A"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161903"),
-	/*Name*/("万家优选"),
-	/*NamePinYin*/("MGYS")
+	/*NamePinYin*/("MGYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161908"),
-	/*Name*/("万家添利"),
-	/*NamePinYin*/("MGTL")
+	/*NamePinYin*/("MGTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("161911"),
-	/*Name*/("万家强债"),
-	/*NamePinYin*/("MGJZ")
+	/*NamePinYin*/("MGJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162006"),
-	/*Name*/("长城久富"),
-	/*NamePinYin*/("CCJF")
+	/*NamePinYin*/("CCJF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162207"),
-	/*Name*/("泰达效率"),
-	/*NamePinYin*/("TDXL")
+	/*NamePinYin*/("TDXL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162307"),
-	/*Name*/("海富100"),
-	/*NamePinYin*/("HF100")
+	/*NamePinYin*/("HF100"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162308"),
-	/*Name*/("海富增利"),
-	/*NamePinYin*/("HFZL")
+	/*NamePinYin*/("HFZL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162411"),
-	/*Name*/("华宝油气"),
-	/*NamePinYin*/("HBYQ")
+	/*NamePinYin*/("HBYQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162605"),
-	/*Name*/("景顺鼎益"),
-	/*NamePinYin*/("JSDY")
+	/*NamePinYin*/("JSDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162607"),
-	/*Name*/("景顺资源"),
-	/*NamePinYin*/("JSZY")
+	/*NamePinYin*/("JSZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162703"),
-	/*Name*/("广发小盘"),
-	/*NamePinYin*/("AFXP")
+	/*NamePinYin*/("AFXP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162711"),
-	/*Name*/("广发500L"),
-	/*NamePinYin*/("AF500L")
+	/*NamePinYin*/("AF500L"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("162715"),
-	/*Name*/("广发聚源"),
-	/*NamePinYin*/("AFJY")
+	/*NamePinYin*/("AFJY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163001"),
-	/*Name*/("长信100"),
-	/*NamePinYin*/("CX100")
+	/*NamePinYin*/("CX100"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163112"),
-	/*Name*/("申万债券"),
-	/*NamePinYin*/("SMZQ")
+	/*NamePinYin*/("SMZQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163210"),
-	/*Name*/("诺安纯债"),
-	/*NamePinYin*/("NACZ")
+	/*NamePinYin*/("NACZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163302"),
-	/*Name*/("大摩资源"),
-	/*NamePinYin*/("DMZY")
+	/*NamePinYin*/("DMZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163402"),
-	/*Name*/("兴全趋势"),
-	/*NamePinYin*/("XQQS")
+	/*NamePinYin*/("XQQS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163407"),
-	/*Name*/("兴全300"),
-	/*NamePinYin*/("XQ300")
+	/*NamePinYin*/("XQ300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163412"),
-	/*Name*/("兴全轻资"),
-	/*NamePinYin*/("XQQZ")
+	/*NamePinYin*/("XQQZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163415"),
-	/*Name*/("兴全模式"),
-	/*NamePinYin*/("XQMS")
+	/*NamePinYin*/("XQMS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163503"),
-	/*Name*/("天治核心"),
-	/*NamePinYin*/("TZHX")
+	/*NamePinYin*/("TZHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163801"),
-	/*Name*/("中银中国"),
-	/*NamePinYin*/("ZYZG")
+	/*NamePinYin*/("ZYZG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163819"),
-	/*Name*/("中银信用"),
-	/*NamePinYin*/("ZYXY")
+	/*NamePinYin*/("ZYXY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163821"),
-	/*Name*/("中银300E"),
-	/*NamePinYin*/("ZY300E")
+	/*NamePinYin*/("ZY300E"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("163824"),
-	/*Name*/("中银盛利"),
-	/*NamePinYin*/("ZYCL")
+	/*NamePinYin*/("ZYCL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164105"),
-	/*Name*/("华富强债"),
-	/*NamePinYin*/("HFJZ")
+	/*NamePinYin*/("HFJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164205"),
-	/*Name*/("天弘深成"),
-	/*NamePinYin*/("THSC")
+	/*NamePinYin*/("THSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164702"),
-	/*Name*/("添富季红"),
-	/*NamePinYin*/("TFJG")
+	/*NamePinYin*/("TFJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164808"),
-	/*Name*/("工银四季"),
-	/*NamePinYin*/("GYSJ")
+	/*NamePinYin*/("GYSJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164810"),
-	/*Name*/("工银纯债"),
-	/*NamePinYin*/("GYCZ")
+	/*NamePinYin*/("GYCZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164814"),
-	/*Name*/("工银双债"),
-	/*NamePinYin*/("GYSZ")
+	/*NamePinYin*/("GYSZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164815"),
-	/*Name*/("工银资源"),
-	/*NamePinYin*/("GYZY")
+	/*NamePinYin*/("GYZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("164902"),
-	/*Name*/("交银添利"),
-	/*NamePinYin*/("JYTL")
+	/*NamePinYin*/("JYTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("165309"),
-	/*Name*/("建信300"),
-	/*NamePinYin*/("JX300")
+	/*NamePinYin*/("JX300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("165313"),
-	/*Name*/("建信优势"),
-	/*NamePinYin*/("JXYS")
+	/*NamePinYin*/("JXYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("165508"),
-	/*Name*/("信诚深度"),
-	/*NamePinYin*/("XCSD")
+	/*NamePinYin*/("XCSD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("165509"),
-	/*Name*/("信诚增强"),
-	/*NamePinYin*/("XCZJ")
+	/*NamePinYin*/("XCZJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("165516"),
-	/*Name*/("信诚周期"),
-	/*NamePinYin*/("XCZJ")
+	/*NamePinYin*/("XCZJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("166001"),
-	/*Name*/("中欧趋势"),
-	/*NamePinYin*/("ZOQS")
+	/*NamePinYin*/("ZOQS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("166006"),
-	/*Name*/("中欧小盘"),
-	/*NamePinYin*/("ZOXP")
+	/*NamePinYin*/("ZOXP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("166007"),
-	/*Name*/("中欧300"),
-	/*NamePinYin*/("ZO300")
+	/*NamePinYin*/("ZO300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("166008"),
-	/*Name*/("中欧强债"),
-	/*NamePinYin*/("ZOJZ")
+	/*NamePinYin*/("ZOJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("166902"),
-	/*Name*/("民生增利"),
-	/*NamePinYin*/("MSZL")
+	/*NamePinYin*/("MSZL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("166904"),
-	/*Name*/("民生添利"),
-	/*NamePinYin*/("MSTL")
+	/*NamePinYin*/("MSTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("167901"),
-	/*Name*/("华宸300"),
-	/*NamePinYin*/("HC300")
+	/*NamePinYin*/("HC300"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184688"),
-	/*Name*/("基金开元"),
-	/*NamePinYin*/("JJKY")
+	/*NamePinYin*/("JJKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184689"),
-	/*Name*/("基金普惠"),
-	/*NamePinYin*/("JJPH")
+	/*NamePinYin*/("JJPH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184690"),
-	/*Name*/("基金同益"),
-	/*NamePinYin*/("JJTY")
+	/*NamePinYin*/("JJTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184691"),
-	/*Name*/("基金景宏"),
-	/*NamePinYin*/("JJJH")
+	/*NamePinYin*/("JJJH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184692"),
-	/*Name*/("基金裕隆"),
-	/*NamePinYin*/("JJYL")
+	/*NamePinYin*/("JJYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184693"),
-	/*Name*/("基金普丰"),
-	/*NamePinYin*/("JJPF")
+	/*NamePinYin*/("JJPF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184698"),
-	/*Name*/("基金天元"),
-	/*NamePinYin*/("JJTY")
+	/*NamePinYin*/("JJTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184699"),
-	/*Name*/("基金同盛"),
-	/*NamePinYin*/("JJTC")
+	/*NamePinYin*/("JJTC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184701"),
-	/*Name*/("基金景福"),
-	/*NamePinYin*/("JJJF")
+	/*NamePinYin*/("JJJF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184703"),
-	/*Name*/("基金金盛"),
-	/*NamePinYin*/("JJJC")
+	/*NamePinYin*/("JJJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184705"),
-	/*Name*/("基金裕泽"),
-	/*NamePinYin*/("JJYZ")
+	/*NamePinYin*/("JJYZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184706"),
-	/*Name*/("基金天华"),
-	/*NamePinYin*/("JJTH")
+	/*NamePinYin*/("JJTH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184721"),
-	/*Name*/("基金丰和"),
-	/*NamePinYin*/("JJFH")
+	/*NamePinYin*/("JJFH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184722"),
-	/*Name*/("基金久嘉"),
-	/*NamePinYin*/("JJJJ")
+	/*NamePinYin*/("JJJJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("184728"),
-	/*Name*/("基金鸿阳"),
-	/*NamePinYin*/("JJHY")
+	/*NamePinYin*/("JJHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200002"),
-	/*Name*/("万科B"),
-	/*NamePinYin*/("MKB")
+	/*NamePinYin*/("MKB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200003"),
-	/*Name*/("PT金田B"),
-	/*NamePinYin*/("PTJTB")
+	/*NamePinYin*/("PTJTB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200011"),
-	/*Name*/("深物业B"),
-	/*NamePinYin*/("SWYB")
+	/*NamePinYin*/("SWYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200012"),
-	/*Name*/("南玻B"),
-	/*NamePinYin*/("NBB")
+	/*NamePinYin*/("NBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200013"),
-	/*Name*/("*ST石化B"),
-	/*NamePinYin*/("*STDHB")
+	/*NamePinYin*/("*STDHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200015"),
-	/*Name*/("PT中浩B"),
-	/*NamePinYin*/("PTZHB")
+	/*NamePinYin*/("PTZHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200016"),
-	/*Name*/("深康佳B"),
-	/*NamePinYin*/("SKJB")
+	/*NamePinYin*/("SKJB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200017"),
-	/*Name*/("深中华B"),
-	/*NamePinYin*/("SZHB")
+	/*NamePinYin*/("SZHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200018"),
-	/*Name*/("*ST中冠B"),
-	/*NamePinYin*/("*STZGB")
+	/*NamePinYin*/("*STZGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200019"),
-	/*Name*/("深深宝B"),
-	/*NamePinYin*/("SSBB")
+	/*NamePinYin*/("SSBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200020"),
-	/*Name*/("深华发B"),
-	/*NamePinYin*/("SHFB")
+	/*NamePinYin*/("SHFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200022"),
-	/*Name*/("深赤湾B"),
-	/*NamePinYin*/("SCWB")
+	/*NamePinYin*/("SCWB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200024"),
-	/*Name*/("招商局B"),
-	/*NamePinYin*/("QSJB")
+	/*NamePinYin*/("QSJB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200025"),
-	/*Name*/("特力B"),
-	/*NamePinYin*/("TLB")
+	/*NamePinYin*/("TLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200026"),
-	/*Name*/("飞亚达B"),
-	/*NamePinYin*/("FYDB")
+	/*NamePinYin*/("FYDB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200028"),
-	/*Name*/("一致B"),
-	/*NamePinYin*/("YZB")
+	/*NamePinYin*/("YZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200029"),
-	/*Name*/("深深房B"),
-	/*NamePinYin*/("SSFB")
+	/*NamePinYin*/("SSFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200030"),
-	/*Name*/("富奥B"),
-	/*NamePinYin*/("FAB")
+	/*NamePinYin*/("FAB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200037"),
-	/*Name*/("深南电B"),
-	/*NamePinYin*/("SNDB")
+	/*NamePinYin*/("SNDB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200039"),
-	/*Name*/("中集B"),
-	/*NamePinYin*/("ZJB")
+	/*NamePinYin*/("ZJB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200041"),
-	/*Name*/("*ST本实B"),
-	/*NamePinYin*/("*STBSB")
+	/*NamePinYin*/("*STBSB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200045"),
-	/*Name*/("深纺织B"),
-	/*NamePinYin*/("SFZB")
+	/*NamePinYin*/("SFZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200053"),
-	/*Name*/("深基地B"),
-	/*NamePinYin*/("SJDB")
+	/*NamePinYin*/("SJDB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200054"),
-	/*Name*/("建摩B"),
-	/*NamePinYin*/("JMB")
+	/*NamePinYin*/("JMB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200055"),
-	/*Name*/("方大B"),
-	/*NamePinYin*/("FDB")
+	/*NamePinYin*/("FDB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200056"),
-	/*Name*/("*ST国商B"),
-	/*NamePinYin*/("*STGSB")
+	/*NamePinYin*/("*STGSB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200057"),
-	/*Name*/("*ST大洋B"),
-	/*NamePinYin*/("*STDXB")
+	/*NamePinYin*/("*STDXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200058"),
-	/*Name*/("深赛格B"),
-	/*NamePinYin*/("SSGB")
+	/*NamePinYin*/("SSGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200152"),
-	/*Name*/("山航B"),
-	/*NamePinYin*/("SHB")
+	/*NamePinYin*/("SHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200160"),
-	/*Name*/("南江B"),
-	/*NamePinYin*/("NJB")
+	/*NamePinYin*/("NJB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200168"),
-	/*Name*/("雷伊B"),
-	/*NamePinYin*/("LYB")
+	/*NamePinYin*/("LYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200413"),
-	/*Name*/("东旭B"),
-	/*NamePinYin*/("DXB")
+	/*NamePinYin*/("DXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200418"),
-	/*Name*/("小天鹅B"),
-	/*NamePinYin*/("XTEB")
+	/*NamePinYin*/("XTEB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200429"),
-	/*Name*/("粤高速B"),
-	/*NamePinYin*/("YGSB")
+	/*NamePinYin*/("YGSB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200468"),
-	/*Name*/("宁通信B"),
-	/*NamePinYin*/("NTXB")
+	/*NamePinYin*/("NTXB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200488"),
-	/*Name*/("晨鸣B"),
-	/*NamePinYin*/("CMB")
+	/*NamePinYin*/("CMB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200505"),
-	/*Name*/("珠江B"),
-	/*NamePinYin*/("ZJB")
+	/*NamePinYin*/("ZJB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200512"),
-	/*Name*/("闽灿坤B"),
-	/*NamePinYin*/("MCKB")
+	/*NamePinYin*/("MCKB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200513"),
-	/*Name*/("丽珠B"),
-	/*NamePinYin*/("LZB")
+	/*NamePinYin*/("LZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200521"),
-	/*Name*/("皖美菱B"),
-	/*NamePinYin*/("WMLB")
+	/*NamePinYin*/("WMLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200530"),
-	/*Name*/("大冷B"),
-	/*NamePinYin*/("DLB")
+	/*NamePinYin*/("DLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200539"),
-	/*Name*/("粤电力B"),
-	/*NamePinYin*/("YDLB")
+	/*NamePinYin*/("YDLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200541"),
-	/*Name*/("粤照明B"),
-	/*NamePinYin*/("YZMB")
+	/*NamePinYin*/("YZMB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200550"),
-	/*Name*/("江铃B"),
-	/*NamePinYin*/("JLB")
+	/*NamePinYin*/("JLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200553"),
-	/*Name*/("沙隆达B"),
-	/*NamePinYin*/("SLDB")
+	/*NamePinYin*/("SLDB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200570"),
-	/*Name*/("苏常柴B"),
-	/*NamePinYin*/("SCCB")
+	/*NamePinYin*/("SCCB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200581"),
-	/*Name*/("苏威孚B"),
-	/*NamePinYin*/("SWFB")
+	/*NamePinYin*/("SWFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200596"),
-	/*Name*/("古井贡B"),
-	/*NamePinYin*/("GJGB")
+	/*NamePinYin*/("GJGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200613"),
-	/*Name*/("大东海B"),
-	/*NamePinYin*/("DDHB")
+	/*NamePinYin*/("DDHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200625"),
-	/*Name*/("长安B"),
-	/*NamePinYin*/("CAB")
+	/*NamePinYin*/("CAB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200706"),
-	/*Name*/("瓦轴B"),
-	/*NamePinYin*/("WZB")
+	/*NamePinYin*/("WZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200725"),
-	/*Name*/("京东方B"),
-	/*NamePinYin*/("JDFB")
+	/*NamePinYin*/("JDFB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200726"),
-	/*Name*/("鲁泰B"),
-	/*NamePinYin*/("LTB")
+	/*NamePinYin*/("LTB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200761"),
-	/*Name*/("本钢板B"),
-	/*NamePinYin*/("BGBB")
+	/*NamePinYin*/("BGBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200770"),
-	/*Name*/("*ST武锅B"),
-	/*NamePinYin*/("*STWGB")
+	/*NamePinYin*/("*STWGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200771"),
-	/*Name*/("杭汽轮B"),
-	/*NamePinYin*/("HQLB")
+	/*NamePinYin*/("HQLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200869"),
-	/*Name*/("张裕B"),
-	/*NamePinYin*/("ZYB")
+	/*NamePinYin*/("ZYB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200986"),
-	/*Name*/("粤华包B"),
-	/*NamePinYin*/("YHBB")
+	/*NamePinYin*/("YHBB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("200992"),
-	/*Name*/("中鲁B"),
-	/*NamePinYin*/("ZLB")
+	/*NamePinYin*/("ZLB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300001"),
-	/*Name*/("特锐德"),
-	/*NamePinYin*/("TRD")
+	/*NamePinYin*/("TRD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300002"),
-	/*Name*/("神州泰岳"),
-	/*NamePinYin*/("SZTY")
+	/*NamePinYin*/("SZTY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300003"),
-	/*Name*/("乐普医疗"),
-	/*NamePinYin*/("LPYL")
+	/*NamePinYin*/("LPYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300004"),
-	/*Name*/("南风股份"),
-	/*NamePinYin*/("NFGF")
+	/*NamePinYin*/("NFGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300005"),
-	/*Name*/("探路者"),
-	/*NamePinYin*/("TLZ")
+	/*NamePinYin*/("TLZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300006"),
-	/*Name*/("莱美药业"),
-	/*NamePinYin*/("LMYY")
+	/*NamePinYin*/("LMYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300007"),
-	/*Name*/("汉威电子"),
-	/*NamePinYin*/("HWDZ")
+	/*NamePinYin*/("HWDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300008"),
-	/*Name*/("上海佳豪"),
-	/*NamePinYin*/("SHJH")
+	/*NamePinYin*/("SHJH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300009"),
-	/*Name*/("安科生物"),
-	/*NamePinYin*/("AKSW")
+	/*NamePinYin*/("AKSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300010"),
-	/*Name*/("立思辰"),
-	/*NamePinYin*/("LSC")
+	/*NamePinYin*/("LSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300011"),
-	/*Name*/("鼎汉技术"),
-	/*NamePinYin*/("DHJS")
+	/*NamePinYin*/("DHJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300012"),
-	/*Name*/("华测检测"),
-	/*NamePinYin*/("HCJC")
+	/*NamePinYin*/("HCJC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300013"),
-	/*Name*/("新宁物流"),
-	/*NamePinYin*/("XNWL")
+	/*NamePinYin*/("XNWL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300014"),
-	/*Name*/("亿纬锂能"),
-	/*NamePinYin*/("YWLN")
+	/*NamePinYin*/("YWLN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300015"),
-	/*Name*/("爱尔眼科"),
-	/*NamePinYin*/("AEYK")
+	/*NamePinYin*/("AEYK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300016"),
-	/*Name*/("北陆药业"),
-	/*NamePinYin*/("BLYY")
+	/*NamePinYin*/("BLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300017"),
-	/*Name*/("网宿科技"),
-	/*NamePinYin*/("WSKJ")
+	/*NamePinYin*/("WSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300018"),
-	/*Name*/("中元华电"),
-	/*NamePinYin*/("ZYHD")
+	/*NamePinYin*/("ZYHD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300019"),
-	/*Name*/("硅宝科技"),
-	/*NamePinYin*/("GBKJ")
+	/*NamePinYin*/("GBKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300020"),
-	/*Name*/("银江股份"),
-	/*NamePinYin*/("YJGF")
+	/*NamePinYin*/("YJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300021"),
-	/*Name*/("大禹节水"),
-	/*NamePinYin*/("DYJS")
+	/*NamePinYin*/("DYJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300022"),
-	/*Name*/("吉峰农机"),
-	/*NamePinYin*/("JFNJ")
+	/*NamePinYin*/("JFNJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300023"),
-	/*Name*/("宝德股份"),
-	/*NamePinYin*/("BDGF")
+	/*NamePinYin*/("BDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300024"),
-	/*Name*/("机器人"),
-	/*NamePinYin*/("JQR")
+	/*NamePinYin*/("JQR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300025"),
-	/*Name*/("华星创业"),
-	/*NamePinYin*/("HXCY")
+	/*NamePinYin*/("HXCY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300026"),
-	/*Name*/("红日药业"),
-	/*NamePinYin*/("GRYY")
+	/*NamePinYin*/("GRYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300027"),
-	/*Name*/("华谊兄弟"),
-	/*NamePinYin*/("HYXD")
+	/*NamePinYin*/("HYXD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300028"),
-	/*Name*/("金亚科技"),
-	/*NamePinYin*/("JYKJ")
+	/*NamePinYin*/("JYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300029"),
-	/*Name*/("天龙光电"),
-	/*NamePinYin*/("TLGD")
+	/*NamePinYin*/("TLGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300030"),
-	/*Name*/("阳普医疗"),
-	/*NamePinYin*/("YPYL")
+	/*NamePinYin*/("YPYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300031"),
-	/*Name*/("宝通带业"),
-	/*NamePinYin*/("BTDY")
+	/*NamePinYin*/("BTDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300032"),
-	/*Name*/("金龙机电"),
-	/*NamePinYin*/("JLJD")
+	/*NamePinYin*/("JLJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300033"),
-	/*Name*/("同花顺"),
-	/*NamePinYin*/("THS")
+	/*NamePinYin*/("THS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300034"),
-	/*Name*/("钢研高纳"),
-	/*NamePinYin*/("GYGN")
+	/*NamePinYin*/("GYGN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300035"),
-	/*Name*/("中科电气"),
-	/*NamePinYin*/("ZKDQ")
+	/*NamePinYin*/("ZKDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300036"),
-	/*Name*/("超图软件"),
-	/*NamePinYin*/("CTRJ")
+	/*NamePinYin*/("CTRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300037"),
-	/*Name*/("新宙邦"),
-	/*NamePinYin*/("XZB")
+	/*NamePinYin*/("XZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300038"),
-	/*Name*/("梅泰诺"),
-	/*NamePinYin*/("MTN")
+	/*NamePinYin*/("MTN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300039"),
-	/*Name*/("上海凯宝"),
-	/*NamePinYin*/("SHKB")
+	/*NamePinYin*/("SHKB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300040"),
-	/*Name*/("九洲电气"),
-	/*NamePinYin*/("JZDQ")
+	/*NamePinYin*/("JZDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300041"),
-	/*Name*/("回天新材"),
-	/*NamePinYin*/("HTXC")
+	/*NamePinYin*/("HTXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300042"),
-	/*Name*/("朗科科技"),
-	/*NamePinYin*/("LKKJ")
+	/*NamePinYin*/("LKKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300043"),
-	/*Name*/("互动娱乐"),
-	/*NamePinYin*/("HDYL")
+	/*NamePinYin*/("HDYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300044"),
-	/*Name*/("赛为智能"),
-	/*NamePinYin*/("SWZN")
+	/*NamePinYin*/("SWZN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300045"),
-	/*Name*/("华力创通"),
-	/*NamePinYin*/("HLCT")
+	/*NamePinYin*/("HLCT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300046"),
-	/*Name*/("台基股份"),
-	/*NamePinYin*/("TJGF")
+	/*NamePinYin*/("TJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300047"),
-	/*Name*/("天源迪科"),
-	/*NamePinYin*/("TYDK")
+	/*NamePinYin*/("TYDK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300048"),
-	/*Name*/("合康变频"),
-	/*NamePinYin*/("GKBP")
+	/*NamePinYin*/("GKBP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300049"),
-	/*Name*/("福瑞股份"),
-	/*NamePinYin*/("FRGF")
+	/*NamePinYin*/("FRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300050"),
-	/*Name*/("世纪鼎利"),
-	/*NamePinYin*/("SJDL")
+	/*NamePinYin*/("SJDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300051"),
-	/*Name*/("三五互联"),
-	/*NamePinYin*/("SWHL")
+	/*NamePinYin*/("SWHL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300052"),
-	/*Name*/("中青宝"),
-	/*NamePinYin*/("ZQB")
+	/*NamePinYin*/("ZQB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300053"),
-	/*Name*/("欧比特"),
-	/*NamePinYin*/("OBT")
+	/*NamePinYin*/("OBT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300054"),
-	/*Name*/("鼎龙股份"),
-	/*NamePinYin*/("DLGF")
+	/*NamePinYin*/("DLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300055"),
-	/*Name*/("万邦达"),
-	/*NamePinYin*/("MBD")
+	/*NamePinYin*/("MBD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300056"),
-	/*Name*/("三维丝"),
-	/*NamePinYin*/("SWS")
+	/*NamePinYin*/("SWS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300057"),
-	/*Name*/("万顺股份"),
-	/*NamePinYin*/("MSGF")
+	/*NamePinYin*/("MSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300058"),
-	/*Name*/("蓝色光标"),
-	/*NamePinYin*/("LSGB")
+	/*NamePinYin*/("LSGB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300059"),
-	/*Name*/("东方财富"),
-	/*NamePinYin*/("DFCF")
+	/*NamePinYin*/("DFCF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300061"),
-	/*Name*/("康耐特"),
-	/*NamePinYin*/("KNT")
+	/*NamePinYin*/("KNT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300062"),
-	/*Name*/("中能电气"),
-	/*NamePinYin*/("ZNDQ")
+	/*NamePinYin*/("ZNDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300063"),
-	/*Name*/("天龙集团"),
-	/*NamePinYin*/("TLJT")
+	/*NamePinYin*/("TLJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300064"),
-	/*Name*/("豫金刚石"),
-	/*NamePinYin*/("YJGD")
+	/*NamePinYin*/("YJGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300065"),
-	/*Name*/("海兰信"),
-	/*NamePinYin*/("HLX")
+	/*NamePinYin*/("HLX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300066"),
-	/*Name*/("三川股份"),
-	/*NamePinYin*/("SCGF")
+	/*NamePinYin*/("SCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300067"),
-	/*Name*/("安诺其"),
-	/*NamePinYin*/("ANJ")
+	/*NamePinYin*/("ANJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300068"),
-	/*Name*/("南都电源"),
-	/*NamePinYin*/("NDDY")
+	/*NamePinYin*/("NDDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300069"),
-	/*Name*/("金利华电"),
-	/*NamePinYin*/("JLHD")
+	/*NamePinYin*/("JLHD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300070"),
-	/*Name*/("碧水源"),
-	/*NamePinYin*/("BSY")
+	/*NamePinYin*/("BSY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300071"),
-	/*Name*/("华谊嘉信"),
-	/*NamePinYin*/("HYJX")
+	/*NamePinYin*/("HYJX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300072"),
-	/*Name*/("三聚环保"),
-	/*NamePinYin*/("SJHB")
+	/*NamePinYin*/("SJHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300073"),
-	/*Name*/("当升科技"),
-	/*NamePinYin*/("DSKJ")
+	/*NamePinYin*/("DSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300074"),
-	/*Name*/("华平股份"),
-	/*NamePinYin*/("HPGF")
+	/*NamePinYin*/("HPGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300075"),
-	/*Name*/("数字政通"),
-	/*NamePinYin*/("SZZT")
+	/*NamePinYin*/("SZZT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300076"),
-	/*Name*/("GQY视讯"),
-	/*NamePinYin*/("GQYSX")
+	/*NamePinYin*/("GQYSX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300077"),
-	/*Name*/("国民技术"),
-	/*NamePinYin*/("GMJS")
+	/*NamePinYin*/("GMJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300078"),
-	/*Name*/("中瑞思创"),
-	/*NamePinYin*/("ZRSC")
+	/*NamePinYin*/("ZRSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300079"),
-	/*Name*/("数码视讯"),
-	/*NamePinYin*/("SMSX")
+	/*NamePinYin*/("SMSX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300080"),
-	/*Name*/("新大新材"),
-	/*NamePinYin*/("XDXC")
+	/*NamePinYin*/("XDXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300081"),
-	/*Name*/("恒信移动"),
-	/*NamePinYin*/("HXYD")
+	/*NamePinYin*/("HXYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300082"),
-	/*Name*/("奥克股份"),
-	/*NamePinYin*/("AKGF")
+	/*NamePinYin*/("AKGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300083"),
-	/*Name*/("劲胜精密"),
-	/*NamePinYin*/("JSJM")
+	/*NamePinYin*/("JSJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300084"),
-	/*Name*/("海默科技"),
-	/*NamePinYin*/("HMKJ")
+	/*NamePinYin*/("HMKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300085"),
-	/*Name*/("银之杰"),
-	/*NamePinYin*/("YZJ")
+	/*NamePinYin*/("YZJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300086"),
-	/*Name*/("康芝药业"),
-	/*NamePinYin*/("KZYY")
+	/*NamePinYin*/("KZYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300087"),
-	/*Name*/("荃银高科"),
-	/*NamePinYin*/("QYGK")
+	/*NamePinYin*/("QYGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300088"),
-	/*Name*/("长信科技"),
-	/*NamePinYin*/("CXKJ")
+	/*NamePinYin*/("CXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300089"),
-	/*Name*/("长城集团"),
-	/*NamePinYin*/("CCJT")
+	/*NamePinYin*/("CCJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300090"),
-	/*Name*/("盛运股份"),
-	/*NamePinYin*/("CYGF")
+	/*NamePinYin*/("CYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300091"),
-	/*Name*/("金通灵"),
-	/*NamePinYin*/("JTL")
+	/*NamePinYin*/("JTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300092"),
-	/*Name*/("科新机电"),
-	/*NamePinYin*/("KXJD")
+	/*NamePinYin*/("KXJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300093"),
-	/*Name*/("金刚玻璃"),
-	/*NamePinYin*/("JGBL")
+	/*NamePinYin*/("JGBL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300094"),
-	/*Name*/("国联水产"),
-	/*NamePinYin*/("GLSC")
+	/*NamePinYin*/("GLSC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300095"),
-	/*Name*/("华伍股份"),
-	/*NamePinYin*/("HWGF")
+	/*NamePinYin*/("HWGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300096"),
-	/*Name*/("易联众"),
-	/*NamePinYin*/("YLZ")
+	/*NamePinYin*/("YLZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300097"),
-	/*Name*/("智云股份"),
-	/*NamePinYin*/("ZYGF")
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300098"),
-	/*Name*/("高新兴"),
-	/*NamePinYin*/("GXX")
+	/*NamePinYin*/("GXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300099"),
-	/*Name*/("尤洛卡"),
-	/*NamePinYin*/("YLK")
+	/*NamePinYin*/("YLK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300100"),
-	/*Name*/("双林股份"),
-	/*NamePinYin*/("SLGF")
+	/*NamePinYin*/("SLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300101"),
-	/*Name*/("振芯科技"),
-	/*NamePinYin*/("ZXKJ")
+	/*NamePinYin*/("ZXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300102"),
-	/*Name*/("乾照光电"),
-	/*NamePinYin*/("GZGD")
+	/*NamePinYin*/("GZGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300103"),
-	/*Name*/("达刚路机"),
-	/*NamePinYin*/("DGLJ")
+	/*NamePinYin*/("DGLJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300104"),
-	/*Name*/("乐视网"),
-	/*NamePinYin*/("LSW")
+	/*NamePinYin*/("LSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300105"),
-	/*Name*/("龙源技术"),
-	/*NamePinYin*/("LYJS")
+	/*NamePinYin*/("LYJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300106"),
-	/*Name*/("西部牧业"),
-	/*NamePinYin*/("XBMY")
+	/*NamePinYin*/("XBMY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300107"),
-	/*Name*/("建新股份"),
-	/*NamePinYin*/("JXGF")
+	/*NamePinYin*/("JXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300108"),
-	/*Name*/("双龙股份"),
-	/*NamePinYin*/("SLGF")
+	/*NamePinYin*/("SLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300109"),
-	/*Name*/("新开源"),
-	/*NamePinYin*/("XKY")
+	/*NamePinYin*/("XKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300110"),
-	/*Name*/("华仁药业"),
-	/*NamePinYin*/("HRYY")
+	/*NamePinYin*/("HRYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300111"),
-	/*Name*/("向日葵"),
-	/*NamePinYin*/("XRK")
+	/*NamePinYin*/("XRK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300112"),
-	/*Name*/("万讯自控"),
-	/*NamePinYin*/("MXZK")
+	/*NamePinYin*/("MXZK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300113"),
-	/*Name*/("顺网科技"),
-	/*NamePinYin*/("SWKJ")
+	/*NamePinYin*/("SWKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300114"),
-	/*Name*/("中航电测"),
-	/*NamePinYin*/("ZHDC")
+	/*NamePinYin*/("ZHDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300115"),
-	/*Name*/("长盈精密"),
-	/*NamePinYin*/("CYJM")
+	/*NamePinYin*/("CYJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300116"),
-	/*Name*/("坚瑞消防"),
-	/*NamePinYin*/("JRXF")
+	/*NamePinYin*/("JRXF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300117"),
-	/*Name*/("嘉寓股份"),
-	/*NamePinYin*/("JYGF")
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300118"),
-	/*Name*/("东方日升"),
-	/*NamePinYin*/("DFRS")
+	/*NamePinYin*/("DFRS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300119"),
-	/*Name*/("瑞普生物"),
-	/*NamePinYin*/("RPSW")
+	/*NamePinYin*/("RPSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300120"),
-	/*Name*/("经纬电材"),
-	/*NamePinYin*/("JWDC")
+	/*NamePinYin*/("JWDC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300121"),
-	/*Name*/("阳谷华泰"),
-	/*NamePinYin*/("YGHT")
+	/*NamePinYin*/("YGHT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300122"),
-	/*Name*/("智飞生物"),
-	/*NamePinYin*/("ZFSW")
+	/*NamePinYin*/("ZFSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300123"),
-	/*Name*/("太阳鸟"),
-	/*NamePinYin*/("TYD")
+	/*NamePinYin*/("TYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300124"),
-	/*Name*/("汇川技术"),
-	/*NamePinYin*/("HCJS")
+	/*NamePinYin*/("HCJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300125"),
-	/*Name*/("易世达"),
-	/*NamePinYin*/("YSD")
+	/*NamePinYin*/("YSD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300126"),
-	/*Name*/("锐奇股份"),
-	/*NamePinYin*/("RJGF")
+	/*NamePinYin*/("RJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300127"),
-	/*Name*/("银河磁体"),
-	/*NamePinYin*/("YHCT")
+	/*NamePinYin*/("YHCT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300128"),
-	/*Name*/("锦富新材"),
-	/*NamePinYin*/("JFXC")
+	/*NamePinYin*/("JFXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300129"),
-	/*Name*/("泰胜风能"),
-	/*NamePinYin*/("TSFN")
+	/*NamePinYin*/("TSFN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300130"),
-	/*Name*/("新国都"),
-	/*NamePinYin*/("XGD")
+	/*NamePinYin*/("XGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300131"),
-	/*Name*/("英唐智控"),
-	/*NamePinYin*/("YTZK")
+	/*NamePinYin*/("YTZK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300132"),
-	/*Name*/("青松股份"),
-	/*NamePinYin*/("QSGF")
+	/*NamePinYin*/("QSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300133"),
-	/*Name*/("华策影视"),
-	/*NamePinYin*/("HCYS")
+	/*NamePinYin*/("HCYS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300134"),
-	/*Name*/("大富科技"),
-	/*NamePinYin*/("DFKJ")
+	/*NamePinYin*/("DFKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300135"),
-	/*Name*/("宝利沥青"),
-	/*NamePinYin*/("BLLQ")
+	/*NamePinYin*/("BLLQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300136"),
-	/*Name*/("信维通信"),
-	/*NamePinYin*/("XWTX")
+	/*NamePinYin*/("XWTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300137"),
-	/*Name*/("先河环保"),
-	/*NamePinYin*/("XHHB")
+	/*NamePinYin*/("XHHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300138"),
-	/*Name*/("晨光生物"),
-	/*NamePinYin*/("CGSW")
+	/*NamePinYin*/("CGSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300139"),
-	/*Name*/("福星晓程"),
-	/*NamePinYin*/("FXXC")
+	/*NamePinYin*/("FXXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300140"),
-	/*Name*/("启源装备"),
-	/*NamePinYin*/("QYZB")
+	/*NamePinYin*/("QYZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300141"),
-	/*Name*/("和顺电气"),
-	/*NamePinYin*/("HSDQ")
+	/*NamePinYin*/("HSDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300142"),
-	/*Name*/("沃森生物"),
-	/*NamePinYin*/("WSSW")
+	/*NamePinYin*/("WSSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300143"),
-	/*Name*/("星河生物"),
-	/*NamePinYin*/("XHSW")
+	/*NamePinYin*/("XHSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300144"),
-	/*Name*/("宋城演艺"),
-	/*NamePinYin*/("SCYY")
+	/*NamePinYin*/("SCYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300145"),
-	/*Name*/("南方泵业"),
-	/*NamePinYin*/("NFBY")
+	/*NamePinYin*/("NFBY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300146"),
-	/*Name*/("汤臣倍健"),
-	/*NamePinYin*/("SCBJ")
+	/*NamePinYin*/("SCBJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300147"),
-	/*Name*/("香雪制药"),
-	/*NamePinYin*/("XXZY")
+	/*NamePinYin*/("XXZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300148"),
-	/*Name*/("天舟文化"),
-	/*NamePinYin*/("TZWH")
+	/*NamePinYin*/("TZWH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300149"),
-	/*Name*/("量子高科"),
-	/*NamePinYin*/("LZGK")
+	/*NamePinYin*/("LZGK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300150"),
-	/*Name*/("世纪瑞尔"),
-	/*NamePinYin*/("SJRE")
+	/*NamePinYin*/("SJRE"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300151"),
-	/*Name*/("昌红科技"),
-	/*NamePinYin*/("CGKJ")
+	/*NamePinYin*/("CGKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300152"),
-	/*Name*/("燃控科技"),
-	/*NamePinYin*/("RKKJ")
+	/*NamePinYin*/("RKKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300153"),
-	/*Name*/("科泰电源"),
-	/*NamePinYin*/("KTDY")
+	/*NamePinYin*/("KTDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300154"),
-	/*Name*/("瑞凌股份"),
-	/*NamePinYin*/("RLGF")
+	/*NamePinYin*/("RLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300155"),
-	/*Name*/("安居宝"),
-	/*NamePinYin*/("AJB")
+	/*NamePinYin*/("AJB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300156"),
-	/*Name*/("神雾环保"),
-	/*NamePinYin*/("SWHB")
+	/*NamePinYin*/("SWHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300157"),
-	/*Name*/("恒泰艾普"),
-	/*NamePinYin*/("HTAP")
+	/*NamePinYin*/("HTAP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300158"),
-	/*Name*/("振东制药"),
-	/*NamePinYin*/("ZDZY")
+	/*NamePinYin*/("ZDZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300159"),
-	/*Name*/("新研股份"),
-	/*NamePinYin*/("XYGF")
+	/*NamePinYin*/("XYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300160"),
-	/*Name*/("秀强股份"),
-	/*NamePinYin*/("XJGF")
+	/*NamePinYin*/("XJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300161"),
-	/*Name*/("华中数控"),
-	/*NamePinYin*/("HZSK")
+	/*NamePinYin*/("HZSK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300162"),
-	/*Name*/("雷曼光电"),
-	/*NamePinYin*/("LMGD")
+	/*NamePinYin*/("LMGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300163"),
-	/*Name*/("先锋新材"),
-	/*NamePinYin*/("XFXC")
+	/*NamePinYin*/("XFXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300164"),
-	/*Name*/("通源石油"),
-	/*NamePinYin*/("TYDY")
+	/*NamePinYin*/("TYDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300165"),
-	/*Name*/("天瑞仪器"),
-	/*NamePinYin*/("TRYQ")
+	/*NamePinYin*/("TRYQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300166"),
-	/*Name*/("东方国信"),
-	/*NamePinYin*/("DFGX")
+	/*NamePinYin*/("DFGX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300167"),
-	/*Name*/("迪威视讯"),
-	/*NamePinYin*/("DWSX")
+	/*NamePinYin*/("DWSX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300168"),
-	/*Name*/("万达信息"),
-	/*NamePinYin*/("MDXX")
+	/*NamePinYin*/("MDXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300169"),
-	/*Name*/("天晟新材"),
-	/*NamePinYin*/("TCXC")
+	/*NamePinYin*/("TCXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300170"),
-	/*Name*/("汉得信息"),
-	/*NamePinYin*/("HDXX")
+	/*NamePinYin*/("HDXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300171"),
-	/*Name*/("东富龙"),
-	/*NamePinYin*/("DFL")
+	/*NamePinYin*/("DFL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300172"),
-	/*Name*/("中电环保"),
-	/*NamePinYin*/("ZDHB")
+	/*NamePinYin*/("ZDHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300173"),
-	/*Name*/("松德股份"),
-	/*NamePinYin*/("SDGF")
+	/*NamePinYin*/("SDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300174"),
-	/*Name*/("元力股份"),
-	/*NamePinYin*/("YLGF")
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300175"),
-	/*Name*/("朗源股份"),
-	/*NamePinYin*/("LYGF")
+	/*NamePinYin*/("LYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300176"),
-	/*Name*/("鸿特精密"),
-	/*NamePinYin*/("HTJM")
+	/*NamePinYin*/("HTJM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300177"),
-	/*Name*/("中海达"),
-	/*NamePinYin*/("ZHD")
+	/*NamePinYin*/("ZHD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300178"),
-	/*Name*/("腾邦国际"),
-	/*NamePinYin*/("TBGJ")
+	/*NamePinYin*/("TBGJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300179"),
-	/*Name*/("四方达"),
-	/*NamePinYin*/("SFD")
+	/*NamePinYin*/("SFD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300180"),
-	/*Name*/("华峰超纤"),
-	/*NamePinYin*/("HFCQ")
+	/*NamePinYin*/("HFCQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300181"),
-	/*Name*/("佐力药业"),
-	/*NamePinYin*/("ZLYY")
+	/*NamePinYin*/("ZLYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300182"),
-	/*Name*/("捷成股份"),
-	/*NamePinYin*/("JCGF")
+	/*NamePinYin*/("JCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300183"),
-	/*Name*/("东软载波"),
-	/*NamePinYin*/("DRZB")
+	/*NamePinYin*/("DRZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300184"),
-	/*Name*/("力源信息"),
-	/*NamePinYin*/("LYXX")
+	/*NamePinYin*/("LYXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300185"),
-	/*Name*/("通裕重工"),
-	/*NamePinYin*/("TYCG")
+	/*NamePinYin*/("TYCG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300186"),
-	/*Name*/("大华农"),
-	/*NamePinYin*/("DHN")
+	/*NamePinYin*/("DHN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300187"),
-	/*Name*/("永清环保"),
-	/*NamePinYin*/("YQHB")
+	/*NamePinYin*/("YQHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300188"),
-	/*Name*/("美亚柏科"),
-	/*NamePinYin*/("MYBK")
+	/*NamePinYin*/("MYBK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300189"),
-	/*Name*/("神农大丰"),
-	/*NamePinYin*/("SNDF")
+	/*NamePinYin*/("SNDF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300190"),
-	/*Name*/("维尔利"),
-	/*NamePinYin*/("WEL")
+	/*NamePinYin*/("WEL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300191"),
-	/*Name*/("潜能恒信"),
-	/*NamePinYin*/("QNHX")
+	/*NamePinYin*/("QNHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300192"),
-	/*Name*/("科斯伍德"),
-	/*NamePinYin*/("KSWD")
+	/*NamePinYin*/("KSWD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300193"),
-	/*Name*/("佳士科技"),
-	/*NamePinYin*/("JSKJ")
+	/*NamePinYin*/("JSKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300194"),
-	/*Name*/("福安药业"),
-	/*NamePinYin*/("FAYY")
+	/*NamePinYin*/("FAYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300195"),
-	/*Name*/("长荣股份"),
-	/*NamePinYin*/("CRGF")
+	/*NamePinYin*/("CRGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300196"),
-	/*Name*/("长海股份"),
-	/*NamePinYin*/("CHGF")
+	/*NamePinYin*/("CHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300197"),
-	/*Name*/("铁汉生态"),
-	/*NamePinYin*/("THST")
+	/*NamePinYin*/("THST"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300198"),
-	/*Name*/("纳川股份"),
-	/*NamePinYin*/("NCGF")
+	/*NamePinYin*/("NCGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300199"),
-	/*Name*/("翰宇药业"),
-	/*NamePinYin*/("HYYY")
+	/*NamePinYin*/("HYYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300200"),
-	/*Name*/("高盟新材"),
-	/*NamePinYin*/("GMXC")
+	/*NamePinYin*/("GMXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300201"),
-	/*Name*/("海伦哲"),
-	/*NamePinYin*/("HLZ")
+	/*NamePinYin*/("HLZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300202"),
-	/*Name*/("聚龙股份"),
-	/*NamePinYin*/("JLGF")
+	/*NamePinYin*/("JLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300203"),
-	/*Name*/("聚光科技"),
-	/*NamePinYin*/("JGKJ")
+	/*NamePinYin*/("JGKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300204"),
-	/*Name*/("舒泰神"),
-	/*NamePinYin*/("STS")
+	/*NamePinYin*/("STS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300205"),
-	/*Name*/("天喻信息"),
-	/*NamePinYin*/("TYXX")
+	/*NamePinYin*/("TYXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300206"),
-	/*Name*/("理邦仪器"),
-	/*NamePinYin*/("LBYQ")
+	/*NamePinYin*/("LBYQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300207"),
-	/*Name*/("欣旺达"),
-	/*NamePinYin*/("XWD")
+	/*NamePinYin*/("XWD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300208"),
-	/*Name*/("恒顺电气"),
-	/*NamePinYin*/("HSDQ")
+	/*NamePinYin*/("HSDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300209"),
-	/*Name*/("天泽信息"),
-	/*NamePinYin*/("TZXX")
+	/*NamePinYin*/("TZXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300210"),
-	/*Name*/("森远股份"),
-	/*NamePinYin*/("SYGF")
+	/*NamePinYin*/("SYGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300211"),
-	/*Name*/("亿通科技"),
-	/*NamePinYin*/("YTKJ")
+	/*NamePinYin*/("YTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300212"),
-	/*Name*/("易华录"),
-	/*NamePinYin*/("YHL")
+	/*NamePinYin*/("YHL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300213"),
-	/*Name*/("佳讯飞鸿"),
-	/*NamePinYin*/("JXFH")
+	/*NamePinYin*/("JXFH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300214"),
-	/*Name*/("日科化学"),
-	/*NamePinYin*/("RKHX")
+	/*NamePinYin*/("RKHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300215"),
-	/*Name*/("电科院"),
-	/*NamePinYin*/("DKY")
+	/*NamePinYin*/("DKY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300216"),
-	/*Name*/("千山药机"),
-	/*NamePinYin*/("QSYJ")
+	/*NamePinYin*/("QSYJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300217"),
-	/*Name*/("东方电热"),
-	/*NamePinYin*/("DFDR")
+	/*NamePinYin*/("DFDR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300218"),
-	/*Name*/("安利股份"),
-	/*NamePinYin*/("ALGF")
+	/*NamePinYin*/("ALGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300219"),
-	/*Name*/("鸿利光电"),
-	/*NamePinYin*/("HLGD")
+	/*NamePinYin*/("HLGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300220"),
-	/*Name*/("金运激光"),
-	/*NamePinYin*/("JYJG")
+	/*NamePinYin*/("JYJG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300221"),
-	/*Name*/("银禧科技"),
-	/*NamePinYin*/("YXKJ")
+	/*NamePinYin*/("YXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300222"),
-	/*Name*/("科大智能"),
-	/*NamePinYin*/("KDZN")
+	/*NamePinYin*/("KDZN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300223"),
-	/*Name*/("北京君正"),
-	/*NamePinYin*/("BJJZ")
+	/*NamePinYin*/("BJJZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300224"),
-	/*Name*/("正海磁材"),
-	/*NamePinYin*/("ZHCC")
+	/*NamePinYin*/("ZHCC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300225"),
-	/*Name*/("金力泰"),
-	/*NamePinYin*/("JLT")
+	/*NamePinYin*/("JLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300226"),
-	/*Name*/("上海钢联"),
-	/*NamePinYin*/("SHGL")
+	/*NamePinYin*/("SHGL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300227"),
-	/*Name*/("光韵达"),
-	/*NamePinYin*/("GYD")
+	/*NamePinYin*/("GYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300228"),
-	/*Name*/("富瑞特装"),
-	/*NamePinYin*/("FRTZ")
+	/*NamePinYin*/("FRTZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300229"),
-	/*Name*/("拓尔思"),
-	/*NamePinYin*/("TES")
+	/*NamePinYin*/("TES"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300230"),
-	/*Name*/("永利带业"),
-	/*NamePinYin*/("YLDY")
+	/*NamePinYin*/("YLDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300231"),
-	/*Name*/("银信科技"),
-	/*NamePinYin*/("YXKJ")
+	/*NamePinYin*/("YXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300232"),
-	/*Name*/("洲明科技"),
-	/*NamePinYin*/("ZMKJ")
+	/*NamePinYin*/("ZMKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300233"),
-	/*Name*/("金城医药"),
-	/*NamePinYin*/("JCYY")
+	/*NamePinYin*/("JCYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300234"),
-	/*Name*/("开尔新材"),
-	/*NamePinYin*/("KEXC")
+	/*NamePinYin*/("KEXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300235"),
-	/*Name*/("方直科技"),
-	/*NamePinYin*/("FZKJ")
+	/*NamePinYin*/("FZKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300236"),
-	/*Name*/("上海新阳"),
-	/*NamePinYin*/("SHXY")
+	/*NamePinYin*/("SHXY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300237"),
-	/*Name*/("美晨科技"),
-	/*NamePinYin*/("MCKJ")
+	/*NamePinYin*/("MCKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300238"),
-	/*Name*/("冠昊生物"),
-	/*NamePinYin*/("GHSW")
+	/*NamePinYin*/("GHSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300239"),
-	/*Name*/("东宝生物"),
-	/*NamePinYin*/("DBSW")
+	/*NamePinYin*/("DBSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300240"),
-	/*Name*/("飞力达"),
-	/*NamePinYin*/("FLD")
+	/*NamePinYin*/("FLD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300241"),
-	/*Name*/("瑞丰光电"),
-	/*NamePinYin*/("RFGD")
+	/*NamePinYin*/("RFGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300242"),
-	/*Name*/("明家科技"),
-	/*NamePinYin*/("MGKJ")
+	/*NamePinYin*/("MGKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300243"),
-	/*Name*/("瑞丰高材"),
-	/*NamePinYin*/("RFGC")
+	/*NamePinYin*/("RFGC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300244"),
-	/*Name*/("迪安诊断"),
-	/*NamePinYin*/("DAZD")
+	/*NamePinYin*/("DAZD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300245"),
-	/*Name*/("天玑科技"),
-	/*NamePinYin*/("TJKJ")
+	/*NamePinYin*/("TJKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300246"),
-	/*Name*/("宝莱特"),
-	/*NamePinYin*/("BLT")
+	/*NamePinYin*/("BLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300247"),
-	/*Name*/("桑乐金"),
-	/*NamePinYin*/("SLJ")
+	/*NamePinYin*/("SLJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300248"),
-	/*Name*/("新开普"),
-	/*NamePinYin*/("XKP")
+	/*NamePinYin*/("XKP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300249"),
-	/*Name*/("依米康"),
-	/*NamePinYin*/("YMK")
+	/*NamePinYin*/("YMK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300250"),
-	/*Name*/("初灵信息"),
-	/*NamePinYin*/("CLXX")
+	/*NamePinYin*/("CLXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300251"),
-	/*Name*/("光线传媒"),
-	/*NamePinYin*/("GXCM")
+	/*NamePinYin*/("GXCM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300252"),
-	/*Name*/("金信诺"),
-	/*NamePinYin*/("JXN")
+	/*NamePinYin*/("JXN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300253"),
-	/*Name*/("卫宁软件"),
-	/*NamePinYin*/("WNRJ")
+	/*NamePinYin*/("WNRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300254"),
-	/*Name*/("仟源医药"),
-	/*NamePinYin*/("QYYY")
+	/*NamePinYin*/("QYYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300255"),
-	/*Name*/("常山药业"),
-	/*NamePinYin*/("CSYY")
+	/*NamePinYin*/("CSYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300256"),
-	/*Name*/("星星科技"),
-	/*NamePinYin*/("XXKJ")
+	/*NamePinYin*/("XXKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300257"),
-	/*Name*/("开山股份"),
-	/*NamePinYin*/("KSGF")
+	/*NamePinYin*/("KSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300258"),
-	/*Name*/("精锻科技"),
-	/*NamePinYin*/("JDKJ")
+	/*NamePinYin*/("JDKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300259"),
-	/*Name*/("新天科技"),
-	/*NamePinYin*/("XTKJ")
+	/*NamePinYin*/("XTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300260"),
-	/*Name*/("新莱应材"),
-	/*NamePinYin*/("XLYC")
+	/*NamePinYin*/("XLYC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300261"),
-	/*Name*/("雅本化学"),
-	/*NamePinYin*/("YBHX")
+	/*NamePinYin*/("YBHX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300262"),
-	/*Name*/("巴安水务"),
-	/*NamePinYin*/("BASW")
+	/*NamePinYin*/("BASW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300263"),
-	/*Name*/("隆华节能"),
-	/*NamePinYin*/("LHJN")
+	/*NamePinYin*/("LHJN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300264"),
-	/*Name*/("佳创视讯"),
-	/*NamePinYin*/("JCSX")
+	/*NamePinYin*/("JCSX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300265"),
-	/*Name*/("通光线缆"),
-	/*NamePinYin*/("TGXL")
+	/*NamePinYin*/("TGXL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300266"),
-	/*Name*/("兴源过滤"),
-	/*NamePinYin*/("XYGL")
+	/*NamePinYin*/("XYGL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300267"),
-	/*Name*/("尔康制药"),
-	/*NamePinYin*/("EKZY")
+	/*NamePinYin*/("EKZY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300268"),
-	/*Name*/("万福生科"),
-	/*NamePinYin*/("MFSK")
+	/*NamePinYin*/("MFSK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300269"),
-	/*Name*/("联建光电"),
-	/*NamePinYin*/("LJGD")
+	/*NamePinYin*/("LJGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300270"),
-	/*Name*/("中威电子"),
-	/*NamePinYin*/("ZWDZ")
+	/*NamePinYin*/("ZWDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300271"),
-	/*Name*/("华宇软件"),
-	/*NamePinYin*/("HYRJ")
+	/*NamePinYin*/("HYRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300272"),
-	/*Name*/("开能环保"),
-	/*NamePinYin*/("KNHB")
+	/*NamePinYin*/("KNHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300273"),
-	/*Name*/("和佳股份"),
-	/*NamePinYin*/("HJGF")
+	/*NamePinYin*/("HJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300274"),
-	/*Name*/("阳光电源"),
-	/*NamePinYin*/("YGDY")
+	/*NamePinYin*/("YGDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300275"),
-	/*Name*/("梅安森"),
-	/*NamePinYin*/("MAS")
+	/*NamePinYin*/("MAS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300276"),
-	/*Name*/("三丰智能"),
-	/*NamePinYin*/("SFZN")
+	/*NamePinYin*/("SFZN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300277"),
-	/*Name*/("海联讯"),
-	/*NamePinYin*/("HLX")
+	/*NamePinYin*/("HLX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300278"),
-	/*Name*/("华昌达"),
-	/*NamePinYin*/("HCD")
+	/*NamePinYin*/("HCD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300279"),
-	/*Name*/("和晶科技"),
-	/*NamePinYin*/("HJKJ")
+	/*NamePinYin*/("HJKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300280"),
-	/*Name*/("南通锻压"),
-	/*NamePinYin*/("NTDY")
+	/*NamePinYin*/("NTDY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300281"),
-	/*Name*/("金明精机"),
-	/*NamePinYin*/("JMJJ")
+	/*NamePinYin*/("JMJJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300282"),
-	/*Name*/("汇冠股份"),
-	/*NamePinYin*/("HGGF")
+	/*NamePinYin*/("HGGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300283"),
-	/*Name*/("温州宏丰"),
-	/*NamePinYin*/("WZHF")
+	/*NamePinYin*/("WZHF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300284"),
-	/*Name*/("苏交科"),
-	/*NamePinYin*/("SJK")
+	/*NamePinYin*/("SJK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300285"),
-	/*Name*/("国瓷材料"),
-	/*NamePinYin*/("GCCL")
+	/*NamePinYin*/("GCCL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300286"),
-	/*Name*/("安科瑞"),
-	/*NamePinYin*/("AKR")
+	/*NamePinYin*/("AKR"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300287"),
-	/*Name*/("飞利信"),
-	/*NamePinYin*/("FLX")
+	/*NamePinYin*/("FLX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300288"),
-	/*Name*/("朗玛信息"),
-	/*NamePinYin*/("LMXX")
+	/*NamePinYin*/("LMXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300289"),
-	/*Name*/("利德曼"),
-	/*NamePinYin*/("LDM")
+	/*NamePinYin*/("LDM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300290"),
-	/*Name*/("荣科科技"),
-	/*NamePinYin*/("RKKJ")
+	/*NamePinYin*/("RKKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300291"),
-	/*Name*/("华录百纳"),
-	/*NamePinYin*/("HLBN")
+	/*NamePinYin*/("HLBN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300292"),
-	/*Name*/("吴通通讯"),
-	/*NamePinYin*/("WTTX")
+	/*NamePinYin*/("WTTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300293"),
-	/*Name*/("蓝英装备"),
-	/*NamePinYin*/("LYZB")
+	/*NamePinYin*/("LYZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300294"),
-	/*Name*/("博雅生物"),
-	/*NamePinYin*/("BYSW")
+	/*NamePinYin*/("BYSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300295"),
-	/*Name*/("三六五网"),
-	/*NamePinYin*/("SLWW")
+	/*NamePinYin*/("SLWW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300296"),
-	/*Name*/("利亚德"),
-	/*NamePinYin*/("LYD")
+	/*NamePinYin*/("LYD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300297"),
-	/*Name*/("蓝盾股份"),
-	/*NamePinYin*/("LDGF")
+	/*NamePinYin*/("LDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300298"),
-	/*Name*/("三诺生物"),
-	/*NamePinYin*/("SNSW")
+	/*NamePinYin*/("SNSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300299"),
-	/*Name*/("富春通信"),
-	/*NamePinYin*/("FCTX")
+	/*NamePinYin*/("FCTX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300300"),
-	/*Name*/("汉鼎股份"),
-	/*NamePinYin*/("HDGF")
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300301"),
-	/*Name*/("长方照明"),
-	/*NamePinYin*/("CFZM")
+	/*NamePinYin*/("CFZM"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300302"),
-	/*Name*/("同有科技"),
-	/*NamePinYin*/("TYKJ")
+	/*NamePinYin*/("TYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300303"),
-	/*Name*/("聚飞光电"),
-	/*NamePinYin*/("JFGD")
+	/*NamePinYin*/("JFGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300304"),
-	/*Name*/("云意电气"),
-	/*NamePinYin*/("YYDQ")
+	/*NamePinYin*/("YYDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300305"),
-	/*Name*/("裕兴股份"),
-	/*NamePinYin*/("YXGF")
+	/*NamePinYin*/("YXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300306"),
-	/*Name*/("远方光电"),
-	/*NamePinYin*/("YFGD")
+	/*NamePinYin*/("YFGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300307"),
-	/*Name*/("慈星股份"),
-	/*NamePinYin*/("CXGF")
+	/*NamePinYin*/("CXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300308"),
-	/*Name*/("中际装备"),
-	/*NamePinYin*/("ZJZB")
+	/*NamePinYin*/("ZJZB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300309"),
-	/*Name*/("吉艾科技"),
-	/*NamePinYin*/("JAKJ")
+	/*NamePinYin*/("JAKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300310"),
-	/*Name*/("宜通世纪"),
-	/*NamePinYin*/("YTSJ")
+	/*NamePinYin*/("YTSJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300311"),
-	/*Name*/("任子行"),
-	/*NamePinYin*/("RZH")
+	/*NamePinYin*/("RZH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300312"),
-	/*Name*/("邦讯技术"),
-	/*NamePinYin*/("BXJS")
+	/*NamePinYin*/("BXJS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300313"),
-	/*Name*/("天山生物"),
-	/*NamePinYin*/("TSSW")
+	/*NamePinYin*/("TSSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300314"),
-	/*Name*/("戴维医疗"),
-	/*NamePinYin*/("DWYL")
+	/*NamePinYin*/("DWYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300315"),
-	/*Name*/("掌趣科技"),
-	/*NamePinYin*/("ZQKJ")
+	/*NamePinYin*/("ZQKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300316"),
-	/*Name*/("晶盛机电"),
-	/*NamePinYin*/("JCJD")
+	/*NamePinYin*/("JCJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300317"),
-	/*Name*/("珈伟股份"),
-	/*NamePinYin*/("JWGF")
+	/*NamePinYin*/("JWGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300318"),
-	/*Name*/("博晖创新"),
-	/*NamePinYin*/("BHCX")
+	/*NamePinYin*/("BHCX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300319"),
-	/*Name*/("麦捷科技"),
-	/*NamePinYin*/("MJKJ")
+	/*NamePinYin*/("MJKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300320"),
-	/*Name*/("海达股份"),
-	/*NamePinYin*/("HDGF")
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300321"),
-	/*Name*/("同大股份"),
-	/*NamePinYin*/("TDGF")
+	/*NamePinYin*/("TDGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300322"),
-	/*Name*/("硕贝德"),
-	/*NamePinYin*/("SBD")
+	/*NamePinYin*/("SBD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300323"),
-	/*Name*/("华灿光电"),
-	/*NamePinYin*/("HCGD")
+	/*NamePinYin*/("HCGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300324"),
-	/*Name*/("旋极信息"),
-	/*NamePinYin*/("XJXX")
+	/*NamePinYin*/("XJXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300325"),
-	/*Name*/("德威新材"),
-	/*NamePinYin*/("DWXC")
+	/*NamePinYin*/("DWXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300326"),
-	/*Name*/("凯利泰"),
-	/*NamePinYin*/("KLT")
+	/*NamePinYin*/("KLT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300327"),
-	/*Name*/("中颖电子"),
-	/*NamePinYin*/("ZYDZ")
+	/*NamePinYin*/("ZYDZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300328"),
-	/*Name*/("宜安科技"),
-	/*NamePinYin*/("YAKJ")
+	/*NamePinYin*/("YAKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300329"),
-	/*Name*/("海伦钢琴"),
-	/*NamePinYin*/("HLGQ")
+	/*NamePinYin*/("HLGQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300330"),
-	/*Name*/("华虹计通"),
-	/*NamePinYin*/("HHJT")
+	/*NamePinYin*/("HHJT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300331"),
-	/*Name*/("苏大维格"),
-	/*NamePinYin*/("SDWG")
+	/*NamePinYin*/("SDWG"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300332"),
-	/*Name*/("天壕节能"),
-	/*NamePinYin*/("THJN")
+	/*NamePinYin*/("THJN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300333"),
-	/*Name*/("兆日科技"),
-	/*NamePinYin*/("ZRKJ")
+	/*NamePinYin*/("ZRKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300334"),
-	/*Name*/("津膜科技"),
-	/*NamePinYin*/("JMKJ")
+	/*NamePinYin*/("JMKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300335"),
-	/*Name*/("迪森股份"),
-	/*NamePinYin*/("DSGF")
+	/*NamePinYin*/("DSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300336"),
-	/*Name*/("新文化"),
-	/*NamePinYin*/("XWH")
+	/*NamePinYin*/("XWH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300337"),
-	/*Name*/("银邦股份"),
-	/*NamePinYin*/("YBGF")
+	/*NamePinYin*/("YBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300338"),
-	/*Name*/("开元仪器"),
-	/*NamePinYin*/("KYYQ")
+	/*NamePinYin*/("KYYQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300339"),
-	/*Name*/("润和软件"),
-	/*NamePinYin*/("RHRJ")
+	/*NamePinYin*/("RHRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300340"),
-	/*Name*/("科恒股份"),
-	/*NamePinYin*/("KHGF")
+	/*NamePinYin*/("KHGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300341"),
-	/*Name*/("麦迪电气"),
-	/*NamePinYin*/("MDDQ")
+	/*NamePinYin*/("MDDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300342"),
-	/*Name*/("天银机电"),
-	/*NamePinYin*/("TYJD")
+	/*NamePinYin*/("TYJD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300343"),
-	/*Name*/("联创节能"),
-	/*NamePinYin*/("LCJN")
+	/*NamePinYin*/("LCJN"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300344"),
-	/*Name*/("太空板业"),
-	/*NamePinYin*/("TKBY")
+	/*NamePinYin*/("TKBY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300345"),
-	/*Name*/("红宇新材"),
-	/*NamePinYin*/("GYXC")
+	/*NamePinYin*/("GYXC"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300346"),
-	/*Name*/("南大光电"),
-	/*NamePinYin*/("NDGD")
+	/*NamePinYin*/("NDGD"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300347"),
-	/*Name*/("泰格医药"),
-	/*NamePinYin*/("TGYY")
+	/*NamePinYin*/("TGYY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300348"),
-	/*Name*/("长亮科技"),
-	/*NamePinYin*/("CLKJ")
+	/*NamePinYin*/("CLKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300349"),
-	/*Name*/("金卡股份"),
-	/*NamePinYin*/("JKGF")
+	/*NamePinYin*/("JKGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300350"),
-	/*Name*/("华鹏飞"),
-	/*NamePinYin*/("HPF")
+	/*NamePinYin*/("HPF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300351"),
-	/*Name*/("永贵电器"),
-	/*NamePinYin*/("YGDQ")
+	/*NamePinYin*/("YGDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300352"),
-	/*Name*/("北信源"),
-	/*NamePinYin*/("BXY")
+	/*NamePinYin*/("BXY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300353"),
-	/*Name*/("东土科技"),
-	/*NamePinYin*/("DTKJ")
+	/*NamePinYin*/("DTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300354"),
-	/*Name*/("东华测试"),
-	/*NamePinYin*/("DHCS")
+	/*NamePinYin*/("DHCS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300355"),
-	/*Name*/("蒙草抗旱"),
-	/*NamePinYin*/("MCKH")
+	/*NamePinYin*/("MCKH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300356"),
-	/*Name*/("光一科技"),
-	/*NamePinYin*/("GYKJ")
+	/*NamePinYin*/("GYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300357"),
-	/*Name*/("我武生物"),
-	/*NamePinYin*/("WWSW")
+	/*NamePinYin*/("WWSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300358"),
-	/*Name*/("楚天科技"),
-	/*NamePinYin*/("CTKJ")
+	/*NamePinYin*/("CTKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300359"),
-	/*Name*/("全通教育"),
-	/*NamePinYin*/("QTJY")
+	/*NamePinYin*/("QTJY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300360"),
-	/*Name*/("炬华科技"),
-	/*NamePinYin*/("JHKJ")
+	/*NamePinYin*/("JHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300361"),
-	/*Name*/("奥赛康"),
-	/*NamePinYin*/("ASK")
+	/*NamePinYin*/("ASK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300362"),
-	/*Name*/("天保重装"),
-	/*NamePinYin*/("TBCZ")
+	/*NamePinYin*/("TBCZ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300363"),
-	/*Name*/("博腾股份"),
-	/*NamePinYin*/("BTGF")
+	/*NamePinYin*/("BTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300365"),
-	/*Name*/("恒华科技"),
-	/*NamePinYin*/("HHKJ")
+	/*NamePinYin*/("HHKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300366"),
-	/*Name*/("创意信息"),
-	/*NamePinYin*/("CYXX")
+	/*NamePinYin*/("CYXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300367"),
-	/*Name*/("东方网力"),
-	/*NamePinYin*/("DFWL")
+	/*NamePinYin*/("DFWL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300368"),
-	/*Name*/("汇金股份"),
-	/*NamePinYin*/("HJGF")
+	/*NamePinYin*/("HJGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300369"),
-	/*Name*/("绿盟科技"),
-	/*NamePinYin*/("LMKJ")
+	/*NamePinYin*/("LMKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300370"),
-	/*Name*/("安控科技"),
-	/*NamePinYin*/("AKKJ")
+	/*NamePinYin*/("AKKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300371"),
-	/*Name*/("汇中股份"),
-	/*NamePinYin*/("HZGF")
+	/*NamePinYin*/("HZGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300372"),
-	/*Name*/("欣泰电气"),
-	/*NamePinYin*/("XTDQ")
+	/*NamePinYin*/("XTDQ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300373"),
-	/*Name*/("扬杰科技"),
-	/*NamePinYin*/("YJKJ")
+	/*NamePinYin*/("YJKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300375"),
-	/*Name*/("鹏翎股份"),
-	/*NamePinYin*/("PLGF")
+	/*NamePinYin*/("PLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300376"),
-	/*Name*/("易事特"),
-	/*NamePinYin*/("YST")
+	/*NamePinYin*/("YST"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300377"),
-	/*Name*/("赢时胜"),
-	/*NamePinYin*/("YSS")
+	/*NamePinYin*/("YSS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300378"),
-	/*Name*/("鼎捷软件"),
-	/*NamePinYin*/("DJRJ")
+	/*NamePinYin*/("DJRJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300379"),
-	/*Name*/("东方通"),
-	/*NamePinYin*/("DFT")
+	/*NamePinYin*/("DFT"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300380"),
-	/*Name*/("安硕信息"),
-	/*NamePinYin*/("ASXX")
+	/*NamePinYin*/("ASXX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300381"),
-	/*Name*/("溢多利"),
-	/*NamePinYin*/("YDL")
+	/*NamePinYin*/("YDL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300382"),
-	/*Name*/("斯莱克"),
-	/*NamePinYin*/("SLK")
+	/*NamePinYin*/("SLK"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300383"),
-	/*Name*/("光环新网"),
-	/*NamePinYin*/("GHXW")
+	/*NamePinYin*/("GHXW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300384"),
-	/*Name*/("三联虹普"),
-	/*NamePinYin*/("SLHP")
+	/*NamePinYin*/("SLHP"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300385"),
-	/*Name*/("雪浪环境"),
-	/*NamePinYin*/("XLHJ")
+	/*NamePinYin*/("XLHJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300386"),
-	/*Name*/("飞天诚信"),
-	/*NamePinYin*/("FTCX")
+	/*NamePinYin*/("FTCX"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300387"),
-	/*Name*/("富邦股份"),
-	/*NamePinYin*/("FBGF")
+	/*NamePinYin*/("FBGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300388"),
-	/*Name*/("国祯环保"),
-	/*NamePinYin*/("GZHB")
+	/*NamePinYin*/("GZHB"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300389"),
-	/*Name*/("艾比森"),
-	/*NamePinYin*/("ABS")
+	/*NamePinYin*/("ABS"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300390"),
-	/*Name*/("天华超净"),
-	/*NamePinYin*/("THCJ")
+	/*NamePinYin*/("THCJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300391"),
-	/*Name*/("康跃科技"),
-	/*NamePinYin*/("KYKJ")
+	/*NamePinYin*/("KYKJ"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300392"),
-	/*Name*/("腾信股份"),
-	/*NamePinYin*/("TXGF")
+	/*NamePinYin*/("TXGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300393"),
-	/*Name*/("中来股份"),
-	/*NamePinYin*/("ZLGF")
+	/*NamePinYin*/("ZLGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300395"),
-	/*Name*/("菲利华"),
-	/*NamePinYin*/("FLH")
+	/*NamePinYin*/("FLH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300396"),
-	/*Name*/("迪瑞医疗"),
-	/*NamePinYin*/("DRYL")
+	/*NamePinYin*/("DRYL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300397"),
-	/*Name*/("天和防务"),
-	/*NamePinYin*/("THFW")
+	/*NamePinYin*/("THFW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300398"),
-	/*Name*/("飞凯材料"),
-	/*NamePinYin*/("FKCL")
+	/*NamePinYin*/("FKCL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300399"),
-	/*Name*/("京天利"),
-	/*NamePinYin*/("JTL")
+	/*NamePinYin*/("JTL"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300400"),
-	/*Name*/("劲拓股份"),
-	/*NamePinYin*/("JTGF")
+	/*NamePinYin*/("JTGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300401"),
-	/*Name*/("花园生物"),
-	/*NamePinYin*/("HYSW")
+	/*NamePinYin*/("HYSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300402"),
-	/*Name*/("宝色股份"),
-	/*NamePinYin*/("BSGF")
+	/*NamePinYin*/("BSGF"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300403"),
-	/*Name*/("地尔汉宇"),
-	/*NamePinYin*/("DEHY")
+	/*NamePinYin*/("DEHY"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300405"),
-	/*Name*/("科隆精化"),
-	/*NamePinYin*/("KLJH")
+	/*NamePinYin*/("KLJH"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("300406"),
-	/*Name*/("九强生物"),
-	/*NamePinYin*/("JJSW")
+	/*NamePinYin*/("JJSW"),
+	/*SymbolExtern*/(".SZ")
 },
 {
 	/*Symbol*/("500159"),
-	/*Name*/("景顺500"),
-	/*NamePinYin*/("JS500")
-}
-
-
+	/*NamePinYin*/("JS500"),
+	/*SymbolExtern*/(".SZ")
+},
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 };
 
