@@ -36,6 +36,8 @@ private:
 	void _PrintBadData();
 	int _Test_YahuoHistoryReqAck(const std::string& strSymbolUse);
 private:
+	void sleep(unsigned int milliSeconds);
+private:
 	workState  m_nWorkState;
 
 	boost::mutex m_mutexMapStockDataItemT_Total;

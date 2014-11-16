@@ -1,6 +1,13 @@
 //#include "vld.h"
 #include <iostream>
-#pragma comment(lib, "Ws2_32.lib")//winsock2
+//#pragma comment(lib, "Ws2_32.lib")//winsock2
+
+#pragma comment(lib,"winmm.lib")
+#pragma comment(lib,"wldap32.lib")
+#pragma comment(lib,"libcurld.lib")
+#pragma comment(lib,"log4cppd.lib")
+
+//log4cppd.lib ws2_32.lib winmm.lib wldap32.lib libcurld.lib
 
 #include "Log4cppLogger.h"
 

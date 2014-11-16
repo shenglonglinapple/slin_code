@@ -45,8 +45,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;.\src;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;..\..\..\..\PUBLIC\boost\boost_1_55_0;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.37.0\include&quot;"
-				PreprocessorDefinitions="_DEBUG;__WIN32__;__x86__;_NT_;_WIN32_WINNT=0x500;_CRT_SECURE_NO_DEPRECATE;__OSVERSION__=4;WIN32;_CONSOLE;_USE_32BIT_TIME_T"
+				AdditionalIncludeDirectories=".\;.\src;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;..\..\..\..\PUBLIC\boost\boost_1_55_0;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\include&quot;"
+				PreprocessorDefinitions="_DEBUG;__WIN32__;__x86__;_NT_;_WIN32_WINNT=0x500;_CRT_SECURE_NO_DEPRECATE;__OSVERSION__=4;WIN32;_CONSOLE;_USE_32BIT_TIME_T;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -74,11 +74,11 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cppd.lib libcurld.lib"
+				AdditionalDependencies="log4cppd.lib ws2_32.lib winmm.lib wldap32.lib libcurld.lib"
 				OutputFile="../../../../../bin/win32_nd/yahuostockserver.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="..\..\..\..\..\sdk\win32_nd;..\..\..\..\..\build\win32_nd;..\..\..\..\PUBLIC\boost\boost_1_55_0\stage\lib;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\lib\debug\x86&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.37.0\build\lib\win32&quot;"
+				AdditionalLibraryDirectories="..\..\..\..\..\sdk\win32_nd;..\..\..\..\..\build\win32_nd;..\..\..\..\PUBLIC\boost\boost_1_55_0\stage\lib;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\lib\debug\x86&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\lib\debug-zlib&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\../../../../../bin/win32_nd/yahuostockserver.pdb"
 				SubSystem="1"

@@ -3,6 +3,7 @@
 #include <boost/chrono.hpp>
 #include <boost/thread.hpp>
 
+
 #include "BaseException.h"
 #include "StockData.h"
 #include "TotalStocksData.h"
@@ -149,6 +150,9 @@ void CCheckTotalStocks::_CheckTotalData()
 	iterMap = m_MapStockDataItemT_Total.begin();
 	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
+		sleep(1000);
+
+
 		pData = (iterMap->second);
 
 		nFunCheckRes = 0;
@@ -162,6 +166,10 @@ void CCheckTotalStocks::_CheckTotalData()
 		{
 			m_MapStockDataItemT_Bad.insert(
 				MapStockDataItemValueTypeT(pData->m_strSymbolUse, pData));	
+
+			std::string errorMessage = "_Test_YahuoHistoryReqAck error!!";
+			pData->logInfo(__FILE__, __LINE__, errorMessage);
+
 		}
 
 		pData = NULL;
@@ -219,6 +227,15 @@ void CCheckTotalStocks::_PrintBadData()
 	
 }
 
+void CCheckTotalStocks::sleep(unsigned int milliSeconds)
+{  
 
+	boost::xtime timeTmp;
+	boost::xtime_get(&timeTmp, boost::TIME_UTC_);
+	timeTmp.nsec += milliSeconds%1000*1000*1000;
+	timeTmp.sec += milliSeconds/1000;
+	boost::thread::sleep(timeTmp);
+	//boost::this_thread::sleep(boost::posix_time::milliseconds(500));
+}
 
 
