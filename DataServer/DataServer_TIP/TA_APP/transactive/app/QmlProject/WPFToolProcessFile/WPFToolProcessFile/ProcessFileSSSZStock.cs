@@ -130,9 +130,58 @@ namespace WPFToolProcessFile
             }
             return strNameFirstCHSPinYin;
         }
+        
+        public void _ProcessEachLine(System.String strLineSrc, System.IO.StreamWriter fileWriterHander, System.String m_s_Symbol_Extern)
+        {
+            System.String strLineDest = System.String.Empty;
+            System.String strLineCopy = strLineSrc;
+            System.Int32 nFindFisrt = 0;
+            System.Int32 nFindSecond = 0;
+            System.String m_n_Name = System.String.Empty;
+            System.String m_s_Symbol = System.String.Empty;
+            System.String m_n_NamePinYin = System.String.Empty;
+            //System.String m_s_Symbol_Extern = ".SS";
 
 
 
+            //log4net.LogManager.GetLogger("ExeLogger").Info(System.String.Format("_ProcessEachLine {0}", strLineSrc));
+            strLineCopy = strLineSrc.Trim();
+            if (strLineCopy.Length <= 0)
+            {
+                return;
+            }
+            //R002(201009)
+            nFindFisrt = strLineCopy.IndexOf("(");
+            nFindSecond = strLineCopy.IndexOf(")");
+            m_n_Name = strLineCopy.Substring(0, nFindFisrt);//m_n_Name
+            m_n_NamePinYin = _GetFirstCHSPinYin(m_n_Name);
+            m_s_Symbol = strLineCopy.Substring(nFindFisrt + 1, nFindSecond - nFindFisrt - 1);//m_s_Symbol
+
+            strLineDest = "{";
+            fileWriterHander.WriteLine(strLineDest);
+            strLineDest =  "\t"+ "/*Symbol*/" + "(\"" + m_s_Symbol + "\"),";
+            fileWriterHander.WriteLine(strLineDest);
+            //strLineDest = "\t" + "/*Name*/" + "(\"" + m_n_Name + "\"),";
+            //fileWriterHander.WriteLine(strLineDest);
+            strLineDest = "\t" + "/*NamePinYin*/" + "(\"" + m_n_NamePinYin + "\"),";
+            fileWriterHander.WriteLine(strLineDest);
+            strLineDest = "\t" + "/*SymbolExtern*/" + "(\"" + m_s_Symbol_Extern + "\")";
+            fileWriterHander.WriteLine(strLineDest);
+             strLineDest = "},";
+            fileWriterHander.WriteLine(strLineDest);
+
+
+// {
+// 	/*Symbol*/("600652"),
+// 	/*Name*/("爱使股份"),
+// 	/*NamePinYin*/("ASGF")
+// },
+
+            return;
+        }
+        
+
+/*
         public void _ProcessEachLine(System.String strLineSrc, System.IO.StreamWriter fileWriterHander, System.String m_s_Symbol_Extern)
         {
             System.String strLineDest = System.String.Empty;
@@ -172,21 +221,23 @@ namespace WPFToolProcessFile
             fileWriterHander.WriteLine(strLineDest);
             strLineDest = "}";
             fileWriterHander.WriteLine(strLineDest);
-            /*
-                  ListElement
-                {
-                    m_n_Name: "Apple Inc.";
-                    m_s_Symbol: "AAPL";
-                    m_s_Symbol_Extern: "",     
-                    m_l1_Last_Trade_Price_Only: "0.0";
-                    m_c6_Change_Realtime: "0.0";
-                    m_p2_Change_in_Percent: "0%"
-                }
-             */
+            
+//                 ListElement
+//                 {
+//                     m_n_Name: "Apple Inc.";
+//                     m_s_Symbol: "AAPL";
+//                     m_s_Symbol_Extern: "",     
+//                     m_l1_Last_Trade_Price_Only: "0.0";
+//                     m_c6_Change_Realtime: "0.0";
+//                     m_p2_Change_in_Percent: "0%"
+//                 }
+            
 
             return;
         }//_ProcessEachLine
 
+   
+*/
 
     }//class ProcessFileSSSZStock
 }//namespace WPFToolChangeLongType
