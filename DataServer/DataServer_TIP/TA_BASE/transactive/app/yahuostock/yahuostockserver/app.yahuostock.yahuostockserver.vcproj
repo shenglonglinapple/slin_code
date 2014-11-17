@@ -259,6 +259,18 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\TotalStocksDataYahuoNodata.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\TotalStocksForProject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\TotalStocksForProject.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\YahuoHistoryReqAck.cpp"
 				>
 			</File>
