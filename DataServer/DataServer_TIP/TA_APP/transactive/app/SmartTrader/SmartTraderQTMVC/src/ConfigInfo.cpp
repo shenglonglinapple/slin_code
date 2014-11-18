@@ -1,9 +1,12 @@
 #include "ConfigInfo.h"
 
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
+
 #include "ConfigFileHelper.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 
@@ -21,11 +24,11 @@ static const std::string DEFVALUE_String_ColumnName_SmartQuotes_InstrumentPriceC
 
 
 CConfigInfo* CConfigInfo::m_pInstance = 0;
-boost::mutex CConfigInfo::m_mutexInstance;
+QMutex CConfigInfo::m_mutexInstance;
 
 CConfigInfo& CConfigInfo::getInstance()
 {	
-	boost::mutex::scoped_lock lock(m_mutexInstance);	
+	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL == m_pInstance)
 	{
 		m_pInstance = new CConfigInfo();
@@ -35,7 +38,7 @@ CConfigInfo& CConfigInfo::getInstance()
 
 void CConfigInfo::removeInstance()
 {
-	boost::mutex::scoped_lock lock(m_mutexInstance);	
+	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL != m_pInstance)
 	{
 		delete m_pInstance;

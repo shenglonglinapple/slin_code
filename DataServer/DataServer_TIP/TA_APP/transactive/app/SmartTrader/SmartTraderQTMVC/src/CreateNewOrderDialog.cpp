@@ -7,8 +7,8 @@
 #include "OrderInfoWidget.h"
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -288,10 +288,9 @@ void CCreateNewOrderDialog::_CreateConnect()
 		SLOT(slotPushButtonSellClicked(bool)));
 
 	QObject::connect(m_pOrderInfoWidget, 
-		SIGNAL(signalOrderCheck(Order::Side, Order::OrderType, QString, double, int, OrderCheckRes)),
+		SIGNAL(signalOrderCheck(CUserOrderInfo*)),
 		this, 
-		SLOT(slotOrderCheck(Order::Side, Order::OrderType, QString, double, int, OrderCheckRes)));
-
+		SLOT(slotOrderCheck(CUserOrderInfo*)));
 
 	
 }
@@ -302,7 +301,7 @@ void CCreateNewOrderDialog::slotOrderCheck(CUserOrderInfo* pUserOrderInfo)
 	//emit
 	if (CUserOrderInfo::OrderCheckRes_OK == pUserOrderInfo->m_nCheckRes)
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CCreateNewOrderDialog"
 			<<" "<<"fun:"<<"slotOrderCheck(Order::Side, Order::OrderType, QString, double, int, OrderCheckRes)"
 			<<" "<<"emit"
@@ -318,7 +317,7 @@ void CCreateNewOrderDialog::slotOrderCheck(CUserOrderInfo* pUserOrderInfo)
 	}
 	else if (CUserOrderInfo::OrderCheckRes_Cancel ==  pUserOrderInfo->m_nCheckRes)
 	{
-		LOG_DEBUG<<" "<<"user Cancel new order";
+		MYLOG4CPP_DEBUG<<" "<<"user Cancel new order";
 	}
 }
 

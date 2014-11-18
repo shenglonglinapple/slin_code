@@ -14,8 +14,8 @@
 #include "QuotesInfo.h"
 #include "ConfigInfo.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -353,7 +353,7 @@ bool CTreeItemQuotes::removeChildren( int position, int count )
 
 	if (position < 0 || position + count > m_LstChildItems.size())
 	{
-		LOG_ERROR<<"removeChildren() error!"
+		MYLOG4CPP_ERROR<<"removeChildren() error!"
 			<<" "<<"position="<<position
 			<<" "<<"count="<<count
 			<<" "<<"m_LstChildItems.count()="<<m_LstChildItems.count();

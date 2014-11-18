@@ -2,8 +2,8 @@
 
 #include "ProjectUtilityFun.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -257,7 +257,9 @@ void CQuotesInfo::setValue( const Instrument &instrument)
 	m_fSettlementPrice = m_pUtilityFun->checkFloatNanValue(m_fSettlementPrice);
 
 	m_timeUpdateTime  = instrument.getUpdateTime();
-	m_strGetupdateTime = m_pUtilityFun->dataTimeToStr(m_timeUpdateTime);
+	m_strGetupdateTime = m_pUtilityFun->dateTimeToStr_Qt(m_timeUpdateTime);
+	//m_strGetupdateTime = m_pUtilityFun->dateTimeToStr_Qt(m_timeUpdateTime);
+	
 	//strGetupdateTime  = instrument.getInstrumentID();
 
 	m_fValuePerPoint  = instrument.getValuePerPoint();
@@ -280,7 +282,7 @@ unsigned int CQuotesInfo::getInstrumentID() const
 }
 void CQuotesInfo::logInfo( const QString& strLogInfo ) const
 {
-	LOG_DEBUG<<strLogInfo.toStdString()
+	MYLOG4CPP_DEBUG<<strLogInfo.toStdString()
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
 		<<" "<<"m_strExchangeName="<<m_strExchangeName.toStdString()
 		<<" "<<"m_strUnderlyingCode="<<m_strUnderlyingCode.toStdString()

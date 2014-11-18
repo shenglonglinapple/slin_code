@@ -3,8 +3,8 @@
 #include <boost/thread.hpp>
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"//#include "BoostLogger.h"
+//USING_BOOST_LOG;
 
 
 //QT_BEGIN_NAMESPACE
@@ -14,7 +14,7 @@ USING_BOOST_LOG;
 
 CBoostThread::CBoostThread()
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 	m_ThreadState = THREAD_STATE_UNKNOWN;
 	m_thread = NULL;	
@@ -23,7 +23,7 @@ CBoostThread::CBoostThread()
 
 CBoostThread::~CBoostThread()
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 
 }
@@ -31,7 +31,7 @@ CBoostThread::~CBoostThread()
 
 void CBoostThread::runThread(void* ptr)
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 
 	CBoostThread* myThread = static_cast<CBoostThread *>(ptr);
@@ -40,7 +40,7 @@ void CBoostThread::runThread(void* ptr)
 	// printf("&i = %p\n", &i)	// printf Thread address
 	myThread->m_nThreadID = CBoostThread::getCurrentThreadId();
 
-	LOG_DEBUG<<"runThread(): [Thrd: "<<myThread->m_nThreadID<<"] begin  call run()";
+	MYLOG4CPP_DEBUG<<"runThread(): [Thrd: "<<myThread->m_nThreadID<<"] begin  call run()";
 
 	try
 	{
@@ -50,16 +50,16 @@ void CBoostThread::runThread(void* ptr)
 	{
 		std::string msg( "runThread(): " );
 		msg.append( e.what() );
-		LOG_ERROR<<"runThread(): std::exception  msg="<<msg;
+		MYLOG4CPP_ERROR<<"runThread(): std::exception  msg="<<msg;
 		return;
 	}
 	catch (...)
 	{
-		LOG_ERROR<<"runThread(): Unknown exception";		
+		MYLOG4CPP_ERROR<<"runThread(): Unknown exception";		
 		return;
 	}
 
-	LOG_DEBUG<<"runThread(): [Thrd: "<<myThread->m_nThreadID<<"] end  call run()";
+	MYLOG4CPP_DEBUG<<"runThread(): [Thrd: "<<myThread->m_nThreadID<<"] end  call run()";
 
 	myThread->m_ThreadState = THREAD_STATE_FINISH; 
 	return;
@@ -69,13 +69,13 @@ void CBoostThread::runThread(void* ptr)
 
 void CBoostThread::start()
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 	
 	int status = 0;		 
 	if (THREAD_STATE_RUNNING ==	m_ThreadState
 		|| THREAD_STATE_FINISH == m_ThreadState)
 	{
-		LOG_WARNING<<"start(): [Thrd: "<<this->m_nThreadID<<"] is already running";
+		MYLOG4CPP_WARNING<<"start(): [Thrd: "<<this->m_nThreadID<<"] is already running";
 		return;
 	}
 	//CTestClientThread* pClient = NULL;	
@@ -83,32 +83,32 @@ void CBoostThread::start()
 	//pThread = new boost::thread(boost::bind(&CTestClientThread::loop, pClient, 100));
 
 
-	LOG_DEBUG<<"start(): [Thrd: "<<this->m_nThreadID<<"] begin start";
+	MYLOG4CPP_DEBUG<<"start(): [Thrd: "<<this->m_nThreadID<<"] begin start";
 
 	//m_thread = new boost::thread(runThread, this);
 	m_thread = new boost::thread(boost::bind(&CBoostThread::runThread, this, this));
 	m_ThreadState = THREAD_STATE_NEW;
-	LOG_DEBUG<<"start(): [Thrd: "<<this->m_nThreadID<<"] end start";
+	MYLOG4CPP_DEBUG<<"start(): [Thrd: "<<this->m_nThreadID<<"] end start";
 
 }
 
 
 void CBoostThread::terminateAndWait()
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 	int status = 0; 
 
 	if (NULL != m_thread)
 	{
-		LOG_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] begin call terminate()";
+		MYLOG4CPP_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] begin call terminate()";
 
 		terminate();
 
-		LOG_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] end call terminate()";
+		MYLOG4CPP_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] end call terminate()";
 
 
-		LOG_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] begin  join";
+		MYLOG4CPP_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] begin  join";
 
         m_thread->join();
 
@@ -117,7 +117,7 @@ void CBoostThread::terminateAndWait()
 		delete m_thread;
 		m_thread = NULL;
 
-		LOG_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] end  join";
+		MYLOG4CPP_DEBUG<<"terminateAndWait(): [Thrd: "<<this->m_nThreadID<<"] end  join";
 
 	}
 }
@@ -125,7 +125,7 @@ void CBoostThread::terminateAndWait()
 
 void CBoostThread::sleep(unsigned int milliSeconds)
 {  
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 	boost::xtime timeTmp;
 	boost::xtime_get(&timeTmp, boost::TIME_UTC_);
@@ -138,14 +138,14 @@ void CBoostThread::sleep(unsigned int milliSeconds)
 
 unsigned int CBoostThread::getId() const
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 	return (m_thread != NULL) ? m_nThreadID : static_cast< unsigned int >( -1 );
 }
 
 unsigned int CBoostThread::getCurrentThreadId()
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 	std::string threadId = boost::lexical_cast<std::string>(boost::this_thread::get_id());
 	unsigned int threadNumber = 0;
@@ -154,7 +154,7 @@ unsigned int CBoostThread::getCurrentThreadId()
 }
 CBoostThread::EThreadStates CBoostThread::getCurrentState() const
 {
-	BOOST_LOG_FUNCTION();
+	//BOOST_LOG_FUNCTION();
 
 	return m_ThreadState;
 }

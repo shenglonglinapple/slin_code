@@ -12,8 +12,8 @@
 
 #include "ContractInfo.h"
 
-//#include "BoostLogger.h"
-//USING_BOOST_LOG;
+//#include "Log4cppLogger.h"
+//
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -274,7 +274,7 @@ bool CTreeItemContract::removeChildren(int position)
 
 	if (position < 0 || position > m_MapStringChildren.size())
 	{
-// 		LOG_ERROR<<"removeChildren() error!"
+// 		MYLOG4CPP_ERROR<<"removeChildren() error!"
 // 			<<" "<<"position="<<position
 // 			<<" "<<"m_MapStringChildren.size()="<<m_MapStringChildren.size();
 

@@ -1,8 +1,8 @@
 #include "HistoryDataManager.h"
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 CHistoryDataManager::CHistoryDataManager()

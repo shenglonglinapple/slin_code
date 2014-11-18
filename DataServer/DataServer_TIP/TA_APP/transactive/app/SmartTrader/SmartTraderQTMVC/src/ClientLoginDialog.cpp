@@ -1,13 +1,14 @@
 #include "ClientLoginDialog.h"
 
 #include "ProjectQTInclude.h"
+#include "ProjectCommonData.h"
 
 #include "ClientLoginParam.h"
 #include "ServerSettingDialog.h"
 #include "PwdLineEdit.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -155,10 +156,10 @@ void CClientLoginDialog::translateLanguage()
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_Title_Text.c_str()));
 
 	m_pLabel_UserName->setText(QObject::tr(DEFVALUE_String_Label_UserName_Text.c_str()));
-	m_pComboBox_UserName->insertItem(0, QObject::tr("DU07"));
+	m_pComboBox_UserName->insertItem(0, QObject::tr(DEFVALUE_String_UserName.c_str()));
 	m_pComboBox_UserName->setCurrentIndex(0);
 	m_pLabel_Password->setText(QObject::tr(DEFVALUE_String_Label_Password_Text.c_str()));
-	m_pLineEdit_Password->setText(QObject::tr("Changeme1"));
+	m_pLineEdit_Password->setText(QObject::tr(DEFVALUE_String_PassWord.c_str()));
 	m_pPushButtonSetting->setText(QObject::tr(DEFVALUE_String_Button_Settings_Text.c_str()));
 	m_pPushButtonLogin->setText(QObject::tr(DEFVALUE_String_Button_Login_Text.c_str()));
 	m_pPushButtonCancle->setText(QObject::tr(DEFVALUE_String_Button_Cancel_Text.c_str()));
@@ -179,11 +180,11 @@ void CClientLoginDialog::slotButtonLoginClicked( bool checked )
 	m_pClientLoginParam->m_strUserName = m_pComboBox_UserName_Value.toStdString();
 	m_pClientLoginParam->m_strPassWord = m_pLineEdit_Password_Value.toStdString();
 
-	LOG_DEBUG<<"set client info"
+	MYLOG4CPP_DEBUG<<"set client info"
 		<<" "<<"m_strUserName="<<m_pClientLoginParam->m_strUserName
 		<<" "<<"m_strPassWord="<<m_pClientLoginParam->m_strPassWord;
 
-	LOG_DEBUG<<"CClientLoginDialog emit signalClientLoginParamChanged"
+	MYLOG4CPP_DEBUG<<"CClientLoginDialog emit signalClientLoginParamChanged"
 		<<" "<<"m_pClientLoginParam=0x"<<m_pClientLoginParam;
 
 	emit signalClientLoginParamChanged(m_pClientLoginParam);
@@ -198,7 +199,7 @@ void CClientLoginDialog::slotButtonCancelClicked( bool checked )
 
 void CClientLoginDialog::slotLoginToServerResult( int nLoginResust )
 {
-	LOG_DEBUG<<"CClientLoginDialog process signalLoginToServerResult"
+	MYLOG4CPP_DEBUG<<"CClientLoginDialog process signalLoginToServerResult"
 		<<" "<<"nLoginResust="<<nLoginResust;
 
 	//logon ok
@@ -215,13 +216,13 @@ void CClientLoginDialog::slotLoginToServerResult( int nLoginResust )
 
 void CClientLoginDialog::slotServerInfoChanged( CClientLoginParam* pClientLoginParam )
 {
-	LOG_DEBUG<<"CClientLoginDialog process slotServerInfoChanged"
+	MYLOG4CPP_DEBUG<<"CClientLoginDialog process slotServerInfoChanged"
 		<<" "<<"pClientLoginParam=0x"<<pClientLoginParam;
 
 	m_pClientLoginParam->m_strServerIP = pClientLoginParam->m_strServerIP;
 	m_pClientLoginParam->m_nServerPort = pClientLoginParam->m_nServerPort;
 
-	LOG_DEBUG<<"set server info"
+	MYLOG4CPP_DEBUG<<"set server info"
 		<<" "<<"m_strServerIP="<<m_pClientLoginParam->m_strServerIP
 		<<" "<<"m_nServerPort="<<m_pClientLoginParam->m_nServerPort;
 

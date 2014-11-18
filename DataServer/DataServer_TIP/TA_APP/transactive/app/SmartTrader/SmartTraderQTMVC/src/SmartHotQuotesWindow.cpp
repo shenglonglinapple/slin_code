@@ -9,8 +9,8 @@
 #include "TreeModelQuotes.h"
 #include "TreeItemQuotes.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -94,7 +94,7 @@ void CLeftDockWidget::translateLanguage()
 
 void CLeftDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
 {
-	LOG_DEBUG<<"CSmartHotQuotesWindow process slotQuotesInfoChanged"
+	MYLOG4CPP_DEBUG<<"CSmartHotQuotesWindow process slotQuotesInfoChanged"
 		<<" "<<"pTreeItem=ox"<<pTreeItem;
 
 	QModelIndex inValidIndex;

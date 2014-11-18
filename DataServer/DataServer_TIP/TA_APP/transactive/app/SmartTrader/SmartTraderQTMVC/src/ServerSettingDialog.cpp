@@ -1,12 +1,13 @@
 #include "ServerSettingDialog.h"
 
 #include "ProjectQTInclude.h"
+#include "ProjectCommonData.h"
 
 #include "ClientLoginParam.h"
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -116,9 +117,9 @@ void CServerSettingDialog::translateLanguage()
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_Title_Text.c_str()));
 
 	m_pLabel_IPAddress->setText(QObject::tr(DEFVALUE_String_Label_IPAddress_Text.c_str()));
-	m_pLineEdit_IPAddress->setText(QObject::tr("cts.sdicfutures.com"));
+	m_pLineEdit_IPAddress->setText(QObject::tr(DEFVALUE_String_ServerIP.c_str()));
 	m_pLabel_Port->setText(QObject::tr(DEFVALUE_String_Label_Port_Text.c_str()));
-	m_pLineEdit_Port->setText(QObject::tr("9170"));
+	m_pLineEdit_Port->setText(QString("%1").arg(DEFVALUE_Int_ServerPort));
 	m_pPushButton_OK->setText(QObject::tr(DEFVALUE_String_PushButton_OK_Text.c_str()));
 	m_pPushButton_Cancel->setText(QObject::tr(DEFVALUE_String_PushButton_Cancel_Text.c_str()));
 
@@ -136,7 +137,7 @@ void CServerSettingDialog::slotButtonOKlicked( bool checked )
 	m_pClientLoginParam->m_strServerIP = m_str_LineEdit_IPAddress_Value.toStdString();
 	m_pClientLoginParam->m_nServerPort = m_str_LineEdit_Port_Value.toInt();
 
-	LOG_DEBUG<<"CServerSettingDialog emit signalServerInfoChanged"
+	MYLOG4CPP_DEBUG<<"CServerSettingDialog emit signalServerInfoChanged"
 		<<" "<<"m_pClientLoginParam=0x"<<m_pClientLoginParam;
 
 	emit signalServerInfoChanged(m_pClientLoginParam);

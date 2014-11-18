@@ -6,6 +6,7 @@
 #include <QtCore/QTextCodec>
 #include <QtCore/QTranslator>
 #include <QtCore/QSharedMemory>
+#include <QtCore/QTextStream>
 #include <QtCore/QFile>
 
 #include "QTProjectEnvironment.h"
@@ -74,21 +75,21 @@ int main(int argc, char *argv[])
 	//加载Qt中的资源文件，使Qt显示中文（包括QMessageBox、文本框右键菜单等）
 	QTranslator translator;  
 	translator.load(QString(":/language/qt_zh_CN"));  
-	app.installTranslator(&translator);  
+	//app.installTranslator(&translator);  
 
 
 	//加载QSS样式表
-	QFile qss(":/qss/SmartTraderQTMVC");
-	qss.open(QFile::ReadOnly);
-	//qApp->setStyleSheet(qss.readAll());//QCoreApplication::instance()
-	qss.close();
+	QFile file(":/Qss/SmartTraderQTMVC");
+	file.open(QFile::ReadOnly);
+	QTextStream filetext(&file);
+	QString stylesheet= filetext.readAll();
+	//app.setStyleSheet(stylesheet);
+	
 
 
 
 	CClientManager objClientWindow;
 
-// 	CCreateNewOrderDialog* pCCreateNewOrderDialog = new CCreateNewOrderDialog(NULL);
-// 	pCCreateNewOrderDialog->show();
 
 	nFunRes = app.exec(); 
 

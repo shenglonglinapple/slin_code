@@ -7,8 +7,8 @@
 #include <QtGui/QFontMetrics>
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 
@@ -54,12 +54,12 @@ void CConfigFileHelper::setConfigFile( const QString& strConfigFileName )
 	if (m_strConfigFileName.isEmpty())
 	{
 		m_strConfigFileName = DEF_VALUE_CONFIG_FILE.c_str();
-		LOG_ERROR<<"setConfigFile"
+		MYLOG4CPP_ERROR<<"setConfigFile"
 			<<" "<<"strConfigFileName="<<"NULL";
 	}
 	else
 	{
-		LOG_INFO<<"setConfigFile"
+		MYLOG4CPP_INFO<<"setConfigFile"
 			<<" "<<"strConfigFileName="<<strConfigFileName.toStdString();
 	}
 }
@@ -71,14 +71,14 @@ void CConfigFileHelper::setConfigFile( const QString& strConfigFileName )
 */
 int CConfigFileHelper::_WriteToConfig(const QString& strConfigFileName, const QString& strGroup, const QString& strKey, const QString& strValue)
 {
-	boost::mutex::scoped_lock lock(m_mutexConfigFileName);	
+	QMutexLocker lock(&m_mutexConfigFileName);	
 
 	int nRunRes = 0;
 	QSettings *configFileHandle = NULL;
 
 	if(strConfigFileName.isEmpty() || strKey.isEmpty())
 	{
-		LOG_ERROR<<"writeToConfig"
+		MYLOG4CPP_ERROR<<"writeToConfig"
 			<<" "<<"strConfigFileName="<<"NULL";
 
 		nRunRes = -1;
@@ -93,7 +93,7 @@ int CConfigFileHelper::_WriteToConfig(const QString& strConfigFileName, const QS
 	configFileHandle->setValue(strKey, strValue);
 	configFileHandle->endGroup();
 
-	LOG_INFO<<"writeToConfig"
+	MYLOG4CPP_INFO<<"writeToConfig"
 		<<" "<<"strConfigFileName="<<strConfigFileName.toStdString()
 		<<" "<<"strGroup="<<strGroup.toStdString()
 		<<" "<<"strKey="<<strKey.toStdString()
@@ -108,7 +108,7 @@ int CConfigFileHelper::_WriteToConfig(const QString& strConfigFileName, const QS
 */
 int CConfigFileHelper::_ReadFormConfig(const QString& strConfigFileName, const QString& strGroup, const QString& strKey, QString& strValue)
 {
-	boost::mutex::scoped_lock lock(m_mutexConfigFileName);	
+	QMutexLocker lock(&m_mutexConfigFileName);	
 
 	int nRunRes = 0;
 	QSettings *configFileHandle = NULL;
@@ -118,7 +118,7 @@ int CConfigFileHelper::_ReadFormConfig(const QString& strConfigFileName, const Q
 
 	if(strConfigFileName.isEmpty() || strKey.isEmpty())
 	{
-		LOG_ERROR<<"readFormConfig"
+		MYLOG4CPP_ERROR<<"readFormConfig"
 			<<" "<<"strConfigFileName="<<"NULL";
 
 		nRunRes = -1;
@@ -136,7 +136,7 @@ int CConfigFileHelper::_ReadFormConfig(const QString& strConfigFileName, const Q
 	nKeyIndex = allKeys.indexOf(strKeyTemp);//allKeys.indexOf();
 	if (-1 == nKeyIndex)
 	{
-		LOG_WARNING<<"readFormConfig"
+		MYLOG4CPP_WARNING<<"readFormConfig"
 			<<" "<<"strConfigFileName="<<strConfigFileName.toStdString()
 			<<" "<<"not have key="<<strKeyTemp.toStdString();
 		nRunRes = -1;
@@ -146,7 +146,7 @@ int CConfigFileHelper::_ReadFormConfig(const QString& strConfigFileName, const Q
 	//读取用户配置信息
 	strValue = configFileHandle->value(strKeyTemp).toString();
 
-	LOG_INFO<<"readFormConfig"
+	MYLOG4CPP_INFO<<"readFormConfig"
 		<<" "<<"strConfigFileName="<<strConfigFileName.toStdString()
 		<<" "<<"strKeyTemp="<<strKeyTemp.toStdString()
 		<<" "<<"strValue="<<strValue.toStdString();

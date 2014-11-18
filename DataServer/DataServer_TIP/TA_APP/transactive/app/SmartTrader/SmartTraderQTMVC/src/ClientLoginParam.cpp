@@ -1,34 +1,19 @@
 #include "ClientLoginParam.h"
 
-//#include "BoostLogger.h"
-//USING_BOOST_LOG;
+#include "ProjectCommonData.h"
+//#include "Log4cppLogger.h"
+//
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
 
 
 
-//////////////////////////////////////////////////////////////////////////
-static const std::string DEFVALUE_String_UserName = "CTS007";
-static const std::string DEFVALUE_String_PassWord = "Password1";
-// static const std::string DEFVALUE_String_UserName = "DU07";
-// static const std::string DEFVALUE_String_PassWord = "Changeme1";
-static const bool DEFVALUE_Bool_EnableDebug = false;
 
-//static const std::string DEFVALUE_String_ServerIP = "211.144.192.149";
-static const std::string DEFVALUE_String_ServerIP = "cts.sdicfutures.com";
-static const int DEFVALUE_Int_ServerPort = 9170;
-static const bool DEFVALUE_Bool_Synchronous = true;
-//////////////////////////////////////////////////////////////////////////
 
 CClientLoginParam::CClientLoginParam()
 {
-	m_strUserName = DEFVALUE_String_UserName;
-	m_strPassWord = DEFVALUE_String_PassWord;
-	m_bEnableDebug = DEFVALUE_Bool_EnableDebug;
-	m_strServerIP = DEFVALUE_String_ServerIP;
-	m_nServerPort = DEFVALUE_Int_ServerPort;
-	m_bSynchronous = DEFVALUE_Bool_Synchronous;
+	setDefaultValue();
 }
 
 CClientLoginParam::~CClientLoginParam()

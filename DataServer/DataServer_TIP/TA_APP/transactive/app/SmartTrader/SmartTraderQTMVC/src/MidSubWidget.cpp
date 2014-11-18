@@ -12,8 +12,8 @@
 #include <time.h>       /* time_t, struct tm, difftime, time, mktime */
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -199,7 +199,7 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 {
 	//emit
 	{
-		LOG_DEBUG<<" "<<"slot"
+		MYLOG4CPP_DEBUG<<" "<<"slot"
 			<<" "<<"class:"<<"CMidSubWidget"
 			<<" "<<"fun:"<<"slotHistoryDataChanged()"
 			<<" "<<"param:"

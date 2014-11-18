@@ -6,8 +6,8 @@
 #include "ConfigInfo.h"
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -454,7 +454,7 @@ void CCustomColumnsDialog::slotPushButtonOKClick( bool checked /*= false*/ )
 
 	//emit
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CCustomColumnsDialog"
 			<<" "<<"emit"
 			<<" "<<"signalModifySelectedColumns(AllAvailableColums, SelectedColumns)"

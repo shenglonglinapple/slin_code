@@ -8,8 +8,8 @@
 
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -35,7 +35,7 @@ void CQuotesHHeaderView::mousePressEvent( QMouseEvent* e )
 	if (Qt::RightButton == e->button()) 
 	{
 		{
-			LOG_DEBUG<<" "<<"emit"
+			MYLOG4CPP_DEBUG<<" "<<"emit"
 				<<" "<<"class:"<<"CQuotesTableViewHHeaderView"
 				<<" "<<"emit"
 				<<" "<<"signalMouseRightClickInHHeaderView(QMouseEvent*)"

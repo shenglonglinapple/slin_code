@@ -6,8 +6,8 @@
 #include "Instrument.h"
 #include "Account.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -339,7 +339,8 @@ void COrderInfo::setValue( const Order &newValue )
 	m_n_Column_Filled = getColumnValueIsOrderFilled(m_orderStatus);
 	m_avgPrice = newValue.getAvgPrice();
 	m_transactTime = newValue.getTransactTime();
-	m_str_Column_Time = m_pUtilityFun->dataTimeToStr((time_t)m_transactTime).c_str();
+	//m_str_Column_Time = m_pUtilityFun->dataTimeToStr((time_t)m_transactTime).c_str();
+	m_str_Column_Time = m_pUtilityFun->dateTimeToStr_Qt((time_t)m_transactTime).c_str();
 	m_rejectReason = newValue.getRejectReason();
 	m_text = newValue.getText();
 	m_fees = newValue.getFees();
@@ -356,7 +357,7 @@ void COrderInfo::setValue( const Order &newValue )
 
 void COrderInfo::logInfo( const QString& strLogInfo ) const
 {
-	LOG_DEBUG<<"COrderInfo:"
+	MYLOG4CPP_DEBUG<<"COrderInfo:"
 		<<" "<<"m_nKey="<<m_nKey
 		<<" "<<"m_nOrderID="<<m_nKey;
 }

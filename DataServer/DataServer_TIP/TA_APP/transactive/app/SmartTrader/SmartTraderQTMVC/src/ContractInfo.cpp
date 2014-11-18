@@ -1,7 +1,7 @@
 #include "ContractInfo.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -74,7 +74,7 @@ unsigned int CContractInfo::getInstrumentID() const
 }
 void CContractInfo::logInfo( const QString& strLogInfo ) const
 {
-	LOG_DEBUG<<strLogInfo.toStdString()
+	MYLOG4CPP_DEBUG<<strLogInfo.toStdString()
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
 		<<" "<<"m_strExchangeName="<<m_strExchangeName.toStdString()
 		<<" "<<"m_strUnderlyingCode="<<m_strUnderlyingCode.toStdString()

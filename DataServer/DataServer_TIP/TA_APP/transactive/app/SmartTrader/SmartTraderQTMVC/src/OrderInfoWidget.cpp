@@ -5,8 +5,8 @@
 #include "UserOrderInfo.h"
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -157,7 +157,7 @@ void COrderInfoWidget::slotPushButtonOKClicked( bool checked )
 
 	//emit
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"COrderInfoWidget"
 			<<" "<<"fun:"<<"slotPushButtonOKClicked(bool checked)"
 			<<" "<<"emit"
@@ -180,7 +180,7 @@ void COrderInfoWidget::slotPushButtonCancelClicked( bool checked )
 
 	//emit
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"COrderInfoWidget"
 			<<" "<<"fun:"<<"slotPushButtonOKClicked(bool checked)"
 			<<" "<<"emit"

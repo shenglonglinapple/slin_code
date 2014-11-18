@@ -1,10 +1,6 @@
 #ifndef __CLASS_CLIENT_DATA_MAMAGER_WORKER__HH__
 #define __CLASS_CLIENT_DATA_MAMAGER_WORKER__HH__
 
-#include <boost/chrono.hpp>
-#include <boost/thread.hpp>
-#include <boost/bind.hpp>
-
 
 #include <QtCore/QObject>
 #include <QtCore/QMap>
@@ -12,7 +8,8 @@
 #include <QtCore/QVariant>
 #include <QtCore/QString>
 
-//#include "BoostThread.h"
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 #include "IProcessRecvData.h"
 
@@ -26,11 +23,12 @@ class CQuotesInfo;
 class CTreeItemQuotes;
 class CClientLoginParam;
 class CSmartTraderClient;
-class CProjectUtilityFun;
 class COrderInfo;
 class CUserOrderInfo;
 class CTreeItemOrder;
 class CHistoryDataManager;
+class CProjectUtilityFun;
+class CProjectLogHelper;
 
 
 
@@ -218,18 +216,12 @@ private:
 private:
 	void _UpdateOrderInfo(const Order &order);
 
-
 private:
-	boost::mutex m_mutexForMapInstrumentIDData;
-	QMap<unsigned int, Instrument*> m_MapInstrumentIDData;
-private:
-	boost::mutex m_mutexForNodeRootContract;
+	QMutex m_mutexForNodeRootContract;
 	CContractInfo* m_pContractInfo;
 	CTreeItemContract* m_pTreeItemContract_Root;//total
-	int m_SignalControl_NotWork;
-	int m_IndexSigalControl;
 private:
-	boost::mutex m_mutexForNodeRootQuotes;
+	QMutex m_mutexForNodeRootQuotes;
 	CQuotesInfo* m_pQuotesInfo;
 	CTreeItemQuotes* m_pTreeItemQuotes_Root;//submarket
 
@@ -237,17 +229,18 @@ private:
 	CClientLoginParam* m_pClientLoginParam;
 	CSmartTraderClient* m_pMyTradeClient;
 	CProjectUtilityFun* m_pUtilityFun;
+	CProjectLogHelper* m_pProjectLogHelper;
 private:
-	boost::mutex m_mutexForMapAccount;
+	QMutex m_mutexForMapAccount;
 	QMap<int, Account*> m_MapAccount;//AccountID
 
 private:
-	boost::mutex m_mutexForMapOrder;
+	QMutex m_mutexForMapOrder;
 	QMap<unsigned int, Order*> m_MapOrder;//OrderID
 	COrderInfo* m_pOrderInfo;
 	CTreeItemOrder* m_pTreeItemOrder_root;
 private:
-	boost::mutex m_mutexForMapHistoryData;
+	QMutex m_mutexForMapHistoryData;
 	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//instrumentID
 	int m_nDoTest;
 };

@@ -23,10 +23,11 @@
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlDatabase>
 
-//#include <boost/foreach.hpp>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -34,11 +35,11 @@ USING_BOOST_LOG;
 
 
 CQTProjectEnviroment* CQTProjectEnviroment::m_pInstance = 0;
-boost::mutex CQTProjectEnviroment::m_mutexInstance;
+QMutex CQTProjectEnviroment::m_mutexInstance;
 
 CQTProjectEnviroment& CQTProjectEnviroment::getInstance()
 {	
-	boost::mutex::scoped_lock lock(m_mutexInstance);	
+	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL == m_pInstance)
 	{
 		m_pInstance = new CQTProjectEnviroment();
@@ -48,7 +49,7 @@ CQTProjectEnviroment& CQTProjectEnviroment::getInstance()
 
 void CQTProjectEnviroment::removeInstance()
 {
-	boost::mutex::scoped_lock lock(m_mutexInstance);	
+	QMutexLocker lock(&m_mutexInstance);	
 	delete m_pInstance;
 	m_pInstance = NULL;
 
@@ -57,8 +58,8 @@ void CQTProjectEnviroment::removeInstance()
 
 CQTProjectEnviroment::CQTProjectEnviroment( void )
 {
-	_InitBoostLog();
-	_RedirectQTLogToBoostLog();
+	_InitLog();
+	_Redirect_QTLog_To_ProjectLog();
 	_TestQTLog();
 	_PrintSupportDBType();
 	//_SetQTProjectEnvFont();
@@ -66,38 +67,15 @@ CQTProjectEnviroment::CQTProjectEnviroment( void )
 
 CQTProjectEnviroment::~CQTProjectEnviroment( void )
 {
-	_UnInitBoostLog();
+	_UnInitLog();
 }
 
-
-void CQTProjectEnviroment::_InitBoostLog()
-{
-	//init CBoostLogger
-	CBoostLogger::getInstance();
-
-	std::string strLogPath = "ALL_LOG_PATH";
-	//std::string strLogFileName = "Test_Log_%Y-%m-%d_%H_%M_%S_%f_%4N.log";
-	std::string strLogFileName = "SmartTrader_Log_%Y-%m-%d_%H_%M_%S.log";
-	boost::log::trivial::severity_level nLogLevel = boost::log::trivial::trace;
-	//boost::log::trivial::severity_level nLogLevel = boost::log::trivial::info;
-	//boost::log::trivial::severity_level nLogLevel = boost::log::trivial::debug;
-	CBoostLogger::getInstance().setLogPath(strLogPath);
-	CBoostLogger::getInstance().setLogFileName(strLogFileName);
-	CBoostLogger::getInstance().setLogLevel(nLogLevel);
-	CBoostLogger::getInstance().initBoostLog();
-	CBoostLogger::getInstance().testBoostLog();
-}
-void CQTProjectEnviroment::_UnInitBoostLog()
-{
-	CBoostLogger::removeInstance();
-}
-
-int CQTProjectEnviroment::_RedirectQTLogToBoostLog()
+int CQTProjectEnviroment::_Redirect_QTLog_To_ProjectLog()
 {
 	//QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 
 	/**< install qDebug function handler.*/
-	qInstallMsgHandler(logMsgHandlerToBoostLog);
+	qInstallMsgHandler(logMsgHandlerToProjectLog);
 
 	return 0;
 }
@@ -123,7 +101,7 @@ int CQTProjectEnviroment::_TestQTLog()
 * @param msg [const char *]
 * @return void
 */
-void CQTProjectEnviroment::logMsgHandlerToBoostLog( QtMsgType type, const char *msg )
+void CQTProjectEnviroment::logMsgHandlerToProjectLog( QtMsgType type, const char *msg )
 {
 	QString strLog;
 
@@ -133,19 +111,19 @@ void CQTProjectEnviroment::logMsgHandlerToBoostLog( QtMsgType type, const char *
 	{
 	case QtDebugMsg:
 		strLog += QObject::tr(msg);
-		LOG_DEBUG<<strLog.toStdString();
+		MYLOG4CPP_DEBUG<<strLog.toStdString();
 		break;
 	case QtWarningMsg:
 		strLog += QObject::tr(msg);
-		LOG_WARNING<<strLog.toStdString();
+		MYLOG4CPP_WARNING<<strLog.toStdString();
 		break;
 	case QtCriticalMsg:
 		strLog += QObject::tr(msg);
-		LOG_ERROR<<strLog.toStdString();
+		MYLOG4CPP_ERROR<<strLog.toStdString();
 		break;
 	case QtFatalMsg:
 		strLog += QObject::tr(msg);
-		LOG_FATAL<<strLog.toStdString();
+		MYLOG4CPP_FATAL<<strLog.toStdString();
 		//abort();
 	default:
 		break;
@@ -246,6 +224,18 @@ void CQTProjectEnviroment::qtWaitTime(qint64 milliseconds)
 	{
 		QCoreApplication::processEvents();
 	}
+}
+
+void CQTProjectEnviroment::_InitLog()
+{
+	CLog4cppLogger::getInstance();
+	CLog4cppLogger::getInstance().initLog();
+	CLog4cppLogger::getInstance().testLog();
+}
+
+void CQTProjectEnviroment::_UnInitLog()
+{
+	CLog4cppLogger::removeInstance();
 }
 
 //QT_END_NAMESPACE

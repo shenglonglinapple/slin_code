@@ -8,8 +8,8 @@
 #include "TreeItemOrder.h"
 #include "TreeModelOrder.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -94,7 +94,7 @@ void CBottomDockWidget::translateLanguage()
 
 void CBottomDockWidget::slotOrderInfoChanged( CTreeItemOrder* pTreeItem )
 {
-	LOG_DEBUG<<"CBottomDockWidget process slotOrderInfoChanged"
+	MYLOG4CPP_DEBUG<<"CBottomDockWidget process slotOrderInfoChanged"
 		<<" "<<"pTreeItem=0x"<<pTreeItem;
 
 	QModelIndex inValidIndex;

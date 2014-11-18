@@ -2,10 +2,12 @@
 
 #include <QtCore/QStringList>
 #include "Bar.h"
+#include "Instrument.h"
 
 #include "ClientLoginParam.h"
 #include "SmartTraderClient.h"
 #include "ProjectUtilityFun.h"
+#include "ProjectLogHelper.h"
 #include "ConfigInfo.h"
 
 #include "ContractInfo.h"
@@ -19,16 +21,9 @@
 #include "TreeItemOrder.h"
 
 #include "HistoryDataManager.h"
+#include "Log4cppLogger.h"
 
-
-
-#include "BoostLogger.h"
-USING_BOOST_LOG;
-
-
-//QT_BEGIN_NAMESPACE
-////QT_END_NAMESPACE
-
+#include "DataTotalInstrument.h"
 
 
 CClientDataManagerWorker::CClientDataManagerWorker(void)
@@ -40,47 +35,46 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 	m_pQuotesInfo = NULL;
 	m_pTreeItemQuotes_Root = NULL;
 	m_pUtilityFun = NULL;
+	m_pProjectLogHelper = NULL;
 	m_pOrderInfo = NULL;
 	m_pTreeItemOrder_root = NULL;
 
 	m_pUtilityFun = new CProjectUtilityFun();
+	m_pProjectLogHelper = new CProjectLogHelper();
 
 	_InitMVCDataForContract();
 	_InitMVCDataForQuotes();
 	_InitMVCDataForOrder();
 
-	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		m_MapInstrumentIDData.clear();
-	}
+	
+	CDataTotalInstrument::getInstance();
+
+	
 
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
+		QMutexLocker lock(&m_mutexForMapAccount);
 		m_MapAccount.clear();
 	}
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
+		QMutexLocker lock(&m_mutexForMapOrder);
 		m_MapOrder.clear();
 	}
 
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		QMutexLocker lock(&m_mutexForMapHistoryData);
 		m_MapHistoryData.clear();
 		m_nDoTest = 0;
 	}
 
 	
-	//TODO.ForTest
-	m_SignalControl_NotWork = 990;
-	m_IndexSigalControl = 0;
+
 }
 
 CClientDataManagerWorker::~CClientDataManagerWorker(void)
 {	
-	//BOOST_LOG_FUNCTION();
 	_UnInitLoginParam();
 
 	if (NULL !=  m_pUtilityFun)
@@ -89,25 +83,26 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 		m_pUtilityFun = NULL;
 	}
 
-
-
+	if (NULL != m_pProjectLogHelper)
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		m_MapInstrumentIDData.clear();
+		delete m_pProjectLogHelper;
+		m_pProjectLogHelper = NULL;
 	}
 
+	CDataTotalInstrument::removeInstance();
+
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
+		QMutexLocker lock(&m_mutexForMapAccount);
 		m_MapAccount.clear();
 	}
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
+		QMutexLocker lock(&m_mutexForMapOrder);
 		m_MapOrder.clear();
 	}
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		QMutexLocker lock(&m_mutexForMapHistoryData);
 		QMap<unsigned int, CHistoryDataManager*>::Iterator iterMap;
 		CHistoryDataManager* pDataRef = NULL;
 		iterMap = m_MapHistoryData.begin();
@@ -143,7 +138,7 @@ void CClientDataManagerWorker::_UnInitLoginParam()
 void CClientDataManagerWorker::_InitMVCDataForContract()
 {
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+		QMutexLocker lock(&m_mutexForNodeRootContract);	
 		if (NULL != m_pTreeItemContract_Root)
 		{
 			delete m_pTreeItemContract_Root;
@@ -166,7 +161,7 @@ void CClientDataManagerWorker::_InitMVCDataForContract()
 }
 void CClientDataManagerWorker::_UnInitMVCDataForContract()
 {
-	boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+	QMutexLocker lock(&m_mutexForNodeRootContract);	
 
 	if (NULL != m_pTreeItemContract_Root)
 	{
@@ -186,7 +181,7 @@ void CClientDataManagerWorker::_UnInitMVCDataForContract()
 
 void CClientDataManagerWorker::_InitMVCDataForQuotes()
 {
-	boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
+	QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 	if (NULL != m_pTreeItemQuotes_Root)
 	{
 		delete m_pTreeItemQuotes_Root;
@@ -202,7 +197,7 @@ void CClientDataManagerWorker::_InitMVCDataForQuotes()
 
 	m_pQuotesInfo = new CQuotesInfo();
 
-	LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
 		<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
 
 	emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
@@ -210,7 +205,7 @@ void CClientDataManagerWorker::_InitMVCDataForQuotes()
 }
 void CClientDataManagerWorker::_UnInitMVCDataForQuotes()
 {
-	boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
+	QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 
 	if (NULL != m_pTreeItemQuotes_Root)
 	{
@@ -230,7 +225,7 @@ void CClientDataManagerWorker::_UnInitMVCDataForQuotes()
 
 void CClientDataManagerWorker::_InitMVCDataForOrder()
 {
-	boost::mutex::scoped_lock lock(m_mutexForMapOrder);	
+	QMutexLocker lock(&m_mutexForMapOrder);	
 	if (NULL != m_pTreeItemOrder_root)
 	{
 		delete m_pTreeItemOrder_root;
@@ -247,7 +242,7 @@ void CClientDataManagerWorker::_InitMVCDataForOrder()
 	m_pOrderInfo = new COrderInfo();
 
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CClientDataManagerWorker"
 			<<" "<<"fun:"<<"_UpdateOrderInfo()"
 			<<" "<<"emit"
@@ -262,7 +257,7 @@ void CClientDataManagerWorker::_InitMVCDataForOrder()
 }
 void CClientDataManagerWorker::_UnInitMVCDataForOrder()
 {
-	boost::mutex::scoped_lock lock(m_mutexForMapOrder);	
+	QMutexLocker lock(&m_mutexForMapOrder);	
 
 	if (NULL != m_pTreeItemOrder_root)
 	{
@@ -284,31 +279,16 @@ void CClientDataManagerWorker::onInstrumentDownloaded( const Instrument& instrum
 	unsigned int nGetInstrumentID = 0;
 	std::string strLogInfo;
 
-	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		nGetInstrumentID = instrument.getInstrumentID();
-		pGetInstrument = instrument.getInstrument(nGetInstrumentID);
-		m_MapInstrumentIDData.insert(nGetInstrumentID, pGetInstrument);
-		LOG_DEBUG<<"CClientDataManagerWorker"
-			<<" "<<"onInstrumentDownloaded"
-			<<" "<<"m_MapInstrumentIDData.size="<<m_MapInstrumentIDData.size();
-		strLogInfo = "onInstrumentDownloaded";
-		m_pUtilityFun->log_Instrument_info(DefFLInfo, strLogInfo, instrument);
-	}
-
+	nGetInstrumentID = instrument.getInstrumentID();
+	pGetInstrument = instrument.getInstrument(nGetInstrumentID);
+	
+	CDataTotalInstrument::getInstance().onInstrumentDownloaded(instrument);
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+		QMutexLocker lock(&m_mutexForNodeRootContract);	
 		m_pContractInfo->setValue(instrument);
 		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
 		//use slotContractInfoWindowResetData()
-// 		m_IndexSigalControl++;
-// 		if (m_IndexSigalControl > m_SignalControl_NotWork)
-// 		{
-// 			LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
-// 				<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
-// 			emit signalContractInfoChanged(m_pTreeItemContract_Root);
-// 		}
 	}
 
 
@@ -333,35 +313,15 @@ void CClientDataManagerWorker::onMarketDataUpdate(const Instrument& instrument)
 	QMap<unsigned int, Instrument*>::iterator  iterFind;
 	std::string strLogInfo;
 
+	CDataTotalInstrument::getInstance().onMarketDataUpdate(instrument);
+
+
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-
-		if (false == m_MapInstrumentIDData.contains(instrument.getInstrumentID()))
-		{
-			LOG_ERROR<<"not find nInstrumentID="<<instrument.getInstrumentID()
-				<<" "<<"in m_MapInstrumentIDData"
-				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
-			//TODO.
-			return;
-		}
-
-		iterFind = m_MapInstrumentIDData.find(instrument.getInstrumentID());
-		//find ok
-		pInstrumentGet = iterFind.value();
-		*pInstrumentGet = instrument;
+		QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 		m_pQuotesInfo->setValue(*pInstrumentGet);
-		LOG_DEBUG<<"onMarketDataUpdate reset contract to SmartQuotes"
-			<<" "<<"strInstrumentCode="<<instrument.getInstrumentCode()
-			<<" "<<"getTickSize="<<instrument.getTickSize();
-		strLogInfo = "onMarketDataUpdate reset contract to SmartQuotes";
-		m_pUtilityFun->log_Instrument_info(DefFLInfo, strLogInfo, instrument);
-	}
-
-	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
 		m_pTreeItemQuotes_Root->resetChildrenData(m_pQuotesInfo);
 		m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
-		LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
+		MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
 			<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
 		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
@@ -378,24 +338,20 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 	Instrument* pInstrumentRef = NULL;
 	QMap<unsigned int, Instrument*>::iterator  iterFind;
 
-	LOG_DEBUG<<"CClientDataManagerWorker process slotAddContractToSmartQuotes"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker process slotAddContractToSmartQuotes"
 		<<" "<<"nInstrumentID="<<nInstrumentID;
 
-	{
-		//check in total list
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		if (false == m_MapInstrumentIDData.contains(nInstrumentID))
-		{
-			LOG_ERROR<<"not find nInstrumentID="<<nInstrumentID
-				<<" "<<"in m_MapInstrumentIDData"
-				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
-			//TODO.
-			return;
-		}
-		iterFind = m_MapInstrumentIDData.find(nInstrumentID);
+	pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 
+	if (NULL == pInstrumentRef)
+	{
+		//TODO.
+		return;
+	}
+
+	{
 		//find ok
-		pInstrumentRef = iterFind.value();
 		//save to configfile
 		QStringList strLstUserInstruemt;
 		strLstUserInstruemt = CConfigInfo::getInstance().getLstUserInstrument();
@@ -406,7 +362,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		}
 
 		//subscribe this instrument
-		LOG_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
+		MYLOG4CPP_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
 		m_pMyTradeClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 
 		m_pQuotesInfo->setValue(*pInstrumentRef);
@@ -421,19 +377,19 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
+		QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 
 		strExchangeName = m_pQuotesInfo->m_strExchangeName.toStdString();
 		strUnderlyingCode = m_pQuotesInfo->m_strUnderlyingCode.toStdString();
 		strInstrumentCode = m_pQuotesInfo->m_strInstrumentCode.toStdString();
-		LOG_DEBUG<<"slotAddContractToSmartQuotes add contract to SmartQuotes"
+		MYLOG4CPP_DEBUG<<"slotAddContractToSmartQuotes add contract to SmartQuotes"
 			<<" "<<"InstrumentID="<<nInstrumentID
 			<<" "<<"ExchangeName="<<strExchangeName
 			<<" "<<"strInstrumentCode="<<strInstrumentCode;
 
 		m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
 		m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
-		LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
+		MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
 			<<" "<<"m_pTreeItemQuotes_Root=ox"<<m_pTreeItemQuotes_Root;
 		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
@@ -441,7 +397,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 	{
 		//TODO. TTTTTTTTTTT historydata test
-		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		QMutexLocker lock(&m_mutexForMapHistoryData);
 		if (0 == m_nDoTest)
 		{
 			//time_t timeNow = m_pUtilityFun->strToDateTime("2014-08-23 20:06:09");
@@ -453,7 +409,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 			pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
 			pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
 			pHistoryDataManager->m_pHistoryRequest->setBarType(FIVE_SECOND);
-			pHistoryDataManager->m_pHistoryRequest->setTimeFrom(m_pUtilityFun->getTimeNow() - 60 * 60 * 24 * 10);
+			pHistoryDataManager->m_pHistoryRequest->setTimeFrom(m_pUtilityFun->getTimeNow_Qt() - 60 * 60 * 24 * 10);
 			pHistoryDataManager->m_pHistoryRequest->setBarCount(6000);
 			pHistoryDataManager->m_pHistoryRequest->setSubscribe(true);
 			pHistoryDataManager->m_pHistoryRequest->sentRequest(m_pMyTradeClient);
@@ -472,49 +428,44 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
 	std::string strInstrumentCode;
-	Instrument* pInstrument = NULL;
+	Instrument* pInstrumentRef = NULL;
 	QMap<unsigned int, Instrument*>::iterator  iterFind;
 
-	LOG_DEBUG<<"CClientDataManagerWorker process singalRemoveContractFromSmartQuotes"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker process singalRemoveContractFromSmartQuotes"
 		<<" "<<"nInstrumentID="<<nInstrumentID;
 
+	pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	//check
+	if (NULL == pInstrumentRef)
+	{
+		//TODO.
+		return;
+	}
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		if (false == m_MapInstrumentIDData.contains(nInstrumentID))
-		{
-			LOG_ERROR<<"not find nInstrumentID="<<nInstrumentID
-				<<" "<<"in m_MapInstrumentIDData"
-				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
-			//TODO.
-			return;
-		}
-
-		iterFind = m_MapInstrumentIDData.find(nInstrumentID);
 		//find ok
-		pInstrument = iterFind.value();
-
 		//unsubscribe this instrument
-		LOG_DEBUG<<"unsubscribeMarketData"
-			<<" "<<"InstrumentID="<<pInstrument->getInstrumentID();
-		m_pMyTradeClient->unsubscribeMarketData(pInstrument->getInstrumentID());
+		MYLOG4CPP_DEBUG<<"unsubscribeMarketData"
+			<<" "<<"InstrumentID="<<pInstrumentRef->getInstrumentID();
+		m_pMyTradeClient->unsubscribeMarketData(pInstrumentRef->getInstrumentID());
 
-		m_pContractInfo->setValue(*pInstrument);
-		m_pQuotesInfo->setValue(*pInstrument);		
+		m_pContractInfo->setValue(*pInstrumentRef);
+		m_pQuotesInfo->setValue(*pInstrumentRef);		
 	}
 
 
 	//remove
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);
-		LOG_DEBUG<<"slotRemoveContractFromSmartQuotes remove hot Quotes"
+		QMutexLocker lock(&m_mutexForNodeRootQuotes);
+		MYLOG4CPP_DEBUG<<"slotRemoveContractFromSmartQuotes remove hot Quotes"
 			<<" "<<"InstrumentID="<<nInstrumentID
 			<<" "<<"ExchangeName="<<strExchangeName
 			<<" "<<"strInstrumentCode="<<strInstrumentCode;
 
 		m_pTreeItemQuotes_Root->removeChildByData(m_pQuotesInfo);
 
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CClientDataManagerWorker"
 			<<" "<<"emit"
 			<<" "<<"signalQuotesInfoChanged(CTreeItemQuotes*)"
@@ -526,15 +477,15 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 
 	//add
 	{		
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
-		LOG_DEBUG<<"slotRemoveContractFromSmartQuotes add contract to ContratInfo"
+		QMutexLocker lock(&m_mutexForNodeRootContract);	
+		MYLOG4CPP_DEBUG<<"slotRemoveContractFromSmartQuotes add contract to ContratInfo"
 			<<" "<<"InstrumentID="<<nInstrumentID
 			<<" "<<"ExchangeName="<<m_pContractInfo->getExchangeName().toStdString()
 			<<" "<<"strInstrumentCode="<<m_pContractInfo->getInstrumentCode().toStdString();
 
 		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
 
-		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
+		MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
 			<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
 
 		emit signalContractInfoChanged(m_pTreeItemContract_Root);
@@ -563,7 +514,7 @@ void CClientDataManagerWorker::slotClientLoginParamChanged( CClientLoginParam* p
 {
 	int nloginToServerRes = 0;
 
-	LOG_DEBUG<<"CClientDataManagerWorker process signalClientLoginParamChanged"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker process signalClientLoginParamChanged"
 		<<" "<<"pClientLoginParam=0x"<<pClientLoginParam;
 
 	_UnInitLoginParam();
@@ -576,7 +527,7 @@ void CClientDataManagerWorker::slotClientLoginParamChanged( CClientLoginParam* p
 	m_pMyTradeClient->setProcessRecvDataHandle(this);
 	nloginToServerRes = m_pMyTradeClient->loginToServer();
 
-	LOG_DEBUG<<"CClientDataManagerWorker emit signalLoginToServerResult"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalLoginToServerResult"
 		<<" "<<"nlogonToServerRes="<<nloginToServerRes;
 
 	emit signalLoginToServerResult(nloginToServerRes);
@@ -597,23 +548,16 @@ void CClientDataManagerWorker::_Test()
 	unsigned int nGetInstrumentID = 0;
 	std::string strLogInfo;
 
-	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		nGetInstrumentID = 1;
-		pGetInstrument = NULL;
-		m_MapInstrumentIDData.insert(nGetInstrumentID, pGetInstrument);
-		LOG_DEBUG<<"CClientDataManagerWorker"
-			<<" "<<"onInstrumentDownloaded"
-			<<" "<<"m_MapInstrumentIDData.size="<<m_MapInstrumentIDData.size();
-	}
-
+	
+	CDataTotalInstrument::getInstance()._Test();
+	
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+		QMutexLocker lock(&m_mutexForNodeRootContract);	
 		m_pContractInfo->setDefaultValue();
 		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
 
-		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
+		MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
 			<<" "<<"m_pNodeRootContract=0x"<<m_pTreeItemContract_Root;
 
 		emit signalContractInfoChanged(m_pTreeItemContract_Root);
@@ -621,11 +565,11 @@ void CClientDataManagerWorker::_Test()
 
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);
+		QMutexLocker lock(&m_mutexForNodeRootQuotes);
 		m_pQuotesInfo->setDefaultValue();
 		m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
 		m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
-		LOG_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
+		MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalQuotesInfoChanged"
 			<<" "<<"m_pNodeRootQuotes=ox"<<m_pTreeItemQuotes_Root;
 		emit signalQuotesInfoChanged(m_pTreeItemQuotes_Root);
 	}
@@ -639,21 +583,21 @@ void CClientDataManagerWorker::_Test()
 void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 {
 
-	LOG_DEBUG<<" "<<"slot"
+	MYLOG4CPP_DEBUG<<" "<<"slot"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
 		<<" "<<"slot"
 		<<" "<<"slotQuotesTableViewColumnsChanged";
 
 	//subscribeMarketData user hot Instrument
 	QStringList lstUserInstrument;
-	Instrument* pInstrument = NULL;
+	Instrument* pInstrumentRef = NULL;
 	unsigned int nInstrumentID = 0;
 	QMap<unsigned int, Instrument*>::iterator  iterFind;
 
 	lstUserInstrument = CConfigInfo::getInstance().getLstUserInstrument();
 	
 	{
-		boost::mutex::scoped_lock lockMutexForNodeRootQuotes(m_mutexForNodeRootQuotes);
+		QMutexLocker lock(&m_mutexForNodeRootQuotes);
 		//delete old data
 		if (NULL != m_pTreeItemQuotes_Root)
 		{
@@ -668,23 +612,22 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 	}
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		boost::mutex::scoped_lock lockMutexForNodeRootQuotes(m_mutexForNodeRootQuotes);
+		QMutexLocker lock_m_mutexForNodeRootQuotes(&m_mutexForNodeRootQuotes);
 		
 		//reset child data
 		foreach (const QString& strInstrument, lstUserInstrument)
 		{
 			nInstrumentID = strInstrument.toUInt();
-			if (m_MapInstrumentIDData.contains(nInstrumentID))
+			pInstrumentRef = NULL;
+			pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+			if (NULL != pInstrumentRef)
 			{
-				iterFind = m_MapInstrumentIDData.find(nInstrumentID);
-				pInstrument = iterFind.value();
-				m_pQuotesInfo->setValue(*pInstrument);
+				m_pQuotesInfo->setValue(*pInstrumentRef);
 				m_pTreeItemQuotes_Root->appendChildByData(m_pQuotesInfo);
 			}//if
 		}//foreach
 
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CClientDataManagerWorker"
 			<<" "<<"emit"
 			<<" "<<"signalQuotesInfoChanged(CTreeItemQuotes*)"
@@ -700,7 +643,7 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 void CClientDataManagerWorker::onAccountDownloaded( Account& account )
 {
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
+		QMutexLocker lock(&m_mutexForMapAccount);
 		m_MapAccount.insert(account.getAccountID(), &account);
 	}
 }
@@ -742,7 +685,7 @@ void CClientDataManagerWorker::_UpdateOrderInfo(const Order &order)
 	Order* pOrder = NULL;
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapOrder);
+		QMutexLocker lock(&m_mutexForMapOrder);
 
 		m_pOrderInfo->setValue(order);
 
@@ -763,7 +706,7 @@ void CClientDataManagerWorker::_UpdateOrderInfo(const Order &order)
 
 
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CClientDataManagerWorker"
 			<<" "<<"fun:"<<"_UpdateOrderInfo()"
 			<<" "<<"emit"
@@ -780,9 +723,9 @@ unsigned int CClientDataManagerWorker::_GetInstrumentIDByInstruemntCode(const QS
 	unsigned int nInstruemntID = -1;
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootQuotes);	
+		QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 		nInstruemntID = m_pTreeItemQuotes_Root->getHotInstrumentIDByCode(strInstrumentCode);
-		LOG_DEBUG<<"strInstrumentCode="<<strInstrumentCode.toStdString()
+		MYLOG4CPP_DEBUG<<"strInstrumentCode="<<strInstrumentCode.toStdString()
 			<<" "<<"getHotInstrumentIDByCode"
 			<<" "<<"nInstruemntID="<<nInstruemntID;
 	}
@@ -794,7 +737,7 @@ void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 {
 	//emit
 	{
-		LOG_DEBUG<<" "<<"slot"
+		MYLOG4CPP_DEBUG<<" "<<"slot"
 			<<" "<<"class:"<<"CClientDataManagerWorker"
 			<<" "<<"fun:"<<"slotNewOrder()"
 			<<" "<<"slot"
@@ -817,26 +760,21 @@ void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 	//nInstrumentID = _GetInstrumentIDByInstruemntCode(strInstrumentCode);//"IF1402"
 	nInstrumentID = pUserOrderInfo->m_nInstrumentID;
 
+	
+	pInstrumentGet = NULL;
+	pInstrumentGet = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	if (NULL == pInstrumentGet)
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-		if (false == m_MapInstrumentIDData.contains(nInstrumentID))
-		{
-			LOG_ERROR<<"not find nInstrumentID="<<nInstrumentID
-				<<" "<<"in m_MapInstrumentIDData"
-				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
-			return;
-		}
-
-		iterFind = m_MapInstrumentIDData.find(nInstrumentID);
-		//find ok
-		pInstrumentGet = iterFind.value();
+		return;
 	}
+	//find ok
+
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForMapAccount);
+		QMutexLocker lock(&m_mutexForMapAccount);
 		if (m_MapAccount.isEmpty())
 		{
-			LOG_ERROR<<" "<<"m_MapAccount is empty";
+			MYLOG4CPP_ERROR<<" "<<"m_MapAccount is empty";
 			return;
 		}
 		pAccount = m_MapAccount.begin().value();
@@ -920,7 +858,7 @@ void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 		}
 		break;
 	case Order::UNKNOWN:
-		LOG_ERROR<<"CClientDataManagerWorker::slotNewOrder"<<" Order::UNKNOWN";
+		MYLOG4CPP_ERROR<<"CClientDataManagerWorker::slotNewOrder"<<" Order::UNKNOWN";
 		break;
 	}//switch (nSide)
 
@@ -930,7 +868,7 @@ void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 
 void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 {
-	LOG_DEBUG<<"CClientDataManagerWorker::onBarDataUpdate"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
 		<<" "<<"barData.bars.size="<<barData.bars.size();
 
@@ -939,12 +877,12 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 
 	{
 		//TODO. historydata test
-		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		QMutexLocker lock(&m_mutexForMapHistoryData);
 
 		if (!m_MapHistoryData.contains(barData.instrumentID))
 		{
 			//find error
-			LOG_ERROR<<" "<<"find error instrumentID="<<barData.instrumentID;
+			MYLOG4CPP_ERROR<<" "<<"find error instrumentID="<<barData.instrumentID;
 			return;
 		}
 		iterMap = m_MapHistoryData.find(barData.instrumentID);
@@ -955,7 +893,7 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 
 
 		{
-			LOG_DEBUG<<" "<<"emit"
+			MYLOG4CPP_DEBUG<<" "<<"emit"
 				<<" "<<"class:"<<"CClientDataManagerWorker"
 				<<" "<<"fun:"<<"onBarDataUpdate()"
 				<<" "<<"emit"
@@ -971,7 +909,7 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 
 void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
 {
-	LOG_DEBUG<<"CClientDataManagerWorker::onHistoryDataDownloaded"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker::onHistoryDataDownloaded"
 		<<" "<<"requestID="<<requestID
 		<<" "<<"bars->size.size="<<bars->size();
 
@@ -980,7 +918,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 
 	{
 		//TODO. historydata test
-		boost::mutex::scoped_lock lock(m_mutexForMapHistoryData);
+		QMutexLocker lock(&m_mutexForMapHistoryData);
 		iterMap = m_MapHistoryData.begin();
 		while (iterMap != m_MapHistoryData.end())
 		{
@@ -998,7 +936,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 		{
 			//find error
 			//TODO.
-			LOG_ERROR<<" "<<"not find requestID="<<requestID;
+			MYLOG4CPP_ERROR<<" "<<"not find requestID="<<requestID;
 			return;
 		}
 
@@ -1008,7 +946,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 
 
 		{
-			LOG_DEBUG<<" "<<"emit"
+			MYLOG4CPP_DEBUG<<" "<<"emit"
 				<<" "<<"class:"<<"CClientDataManagerWorker"
 				<<" "<<"fun:"<<"onHistoryDataDownloaded()"
 				<<" "<<"emit"
@@ -1026,7 +964,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 void CClientDataManagerWorker::slotContractInfoWindowResetData()
 {
 
-	LOG_DEBUG<<" "<<"slot"
+	MYLOG4CPP_DEBUG<<" "<<"slot"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
 		<<" "<<"fun:"<<"slotContractInfoWindowResetData";
 
@@ -1044,37 +982,32 @@ void CClientDataManagerWorker::slotContractInfoWindowResetData()
 
 	{
 		//check in total list
-		boost::mutex::scoped_lock lock(m_mutexForMapInstrumentIDData);
-
 		foreach (const QString& strUserInstrumentID, strLstUserInstruemt)
 		{
 			nUserInstrumentID = 0;
 			nUserInstrumentID = strUserInstrumentID.toUInt();
 
-			if (false == m_MapInstrumentIDData.contains(nUserInstrumentID))
+			pInstrumentRef = NULL;
+			pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nUserInstrumentID);
+
+			if (NULL == pInstrumentRef)
 			{
-				LOG_ERROR<<"not find nInstrumentID="<<nUserInstrumentID
-					<<" "<<"in m_MapInstrumentIDData"
-					<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
 				pInstrumentRef = NULL;
 			}
 			else
 			{
 				//find ok
-				iterFind = m_MapInstrumentIDData.find(nUserInstrumentID);
-				pInstrumentRef = iterFind.value();
-
 				m_pContractInfo->setValue(*pInstrumentRef);
 				strExchangeName = m_pContractInfo->getExchangeName().toStdString();
 				strUnderlyingCode = m_pContractInfo->getUnderlyingCode().toStdString();
 				strInstrumentCode = m_pContractInfo->getInstrumentCode().toStdString();
-				LOG_DEBUG<<"ContractInfo Window Reset Data"
+				MYLOG4CPP_DEBUG<<"ContractInfo Window Reset Data"
 					<<" "<<"InstrumentID="<<m_pContractInfo->getInstrumentID()
 					<<" "<<"ExchangeName="<<strExchangeName
 					<<" "<<"strInstrumentCode="<<strInstrumentCode;
 
 				//remove nInstrumentID from m_pTreeItemContract_Root
-				boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
+				QMutexLocker lock(&m_mutexForNodeRootContract);	
 				m_pTreeItemContract_Root->removeChildrenByData(m_pContractInfo);
 			}//if
 
@@ -1082,8 +1015,8 @@ void CClientDataManagerWorker::slotContractInfoWindowResetData()
 	}
 
 	{
-		boost::mutex::scoped_lock lock(m_mutexForNodeRootContract);	
-		LOG_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
+		QMutexLocker lock(&m_mutexForNodeRootContract);	
+		MYLOG4CPP_DEBUG<<"CClientDataManagerWorker emit signalContractInfoChanged"
 			<<" "<<"m_pTreeItemContract_Root=0x"<<m_pTreeItemContract_Root;
 		emit signalContractInfoChanged(m_pTreeItemContract_Root);
 	}

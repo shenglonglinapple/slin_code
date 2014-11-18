@@ -2,7 +2,8 @@
 #define __CLASS_CONFIGFILE_HELPER__HH__
 
 #include <QtCore/QString>
-#include <boost/thread/mutex.hpp>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -37,7 +38,7 @@ public:
 	int _ReadFormConfig(const QString& strConfigFileName, const QString& strGroup, const QString& strKey, QString& strValue);
 private:
 	QString m_strConfigFileName;
-	boost::mutex m_mutexConfigFileName;
+	QMutex m_mutexConfigFileName;
 };
 //QT_END_NAMESPACE
 #endif  // __CLASS_CONFIGFILE_HELPER__HH__

@@ -18,8 +18,8 @@
 #include "HistoryDataManager.h"
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -160,7 +160,7 @@ void CClientMainWindow::_CreateConnect()
 	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes->m_pCreateNewOrderDialog, 
 		SIGNAL(signalNewOrder(CUserOrderInfo*)),
 		m_pClientDataManagerWorker,
-		SLOT(slotNewOrder(CUserOrderInfo)));
+		SLOT(slotNewOrder(CUserOrderInfo*)));
 	
 
 

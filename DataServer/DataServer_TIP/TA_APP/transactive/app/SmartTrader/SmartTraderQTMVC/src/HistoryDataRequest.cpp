@@ -8,8 +8,8 @@
 
 #include "SmartTraderClient.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -88,15 +88,19 @@ std::string CHistoryDataRequest::_GetRequestStrValue()
 }
 void CHistoryDataRequest::logInfo()
 {
-	LOG_DEBUG<<" "<<"m_nRequestType="<<_GetRequestStrValue()
+	MYLOG4CPP_DEBUG<<" "<<"m_nRequestType="<<_GetRequestStrValue()
 		<<" "<<"m_nInstrumentID="<<m_pInstrumentRef->getInstrumentID()
 		<<" "<<"m_strInstrumentCode="<<m_pInstrumentRef->getInstrumentCode()
 		<<" "<<"m_nBarType="<<m_nBarType
-		<<" "<<"m_nTimeFrom="<<m_pUtilityFun->dataTimeToStr(m_nTimeFrom).c_str()
-		<<" "<<"m_nTimeTo="<<m_pUtilityFun->dataTimeToStr(m_nTimeTo).c_str()
+		<<" "<<"m_nTimeFrom="<<m_pUtilityFun->dateTimeToStr_Qt(m_nTimeFrom).c_str()
+		<<" "<<"m_nTimeTo="<<m_pUtilityFun->dateTimeToStr_Qt(m_nTimeTo).c_str()
 		<<" "<<"m_nBarCount="<<m_nBarCount
 		<<" "<<"m_bSubscribe="<<m_bSubscribe
 		<<" "<<"m_nRequestID="<<m_nRequestID;
+
+
+	//m_strTimeTo = m_pUtilityFun->dateTimeToStr_Qt(m_nTimeTo);
+
 }
 
 void CHistoryDataRequest::setRequestType( enCHistoryRequestType nRequestType )

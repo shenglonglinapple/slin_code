@@ -6,8 +6,8 @@
 #include <QtCore/QDateTime>
 #include "Bar.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 CHistoryDataACK::CHistoryDataACK()
@@ -78,14 +78,17 @@ void CHistoryDataACK::_ResetTimeValue()
 		m_nTimeFrom = iterMapFirst->timestamp;
 		m_nTimeTo = iterMapLast->timestamp;
 
-		m_strTimeFrom = m_pUtilityFun->dataTimeToStr(m_nTimeFrom);
-		m_strTimeTo = m_pUtilityFun->dataTimeToStr(m_nTimeTo);
+		m_strTimeFrom = m_pUtilityFun->dateTimeToStr_Qt(m_nTimeFrom);
+		//m_strTimeFrom = m_pUtilityFun->dateTimeToStr_Qt(m_nTimeFrom);
+		
+		m_strTimeTo = m_pUtilityFun->dateTimeToStr_Qt(m_nTimeTo);
+		//m_strTimeTo = m_pUtilityFun->dateTimeToStr_Qt(m_nTimeTo);
 	}
 }
 void CHistoryDataACK::logInfo()
 {
 
-	LOG_DEBUG<<" "<<" "
+	MYLOG4CPP_DEBUG<<" "<<" "
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
 		<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode
 		<<" "<<"m_MapBarData.size()="<<m_MapBarData.size()

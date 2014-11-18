@@ -12,8 +12,8 @@
 #include <QtCore/QTextCodec>
 
 
-#include <boost/chrono.hpp>
-#include <boost/thread.hpp>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -27,7 +27,7 @@ public:
 
 private:
 	static CQTProjectEnviroment* m_pInstance;
-	static boost::mutex m_mutexInstance;
+	static QMutex m_mutexInstance;
 
 private:
 	CQTProjectEnviroment(void);	
@@ -42,20 +42,20 @@ public:
 	//qglobal.h  qglobal.cpp
 	//enum QtMsgType { QtDebugMsg, QtWarningMsg, QtCriticalMsg, QtFatalMsg, QtSystemMsg = QtCriticalMsg };
 	//Log4Qt http://log4qt.sourceforge.net/
-	//set qDebug() info to boost log
+	//set qDebug() info to Project log
 	*/
-	static void logMsgHandlerToBoostLog(QtMsgType type, const char *msg);
+	static void logMsgHandlerToProjectLog(QtMsgType type, const char *msg);
 
 	static void logMsgHandlerToUsrFile(QtMsgType type, const char *msg);
 
 	
 private:
-	int _RedirectQTLogToBoostLog();
+	int _Redirect_QTLog_To_ProjectLog();
 	int _TestQTLog();
 	void _PrintSupportDBType();
 	void _SetFont();
-	void _InitBoostLog();
-	void _UnInitBoostLog();
+	void _InitLog();
+	void _UnInitLog();
 };//class
 
 

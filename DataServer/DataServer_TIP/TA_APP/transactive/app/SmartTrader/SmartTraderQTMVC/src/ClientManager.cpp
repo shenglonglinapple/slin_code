@@ -11,8 +11,8 @@
 #include "SmartHotQuotesWindow.h"
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -35,7 +35,7 @@ CClientManager::CClientManager()
 	m_pClientLoginDialog->show();
 
 	//FOR Test, TODO.
-	m_pClientMainWindow->m_pClientDataManagerWorker->_Test();
+	//m_pClientMainWindow->m_pClientDataManagerWorker->_Test();
 }
 
 
@@ -79,7 +79,7 @@ void CClientManager::_CreateConnect()
 
 void CClientManager::slotLoginToServerResult( int nLoginResust )
 {
-	LOG_DEBUG<<"CClientWindow process slotLoginToServerResult"
+	MYLOG4CPP_DEBUG<<"CClientWindow process slotLoginToServerResult"
 		<<" "<<"nLoginResust="<<nLoginResust;
 
 	if (nLoginResust >= 0)

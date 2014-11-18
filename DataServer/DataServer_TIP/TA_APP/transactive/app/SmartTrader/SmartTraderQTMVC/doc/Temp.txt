@@ -1,0 +1,4 @@
+QT：在QTableView中使用各种自定义委托
+IconDelegate
+
+http://blog.csdn.net/small_qch/article/details/7753434

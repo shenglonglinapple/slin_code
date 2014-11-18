@@ -5,8 +5,8 @@
 #include "TreeItemContract.h"
 #include "ContractInfo.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -42,7 +42,7 @@ int CSmartTraderClient::loginToServer()
 {
 	int nFunRes = 0;
 
-	LOG_DEBUG<<"beging logonToServer";
+	MYLOG4CPP_DEBUG<<"beging logonToServer";
 
 	try
 	{
@@ -53,11 +53,11 @@ int CSmartTraderClient::loginToServer()
 	catch (...)
 	{
 		nFunRes = -1;
-		LOG_ERROR<<"login to server Error!";
+		MYLOG4CPP_ERROR<<"login to server Error!";
 	}
 
 	
-	LOG_DEBUG<<"end logonToServer, nFunRes="<<nFunRes;
+	MYLOG4CPP_DEBUG<<"end logonToServer, nFunRes="<<nFunRes;
 
 	return nFunRes;
 }
@@ -74,11 +74,10 @@ void CSmartTraderClient::setProcessRecvDataHandle( IProcessRecvData* pHandle )
 
 void CSmartTraderClient::onInstrumentDownloaded( const Instrument &instrument )
 {
-	LOG_DEBUG<<"onInstrumentDownloaded"
+	MYLOG4CPP_DEBUG<<"onInstrumentDownloaded"
 		<<" "<<"getInstrumentID="<<instrument.getInstrumentID();
 
 
-	//BOOST_LOG_FUNCTION();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
 		m_pProcessRecvDataHandle->onInstrumentDownloaded(instrument);
@@ -89,10 +88,9 @@ void CSmartTraderClient::onInstrumentDownloaded( const Instrument &instrument )
 
 void CSmartTraderClient::onMarketDataUpdate( const Instrument &instrument )
 {
-	LOG_DEBUG<<"onMarketDataUpdate"
+	MYLOG4CPP_DEBUG<<"onMarketDataUpdate"
 		<<" "<<"getInstrumentID="<<instrument.getInstrumentID();
 
-	//BOOST_LOG_FUNCTION();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
 		m_pProcessRecvDataHandle->onMarketDataUpdate(instrument);
@@ -101,7 +99,7 @@ void CSmartTraderClient::onMarketDataUpdate( const Instrument &instrument )
 
 void CSmartTraderClient::onAccountDownloaded( Account& account )
 {
-	LOG_DEBUG<<"onAccountDownloaded"
+	MYLOG4CPP_DEBUG<<"onAccountDownloaded"
 		<<" "<<"getAccountID="<<account.getAccountID();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
@@ -112,7 +110,7 @@ void CSmartTraderClient::onAccountDownloaded( Account& account )
 
 void CSmartTraderClient::onOrderAccepted( const Order &order )
 {
-	LOG_DEBUG<<"onOrderAccepted"
+	MYLOG4CPP_DEBUG<<"onOrderAccepted"
 		<<" "<<"getOrderID="<<order.getOrderID();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
@@ -122,7 +120,7 @@ void CSmartTraderClient::onOrderAccepted( const Order &order )
 
 void CSmartTraderClient::onOrderCanceled( const Order &order )
 {
-	LOG_DEBUG<<"onOrderCanceled"
+	MYLOG4CPP_DEBUG<<"onOrderCanceled"
 		<<" "<<"getOrderID="<<order.getOrderID();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
@@ -132,7 +130,7 @@ void CSmartTraderClient::onOrderCanceled( const Order &order )
 
 void CSmartTraderClient::onOrderRejected( const Order &order )
 {
-	LOG_DEBUG<<"onOrderRejected"
+	MYLOG4CPP_DEBUG<<"onOrderRejected"
 		<<" "<<"getOrderID="<<order.getOrderID();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
@@ -142,7 +140,7 @@ void CSmartTraderClient::onOrderRejected( const Order &order )
 
 void CSmartTraderClient::onOrderFilled( const Order &order )
 {
-	LOG_DEBUG<<"onOrderFilled"
+	MYLOG4CPP_DEBUG<<"onOrderFilled"
 		<<" "<<"getOrderID="<<order.getOrderID();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
@@ -152,7 +150,7 @@ void CSmartTraderClient::onOrderFilled( const Order &order )
 
 void CSmartTraderClient::onCancelReject( const Order &order )
 {
-	LOG_DEBUG<<"onCancelReject"
+	MYLOG4CPP_DEBUG<<"onCancelReject"
 		<<" "<<"getOrderID="<<order.getOrderID();
 	if (NULL != m_pProcessRecvDataHandle)
 	{
@@ -162,7 +160,7 @@ void CSmartTraderClient::onCancelReject( const Order &order )
 
 void CSmartTraderClient::onBarDataUpdate( const BarSummary &barData )
 {
-	LOG_DEBUG<<"CSmartTraderClient::onBarDataUpdate"
+	MYLOG4CPP_DEBUG<<"CSmartTraderClient::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
 		<<" "<<"barData.bars.size="<<barData.bars.size();
 	if (NULL != m_pProcessRecvDataHandle)
@@ -173,7 +171,7 @@ void CSmartTraderClient::onBarDataUpdate( const BarSummary &barData )
 
 void CSmartTraderClient::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
 {
-	LOG_DEBUG<<"CSmartTraderClient::onHistoryDataDownloaded"
+	MYLOG4CPP_DEBUG<<"CSmartTraderClient::onHistoryDataDownloaded"
 		<<" "<<"requestID="<<requestID
 		<<" "<<"bars->size()="<<bars->size();
 

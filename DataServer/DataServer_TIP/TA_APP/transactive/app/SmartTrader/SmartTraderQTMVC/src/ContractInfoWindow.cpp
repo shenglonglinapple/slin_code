@@ -9,8 +9,8 @@
 
 
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 
 //QT_BEGIN_NAMESPACE
@@ -89,7 +89,7 @@ void CContractInfoWindow::translateLanguage()
 
 void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 {
-	LOG_DEBUG<<"CContractInfoWindow process slotTreeViewDoubleClick";
+	MYLOG4CPP_DEBUG<<"CContractInfoWindow process slotTreeViewDoubleClick";
 
 	QAbstractItemModel* model = NULL;
 
@@ -116,7 +116,7 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 	{
 		model->removeRow(index.row(), index.parent());//use mvc to remove node first
 
-		LOG_DEBUG<<"CContractInfoWindow emit signalAddContractToSmartQuotes"
+		MYLOG4CPP_DEBUG<<"CContractInfoWindow emit signalAddContractToSmartQuotes"
 			<<" "<<"nInstrumentID="<<nInstrumentID;
 
 		emit signalAddContractToSmartQuotes(nInstrumentID);
@@ -129,7 +129,7 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 
 void CContractInfoWindow::slotContractInfoChanged( CTreeItemContract* pTreeItem )
 {
-	LOG_DEBUG<<"CContractInfoMainWindow process signalContractInfoChanged"
+	MYLOG4CPP_DEBUG<<"CContractInfoMainWindow process signalContractInfoChanged"
 		<<" "<<"pTreeItem=ox"<<pTreeItem;
 
 	if (NULL == m_pTreeModel)

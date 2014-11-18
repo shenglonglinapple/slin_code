@@ -7,8 +7,8 @@
 #include "OrderInfo.h"
 #include "TreeItemQuotes.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE

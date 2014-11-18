@@ -18,17 +18,17 @@ public:
 
 public:
 	//"%d-%d-%d %d:%d:%d"
-	time_t strToDateTime(const std::string& strTimeValue);
-
 	//"%04d-%02d-%02d %02d:%02d:%02d"
-	std::string dataTimeToStr(time_t nTimeValue);
-
-	time_t getTimeNow();
+public:
+	time_t strToDateTime_Qt(const std::string& strTimeValue);
+	std::string dateTimeToStr_Qt(time_t nTimeValue);
+	time_t getTimeNow_Qt();
 
 public:
-	void log_Instrument_info(const std::string& file, int line, const std::string& strLogInfo, const Instrument &instrument );
 	float checkFloatNanValue(const float& fValueTmp);
-	int getUTCOffset();
+public:
+	template<typename T> bool uti_isnan(T value);
+	template<typename T> bool uti_isinf(T value);
 };
 
 

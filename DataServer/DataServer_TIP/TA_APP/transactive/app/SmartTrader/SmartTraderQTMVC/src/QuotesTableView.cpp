@@ -15,8 +15,8 @@
 #include "ConfigInfo.h"
 #include "UserOrderInfo.h"
 
-#include "BoostLogger.h"
-USING_BOOST_LOG;
+#include "Log4cppLogger.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -176,12 +176,12 @@ void CQuotesTableView::_CreateConnect()
 void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 {
 
-	LOG_DEBUG<<"CQuotesTableView process contextMenuEvent"
+	MYLOG4CPP_DEBUG<<"CQuotesTableView process contextMenuEvent"
 		<<" "<<"pEvent=0x"<<pEvent;
 
 	//prepare data for view
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CQuotesTableView"
 			<<" "<<"fun:"<<"contextMenuEvent()"
 			<<" "<<"emit"
@@ -213,7 +213,7 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 
 	//treeview line have data
 	pCurrentTreeItem = (CTreeItemQuotes*)nCurrentTreeItemIndex.internalPointer();
-	LOG_DEBUG<<"CQuotesTableView::contextMenuEvent"
+	MYLOG4CPP_DEBUG<<"CQuotesTableView::contextMenuEvent"
 		<<" "<<"getInstrumentID="<<pCurrentTreeItem->getInstrumentID()
 		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
 		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
@@ -232,7 +232,7 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 
 void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 {
-	LOG_DEBUG<<"CQuotesTableView process slotActionRemoveHotQuotesTriggered";
+	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionRemoveHotQuotesTriggered";
 
 	QAbstractItemModel* pModel = NULL;
 	int nRowDoubleClick = 0;
@@ -261,7 +261,7 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 
 	pModel->removeRow(nCurrentTreeItemIndex.row(), nCurrentTreeItemIndex.parent());
 		
-	LOG_DEBUG<<"CQuotesTableView emit signalRemoveContractFromSmartQuotes"
+	MYLOG4CPP_DEBUG<<"CQuotesTableView emit signalRemoveContractFromSmartQuotes"
 		<<" "<<"nInstrumentID="<<pCurrentTreeItem->getInstrumentID()
 		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
 		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
@@ -272,7 +272,7 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 
 void CQuotesTableView::slotActionAddHotQuotesTriggered()
 {
-	LOG_DEBUG<<"CQuotesTableView process slotActionAddHotQuotesTriggered";
+	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionAddHotQuotesTriggered";
 
 	//first ContractInfoWindow reset data
 
@@ -287,7 +287,7 @@ void CQuotesTableView::slotActionAddHotQuotesTriggered()
 
 void CQuotesTableView::slotActionCustomColumnsTriggered()
 {
-	LOG_DEBUG<<"CQuotesTableView process slotActionCustomColumnsTriggered";
+	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionCustomColumnsTriggered";
 	m_pCustomColumnsDialog->show();
 }
 
@@ -296,7 +296,7 @@ void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 {
 	if (Qt::LeftButton == pEvent->button())
 	{
-		LOG_DEBUG<<"CQuotesTableView process mouseDoubleClickEvent Qt::LeftButton";
+		MYLOG4CPP_DEBUG<<"CQuotesTableView process mouseDoubleClickEvent Qt::LeftButton";
 
 		QAbstractItemModel* pModel = NULL;
 		QModelIndex nCurrentTreeItemIndex;
@@ -325,7 +325,7 @@ void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 
 void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableColums, QStringList lstSelectedColumns )
 {
-	LOG_DEBUG<<" "<<"slot"
+	MYLOG4CPP_DEBUG<<" "<<"slot"
 		<<" "<<"class:"<<"CQuotesTableView"
 		<<" "<<"slot"
 		<<" "<<"slotModifySelectedColumns(AllAvailableColums, SelectedColumns)"
@@ -357,7 +357,7 @@ void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableCol
 
 	//emit
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CQuotesTableView"
 			<<" "<<"function:"<<"slotModifySelectedColumns"
 			<<" "<<"emit"
@@ -371,7 +371,7 @@ void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableCol
 
 void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 {
-	LOG_DEBUG<<" "<<"slot"
+	MYLOG4CPP_DEBUG<<" "<<"slot"
 		<<" "<<"class:"<<"CQuotesTableView"
 		<<" "<<"slot"
 		<<" "<<"slotMouseRightClickInHHeaderView(QMouseEvent*)"
@@ -380,7 +380,7 @@ void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 
 
 	{
-		LOG_DEBUG<<" "<<"emit"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CQuotesTableView"
 			<<" "<<"fun:"<<"slotMouseRightClickInHHeaderView(e)"
 			<<" "<<"emit"

@@ -3,7 +3,9 @@
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
-#include <boost/thread/mutex.hpp>
+
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -18,7 +20,7 @@ public:
 
 private:
 	static CConfigInfo* m_pInstance;
-	static boost::mutex m_mutexInstance;
+	static QMutex m_mutexInstance;
 
 public:
 	CConfigInfo();

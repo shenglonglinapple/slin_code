@@ -1,0 +1,17 @@
+<RCC>    
+    <qresource prefix="/language">
+      <file alias="qt_zh_CN">language/qt_zh_CN.qm</file>
+    </qresource>
+    <qresource prefix="/Qss">
+      <file alias="SmartTraderQTMVC">qss/SmartTraderQTMVC.qss</file>
+    </qresource>
+    <qresource prefix="/images">
+      <file alias="MainWidgetWindowIcon">images/MainWidgetWindowIcon.ico</file>
+	    <file alias="splash">images/splash.jpg</file>
+    </qresource>
+    <qresource prefix="/skin">
+      <file alias="skin_green_small">images/skin/skin_green_small.png</file>
+      <file alias="skin_green_big">images/skin/skin_green_big.png</file>
+    </qresource>
+    
+</RCC>
