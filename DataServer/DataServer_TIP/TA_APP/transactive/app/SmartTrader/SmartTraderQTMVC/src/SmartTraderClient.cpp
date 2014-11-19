@@ -82,7 +82,8 @@ void CSmartTraderClient::onInstrumentDownloaded( const Instrument &instrument )
 	{
 		m_pProcessRecvDataHandle->onInstrumentDownloaded(instrument);
 	}
-	
+	//TODO.ForTest
+	this->subscribeMarketData(instrument);
 }
 
 

@@ -63,8 +63,7 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
 	m_pMdiArea = NULL;
 	m_pEastMidSubWidget = NULL;
 	m_pMainWindowToolBar = NULL;
-
-	m_pClientDataManagerWorker = new CClientDataManagerWorker();
+	m_pClientDataManagerWorker = NULL;
 
  	_CreateActions();
  	_CreateMenus();
@@ -72,6 +71,8 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
     setupUi();
 	translateLanguage();
 
+
+	m_pClientDataManagerWorker = new CClientDataManagerWorker();
 	_CreateConnect();
 }
 
@@ -112,6 +113,7 @@ void CClientMainWindow::_CreateToolBars()
 {
 	m_pMainWindowToolBar = new CMainWindowToolBar(this);
 	this->addToolBar(m_pMainWindowToolBar);
+	m_pMainWindowToolBar->show();
 }
 
 

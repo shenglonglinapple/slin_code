@@ -35,7 +35,7 @@ CClientManager::CClientManager()
 	m_pClientLoginDialog->show();
 
 	//FOR Test, TODO.
-	m_pClientMainWindow->m_pClientDataManagerWorker->_Test();
+	//m_pClientMainWindow->m_pClientDataManagerWorker->_Test();
 }
 
 

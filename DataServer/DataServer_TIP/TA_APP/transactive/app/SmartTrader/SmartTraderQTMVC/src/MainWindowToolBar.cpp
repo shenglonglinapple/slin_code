@@ -1,6 +1,6 @@
 #include "MainWindowToolBar.h"
 
-
+#include <QtGui/QAction>
 
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Text = "BarInfo";
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_M1_Text = "M1";
@@ -17,8 +17,9 @@ CMainWindowToolBar::CMainWindowToolBar( const QString &title, QWidget *parent /*
 :QToolBar(title, parent)
 {
 	_CreateActions();
-	translateLanguage();
 	_AddAction();
+	translateLanguage();
+
 }
 
 CMainWindowToolBar::CMainWindowToolBar( QWidget *parent /*= 0*/ )
@@ -26,7 +27,14 @@ CMainWindowToolBar::CMainWindowToolBar( QWidget *parent /*= 0*/ )
 {
 	_CreateActions();
 	_AddAction();
+	translateLanguage();
 }
+
+CMainWindowToolBar::~CMainWindowToolBar()
+{
+
+}
+
 void CMainWindowToolBar::_CreateActions()
 {
 	m_pAction_BarInfo_M1 = new QAction(this); 
@@ -38,9 +46,6 @@ void CMainWindowToolBar::_CreateActions()
 	m_pAction_BarInfo_D1 = new QAction(this);
 	m_pAction_BarInfo_W1 = new QAction(this);
 	m_pAction_BarInfo_MN = new QAction(this);
-
-
-
 }
 void CMainWindowToolBar::_AddAction()
 {	
@@ -67,6 +72,10 @@ void CMainWindowToolBar::translateLanguage()
 	m_pAction_BarInfo_D1->setText(QObject::tr(DEFVALUE_String_Window_ToolBar_BarInfo_Action_D1_Text.c_str()));
 	m_pAction_BarInfo_W1->setText(QObject::tr(DEFVALUE_String_Window_ToolBar_BarInfo_Action_W1_Text.c_str()));
 	m_pAction_BarInfo_MN->setText(QObject::tr(DEFVALUE_String_Window_ToolBar_BarInfo_Action_MN_Text.c_str()));
-
-
 }
+
+
+
+
+
+

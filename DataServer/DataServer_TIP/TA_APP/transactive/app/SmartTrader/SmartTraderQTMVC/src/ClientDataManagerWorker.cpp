@@ -653,7 +653,6 @@ void CClientDataManagerWorker::_SignaleDataChange_DataUserContract()
 }
 void CClientDataManagerWorker::_SignaleDataChange_DataUserOrder()
 {
-	CDataUserOrder::getInstance();
 	CTreeItemOrder* pTreeItemOrder = NULL;
 	pTreeItemOrder = CDataUserOrder::getInstance().getRootHandle();
 	MYLOG4CPP_DEBUG<<" "<<"emit"

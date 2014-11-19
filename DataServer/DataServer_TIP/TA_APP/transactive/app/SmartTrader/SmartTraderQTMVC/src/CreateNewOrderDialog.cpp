@@ -49,7 +49,7 @@ CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 	m_pTextEdit_Symbol_Value = "IF1401";
 	m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_LIMIT.c_str();
 	m_pSpinBox_Volume_Value = 1;
-	m_pSpinBox_Price_Value = 99.9f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
+	m_pSpinBox_Price_Value = 000000000.00000f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
 	m_pOrderInfo = new COrderInfo();
 	m_pUserOrderInfo = new CUserOrderInfo();
@@ -235,7 +235,7 @@ void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 	
 	//
 	m_pOrderInfoWidget->setOrderInfo(m_pUserOrderInfo);
-	m_pOrderInfoWidget->move(this->cursor().pos());
+	//m_pOrderInfoWidget->move(this->cursor().pos());
 	m_pOrderInfoWidget->show();
 
 }
@@ -256,7 +256,7 @@ void CCreateNewOrderDialog::slotPushButtonSellClicked( bool checked )
 
 	//
 	m_pOrderInfoWidget->setOrderInfo(m_pUserOrderInfo);
-	m_pOrderInfoWidget->move(this->cursor().pos());
+	//m_pOrderInfoWidget->move(this->cursor().pos());
 	m_pOrderInfoWidget->show();
 
 

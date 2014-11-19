@@ -31,6 +31,7 @@
 #define  MYLOG4CPP_FATAL      log4cpp::Category::getInstance("rootAppender").fatalStream()<<LOG4CPPSourceFLInfo
 
 #define  MYLOG4CPP_ERROR_Base      log4cpp::Category::getInstance("rootAppender").errorStream()<<""
+#define  MYLOG4CPP_DEBUG_Base      log4cpp::Category::getInstance("rootAppender").debugStream()<<""
 
 //////////////////////////////////////////////////////////////////////////
 

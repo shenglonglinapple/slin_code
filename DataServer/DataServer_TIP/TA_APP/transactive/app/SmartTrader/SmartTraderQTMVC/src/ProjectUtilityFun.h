@@ -21,7 +21,7 @@ public:
 	//"%04d-%02d-%02d %02d:%02d:%02d"
 public:
 	time_t strToDateTime_Qt(const std::string& strTimeValue);
-	std::string dateTimeToStr_Qt(time_t nTimeValue);
+	std::string dateTimeToStr_Qt(time_t secsSince1Jan1970UTC);
 	time_t getTimeNow_Qt();
 
 public:
