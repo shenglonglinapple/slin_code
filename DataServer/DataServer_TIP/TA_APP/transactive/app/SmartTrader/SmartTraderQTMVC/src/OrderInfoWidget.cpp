@@ -1,6 +1,7 @@
 #include "OrderInfoWidget.h"
 
 #include "ProjectQTInclude.h"
+#include "ProjectCommonData.h"
 #include "OrderInfo.h"
 #include "UserOrderInfo.h"
 
@@ -16,17 +17,6 @@ static const int DEFVALUE_INT_Window_Height = 300;
 static const std::string DEFVALUE_String_COrderInfoWidget_WindowTitle = "New Order Info";
 static const std::string DEFVALUE_String_Label_InstrumentCode_Text = "InstrumentCode:";
 static const std::string DEFVALUE_String_Label_OrderType_Text = "Order Type:";
-	
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_0__Limit = "Limit";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_1_Market_FAK = "Market-FAK";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_2__Limit_GTC = "#Limit-GTC";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_3_Stop_Limit = "#Stop-Limit";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_4_Stop_Item_Limit_GTC = "#Stop-Limit-GTC";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_5_Stop_Limit_If_Touched = "#Limit_If-Touched";
-
-static const std::string DEFVALUE_String_ComboBox_OpenClose_Item_0_Open = "Open";
-static const std::string DEFVALUE_String_ComboBox_OpenClose_Item_1_Close = "Close";
-static const std::string DEFVALUE_String_ComboBox_OpenClose_Item_2_Auto = "Auto";
 
 
 COrderInfoWidget::COrderInfoWidget(QWidget *parent)
@@ -53,7 +43,7 @@ COrderInfoWidget::COrderInfoWidget(QWidget *parent)
 
 
 	m_str_OrderSide_Value = "Buy";
-	m_str_OrderType_Value = DEFVALUE_String_ComboBox_OrderType_Item_0__Limit.c_str();
+	m_str_OrderType_Value = DEFVALUE_String_OrderType_LIMIT.c_str();
 	m_str_InstrumentCode_Value = "IF1401";
 	m_str_Quantity_Value = "1";
 	m_str_Price_Value = "99.9";//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 

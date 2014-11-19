@@ -87,7 +87,6 @@ private:
 private:
 	QString m_pTextEdit_Symbol_Value;
 	QString m_pComboBox_OrderType_Value;
-	QString m_pComboBox_OpenClose_Value;
 	int m_pSpinBox_Volume_Value;
 	float m_pSpinBox_Price_Value;
 

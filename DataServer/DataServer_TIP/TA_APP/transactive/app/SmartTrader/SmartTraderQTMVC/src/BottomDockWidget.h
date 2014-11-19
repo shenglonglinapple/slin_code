@@ -38,7 +38,7 @@ public slots:
 	class: CClientDataManagerWorker
 	signals:
 	void signalOrderInfoChanged(CTreeItemOrder* pTreeItem);
-	fun send signals: _InitMVCDataForOrder() slotAddContractToSmartQuotes()
+	fun send signals:  slotAddContractToSmartQuotes()
 
 	class: CBottomDockWidget
 	public slots: 

@@ -1,7 +1,10 @@
 #include "OrderInfo.h"
 
-#include "ProjectUtilityFun.h"
 #include <QtCore/QStringList>
+
+
+#include "ProjectCommonData.h"
+#include "ProjectUtilityFun.h"
 #include "Order.h"
 #include "Instrument.h"
 #include "Account.h"
@@ -119,56 +122,56 @@ Order::OrderType COrderInfo::getEnumOrderType( const QString& strOrderType )
 	strOrderTypeTmp = strOrderType;
 	strOrderTypeTmp = strOrderTypeTmp.toUpper();
 
-	strCheckTmp = "MARKET";
+	strCheckTmp = DEFVALUE_String_OrderType_MARKET.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::MARKET;
 		return nOrderType;
 	}
 
-	strCheckTmp = "MARKET_FAK";
+	strCheckTmp = DEFVALUE_String_OrderType_MARKET_FAK.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::MARKET_FAK;
 		return nOrderType;
 	}
 
-	strCheckTmp = "MARKET_FOK";
+	strCheckTmp = DEFVALUE_String_OrderType_MARKET_FOK.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::MARKET_FOK;
 		return nOrderType;
 	}
 
-	strCheckTmp = "LIMIT";
+	strCheckTmp = DEFVALUE_String_OrderType_LIMIT.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::LIMIT;
 		return nOrderType;
 	}
 
-	strCheckTmp = "LIMIT_FAK";
+	strCheckTmp = DEFVALUE_String_OrderType_LIMIT_FAK.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::LIMIT_FAK;
 		return nOrderType;
 	}
 
-	strCheckTmp = "LIMIT_FOK";
+	strCheckTmp = DEFVALUE_String_OrderType_LIMIT_FOK.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::LIMIT_FOK;
 		return nOrderType;
 	}
 
-	strCheckTmp = "STOP";
+	strCheckTmp = DEFVALUE_String_OrderType_STOP.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::STOP;
 		return nOrderType;
 	}
 
-	strCheckTmp = "UNKNOWN";
+	strCheckTmp = DEFVALUE_String_OrderType_UNKNOWN.c_str();
 	if (strCheckTmp == strOrderTypeTmp)
 	{
 		nOrderType = Order::UNKNOWN;
@@ -183,34 +186,35 @@ QString COrderInfo::getStrOrderType(Order::OrderType nOrderType)
 {
 	QString strValue;
 
+
 	switch (nOrderType)
 	{
 	case Order::MARKET:
-		strValue = "MARKET";
+		strValue = DEFVALUE_String_OrderType_MARKET.c_str();
 		break;
 	case Order::MARKET_FAK:
-		strValue = "MARKET_FAK";
+		strValue = DEFVALUE_String_OrderType_MARKET_FAK.c_str();
 		break;
 	case Order::MARKET_FOK:
-		strValue = "MARKET_FOK";
+		strValue = DEFVALUE_String_OrderType_MARKET_FOK.c_str();
 		break;
 	case Order::LIMIT:
-		strValue = "LIMIT";
+		strValue = DEFVALUE_String_OrderType_LIMIT.c_str();
 		break;
 	case Order::LIMIT_FAK:
-		strValue = "LIMIT_FAK";
+		strValue = DEFVALUE_String_OrderType_LIMIT_FAK.c_str();
 		break;
 	case Order::LIMIT_FOK:
-		strValue = "LIMIT_FOK";
+		strValue = DEFVALUE_String_OrderType_LIMIT_FOK.c_str();
 		break;
 	case Order::STOP:
-		strValue = "STOP";
+		strValue = DEFVALUE_String_OrderType_STOP.c_str();
 		break;
 	case Order::UNKNOWN:
-		strValue = "UNKNOWN";
+		strValue = DEFVALUE_String_OrderType_UNKNOWN.c_str();
 		break;
 	default:
-		strValue = "UNKNOWN";
+		strValue = DEFVALUE_String_OrderType_UNKNOWN.c_str();
 		break;
 	}
 
@@ -351,7 +355,27 @@ void COrderInfo::setValue( const Order &newValue )
 
 }
 
+QString COrderInfo::getInformativeText()
+{
+	QString strInformativeText;
 
+	strInformativeText.clear();
+	strInformativeText += QString("OrderID:%1\n").arg(m_orderID);
+	strInformativeText += QString("OrderType:%1\n").arg(m_str_Column_OrderType);
+	strInformativeText += QString("OrderStatus:%1\n").arg(m_str_Column_OrderStatus);
+	strInformativeText += QString("ExchangeName:%1\n").arg(m_strExchangeName);
+	strInformativeText += QString("InstrumentCode:%1\n").arg(m_strInstrumentCode);
+	strInformativeText += QString("AccountCode:%1\n").arg(m_str_Column_Account);
+	strInformativeText += QString("Side:%1\n").arg(m_str_Column_BuyOrSell);
+	strInformativeText += QString("OrderQty:%1\n").arg(m_n_Column_Lots);
+	strInformativeText += QString("Price:%1\n").arg(m_price);
+	strInformativeText += QString("TransactTime:%1\n").arg(m_str_Column_Time);
+	strInformativeText += QString("RejectReason:%1\n").arg(m_rejectReason);
+	strInformativeText += QString("Currency:%1\n").arg(m_Column_Currency);
+	
+
+	return strInformativeText;
+}
 
 
 
@@ -511,6 +535,8 @@ QVariant COrderInfo::getValueByName( const QString& strName )
 
 	return varValueRes;
 }
+
+
 
 
 

@@ -1,6 +1,7 @@
 #include "CreateNewOrderDialog.h"
 
 #include "ProjectQTInclude.h"
+#include "ProjectCommonData.h"
 
 #include "OrderInfo.h"
 #include "UserOrderInfo.h"
@@ -19,17 +20,6 @@ static const std::string DEFVALUE_String_CCreateNewOrderDialog_WindowTitle = "Cr
 static const std::string DEFVALUE_String_Label_Symbol_Text = "Symbol:";
 static const std::string DEFVALUE_String_Label_OrderType_Text = "Order Type:";
 	
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_0__Limit = "Limit";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_1_Market_FAK = "Market-FAK";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_2__Limit_GTC = "#Limit-GTC";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_3_Stop_Limit = "#Stop-Limit";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_4_Stop_Item_Limit_GTC = "#Stop-Limit-GTC";
-static const std::string DEFVALUE_String_ComboBox_OrderType_Item_5_Stop_Limit_If_Touched = "#Limit_If-Touched";
-
-static const std::string DEFVALUE_String_ComboBox_OpenClose_Item_0_Open = "Open";
-static const std::string DEFVALUE_String_ComboBox_OpenClose_Item_1_Close = "Close";
-static const std::string DEFVALUE_String_ComboBox_OpenClose_Item_2_Auto = "Auto";
-
 
 CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 : QDialog(parent)
@@ -52,14 +42,12 @@ CCreateNewOrderDialog::CCreateNewOrderDialog(QWidget *parent)
 
 	m_pTextEdit_Symbol_Value.clear();
 	m_pComboBox_OrderType_Value.clear();
-	m_pComboBox_OpenClose_Value.clear();
 	m_pSpinBox_Volume_Value = 0;
 	m_pSpinBox_Price_Value = 0;
 
 
 	m_pTextEdit_Symbol_Value = "IF1401";
-	m_pComboBox_OrderType_Value = DEFVALUE_String_ComboBox_OrderType_Item_0__Limit.c_str();
-	m_pComboBox_OpenClose_Value = DEFVALUE_String_ComboBox_OpenClose_Item_0_Open.c_str();
+	m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_LIMIT.c_str();
 	m_pSpinBox_Volume_Value = 1;
 	m_pSpinBox_Price_Value = 99.9f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
@@ -187,12 +175,14 @@ void CCreateNewOrderDialog::translateLanguage()
 	m_pLabel_Symbol->setText(DEFVALUE_String_Label_Symbol_Text.c_str());
 	m_pLineEdit_Symbol->setText(m_pTextEdit_Symbol_Value);
 	nIndex = 0;
-	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_ComboBox_OrderType_Item_0__Limit.c_str());
-	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_ComboBox_OrderType_Item_1_Market_FAK.c_str());
-	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_ComboBox_OrderType_Item_2__Limit_GTC.c_str());
-	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_ComboBox_OrderType_Item_3_Stop_Limit.c_str());
-	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_ComboBox_OrderType_Item_4_Stop_Item_Limit_GTC.c_str());
-	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_ComboBox_OrderType_Item_5_Stop_Limit_If_Touched.c_str());
+
+	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_MARKET.c_str());
+	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_MARKET_FAK.c_str());
+	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_MARKET_FOK.c_str());
+	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_LIMIT.c_str());
+	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_LIMIT_FAK.c_str());
+	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_LIMIT_FOK.c_str());
+	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_STOP.c_str());
 
 	m_pLabel_OrderType->setText(DEFVALUE_String_Label_OrderType_Text.c_str());
 
@@ -245,7 +235,6 @@ void CCreateNewOrderDialog::slotPushButtonBuyClicked( bool checked )
 	
 	//
 	m_pOrderInfoWidget->setOrderInfo(m_pUserOrderInfo);
-	//m_pOrderInfoWidget->move(200, 200);
 	m_pOrderInfoWidget->move(this->cursor().pos());
 	m_pOrderInfoWidget->show();
 
@@ -267,7 +256,6 @@ void CCreateNewOrderDialog::slotPushButtonSellClicked( bool checked )
 
 	//
 	m_pOrderInfoWidget->setOrderInfo(m_pUserOrderInfo);
-	//m_pOrderInfoWidget->move(200, 200);
 	m_pOrderInfoWidget->move(this->cursor().pos());
 	m_pOrderInfoWidget->show();
 

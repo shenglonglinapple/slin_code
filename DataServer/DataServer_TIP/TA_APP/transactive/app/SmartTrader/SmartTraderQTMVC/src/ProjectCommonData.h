@@ -19,7 +19,16 @@ static const int DEFVALUE_Int_ServerPort = 9170;
 static const bool DEFVALUE_Bool_Synchronous = true;
 //////////////////////////////////////////////////////////////////////////
 
-//NS_END(TA_App_App)
+
+static const std::string DEFVALUE_String_OrderType_MARKET = "MARKET";
+static const std::string DEFVALUE_String_OrderType_MARKET_FAK = "MARKET_FAK";
+static const std::string DEFVALUE_String_OrderType_MARKET_FOK = "MARKET_FOK";
+static const std::string DEFVALUE_String_OrderType_LIMIT = "LIMIT";
+static const std::string DEFVALUE_String_OrderType_LIMIT_FAK = "LIMIT_FAK";
+static const std::string DEFVALUE_String_OrderType_LIMIT_FOK = "LIMIT_FOK";
+static const std::string DEFVALUE_String_OrderType_STOP = "STOP";
+static const std::string DEFVALUE_String_OrderType_UNKNOWN = "UNKNOWN";
+//////////////////////////////////////////////////////////////////////////
 
 #endif  // __DEF__HISTORY_DATA_SERVER_COMMON_DATA_H_
 

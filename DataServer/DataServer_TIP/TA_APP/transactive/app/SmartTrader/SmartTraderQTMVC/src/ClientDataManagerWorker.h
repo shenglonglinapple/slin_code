@@ -203,6 +203,8 @@ private:
 	void _UnInitLoginParam();
 private:
 	void _UpdateOrderInfo(const Order &order);
+	void _MessageBoxOrderInfo(const Order &order, const std::string& strInfo);
+private:
 	void _SignaleDataChange_DataUserContract();
 	void _SignaleDataChange_DataUserOrder();
 	void _SignaleDataChange_DataContract();

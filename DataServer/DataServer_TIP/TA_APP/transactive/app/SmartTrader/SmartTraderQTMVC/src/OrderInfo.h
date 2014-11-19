@@ -46,6 +46,8 @@ public:
 	void setDefaultValue();
 	QVariant getValueByName(const QString& strName);
 	unsigned int getKey();
+public:
+	QString getInformativeText();
 private:
 	void _ClearData();
 private:

@@ -1,6 +1,7 @@
 #include "ClientDataManagerWorker.h"
 
 #include <QtCore/QStringList>
+#include <QtGui/QMessageBox>
 #include "Bar.h"
 #include "Instrument.h"
 
@@ -355,42 +356,61 @@ void CClientDataManagerWorker::onAccountDownloaded( Account& account )
 
 void CClientDataManagerWorker::onOrderAccepted(const Order &order)
 {
+	std::string strInfo = "OrderAccepted";
 	_UpdateOrderInfo(order);
-
-
+	_MessageBoxOrderInfo(order, strInfo);
 }
 void CClientDataManagerWorker::onOrderCanceled(const Order &order)
 {
-
+	std::string strInfo = "OrderCanceled";
 	_UpdateOrderInfo(order);
-
-
+	_MessageBoxOrderInfo(order, strInfo);
 }
 void CClientDataManagerWorker::onOrderRejected(const Order &order)
 {
+	std::string strInfo = "OrderRejected";
 	_UpdateOrderInfo(order);
-
-
+	_MessageBoxOrderInfo(order, strInfo);
 }
 void CClientDataManagerWorker::onOrderFilled(const Order &order)
 {
+	std::string strInfo = "OrderFilled";
 	_UpdateOrderInfo(order);
-
-
+	_MessageBoxOrderInfo(order, strInfo);
 }
 void CClientDataManagerWorker::onCancelReject(const Order &order)
 {
+	std::string strInfo = "CancelReject";
 	_UpdateOrderInfo(order);
+	_MessageBoxOrderInfo(order, strInfo);
+}
+
+void CClientDataManagerWorker::_MessageBoxOrderInfo(const Order &order, const std::string& strInfo)
+{
+	QMessageBox msgBox;
+	int nMsgBoxRes = 0;
+	COrderInfo* pOrderInfo = NULL;
 	
+	pOrderInfo = new COrderInfo();
+	pOrderInfo->setValue(order);
+		
+	msgBox.setText(strInfo.c_str());
+	msgBox.setInformativeText(pOrderInfo->getInformativeText());
+	msgBox.setStandardButtons(QMessageBox::Close);
+	msgBox.setDefaultButton(QMessageBox::Close);
+	nMsgBoxRes = msgBox.exec();
+
+	if (NULL != pOrderInfo)
+	{
+		delete pOrderInfo;
+		pOrderInfo = NULL;
+	}
 }
 
 void CClientDataManagerWorker::_UpdateOrderInfo(const Order &order)
 {
-
-	{
-		CDataUserOrder::getInstance().addAndUpdateData(order);
-		_SignaleDataChange_DataUserOrder();
-	}
+	CDataUserOrder::getInstance().addAndUpdateData(order);
+	_SignaleDataChange_DataUserOrder();
 }
 
 
@@ -415,9 +435,12 @@ void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 	Instrument* pInstrumentGet = NULL;
 	Account* pAccount = NULL;
 	unsigned int nInstrumentID = 0;
-	//nInstrumentID = _GetInstrumentIDByInstruemntCode(strInstrumentCode);//"IF1402"
-	nInstrumentID = pUserOrderInfo->m_nInstrumentID;
+	Order::OrderType nOrderType;
+	Order::Side nSide;
+	int quantity = 0;
+	double fPrice = 0;
 
+	nInstrumentID = pUserOrderInfo->m_nInstrumentID;
 	
 	pInstrumentGet = NULL;
 	pInstrumentGet = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
@@ -425,21 +448,17 @@ void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 	{
 		return;
 	}
-	//find ok
 
-
+	pAccount = CDataUserAccount::getInstance().getAccount(0);
+	if (NULL == pAccount)
 	{
-		pAccount = CDataUserAccount::getInstance().getAccount(0);
-		if (NULL == pAccount)
-		{
-			return;
-		}
+		return;
 	}
 
-	Order::OrderType nOrderType = pUserOrderInfo->m_nOrderType;
-	Order::Side nSide = pUserOrderInfo->m_nSide;
-	int quantity = pUserOrderInfo->m_nQuantity;
-	double fPrice = pUserOrderInfo->m_fLastPrice;
+	nOrderType = pUserOrderInfo->m_nOrderType;
+	nSide = pUserOrderInfo->m_nSide;
+	quantity = pUserOrderInfo->m_nQuantity;
+	fPrice = pUserOrderInfo->m_fLastPrice;
 
 	switch (nOrderType)
 	{
