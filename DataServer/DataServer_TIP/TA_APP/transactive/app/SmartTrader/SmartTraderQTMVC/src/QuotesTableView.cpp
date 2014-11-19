@@ -260,12 +260,16 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 	//strLogInfo += pModel->data(nCurrentTreeItemIndex, Qt::DisplayRole).toString();
 
 	pModel->removeRow(nCurrentTreeItemIndex.row(), nCurrentTreeItemIndex.parent());
-		
-	MYLOG4CPP_DEBUG<<"CQuotesTableView emit signalRemoveContractFromSmartQuotes"
+
+	MYLOG4CPP_DEBUG<<" "<<"emit"
+		<<" "<<"class:"<<"CQuotesTableView"
+		<<" "<<"fun:"<<"slotActionRemoveHotQuotesTriggered()"
+		<<" "<<"emit"
+		<<" "<<"signalRemoveContractFromSmartQuotes(unsigned int)"
+		<<" "<<"param:"
 		<<" "<<"nInstrumentID="<<pCurrentTreeItem->getInstrumentID()
 		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
 		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
-
 
 	emit signalRemoveContractFromSmartQuotes(nInstrumentID);
 }
@@ -325,10 +329,7 @@ void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 
 void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableColums, QStringList lstSelectedColumns )
 {
-	MYLOG4CPP_DEBUG<<" "<<"slot"
-		<<" "<<"class:"<<"CQuotesTableView"
-		<<" "<<"slot"
-		<<" "<<"slotModifySelectedColumns(AllAvailableColums, SelectedColumns)"
+	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotModifySelectedColumns"
 		<<" "<<"param:"
 		<<" "<<"lstAllAvailableColums.count="<<lstAllAvailableColums.count()
 		<<" "<<"lstSelectedColumns.count="<<lstSelectedColumns.count();
@@ -371,13 +372,9 @@ void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableCol
 
 void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 {
-	MYLOG4CPP_DEBUG<<" "<<"slot"
-		<<" "<<"class:"<<"CQuotesTableView"
-		<<" "<<"slot"
-		<<" "<<"slotMouseRightClickInHHeaderView(QMouseEvent*)"
+	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotMouseRightClickInHHeaderView"
 		<<" "<<"param:"
 		<<" "<<"QMouseEvent* e=0x"<<e;
-
 
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"

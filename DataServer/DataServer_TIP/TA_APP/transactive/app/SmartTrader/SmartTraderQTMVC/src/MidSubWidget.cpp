@@ -199,9 +199,7 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 {
 	//emit
 	{
-		MYLOG4CPP_DEBUG<<" "<<"slot"
-			<<" "<<"class:"<<"CMidSubWidget"
-			<<" "<<"fun:"<<"slotHistoryDataChanged()"
+		MYLOG4CPP_DEBUG<<"CMidSubWidget process slotHistoryDataChanged"
 			<<" "<<"param:"
 			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
 	}

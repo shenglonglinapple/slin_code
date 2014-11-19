@@ -35,7 +35,7 @@ CClientManager::CClientManager()
 	m_pClientLoginDialog->show();
 
 	//FOR Test, TODO.
-	//m_pClientMainWindow->m_pClientDataManagerWorker->_Test();
+	m_pClientMainWindow->m_pClientDataManagerWorker->_Test();
 }
 
 
@@ -84,6 +84,7 @@ void CClientManager::slotLoginToServerResult( int nLoginResust )
 
 	if (nLoginResust >= 0)
 	{
+		//login to server ok
 		m_pClientMainWindow->show();
 	}
 }

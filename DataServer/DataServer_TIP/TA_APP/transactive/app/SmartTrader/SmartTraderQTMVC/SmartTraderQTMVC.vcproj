@@ -291,11 +291,51 @@
 				Name="Data"
 				>
 				<File
+					RelativePath=".\src\DataContract.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataContract.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\DataTotalInstrument.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\src\DataTotalInstrument.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserAccount.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserAccount.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserContract.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserContract.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserHistoryBar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserHistoryBar.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserOrder.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\DataUserOrder.h"
 					>
 				</File>
 			</Filter>

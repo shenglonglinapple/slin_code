@@ -116,9 +116,13 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 	{
 		model->removeRow(index.row(), index.parent());//use mvc to remove node first
 
-		MYLOG4CPP_DEBUG<<"CContractInfoWindow emit signalAddContractToSmartQuotes"
+		MYLOG4CPP_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CContractInfoWindow"
+			<<" "<<"fun:"<<"slotTreeViewDoubleClick()"
+			<<" "<<"emit"
+			<<" "<<"signalAddContractToSmartQuotes(unsigned int)"
+			<<" "<<"param:"
 			<<" "<<"nInstrumentID="<<nInstrumentID;
-
 		emit signalAddContractToSmartQuotes(nInstrumentID);
 	}
 

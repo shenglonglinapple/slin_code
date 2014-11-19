@@ -36,11 +36,12 @@ void CQuotesHHeaderView::mousePressEvent( QMouseEvent* e )
 	{
 		{
 			MYLOG4CPP_DEBUG<<" "<<"emit"
-				<<" "<<"class:"<<"CQuotesTableViewHHeaderView"
+				<<" "<<"class:"<<"CQuotesHHeaderView"
+				<<" "<<"fun:"<<"mousePressEvent"
 				<<" "<<"emit"
 				<<" "<<"signalMouseRightClickInHHeaderView(QMouseEvent*)"
 				<<" "<<"param:"
-				<<" "<<"QMouseEvent* e="<<e;
+				<<" "<<"QMouseEvent* e=0x"<<e;
 
 			emit signalMouseRightClickInHHeaderView(e);
 		}

@@ -283,7 +283,9 @@ bool CTreeModelQuotes::setHeaderData( int section, Qt::Orientation orientation, 
 	bool result = m_pRootItemCopy->setData(section, value);
 
 	if (result)
+	{
 		emit headerDataChanged(orientation, section, section);
+	}
 
 	return result;
 }
@@ -297,7 +299,9 @@ bool CTreeModelQuotes::setData( const QModelIndex &index, const QVariant &value,
 	bool result = item->setData(index.column(), value);
 
 	if (result)
+	{
 		emit dataChanged(index, index);
+	}
 
 	return result;
 }

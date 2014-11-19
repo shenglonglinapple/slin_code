@@ -184,7 +184,12 @@ void CClientLoginDialog::slotButtonLoginClicked( bool checked )
 		<<" "<<"m_strUserName="<<m_pClientLoginParam->m_strUserName
 		<<" "<<"m_strPassWord="<<m_pClientLoginParam->m_strPassWord;
 
-	MYLOG4CPP_DEBUG<<"CClientLoginDialog emit signalClientLoginParamChanged"
+	MYLOG4CPP_DEBUG<<" "<<"emit"
+		<<" "<<"class:"<<"CClientLoginDialog"
+		<<" "<<"fun:"<<"slotButtonLoginClicked()"
+		<<" "<<"emit"
+		<<" "<<"signalClientLoginParamChanged(CClientLoginParam* )"
+		<<" "<<"param:"
 		<<" "<<"m_pClientLoginParam=0x"<<m_pClientLoginParam;
 
 	emit signalClientLoginParamChanged(m_pClientLoginParam);

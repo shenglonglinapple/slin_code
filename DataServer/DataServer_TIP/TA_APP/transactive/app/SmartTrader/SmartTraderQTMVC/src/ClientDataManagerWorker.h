@@ -181,9 +181,6 @@ signals:
 	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 	*/
 	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-
-
-	
 public:
 	void onInstrumentDownloaded(const Instrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate(const Instrument& instrument);
@@ -197,51 +194,23 @@ public:
 	//history bar
 	void onBarDataUpdate(const BarSummary &barData);
 	void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
-
 public:
 	void _Test();
-
 private:
+	void _InitTraderClient();
 	void _UnInitTraderClient();
+	void _InitLoginParam();
 	void _UnInitLoginParam();
-	void _InitMVCDataForContract();
-	void _UnInitMVCDataForContract();
-	void _InitMVCDataForQuotes();
-	void _UnInitMVCDataForQuotes();
-	void _InitMVCDataForOrder();
-	void _UnInitMVCDataForOrder();
-private:
-	unsigned int _GetInstrumentIDByInstruemntCode(const QString& strInstrumentCode);
-
 private:
 	void _UpdateOrderInfo(const Order &order);
-
-private:
-	QMutex m_mutexForNodeRootContract;
-	CContractInfo* m_pContractInfo;
-	CTreeItemContract* m_pTreeItemContract_Root;//total
-private:
-	QMutex m_mutexForNodeRootQuotes;
-	CQuotesInfo* m_pQuotesInfo;
-	CTreeItemQuotes* m_pTreeItemQuotes_Root;//submarket
-
+	void _SignaleDataChange_DataUserContract();
+	void _SignaleDataChange_DataUserOrder();
+	void _SignaleDataChange_DataContract();
 private:
 	CClientLoginParam* m_pClientLoginParam;
 	CSmartTraderClient* m_pMyTradeClient;
-	CProjectUtilityFun* m_pUtilityFun;
-	CProjectLogHelper* m_pProjectLogHelper;
-private:
-	QMutex m_mutexForMapAccount;
-	QMap<int, Account*> m_MapAccount;//AccountID
 
 private:
-	QMutex m_mutexForMapOrder;
-	QMap<unsigned int, Order*> m_MapOrder;//OrderID
-	COrderInfo* m_pOrderInfo;
-	CTreeItemOrder* m_pTreeItemOrder_root;
-private:
-	QMutex m_mutexForMapHistoryData;
-	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//instrumentID
 	int m_nDoTest;
 };
 

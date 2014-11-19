@@ -137,7 +137,12 @@ void CServerSettingDialog::slotButtonOKlicked( bool checked )
 	m_pClientLoginParam->m_strServerIP = m_str_LineEdit_IPAddress_Value.toStdString();
 	m_pClientLoginParam->m_nServerPort = m_str_LineEdit_Port_Value.toInt();
 
-	MYLOG4CPP_DEBUG<<"CServerSettingDialog emit signalServerInfoChanged"
+	MYLOG4CPP_DEBUG<<" "<<"emit"
+		<<" "<<"class:"<<"CServerSettingDialog"
+		<<" "<<"fun:"<<"slotButtonOKlicked()"
+		<<" "<<"emit"
+		<<" "<<"signalServerInfoChanged(CClientLoginParam* )"
+		<<" "<<"param:"
 		<<" "<<"m_pClientLoginParam=0x"<<m_pClientLoginParam;
 
 	emit signalServerInfoChanged(m_pClientLoginParam);

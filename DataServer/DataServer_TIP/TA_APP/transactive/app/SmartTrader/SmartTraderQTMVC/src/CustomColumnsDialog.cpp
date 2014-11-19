@@ -456,8 +456,9 @@ void CCustomColumnsDialog::slotPushButtonOKClick( bool checked /*= false*/ )
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CCustomColumnsDialog"
+			<<" "<<"fun:"<<"slotPushButtonOKClick()"
 			<<" "<<"emit"
-			<<" "<<"signalModifySelectedColumns(AllAvailableColums, SelectedColumns)"
+			<<" "<<"signalModifySelectedColumns(QStringList,QStringList)"
 			<<" "<<"param:"
 			<<" "<<"AllAvailableColums.count="<<strAllData_AllAvailableColums.count()
 			<<" "<<"SelectedColumns.count="<<strAllData_SelectedColumns.count();

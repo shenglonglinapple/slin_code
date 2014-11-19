@@ -303,13 +303,14 @@ void CCreateNewOrderDialog::slotOrderCheck(CUserOrderInfo* pUserOrderInfo)
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CCreateNewOrderDialog"
-			<<" "<<"fun:"<<"slotOrderCheck(Order::Side, Order::OrderType, QString, double, int, OrderCheckRes)"
+			<<" "<<"fun:"<<"slotOrderCheck()"
 			<<" "<<"emit"
-			<<" "<<"signalNewOrder()"
+			<<" "<<"signalNewOrder(CUserOrderInfo*)"
 			<<" "<<"param:"
+			<<" "<<"pUserOrderInfo=0x"<<pUserOrderInfo
 			<<" "<<"nSide="<<pUserOrderInfo->m_nSide
 			<<" "<<"nOrderType="<<pUserOrderInfo->m_nOrderType
-			<<" "<<"strInstrumentCode="<<pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
+			<<" "<<"strInstrumentCode="<<pUserOrderInfo->m_strInstrumentCode.toStdString()
 			<<" "<<"fPrice="<<pUserOrderInfo->m_fLastPrice
 			<<" "<<"quantity="<<pUserOrderInfo->m_nQuantity;
 

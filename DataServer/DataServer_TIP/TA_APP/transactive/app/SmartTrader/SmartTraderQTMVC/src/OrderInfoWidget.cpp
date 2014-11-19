@@ -159,13 +159,14 @@ void COrderInfoWidget::slotPushButtonOKClicked( bool checked )
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"COrderInfoWidget"
-			<<" "<<"fun:"<<"slotPushButtonOKClicked(bool checked)"
+			<<" "<<"fun:"<<"slotPushButtonOKClicked()"
 			<<" "<<"emit"
-			<<" "<<"signalNewOrder()"
+			<<" "<<"signalOrderCheck(CUserOrderInfo*)"
 			<<" "<<"param:"
+			<<" "<<"m_pUserOrderInfo=0x"<<m_pUserOrderInfo
 			<<" "<<"m_nSide="<<m_pUserOrderInfo->m_nSide
 			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
-			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
+			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString()
 			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
 			<<" "<<"m_quantity="<<m_pUserOrderInfo->m_nQuantity
 			<<" "<<"m_nCheckRes="<<m_pUserOrderInfo->m_nCheckRes;
@@ -182,13 +183,14 @@ void COrderInfoWidget::slotPushButtonCancelClicked( bool checked )
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"COrderInfoWidget"
-			<<" "<<"fun:"<<"slotPushButtonOKClicked(bool checked)"
+			<<" "<<"fun:"<<"slotPushButtonCancelClicked()"
 			<<" "<<"emit"
-			<<" "<<"signalNewOrder()"
+			<<" "<<"signalOrderCheck(CUserOrderInfo*)"
 			<<" "<<"param:"
+			<<" "<<"m_pUserOrderInfo=0x"<<m_pUserOrderInfo
 			<<" "<<"m_nSide="<<m_pUserOrderInfo->m_nSide
 			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
-			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString().c_str()
+			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString()
 			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
 			<<" "<<"m_quantity="<<m_pUserOrderInfo->m_nQuantity
 			<<" "<<"m_nCheckRes="<<m_pUserOrderInfo->m_nCheckRes;
