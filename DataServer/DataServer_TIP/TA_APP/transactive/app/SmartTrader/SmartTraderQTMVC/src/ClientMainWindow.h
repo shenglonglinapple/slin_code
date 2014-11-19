@@ -21,12 +21,11 @@ class QAction;
 QT_END_NAMESPACE
 
 
-
-
 class CClientDataManagerWorker;
 class CLeftDockWidget;
 class CBottomDockWidget;
 class CMidSubWidget;
+class CMainWindowToolBar;
 
 class CClientMainWindow : public QMainWindow
 {
@@ -68,22 +67,12 @@ private:
 	QMenu* m_Menu_Help;
 
 private:
-	QToolBar* m_ToolBar_BarInfo;
-private:
-	QAction* m_pAction_BarInfo_M1;
-	QAction* m_pAction_BarInfo_M5;
-	QAction* m_pAction_BarInfo_M15;
-	QAction* m_pAction_BarInfo_M30;
-	QAction* m_pAction_BarInfo_H1;
-	QAction* m_pAction_BarInfo_D1;
-	QAction* m_pAction_BarInfo_W1;
-	QAction* m_pAction_BarInfo_MN;
-private:
 	QAction* m_pAction_ReConnect;
 	QAction* m_pAction_ChangePassword;
 	QAction* m_pAction_Exit;
 
-	
+private:
+	CMainWindowToolBar* m_pMainWindowToolBar;
 };
 
 //QT_END_NAMESPACE

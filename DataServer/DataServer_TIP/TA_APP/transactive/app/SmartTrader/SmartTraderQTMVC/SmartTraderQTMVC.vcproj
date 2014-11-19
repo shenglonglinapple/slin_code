@@ -1004,6 +1004,14 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\src\MainWindowToolBar.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MainWindowToolBar.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\PwdLineEdit.cpp"
 				>
 			</File>
