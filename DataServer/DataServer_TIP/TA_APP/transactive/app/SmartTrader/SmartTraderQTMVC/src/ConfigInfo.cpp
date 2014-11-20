@@ -125,7 +125,38 @@ void CConfigInfo::loadDataFromConfig()
 
 }
 
+void CConfigInfo::removeInstrument(const QString& strInstrumentID)
+{
+	QStringList lstStringValue;
+	QStringList lstStringValueNew;
+	QString  strValue;
+	
+	lstStringValue = getLstUserInstrument();
 
+	foreach (const QString& strValue, lstStringValue)
+	{
+		if (strInstrumentID != strValue)
+		{
+			lstStringValueNew.push_back(strValue);
+		}
+	}
+
+	setLstUserInstrument(lstStringValueNew);
+
+
+}
+
+void CConfigInfo::addInstrument(const QString& strInstrumentID)
+{
+	QStringList lstStringValue;
+	lstStringValue = getLstUserInstrument();
+
+	if (!lstStringValue.contains(strInstrumentID))
+	{
+		lstStringValue.push_back(strInstrumentID);
+		setLstUserInstrument(lstStringValue);
+	}
+}
 
 void CConfigInfo::setLstUserInstrument( QStringList& lstStringValue )
 {

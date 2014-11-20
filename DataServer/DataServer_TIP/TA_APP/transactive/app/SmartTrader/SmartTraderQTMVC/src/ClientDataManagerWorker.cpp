@@ -165,14 +165,8 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 	{
 		//find ok
 		//save to configfile
-		QStringList strLstUserInstruemt;
-		strLstUserInstruemt = CConfigInfo::getInstance().getLstUserInstrument();
-		if (!strLstUserInstruemt.contains(QVariant(nInstrumentID).toString()))
-		{
-			strLstUserInstruemt.push_back(QVariant(nInstrumentID).toString());
-			CConfigInfo::getInstance().setLstUserInstrument(strLstUserInstruemt);
-		}
-
+		QString strUserInstruemt = QString("%1").arg(nInstrumentID);
+		CConfigInfo::getInstance().addInstrument(strUserInstruemt);
 		//subscribe this instrument
 		MYLOG4CPP_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
 		m_pMyTradeClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
@@ -232,6 +226,9 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 			<<" "<<"InstrumentID="<<pInstrumentRef->getInstrumentID();
 		m_pMyTradeClient->unsubscribeMarketData(pInstrumentRef->getInstrumentID());
 
+		//save to config file
+		QString strInstrumentID = QString("%1").arg(pInstrumentRef->getInstrumentID());
+		CConfigInfo::getInstance().removeInstrument(strInstrumentID);
 	}
 
 

@@ -268,7 +268,6 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 	nColumnDoubleClick = nCurrentTreeItemIndex.column();
 	//strLogInfo += pModel->data(nCurrentTreeItemIndex, Qt::DisplayRole).toString();
 
-	pModel->removeRow(nCurrentTreeItemIndex.row(), nCurrentTreeItemIndex.parent());
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CQuotesTableView"
@@ -280,7 +279,10 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
 		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
 
-	emit signalRemoveContractFromSmartQuotes(nInstrumentID);
+	pModel->removeRow(nCurrentTreeItemIndex.row(), nCurrentTreeItemIndex.parent());
+
+	CSignalSlotManager::getInstance().emit_signalRemoveContractFromSmartQuotes(nInstrumentID);
+
 }
 
 void CQuotesTableView::slotActionAddHotQuotesTriggered()

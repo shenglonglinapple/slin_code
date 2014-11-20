@@ -46,7 +46,7 @@ COrderInfoWidget::COrderInfoWidget(QWidget *parent)
 	m_str_OrderType_Value = DEFVALUE_String_OrderType_LIMIT.c_str();
 	m_str_InstrumentCode_Value = "IF1401";
 	m_str_Quantity_Value = "1";
-	m_str_Price_Value = "99.9";//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
+	m_str_Price_Value = "000000000.00000";//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
 	m_pOrderInfo = new COrderInfo();
 	m_pUserOrderInfo = new CUserOrderInfo();

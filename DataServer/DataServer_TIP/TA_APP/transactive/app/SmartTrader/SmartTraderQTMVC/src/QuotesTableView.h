@@ -99,7 +99,6 @@ public slots:
 	void slotMouseRightClickInHHeaderView(QMouseEvent* e);
 
 signals:
-	void signalRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
 
 protected:
 	//overwite QWight fun

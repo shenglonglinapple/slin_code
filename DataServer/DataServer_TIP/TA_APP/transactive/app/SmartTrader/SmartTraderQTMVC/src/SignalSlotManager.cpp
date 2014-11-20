@@ -136,8 +136,8 @@ void CSignalSlotManager::setSignalSlot_QuotesInfoChanged(CClientDataManagerWorke
 	m_pSignal_QuotesInfoChanged = pSignal;
 	m_pSlot_QuotesInfoChanged = pSlot;
 
-	QObject::connect(this, SIGNAL(signalOrderInfoChanged(CTreeItemQuotes*)),
-		this, SLOT(slotOrderInfoChanged(CTreeItemQuotes*)));
+	QObject::connect(this, SIGNAL(signalQuotesInfoChanged(CTreeItemQuotes*)),
+		this, SLOT(slotQuotesInfoChanged(CTreeItemQuotes*)));
 }
 
 void CSignalSlotManager::emit_signalQuotesInfoChanged(CTreeItemQuotes* pParam)

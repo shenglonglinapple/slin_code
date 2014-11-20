@@ -30,6 +30,9 @@ public:
 
 	QStringList getLstUserInstrument();
 	void setLstUserInstrument(QStringList& lstStringValue);
+	void removeInstrument(const QString& strInstrumentID);
+	void addInstrument(const QString& strInstrumentID);
+
 
 	QStringList getLstAllAvailableColumsDefault();
 	QStringList getLstAllAvailableColums();
