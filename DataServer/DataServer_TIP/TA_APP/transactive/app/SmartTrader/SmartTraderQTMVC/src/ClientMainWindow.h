@@ -21,11 +21,12 @@ class QAction;
 QT_END_NAMESPACE
 
 
-class CClientDataManagerWorker;
 class CLeftDockWidget;
 class CBottomDockWidget;
 class CMidSubWidget;
 class CMainWindowToolBar;
+
+
 
 class CClientMainWindow : public QMainWindow
 {
@@ -45,10 +46,9 @@ private:
 	void _CreateToolBars();
 
 	void _CreateConnect();
-	
-public:
-	//Data
-	CClientDataManagerWorker* m_pClientDataManagerWorker;
+public slots:
+
+signals:
 
 public:
 	//GUI

@@ -18,7 +18,7 @@
 #include "HistoryDataManager.h"
 
 #include "MainWindowToolBar.h"
-
+#include "SignalSlotManager.h"
 
 #include "Log4cppLogger.h"
 
@@ -57,13 +57,11 @@ static const  std::string DEF_VALUE_MainWidgetWindowIcon = ":/images/MainWidgetW
 CClientMainWindow::CClientMainWindow(QWidget* parent)
     : QMainWindow(parent)
 {
-	m_pClientDataManagerWorker = NULL;
 	m_pLeftDockWidget = NULL;
 	m_pBottomDockWidget = NULL;
 	m_pMdiArea = NULL;
 	m_pEastMidSubWidget = NULL;
 	m_pMainWindowToolBar = NULL;
-	m_pClientDataManagerWorker = NULL;
 
  	_CreateActions();
  	_CreateMenus();
@@ -72,18 +70,19 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
 	translateLanguage();
 
 
-	m_pClientDataManagerWorker = new CClientDataManagerWorker();
+	//m_pClientDataManagerWorker = NULL:
+	//m_pClientDataManagerWorker = new CClientDataManagerWorker();
 	_CreateConnect();
 }
 
 
 CClientMainWindow::~CClientMainWindow()
 {
-	if (NULL != m_pClientDataManagerWorker)
-	{
-		delete m_pClientDataManagerWorker;
-		m_pClientDataManagerWorker = NULL;
-	}
+// 	if (NULL != m_pClientDataManagerWorker)
+// 	{
+// 		delete m_pClientDataManagerWorker;
+// 		m_pClientDataManagerWorker = NULL;
+// 	}
 
 }
 
@@ -119,60 +118,6 @@ void CClientMainWindow::_CreateToolBars()
 
 void CClientMainWindow::_CreateConnect()
 {
-	//
-	QObject::connect(m_pClientDataManagerWorker, 
-		SIGNAL(signalContractInfoChanged (CTreeItemContract*)),
-		m_pLeftDockWidget->m_pTableView_Quotes->m_pContractInfoWindow,
-		SLOT(slotContractInfoChanged(CTreeItemContract*)));
-
-
-	//
-	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes->m_pContractInfoWindow, 
-		SIGNAL(signalAddContractToSmartQuotes (unsigned int)),
-		m_pClientDataManagerWorker,
-		SLOT(slotAddContractToSmartQuotes(unsigned int)));
-
-	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes->m_pCreateNewOrderDialog, 
-		SIGNAL(signalNewOrder(CUserOrderInfo*)),
-		m_pClientDataManagerWorker,
-		SLOT(slotNewOrder(CUserOrderInfo*)));
-	
-
-
-	//
-	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes, 
-		SIGNAL(signalContractInfoWindowResetData()),
-		m_pClientDataManagerWorker,
-		SLOT(slotContractInfoWindowResetData()));
-
-	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes, 
-		SIGNAL(signalRemoveContractFromSmartQuotes (unsigned int)),
-		m_pClientDataManagerWorker,
-		SLOT(slotRemoveContractFromSmartQuotes(unsigned int)));
-
-	QObject::connect(m_pLeftDockWidget->m_pTableView_Quotes, 
-		SIGNAL(signalQuotesTableViewColumnsChanged ()),
-		m_pClientDataManagerWorker,
-		SLOT(slotQuotesTableViewColumnsChanged()));
-
-
-	QObject::connect(m_pClientDataManagerWorker, 
-		SIGNAL(signalQuotesInfoChanged(CTreeItemQuotes*)), 
-		m_pLeftDockWidget, 
-		SLOT(slotQuotesInfoChanged(CTreeItemQuotes*))); 
-
-
-	QObject::connect(m_pClientDataManagerWorker, 
-		SIGNAL(signalOrderInfoChanged(CTreeItemOrder*)), 
-		m_pBottomDockWidget, 
-		SLOT(slotOrderInfoChanged(CTreeItemOrder*))); 
-
-
-
-	QObject::connect(m_pClientDataManagerWorker, 
-		SIGNAL(signalHistoryDataChanged(CHistoryDataManager*)), 
-		m_pEastMidSubWidget, 
-		SLOT(slotHistoryDataChanged(CHistoryDataManager*))); 
 
 }
 void CClientMainWindow::setupUi()
@@ -185,7 +130,10 @@ void CClientMainWindow::setupUi()
 	
 	//add Samrt hot Quotes window
 	m_pLeftDockWidget = new CLeftDockWidget(this);
+	CSignalSlotManager::getInstance().setSignalSlot_QuotesInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pLeftDockWidget);
+
 	m_pBottomDockWidget = new CBottomDockWidget(this);
+	CSignalSlotManager::getInstance().setSignalSlot_OrderInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pBottomDockWidget);
 
 	m_DockWidget_Left = new QDockWidget(this);
 	m_DockWidget_Left->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
@@ -196,9 +144,10 @@ void CClientMainWindow::setupUi()
 	m_DockWidget_Bottom->setWidget(m_pBottomDockWidget);
 
 	
-
 	//right
 	m_pEastMidSubWidget = new CMidSubWidget(this);
+	CSignalSlotManager::getInstance().setSignalSlot_HistoryDataChanged(&(CClientDataManagerWorker::getInstance()), m_pEastMidSubWidget);
+
 	//East West South North
 
 	m_pMdiArea = new QMdiArea(this);
@@ -243,7 +192,4 @@ void CClientMainWindow::translateLanguage()
 	//
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_CSmartTraderClientMainWindow_Title.c_str()));
 }
-
-
-//QT_END_NAMESPACE
 

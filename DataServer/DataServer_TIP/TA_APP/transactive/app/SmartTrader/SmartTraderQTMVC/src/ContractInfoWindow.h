@@ -47,17 +47,7 @@ public slots:
 	void slotTreeViewDoubleClick(const QModelIndex & index);
 
 signals: 
-	/*
-	class: CContractInfoWindow
-	signals:
-	void signalAddContractToSmartQuotes(unsigned int nInstrumentID);
-	fun send signals: slotTreeViewDoubleClick()
 
-	class: CClientDataManagerWorker
-	public slots: 
-	void slotAddContractToSmartQuotes(unsigned int nInstrumentID);
-	*/
-	void signalAddContractToSmartQuotes(unsigned int nInstrumentID);
 private:
 	void _CreateConnect();
 private:

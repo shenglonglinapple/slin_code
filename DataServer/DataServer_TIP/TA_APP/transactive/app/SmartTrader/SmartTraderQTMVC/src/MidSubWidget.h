@@ -29,7 +29,6 @@ class CMidSubWidget : public QWidget
 public:
     CMidSubWidget(QWidget* parent = 0);
 	~CMidSubWidget();
-
 	
 public slots:
 	/*

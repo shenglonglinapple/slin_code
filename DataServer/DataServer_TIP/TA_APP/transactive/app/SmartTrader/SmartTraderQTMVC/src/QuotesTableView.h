@@ -99,46 +99,7 @@ public slots:
 	void slotMouseRightClickInHHeaderView(QMouseEvent* e);
 
 signals:
-	
-	/*
-	class: CQuotesTableView
-	signals:
 	void signalRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
-	fun send signals: slotActionRemoveHotQuotesTriggered()
-
-	class: CClientDataManagerWorker
-	public slots: 
-	void slotRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
-	*/
-	void signalRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
-
-
-
-	/*
-	class: CQuotesTableView
-	signals:
-	void signalQuotesTableViewColumnsChanged();
-	fun send signals: slotQuotesTableViewColumnsChanged()
-
-	class: CClientDataManagerWorker
-	public slots: 
-	void slotQuotesTableViewColumnsChanged();
-	*/
-	void signalQuotesTableViewColumnsChanged();
-
-
-	/*
-	class: CQuotesTableView
-	signals:
-	void signalContractInfoWindowResetData();
-	fun send signals: CQuotesTableView::contextMenuEvent()
-	CQuotesTableView::slotMouseRightClickInHHeaderView()
-
-	class: CClientDataManagerWorker
-	public slots: 
-	void slotContractInfoWindowResetData();
-	*/
-	void signalContractInfoWindowResetData();
 
 protected:
 	//overwite QWight fun

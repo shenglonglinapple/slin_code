@@ -241,5 +241,6 @@ void CMidSubWidget::QCPItemTracerCrossHairMouseMove( QMouseEvent *event )
 }
 
 
+
 //QT_END_NAMESPACE
 

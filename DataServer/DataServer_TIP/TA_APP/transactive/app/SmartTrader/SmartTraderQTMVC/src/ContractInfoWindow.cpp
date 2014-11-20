@@ -1,13 +1,12 @@
 #include "ContractInfoWindow.h"
 
-
 #include "ProjectQTInclude.h"
 
 #include "ContractInfo.h"
 #include "TreeItemContract.h"
 #include "TreeModelContract.h"
-
-
+#include "DataContract.h"
+#include "SignalSlotManager.h"
 
 #include "Log4cppLogger.h"
 
@@ -29,7 +28,9 @@ CContractInfoWindow::CContractInfoWindow(QWidget* parent)
 
 	setupUi();
 	translateLanguage();
-	_CreateConnect();	
+	_CreateConnect();
+
+	slotContractInfoChanged(CDataContract::getInstance().getRootHandle());
 }
 
 
@@ -123,7 +124,7 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 			<<" "<<"signalAddContractToSmartQuotes(unsigned int)"
 			<<" "<<"param:"
 			<<" "<<"nInstrumentID="<<nInstrumentID;
-		emit signalAddContractToSmartQuotes(nInstrumentID);
+		CSignalSlotManager::getInstance().emit_signalAddContractToSmartQuotes(nInstrumentID);
 	}
 
 

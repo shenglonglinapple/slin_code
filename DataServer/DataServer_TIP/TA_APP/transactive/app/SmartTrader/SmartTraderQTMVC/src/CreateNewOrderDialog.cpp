@@ -6,7 +6,7 @@
 #include "OrderInfo.h"
 #include "UserOrderInfo.h"
 #include "OrderInfoWidget.h"
-
+#include "SignalSlotManager.h"
 
 #include "Log4cppLogger.h"
 
@@ -302,7 +302,7 @@ void CCreateNewOrderDialog::slotOrderCheck(CUserOrderInfo* pUserOrderInfo)
 			<<" "<<"fPrice="<<pUserOrderInfo->m_fLastPrice
 			<<" "<<"quantity="<<pUserOrderInfo->m_nQuantity;
 
-		emit signalNewOrder(pUserOrderInfo);	
+		CSignalSlotManager::getInstance().emit_signalNewOrder(pUserOrderInfo);
 	}
 	else if (CUserOrderInfo::OrderCheckRes_Cancel ==  pUserOrderInfo->m_nCheckRes)
 	{

@@ -7,6 +7,7 @@
 #include "ClientDataManagerWorker.h"
 #include "TreeItemOrder.h"
 #include "TreeModelOrder.h"
+#include "DataUserOrder.h"
 
 #include "Log4cppLogger.h"
 
@@ -33,6 +34,8 @@ CBottomDockWidget::CBottomDockWidget(QWidget* parent)
 
 	_CreateAction();
 	_CreateConnect();
+	
+	slotOrderInfoChanged(CDataUserOrder::getInstance().getRootHandle());
 }
 
 
@@ -119,6 +122,7 @@ void CBottomDockWidget::slotOrderInfoChanged( CTreeItemOrder* pTreeItem )
 		m_pTableView_Order->resizeColumnsToContents();
 	}
 }
+
 
 
 

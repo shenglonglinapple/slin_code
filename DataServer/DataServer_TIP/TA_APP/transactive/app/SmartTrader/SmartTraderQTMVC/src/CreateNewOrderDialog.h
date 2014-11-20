@@ -45,17 +45,7 @@ public:
 	~CCreateNewOrderDialog();
 
 signals:
-	/*
-	class: CCreateNewOrderDialog
-	signals:
-	void signalNewOrder(CUserOrderInfo* pUserOrderInfo);
-	fun send signals: slotOrderCheck()
 
-	class: CClientDataManagerWorker
-	public slots: 
-	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
-	*/
-	void signalNewOrder(CUserOrderInfo* pUserOrderInfo);
 public slots:
 	/*
 	class: COrderInfoWidget

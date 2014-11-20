@@ -37,150 +37,26 @@ class CClientDataManagerWorker :
 	public IProcessRecvData
 {
 	Q_OBJECT
-
 public:
+	static CClientDataManagerWorker& getInstance();
+	static void removeInstance();
+
+private:
+	static CClientDataManagerWorker* m_pInstance;
+	static QMutex m_mutexInstance;
+private:
 	CClientDataManagerWorker(void);
 	~CClientDataManagerWorker(void);
 
 public slots:
-	/*
-	class: CClientLoginDialog
-	signals:
-	void signalClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
-	fun send signals: slotButtonLoginClicked()
-
-	class: CClientDataManagerWorker
-	public slots: 
 	void slotClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
-	*/
-	void slotClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
-
-
-	/*
-	class: CContractInfoMainWindow
-	signals:
-	void signalAddContractToSmartQuotes(unsigned int nInstrumentID);
-	fun send signals: slotTreeViewDoubleClick()
-
-	class: CClientDataManagerWorker
-	public slots: 
 	void slotAddContractToSmartQuotes(unsigned int nInstrumentID);
-	*/
-	void slotAddContractToSmartQuotes(unsigned int nInstrumentID);
-
-	/*
-	class: CSmartHotQuotesWindow
-	signals:
-	void signalRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
-	fun send signals: slotTreeViewDoubleClick()
-
-	class: CClientDataManagerWorker
-	public slots: 
 	void slotRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
-	*/
-	void slotRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
-
-
-	/*
-	class: CQuotesTableView
-	signals:
-	void signalContractInfoWindowResetData();
-	fun send signals: CQuotesTableView::contextMenuEvent()
-	CQuotesTableView::slotMouseRightClickInHHeaderView()
-
-	class: CClientDataManagerWorker
-	public slots: 
 	void slotContractInfoWindowResetData();
-	*/
-	void slotContractInfoWindowResetData();
-	
-	/*
-	class: CQuotesTableView
-	signals:
-	void signalQuotesTableViewColumnsChanged();
-	fun send signals: slotQuotesTableViewColumnsChanged()
-
-	class: CClientDataManagerWorker
-	public slots: 
 	void slotQuotesTableViewColumnsChanged();
-	*/
-	void slotQuotesTableViewColumnsChanged();
-
-
-	/*
-	class: CCreateNewOrderDialog
-	signals:
-	void signalNewOrder(CUserOrderInfo* pUserOrderInfo);
-	fun send signals: slotClientLoginParamChanged()
-
-	class: CClientDataManagerWorker
-	public slots: 
-	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
-	*/
 	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
 signals:
-
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalLoginToServerResult(int nLoginResust);
-	fun send signals: slotClientLoginParamChanged()
-
-	class: CClientLoginDialog
-	public slots: 
-	void slotLoginToServerResult(int nLoginResust);
-	*/
-	void signalLoginToServerResult(int nLoginResust);
-
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalContractInfoChanged(CTreeItemContract* pTreeItem);
-	fun send signals: onInstrumentDownloaded()
-
-	class: CContractInfoMainWindow
-	public slots: 
-	void slotContractInfoChanged(CTreeItemContract* pTreeItem);
-	*/
-	void signalContractInfoChanged(CTreeItemContract* pTreeItem);
-
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
-	fun send signals: slotAddContractToSmartQuotes()
-
-	class: CSmartHotQuotesWindow
-	public slots: 
-	void slotQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
-	*/
-	void signalQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
-
-
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalOrderInfoChanged(CTreeItemOrder* pTreeItem);
-	fun send signals: _InitMVCDataForOrder() slotAddContractToSmartQuotes() _UpdateOrderInfo()
-
-	class: CBottomDockWidget
-	public slots: 
-	void slotOrderInfoChanged(CTreeItemOrder* pTreeItem);
-	*/
-	void signalOrderInfoChanged(CTreeItemOrder* pTreeItem);
-
-
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-	fun send signals: onHistoryDataDownloaded()
-
-	class: CMidSubWidget
-	public slots: 
-	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-	*/
-	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
+	void signalLoginToServerResult(int nResult);
 public:
 	void onInstrumentDownloaded(const Instrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate(const Instrument& instrument);
@@ -205,9 +81,10 @@ private:
 	void _UpdateOrderInfo(const Order &order);
 	void _MessageBoxOrderInfo(const Order &order, const std::string& strInfo);
 private:
-	void _SignaleDataChange_DataUserContract();
-	void _SignaleDataChange_DataUserOrder();
-	void _SignaleDataChange_DataContract();
+	void _Emit_SignalQuotesInfoChanged();
+	void _Emit_SignalOrderInfoChanged();
+	void _Emit_SignalContractInfoChanged();
+	void _Emit_SignalHistoryDataChanged(unsigned int nInstrumentID);
 private:
 	CClientLoginParam* m_pClientLoginParam;
 	CSmartTraderClient* m_pMyTradeClient;

@@ -17,27 +17,11 @@ class CClientMainWindow;
 class CClientManager : public QObject
 {
     Q_OBJECT
-
-
 public:
     CClientManager();
 	~CClientManager();
-
-
 public slots:
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalLoginToServerResult(int nLoginResust);
-	fun send signals: slotClientLoginParamChanged()
-
-	class: CClientLoginDialog
-	public slots: 
 	void slotLoginToServerResult(int nLoginResust);
-	*/
-	void slotLoginToServerResult(int nLoginResust);
-signals:
-
 private:
 	void _CreateConnect();
 private:

@@ -9,7 +9,8 @@
 #include "ClientMainWindow.h"
 #include "ClientDataManagerWorker.h"
 #include "SmartHotQuotesWindow.h"
-
+#include "SignalSlotManager.h"
+#include "ClientDataManagerWorker.h"
 
 #include "Log4cppLogger.h"
 
@@ -28,14 +29,17 @@ CClientManager::CClientManager()
 
 
 	m_pClientLoginDialog = new CClientLoginDialog();
+	CSignalSlotManager::getInstance().setSignalSlot_ClientLoginParamChanged(m_pClientLoginDialog, &(CClientDataManagerWorker::getInstance()));
+
 	m_pClientMainWindow = new CClientMainWindow();
+	CClientDataManagerWorker::getInstance();
 
 	_CreateConnect();
 
 	m_pClientLoginDialog->show();
 
 	//FOR Test, TODO.
-	//m_pClientMainWindow->m_pClientDataManagerWorker->_Test();
+	CClientDataManagerWorker::getInstance()._Test();
 }
 
 
@@ -52,26 +56,18 @@ CClientManager::~CClientManager()
 		delete m_pClientMainWindow;
 		m_pClientMainWindow = NULL;
 	}
+	CClientDataManagerWorker::removeInstance();
 }
 
 void CClientManager::_CreateConnect()
 {
-	QObject::connect(m_pClientLoginDialog, 
-		SIGNAL(signalClientLoginParamChanged(CClientLoginParam*)),
-		m_pClientMainWindow->m_pClientDataManagerWorker,
-		SLOT(slotClientLoginParamChanged(CClientLoginParam*)));
 
 	//
-	QObject::connect(m_pClientMainWindow->m_pClientDataManagerWorker, 
-		SIGNAL(signalLoginToServerResult(int)),
-		m_pClientLoginDialog,
-		SLOT(slotLoginToServerResult(int)));
-
-	//
-	QObject::connect(m_pClientMainWindow->m_pClientDataManagerWorker, 
+	QObject::connect(&(CClientDataManagerWorker::getInstance()), 
 		SIGNAL(signalLoginToServerResult(int)),
 		this,
 		SLOT(slotLoginToServerResult(int)));
+
 
 }
 
@@ -79,14 +75,23 @@ void CClientManager::_CreateConnect()
 
 void CClientManager::slotLoginToServerResult( int nLoginResust )
 {
-	MYLOG4CPP_DEBUG<<"CClientWindow process slotLoginToServerResult"
+	MYLOG4CPP_DEBUG<<"CClientManager process slotLoginToServerResult"
 		<<" "<<"nLoginResust="<<nLoginResust;
 
+	//logon ok
 	if (nLoginResust >= 0)
 	{
+		m_pClientLoginDialog->setVisible(false);
+		m_pClientLoginDialog->close();
 		//login to server ok
 		m_pClientMainWindow->show();
 	}
+	else
+	{
+		QMessageBox::about(NULL, "login to server Error!", "login to server Error!");
+	}
+
+
 }
 
 

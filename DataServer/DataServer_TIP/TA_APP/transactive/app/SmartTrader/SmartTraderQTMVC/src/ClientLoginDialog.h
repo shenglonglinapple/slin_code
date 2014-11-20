@@ -44,46 +44,9 @@ public slots:
 	void slotButtonLoginClicked(bool checked);
 	void slotButtonCancelClicked( bool checked );
 
-
-	/*
-	class: CServerSettingDialog
-	signals:
-	void signalServerInfoChanged(CClientLoginParam* pClientLoginParam);
-	fun send signals: slotButtonOKlicked()
-
-	class: CClientLoginDialog
-	public slots: 
+public slots:
 	void slotServerInfoChanged(CClientLoginParam* pClientLoginParam);
-	*/
-	void slotServerInfoChanged(CClientLoginParam* pClientLoginParam);
-
-	
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalLoginToServerResult(int nLoginResust);
-	fun send signals: slotClientLoginParamChanged()
-
-	class: CClientLoginDialog
-	public slots: 
 	void slotLoginToServerResult(int nLoginResust);
-	*/
-	void slotLoginToServerResult(int nLoginResust);
-
-
-signals:
-	/*
-	class: CClientLoginDialog
-	signals:
-	void signalClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
-	fun send signals: slotButtonLoginClicked()
-
-	class: CClientDataManagerWorker
-	public slots: 
-	void slotClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
-	*/
-	void signalClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
-
 private:
 	void _CreateConnect();
 private:

@@ -14,6 +14,8 @@
 #include "QuotesHHeaderView.h"
 #include "ConfigInfo.h"
 #include "UserOrderInfo.h"
+#include "SignalSlotManager.h"
+#include "ClientDataManagerWorker.h"
 
 #include "Log4cppLogger.h"
 
@@ -69,8 +71,15 @@ CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
 
 	m_pCreateNewOrderDialog = new CCreateNewOrderDialog(this);
 	m_pCreateNewOrderDialog->hide();
+	CSignalSlotManager::getInstance().setSignalSlot_NewOrder(m_pCreateNewOrderDialog, &(CClientDataManagerWorker::getInstance()));
+
 	m_pContractInfoWindow = new CContractInfoWindow(this);
 	m_pContractInfoWindow->hide();
+	CSignalSlotManager::getInstance().setSignalSlot_AddContractToSmartQuotes(m_pContractInfoWindow, &(CClientDataManagerWorker::getInstance()));
+	CSignalSlotManager::getInstance().setSignalSlot_ContractInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pContractInfoWindow);
+
+	
+
 	m_pCustomColumnsDialog = new CCustomColumnsDialog(this);
 	m_pCustomColumnsDialog->hide();
 	m_pUserOrderInfo = new CUserOrderInfo();
@@ -187,7 +196,7 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 			<<" "<<"emit"
 			<<" "<<"signalContractInfoWindowResetData()";
 
-		emit signalContractInfoWindowResetData();
+		CSignalSlotManager::getInstance().emit_signalContractInfoWindowResetData();
 	}
 
 	QPoint point;
@@ -364,7 +373,7 @@ void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableCol
 			<<" "<<"emit"
 			<<" "<<"signalQuotesTableViewColumnsChanged()";
 
-		emit signalQuotesTableViewColumnsChanged();
+		CSignalSlotManager::getInstance().emit_signalQuotesTableViewColumnsChanged();
 	}
 	
 
@@ -383,7 +392,7 @@ void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 			<<" "<<"emit"
 			<<" "<<"signalContractInfoWindowResetData()";
 
-		emit signalContractInfoWindowResetData();
+		CSignalSlotManager::getInstance().emit_signalContractInfoWindowResetData();
 	}
 
 	//set menu pos

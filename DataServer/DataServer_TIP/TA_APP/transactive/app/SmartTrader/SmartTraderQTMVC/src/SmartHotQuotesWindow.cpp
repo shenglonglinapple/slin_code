@@ -8,7 +8,8 @@
 #include "QuotesTableView.h"
 #include "TreeModelQuotes.h"
 #include "TreeItemQuotes.h"
-
+#include "DataUserContract.h"
+#include "SignalSlotManager.h"
 #include "Log4cppLogger.h"
 
 
@@ -37,6 +38,8 @@ CLeftDockWidget::CLeftDockWidget(QWidget* parent)
 
 	_CreateAction();
 	_CreateConnect();
+
+	slotQuotesInfoChanged(CDataUserContract::getInstance().getRootHandle());
 }
 
 
@@ -71,6 +74,10 @@ void CLeftDockWidget::setupUi()
 	m_pTabWidget->setTabPosition(QTabWidget::South);	//enum TabPosition { North, South, West, East
 
 	m_pTableView_Quotes = new CQuotesTableView(m_pTabWidget);
+	CSignalSlotManager::getInstance().setSignalSlot_QuotesTableViewColumnsChanged(m_pTableView_Quotes, &(CClientDataManagerWorker::getInstance()));
+	CSignalSlotManager::getInstance().setSignalSlot_RemoveContractFromSmartQuotes(m_pTableView_Quotes, &(CClientDataManagerWorker::getInstance()));
+	CSignalSlotManager::getInstance().setSignalSlot_ContractInfoWindowResetData(m_pTableView_Quotes, &(CClientDataManagerWorker::getInstance()));
+
 
 	
  	m_pVBoxLayout = new QVBoxLayout(this);
@@ -119,6 +126,7 @@ void CLeftDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
 		m_pTableView_Quotes->resizeColumnsToContents();
 	}
 }
+
 
 
 

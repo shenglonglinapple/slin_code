@@ -6,6 +6,7 @@
 #include "ClientLoginParam.h"
 #include "ServerSettingDialog.h"
 #include "PwdLineEdit.h"
+#include "SignalSlotManager.h"
 
 #include "Log4cppLogger.h"
 
@@ -192,8 +193,7 @@ void CClientLoginDialog::slotButtonLoginClicked( bool checked )
 		<<" "<<"param:"
 		<<" "<<"m_pClientLoginParam=0x"<<m_pClientLoginParam;
 
-	emit signalClientLoginParamChanged(m_pClientLoginParam);
-
+	CSignalSlotManager::getInstance().emit_signalClientLoginParamChanged(m_pClientLoginParam);
 }
 
 void CClientLoginDialog::slotButtonCancelClicked( bool checked )

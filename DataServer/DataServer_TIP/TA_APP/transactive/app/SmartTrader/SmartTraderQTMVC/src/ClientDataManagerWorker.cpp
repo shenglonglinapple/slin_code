@@ -31,6 +31,29 @@
 #include "DataUserOrder.h"
 #include "DataUserHistoryBar.h"
 
+#include "SignalSlotManager.h"
+
+
+CClientDataManagerWorker* CClientDataManagerWorker::m_pInstance = 0;
+QMutex CClientDataManagerWorker::m_mutexInstance;
+
+CClientDataManagerWorker& CClientDataManagerWorker::getInstance()
+{	
+	QMutexLocker lock(&m_mutexInstance);	
+	if (NULL == m_pInstance)
+	{
+		m_pInstance = new CClientDataManagerWorker();
+	}
+	return (*m_pInstance);
+}
+
+void CClientDataManagerWorker::removeInstance()
+{
+	QMutexLocker lock(&m_mutexInstance);	
+	delete m_pInstance;
+	m_pInstance = NULL;
+
+}
 
 CClientDataManagerWorker::CClientDataManagerWorker(void)
 {	
@@ -38,15 +61,8 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 	m_pMyTradeClient = NULL;
 
 	CDataContract::getInstance();
-	_SignaleDataChange_DataContract();
-	
 	CDataUserContract::getInstance();
-	_SignaleDataChange_DataUserContract();
-	
 	CDataUserOrder::getInstance();
-	_SignaleDataChange_DataUserOrder();
-	
-	
 	CDataUserHistoryBar::getInstance();
 	CDataTotalInstrument::getInstance();
 	
@@ -119,7 +135,7 @@ void CClientDataManagerWorker::onMarketDataUpdate(const Instrument& instrument)
 	
 	{
 		CDataUserContract::getInstance().onMarketDataUpdate(instrument);
-		_SignaleDataChange_DataUserContract();
+		_Emit_SignalQuotesInfoChanged();
 	}
 
 
@@ -173,7 +189,7 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 
 	{
 		CDataUserContract::getInstance().addByData(pInstrumentRef);
-		_SignaleDataChange_DataUserContract();
+		_Emit_SignalQuotesInfoChanged();
 	}
 	
 
@@ -222,14 +238,14 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 	//remove
 	{
 		CDataUserContract::getInstance().removeByData(pInstrumentRef);
-		_SignaleDataChange_DataUserContract();
+		_Emit_SignalQuotesInfoChanged();
 	}
 		
 
 	//add
 	{
 		CDataContract::getInstance().addByData(pInstrumentRef);
-		_SignaleDataChange_DataContract();
+		_Emit_SignalContractInfoChanged();
 	}
 
 
@@ -281,7 +297,6 @@ void CClientDataManagerWorker::slotClientLoginParamChanged( CClientLoginParam* p
 		<<" "<<"nloginToServerRes="<<nloginToServerRes;
 
 	emit signalLoginToServerResult(nloginToServerRes);
-
 }
 
 void CClientDataManagerWorker::_Test()
@@ -298,16 +313,18 @@ void CClientDataManagerWorker::_Test()
 		<<" "<<"param:"
 		<<" "<<"nloginToServerRes="<<0;
 	emit signalLoginToServerResult(0);
+
 	
 	CDataTotalInstrument::getInstance()._Test();
 	
 	CDataContract::getInstance()._Test();
-	_SignaleDataChange_DataContract();
+	_Emit_SignalContractInfoChanged();
 
 
 	CDataUserContract::getInstance()._Test();
-	_SignaleDataChange_DataUserContract();
+	_Emit_SignalQuotesInfoChanged();
 
+	_Emit_SignalOrderInfoChanged();
 }
 
 
@@ -342,7 +359,7 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 			}//if
 		}//foreach
 
-		_SignaleDataChange_DataUserContract();
+		_Emit_SignalQuotesInfoChanged();
 	}
 
 	return;
@@ -410,7 +427,7 @@ void CClientDataManagerWorker::_MessageBoxOrderInfo(const Order &order, const st
 void CClientDataManagerWorker::_UpdateOrderInfo(const Order &order)
 {
 	CDataUserOrder::getInstance().addAndUpdateData(order);
-	_SignaleDataChange_DataUserOrder();
+	_Emit_SignalOrderInfoChanged();
 }
 
 
@@ -551,18 +568,8 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 	{
 		//TODO. historydata test
 		CDataUserHistoryBar::getInstance().onBarDataUpdate(barData);
-		CHistoryDataManager* pHistoryDataManager = NULL;
-
-		pHistoryDataManager = CDataUserHistoryBar::getInstance().findByID(barData.instrumentID);
-
-		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CClientDataManagerWorker"
-			<<" "<<"fun:"<<"onBarDataUpdate()"
-			<<" "<<"emit"
-			<<" "<<"signalHistoryDataChanged()"
-			<<" "<<"param:"
-			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
-        emit signalHistoryDataChanged(pHistoryDataManager);
+		_Emit_SignalHistoryDataChanged(barData.instrumentID);
+		
 	}//
 }
 
@@ -575,19 +582,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 	{
 		//TODO. historydata test
 		CDataUserHistoryBar::getInstance().onHistoryDataDownloaded(requestID, bars);
-		CHistoryDataManager* pHistoryDataManager = NULL;
-		pHistoryDataManager = CDataUserHistoryBar::getInstance().findByID(requestID);
-
-		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CClientDataManagerWorker"
-			<<" "<<"fun:"<<"onHistoryDataDownloaded()"
-			<<" "<<"emit"
-			<<" "<<"signalHistoryDataChanged()"
-			<<" "<<"param:"
-			<<" "<<"pHistoryDataManager"<<pHistoryDataManager;
-
-		emit signalHistoryDataChanged(pHistoryDataManager);
-
+		_Emit_SignalHistoryDataChanged(requestID);
 	}//
 
 }
@@ -628,59 +623,73 @@ void CClientDataManagerWorker::slotContractInfoWindowResetData()
 	}
 
 	{		
-		_SignaleDataChange_DataContract();
+		_Emit_SignalContractInfoChanged();
 	}
 }
 
 
 
 
-void CClientDataManagerWorker::_SignaleDataChange_DataUserContract()
+void CClientDataManagerWorker::_Emit_SignalQuotesInfoChanged()
 {
 
 	CTreeItemQuotes* pTreeItemQuotes = NULL;
 	pTreeItemQuotes = CDataUserContract::getInstance().getRootHandle();
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
-		<<" "<<"fun:"<<"_SignaleDataChange_DataUserContract()"
+		<<" "<<"fun:"<<"_Emit_SignalQuotesInfoChanged()"
 		<<" "<<"emit"
 		<<" "<<"signalQuotesInfoChanged(CTreeItemQuotes*)"
 		<<" "<<"param:"
 		<<" "<<"pTreeItemQuotes=0x"<<pTreeItemQuotes;
-	emit signalQuotesInfoChanged(pTreeItemQuotes);
 
-	return;
+	CSignalSlotManager::getInstance().emit_signalQuotesInfoChanged(pTreeItemQuotes);
+	
 }
-void CClientDataManagerWorker::_SignaleDataChange_DataUserOrder()
+void CClientDataManagerWorker::_Emit_SignalOrderInfoChanged()
 {
 	CTreeItemOrder* pTreeItemOrder = NULL;
 	pTreeItemOrder = CDataUserOrder::getInstance().getRootHandle();
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
-		<<" "<<"fun:"<<"_SignaleDataChange_DataUserOrder()"
+		<<" "<<"fun:"<<"_Emit_SignalOrderInfoChanged()"
 		<<" "<<"emit"
 		<<" "<<"signalOrderInfoChanged(CTreeItemOrder*)"
 		<<" "<<"param:"
 		<<" "<<"pTreeItemOrder=0x"<<pTreeItemOrder;
 
-	emit signalOrderInfoChanged(pTreeItemOrder);
+	CSignalSlotManager::getInstance().emit_signalOrderInfoChanged(pTreeItemOrder);
 }
 
 
 
-void CClientDataManagerWorker::_SignaleDataChange_DataContract()
+void CClientDataManagerWorker::_Emit_SignalContractInfoChanged()
 {
 	CTreeItemContract* pTreeItemContract_Root = NULL;
 	pTreeItemContract_Root = CDataContract::getInstance().getRootHandle();
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
-		<<" "<<"fun:"<<"_SignaleDataChange_DataContract()"
+		<<" "<<"fun:"<<"_Emit_SignalContractInfoChanged()"
 		<<" "<<"emit"
 		<<" "<<"signalContractInfoChanged(CTreeItemContract*)"
 		<<" "<<"param:"
 		<<" "<<"pTreeItemContract_Root=0x"<<pTreeItemContract_Root;
-	emit signalContractInfoChanged(pTreeItemContract_Root);
+	
+	CSignalSlotManager::getInstance().emit_signalContractInfoChanged(pTreeItemContract_Root);
 }
 
+void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInstrumentID)
+{
+	CHistoryDataManager* pHistoryDataManager = NULL;
+	pHistoryDataManager = CDataUserHistoryBar::getInstance().findByID(nInstrumentID);
 
+	MYLOG4CPP_DEBUG<<" "<<"emit"
+		<<" "<<"class:"<<"CClientDataManagerWorker"
+		<<" "<<"fun:"<<"_Emit_SignalHistoryDataChanged()"
+		<<" "<<"emit"
+		<<" "<<"signalHistoryDataChanged()"
+		<<" "<<"param:"
+		<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
+	CSignalSlotManager::getInstance().emit_signalHistoryDataChanged(pHistoryDataManager);
+}//

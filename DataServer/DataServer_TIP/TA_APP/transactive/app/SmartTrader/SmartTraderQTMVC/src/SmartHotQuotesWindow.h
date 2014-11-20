@@ -32,7 +32,6 @@ public:
 	void translateLanguage();
 public:
 	QSize sizeHint() const;
-
 protected:
 
 	
