@@ -1,5 +1,5 @@
-#ifndef __CLASS_QUOTES_INFO_HH__
-#define __CLASS_QUOTES_INFO_HH__
+#ifndef __CLASS_USER_INSTRUMENT_INFO_HELPER_HH__
+#define __CLASS_USER_INSTRUMENT_INFO_HELPER_HH__
 
 
 
@@ -47,13 +47,13 @@ Ref Price//²Î¿¼¼Û
 
 */
 
-class CQuotesInfo 
+class CUserInstrumentInfoHelper 
 { 
 public: 
-	CQuotesInfo();
+	CUserInstrumentInfoHelper();
 
-	virtual ~CQuotesInfo(); 
-	CQuotesInfo& operator=(const CQuotesInfo& exchangeParam);
+	virtual ~CUserInstrumentInfoHelper(); 
+	CUserInstrumentInfoHelper& operator=(const CUserInstrumentInfoHelper& exchangeParam);
 
 public:
 	void setValue( const Instrument &instrument);
@@ -125,7 +125,7 @@ private:
 //QT_END_NAMESPACE
 
 
-#endif//__CLASS_CONTRACT_INFO_HH__
+#endif//__CLASS_USER_INSTRUMENT_INFO_HELPER_HH__
 
 
 

@@ -5,8 +5,8 @@
 #include "ProjectQTInclude.h"
 
 #include "ClientDataManagerWorker.h"
-#include "TreeItemOrder.h"
-#include "TreeModelOrder.h"
+#include "ItemOrderInfo.h"
+#include "ItemModelOrderInfo.h"
 #include "DataUserOrder.h"
 
 #include "Log4cppLogger.h"
@@ -26,8 +26,8 @@ CBottomDockWidget::CBottomDockWidget(QWidget* parent)
 {
 
 	m_pVBoxLayout = NULL;
-	m_pTreeModel_Order = NULL;
-	m_pTableView_Order = NULL;//
+	m_pTreeModel_OrderInfo = NULL;
+	m_pTableView_OrderInfo = NULL;//
 
     setupUi();
 	translateLanguage();
@@ -70,8 +70,8 @@ void CBottomDockWidget::setupUi()
 	m_pTabWidget->setTabPosition(QTabWidget::South);	//enum TabPosition { North, South, West, East
 
 
-	m_pTableView_Order = new QTableView(m_pTabWidget);
-	m_pTableView_Order->setFrameShape(QFrame::NoFrame); //设置无边框
+	m_pTableView_OrderInfo = new QTableView(m_pTabWidget);
+	m_pTableView_OrderInfo->setFrameShape(QFrame::NoFrame); //设置无边框
 	
  	m_pVBoxLayout = new QVBoxLayout(this);
  	m_pVBoxLayout->addWidget(m_pTabWidget);
@@ -91,7 +91,7 @@ void CBottomDockWidget::setupUi()
 void CBottomDockWidget::translateLanguage()
 {
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_Title.c_str()));
-	m_pTabWidget->addTab(m_pTableView_Order, QObject::tr("OrderInfo"));
+	m_pTabWidget->addTab(m_pTableView_OrderInfo, QObject::tr("OrderInfo"));
 
 }
 
@@ -102,24 +102,24 @@ void CBottomDockWidget::slotOrderInfoChanged( CTreeItemOrder* pTreeItem )
 
 	QModelIndex inValidIndex;
 
-	if (NULL == m_pTreeModel_Order)
+	if (NULL == m_pTreeModel_OrderInfo)
 	{
 		//
-		m_pTreeModel_Order = new CTreeModelOrder(this);
-		m_pTreeModel_Order->setRootItem(pTreeItem);
+		m_pTreeModel_OrderInfo = new CTreeModelOrder(this);
+		m_pTreeModel_OrderInfo->setRootItem(pTreeItem);
 
 		//mvc
-		m_pTableView_Order->setModel(m_pTreeModel_Order);
+		m_pTableView_OrderInfo->setModel(m_pTreeModel_OrderInfo);
 		//m_pTreeView_Quotes->setColumnWidth(0, 200);
-		m_pTableView_Order->setCurrentIndex(inValidIndex);
-		m_pTableView_Order->resizeColumnsToContents();
+		m_pTableView_OrderInfo->setCurrentIndex(inValidIndex);
+		m_pTableView_OrderInfo->resizeColumnsToContents();
 
 	}
 	else
 	{
-		m_pTreeModel_Order->setRootItem(pTreeItem);
-		m_pTableView_Order->setCurrentIndex(inValidIndex);
-		m_pTableView_Order->resizeColumnsToContents();
+		m_pTreeModel_OrderInfo->setRootItem(pTreeItem);
+		m_pTableView_OrderInfo->setCurrentIndex(inValidIndex);
+		m_pTableView_OrderInfo->resizeColumnsToContents();
 	}
 }
 

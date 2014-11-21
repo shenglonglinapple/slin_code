@@ -7,7 +7,7 @@
 #include <QtGui/QColor>
 #include <QtGui/QPen>
 
-#include "TreeItemQuotes.h"
+#include "ItemUserInstrumentInfo.h"
 #include "ConfigInfo.h"
 
 //QT_BEGIN_NAMESPACE
@@ -38,7 +38,7 @@ void IconDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option,
 	//	return;
 	//}
 
-	CTreeItemQuotes* pTreeItem = NULL;
+	CItemUserInstrumentInfo* pTreeItem = NULL;
 	enInstrumentPriceChange nInstrumentPriceChange;
 	QString strInstrumentCode;
 	if (!index.isValid())
@@ -46,7 +46,7 @@ void IconDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option,
 		return;
 	}
 
-	pTreeItem = static_cast<CTreeItemQuotes*>(index.internalPointer());
+	pTreeItem = static_cast<CItemUserInstrumentInfo*>(index.internalPointer());
 	if (NULL == pTreeItem)
 	{
 		return;

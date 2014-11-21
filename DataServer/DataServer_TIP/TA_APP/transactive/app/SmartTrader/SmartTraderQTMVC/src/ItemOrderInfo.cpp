@@ -1,4 +1,4 @@
-#include "TreeItemOrder.h"
+#include "ItemOrderInfo.h"
 
 
 //qt sys
@@ -10,7 +10,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
-#include "OrderInfo.h"
+#include "OrderInfoHelper.h"
 #include "ConfigInfo.h"
 
 #include "Log4cppLogger.h"

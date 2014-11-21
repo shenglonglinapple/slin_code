@@ -1,4 +1,4 @@
-#include "TreeItemContract.h"
+#include "ItemInstrumentInfo.h"
 
 
 //qt sys
@@ -10,7 +10,7 @@
 #include <QtCore/QObject>
 
 
-#include "ContractInfo.h"
+#include "InstrumentInfoHelper.h"
 
 //#include "Log4cppLogger.h"
 //
@@ -19,7 +19,7 @@
 ////QT_END_NAMESPACE
 
 
-CTreeItemContract::CTreeItemContract(const QList<QVariant> &data, CTreeItemContract *parent /*= 0*/ )
+CItemInstrumentInfo::CItemInstrumentInfo(const QList<QVariant> &data, CItemInstrumentInfo *parent /*= 0*/ )
 {
 	m_pParentItem = NULL;
 	m_ItemData.clear();
@@ -27,14 +27,14 @@ CTreeItemContract::CTreeItemContract(const QList<QVariant> &data, CTreeItemContr
 
 	m_pParentItem = parent;
 	m_ItemData = data;
-	m_nDataTypeExchange = CTreeItemContract::DataTypeContract_InstrumentCode;
+	m_nDataTypeExchange = CItemInstrumentInfo::DataTypeContract_InstrumentCode;
 	m_nInstrumentID = 0;
 }
 
-CTreeItemContract::CTreeItemContract()
+CItemInstrumentInfo::CItemInstrumentInfo()
 {
 	QList<QVariant> dataTmp;
-	CTreeItemContract* parent = NULL;
+	CItemInstrumentInfo* parent = NULL;
 	QString strTmp = "NULL";
 	dataTmp.push_back(strTmp);
 	parent = NULL;
@@ -45,15 +45,15 @@ CTreeItemContract::CTreeItemContract()
 
 	m_pParentItem = parent;
 	m_ItemData = dataTmp;
-	m_nDataTypeExchange = CTreeItemContract::DataTypeContract_InstrumentCode;
+	m_nDataTypeExchange = CItemInstrumentInfo::DataTypeContract_InstrumentCode;
 
 }
 
 
-CTreeItemContract::~CTreeItemContract()
+CItemInstrumentInfo::~CItemInstrumentInfo()
 {
-	CTreeItemContract* pTreeItem = NULL;
-	QMap<QString, CTreeItemContract*>::iterator iterMap;
+	CItemInstrumentInfo* pTreeItem = NULL;
+	QMap<QString, CItemInstrumentInfo*>::iterator iterMap;
 
 	iterMap = m_MapStringChildren.begin();
 	while (iterMap != m_MapStringChildren.end())
@@ -76,9 +76,9 @@ CTreeItemContract::~CTreeItemContract()
 
 }
 
-void CTreeItemContract::appendChild(const QString& strMapKey, CTreeItemContract** ppItem)
+void CItemInstrumentInfo::appendChild(const QString& strMapKey, CItemInstrumentInfo** ppItem)
 {
-	CTreeItemContract* pItem = NULL;
+	CItemInstrumentInfo* pItem = NULL;
 	if (NULL == ppItem || NULL == *ppItem || strMapKey.isEmpty())
 	{
 		return;
@@ -98,13 +98,13 @@ void CTreeItemContract::appendChild(const QString& strMapKey, CTreeItemContract*
 
 }
 
-CTreeItemContract* CTreeItemContract::child(int row)
+CItemInstrumentInfo* CItemInstrumentInfo::child(int row)
 {
   //  return m_LstChildItems.value(row);
 
 	int nIndex = 0;
-	CTreeItemContract* pTreeItem = NULL;
-	QMap<QString, CTreeItemContract*>::iterator iterMap;
+	CItemInstrumentInfo* pTreeItem = NULL;
+	QMap<QString, CItemInstrumentInfo*>::iterator iterMap;
 
 	iterMap = m_MapStringChildren.begin();
 	nIndex = 0;
@@ -122,46 +122,46 @@ CTreeItemContract* CTreeItemContract::child(int row)
 	return pTreeItem;
 }
 
-int CTreeItemContract::childCount() const
+int CItemInstrumentInfo::childCount() const
 {
     //return m_LstChildItems.count();
 	return m_MapStringChildren.size();
 }
 
-int CTreeItemContract::columnCount() const
+int CItemInstrumentInfo::columnCount() const
 {
     return m_ItemData.count();
 }
 
-QVariant CTreeItemContract::data(int column) const
+QVariant CItemInstrumentInfo::data(int column) const
 {
     return m_ItemData.value(column);
 }
 
-CTreeItemContract* CTreeItemContract::parent()
+CItemInstrumentInfo* CItemInstrumentInfo::parent()
 {
     return m_pParentItem;
 }
 
-int CTreeItemContract::row() const
+int CItemInstrumentInfo::row() const
 {
 	int nIndex = 0;
 
     if (NULL != m_pParentItem)
 	{
 		//nIndex = m_pParentItem->m_LstChildItems.indexOf(const_cast<TreeItem*>(this));
-		nIndex = m_pParentItem->indexOfChildren(const_cast<CTreeItemContract*>(this));
+		nIndex = m_pParentItem->indexOfChildren(const_cast<CItemInstrumentInfo*>(this));
         return nIndex;
 	}
 
     return nIndex;
 }
 
-int CTreeItemContract::indexOfChildren(CTreeItemContract* pChildrenItem) const
+int CItemInstrumentInfo::indexOfChildren(CItemInstrumentInfo* pChildrenItem) const
 {
 	int nIndex = 0;
-	CTreeItemContract* pTreeItemTmp = NULL;
-	QMap<QString,CTreeItemContract*>::const_iterator iterMap;
+	CItemInstrumentInfo* pTreeItemTmp = NULL;
+	QMap<QString,CItemInstrumentInfo*>::const_iterator iterMap;
 	
 	iterMap = m_MapStringChildren.constBegin();
 	nIndex = 0;
@@ -180,26 +180,26 @@ int CTreeItemContract::indexOfChildren(CTreeItemContract* pChildrenItem) const
 	return nIndex;
 }
 
-void CTreeItemContract::appendThreeChild(const CContractInfo* pExchangeInfo)
+void CItemInstrumentInfo::appendThreeChild(const CInstrumentInfoHelper* pExchangeInfo)
 {
 	_AppendChildExchangeName(pExchangeInfo);
 }
 
-void CTreeItemContract::_AppendChildExchangeName( const CContractInfo* pExchangeInfo )
+void CItemInstrumentInfo::_AppendChildExchangeName( const CInstrumentInfoHelper* pExchangeInfo )
 {
 	QString strItemValue;
 	QList<QVariant> dataTreeItem;
-	CTreeItemContract* pTreeItemExchangeName = NULL;
-	QMap<QString, CTreeItemContract*>::iterator iterFind;
+	CItemInstrumentInfo* pTreeItemExchangeName = NULL;
+	QMap<QString, CItemInstrumentInfo*>::iterator iterFind;
 	strItemValue = pExchangeInfo->getExchangeName();
 
 	dataTreeItem.clear();
 	dataTreeItem.push_back(strItemValue);
-	pTreeItemExchangeName = new CTreeItemContract(dataTreeItem, this);
-	pTreeItemExchangeName->setDataType(CTreeItemContract::DataTypeContract_ExchangeName);
+	pTreeItemExchangeName = new CItemInstrumentInfo(dataTreeItem, this);
+	pTreeItemExchangeName->setDataType(CItemInstrumentInfo::DataTypeContract_ExchangeName);
 	pTreeItemExchangeName->setInstrumentID(pExchangeInfo->getInstrumentID());
 
-	this->setDataType(CTreeItemContract::DataTypeContract_Root);
+	this->setDataType(CItemInstrumentInfo::DataTypeContract_Root);
 	this->appendChild(strItemValue, &pTreeItemExchangeName);
 	pTreeItemExchangeName = NULL;
 
@@ -213,22 +213,22 @@ void CTreeItemContract::_AppendChildExchangeName( const CContractInfo* pExchange
 
 
 }
-void CTreeItemContract::appendChildUnderlyingCode( const CContractInfo* pExchangeInfo )
+void CItemInstrumentInfo::appendChildUnderlyingCode( const CInstrumentInfoHelper* pExchangeInfo )
 {
 	QString strItemValue;
 	QList<QVariant> dataTreeItem;
-	CTreeItemContract* pTreeItemUnderlyingCode = NULL;
-	QMap<QString, CTreeItemContract*>::iterator iterFind;
+	CItemInstrumentInfo* pTreeItemUnderlyingCode = NULL;
+	QMap<QString, CItemInstrumentInfo*>::iterator iterFind;
 
 	strItemValue = pExchangeInfo->getUnderlyingCode();
 
 	dataTreeItem.clear();
 	dataTreeItem.push_back(strItemValue);
-	pTreeItemUnderlyingCode = new CTreeItemContract(dataTreeItem, this);
-	pTreeItemUnderlyingCode->setDataType(CTreeItemContract::DataTypeContract_UnderlyingCode);
+	pTreeItemUnderlyingCode = new CItemInstrumentInfo(dataTreeItem, this);
+	pTreeItemUnderlyingCode->setDataType(CItemInstrumentInfo::DataTypeContract_UnderlyingCode);
 	pTreeItemUnderlyingCode->setInstrumentID(pExchangeInfo->getInstrumentID());
 
-	this->setDataType(CTreeItemContract::DataTypeContract_ExchangeName);
+	this->setDataType(CItemInstrumentInfo::DataTypeContract_ExchangeName);
 	this->appendChild(strItemValue, &pTreeItemUnderlyingCode);
 	pTreeItemUnderlyingCode = NULL;
 
@@ -244,33 +244,33 @@ void CTreeItemContract::appendChildUnderlyingCode( const CContractInfo* pExchang
 
 }
 
-void CTreeItemContract::appendChildInstrumentCode( const CContractInfo* pExchangeInfo )
+void CItemInstrumentInfo::appendChildInstrumentCode( const CInstrumentInfoHelper* pExchangeInfo )
 {	
 
 	QString strItemValue;
 	QList<QVariant> dataTreeItem;
-	CTreeItemContract* pTreeItemInstrumentCode = NULL;
-	QMap<QString, CTreeItemContract*>::iterator iterFind;
+	CItemInstrumentInfo* pTreeItemInstrumentCode = NULL;
+	QMap<QString, CItemInstrumentInfo*>::iterator iterFind;
 
 	strItemValue = pExchangeInfo->getInstrumentCode();
 
 	dataTreeItem.clear();
 	dataTreeItem.push_back(strItemValue);
-	pTreeItemInstrumentCode = new CTreeItemContract(dataTreeItem, this);
-	pTreeItemInstrumentCode->setDataType(CTreeItemContract::DataTypeContract_InstrumentCode);
+	pTreeItemInstrumentCode = new CItemInstrumentInfo(dataTreeItem, this);
+	pTreeItemInstrumentCode->setDataType(CItemInstrumentInfo::DataTypeContract_InstrumentCode);
 	pTreeItemInstrumentCode->setInstrumentID(pExchangeInfo->getInstrumentID());
 
-	this->setDataType(CTreeItemContract::DataTypeContract_UnderlyingCode);
+	this->setDataType(CItemInstrumentInfo::DataTypeContract_UnderlyingCode);
 	this->appendChild(strItemValue, &pTreeItemInstrumentCode);
 	pTreeItemInstrumentCode = NULL;
 
 }
 
-bool CTreeItemContract::removeChildren(int position)
+bool CItemInstrumentInfo::removeChildren(int position)
 {
 	int nIndex = 0;
-	CTreeItemContract* pTreeItemTmp = NULL;
-	QMap<QString,CTreeItemContract*>::iterator iterMap;
+	CItemInstrumentInfo* pTreeItemTmp = NULL;
+	QMap<QString,CItemInstrumentInfo*>::iterator iterMap;
 
 	if (position < 0 || position > m_MapStringChildren.size())
 	{
@@ -304,11 +304,11 @@ bool CTreeItemContract::removeChildren(int position)
 }
 
 
-bool CTreeItemContract::removeChildrenByData(const CContractInfo* pExchangeInfo)
+bool CItemInstrumentInfo::removeChildrenByData(const CInstrumentInfoHelper* pExchangeInfo)
 {
 	int nIndex = 0;
-	CTreeItemContract* pTreeItemTmp = NULL;
-	QMap<QString,CTreeItemContract*>::iterator iterMap;
+	CItemInstrumentInfo* pTreeItemTmp = NULL;
+	QMap<QString,CItemInstrumentInfo*>::iterator iterMap;
 
 	iterMap = m_MapStringChildren.begin();
 
@@ -352,22 +352,22 @@ bool CTreeItemContract::removeChildrenByData(const CContractInfo* pExchangeInfo)
 	return true;
 }
 
-void CTreeItemContract::setDataType( enDataTypeContract nDataTypeExchange )
+void CItemInstrumentInfo::setDataType( enDataTypeContract nDataTypeExchange )
 {
 	m_nDataTypeExchange = nDataTypeExchange;
 }
 
-CTreeItemContract::enDataTypeContract CTreeItemContract::getDataType()
+CItemInstrumentInfo::enDataTypeContract CItemInstrumentInfo::getDataType()
 {
 	return m_nDataTypeExchange;
 }
 
-void CTreeItemContract::setInstrumentID( unsigned int nInstrumentID )
+void CItemInstrumentInfo::setInstrumentID( unsigned int nInstrumentID )
 {
 	m_nInstrumentID = nInstrumentID;
 }
 
-unsigned int CTreeItemContract::getInstrumentID()
+unsigned int CItemInstrumentInfo::getInstrumentID()
 {
 	return m_nInstrumentID;
 }

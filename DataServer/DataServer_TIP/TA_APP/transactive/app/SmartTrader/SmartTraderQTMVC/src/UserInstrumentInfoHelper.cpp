@@ -1,4 +1,4 @@
-#include "QuotesInfo.h"
+#include "UserInstrumentInfoHelper.h"
 
 #include "ProjectUtilityFun.h"
 
@@ -52,7 +52,7 @@ static const std::string DEFVALUE_String_ColumnName_SmartQuotes_InstrumentID = "
 
 //////////////////////////////////////////////////////////////////////////
 
-CQuotesInfo::CQuotesInfo()
+CUserInstrumentInfoHelper::CUserInstrumentInfoHelper()
 {
 	m_nInstrumentPriceChange = IconDelegate::InstrumentPriceChange_NoQuotes;
 
@@ -95,7 +95,7 @@ CQuotesInfo::CQuotesInfo()
 
 }
 
-CQuotesInfo::~CQuotesInfo()
+CUserInstrumentInfoHelper::~CUserInstrumentInfoHelper()
 {
 	if (NULL != m_pUtilityFun)
 	{
@@ -106,7 +106,7 @@ CQuotesInfo::~CQuotesInfo()
 }
 
 
-CQuotesInfo& CQuotesInfo::operator=( const CQuotesInfo& exchangeParam )
+CUserInstrumentInfoHelper& CUserInstrumentInfoHelper::operator=( const CUserInstrumentInfoHelper& exchangeParam )
 {
 	m_nInstrumentPriceChange = exchangeParam.m_nInstrumentPriceChange;
 
@@ -166,7 +166,7 @@ CQuotesInfo& CQuotesInfo::operator=( const CQuotesInfo& exchangeParam )
 	return *this;
 }
 
-void CQuotesInfo::_ClearData()
+void CUserInstrumentInfoHelper::_ClearData()
 {
 	m_strExchangeName.clear();//Exchange Name//ExchangeName//交易所
 	m_strInstrumentCode.clear();//Contract Name//InstrumentCode//合约名称
@@ -192,7 +192,7 @@ void CQuotesInfo::_ClearData()
 }
 
 
-void CQuotesInfo::setValue( const Instrument &instrument)
+void CUserInstrumentInfoHelper::setValue( const Instrument &instrument)
 {
 	_ClearData();
 
@@ -276,11 +276,11 @@ void CQuotesInfo::setValue( const Instrument &instrument)
 
 
 
-unsigned int CQuotesInfo::getInstrumentID() const
+unsigned int CUserInstrumentInfoHelper::getInstrumentID() const
 {
 	return m_nInstrumentID;
 }
-void CQuotesInfo::logInfo( const QString& strLogInfo ) const
+void CUserInstrumentInfoHelper::logInfo( const QString& strLogInfo ) const
 {
 	MYLOG4CPP_DEBUG<<strLogInfo.toStdString()
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
@@ -289,12 +289,12 @@ void CQuotesInfo::logInfo( const QString& strLogInfo ) const
 		<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode.toStdString();
 }
 
-QString CQuotesInfo::getInstrumentCode() const
+QString CUserInstrumentInfoHelper::getInstrumentCode() const
 {
 	return m_strInstrumentCode;
 }
 
-void CQuotesInfo::setDefaultValue()
+void CUserInstrumentInfoHelper::setDefaultValue()
 {
 	m_nInstrumentID = 1;
 	m_strExchangeName = "AAAA";
@@ -302,7 +302,7 @@ void CQuotesInfo::setDefaultValue()
 	m_strInstrumentCode = "AAAA_BB_CC";
 }
 
-QVariant CQuotesInfo::getValueByName( const QString& strName )
+QVariant CUserInstrumentInfoHelper::getValueByName( const QString& strName )
 {
 	QVariant varValueRes;
 	QStringList strlstClumnNameShow;

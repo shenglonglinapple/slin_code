@@ -1,5 +1,5 @@
-#ifndef __CLASS_TREE_MODEL_CONTRACT_HH__
-#define __CLASS_TREE_MODEL_CONTRACT_HH__
+#ifndef __CLASS_ITEM_MODEL_INSTRUMENT_INFO_HH__
+#define __CLASS_ITEM_MODEL_INSTRUMENT_INFO_HH__
 
 
 
@@ -11,16 +11,16 @@
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
 
-class CTreeItemContract;
+class CItemInstrumentInfo;
 
 
-class CTreeModelContract : public QAbstractItemModel
+class CItemModelInstrumentInfo : public QAbstractItemModel
 {
     Q_OBJECT
 
 public:
-    CTreeModelContract(QObject* parent = 0);
-    ~CTreeModelContract();
+    CItemModelInstrumentInfo(QObject* parent = 0);
+    ~CItemModelInstrumentInfo();
 public:
     QVariant data(const QModelIndex &index, int role) const;
     Qt::ItemFlags flags(const QModelIndex &index) const;
@@ -33,13 +33,12 @@ public:
 	bool removeRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ );
 
 public:
-	void setRootItem(CTreeItemContract* rootItem);
+	void setRootItem(CItemInstrumentInfo* rootItem);
 private:
-	CTreeItemContract* _GetItem( const QModelIndex& index ) const;
+	CItemInstrumentInfo* _GetItem( const QModelIndex& index ) const;
 private:
-    CTreeItemContract* m_pRootItemCopy;
+    CItemInstrumentInfo* m_pRootItemRef;
 };
-//QT_END_NAMESPACE
 
 
-#endif//__CLASS_TREE_MODEL_CONTRACT_HH__
+#endif//__CLASS_ITEM_MODEL_INSTRUMENT_INFO_HH__

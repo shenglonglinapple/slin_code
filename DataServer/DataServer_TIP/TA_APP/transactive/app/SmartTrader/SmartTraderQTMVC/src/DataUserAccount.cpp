@@ -5,8 +5,6 @@
 #include "Instrument.h"
 #include "ProjectLogHelper.h"
 #include "Log4cppLogger.h"
-#include "ContractInfo.h"
-#include "TreeItemContract.h"
 
 
 CDataUserAccount* CDataUserAccount::m_pInstance = 0;

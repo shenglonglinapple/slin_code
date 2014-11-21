@@ -1,4 +1,4 @@
-#include "TreeModelContract.h"
+#include "ItemModelInstrumentInfo.h"
 
 
 //qt sys
@@ -12,37 +12,37 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QModelIndex>
 
-#include "TreeItemContract.h"
+#include "ItemInstrumentInfo.h"
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
 
 
-CTreeModelContract::CTreeModelContract(QObject *parent)
+CItemModelInstrumentInfo::CItemModelInstrumentInfo(QObject *parent)
     : QAbstractItemModel(parent)
 {
-	m_pRootItemCopy = NULL;
+	m_pRootItemRef = NULL;
 }
 
 
-CTreeModelContract::~CTreeModelContract()
+CItemModelInstrumentInfo::~CItemModelInstrumentInfo()
 {
-	m_pRootItemCopy = NULL;
+	m_pRootItemRef = NULL;
 }
 
 
 
-int CTreeModelContract::columnCount(const QModelIndex &parent) const
+int CItemModelInstrumentInfo::columnCount(const QModelIndex &parent) const
 {
 	int nColumnCount = 0;
 
     if (parent.isValid())
 	{
-        nColumnCount = static_cast<CTreeItemContract*>(parent.internalPointer())->columnCount();
+        nColumnCount = static_cast<CItemInstrumentInfo*>(parent.internalPointer())->columnCount();
 	}
     else
 	{
-        nColumnCount = m_pRootItemCopy->columnCount();
+        nColumnCount = m_pRootItemRef->columnCount();
 	}
 
 	return nColumnCount;
@@ -50,9 +50,9 @@ int CTreeModelContract::columnCount(const QModelIndex &parent) const
 
 
 
-QVariant CTreeModelContract::data(const QModelIndex &index, int role) const
+QVariant CItemModelInstrumentInfo::data(const QModelIndex &index, int role) const
 {
-	CTreeItemContract* item = NULL;
+	CItemInstrumentInfo* item = NULL;
 
     if (!index.isValid())
 	{
@@ -64,18 +64,18 @@ QVariant CTreeModelContract::data(const QModelIndex &index, int role) const
         return QVariant();
 	}
 
-    item = static_cast<CTreeItemContract*>(index.internalPointer());
+    item = static_cast<CItemInstrumentInfo*>(index.internalPointer());
 
     return item->data(index.column());
 }
 
 
 
-Qt::ItemFlags CTreeModelContract::flags(const QModelIndex &index) const
+Qt::ItemFlags CItemModelInstrumentInfo::flags(const QModelIndex &index) const
 {
 	Qt::ItemFlags nFlagsTreeItem;
-	CTreeItemContract* pTreeItem = NULL;
-	CTreeItemContract::enDataTypeContract nDataTypeExchange = CTreeItemContract::DataTypeContract_InstrumentCode;
+	CItemInstrumentInfo* pTreeItem = NULL;
+	CItemInstrumentInfo::enDataTypeContract nDataTypeExchange = CItemInstrumentInfo::DataTypeContract_InstrumentCode;
 
     if (!index.isValid())
 	{
@@ -85,7 +85,7 @@ Qt::ItemFlags CTreeModelContract::flags(const QModelIndex &index) const
 
     //return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 
-	pTreeItem = static_cast<CTreeItemContract*>(index.internalPointer());
+	pTreeItem = static_cast<CItemInstrumentInfo*>(index.internalPointer());
 
 	if (NULL == pTreeItem)
 	{
@@ -94,7 +94,7 @@ Qt::ItemFlags CTreeModelContract::flags(const QModelIndex &index) const
 	}
 
 	nDataTypeExchange = pTreeItem->getDataType();
-	if (CTreeItemContract::DataTypeContract_InstrumentCode == nDataTypeExchange)
+	if (CItemInstrumentInfo::DataTypeContract_InstrumentCode == nDataTypeExchange)
 	{
 		//nFlagsTreeItem = Qt::ItemIsEditable;
 		nFlagsTreeItem = Qt::ItemIsEnabled | Qt::ItemIsSelectable |  Qt::ItemIsEditable;
@@ -107,7 +107,7 @@ Qt::ItemFlags CTreeModelContract::flags(const QModelIndex &index) const
 
 
 
-QVariant CTreeModelContract::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant CItemModelInstrumentInfo::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
@@ -121,10 +121,10 @@ QVariant CTreeModelContract::headerData(int section, Qt::Orientation orientation
 
 
 
-QModelIndex CTreeModelContract::index(int row, int column, const QModelIndex &parent) const
+QModelIndex CItemModelInstrumentInfo::index(int row, int column, const QModelIndex &parent) const
 {
-	CTreeItemContract* parentItem = NULL;
-	CTreeItemContract* childItem = NULL;
+	CItemInstrumentInfo* parentItem = NULL;
+	CItemInstrumentInfo* childItem = NULL;
 
     if (!hasIndex(row, column, parent))
 	{
@@ -133,11 +133,11 @@ QModelIndex CTreeModelContract::index(int row, int column, const QModelIndex &pa
 
     if (!parent.isValid())
 	{
-        parentItem = m_pRootItemCopy;
+        parentItem = m_pRootItemRef;
 	}
     else
 	{
-        parentItem = static_cast<CTreeItemContract*>(parent.internalPointer());
+        parentItem = static_cast<CItemInstrumentInfo*>(parent.internalPointer());
 	}
 
     childItem = parentItem->child(row);
@@ -155,20 +155,20 @@ QModelIndex CTreeModelContract::index(int row, int column, const QModelIndex &pa
 
 
 
-QModelIndex CTreeModelContract::parent(const QModelIndex &index) const
+QModelIndex CItemModelInstrumentInfo::parent(const QModelIndex &index) const
 {
-	CTreeItemContract* childItem = NULL;
-	CTreeItemContract* parentItem = NULL;
+	CItemInstrumentInfo* childItem = NULL;
+	CItemInstrumentInfo* parentItem = NULL;
 
     if (!index.isValid())
 	{
         return QModelIndex();
 	}
 
-    childItem = static_cast<CTreeItemContract*>(index.internalPointer());
+    childItem = static_cast<CItemInstrumentInfo*>(index.internalPointer());
     parentItem = childItem->parent();
 
-    if (parentItem == m_pRootItemCopy)
+    if (parentItem == m_pRootItemRef)
 	{
         return QModelIndex();
 	}
@@ -178,9 +178,9 @@ QModelIndex CTreeModelContract::parent(const QModelIndex &index) const
 
 
 
-int CTreeModelContract::rowCount(const QModelIndex &parent) const
+int CItemModelInstrumentInfo::rowCount(const QModelIndex &parent) const
 {
-    CTreeItemContract* parentItem = NULL;
+    CItemInstrumentInfo* parentItem = NULL;
     if (parent.column() > 0)
 	{
         return 0;
@@ -188,26 +188,26 @@ int CTreeModelContract::rowCount(const QModelIndex &parent) const
 
     if (!parent.isValid())
 	{
-        parentItem = m_pRootItemCopy;
+        parentItem = m_pRootItemRef;
 	}
     else
 	{
-        parentItem = static_cast<CTreeItemContract*>(parent.internalPointer());
+        parentItem = static_cast<CItemInstrumentInfo*>(parent.internalPointer());
 	}
 
     return parentItem->childCount();
 }
 
-void CTreeModelContract::setRootItem( CTreeItemContract* rootItem )
+void CItemModelInstrumentInfo::setRootItem( CItemInstrumentInfo* rootItem )
 {
-	m_pRootItemCopy = rootItem;
+	m_pRootItemRef = rootItem;
 	reset();
 }
 
 
-bool CTreeModelContract::removeRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
+bool CItemModelInstrumentInfo::removeRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
 {
-	CTreeItemContract* parentItem = _GetItem(parent);
+	CItemInstrumentInfo* parentItem = _GetItem(parent);
 	bool success = true;
 	int nRemoveRowNum = 1;
 
@@ -219,20 +219,20 @@ bool CTreeModelContract::removeRows( int position, int rows, const QModelIndex &
 }
 
 
-CTreeItemContract* CTreeModelContract::_GetItem( const QModelIndex& index ) const
+CItemInstrumentInfo* CItemModelInstrumentInfo::_GetItem( const QModelIndex& index ) const
 {
-	CTreeItemContract *item = NULL;
+	CItemInstrumentInfo *item = NULL;
 
 	if (index.isValid()) 
 	{
-		item = static_cast<CTreeItemContract*>(index.internalPointer());
+		item = static_cast<CItemInstrumentInfo*>(index.internalPointer());
 		if (NULL != item) 
 		{
 			return item;
 		}
 	}
 
-	return m_pRootItemCopy;
+	return m_pRootItemRef;
 }
 
 

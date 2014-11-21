@@ -1,5 +1,5 @@
-#ifndef __CLASS_TREE_MODEL_ORDER_HH__
-#define __CLASS_TREE_MODEL_ORDER_HH__
+#ifndef __CLASS_ITEM_MODEL_USER_INSTRUMENT_INFO_HH__
+#define __CLASS_ITEM_MODEL_USER_INSTRUMENT_INFO_HH__
 
 
 
@@ -7,19 +7,17 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
-#include "TreeItemOrder.h"
 
-//QT_BEGIN_NAMESPACE
-////QT_END_NAMESPACE
+class CItemUserInstrumentInfo;
 
 
-class CTreeModelOrder : public QAbstractItemModel
+class CItemModelUserInstrumentInfo : public QAbstractItemModel
 {
     Q_OBJECT
 
 public:
-    CTreeModelOrder(QObject* parent = 0);
-    ~CTreeModelOrder();
+    CItemModelUserInstrumentInfo(QObject* parent = 0);
+    ~CItemModelUserInstrumentInfo();
 public:
     QVariant data(const QModelIndex &index, int role) const;
 
@@ -48,14 +46,14 @@ public:
 
 	bool removeRows(int position, int rows, const QModelIndex &parent = QModelIndex());;
 public:
-	void setRootItem(CTreeItemOrder* rootItem);
+	void setRootItem(CItemUserInstrumentInfo* rootItem);
 private:
-	CTreeItemOrder* _GetItem( const QModelIndex& index ) const;
+	CItemUserInstrumentInfo* _GetItem( const QModelIndex& index ) const;
 private:
-    CTreeItemOrder* m_pRootItemCopy;
+    CItemUserInstrumentInfo* m_pRootItemRef;
 };
 
 
 //QT_END_NAMESPACE
 
-#endif//__CLASS_TREE_MODEL_ORDER_HH__
+#endif//__CLASS_ITEM_MODEL_USER_INSTRUMENT_INFO_HH__

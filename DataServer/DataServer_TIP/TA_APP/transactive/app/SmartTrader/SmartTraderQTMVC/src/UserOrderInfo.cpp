@@ -4,8 +4,8 @@
 #include "Order.h"
 #include "Instrument.h"
 #include "Account.h"
-#include "OrderInfo.h"
-#include "TreeItemQuotes.h"
+#include "OrderInfoHelper.h"
+#include "ItemUserInstrumentInfo.h"
 
 #include "Log4cppLogger.h"
 
@@ -56,7 +56,7 @@ void CUserOrderInfo::_ClearData()
 
 }
 
-void CUserOrderInfo::setDataByItem( CTreeItemQuotes* pData )
+void CUserOrderInfo::setDataByItem( CItemUserInstrumentInfo* pData )
 {
 	_ClearData();
 	m_nInstrumentID = pData->getInstrumentID();

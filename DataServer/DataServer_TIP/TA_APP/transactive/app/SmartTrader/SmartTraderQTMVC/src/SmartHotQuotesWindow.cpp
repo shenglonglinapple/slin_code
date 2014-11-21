@@ -5,10 +5,11 @@
 #include "ProjectQTInclude.h"
 
 #include "ClientDataManagerWorker.h"
-#include "QuotesTableView.h"
-#include "TreeModelQuotes.h"
-#include "TreeItemQuotes.h"
-#include "DataUserContract.h"
+#include "UserInstrumentInfoView.h"
+#include "ItemUserInstrumentInfo.h"
+#include "ItemModelUserInstrumentInfo.h"
+
+#include "DataUserInstrument.h"
 #include "SignalSlotManager.h"
 #include "Log4cppLogger.h"
 
@@ -30,8 +31,8 @@ CLeftDockWidget::CLeftDockWidget(QWidget* parent)
 {
 
 	m_pVBoxLayout = NULL;
-	m_pTreeModelQuotes = NULL;
-	m_pTableView_Quotes = NULL;//m_pTreeModelQuotes
+	m_pItemModelUserInstrumentInfo = NULL;
+	m_pUserInstrumentInfoView = NULL;//m_pTreeModelQuotes
 
     setupUi();
 	translateLanguage();
@@ -39,7 +40,7 @@ CLeftDockWidget::CLeftDockWidget(QWidget* parent)
 	_CreateAction();
 	_CreateConnect();
 
-	slotQuotesInfoChanged(CDataUserContract::getInstance().getRootHandle());
+	slotUserInstrumentInfoChanged(CDataUserInstrument::getInstance().getRootHandle());
 }
 
 
@@ -73,10 +74,10 @@ void CLeftDockWidget::setupUi()
 	m_pTabWidget = new QTabWidget(this);
 	m_pTabWidget->setTabPosition(QTabWidget::South);	//enum TabPosition { North, South, West, East
 
-	m_pTableView_Quotes = new CQuotesTableView(m_pTabWidget);
-	CSignalSlotManager::getInstance().setSignalSlot_QuotesTableViewColumnsChanged(m_pTableView_Quotes, &(CClientDataManagerWorker::getInstance()));
-	CSignalSlotManager::getInstance().setSignalSlot_RemoveContractFromSmartQuotes(m_pTableView_Quotes, &(CClientDataManagerWorker::getInstance()));
-	CSignalSlotManager::getInstance().setSignalSlot_ContractInfoWindowResetData(m_pTableView_Quotes, &(CClientDataManagerWorker::getInstance()));
+	m_pUserInstrumentInfoView = new CUserInstrumentInfoView(m_pTabWidget);
+	CSignalSlotManager::getInstance().setSignalSlot_UserInstrumentViewColumnsChanged(m_pUserInstrumentInfoView, &(CClientDataManagerWorker::getInstance()));
+	CSignalSlotManager::getInstance().setSignalSlot_RemoveUserInstrument(m_pUserInstrumentInfoView, &(CClientDataManagerWorker::getInstance()));
+	CSignalSlotManager::getInstance().setSignalSlot_InstrumentViewResetData(m_pUserInstrumentInfoView, &(CClientDataManagerWorker::getInstance()));
 
 
 	
@@ -94,36 +95,36 @@ void CLeftDockWidget::setupUi()
 void CLeftDockWidget::translateLanguage()
 {
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_Title.c_str()));
-	m_pTabWidget->addTab(m_pTableView_Quotes, QObject::tr("Symbols"));
+	m_pTabWidget->addTab(m_pUserInstrumentInfoView, QObject::tr("Symbols"));
 
 }
 
 
-void CLeftDockWidget::slotQuotesInfoChanged( CTreeItemQuotes* pTreeItem )
+void CLeftDockWidget::slotUserInstrumentInfoChanged( CItemUserInstrumentInfo* pTreeItem )
 {
 	MYLOG4CPP_DEBUG<<"CSmartHotQuotesWindow process slotQuotesInfoChanged"
 		<<" "<<"pTreeItem=ox"<<pTreeItem;
 
 	QModelIndex inValidIndex;
 
-	if (NULL == m_pTreeModelQuotes)
+	if (NULL == m_pItemModelUserInstrumentInfo)
 	{
 		//
-		m_pTreeModelQuotes = new CTreeModelQuotes(this);
-		m_pTreeModelQuotes->setRootItem(pTreeItem);
+		m_pItemModelUserInstrumentInfo = new CItemModelUserInstrumentInfo(this);
+		m_pItemModelUserInstrumentInfo->setRootItem(pTreeItem);
 
 		//mvc
-		m_pTableView_Quotes->setModel(m_pTreeModelQuotes);
+		m_pUserInstrumentInfoView->setModel(m_pItemModelUserInstrumentInfo);
 		//m_pTreeView_Quotes->setColumnWidth(0, 200);
-		m_pTableView_Quotes->setCurrentIndex(inValidIndex);
-		m_pTableView_Quotes->resizeColumnsToContents();
+		m_pUserInstrumentInfoView->setCurrentIndex(inValidIndex);
+		m_pUserInstrumentInfoView->resizeColumnsToContents();
 
 	}
 	else
 	{
-		m_pTreeModelQuotes->setRootItem(pTreeItem);
-		m_pTableView_Quotes->setCurrentIndex(inValidIndex);
-		m_pTableView_Quotes->resizeColumnsToContents();
+		m_pItemModelUserInstrumentInfo->setRootItem(pTreeItem);
+		m_pUserInstrumentInfoView->setCurrentIndex(inValidIndex);
+		m_pUserInstrumentInfoView->resizeColumnsToContents();
 	}
 }
 

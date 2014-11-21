@@ -1,12 +1,17 @@
-#include "ContractInfoWindow.h"
+#include "InstrumentInfoView.h"
 
 #include "ProjectQTInclude.h"
 
-#include "ContractInfo.h"
-#include "TreeItemContract.h"
-#include "TreeModelContract.h"
-#include "DataContract.h"
+#include "ItemInstrumentInfo.h"
+#include "ItemModelInstrumentInfo.h"
+
+#include "DataInstrument.h"
 #include "SignalSlotManager.h"
+
+
+#include "InstrumentInfoHelper.h"
+
+
 
 #include "Log4cppLogger.h"
 
@@ -21,34 +26,34 @@ static const int DEFVALUE_INT_Window_Height = 300;
 
 //, Qt::WindowMinMaxButtonsHint
 //Qt::WStyle_Customize| Qt::WStyle_NoBorder
-CContractInfoWindow::CContractInfoWindow(QWidget* parent)
+CInstrumentInfoView::CInstrumentInfoView(QWidget* parent)
 : QMainWindow(parent)
 {
-	m_pTreeModel = NULL;	
+	m_pItemModelInstrumentInfo = NULL;	
 
 	setupUi();
 	translateLanguage();
 	_CreateConnect();
 
-	slotContractInfoChanged(CDataContract::getInstance().getRootHandle());
+	slotInstrumentInfoChanged(CDataInstrument::getInstance().getRootHandle());
 }
 
 
-CContractInfoWindow::~CContractInfoWindow()
+CInstrumentInfoView::~CInstrumentInfoView()
 {
-	if (NULL != m_pTreeModel)
+	if (NULL != m_pItemModelInstrumentInfo)
 	{
-		delete m_pTreeModel;
-		m_pTreeModel = NULL;
+		delete m_pItemModelInstrumentInfo;
+		m_pItemModelInstrumentInfo = NULL;
 	}
 }
 
 
-void CContractInfoWindow::_CreateConnect()
+void CInstrumentInfoView::_CreateConnect()
 {
 
 	//
-	QObject::connect(m_pTreeView_ContractInfo, 
+	QObject::connect(m_pTreeView_InstrumentInfo, 
 		SIGNAL(doubleClicked ( const QModelIndex&)),
 		this,
 		SLOT(slotTreeViewDoubleClick(const QModelIndex&)));
@@ -56,24 +61,24 @@ void CContractInfoWindow::_CreateConnect()
 
 }
 
-void CContractInfoWindow::setupUi()
+void CInstrumentInfoView::setupUi()
 {
 	m_pWidget_Central = new QWidget(this);
 
-	m_pTreeView_ContractInfo = new QTreeView(m_pWidget_Central);
-	m_pTreeView_ContractInfo->setEditTriggers(QAbstractItemView::NoEditTriggers);
-	m_pTreeView_ContractInfo->setAlternatingRowColors(true);
-	m_pTreeView_ContractInfo->setSelectionBehavior(QAbstractItemView::SelectItems);
-	m_pTreeView_ContractInfo->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
-	m_pTreeView_ContractInfo->setAnimated(false);
-	m_pTreeView_ContractInfo->setAllColumnsShowFocus(true);
-	m_pTreeView_ContractInfo->header()->setVisible(false);
-	m_pTreeView_ContractInfo->header()->setStretchLastSection(false);
+	m_pTreeView_InstrumentInfo = new QTreeView(m_pWidget_Central);
+	m_pTreeView_InstrumentInfo->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	m_pTreeView_InstrumentInfo->setAlternatingRowColors(true);
+	m_pTreeView_InstrumentInfo->setSelectionBehavior(QAbstractItemView::SelectItems);
+	m_pTreeView_InstrumentInfo->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_pTreeView_InstrumentInfo->setAnimated(false);
+	m_pTreeView_InstrumentInfo->setAllColumnsShowFocus(true);
+	m_pTreeView_InstrumentInfo->header()->setVisible(false);
+	m_pTreeView_InstrumentInfo->header()->setStretchLastSection(false);
 
 	m_pVBoxLayout = new QVBoxLayout(m_pWidget_Central);
 	m_pVBoxLayout->setSpacing(1);
 	m_pVBoxLayout->setContentsMargins(0, 0, 0, 0);
-	m_pVBoxLayout->addWidget(m_pTreeView_ContractInfo);
+	m_pVBoxLayout->addWidget(m_pTreeView_InstrumentInfo);
 
 	this->setCentralWidget(m_pWidget_Central);
 	this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);
@@ -82,13 +87,13 @@ void CContractInfoWindow::setupUi()
 } // setupUi
 
 
-void CContractInfoWindow::translateLanguage()
+void CInstrumentInfoView::translateLanguage()
 {
 
 }
 
 
-void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
+void CInstrumentInfoView::slotTreeViewDoubleClick(const QModelIndex & index)
 {
 	MYLOG4CPP_DEBUG<<"CContractInfoWindow process slotTreeViewDoubleClick";
 
@@ -99,18 +104,18 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 	QString strTmp;
 	Qt::ItemFlags nFlagsTreeItem;
 	Qt::ItemFlags nFlagsTreeItemCheck;
-	CTreeItemContract* pTreeItemGet = NULL;
+	CItemInstrumentInfo* pTreeItemGet = NULL;
 	unsigned int nInstrumentID = 0;
 
 	nFlagsTreeItemCheck = Qt::ItemIsEnabled | Qt::ItemIsSelectable |  Qt::ItemIsEditable;
-	model = m_pTreeView_ContractInfo->model();
+	model = m_pTreeView_InstrumentInfo->model();
 
 	nRowDoubleClick = index.row();
 	nColumnDoubleClick = index.column();
 
 	strTmp = model->data(index, Qt::DisplayRole).toString();
 	//QMessageBox::about(this, strTmp, strTmp);
-	pTreeItemGet = static_cast<CTreeItemContract*>(index.internalPointer());
+	pTreeItemGet = static_cast<CItemInstrumentInfo*>(index.internalPointer());
 	nInstrumentID = pTreeItemGet->getInstrumentID();
 	nFlagsTreeItem = model->flags(index);
 	if (nFlagsTreeItemCheck== nFlagsTreeItem)
@@ -124,7 +129,7 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 			<<" "<<"signalAddContractToSmartQuotes(unsigned int)"
 			<<" "<<"param:"
 			<<" "<<"nInstrumentID="<<nInstrumentID;
-		CSignalSlotManager::getInstance().emit_signalAddContractToSmartQuotes(nInstrumentID);
+		CSignalSlotManager::getInstance().emit_signalAddUserInstrument(nInstrumentID);
 	}
 
 
@@ -132,24 +137,24 @@ void CContractInfoWindow::slotTreeViewDoubleClick(const QModelIndex & index)
 
 
 
-void CContractInfoWindow::slotContractInfoChanged( CTreeItemContract* pTreeItem )
+void CInstrumentInfoView::slotInstrumentInfoChanged( CItemInstrumentInfo* pTreeItem )
 {
 	MYLOG4CPP_DEBUG<<"CContractInfoMainWindow process signalContractInfoChanged"
 		<<" "<<"pTreeItem=ox"<<pTreeItem;
 
-	if (NULL == m_pTreeModel)
+	if (NULL == m_pItemModelInstrumentInfo)
 	{
 		//
-		m_pTreeModel = new CTreeModelContract(NULL);
-		m_pTreeModel->setRootItem(pTreeItem);
+		m_pItemModelInstrumentInfo = new CItemModelInstrumentInfo(NULL);
+		m_pItemModelInstrumentInfo->setRootItem(pTreeItem);
 
 		//mvc
-		m_pTreeView_ContractInfo->setModel(m_pTreeModel);
-		m_pTreeView_ContractInfo->setColumnWidth(0, 200);
+		m_pTreeView_InstrumentInfo->setModel(m_pItemModelInstrumentInfo);
+		m_pTreeView_InstrumentInfo->setColumnWidth(0, 200);
 	}
 	else
 	{
-		m_pTreeModel->setRootItem(pTreeItem);
+		m_pItemModelInstrumentInfo->setRootItem(pTreeItem);
 	}
 
 

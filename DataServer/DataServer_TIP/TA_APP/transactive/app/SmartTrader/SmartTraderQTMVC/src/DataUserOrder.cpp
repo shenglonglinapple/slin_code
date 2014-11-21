@@ -7,9 +7,9 @@
 #include "Log4cppLogger.h"
 
 
-#include "OrderInfo.h"
+#include "OrderInfoHelper.h"
 #include "UserOrderInfo.h"
-#include "TreeItemOrder.h"
+#include "ItemOrderInfo.h"
 
 
 CDataUserOrder* CDataUserOrder::m_pInstance = 0;

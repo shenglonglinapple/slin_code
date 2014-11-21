@@ -3,7 +3,7 @@
 #include "ProjectQTInclude.h"
 #include "ProjectCommonData.h"
 
-#include "OrderInfo.h"
+#include "OrderInfoHelper.h"
 #include "UserOrderInfo.h"
 #include "OrderInfoWidget.h"
 #include "SignalSlotManager.h"

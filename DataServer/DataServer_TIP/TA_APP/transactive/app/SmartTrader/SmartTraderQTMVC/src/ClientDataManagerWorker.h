@@ -17,10 +17,10 @@
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
 
-class CContractInfo;
-class CTreeItemContract;
-class CQuotesInfo;
-class CTreeItemQuotes;
+class CInstrumentInfoHelper;
+class CItemInstrumentInfo;
+class CUserInstrumentInfoHelper;
+class CItemUserInstrumentInfo;
 class CClientLoginParam;
 class CSmartTraderClient;
 class COrderInfo;
@@ -50,10 +50,10 @@ private:
 
 public slots:
 	void slotClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
-	void slotAddContractToSmartQuotes(unsigned int nInstrumentID);
-	void slotRemoveContractFromSmartQuotes(unsigned int nInstrumentID);
-	void slotContractInfoWindowResetData();
-	void slotQuotesTableViewColumnsChanged();
+	void slotAddUserInstrument(unsigned int nInstrumentID);
+	void slotRemoveUserInstrument(unsigned int nInstrumentID);
+	void slotInstrumentViewResetData();
+	void slotUserInstrumentViewColumnsChanged();
 	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
 signals:
 	void signalLoginToServerResult(int nResult);
@@ -81,13 +81,13 @@ private:
 	void _UpdateOrderInfo(const Order &order);
 	void _MessageBoxOrderInfo(const Order &order, const std::string& strInfo);
 private:
-	void _Emit_SignalQuotesInfoChanged();
+	void _Emit_SignalUserInstrumentInfoChanged();
 	void _Emit_SignalOrderInfoChanged();
 	void _Emit_SignalContractInfoChanged();
 	void _Emit_SignalHistoryDataChanged(unsigned int nInstrumentID);
 private:
 	CClientLoginParam* m_pClientLoginParam;
-	CSmartTraderClient* m_pMyTradeClient;
+	CSmartTraderClient* m_pSmartTraderClient;
 
 private:
 	int m_nDoTest;

@@ -11,25 +11,26 @@
 #include "ProjectLogHelper.h"
 #include "ConfigInfo.h"
 
-#include "ContractInfo.h"
-#include "TreeItemContract.h"
 
-#include "QuotesInfo.h"
-#include "TreeItemQuotes.h"
+#include "UserInstrumentInfoHelper.h"
+#include "ItemUserInstrumentInfo.h"
 
-#include "OrderInfo.h"
+#include "OrderInfoHelper.h"
 #include "UserOrderInfo.h"
-#include "TreeItemOrder.h"
+#include "ItemOrderInfo.h"
 
 #include "HistoryDataManager.h"
 #include "Log4cppLogger.h"
 
 #include "DataTotalInstrument.h"
-#include "DataContract.h"
-#include "DataUserContract.h"
+#include "DataInstrument.h"
+#include "DataUserInstrument.h"
 #include "DataUserAccount.h"
 #include "DataUserOrder.h"
 #include "DataUserHistoryBar.h"
+
+#include "InstrumentInfoHelper.h"
+#include "ItemInstrumentInfo.h"
 
 #include "SignalSlotManager.h"
 
@@ -58,10 +59,10 @@ void CClientDataManagerWorker::removeInstance()
 CClientDataManagerWorker::CClientDataManagerWorker(void)
 {	
 	m_pClientLoginParam = NULL;
-	m_pMyTradeClient = NULL;
+	m_pSmartTraderClient = NULL;
 
-	CDataContract::getInstance();
-	CDataUserContract::getInstance();
+	CDataInstrument::getInstance();
+	CDataUserInstrument::getInstance();
 	CDataUserOrder::getInstance();
 	CDataUserHistoryBar::getInstance();
 	CDataTotalInstrument::getInstance();
@@ -81,8 +82,8 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 	CDataTotalInstrument::removeInstance();
 	CDataUserHistoryBar::removeInstance();
 	CDataUserOrder::removeInstance();
-	CDataUserContract::removeInstance();
-	CDataContract::removeInstance();
+	CDataUserInstrument::removeInstance();
+	CDataInstrument::removeInstance();
 
 }
 
@@ -112,19 +113,15 @@ void CClientDataManagerWorker::onInstrumentDownloaded( const Instrument& instrum
 	nGetInstrumentID = instrument.getInstrumentID();
 	
 	CDataTotalInstrument::getInstance().onInstrumentDownloaded(instrument);
-	CDataContract::getInstance().onInstrumentDownloaded(instrument);
+	CDataInstrument::getInstance().onInstrumentDownloaded(instrument);
 
-	{
-		//subscribeMarketData user hot Instrument
-		QStringList LstUserInstrument;
-		QString strUserInstruemt = QString("%1").arg(nGetInstrumentID);
-		LstUserInstrument = CConfigInfo::getInstance().getLstUserInstrument();
-		if (LstUserInstrument.contains(strUserInstruemt))
-		{
-			slotAddContractToSmartQuotes(nGetInstrumentID);
-		}
 	
-	}
+	//subscribeMarketData user Instrument
+	QString strUserInstruemt = QString("%1").arg(nGetInstrumentID);
+	if (CConfigInfo::getInstance().checkUserInstrument(strUserInstruemt))
+	{
+		slotAddUserInstrument(nGetInstrumentID);
+	}	
 }
 
 
@@ -134,15 +131,15 @@ void CClientDataManagerWorker::onMarketDataUpdate(const Instrument& instrument)
 
 	
 	{
-		CDataUserContract::getInstance().onMarketDataUpdate(instrument);
-		_Emit_SignalQuotesInfoChanged();
+		CDataUserInstrument::getInstance().onMarketDataUpdate(instrument);
+		_Emit_SignalUserInstrumentInfoChanged();
 	}
 
 
 
 }
 
-void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstrumentID )
+void CClientDataManagerWorker::slotAddUserInstrument( unsigned int nInstrumentID )
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -169,23 +166,19 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		CConfigInfo::getInstance().addInstrument(strUserInstruemt);
 		//subscribe this instrument
 		MYLOG4CPP_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
-		m_pMyTradeClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
+		m_pSmartTraderClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 
-	}
-
-	{
-		//remove later
-		//remove nInstrumentID from m_pTreeItemContract_Root
-		//class: CQuotesTableView signals:	void signalContractInfoWindowResetData();
-		//CClientDataManagerWorker::slotContractInfoWindowResetData()
 	}
 
 
 	{
-		CDataUserContract::getInstance().addByData(pInstrumentRef);
-		_Emit_SignalQuotesInfoChanged();
+		/*	
+		add to CDataUserInstrument
+		remove from CDataInstrument will at slotInstrumentViewResetData()
+		*/
+		CDataUserInstrument::getInstance().addByData(pInstrumentRef);
+		_Emit_SignalUserInstrumentInfoChanged();
 	}
-	
 
 	{
 		//TODO. TTTTTTTTTTT historydata test
@@ -193,13 +186,13 @@ void CClientDataManagerWorker::slotAddContractToSmartQuotes( unsigned int nInstr
 		{
 			//time_t timeNow = m_pUtilityFun->strToDateTime("2014-08-23 20:06:09");
 			m_nDoTest = 1;
-			CDataUserHistoryBar::getInstance().createRequest(nInstrumentID, m_pMyTradeClient);
+			CDataUserHistoryBar::getInstance().createRequest(nInstrumentID, m_pSmartTraderClient);
 		}
 	}
-	
+		
 }
 
-void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int nInstrumentID )
+void CClientDataManagerWorker::slotRemoveUserInstrument( unsigned int nInstrumentID )
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -224,7 +217,7 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 		//unsubscribe this instrument
 		MYLOG4CPP_DEBUG<<"unsubscribeMarketData"
 			<<" "<<"InstrumentID="<<pInstrumentRef->getInstrumentID();
-		m_pMyTradeClient->unsubscribeMarketData(pInstrumentRef->getInstrumentID());
+		m_pSmartTraderClient->unsubscribeMarketData(pInstrumentRef->getInstrumentID());
 
 		//save to config file
 		QString strInstrumentID = QString("%1").arg(pInstrumentRef->getInstrumentID());
@@ -232,40 +225,37 @@ void CClientDataManagerWorker::slotRemoveContractFromSmartQuotes( unsigned int n
 	}
 
 
-	//remove
+	//remove and add
 	{
-		CDataUserContract::getInstance().removeByData(pInstrumentRef);
-		_Emit_SignalQuotesInfoChanged();
-	}
-		
+		/*	
+		remove from CDataUserInstrument
+		add to CDataInstrument
+		*/
+		CDataUserInstrument::getInstance().removeByData(pInstrumentRef);
+		_Emit_SignalUserInstrumentInfoChanged();
 
-	//add
-	{
-		CDataContract::getInstance().addByData(pInstrumentRef);
+		CDataInstrument::getInstance().addByData(pInstrumentRef);
 		_Emit_SignalContractInfoChanged();
 	}
-
-
-	
 
 }
 
 
 void CClientDataManagerWorker::_InitTraderClient()
 {
-	m_pMyTradeClient = new CSmartTraderClient(*m_pClientLoginParam);
-	m_pMyTradeClient->setProcessRecvDataHandle(this);
+	m_pSmartTraderClient = new CSmartTraderClient(*m_pClientLoginParam);
+	m_pSmartTraderClient->setProcessRecvDataHandle(this);
 }
 void CClientDataManagerWorker::_UnInitTraderClient()
 {
-	if (NULL != m_pMyTradeClient)
+	if (NULL != m_pSmartTraderClient)
 	{
 		//TODO. debug mode will crash
 		//m_pMyTradeClient->logoff();
-		m_pMyTradeClient->setProcessRecvDataHandle(NULL);
+		m_pSmartTraderClient->setProcessRecvDataHandle(NULL);
 
-		delete m_pMyTradeClient;
-		m_pMyTradeClient = NULL;
+		delete m_pSmartTraderClient;
+		m_pSmartTraderClient = NULL;
 	}
 }
 
@@ -283,7 +273,7 @@ void CClientDataManagerWorker::slotClientLoginParamChanged( CClientLoginParam* p
 
 	_UnInitTraderClient();
 	_InitTraderClient();
-	nloginToServerRes = m_pMyTradeClient->loginToServer();
+	nloginToServerRes = m_pSmartTraderClient->loginToServer();
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
@@ -314,19 +304,19 @@ void CClientDataManagerWorker::_Test()
 	
 	CDataTotalInstrument::getInstance()._Test();
 	
-	CDataContract::getInstance()._Test();
+	CDataInstrument::getInstance()._Test();
 	_Emit_SignalContractInfoChanged();
 
 
-	CDataUserContract::getInstance()._Test();
-	_Emit_SignalQuotesInfoChanged();
+	CDataUserInstrument::getInstance()._Test();
+	_Emit_SignalUserInstrumentInfoChanged();
 
 	_Emit_SignalOrderInfoChanged();
 }
 
 
 
-void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
+void CClientDataManagerWorker::slotUserInstrumentViewColumnsChanged()
 {
 	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker process slotQuotesTableViewColumnsChanged";
 
@@ -339,8 +329,8 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 	lstUserInstrument = CConfigInfo::getInstance().getLstUserInstrument();
 	
 	{
-		CDataUserContract::removeInstance();
-		CDataUserContract::getInstance();
+		CDataUserInstrument::removeInstance();
+		CDataUserInstrument::getInstance();
 	}
 
 	{
@@ -352,11 +342,11 @@ void CClientDataManagerWorker::slotQuotesTableViewColumnsChanged()
 			pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 			if (NULL != pInstrumentRef)
 			{
-				CDataUserContract::getInstance().addByData(pInstrumentRef);
+				CDataUserInstrument::getInstance().addByData(pInstrumentRef);
 			}//if
 		}//foreach
 
-		_Emit_SignalQuotesInfoChanged();
+		_Emit_SignalUserInstrumentInfoChanged();
 	}
 
 	return;
@@ -479,71 +469,71 @@ void CClientDataManagerWorker::slotNewOrder( CUserOrderInfo* pUserOrderInfo)
 	case Order::MARKET:
 		if (Order::BUY == nSide)
 		{
-			m_pMyTradeClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+			m_pSmartTraderClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
 		}
 		else if (Order::SELL == nSide)
 		{
-			m_pMyTradeClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+			m_pSmartTraderClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
 		}
 		break;
 	case Order::MARKET_FAK:
 		if (Order::BUY == nSide)
 		{
-			m_pMyTradeClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+			m_pSmartTraderClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
 		}
 		else if (Order::SELL == nSide)
 		{
-			m_pMyTradeClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+			m_pSmartTraderClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
 		}
 		break;
 	case Order::MARKET_FOK:
 		if (Order::BUY == nSide)
 		{
-			m_pMyTradeClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+			m_pSmartTraderClient->buyMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
 		}
 		else if (Order::SELL == nSide)
 		{
-			m_pMyTradeClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
+			m_pSmartTraderClient->sellMarket(*pAccount, *pInstrumentGet, quantity, 0, 0);
 		}
 		break;
 	case Order::LIMIT:
 		if (Order::BUY == nSide)
 		{
-			m_pMyTradeClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		else if (Order::SELL == nSide)
 		{
-			m_pMyTradeClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		break;
 	case Order::LIMIT_FAK:
 		if (Order::BUY == nSide)
 		{
-			m_pMyTradeClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		else if (Order::SELL == nSide)
 		{
-			m_pMyTradeClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		break;
 	case Order::LIMIT_FOK:
 		if (Order::BUY == nSide)
 		{
-			m_pMyTradeClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->buyLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		else if (Order::SELL == nSide)
 		{
-			m_pMyTradeClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->sellLimit(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		break;
 	case Order::STOP:
 		if (Order::BUY == nSide)
 		{
-			m_pMyTradeClient->buyStop(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->buyStop(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		else if (Order::SELL == nSide)
 		{
-			m_pMyTradeClient->sellStop(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
+			m_pSmartTraderClient->sellStop(*pAccount, *pInstrumentGet, fPrice, quantity, 0, 0);
 		}
 		break;
 	case Order::UNKNOWN:
@@ -584,7 +574,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 
 }
 
-void CClientDataManagerWorker::slotContractInfoWindowResetData()
+void CClientDataManagerWorker::slotInstrumentViewResetData()
 {
 	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker process slotContractInfoWindowResetData";
 
@@ -612,8 +602,11 @@ void CClientDataManagerWorker::slotContractInfoWindowResetData()
 			}
 			else
 			{
-				//find ok
-				CDataContract::getInstance().removeByData(pInstrumentRef);
+				/*	
+				instrument have add to CDataUserInstrument
+				remove from CDataInstrument
+				*/				
+				CDataInstrument::getInstance().removeByData(pInstrumentRef);
 			}//if
 
 		}//foreach
@@ -627,20 +620,20 @@ void CClientDataManagerWorker::slotContractInfoWindowResetData()
 
 
 
-void CClientDataManagerWorker::_Emit_SignalQuotesInfoChanged()
+void CClientDataManagerWorker::_Emit_SignalUserInstrumentInfoChanged()
 {
 
-	CTreeItemQuotes* pTreeItemQuotes = NULL;
-	pTreeItemQuotes = CDataUserContract::getInstance().getRootHandle();
+	CItemUserInstrumentInfo* pItemUserInstrumentInfo = NULL;
+	pItemUserInstrumentInfo = CDataUserInstrument::getInstance().getRootHandle();
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
-		<<" "<<"fun:"<<"_Emit_SignalQuotesInfoChanged()"
+		<<" "<<"fun:"<<"_Emit_SignalUserInstrumentInfoChanged()"
 		<<" "<<"emit"
-		<<" "<<"signalQuotesInfoChanged(CTreeItemQuotes*)"
+		<<" "<<"signalUserInstrumentInfoChanged(CItemUserInstrumentInfo*)"
 		<<" "<<"param:"
-		<<" "<<"pTreeItemQuotes=0x"<<pTreeItemQuotes;
+		<<" "<<"pItemUserInstrumentInfo=0x"<<pItemUserInstrumentInfo;
 
-	CSignalSlotManager::getInstance().emit_signalQuotesInfoChanged(pTreeItemQuotes);
+	CSignalSlotManager::getInstance().emit_signalUserInstrumentInfoChanged(pItemUserInstrumentInfo);
 	
 }
 void CClientDataManagerWorker::_Emit_SignalOrderInfoChanged()
@@ -662,8 +655,8 @@ void CClientDataManagerWorker::_Emit_SignalOrderInfoChanged()
 
 void CClientDataManagerWorker::_Emit_SignalContractInfoChanged()
 {
-	CTreeItemContract* pTreeItemContract_Root = NULL;
-	pTreeItemContract_Root = CDataContract::getInstance().getRootHandle();
+	CItemInstrumentInfo* pTreeItemContract_Root = NULL;
+	pTreeItemContract_Root = CDataInstrument::getInstance().getRootHandle();
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
@@ -673,7 +666,7 @@ void CClientDataManagerWorker::_Emit_SignalContractInfoChanged()
 		<<" "<<"param:"
 		<<" "<<"pTreeItemContract_Root=0x"<<pTreeItemContract_Root;
 	
-	CSignalSlotManager::getInstance().emit_signalContractInfoChanged(pTreeItemContract_Root);
+	CSignalSlotManager::getInstance().emit_signalInstrumentInfoChanged(pTreeItemContract_Root);
 }
 
 void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInstrumentID)

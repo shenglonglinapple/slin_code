@@ -1,23 +1,23 @@
 #include "ClientMainWindow.h"
 
+
 #include <QtGui/QTabWidget>
-#include "ProjectQTInclude.h"
 #include "Order.h"
 
+#include "ProjectQTInclude.h"
+
 #include "ClientDataManagerWorker.h"
-
-#include "BottomDockWidget.h"
-#include "MidSubWidget.h"
-#include "SmartHotQuotesWindow.h"
-#include "QuotesTableView.h"
-
-#include "ContractInfoWindow.h"
-#include "CreateNewOrderDialog.h"
-#include "TreeItemOrder.h"
-#include "TreeItemContract.h"
 #include "HistoryDataManager.h"
 
+
 #include "MainWindowToolBar.h"
+#include "InstrumentInfoView.h"
+#include "UserInstrumentInfoView.h"
+#include "MidSubWidget.h"
+#include "BottomDockWidget.h"
+#include "SmartHotQuotesWindow.h"
+#include "CreateNewOrderDialog.h"
+
 #include "SignalSlotManager.h"
 
 #include "Log4cppLogger.h"
@@ -130,7 +130,7 @@ void CClientMainWindow::setupUi()
 	
 	//add Samrt hot Quotes window
 	m_pLeftDockWidget = new CLeftDockWidget(this);
-	CSignalSlotManager::getInstance().setSignalSlot_QuotesInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pLeftDockWidget);
+	CSignalSlotManager::getInstance().setSignalSlot_UserInstrumentInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pLeftDockWidget);
 
 	m_pBottomDockWidget = new CBottomDockWidget(this);
 	CSignalSlotManager::getInstance().setSignalSlot_OrderInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pBottomDockWidget);

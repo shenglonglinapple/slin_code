@@ -14,9 +14,9 @@ class QTabWidget;
 
 QT_END_NAMESPACE
 
-class CTreeModelQuotes;
-class CQuotesTableView;
-class CTreeItemQuotes;
+class CItemModelUserInstrumentInfo;
+class CUserInstrumentInfoView;
+class CItemUserInstrumentInfo;
 
 //class IconDelegate;
 class CLeftDockWidget : public QWidget
@@ -36,17 +36,7 @@ protected:
 
 	
 public slots:
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
-	fun send signals: slotAddContractToSmartQuotes()
-
-	class: CSmartHotQuotesWindow
-	public slots: 
-	void slotQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
-	*/
-	void slotQuotesInfoChanged(CTreeItemQuotes* pTreeItem);
+	void slotUserInstrumentInfoChanged(CItemUserInstrumentInfo* pTreeItem);
 
 signals:
 
@@ -58,10 +48,10 @@ private:
 	QVBoxLayout* m_pVBoxLayout;
 	QTabWidget* m_pTabWidget;
 private:
-	CTreeModelQuotes* m_pTreeModelQuotes;
+	CItemModelUserInstrumentInfo* m_pItemModelUserInstrumentInfo;
 public:
 	//IconDelegate* m_pIconDelegate;
-	CQuotesTableView* m_pTableView_Quotes;
+	CUserInstrumentInfoView* m_pUserInstrumentInfoView;
 
 };
 

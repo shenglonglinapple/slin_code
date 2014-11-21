@@ -1,5 +1,5 @@
-#ifndef __CLASS_TREE_MODEL_QUOTES_HH__
-#define __CLASS_TREE_MODEL_QUOTES_HH__
+#ifndef __CLASS_ITEM_MODEL_ORDER_INFO_HH__
+#define __CLASS_ITEM_MODEL_ORDER_INFO_HH__
 
 
 
@@ -7,19 +7,16 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
-#include "TreeItemQuotes.h"
 
-//QT_BEGIN_NAMESPACE
-////QT_END_NAMESPACE
+class CTreeItemOrder;
 
-
-class CTreeModelQuotes : public QAbstractItemModel
+class CTreeModelOrder : public QAbstractItemModel
 {
     Q_OBJECT
 
 public:
-    CTreeModelQuotes(QObject* parent = 0);
-    ~CTreeModelQuotes();
+    CTreeModelOrder(QObject* parent = 0);
+    ~CTreeModelOrder();
 public:
     QVariant data(const QModelIndex &index, int role) const;
 
@@ -48,14 +45,14 @@ public:
 
 	bool removeRows(int position, int rows, const QModelIndex &parent = QModelIndex());;
 public:
-	void setRootItem(CTreeItemQuotes* rootItem);
+	void setRootItem(CTreeItemOrder* rootItem);
 private:
-	CTreeItemQuotes* _GetItem( const QModelIndex& index ) const;
+	CTreeItemOrder* _GetItem( const QModelIndex& index ) const;
 private:
-    CTreeItemQuotes* m_pRootItemCopy;
+    CTreeItemOrder* m_pRootItemRef;
 };
 
 
 //QT_END_NAMESPACE
 
-#endif//__CLASS_TREE_MODEL_CONTRACT_HH__
+#endif//__CLASS_ITEM_MODEL_ORDER_INFO_HH__

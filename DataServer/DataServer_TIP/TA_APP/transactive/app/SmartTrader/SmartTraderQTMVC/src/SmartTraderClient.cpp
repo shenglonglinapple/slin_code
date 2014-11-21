@@ -2,8 +2,6 @@
 
 
 #include "IProcessRecvData.h"
-#include "TreeItemContract.h"
-#include "ContractInfo.h"
 
 #include "Log4cppLogger.h"
 
@@ -83,7 +81,7 @@ void CSmartTraderClient::onInstrumentDownloaded( const Instrument &instrument )
 		m_pProcessRecvDataHandle->onInstrumentDownloaded(instrument);
 	}
 	//TODO.ForTest
-	this->subscribeMarketData(instrument);
+	//this->subscribeMarketData(instrument);
 }
 
 

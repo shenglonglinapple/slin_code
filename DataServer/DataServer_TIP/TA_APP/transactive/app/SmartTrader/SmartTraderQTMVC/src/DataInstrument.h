@@ -1,5 +1,5 @@
-#ifndef __CLASS_DATA_CONTRACT_HH__
-#define __CLASS_DATA_CONTRACT_HH__
+#ifndef __CLASS_DATA_INSTRUMENT_HH__
+#define __CLASS_DATA_INSTRUMENT_HH__
 
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
@@ -7,21 +7,21 @@
 #include "Instrument.h"
 
 class CProjectLogHelper;
-class CContractInfo;
-class CTreeItemContract;
+class CInstrumentInfoHelper;
+class CItemInstrumentInfo;
 
-class CDataContract 
+class CDataInstrument 
 { 
 public:
-	static CDataContract& getInstance();
+	static CDataInstrument& getInstance();
 	static void removeInstance();
 
 private:
-	static CDataContract* m_pInstance;
+	static CDataInstrument* m_pInstance;
 	static QMutex m_mutexInstance;
 private: 
-	CDataContract(); 
-	virtual ~CDataContract(); 
+	CDataInstrument(); 
+	virtual ~CDataInstrument(); 
 
 private: 
 	void _InitMVCDataForContract();
@@ -30,12 +30,12 @@ public:
 	void onInstrumentDownloaded( const Instrument& instrument );
 	void addByData(Instrument* pInstrument);
 	void removeByData(Instrument* pInstrument);
-	CTreeItemContract* getRootHandle();
+	CItemInstrumentInfo* getRootHandle();
 	void _Test();
 private:
 	QMutex m_mutexForNodeRootContract;
-	CContractInfo* m_pContractInfo;
-	CTreeItemContract* m_pTreeItemContract_Root;//total
+	CInstrumentInfoHelper* m_pContractInfo;
+	CItemInstrumentInfo* m_pTreeItemContract_Root;//total
 private:
 	CProjectLogHelper* m_pProjectLogHelper;
 
@@ -46,7 +46,7 @@ private:
 
 
 
-#endif//__CLASS_DATA_CONTRACT_HH__
+#endif//__CLASS_DATA_INSTRUMENT_HH__
 
 
 

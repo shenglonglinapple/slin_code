@@ -3,7 +3,7 @@
 
 
 #include <QtGui/QToolBar>
-
+#include "Bar.h"
 
 class CMainWindowToolBar : public QToolBar 
 { 
@@ -12,9 +12,19 @@ public:
 	CMainWindowToolBar(QWidget *parent = 0); 
 	virtual ~CMainWindowToolBar(); 
 
+public slots:
+	void slotActionM1Triggered();
+	void slotActionM5Triggered();
+	void slotActionM15Triggered();
+	void slotActionM30Triggered();
+	void slotActionH1Triggered();
+	void slotActionD1Triggered();
+	void slotActionW1Triggered();
+	void slotActionMNTriggered();
 private:
 	void _CreateActions();
 	void _AddAction();
+	void _CreateConnect();
 	void translateLanguage();
 private:
 	QAction* m_pAction_BarInfo_M1;

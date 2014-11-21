@@ -56,9 +56,9 @@ private:
 	QVBoxLayout* m_pVBoxLayout;
 	QTabWidget* m_pTabWidget;
 private:
-	CTreeModelOrder* m_pTreeModel_Order;
+	CTreeModelOrder* m_pTreeModel_OrderInfo;
 public:
-	QTableView* m_pTableView_Order;
+	QTableView* m_pTableView_OrderInfo;
 
 };
 

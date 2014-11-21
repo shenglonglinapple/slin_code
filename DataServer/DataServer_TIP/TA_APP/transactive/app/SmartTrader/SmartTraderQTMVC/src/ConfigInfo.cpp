@@ -264,5 +264,19 @@ int CConfigInfo::getColumnIndex_Change()
 	return m_nColumnIndex_Change;
 }
 
+bool CConfigInfo::checkUserInstrument( const QString& strInstrumentID )
+{
+	bool bFunRes = false;
+	//subscribeMarketData user hot Instrument
+	QStringList LstUserInstrument;
+	LstUserInstrument = CConfigInfo::getInstance().getLstUserInstrument();
+	if (LstUserInstrument.contains(strInstrumentID))
+	{
+		bFunRes = true;
+	}
+
+	return bFunRes;
+}
+
 //QT_END_NAMESPACE
 

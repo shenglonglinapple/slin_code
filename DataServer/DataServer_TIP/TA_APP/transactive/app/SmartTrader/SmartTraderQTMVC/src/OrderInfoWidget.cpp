@@ -2,7 +2,7 @@
 
 #include "ProjectQTInclude.h"
 #include "ProjectCommonData.h"
-#include "OrderInfo.h"
+#include "OrderInfoHelper.h"
 #include "UserOrderInfo.h"
 
 

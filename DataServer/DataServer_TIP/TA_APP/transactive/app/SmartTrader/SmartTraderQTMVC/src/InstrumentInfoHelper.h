@@ -1,5 +1,5 @@
-#ifndef __CLASS_CONTRACT_INFO_HH__
-#define __CLASS_CONTRACT_INFO_HH__
+#ifndef __CLASS_INSTRUEMNT_INFO_HELPER_HH__
+#define __CLASS_INSTRUEMNT_INFO_HELPER_HH__
 
 
 
@@ -12,13 +12,13 @@
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
 
-class CContractInfo 
+class CInstrumentInfoHelper 
 { 
 public: 
-	CContractInfo();
+	CInstrumentInfoHelper();
 
-	virtual ~CContractInfo(); 
-	CContractInfo& operator=(const CContractInfo& exchangeParam);
+	virtual ~CInstrumentInfoHelper(); 
+	CInstrumentInfoHelper& operator=(const CInstrumentInfoHelper& exchangeParam);
 
 public:
 	void setValue( const Instrument &instrument);
@@ -48,7 +48,7 @@ private:
 
 
 
-#endif//__CLASS_CONTRACT_INFO_HH__
+#endif//__CLASS_INSTRUEMNT_INFO_HELPER_HH__
 
 
 

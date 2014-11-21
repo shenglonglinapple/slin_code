@@ -1,4 +1,4 @@
-#include "QuotesTableView.h"
+#include "UserInstrumentInfoView.h"
 
 #include <QtGui/QMenu>
 #include <QtGui/QCursor>
@@ -6,12 +6,13 @@
 #include <QtCore/QEvent>
 #include <QtGui/QContextMenuEvent>
 
-#include "TreeItemQuotes.h"
+#include "ItemUserInstrumentInfo.h"
 #include "IconDelegate.h"
+#include "UserInstrumentInfoHeaderView.h"
 #include "CustomColumnsDialog.h"
-#include "ContractInfoWindow.h"
+#include "InstrumentInfoView.h"
 #include "CreateNewOrderDialog.h"
-#include "QuotesHHeaderView.h"
+
 #include "ConfigInfo.h"
 #include "UserOrderInfo.h"
 #include "SignalSlotManager.h"
@@ -30,16 +31,16 @@ static const std::string DEFVALUE_String_ActionCustomColumns = "CustomColumns";/
 
 static const std::string DEFAULT_STRING_VALUE_STRING_SPLIT = ",";
 
-CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
+CUserInstrumentInfoView::CUserInstrumentInfoView( QWidget* parent /*= 0*/ )
 :QTableView(parent)
 {
 	m_pHorizontalHeader = NULL;
 	m_pVerticalHeader = NULL;
-	m_pActionAddHotQuotes = NULL;
-	m_pActionRemoveHotQuotes = NULL;
+	m_pActionAddUserInstrument = NULL;
+	m_pActionRemoveUserInstrument = NULL;
 	m_pActionCustomColumns = NULL;
 	m_pCreateNewOrderDialog = NULL;
-	m_pContractInfoWindow = NULL;
+	m_pInstrumentInfoView = NULL;
 	m_pCustomColumnsDialog = NULL;
 	m_pIconDelegate_Column_Change = NULL;
 	m_nColumnIndex_Change = -1;
@@ -59,24 +60,24 @@ CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
 	this->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
 
 
-	m_pHorizontalHeader = new CQuotesHHeaderView(Qt::Horizontal, this);
+	m_pHorizontalHeader = new CUserInstrumentInfoHeaderView(Qt::Horizontal, this);
 	//m_pHorizontalHeader = this->horizontalHeader();
 	this->setHorizontalHeader(m_pHorizontalHeader);
 	m_pVerticalHeader = this->verticalHeader();
 
 
-	m_pActionAddHotQuotes = new QAction(QObject::tr(DEFVALUE_String_ActionAddHotQuotes.c_str()), this); 
-	m_pActionRemoveHotQuotes = new QAction(QObject::tr(DEFVALUE_String_ActionRemoveHotQuotes.c_str()), this); 
+	m_pActionAddUserInstrument = new QAction(QObject::tr(DEFVALUE_String_ActionAddHotQuotes.c_str()), this); 
+	m_pActionRemoveUserInstrument = new QAction(QObject::tr(DEFVALUE_String_ActionRemoveHotQuotes.c_str()), this); 
 	m_pActionCustomColumns = new QAction(QObject::tr(DEFVALUE_String_ActionCustomColumns.c_str()), this); 
 
 	m_pCreateNewOrderDialog = new CCreateNewOrderDialog(this);
 	m_pCreateNewOrderDialog->hide();
 	CSignalSlotManager::getInstance().setSignalSlot_NewOrder(m_pCreateNewOrderDialog, &(CClientDataManagerWorker::getInstance()));
 
-	m_pContractInfoWindow = new CContractInfoWindow(this);
-	m_pContractInfoWindow->hide();
-	CSignalSlotManager::getInstance().setSignalSlot_AddContractToSmartQuotes(m_pContractInfoWindow, &(CClientDataManagerWorker::getInstance()));
-	CSignalSlotManager::getInstance().setSignalSlot_ContractInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pContractInfoWindow);
+	m_pInstrumentInfoView = new CInstrumentInfoView(this);
+	m_pInstrumentInfoView->hide();
+	CSignalSlotManager::getInstance().setSignalSlot_AddUserInstrument(m_pInstrumentInfoView, &(CClientDataManagerWorker::getInstance()));
+	CSignalSlotManager::getInstance().setSignalSlot_InstrumentInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pInstrumentInfoView);
 
 	
 
@@ -91,18 +92,18 @@ CQuotesTableView::CQuotesTableView( QWidget* parent /*= 0*/ )
 	m_strSelectedColumnsForCheck.clear();
 }
 
-CQuotesTableView::~CQuotesTableView()
+CUserInstrumentInfoView::~CUserInstrumentInfoView()
 {
-	if (NULL != m_pActionAddHotQuotes)
+	if (NULL != m_pActionAddUserInstrument)
 	{
-		delete m_pActionAddHotQuotes;
-		m_pActionAddHotQuotes = NULL;
+		delete m_pActionAddUserInstrument;
+		m_pActionAddUserInstrument = NULL;
 	}
 
-	if (NULL != m_pActionRemoveHotQuotes)
+	if (NULL != m_pActionRemoveUserInstrument)
 	{
-		delete m_pActionRemoveHotQuotes;
-		m_pActionRemoveHotQuotes = NULL;
+		delete m_pActionRemoveUserInstrument;
+		m_pActionRemoveUserInstrument = NULL;
 	}
 
 	if (NULL != m_pActionCustomColumns)
@@ -124,10 +125,10 @@ CQuotesTableView::~CQuotesTableView()
 	}
 	
 
-	if (NULL != m_pContractInfoWindow)
+	if (NULL != m_pInstrumentInfoView)
 	{
-		delete m_pContractInfoWindow;
-		m_pContractInfoWindow = NULL;
+		delete m_pInstrumentInfoView;
+		m_pInstrumentInfoView = NULL;
 	}
 
 	if (NULL != m_pCustomColumnsDialog)
@@ -149,16 +150,16 @@ CQuotesTableView::~CQuotesTableView()
 }
 
 
-void CQuotesTableView::_CreateConnect()
+void CUserInstrumentInfoView::_CreateConnect()
 {
 
 	//connect action
-	QObject::connect(m_pActionAddHotQuotes, 
+	QObject::connect(m_pActionAddUserInstrument, 
 		SIGNAL(triggered()), 
 		this, 
 		SLOT(slotActionAddHotQuotesTriggered())); 
 
-	QObject::connect(m_pActionRemoveHotQuotes, 
+	QObject::connect(m_pActionRemoveUserInstrument, 
 		SIGNAL(triggered()), 
 		this, 
 		SLOT(slotActionRemoveHotQuotesTriggered())); 
@@ -182,7 +183,7 @@ void CQuotesTableView::_CreateConnect()
 }
 
 
-void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
+void CUserInstrumentInfoView::contextMenuEvent( QContextMenuEvent* pEvent )
 {
 
 	MYLOG4CPP_DEBUG<<"CQuotesTableView process contextMenuEvent"
@@ -196,13 +197,13 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 			<<" "<<"emit"
 			<<" "<<"signalContractInfoWindowResetData()";
 
-		CSignalSlotManager::getInstance().emit_signalContractInfoWindowResetData();
+		CSignalSlotManager::getInstance().emit_signalInstrumentViewResetData();
 	}
 
 	QPoint point;
 	QCursor currentCursor;
 	QModelIndex nCurrentTreeItemIndex;
-	CTreeItemQuotes* pCurrentTreeItem = NULL;
+	CItemUserInstrumentInfo* pCurrentTreeItem = NULL;
 	unsigned int  nInstrumentID = 0;
 	QString strLogInfo;
 
@@ -215,13 +216,13 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 		//treeview line no data
 		//set menu pos
 		QMenu menuRightClieck(this);
-		menuRightClieck.addAction(m_pActionAddHotQuotes);	//first ContractInfoWindow reset data
+		menuRightClieck.addAction(m_pActionAddUserInstrument);	//first ContractInfoWindow reset data
 		menuRightClieck.exec(QCursor::pos());
 		return;
 	}
 
 	//treeview line have data
-	pCurrentTreeItem = (CTreeItemQuotes*)nCurrentTreeItemIndex.internalPointer();
+	pCurrentTreeItem = (CItemUserInstrumentInfo*)nCurrentTreeItemIndex.internalPointer();
 	MYLOG4CPP_DEBUG<<"CQuotesTableView::contextMenuEvent"
 		<<" "<<"getInstrumentID="<<pCurrentTreeItem->getInstrumentID()
 		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
@@ -230,8 +231,8 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 
 	//set menu pos
 	QMenu menuRightClieck(this);
-	menuRightClieck.addAction(m_pActionAddHotQuotes);	//first ContractInfoWindow reset data
-	menuRightClieck.addAction(m_pActionRemoveHotQuotes);
+	menuRightClieck.addAction(m_pActionAddUserInstrument);	//first ContractInfoWindow reset data
+	menuRightClieck.addAction(m_pActionRemoveUserInstrument);
 	menuRightClieck.addAction(m_pActionCustomColumns);
 	//menuRightClieck.exec(currentCursor.pos());
 	menuRightClieck.exec(QCursor::pos());
@@ -239,7 +240,7 @@ void CQuotesTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 }
 
 
-void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
+void CUserInstrumentInfoView::slotActionRemoveHotQuotesTriggered()
 {
 	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionRemoveHotQuotesTriggered";
 
@@ -249,7 +250,7 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 	Qt::ItemFlags nFlagsTreeItem;
 	unsigned int nInstrumentID = 0;
 	QModelIndex nCurrentTreeItemIndex;
-	CTreeItemQuotes* pCurrentTreeItem = NULL;
+	CItemUserInstrumentInfo* pCurrentTreeItem = NULL;
 	QString strLogInfo;
 
 
@@ -258,7 +259,7 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 	{
 		return;
 	}
-	pCurrentTreeItem = (CTreeItemQuotes*)nCurrentTreeItemIndex.internalPointer();
+	pCurrentTreeItem = (CItemUserInstrumentInfo*)nCurrentTreeItemIndex.internalPointer();
 	nInstrumentID = pCurrentTreeItem->getInstrumentID();
 
 	//strLogInfo = QString("contextMenuEvent nInstrumentID=%1").arg(nInstrumentID);
@@ -281,11 +282,11 @@ void CQuotesTableView::slotActionRemoveHotQuotesTriggered()
 
 	pModel->removeRow(nCurrentTreeItemIndex.row(), nCurrentTreeItemIndex.parent());
 
-	CSignalSlotManager::getInstance().emit_signalRemoveContractFromSmartQuotes(nInstrumentID);
+	CSignalSlotManager::getInstance().emit_signalRemoveUserInstrument(nInstrumentID);
 
 }
 
-void CQuotesTableView::slotActionAddHotQuotesTriggered()
+void CUserInstrumentInfoView::slotActionAddHotQuotesTriggered()
 {
 	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionAddHotQuotesTriggered";
 
@@ -294,20 +295,20 @@ void CQuotesTableView::slotActionAddHotQuotesTriggered()
 	QCursor currentCursor = this->cursor(); 
 	currentCursor.pos();
 
-	m_pContractInfoWindow->move(QCursor::pos());
-	m_pContractInfoWindow->show();
+	m_pInstrumentInfoView->move(QCursor::pos());
+	m_pInstrumentInfoView->show();
 
 }
 
 
-void CQuotesTableView::slotActionCustomColumnsTriggered()
+void CUserInstrumentInfoView::slotActionCustomColumnsTriggered()
 {
 	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionCustomColumnsTriggered";
 	m_pCustomColumnsDialog->show();
 }
 
 
-void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
+void CUserInstrumentInfoView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 {
 	if (Qt::LeftButton == pEvent->button())
 	{
@@ -315,12 +316,12 @@ void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 
 		QAbstractItemModel* pModel = NULL;
 		QModelIndex nCurrentTreeItemIndex;
-		CTreeItemQuotes* pCurrentTreeItem = NULL;
+		CItemUserInstrumentInfo* pCurrentTreeItem = NULL;
 		QPoint point = pEvent->pos(); //get Pos
 		QCursor currentCursor = this->cursor(); 
 
 		nCurrentTreeItemIndex = this->currentIndex();
-		pCurrentTreeItem = (CTreeItemQuotes*)nCurrentTreeItemIndex.internalPointer();
+		pCurrentTreeItem = (CItemUserInstrumentInfo*)nCurrentTreeItemIndex.internalPointer();
 		pModel = this->model();
 
 		m_pUserOrderInfo->setDataByItem(pCurrentTreeItem);
@@ -338,7 +339,7 @@ void CQuotesTableView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 }
 
 
-void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableColums, QStringList lstSelectedColumns )
+void CUserInstrumentInfoView::slotModifySelectedColumns( QStringList lstAllAvailableColums, QStringList lstSelectedColumns )
 {
 	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotModifySelectedColumns"
 		<<" "<<"param:"
@@ -375,13 +376,13 @@ void CQuotesTableView::slotModifySelectedColumns( QStringList lstAllAvailableCol
 			<<" "<<"emit"
 			<<" "<<"signalQuotesTableViewColumnsChanged()";
 
-		CSignalSlotManager::getInstance().emit_signalQuotesTableViewColumnsChanged();
+		CSignalSlotManager::getInstance().emit_signalUserInstrumentViewColumnsChanged();
 	}
 	
 
 }
 
-void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
+void CUserInstrumentInfoView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 {
 	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotMouseRightClickInHHeaderView"
 		<<" "<<"param:"
@@ -394,13 +395,13 @@ void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 			<<" "<<"emit"
 			<<" "<<"signalContractInfoWindowResetData()";
 
-		CSignalSlotManager::getInstance().emit_signalContractInfoWindowResetData();
+		CSignalSlotManager::getInstance().emit_signalInstrumentViewResetData();
 	}
 
 	//set menu pos
 	QMenu menuRightClieck(this);
-	menuRightClieck.addAction(m_pActionAddHotQuotes);	//first ContractInfoWindow reset data
-	menuRightClieck.addAction(m_pActionRemoveHotQuotes);
+	menuRightClieck.addAction(m_pActionAddUserInstrument);	//first ContractInfoWindow reset data
+	menuRightClieck.addAction(m_pActionRemoveUserInstrument);
 	menuRightClieck.addAction(m_pActionCustomColumns);
 	//menuRightClieck.exec(currentCursor.pos());
 	menuRightClieck.exec(QCursor::pos());
@@ -413,7 +414,7 @@ void CQuotesTableView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-bool CQuotesTableView::_CheckIsColumnModified(const QStringList& lstAllAvailableColums, const QStringList& lstSelectedColumns)
+bool CUserInstrumentInfoView::_CheckIsColumnModified(const QStringList& lstAllAvailableColums, const QStringList& lstSelectedColumns)
 {
 	bool bIsColumnModified = false;
 	QString strNewSelectedColumnsForCheck;

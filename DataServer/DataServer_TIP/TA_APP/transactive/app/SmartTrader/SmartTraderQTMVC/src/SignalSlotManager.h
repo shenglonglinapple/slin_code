@@ -12,8 +12,8 @@
 
 //Data
 class CUserOrderInfo;
-class CTreeItemContract;
-class CTreeItemQuotes;
+class CItemInstrumentInfo;
+class CItemUserInstrumentInfo;
 class CTreeItemOrder;
 class CHistoryDataManager;
 class CClientLoginParam;
@@ -24,9 +24,9 @@ class CClientLoginDialog;
 class CMidSubWidget;
 class CBottomDockWidget;
 class CLeftDockWidget;
-class CQuotesTableView;
+class CUserInstrumentInfoView;
 class CCreateNewOrderDialog;
-class CContractInfoWindow;
+class CInstrumentInfoView;
 
 
 
@@ -90,62 +90,62 @@ public:
 
 	//////////////////////////////////////////////////////
 private:
-	CClientDataManagerWorker* m_pSignal_QuotesInfoChanged;
-	CLeftDockWidget* m_pSlot_QuotesInfoChanged;
+	CClientDataManagerWorker* m_pSignal_UserInstrumentInfoChanged;
+	CLeftDockWidget* m_pSlot_UserInstrumentInfoChanged;
 public:
-	void setSignalSlot_QuotesInfoChanged(CClientDataManagerWorker* pSignal, CLeftDockWidget* pSlot);
+	void setSignalSlot_UserInstrumentInfoChanged(CClientDataManagerWorker* pSignal, CLeftDockWidget* pSlot);
 public slots:
-	void slotQuotesInfoChanged(CTreeItemQuotes* pParam);
+	void slotUserInstrumentInfoChanged(CItemUserInstrumentInfo* pParam);
 signals:
-	void signalQuotesInfoChanged(CTreeItemQuotes* pParam);
+	void signalUserInstrumentInfoChanged(CItemUserInstrumentInfo* pParam);
 public:
-	void emit_signalQuotesInfoChanged(CTreeItemQuotes* pParam);
+	void emit_signalUserInstrumentInfoChanged(CItemUserInstrumentInfo* pParam);
 	//////////////////////////////////////////////////////	
 
 
 	//////////////////////////////////////////////////////
 private:
-	CQuotesTableView* m_pSignal_QuotesTableViewColumnsChanged;
-	CClientDataManagerWorker* m_pSlot_QuotesTableViewColumnsChanged;
+	CUserInstrumentInfoView* m_pSignal_UserInstrumentViewColumnsChanged;
+	CClientDataManagerWorker* m_pSlot_UserInstrumentViewColumnsChanged;
 public:
-	void setSignalSlot_QuotesTableViewColumnsChanged(CQuotesTableView* pSignal, CClientDataManagerWorker* pSlot);
+	void setSignalSlot_UserInstrumentViewColumnsChanged(CUserInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot);
 public slots:
-	void slotQuotesTableViewColumnsChanged();
+	void slotUserInstrumentViewColumnsChanged();
 signals:
-	void signalQuotesTableViewColumnsChanged();
+	void signalUserInstrumentViewColumnsChanged();
 public:
-	void emit_signalQuotesTableViewColumnsChanged();
+	void emit_signalUserInstrumentViewColumnsChanged();
 	//////////////////////////////////////////////////////	
 
 
 	//////////////////////////////////////////////////////
 private:
-	CQuotesTableView* m_pSignal_RemoveContractFromSmartQuotes;
-	CClientDataManagerWorker* m_pSlot_RemoveContractFromSmartQuotes;
+	CUserInstrumentInfoView* m_pSignal_RemoveUserInstrument;
+	CClientDataManagerWorker* m_pSlot_RemoveUserInstrument;
 public:
-	void setSignalSlot_RemoveContractFromSmartQuotes(CQuotesTableView* pSignal, CClientDataManagerWorker* pSlot);
+	void setSignalSlot_RemoveUserInstrument(CUserInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot);
 public slots:
-	void slotRemoveContractFromSmartQuotes(unsigned int nParam);
+	void slotRemoveUserInstrument(unsigned int nParam);
 signals:
-	void signalRemoveContractFromSmartQuotes(unsigned int nParam);
+	void signalRemoveUserInstrument(unsigned int nParam);
 public:
-	void emit_signalRemoveContractFromSmartQuotes(unsigned int nParam);
+	void emit_signalRemoveUserInstrument(unsigned int nParam);
 	//////////////////////////////////////////////////////	
 
 
 
 	//////////////////////////////////////////////////////
 private:
-	CQuotesTableView* m_pSignal_ContractInfoWindowResetData;
-	CClientDataManagerWorker* m_pSlot_ContractInfoWindowResetData;
+	CUserInstrumentInfoView* m_pSignal_InstrumentViewResetData;
+	CClientDataManagerWorker* m_pSlot_InstrumentViewResetData;
 public:
-	void setSignalSlot_ContractInfoWindowResetData(CQuotesTableView* pSignal, CClientDataManagerWorker* pSlot);
+	void setSignalSlot_InstrumentViewResetData(CUserInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot);
 public slots:
-	void slotContractInfoWindowResetData();
+	void slotInstrumentViewResetData();
 signals:
-	void signalContractInfoWindowResetData();
+	void signalInstrumentViewResetData();
 public:
-	void emit_signalContractInfoWindowResetData();
+	void emit_signalInstrumentViewResetData();
 	//////////////////////////////////////////////////////	
 
 
@@ -168,16 +168,16 @@ public:
 
 	//////////////////////////////////////////////////////
 private:
-	CContractInfoWindow* m_pSignal_AddContractToSmartQuotes;
-	CClientDataManagerWorker* m_pSlot_AddContractToSmartQuotes;
+	CInstrumentInfoView* m_pSignal_AddUserInstrument;
+	CClientDataManagerWorker* m_pSlot_AddUserInstrument;
 public:
-	void setSignalSlot_AddContractToSmartQuotes(CContractInfoWindow* pSignal, CClientDataManagerWorker* pSlot);
+	void setSignalSlot_AddUserInstrument(CInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot);
 public slots:
-	void slotAddContractToSmartQuotes(unsigned int nParam);
+	void slotAddUserInstrument(unsigned int nParam);
 signals:
-	void signalAddContractToSmartQuotes(unsigned int nParam);
+	void signalAddUserInstrument(unsigned int nParam);
 public:
-	void emit_signalAddContractToSmartQuotes(unsigned int nParam);
+	void emit_signalAddUserInstrument(unsigned int nParam);
 	//////////////////////////////////////////////////////	
 
 
@@ -185,16 +185,16 @@ public:
 
 	//////////////////////////////////////////////////////
 private:
-	CClientDataManagerWorker* m_pSignal_ContractInfoChanged;
-	CContractInfoWindow* m_pSlot_ContractInfoChanged;
+	CClientDataManagerWorker* m_pSignal_InstrumentInfoChanged;
+	CInstrumentInfoView* m_pSlot_InstrumentInfoChanged;
 public:
-	void setSignalSlot_ContractInfoChanged(CClientDataManagerWorker* pSignal, CContractInfoWindow* pSlot);
-	public slots:
-		void slotContractInfoChanged(CTreeItemContract* pParam);
+	void setSignalSlot_InstrumentInfoChanged(CClientDataManagerWorker* pSignal, CInstrumentInfoView* pSlot);
+public slots:
+	void slotInstrumentInfoChanged(CItemInstrumentInfo* pParam);
 signals:
-		void signalContractInfoChanged(CTreeItemContract* pParam);
+	void signalInstrumentInfoChanged(CItemInstrumentInfo* pParam);
 public:
-	void emit_signalContractInfoChanged(CTreeItemContract* pParam);
+	void emit_signalInstrumentInfoChanged(CItemInstrumentInfo* pParam);
 	//////////////////////////////////////////////////////	
 
 

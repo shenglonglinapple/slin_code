@@ -1,4 +1,4 @@
-#include "ContractInfo.h"
+#include "InstrumentInfoHelper.h"
 
 #include "Log4cppLogger.h"
 
@@ -7,7 +7,7 @@
 ////QT_END_NAMESPACE
 
 
-CContractInfo::CContractInfo()
+CInstrumentInfoHelper::CInstrumentInfoHelper()
 {
 	m_strExchangeName.clear();
 	m_strUnderlyingCode.clear();
@@ -15,7 +15,7 @@ CContractInfo::CContractInfo()
 	m_nInstrumentID = 0;
 }
 
-CContractInfo::~CContractInfo()
+CInstrumentInfoHelper::~CInstrumentInfoHelper()
 {
 	m_strExchangeName.clear();
 	m_strUnderlyingCode.clear();
@@ -24,7 +24,7 @@ CContractInfo::~CContractInfo()
 }
 
 
-CContractInfo& CContractInfo::operator=( const CContractInfo& exchangeParam )
+CInstrumentInfoHelper& CInstrumentInfoHelper::operator=( const CInstrumentInfoHelper& exchangeParam )
 {
 	m_strExchangeName = exchangeParam.getExchangeName();
 	m_strUnderlyingCode = exchangeParam.getUnderlyingCode();
@@ -34,7 +34,7 @@ CContractInfo& CContractInfo::operator=( const CContractInfo& exchangeParam )
 }
 
 
-void CContractInfo::setValue( const Instrument &instrument)
+void CInstrumentInfoHelper::setValue( const Instrument &instrument)
 {
 	m_strExchangeName = instrument.getExchangeName().c_str();
 	m_strUnderlyingCode = instrument.getUnderlyingCode().c_str();
@@ -44,7 +44,7 @@ void CContractInfo::setValue( const Instrument &instrument)
 
 
 
-void CContractInfo::setValue( unsigned int nInstrumentID, const std::string& strExchangeName, const std::string& strUnderlyingCode, const std::string& strInstrumentCode )
+void CInstrumentInfoHelper::setValue( unsigned int nInstrumentID, const std::string& strExchangeName, const std::string& strUnderlyingCode, const std::string& strInstrumentCode )
 {
 	m_nInstrumentID = nInstrumentID;
 	m_strExchangeName = strExchangeName.c_str();
@@ -53,26 +53,26 @@ void CContractInfo::setValue( unsigned int nInstrumentID, const std::string& str
 
 }
 
-QString CContractInfo::getExchangeName() const
+QString CInstrumentInfoHelper::getExchangeName() const
 {
 	return m_strExchangeName;
 }
 
-QString CContractInfo::getUnderlyingCode() const
+QString CInstrumentInfoHelper::getUnderlyingCode() const
 {
 	return m_strUnderlyingCode;
 }
 
-QString CContractInfo::getInstrumentCode() const
+QString CInstrumentInfoHelper::getInstrumentCode() const
 {
 	return m_strInstrumentCode;
 }
 
-unsigned int CContractInfo::getInstrumentID() const
+unsigned int CInstrumentInfoHelper::getInstrumentID() const
 {
 	return m_nInstrumentID;
 }
-void CContractInfo::logInfo( const QString& strLogInfo ) const
+void CInstrumentInfoHelper::logInfo( const QString& strLogInfo ) const
 {
 	MYLOG4CPP_DEBUG<<strLogInfo.toStdString()
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
@@ -81,7 +81,7 @@ void CContractInfo::logInfo( const QString& strLogInfo ) const
 		<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode.toStdString();
 }
 
-void CContractInfo::setDefaultValue()
+void CInstrumentInfoHelper::setDefaultValue()
 {
 	m_nInstrumentID = 1;
 	m_strExchangeName = "AAAA";

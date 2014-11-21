@@ -1,4 +1,4 @@
-#include "DataUserContract.h"
+#include "DataUserInstrument.h"
 
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
@@ -6,23 +6,23 @@
 #include "ProjectLogHelper.h"
 #include "Log4cppLogger.h"
 
-#include "QuotesInfo.h"
-#include "TreeItemQuotes.h"
+#include "UserInstrumentInfoHelper.h"
+#include "ItemUserInstrumentInfo.h"
 
-CDataUserContract* CDataUserContract::m_pInstance = 0;
-QMutex CDataUserContract::m_mutexInstance;
+CDataUserInstrument* CDataUserInstrument::m_pInstance = 0;
+QMutex CDataUserInstrument::m_mutexInstance;
 
-CDataUserContract& CDataUserContract::getInstance()
+CDataUserInstrument& CDataUserInstrument::getInstance()
 {	
 	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL == m_pInstance)
 	{
-		m_pInstance = new CDataUserContract();
+		m_pInstance = new CDataUserInstrument();
 	}
 	return (*m_pInstance);
 }
 
-void CDataUserContract::removeInstance()
+void CDataUserInstrument::removeInstance()
 {
 	QMutexLocker lock(&m_mutexInstance);	
 	delete m_pInstance;
@@ -30,7 +30,7 @@ void CDataUserContract::removeInstance()
 
 }
 
-CDataUserContract::CDataUserContract()
+CDataUserInstrument::CDataUserInstrument()
 {
 	m_pProjectLogHelper = NULL;
 	m_pProjectLogHelper = new CProjectLogHelper();
@@ -40,7 +40,7 @@ CDataUserContract::CDataUserContract()
 	_InitMVCDataForQuotes();
 }
 
-CDataUserContract::~CDataUserContract()
+CDataUserInstrument::~CDataUserInstrument()
 {
 	if (NULL != m_pProjectLogHelper)
 	{
@@ -52,7 +52,7 @@ CDataUserContract::~CDataUserContract()
 }
 
 
-void CDataUserContract::_InitMVCDataForQuotes()
+void CDataUserInstrument::_InitMVCDataForQuotes()
 {
 	QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 	if (NULL != m_pTreeItemQuotes_Root)
@@ -63,16 +63,16 @@ void CDataUserContract::_InitMVCDataForQuotes()
 
 	//root node save all column Names
 	QList<QVariant> dataTreeItem;
-	CTreeItemQuotes::getLstClumnName(dataTreeItem);
-	m_pTreeItemQuotes_Root = new CTreeItemQuotes(dataTreeItem, NULL);
-	m_pTreeItemQuotes_Root->setDataType(CTreeItemQuotes::ItemDataType_ROOT);
+	CItemUserInstrumentInfo::getLstClumnName(dataTreeItem);
+	m_pTreeItemQuotes_Root = new CItemUserInstrumentInfo(dataTreeItem, NULL);
+	m_pTreeItemQuotes_Root->setDataType(CItemUserInstrumentInfo::ItemDataType_ROOT);
 	m_pTreeItemQuotes_Root->rootNodeRetColumnsName();
 
-	m_pQuotesInfo = new CQuotesInfo();
+	m_pQuotesInfo = new CUserInstrumentInfoHelper();
 
 
 }
-void CDataUserContract::_UnInitMVCDataForQuotes()
+void CDataUserInstrument::_UnInitMVCDataForQuotes()
 {
 	QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 
@@ -90,14 +90,14 @@ void CDataUserContract::_UnInitMVCDataForQuotes()
 
 }
 
-CTreeItemQuotes* CDataUserContract::getRootHandle()
+CItemUserInstrumentInfo* CDataUserInstrument::getRootHandle()
 {
 	QMutexLocker lock(&m_mutexForNodeRootQuotes);	
 
 	return m_pTreeItemQuotes_Root;
 }
 
-void CDataUserContract::onMarketDataUpdate(const Instrument& instrument)
+void CDataUserInstrument::onMarketDataUpdate(const Instrument& instrument)
 {
 
 	{
@@ -109,7 +109,7 @@ void CDataUserContract::onMarketDataUpdate(const Instrument& instrument)
 
 }
 
-void CDataUserContract::addByData(Instrument* pInstrument)
+void CDataUserInstrument::addByData(Instrument* pInstrument)
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -132,7 +132,7 @@ void CDataUserContract::addByData(Instrument* pInstrument)
 	}
 }
 
-void CDataUserContract::removeByData( Instrument* pInstrument )
+void CDataUserInstrument::removeByData( Instrument* pInstrument )
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -157,7 +157,7 @@ void CDataUserContract::removeByData( Instrument* pInstrument )
 }
 
 
-void CDataUserContract::_Test()
+void CDataUserInstrument::_Test()
 {
 	{
 		QMutexLocker lock(&m_mutexForNodeRootQuotes);

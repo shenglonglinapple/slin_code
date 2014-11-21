@@ -32,6 +32,7 @@ public:
 	void setLstUserInstrument(QStringList& lstStringValue);
 	void removeInstrument(const QString& strInstrumentID);
 	void addInstrument(const QString& strInstrumentID);
+	bool checkUserInstrument(const QString& strInstrumentID);
 
 
 	QStringList getLstAllAvailableColumsDefault();

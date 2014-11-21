@@ -15,7 +15,7 @@
 
 class CProjectUtilityFun;
 class COrderInfo;
-class CTreeItemQuotes;
+class CItemUserInstrumentInfo;
 
 
 class CUserOrderInfo 
@@ -32,7 +32,7 @@ public:
 public: 
 	CUserOrderInfo& operator=(const CUserOrderInfo& cParam);
 public:
-	void setDataByItem(CTreeItemQuotes* pData);
+	void setDataByItem(CItemUserInstrumentInfo* pData);
 private:
 	void _ClearData();
 private:

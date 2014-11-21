@@ -1,4 +1,4 @@
-#include "QuotesHHeaderView.h"
+#include "UserInstrumentInfoHeaderView.h"
 
 #include <QtGui/QMenu>
 #include <QtGui/QCursor>
@@ -16,7 +16,7 @@
 
 
 
-CQuotesHHeaderView::CQuotesHHeaderView( Qt::Orientation orientation /*= Qt::Horizontal*/, QWidget *parent /*= 0*/ )
+CUserInstrumentInfoHeaderView::CUserInstrumentInfoHeaderView( Qt::Orientation orientation /*= Qt::Horizontal*/, QWidget *parent /*= 0*/ )
 :QHeaderView(orientation, parent)
 {
 	this->setClickable(true);
@@ -25,12 +25,12 @@ CQuotesHHeaderView::CQuotesHHeaderView( Qt::Orientation orientation /*= Qt::Hori
 	this->setStretchLastSection(true);
 }
 
-CQuotesHHeaderView::~CQuotesHHeaderView()
+CUserInstrumentInfoHeaderView::~CUserInstrumentInfoHeaderView()
 {
 
 }
 
-void CQuotesHHeaderView::mousePressEvent( QMouseEvent* e )
+void CUserInstrumentInfoHeaderView::mousePressEvent( QMouseEvent* e )
 {
 	if (Qt::RightButton == e->button()) 
 	{

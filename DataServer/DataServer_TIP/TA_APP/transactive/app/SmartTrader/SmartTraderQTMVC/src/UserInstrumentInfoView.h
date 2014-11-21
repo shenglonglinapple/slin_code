@@ -1,5 +1,5 @@
-#ifndef __CLASS_QUOTES_TABLE_VIEW_HH__
-#define __CLASS_QUOTES_TABLE_VIEW_HH__
+#ifndef __CLASS_USER_INSTRUMENT_INFO_VIEW_HH__
+#define __CLASS_USER_INSTRUMENT_INFO_VIEW_HH__
 
 
 
@@ -22,17 +22,17 @@
 class IconDelegate;
 class CCreateNewOrderDialog;
 class CCustomColumnsDialog;
-class CContractInfoWindow;
-class CQuotesHHeaderView;
+class CInstrumentInfoView;
+class CUserInstrumentInfoHeaderView;
 class CUserOrderInfo;
 
-class CQuotesTableView : public QTableView
+class CUserInstrumentInfoView : public QTableView
 { 
 	Q_OBJECT
 
 public: 
-	CQuotesTableView(QWidget* parent = 0); 
-	~CQuotesTableView(); 
+	CUserInstrumentInfoView(QWidget* parent = 0); 
+	~CUserInstrumentInfoView(); 
 public slots:
 
 	/*
@@ -113,7 +113,7 @@ private:
 	bool _CheckIsColumnModified(const QStringList& lstAllAvailableColums, const QStringList& lstSelectedColumns);
 
 public:
-	CContractInfoWindow* m_pContractInfoWindow;
+	CInstrumentInfoView* m_pInstrumentInfoView;
 	CCreateNewOrderDialog* m_pCreateNewOrderDialog;
 	CUserOrderInfo* m_pUserOrderInfo;
 
@@ -121,13 +121,13 @@ private:
 	QString m_strSelectedColumnsForCheck;
 
 private:
-	QAction* m_pActionAddHotQuotes;
-	QAction* m_pActionRemoveHotQuotes;
+	QAction* m_pActionAddUserInstrument;
+	QAction* m_pActionRemoveUserInstrument;
 	QAction* m_pActionCustomColumns;
 	IconDelegate* m_pIconDelegate_Column_Change;
 	int m_nColumnIndex_Change;
 	CCustomColumnsDialog* m_pCustomColumnsDialog;
-	CQuotesHHeaderView* m_pHorizontalHeader;
+	CUserInstrumentInfoHeaderView* m_pHorizontalHeader;
 	QHeaderView* m_pVerticalHeader;
 }; 
 
@@ -136,7 +136,7 @@ private:
 
 
 
-#endif//__CLASS_QUOTES_TABLE_VIEW_HH__
+#endif//__CLASS_USER_INSTRUMENT_INFO_VIEW_HH__
 
 
 

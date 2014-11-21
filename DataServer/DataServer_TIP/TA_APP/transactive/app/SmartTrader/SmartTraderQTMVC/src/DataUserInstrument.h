@@ -1,5 +1,5 @@
-#ifndef __CLASS_DATA__USR_CONTRACT_HH__
-#define __CLASS_DATA__USR_CONTRACT_HH__
+#ifndef __CLASS_DATA__USR_INSTRUMENT_HH__
+#define __CLASS_DATA__USR_INSTRUMENT_HH__
 
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
@@ -7,26 +7,26 @@
 #include "Instrument.h"
 
 class CProjectLogHelper;
-class CQuotesInfo;
-class CTreeItemQuotes;
+class CUserInstrumentInfoHelper;
+class CItemUserInstrumentInfo;
 
-class CDataUserContract 
+class CDataUserInstrument 
 { 
 public:
-	static CDataUserContract& getInstance();
+	static CDataUserInstrument& getInstance();
 	static void removeInstance();
 
 private:
-	static CDataUserContract* m_pInstance;
+	static CDataUserInstrument* m_pInstance;
 	static QMutex m_mutexInstance;
 private: 
-	CDataUserContract(); 
-	virtual ~CDataUserContract(); 
+	CDataUserInstrument(); 
+	virtual ~CDataUserInstrument(); 
 private:
 	void _InitMVCDataForQuotes();
 	void _UnInitMVCDataForQuotes();
 public:
-	CTreeItemQuotes* getRootHandle();
+	CItemUserInstrumentInfo* getRootHandle();
 	void onMarketDataUpdate(const Instrument& instrument);
 	void addByData(Instrument* pInstrument);
 	void removeByData(Instrument* pInstrument);
@@ -34,8 +34,8 @@ public:
 
 private:
 	QMutex m_mutexForNodeRootQuotes;
-	CQuotesInfo* m_pQuotesInfo;
-	CTreeItemQuotes* m_pTreeItemQuotes_Root;//submarket
+	CUserInstrumentInfoHelper* m_pQuotesInfo;
+	CItemUserInstrumentInfo* m_pTreeItemQuotes_Root;//submarket
 private:
 	CProjectLogHelper* m_pProjectLogHelper;
 
@@ -46,7 +46,7 @@ private:
 
 
 
-#endif//__CLASS_DATA__USR_CONTRACT_HH__
+#endif//__CLASS_DATA__USR_INSTRUMENT_HH__
 
 
 

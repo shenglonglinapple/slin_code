@@ -1,4 +1,4 @@
-#include "OrderInfo.h"
+#include "OrderInfoHelper.h"
 
 #include <QtCore/QStringList>
 

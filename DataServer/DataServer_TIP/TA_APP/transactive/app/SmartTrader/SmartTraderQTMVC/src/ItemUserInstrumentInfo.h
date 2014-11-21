@@ -1,5 +1,5 @@
-#ifndef __CLASS_TREE_ITEM_QUOTES_HH__
-#define __CLASS_TREE_ITEM_QUOTES_HH__
+#ifndef __CLASS_ITEM_USER_INSTRUMENT_INFO_HH__
+#define __CLASS_ITEM_USER_INSTRUMENT_INFO_HH__
 
 
 #include <QtCore/QObject>
@@ -15,10 +15,10 @@
 ////QT_END_NAMESPACE
 
 
-class CQuotesInfo;
+class CUserInstrumentInfoHelper;
 
 
-class CTreeItemQuotes
+class CItemUserInstrumentInfo
 {
 public:
 	enum enItemDataType
@@ -29,14 +29,14 @@ public:
 
 	};
 public:
-	CTreeItemQuotes();
-    CTreeItemQuotes(const QList<QVariant> &data, CTreeItemQuotes *parent = NULL);
-    ~CTreeItemQuotes();
+	CItemUserInstrumentInfo();
+    CItemUserInstrumentInfo(const QList<QVariant> &data, CItemUserInstrumentInfo *parent = NULL);
+    ~CItemUserInstrumentInfo();
 
 public:
-	void appendChild(CTreeItemQuotes** ppItem);
+	void appendChild(CItemUserInstrumentInfo** ppItem);
 
-	CTreeItemQuotes* child(int row);
+	CItemUserInstrumentInfo* child(int row);
 
     int childCount() const;
 
@@ -46,7 +46,7 @@ public:
 
     int childNumber() const;
 
-    CTreeItemQuotes* parent();
+    CItemUserInstrumentInfo* parent();
 public:
 	bool insertChildren(int position, int count, int columns);
 	bool insertColumns(int position, int columns);
@@ -55,16 +55,16 @@ public:
 	bool setData(int column, const QVariant &dataValue);
 
 public:
-	int indexOfChildren(CTreeItemQuotes* pChildrenItem) const;
+	int indexOfChildren(CItemUserInstrumentInfo* pChildrenItem) const;
 
 public:
 	void rootNodeRetColumnsName();
 public:
-	void appendChildByData(CQuotesInfo* pExchangeInfo);
-	void removeChildByData(CQuotesInfo* pExchangeInfo);
+	void appendChildByData(CUserInstrumentInfoHelper* pExchangeInfo);
+	void removeChildByData(CUserInstrumentInfoHelper* pExchangeInfo);
 
-	void resetChildrenData(CQuotesInfo* pExchangeInfo);
-	void resetCurrentNodeData(CQuotesInfo* pExchangeInfo );
+	void resetChildrenData(CUserInstrumentInfoHelper* pExchangeInfo);
+	void resetCurrentNodeData(CUserInstrumentInfoHelper* pExchangeInfo );
 	void resetCurrentNodeDataDefultValue();
 
 	void setDataType(enItemDataType nDataTypeExchange);
@@ -81,10 +81,10 @@ public:
 	static void getLstClumnName(QStringList& strlstClumnName );
 
 private:
-	void _GetItemDataFromClass(CQuotesInfo* pData, QList<QVariant>& itemDataTmp);
+	void _GetItemDataFromClass(CUserInstrumentInfoHelper* pData, QList<QVariant>& itemDataTmp);
 private:
-	CTreeItemQuotes* m_pParentItem;
-	QList<CTreeItemQuotes*> m_LstChildItems;
+	CItemUserInstrumentInfo* m_pParentItem;
+	QList<CItemUserInstrumentInfo*> m_LstChildItems;
     QList<QVariant> m_ItemData;
 	int  m_ItemDataNum;
 private:
@@ -100,7 +100,7 @@ private:
 
 //QT_END_NAMESPACE
 
-#endif//__CLASS_TREE_ITEM_CONTRACT_HH__
+#endif//__CLASS_ITEM_USER_INSTRUMENT_INFO_HH__
 
 
 

@@ -2,9 +2,10 @@
 
 //Data
 #include "UserOrderInfo.h"
-#include "TreeItemContract.h"
-#include "TreeItemQuotes.h"
-#include "TreeItemOrder.h"
+#include "ItemInstrumentInfo.h"
+
+#include "ItemUserInstrumentInfo.h"
+#include "ItemOrderInfo.h"
 #include "HistoryDataManager.h"
 #include "ClientLoginParam.h"
 #include "ClientDataManagerWorker.h"
@@ -15,9 +16,9 @@
 #include "MidSubWidget.h"
 #include "BottomDockWidget.h"
 #include "SmartHotQuotesWindow.h"
-#include "QuotesTableView.h"
+#include "UserInstrumentInfoView.h"
 #include "CreateNewOrderDialog.h"
-#include "ContractInfoWindow.h"
+#include "InstrumentInfoView.h"
 
 
 
@@ -131,73 +132,23 @@ void CSignalSlotManager::slotOrderInfoChanged(CTreeItemOrder* pParam )
 
 
 //////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::setSignalSlot_QuotesInfoChanged(CClientDataManagerWorker* pSignal, CLeftDockWidget* pSlot)
+void CSignalSlotManager::setSignalSlot_UserInstrumentInfoChanged(CClientDataManagerWorker* pSignal, CLeftDockWidget* pSlot)
 {
-	m_pSignal_QuotesInfoChanged = pSignal;
-	m_pSlot_QuotesInfoChanged = pSlot;
+	m_pSignal_UserInstrumentInfoChanged = pSignal;
+	m_pSlot_UserInstrumentInfoChanged = pSlot;
 
-	QObject::connect(this, SIGNAL(signalQuotesInfoChanged(CTreeItemQuotes*)),
-		this, SLOT(slotQuotesInfoChanged(CTreeItemQuotes*)));
+	QObject::connect(this, SIGNAL(signalUserInstrumentInfoChanged(CItemUserInstrumentInfo*)),
+		this, SLOT(slotUserInstrumentInfoChanged(CItemUserInstrumentInfo*)));
 }
 
-void CSignalSlotManager::emit_signalQuotesInfoChanged(CTreeItemQuotes* pParam)
+void CSignalSlotManager::emit_signalUserInstrumentInfoChanged(CItemUserInstrumentInfo* pParam)
 {
-	emit signalQuotesInfoChanged(pParam);
+	emit signalUserInstrumentInfoChanged(pParam);
 }
 
-void CSignalSlotManager::slotQuotesInfoChanged(CTreeItemQuotes* pParam )
+void CSignalSlotManager::slotUserInstrumentInfoChanged(CItemUserInstrumentInfo* pParam )
 {
-	m_pSlot_QuotesInfoChanged->slotQuotesInfoChanged(pParam);
-}
-//////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-//////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::setSignalSlot_QuotesTableViewColumnsChanged(CQuotesTableView* pSignal, CClientDataManagerWorker* pSlot)
-{
-	m_pSignal_QuotesTableViewColumnsChanged = pSignal;
-	m_pSlot_QuotesTableViewColumnsChanged = pSlot;
-
-	QObject::connect(this, SIGNAL(signalQuotesTableViewColumnsChanged()),
-		this, SLOT(slotQuotesTableViewColumnsChanged()));
-}
-
-void CSignalSlotManager::emit_signalQuotesTableViewColumnsChanged()
-{
-	emit signalQuotesTableViewColumnsChanged();
-}
-
-void CSignalSlotManager::slotQuotesTableViewColumnsChanged()
-{
-	m_pSlot_QuotesTableViewColumnsChanged->slotQuotesTableViewColumnsChanged();
-}
-//////////////////////////////////////////////////////////////////////////
-
-
-
-
-//////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::setSignalSlot_RemoveContractFromSmartQuotes(CQuotesTableView* pSignal, CClientDataManagerWorker* pSlot)
-{
-	m_pSignal_RemoveContractFromSmartQuotes = pSignal;
-	m_pSlot_RemoveContractFromSmartQuotes = pSlot;
-
-	QObject::connect(this, SIGNAL(signalRemoveContractFromSmartQuotes(unsigned int)),
-		this, SLOT(slotRemoveContractFromSmartQuotes(unsigned int)));
-}
-
-void CSignalSlotManager::emit_signalRemoveContractFromSmartQuotes(unsigned int nParam)
-{
-	emit signalRemoveContractFromSmartQuotes(nParam);
-}
-
-void CSignalSlotManager::slotRemoveContractFromSmartQuotes(unsigned int nParam)
-{
-	m_pSlot_RemoveContractFromSmartQuotes->slotRemoveContractFromSmartQuotes(nParam);
+	m_pSlot_UserInstrumentInfoChanged->slotUserInstrumentInfoChanged(pParam);
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -207,23 +158,73 @@ void CSignalSlotManager::slotRemoveContractFromSmartQuotes(unsigned int nParam)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::setSignalSlot_ContractInfoWindowResetData(CQuotesTableView* pSignal, CClientDataManagerWorker* pSlot)
+void CSignalSlotManager::setSignalSlot_UserInstrumentViewColumnsChanged(CUserInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot)
 {
-	m_pSignal_ContractInfoWindowResetData = pSignal;
-	m_pSlot_ContractInfoWindowResetData = pSlot;
+	m_pSignal_UserInstrumentViewColumnsChanged = pSignal;
+	m_pSlot_UserInstrumentViewColumnsChanged = pSlot;
 
-	QObject::connect(this, SIGNAL(signalContractInfoWindowResetData()),
-		this, SLOT(slotContractInfoWindowResetData()));
+	QObject::connect(this, SIGNAL(signalUserInstrumentViewColumnsChanged()),
+		this, SLOT(slotUserInstrumentViewColumnsChanged()));
 }
 
-void CSignalSlotManager::emit_signalContractInfoWindowResetData()
+void CSignalSlotManager::emit_signalUserInstrumentViewColumnsChanged()
 {
-	emit signalContractInfoWindowResetData();
+	emit signalUserInstrumentViewColumnsChanged();
 }
 
-void CSignalSlotManager::slotContractInfoWindowResetData()
+void CSignalSlotManager::slotUserInstrumentViewColumnsChanged()
 {
-	m_pSlot_ContractInfoWindowResetData->slotContractInfoWindowResetData();
+	m_pSlot_UserInstrumentViewColumnsChanged->slotUserInstrumentViewColumnsChanged();
+}
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+void CSignalSlotManager::setSignalSlot_RemoveUserInstrument(CUserInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot)
+{
+	m_pSignal_RemoveUserInstrument = pSignal;
+	m_pSlot_RemoveUserInstrument = pSlot;
+
+	QObject::connect(this, SIGNAL(signalRemoveUserInstrument(unsigned int)),
+		this, SLOT(slotRemoveUserInstrument(unsigned int)));
+}
+
+void CSignalSlotManager::emit_signalRemoveUserInstrument(unsigned int nParam)
+{
+	emit signalRemoveUserInstrument(nParam);
+}
+
+void CSignalSlotManager::slotRemoveUserInstrument(unsigned int nParam)
+{
+	m_pSlot_RemoveUserInstrument->slotRemoveUserInstrument(nParam);
+}
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+void CSignalSlotManager::setSignalSlot_InstrumentViewResetData(CUserInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot)
+{
+	m_pSignal_InstrumentViewResetData = pSignal;
+	m_pSlot_InstrumentViewResetData = pSlot;
+
+	QObject::connect(this, SIGNAL(signalInstrumentViewResetData()),
+		this, SLOT(slotInstrumentViewResetData()));
+}
+
+void CSignalSlotManager::emit_signalInstrumentViewResetData()
+{
+	emit signalInstrumentViewResetData();
+}
+
+void CSignalSlotManager::slotInstrumentViewResetData()
+{
+	m_pSlot_InstrumentViewResetData->slotInstrumentViewResetData();
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -257,23 +258,23 @@ void CSignalSlotManager::slotNewOrder(CUserOrderInfo* pParam )
 
 
 //////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::setSignalSlot_AddContractToSmartQuotes(CContractInfoWindow* pSignal, CClientDataManagerWorker* pSlot)
+void CSignalSlotManager::setSignalSlot_AddUserInstrument(CInstrumentInfoView* pSignal, CClientDataManagerWorker* pSlot)
 {
-	m_pSignal_AddContractToSmartQuotes = pSignal;
-	m_pSlot_AddContractToSmartQuotes = pSlot;
+	m_pSignal_AddUserInstrument = pSignal;
+	m_pSlot_AddUserInstrument = pSlot;
 
-	QObject::connect(this, SIGNAL(signalAddContractToSmartQuotes(unsigned int)),
-		this, SLOT(slotAddContractToSmartQuotes(unsigned int)));
+	QObject::connect(this, SIGNAL(signalAddUserInstrument(unsigned int)),
+		this, SLOT(slotAddUserInstrument(unsigned int)));
 }
 
-void CSignalSlotManager::emit_signalAddContractToSmartQuotes(unsigned int nParam)
+void CSignalSlotManager::emit_signalAddUserInstrument(unsigned int nParam)
 {
-	emit signalAddContractToSmartQuotes(nParam);
+	emit signalAddUserInstrument(nParam);
 }
 
-void CSignalSlotManager::slotAddContractToSmartQuotes(unsigned int nParam)
+void CSignalSlotManager::slotAddUserInstrument(unsigned int nParam)
 {
-	m_pSlot_AddContractToSmartQuotes->slotAddContractToSmartQuotes(nParam);
+	m_pSlot_AddUserInstrument->slotAddUserInstrument(nParam);
 }
 //////////////////////////////////////////////////////////////////////////
 
@@ -288,23 +289,23 @@ void CSignalSlotManager::slotAddContractToSmartQuotes(unsigned int nParam)
 
 
 //////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::setSignalSlot_ContractInfoChanged(CClientDataManagerWorker* pSignal, CContractInfoWindow* pSlot)
+void CSignalSlotManager::setSignalSlot_InstrumentInfoChanged(CClientDataManagerWorker* pSignal, CInstrumentInfoView* pSlot)
 {
-	m_pSignal_ContractInfoChanged = pSignal;
-	m_pSlot_ContractInfoChanged = pSlot;
+	m_pSignal_InstrumentInfoChanged = pSignal;
+	m_pSlot_InstrumentInfoChanged = pSlot;
 
-	QObject::connect(this, SIGNAL(signalContractInfoChanged(CTreeItemContract*)),
-		this, SLOT(slotContractInfoChanged(CTreeItemContract*)));
+	QObject::connect(this, SIGNAL(signalInstrumentInfoChanged(CItemInstrumentInfo*)),
+		this, SLOT(slotInstrumentInfoChanged(CItemInstrumentInfo*)));
 }
 
-void CSignalSlotManager::emit_signalContractInfoChanged(CTreeItemContract* pParam)
+void CSignalSlotManager::emit_signalInstrumentInfoChanged(CItemInstrumentInfo* pParam)
 {
-	emit signalContractInfoChanged(pParam);
+	emit signalInstrumentInfoChanged(pParam);
 }
 
-void CSignalSlotManager::slotContractInfoChanged(CTreeItemContract* pParam )
+void CSignalSlotManager::slotInstrumentInfoChanged(CItemInstrumentInfo* pParam )
 {
-	m_pSlot_ContractInfoChanged->slotContractInfoChanged(pParam);
+	m_pSlot_InstrumentInfoChanged->slotInstrumentInfoChanged(pParam);
 }
 //////////////////////////////////////////////////////////////////////////
 

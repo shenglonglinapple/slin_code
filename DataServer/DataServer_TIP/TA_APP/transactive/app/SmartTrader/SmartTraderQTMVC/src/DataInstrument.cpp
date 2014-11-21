@@ -1,29 +1,32 @@
-#include "DataContract.h"
+#include "DataInstrument.h"
 
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 #include "Instrument.h"
 
 #include "ProjectLogHelper.h"
+
+#include "InstrumentInfoHelper.h"
+#include "ItemInstrumentInfo.h"
+
 #include "Log4cppLogger.h"
-#include "ContractInfo.h"
-#include "TreeItemContract.h"
 
 
-CDataContract* CDataContract::m_pInstance = 0;
-QMutex CDataContract::m_mutexInstance;
 
-CDataContract& CDataContract::getInstance()
+CDataInstrument* CDataInstrument::m_pInstance = 0;
+QMutex CDataInstrument::m_mutexInstance;
+
+CDataInstrument& CDataInstrument::getInstance()
 {	
 	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL == m_pInstance)
 	{
-		m_pInstance = new CDataContract();
+		m_pInstance = new CDataInstrument();
 	}
 	return (*m_pInstance);
 }
 
-void CDataContract::removeInstance()
+void CDataInstrument::removeInstance()
 {
 	QMutexLocker lock(&m_mutexInstance);	
 	delete m_pInstance;
@@ -31,7 +34,7 @@ void CDataContract::removeInstance()
 
 }
 
-CDataContract::CDataContract()
+CDataInstrument::CDataInstrument()
 {
 	m_pProjectLogHelper = NULL;
 	m_pProjectLogHelper = new CProjectLogHelper();
@@ -42,7 +45,7 @@ CDataContract::CDataContract()
 
 }
 
-CDataContract::~CDataContract()
+CDataInstrument::~CDataInstrument()
 {
 	if (NULL != m_pProjectLogHelper)
 	{
@@ -55,7 +58,7 @@ CDataContract::~CDataContract()
 
 
 
-void CDataContract::_InitMVCDataForContract()
+void CDataInstrument::_InitMVCDataForContract()
 {
 	{
 		QMutexLocker lock(&m_mutexForNodeRootContract);	
@@ -69,17 +72,17 @@ void CDataContract::_InitMVCDataForContract()
 		QString strMapKey;
 		dataColumn.clear();
 		dataColumn.push_back("DataType_Root");
-		m_pTreeItemContract_Root = new CTreeItemContract(dataColumn, NULL);
-		m_pTreeItemContract_Root->setDataType(CTreeItemContract::DataTypeContract_Root);
+		m_pTreeItemContract_Root = new CItemInstrumentInfo(dataColumn, NULL);
+		m_pTreeItemContract_Root->setDataType(CItemInstrumentInfo::DataTypeContract_Root);
 		m_pTreeItemContract_Root->setInstrumentID(0);
-		m_pContractInfo = new CContractInfo();
+		m_pContractInfo = new CInstrumentInfoHelper();
 	}
 
 
 
 
 }
-void CDataContract::_UnInitMVCDataForContract()
+void CDataInstrument::_UnInitMVCDataForContract()
 {
 	QMutexLocker lock(&m_mutexForNodeRootContract);	
 
@@ -99,7 +102,7 @@ void CDataContract::_UnInitMVCDataForContract()
 
 
 
-void CDataContract::onInstrumentDownloaded( const Instrument& instrument )
+void CDataInstrument::onInstrumentDownloaded( const Instrument& instrument )
 {
 	Instrument* pGetInstrument = NULL;
 	unsigned int nGetInstrumentID = 0;
@@ -107,19 +110,11 @@ void CDataContract::onInstrumentDownloaded( const Instrument& instrument )
 	nGetInstrumentID = instrument.getInstrumentID();
 	pGetInstrument = instrument.getInstrument(nGetInstrumentID);
 
-
-	{
-		QMutexLocker lock(&m_mutexForNodeRootContract);	
-		m_pContractInfo->setValue(instrument);
-		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
-		//use slotContractInfoWindowResetData()
-	}
-
-
+	addByData(pGetInstrument);
 }
 
 
-void CDataContract::addByData(Instrument* pInstrument)
+void CDataInstrument::addByData(Instrument* pInstrument)
 {
 	//add
 	{		
@@ -136,7 +131,7 @@ void CDataContract::addByData(Instrument* pInstrument)
 }
 
 
-void CDataContract::removeByData(Instrument* pInstrument)
+void CDataInstrument::removeByData(Instrument* pInstrument)
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -159,7 +154,7 @@ void CDataContract::removeByData(Instrument* pInstrument)
 	}//if
 }
 
-CTreeItemContract* CDataContract::getRootHandle()
+CItemInstrumentInfo* CDataInstrument::getRootHandle()
 {
 	QMutexLocker lock(&m_mutexForNodeRootContract);	
 
@@ -168,7 +163,7 @@ CTreeItemContract* CDataContract::getRootHandle()
 
 
 
-void CDataContract::_Test()
+void CDataInstrument::_Test()
 {
 	{
 		QMutexLocker lock(&m_mutexForNodeRootContract);	

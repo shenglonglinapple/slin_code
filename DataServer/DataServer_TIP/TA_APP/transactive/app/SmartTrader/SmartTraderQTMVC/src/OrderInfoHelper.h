@@ -1,5 +1,5 @@
-#ifndef __CLASS_ORDER_INFO_HH__
-#define __CLASS_ORDER_INFO_HH__
+#ifndef __CLASS_ORDER_INFO_HELPER_HH__
+#define __CLASS_ORDER_INFO_HELPER_HH__
 
 
 
@@ -85,7 +85,7 @@ public:
 //QT_END_NAMESPACE
 
 
-#endif//__CLASS_ORDER_INFO_HH__
+#endif//__CLASS_ORDER_INFO_HELPER_HH__
 
 
 

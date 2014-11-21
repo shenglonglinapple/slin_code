@@ -1,4 +1,4 @@
-#include "TreeItemQuotes.h"
+#include "ItemUserInstrumentInfo.h"
 
 
 //qt sys
@@ -10,8 +10,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
-#include "ContractInfo.h"
-#include "QuotesInfo.h"
+#include "UserInstrumentInfoHelper.h"
 #include "ConfigInfo.h"
 
 #include "Log4cppLogger.h"
@@ -108,7 +107,7 @@ static const std::string DEFVALUE_String_ColumnName_SmartQuotes_OrderTypes = "Or
 
 //NS_BEGIN(TA_App_App)
 
-CTreeItemQuotes::CTreeItemQuotes(const QList<QVariant> &data, CTreeItemQuotes *parent /*= 0*/ )
+CItemUserInstrumentInfo::CItemUserInstrumentInfo(const QList<QVariant> &data, CItemUserInstrumentInfo *parent /*= 0*/ )
 {
 	m_pParentItem = NULL;
 	m_ItemData.clear();
@@ -125,7 +124,7 @@ CTreeItemQuotes::CTreeItemQuotes(const QList<QVariant> &data, CTreeItemQuotes *p
 	m_fLastPrice = 0;
 }
 
-CTreeItemQuotes::CTreeItemQuotes()
+CItemUserInstrumentInfo::CItemUserInstrumentInfo()
 {
 	QList<QVariant> dataTreeItem;
 	getLstClumnName(dataTreeItem);
@@ -137,15 +136,15 @@ CTreeItemQuotes::CTreeItemQuotes()
 	m_pParentItem = NULL;
 	m_ItemData = dataTreeItem;
 	m_ItemDataNum = m_ItemData.count();
-	m_nDataType = CTreeItemQuotes::ItemDataType_ROOT;
+	m_nDataType = CItemUserInstrumentInfo::ItemDataType_ROOT;
 
 }
 
 
-CTreeItemQuotes::~CTreeItemQuotes()
+CItemUserInstrumentInfo::~CItemUserInstrumentInfo()
 {
-	CTreeItemQuotes* pTreeItem = NULL;
-	QList<CTreeItemQuotes*>::iterator iterLst;
+	CItemUserInstrumentInfo* pTreeItem = NULL;
+	QList<CItemUserInstrumentInfo*>::iterator iterLst;
 
 	iterLst = m_LstChildItems.begin();
 	while (iterLst != m_LstChildItems.end())
@@ -169,9 +168,9 @@ CTreeItemQuotes::~CTreeItemQuotes()
 
 }
 
-void CTreeItemQuotes::appendChild(CTreeItemQuotes** ppItem)
+void CItemUserInstrumentInfo::appendChild(CItemUserInstrumentInfo** ppItem)
 {
-	CTreeItemQuotes* pItem = NULL;
+	CItemUserInstrumentInfo* pItem = NULL;
 	if (NULL == ppItem || NULL == *ppItem)
 	{
 		return;
@@ -183,58 +182,58 @@ void CTreeItemQuotes::appendChild(CTreeItemQuotes** ppItem)
 
 }
 
-CTreeItemQuotes* CTreeItemQuotes::child(int row)
+CItemUserInstrumentInfo* CItemUserInstrumentInfo::child(int row)
 {
 	return m_LstChildItems.value(row);
 }
 
-int CTreeItemQuotes::childCount() const
+int CItemUserInstrumentInfo::childCount() const
 {
     return m_LstChildItems.count();
 }
 
-int CTreeItemQuotes::columnCount() const
+int CItemUserInstrumentInfo::columnCount() const
 {
     return m_ItemData.count();
 }
 
-QVariant CTreeItemQuotes::data(int column) const
+QVariant CItemUserInstrumentInfo::data(int column) const
 {
     return m_ItemData.value(column);
 }
 
-CTreeItemQuotes* CTreeItemQuotes::parent()
+CItemUserInstrumentInfo* CItemUserInstrumentInfo::parent()
 {
     return m_pParentItem;
 }
 
-int CTreeItemQuotes::childNumber() const
+int CItemUserInstrumentInfo::childNumber() const
 {
 	int nIndex = 0;
 
     if (NULL != m_pParentItem)
 	{
 		//nIndex = m_pParentItem->m_LstChildItems.indexOf(const_cast<TreeItem*>(this));
-		nIndex = m_pParentItem->indexOfChildren(const_cast<CTreeItemQuotes*>(this));
+		nIndex = m_pParentItem->indexOfChildren(const_cast<CItemUserInstrumentInfo*>(this));
         return nIndex;
 	}
 
     return nIndex;
 }
 
-int CTreeItemQuotes::indexOfChildren(CTreeItemQuotes* pChildrenItem) const
+int CItemUserInstrumentInfo::indexOfChildren(CItemUserInstrumentInfo* pChildrenItem) const
 {
 	int nIndex = 0;
 	nIndex = m_LstChildItems.indexOf(pChildrenItem);
 	return nIndex;
 }
 
-void CTreeItemQuotes::appendChildByData(CQuotesInfo* pExchangeInfo)
+void CItemUserInstrumentInfo::appendChildByData(CUserInstrumentInfoHelper* pExchangeInfo)
 {
 	QList<QVariant> dataTreeItem;
-	CTreeItemQuotes* pTreeItemInstrumentCode = NULL;
+	CItemUserInstrumentInfo* pTreeItemInstrumentCode = NULL;
 
-	pTreeItemInstrumentCode = new CTreeItemQuotes(dataTreeItem, this);
+	pTreeItemInstrumentCode = new CItemUserInstrumentInfo(dataTreeItem, this);
 	pTreeItemInstrumentCode->resetCurrentNodeData(pExchangeInfo);
 	pTreeItemInstrumentCode->setDataType(ItemDataType_ITEM);
 
@@ -244,12 +243,12 @@ void CTreeItemQuotes::appendChildByData(CQuotesInfo* pExchangeInfo)
 
 
 
-void CTreeItemQuotes::_GetItemDataFromClass(CQuotesInfo* pData, QList<QVariant>& itemDataTmp)
+void CItemUserInstrumentInfo::_GetItemDataFromClass(CUserInstrumentInfoHelper* pData, QList<QVariant>& itemDataTmp)
 {
 
 	QVariant varValueGet;
 	QStringList strlstClumnNameShow;
-	CTreeItemQuotes::getLstClumnName(strlstClumnNameShow);
+	CItemUserInstrumentInfo::getLstClumnName(strlstClumnNameShow);
 
 	//default data
 	varValueGet = pData->getValueByName(QObject::tr(DEFVALUE_String_ColumnName_SmartQuotes_InstrumentPriceChange.c_str()));
@@ -277,7 +276,7 @@ void CTreeItemQuotes::_GetItemDataFromClass(CQuotesInfo* pData, QList<QVariant>&
 }
 
 
-void CTreeItemQuotes::resetCurrentNodeData(CQuotesInfo* pExchangeInfo )
+void CItemUserInstrumentInfo::resetCurrentNodeData(CUserInstrumentInfoHelper* pExchangeInfo )
 {
 	m_ItemData.clear();
 	m_ItemDataNum = 0;
@@ -286,7 +285,7 @@ void CTreeItemQuotes::resetCurrentNodeData(CQuotesInfo* pExchangeInfo )
 	m_ItemDataNum = m_ItemData.count();
 }
 
-void CTreeItemQuotes::resetCurrentNodeDataDefultValue()
+void CItemUserInstrumentInfo::resetCurrentNodeDataDefultValue()
 {
 	QList<QVariant> dataTreeItem;
 
@@ -300,10 +299,10 @@ void CTreeItemQuotes::resetCurrentNodeDataDefultValue()
 }
 
 
-unsigned int CTreeItemQuotes::getHotInstrumentIDByCode(const QString& strInstrumentCode)
+unsigned int CItemUserInstrumentInfo::getHotInstrumentIDByCode(const QString& strInstrumentCode)
 {
-	CTreeItemQuotes* pTreeItemFind = NULL;
-	QList<CTreeItemQuotes*>::iterator iterLst;
+	CItemUserInstrumentInfo* pTreeItemFind = NULL;
+	QList<CItemUserInstrumentInfo*>::iterator iterLst;
 	unsigned int nInstrumentID = -1;
 
 	iterLst = m_LstChildItems.begin();
@@ -323,10 +322,10 @@ unsigned int CTreeItemQuotes::getHotInstrumentIDByCode(const QString& strInstrum
 
 }
 
-void CTreeItemQuotes::resetChildrenData(CQuotesInfo* pExchangeInfo )
+void CItemUserInstrumentInfo::resetChildrenData(CUserInstrumentInfoHelper* pExchangeInfo )
 {
-	CTreeItemQuotes* pTreeItemFind = NULL;
-	QList<CTreeItemQuotes*>::iterator iterLst;
+	CItemUserInstrumentInfo* pTreeItemFind = NULL;
+	QList<CItemUserInstrumentInfo*>::iterator iterLst;
 	unsigned int nInstrumentID = 0;
 	nInstrumentID = pExchangeInfo->getInstrumentID();
 
@@ -347,9 +346,9 @@ void CTreeItemQuotes::resetChildrenData(CQuotesInfo* pExchangeInfo )
 }
 
 
-bool CTreeItemQuotes::removeChildren( int position, int count )
+bool CItemUserInstrumentInfo::removeChildren( int position, int count )
 {
-	CTreeItemQuotes* pTreeItem = NULL;
+	CItemUserInstrumentInfo* pTreeItem = NULL;
 
 	if (position < 0 || position + count > m_LstChildItems.size())
 	{
@@ -376,46 +375,46 @@ bool CTreeItemQuotes::removeChildren( int position, int count )
 	return true;
 }
 
-void CTreeItemQuotes::setDataType( enItemDataType nDataTypeExchange )
+void CItemUserInstrumentInfo::setDataType( enItemDataType nDataTypeExchange )
 {
 	m_nDataType = nDataTypeExchange;
 }
 
-CTreeItemQuotes::enItemDataType CTreeItemQuotes::getDataType()
+CItemUserInstrumentInfo::enItemDataType CItemUserInstrumentInfo::getDataType()
 {
 	return m_nDataType;
 }
 
 
-unsigned int CTreeItemQuotes::getInstrumentID()
+unsigned int CItemUserInstrumentInfo::getInstrumentID()
 {
 	return m_nInstrumentID;
 }
-QString CTreeItemQuotes::getExchangeName()
+QString CItemUserInstrumentInfo::getExchangeName()
 {
 	return m_strExchangeName;
 }
 
-IconDelegate::enInstrumentPriceChange CTreeItemQuotes::getInstrumentPriceChange()
+IconDelegate::enInstrumentPriceChange CItemUserInstrumentInfo::getInstrumentPriceChange()
 {
 	return m_nInstrumentPriceChange;
 }
 
-void CTreeItemQuotes::getLstClumnName(QStringList& strlstClumnName )
+void CItemUserInstrumentInfo::getLstClumnName(QStringList& strlstClumnName )
 {
 	strlstClumnName.clear();
 	strlstClumnName = CConfigInfo::getInstance().getLstSelectedColumns();
 	return;
 }
 
-void CTreeItemQuotes::getLstClumnName(QList<QVariant>& lstClumnName )
+void CItemUserInstrumentInfo::getLstClumnName(QList<QVariant>& lstClumnName )
 {
 	QStringList strlstClumnName;
 	QVariant varColumnName;
 
 	lstClumnName.clear();
 
-	CTreeItemQuotes::getLstClumnName(strlstClumnName);
+	CItemUserInstrumentInfo::getLstClumnName(strlstClumnName);
 
 	foreach (const QString& strColumnName, strlstClumnName)
 	{
@@ -615,7 +614,7 @@ void CTreeItemQuotes::getLstClumnName(QList<QVariant>& lstClumnName )
 #endif
 
 
-bool CTreeItemQuotes::insertChildren( int position, int count, int columns )
+bool CItemUserInstrumentInfo::insertChildren( int position, int count, int columns )
 {
 	if (position < 0 || position > m_LstChildItems.size())
 	{
@@ -629,8 +628,8 @@ bool CTreeItemQuotes::insertChildren( int position, int count, int columns )
 // 		{
 // 			dataTreeItem.push_back("");
 // 		}
-		CTreeItemQuotes* pTreeItemInstrumentCode = NULL;
-		pTreeItemInstrumentCode = new CTreeItemQuotes(dataTreeItem, this);
+		CItemUserInstrumentInfo* pTreeItemInstrumentCode = NULL;
+		pTreeItemInstrumentCode = new CItemUserInstrumentInfo(dataTreeItem, this);
 		pTreeItemInstrumentCode->resetCurrentNodeDataDefultValue();
 		pTreeItemInstrumentCode->setDataType(ItemDataType_ITEM);
 		m_LstChildItems.insert(position, pTreeItemInstrumentCode);
@@ -641,7 +640,7 @@ bool CTreeItemQuotes::insertChildren( int position, int count, int columns )
 	return true;
 }
 
-bool CTreeItemQuotes::insertColumns( int position, int columns )
+bool CItemUserInstrumentInfo::insertColumns( int position, int columns )
 {
 	if (position < 0 || position > m_ItemData.size())
 	{
@@ -653,7 +652,7 @@ bool CTreeItemQuotes::insertColumns( int position, int columns )
 		m_ItemData.insert(position, QVariant());
 	}
 
-	foreach (CTreeItemQuotes *children, m_LstChildItems)
+	foreach (CItemUserInstrumentInfo *children, m_LstChildItems)
 	{
 		children->insertColumns(position, columns);
 	}
@@ -661,7 +660,7 @@ bool CTreeItemQuotes::insertColumns( int position, int columns )
 	return true;
 }
 
-bool CTreeItemQuotes::removeColumns( int position, int columns )
+bool CItemUserInstrumentInfo::removeColumns( int position, int columns )
 {
 	QList<QVariant>::Iterator iterList;
 
@@ -679,7 +678,7 @@ bool CTreeItemQuotes::removeColumns( int position, int columns )
 		m_ItemData.erase(iterList);
 	}
 
-	foreach (CTreeItemQuotes *child, m_LstChildItems)
+	foreach (CItemUserInstrumentInfo *child, m_LstChildItems)
 	{
 		child->removeColumns(position, columns);
 	}
@@ -687,7 +686,7 @@ bool CTreeItemQuotes::removeColumns( int position, int columns )
 	return true;
 }
 
-bool CTreeItemQuotes::setData( int column, const QVariant &dataValue )
+bool CItemUserInstrumentInfo::setData( int column, const QVariant &dataValue )
 {
 	if (column < 0 || column >= m_ItemData.size())
 	{
@@ -699,35 +698,35 @@ bool CTreeItemQuotes::setData( int column, const QVariant &dataValue )
 	return true;
 }
 
-QString CTreeItemQuotes::getInstrumentCode()
+QString CItemUserInstrumentInfo::getInstrumentCode()
 {
 	return m_strInstrumentCode;
 }
 
-float CTreeItemQuotes::getLastPrice()
+float CItemUserInstrumentInfo::getLastPrice()
 {
 	return m_fLastPrice;
 }
 
-void CTreeItemQuotes::rootNodeRetColumnsName()
+void CItemUserInstrumentInfo::rootNodeRetColumnsName()
 {
-	if (CTreeItemQuotes::ItemDataType_ROOT != m_nDataType)
+	if (CItemUserInstrumentInfo::ItemDataType_ROOT != m_nDataType)
 	{
 		return;
 	}
 	m_ItemData.clear();
 	m_ItemDataNum = 0;
 
-	CTreeItemQuotes::getLstClumnName(m_ItemData);
+	CItemUserInstrumentInfo::getLstClumnName(m_ItemData);
 
 	m_ItemDataNum = m_ItemData.count();
-	this->setDataType(CTreeItemQuotes::ItemDataType_ROOT);
+	this->setDataType(CItemUserInstrumentInfo::ItemDataType_ROOT);
 }
 
-void CTreeItemQuotes::removeChildByData( CQuotesInfo* pExchangeInfo )
+void CItemUserInstrumentInfo::removeChildByData( CUserInstrumentInfoHelper* pExchangeInfo )
 {
-	CTreeItemQuotes* pTreeItemFind = NULL;
-	QList<CTreeItemQuotes*>::iterator iterLst;
+	CItemUserInstrumentInfo* pTreeItemFind = NULL;
+	QList<CItemUserInstrumentInfo*>::iterator iterLst;
 	unsigned int nInstrumentID = 0;
 	nInstrumentID = pExchangeInfo->getInstrumentID();
 

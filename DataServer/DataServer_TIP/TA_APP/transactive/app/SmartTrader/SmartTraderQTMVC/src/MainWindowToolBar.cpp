@@ -1,6 +1,7 @@
 #include "MainWindowToolBar.h"
 
 #include <QtGui/QAction>
+#include "Bar.h"
 
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Text = "BarInfo";
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_M1_Text = "M1";
@@ -59,8 +60,33 @@ void CMainWindowToolBar::_AddAction()
 	this->addAction(m_pAction_BarInfo_W1);
 	this->addAction(m_pAction_BarInfo_MN);
 }
+void CMainWindowToolBar::_CreateConnect()
+{
+	QObject::connect(m_pAction_BarInfo_M1, SIGNAL(triggered()), 
+		this, SLOT(slotActionM1Triggered()));
 
+	QObject::connect(m_pAction_BarInfo_M5, SIGNAL(triggered()), 
+		this, SLOT(slotActionM5Triggered()));
 
+	QObject::connect(m_pAction_BarInfo_M15, SIGNAL(triggered()), 
+		this, SLOT(slotActionM15Triggered()));
+
+	QObject::connect(m_pAction_BarInfo_M30, SIGNAL(triggered()), 
+		this, SLOT(slotActionM30Triggered()));
+
+	QObject::connect(m_pAction_BarInfo_H1, SIGNAL(triggered()), 
+		this, SLOT(slotActionH1Triggered()));
+
+	QObject::connect(m_pAction_BarInfo_D1, SIGNAL(triggered()), 
+		this, SLOT(slotActionD1Triggered()));
+	
+	QObject::connect(m_pAction_BarInfo_W1, SIGNAL(triggered()), 
+		this, SLOT(slotActionW1Triggered()));
+
+	QObject::connect(m_pAction_BarInfo_MN, SIGNAL(triggered()), 
+		this, SLOT(slotActionMNTriggered()));
+
+}
 void CMainWindowToolBar::translateLanguage()
 {
 	//
@@ -76,6 +102,37 @@ void CMainWindowToolBar::translateLanguage()
 
 
 
-
+void CMainWindowToolBar::slotActionM1Triggered()
+{
+	enum BarType  nBarType = MINUTE;
+}
+void CMainWindowToolBar::slotActionM5Triggered()
+{
+	enum BarType  nBarType = FIVE_MINUTE;
+}
+void CMainWindowToolBar::slotActionM15Triggered()
+{
+	enum BarType  nBarType = FIFTEEN_MINUTE;
+}
+void CMainWindowToolBar::slotActionM30Triggered()
+{
+	enum BarType  nBarType = THIRTY_MINUTE;
+}
+void CMainWindowToolBar::slotActionH1Triggered()
+{
+	enum BarType  nBarType = ONE_HOUR;
+}
+void CMainWindowToolBar::slotActionD1Triggered()
+{
+	enum BarType  nBarType = DAY;
+}
+void CMainWindowToolBar::slotActionW1Triggered()
+{
+	enum BarType  nBarType = WEEK;
+}
+void CMainWindowToolBar::slotActionMNTriggered()
+{
+	enum BarType  nBarType = MONTH;
+}
 
 

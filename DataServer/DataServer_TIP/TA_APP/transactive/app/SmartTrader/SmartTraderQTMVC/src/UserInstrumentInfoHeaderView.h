@@ -1,5 +1,5 @@
-#ifndef __CLASS_QUOTES_H_HEADER_VIEW_HH__
-#define __CLASS_QUOTES_H_HEADER_VIEW_HH__
+#ifndef __CLASS_USER_INSTRUMENT_INFO_HEADER_VIEW_HH__
+#define __CLASS_USER_INSTRUMENT_INFO_HEADER_VIEW_HH__
 
 
 
@@ -11,12 +11,12 @@
 
 
 
-class CQuotesHHeaderView : public QHeaderView
+class CUserInstrumentInfoHeaderView : public QHeaderView
 { 
 	Q_OBJECT
 public: 
-	CQuotesHHeaderView(Qt::Orientation orientation = Qt::Horizontal, QWidget *parent = 0); 
-	~CQuotesHHeaderView(); 
+	CUserInstrumentInfoHeaderView(Qt::Orientation orientation = Qt::Horizontal, QWidget *parent = 0); 
+	~CUserInstrumentInfoHeaderView(); 
 public: 
 	void mousePressEvent(QMouseEvent* e);
 signals:	
@@ -39,7 +39,7 @@ signals:
 
 
 
-#endif//__CLASS_QUOTES_H_HEADER_VIEW_HH__
+#endif//__CLASS_USER_INSTRUMENT_INFO_HEADER_VIEW_HH__
 
 
 
