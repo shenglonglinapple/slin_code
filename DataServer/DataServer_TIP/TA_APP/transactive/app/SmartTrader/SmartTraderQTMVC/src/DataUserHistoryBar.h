@@ -32,7 +32,7 @@ private:
 public:
 	void createRequest(unsigned int nInstrumentID, CSmartTraderClient* pMyTradeClient);
 	void onBarDataUpdate( const BarSummary &barData );
-	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars );
+	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID);
 	CHistoryDataManager* findByID(unsigned int requestID);
 private:
 	QMutex m_mutexForMapHistoryData;

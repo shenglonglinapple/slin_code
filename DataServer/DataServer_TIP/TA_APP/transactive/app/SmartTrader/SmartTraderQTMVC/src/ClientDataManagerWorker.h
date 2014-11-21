@@ -71,6 +71,8 @@ public:
 	void onBarDataUpdate(const BarSummary &barData);
 	void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 public:
+	void setCurrentInstrument(unsigned int nInstrumentID);
+public:
 	void _Test();
 private:
 	void _InitTraderClient();

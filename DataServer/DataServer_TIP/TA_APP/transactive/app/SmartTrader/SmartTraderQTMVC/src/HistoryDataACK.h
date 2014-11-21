@@ -23,13 +23,15 @@ private:
 	void _ResetTimeValue();
 public:
 	void initTestData();
-	void logInfo();
+	void logInfo(const std::string& file, int line);
 public:
 	unsigned int getTimeFrom();
 	unsigned int getTimeTo();
 	void setBarType(BarType nBarType);
 	BarType getBarType();
-
+public:
+	void setInstrumentID(unsigned int nInstrumentID);
+	unsigned int getInstrumentID();
 public:
 	void onHistoryDataDownloaded(BarsPtr bars );
 	void onBarDataUpdate( const BarSummary &barData );

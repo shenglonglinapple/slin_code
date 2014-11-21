@@ -18,6 +18,9 @@ public:
 	unsigned int getTimeFrom();
 	unsigned int getTimeTo();
 public:
+	void setInstrumentID(unsigned int nInstrumentID);
+	unsigned int getInstrumentID();
+private:
 	unsigned int m_nInstrumentID;
 };
 

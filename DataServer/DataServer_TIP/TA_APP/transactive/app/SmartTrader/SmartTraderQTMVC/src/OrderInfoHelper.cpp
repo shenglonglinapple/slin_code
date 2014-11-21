@@ -379,7 +379,7 @@ QString COrderInfo::getInformativeText()
 
 
 
-void COrderInfo::logInfo( const QString& strLogInfo ) const
+void COrderInfo::logInfo( const QString& strLogInfo )
 {
 	MYLOG4CPP_DEBUG<<"COrderInfo:"
 		<<" "<<"m_nKey="<<m_nKey

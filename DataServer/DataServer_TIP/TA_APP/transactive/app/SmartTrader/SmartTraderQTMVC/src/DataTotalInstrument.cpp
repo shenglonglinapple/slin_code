@@ -60,7 +60,7 @@ void CDataTotalInstrument::onInstrumentDownloaded( const Instrument& instrument 
 			<<" "<<"onInstrumentDownloaded"
 			<<" "<<"m_MapInstrumentIDData.size="<<m_MapInstrumentIDData.size();
 		strLogInfo = "onInstrumentDownloaded";
-		m_pProjectLogHelper->log_Instrument_info(LOG4CPPFLInfo, strLogInfo, instrument);
+		m_pProjectLogHelper->log_Instrument_info(__FILE__, __LINE__, strLogInfo, instrument);
 	}
 
 }//onInstrumentDownloaded
@@ -94,7 +94,7 @@ void CDataTotalInstrument::onMarketDataUpdate(const Instrument& instrument)
 			<<" "<<"strInstrumentCode="<<instrument.getInstrumentCode()
 			<<" "<<"getTickSize="<<instrument.getTickSize();
 		strLogInfo = "onMarketDataUpdate reset contract to SmartQuotes";
-		m_pProjectLogHelper->log_Instrument_info(LOG4CPPFLInfo, strLogInfo, instrument);
+		m_pProjectLogHelper->log_Instrument_info(__FILE__, __LINE__, strLogInfo, instrument);
 	}
 
 }//onMarketDataUpdate

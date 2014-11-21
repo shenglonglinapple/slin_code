@@ -85,10 +85,10 @@ void CHistoryDataACK::_ResetTimeValue()
 		//m_strTimeTo = m_pUtilityFun->dateTimeToStr_Qt(m_nTimeTo);
 	}
 }
-void CHistoryDataACK::logInfo()
+void CHistoryDataACK::logInfo(const std::string& file, int line)
 {
 
-	MYLOG4CPP_DEBUG<<" "<<" "
+	MYLOG4CPP_DEBUG_Base<<" ["<<file<<":"<<line<<"] "
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
 		<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode
 		<<" "<<"m_MapBarData.size()="<<m_MapBarData.size()
@@ -176,5 +176,15 @@ BarType CHistoryDataACK::getBarType()
 void CHistoryDataACK::setBarType( BarType nBarType )
 {
 	m_nBarType = nBarType;
+}
+
+void CHistoryDataACK::setInstrumentID( unsigned int nInstrumentID )
+{
+	m_nInstrumentID = nInstrumentID;
+}
+
+unsigned int CHistoryDataACK::getInstrumentID()
+{
+	return m_nInstrumentID;
 }
 

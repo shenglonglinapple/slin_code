@@ -280,9 +280,10 @@ unsigned int CUserInstrumentInfoHelper::getInstrumentID() const
 {
 	return m_nInstrumentID;
 }
-void CUserInstrumentInfoHelper::logInfo( const QString& strLogInfo ) const
+void CUserInstrumentInfoHelper::logInfo(const std::string& file, int line, const QString& strLogInfo)
 {
-	MYLOG4CPP_DEBUG<<strLogInfo.toStdString()
+	MYLOG4CPP_DEBUG_Base<<" ["<<file<<":"<<line<<"] "
+		<<" "<<strLogInfo.toStdString()
 		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
 		<<" "<<"m_strExchangeName="<<m_strExchangeName.toStdString()
 		<<" "<<"m_strUnderlyingCode="<<m_strUnderlyingCode.toStdString()

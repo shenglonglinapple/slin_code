@@ -181,14 +181,11 @@ void CClientDataManagerWorker::slotAddUserInstrument( unsigned int nInstrumentID
 	}
 
 	{
-		//TODO. TTTTTTTTTTT historydata test
-		if (0 == m_nDoTest)
-		{
-			//time_t timeNow = m_pUtilityFun->strToDateTime("2014-08-23 20:06:09");
-			m_nDoTest = 1;
-			CDataUserHistoryBar::getInstance().createRequest(nInstrumentID, m_pSmartTraderClient);
-		}
+		//set Current Instrument
+		setCurrentInstrument(nInstrumentID);
 	}
+
+
 		
 }
 
@@ -568,8 +565,9 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 
 	{
 		//TODO. historydata test
-		CDataUserHistoryBar::getInstance().onHistoryDataDownloaded(requestID, bars);
-		_Emit_SignalHistoryDataChanged(requestID);
+		unsigned int nGetInstrumentID = 0;
+		CDataUserHistoryBar::getInstance().onHistoryDataDownloaded(requestID, bars, nGetInstrumentID);
+		_Emit_SignalHistoryDataChanged(nGetInstrumentID);
 	}//
 
 }
@@ -683,3 +681,8 @@ void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInst
 		<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
 	CSignalSlotManager::getInstance().emit_signalHistoryDataChanged(pHistoryDataManager);
 }//
+
+void CClientDataManagerWorker::setCurrentInstrument( unsigned int nInstrumentID )
+{
+	CDataUserHistoryBar::getInstance().createRequest(nInstrumentID, m_pSmartTraderClient);
+}

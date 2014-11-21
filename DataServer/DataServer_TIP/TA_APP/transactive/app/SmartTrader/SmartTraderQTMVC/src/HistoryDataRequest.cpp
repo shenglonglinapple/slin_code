@@ -86,9 +86,11 @@ std::string CHistoryDataRequest::_GetRequestStrValue()
 	return strRequestStrValue;
 
 }
-void CHistoryDataRequest::logInfo()
+
+void CHistoryDataRequest::logInfo(const std::string& file, int line)
 {
-	MYLOG4CPP_DEBUG<<" "<<"m_nRequestType="<<_GetRequestStrValue()
+	MYLOG4CPP_DEBUG_Base<<" ["<<file<<":"<<line<<"] "
+		<<" "<<"m_nRequestType="<<_GetRequestStrValue()
 		<<" "<<"m_nInstrumentID="<<m_pInstrumentRef->getInstrumentID()
 		<<" "<<"m_strInstrumentCode="<<m_pInstrumentRef->getInstrumentCode()
 		<<" "<<"m_nBarType="<<m_nBarType

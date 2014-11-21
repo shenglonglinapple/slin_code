@@ -37,7 +37,7 @@ public:
 public:
 	unsigned int m_nRequestID;
 public:
-	void logInfo();
+	void logInfo(const std::string& file, int line);
 	int getBarType();
 public:
 	void setRequestType(enCHistoryRequestType nRequestType);

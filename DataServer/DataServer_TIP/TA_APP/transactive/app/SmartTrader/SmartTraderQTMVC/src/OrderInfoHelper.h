@@ -33,7 +33,7 @@ public:
 public:
 	void setValue( const Order &newValue);
 
-	void logInfo(const QString& strLogInfo) const;
+	void logInfo(const QString& strLogInfo);
 public:
 	QString getStrOrderType(Order::OrderType nOrderType);
 	Order::OrderType getEnumOrderType(const QString& strOrderType);

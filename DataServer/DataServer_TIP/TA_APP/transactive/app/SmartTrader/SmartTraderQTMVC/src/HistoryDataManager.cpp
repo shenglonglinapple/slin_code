@@ -52,3 +52,17 @@ unsigned int CHistoryDataManager::getTimeTo()
 	nTimeTo = m_pHistoryACK->getTimeTo();
 	return nTimeTo;
 }
+
+void CHistoryDataManager::setInstrumentID( unsigned int nInstrumentID )
+{
+	if (NULL != m_pHistoryACK)
+	{
+		m_pHistoryACK->setInstrumentID(nInstrumentID);
+	}
+	m_nInstrumentID = nInstrumentID;
+}
+
+unsigned int CHistoryDataManager::getInstrumentID()
+{
+	return m_nInstrumentID;
+}

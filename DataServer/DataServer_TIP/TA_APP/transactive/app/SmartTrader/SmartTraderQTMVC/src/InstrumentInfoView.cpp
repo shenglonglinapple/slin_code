@@ -8,7 +8,6 @@
 #include "DataInstrument.h"
 #include "SignalSlotManager.h"
 
-
 #include "InstrumentInfoHelper.h"
 
 

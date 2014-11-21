@@ -101,7 +101,7 @@ void CDataUserHistoryBar::createRequest(unsigned int nInstrumentID, CSmartTrader
 
 	pHistoryDataManager = new CHistoryDataManager();
 
-	pHistoryDataManager->m_nInstrumentID = nInstrumentID;
+	pHistoryDataManager->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
 	pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
 	pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
 	pHistoryDataManager->m_pHistoryRequest->setBarType(FIVE_SECOND);
@@ -109,7 +109,7 @@ void CDataUserHistoryBar::createRequest(unsigned int nInstrumentID, CSmartTrader
 	pHistoryDataManager->m_pHistoryRequest->setBarCount(6000);
 	pHistoryDataManager->m_pHistoryRequest->setSubscribe(true);
 	pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
-	pHistoryDataManager->m_pHistoryRequest->logInfo();
+	pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
 
 	m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
 	pHistoryDataManager = NULL;
@@ -136,14 +136,14 @@ void CDataUserHistoryBar::onBarDataUpdate( const BarSummary &barData )
 
 		pHistoryDataManager = iterMap.value();
 		pHistoryDataManager->m_pHistoryACK->onBarDataUpdate(barData);
-		pHistoryDataManager->m_pHistoryACK->logInfo();
+		pHistoryDataManager->m_pHistoryACK->logInfo(__FILE__, __LINE__);
 
 	}//scoped_lock
 }
 
 
 
-void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
+void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID)
 {
 	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
 	CHistoryDataManager* pHistoryDataManager = NULL;
@@ -173,7 +173,8 @@ void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsP
 
 		pHistoryDataManager = iterMap.value();
 		pHistoryDataManager->m_pHistoryACK->onHistoryDataDownloaded(bars);
-		pHistoryDataManager->m_pHistoryACK->logInfo();
+		pHistoryDataManager->m_pHistoryACK->logInfo(__FILE__, __LINE__);
+		nGetInstrumentID = pHistoryDataManager->getInstrumentID();
 	}//scoped_lock
 
 }

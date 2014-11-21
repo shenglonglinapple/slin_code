@@ -61,7 +61,7 @@ public:
 	unsigned int getInstrumentID() const;
 	QString getInstrumentCode() const;
 
-	void logInfo(const QString& strLogInfo) const;
+	void logInfo(const std::string& file, int line, const QString& strLogInfo);
 public:
 	void setDefaultValue();
 	QVariant getValueByName(const QString& strName);
