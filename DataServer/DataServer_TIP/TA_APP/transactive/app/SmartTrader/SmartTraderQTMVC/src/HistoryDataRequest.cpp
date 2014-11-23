@@ -155,17 +155,20 @@ void CHistoryDataRequest::_SentRequestToServer()
 	{
 	case HistoryRequestType_Time:
 		{
-			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(*m_pInstrumentRef, m_nBarType, m_nTimeFrom, m_nTimeTo);
+			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(
+				*m_pInstrumentRef, m_nBarType, m_nTimeFrom, m_nTimeTo);
 		}
 		break;
 	case HistoryRequestType_NumberSubscribe:
 		{
-			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(*m_pInstrumentRef, m_nBarType, m_nBarCount, m_bSubscribe);
+			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(
+				*m_pInstrumentRef, m_nBarType, m_nBarCount, m_bSubscribe);
 		}
 		break;
 	case HistoryRequestType_NumberTimeSubscribe:
 		{
-			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(*m_pInstrumentRef, m_nBarType, m_nTimeFrom, m_nBarCount, m_bSubscribe);
+			m_nRequestID = m_pMyTradeClientRef->downloadHistoryData(
+				*m_pInstrumentRef, m_nBarType, m_nTimeFrom, m_nBarCount, m_bSubscribe);
 		}
 		break;
 	default:

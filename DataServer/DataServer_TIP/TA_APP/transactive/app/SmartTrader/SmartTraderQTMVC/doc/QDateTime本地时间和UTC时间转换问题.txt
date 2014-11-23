@@ -1,0 +1,37 @@
+http://pengdhai.wap.blog.163.com/w2/blogDetail.do;jsessionid=ED5F5BD4A11737C1F04AA8E030633DEC.blog57-8010?blogId=fks_087071086095089070081081087064072087086068082085084067084080&showRest=true&p=2&hostID=peng_dhai
+
+
+QDateTime 本地时间和UTC时间转换问题
+
+2、 QDateTime::toTime_t()
+ QT 帮助告诉我们，toTime_t 是将QDateTime 表示的转换为距1970-01-01 00:00:00 的秒数，转换时间坐标是UTC时间。
+ 关键就是最后这句话：UTC时间坐标。这句话的意思就是，toTime_t()，转换的是QDateTime时间对应的UTC时间距1970-01-01 00:00:00 的秒数。
+     我们知道，一般情况下，QDateTime，表示的是本地时间Qt::LocalTime,特殊情况下会设置成Qt::UTC,表示时间直接表示的就是UTC时间。对应于LocalTime，toTime_t()转换时，首先会将QDateTime的时间转换成UTC时间(toUTC),然后计算秒数。对于Qt::UTC,则直接计算QDateTime距 1970-01-01 00:00:00
+  例：
+  QDateTime dateTime = QDateTime::fromString("1970-01-01 08:00:00","yyyy-MM-dd hh:mm:ss");
+  dateTime.setTimeSpec(Qt::LocalTime);
+  uint secondsLocal= dateTime.toTime_t();  //secondsLocal =0;
+  dateTime.setTimeSpec(Qt::UTC);
+  uint secondsUTC = dateTime.toTime_t();   //secondsUTC = 28800;8小时
+  
+    
+3、QDateTime::fromTime_t(uint seconds)[static]
+查看帮助，是将距1970-01-01 00:00:00 秒数转换为QDateTime,时间坐标还是UTC。也就是说，seconds 表示的是UTC时间距 1970-01-01 00:00:00 的秒数。
+   如果根据 toTime_t() 反向理解，应该是fromTime_t 函数在执行时，首先根据秒数计算出UtC时间，然后根据时间的QTimeSpec，判断，如果是Qt::LocalTime,则加时间差，计算出本地时间（如：北京时间加8小时），如果是Qt::UTC,则不变。
+   但由于fromTime_t()是静态函数，返回QDateTime,缺省直接转换成Qt::LocalTime，即以下操作，不管如何，返回时间值都不变
+  例：
+    QDateTime dateTime = QDateTime::fromTime_t(0);
+   如果dateTime为Qt::LocalTime,则 dateTime，表示的是1970-01-01 08:00:00
+   如果datetime 设为Qt::UTC, dateTime.SetTimeSpec(Qt:UTC);  dateTime代表的时间还是 1970-01-01 08:00:00
+
+4、QDateTime::setTime_t(uint seconds)
+  不同于 fromTime_t，可区分出LocalTime 和 UTC。例：
+  QDateTime time ;
+  time.setTime_t(0);
+  QString strLocal =time.toString("yyyy-MM-dd hh:mm:ss");//strLocal ="1970-01-01 08:00:00"
+  
+  QDateTime timeUTC;
+  timeUTC.setTimeSpec(Qt::UTC);
+  timeUTC.setTime_t(0);
+  QString strUTC = timeUTC.toString("yyyy-MM-dd hh:mm:ss"); //strUTC = "1970-01-01 00:00:00"
+  

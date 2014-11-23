@@ -59,7 +59,10 @@ void CClientDataManagerWorker::removeInstance()
 CClientDataManagerWorker::CClientDataManagerWorker(void)
 {	
 	m_pClientLoginParam = NULL;
-	m_pSmartTraderClient = NULL;
+	m_pSmartTraderClient = NULL;	
+	m_nInstrumentID = 0;
+	m_pProjectUtilityFun = NULL;
+	m_pProjectUtilityFun = new CProjectUtilityFun();
 
 	CDataInstrument::getInstance();
 	CDataUserInstrument::getInstance();
@@ -85,6 +88,11 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 	CDataUserInstrument::removeInstance();
 	CDataInstrument::removeInstance();
 
+	if (NULL != m_pProjectUtilityFun)
+	{
+		delete m_pProjectUtilityFun;
+		m_pProjectUtilityFun = NULL;
+	}
 }
 
 
@@ -240,15 +248,18 @@ void CClientDataManagerWorker::slotRemoveUserInstrument( unsigned int nInstrumen
 
 void CClientDataManagerWorker::_InitTraderClient()
 {
-	m_pSmartTraderClient = new CSmartTraderClient(*m_pClientLoginParam);
-	m_pSmartTraderClient->setProcessRecvDataHandle(this);
+	if (NULL == m_pSmartTraderClient)
+	{
+		m_pSmartTraderClient = new CSmartTraderClient(*m_pClientLoginParam);
+		m_pSmartTraderClient->setProcessRecvDataHandle(this);
+	}
 }
 void CClientDataManagerWorker::_UnInitTraderClient()
 {
 	if (NULL != m_pSmartTraderClient)
 	{
 		//TODO. debug mode will crash
-		//m_pMyTradeClient->logoff();
+		m_pSmartTraderClient->logoff();
 		m_pSmartTraderClient->setProcessRecvDataHandle(NULL);
 
 		delete m_pSmartTraderClient;
@@ -268,7 +279,6 @@ void CClientDataManagerWorker::slotClientLoginParamChanged( CClientLoginParam* p
 	_InitLoginParam();
 	*m_pClientLoginParam = *pClientLoginParam;
 
-	_UnInitTraderClient();
 	_InitTraderClient();
 	nloginToServerRes = m_pSmartTraderClient->loginToServer();
 
@@ -670,7 +680,14 @@ void CClientDataManagerWorker::_Emit_SignalContractInfoChanged()
 void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInstrumentID)
 {
 	CHistoryDataManager* pHistoryDataManager = NULL;
-	pHistoryDataManager = CDataUserHistoryBar::getInstance().findByID(nInstrumentID);
+	pHistoryDataManager = CDataUserHistoryBar::getInstance().findByInstrumentID(nInstrumentID);
+
+	if (NULL == pHistoryDataManager)
+	{
+		MYLOG4CPP_ERROR<<" "<<"CDataUserHistoryBar not find "
+			<<" "<<"nInstrumentID="<<nInstrumentID;
+		return;
+	}
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
@@ -684,5 +701,34 @@ void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInst
 
 void CClientDataManagerWorker::setCurrentInstrument( unsigned int nInstrumentID )
 {
-	CDataUserHistoryBar::getInstance().createRequest(nInstrumentID, m_pSmartTraderClient);
+	time_t  timeFrom;
+	time_t  timeTo;
+	enum BarType nBarType = DAY;
+	m_nInstrumentID = nInstrumentID;
+
+	MYLOG4CPP_DEBUG<<" "<<"setCurrentInstrument="<<m_nInstrumentID;
+	
+	timeTo = m_pProjectUtilityFun->getTimeNow_Qt();
+	timeFrom = timeTo - MONTH;//ONE_HOUR
+
+	//unsigned int nInstrumentID, enum BarType nBarType,time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient);
+	CDataUserHistoryBar::getInstance().createRequest(
+		m_nInstrumentID, nBarType, timeFrom, timeTo, m_pSmartTraderClient);
+}
+
+void CClientDataManagerWorker::setHistoryBarType(enum BarType nBarType)
+{
+	time_t  timeFrom;
+	time_t  timeTo;
+	//enum BarType nBarType = nBarType;//ONE_HOUR;
+
+	MYLOG4CPP_DEBUG<<" "<<"setHistoryBarType="<<nBarType
+		<<" "<<"m_nInstrumentID="<<m_nInstrumentID;
+
+	timeTo = m_pProjectUtilityFun->getTimeNow_Qt();
+	timeFrom = timeTo - MONTH;//ONE_HOUR
+
+	//unsigned int nInstrumentID, enum BarType nBarType,time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient);
+	CDataUserHistoryBar::getInstance().createRequest(
+		m_nInstrumentID, nBarType, timeFrom, timeTo, m_pSmartTraderClient);
 }

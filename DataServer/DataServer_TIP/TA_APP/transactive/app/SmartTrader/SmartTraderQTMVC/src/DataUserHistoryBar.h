@@ -30,10 +30,10 @@ private:
 	void _Init();
 	void _UniInit();
 public:
-	void createRequest(unsigned int nInstrumentID, CSmartTraderClient* pMyTradeClient);
+	void createRequest(unsigned int nInstrumentID, enum BarType nBarType,time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient);
 	void onBarDataUpdate( const BarSummary &barData );
 	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID);
-	CHistoryDataManager* findByID(unsigned int requestID);
+	CHistoryDataManager* findByInstrumentID(unsigned int nInstrumentID);
 private:
 	QMutex m_mutexForMapHistoryData;
 	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//instrumentID

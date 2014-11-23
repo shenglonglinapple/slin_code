@@ -85,7 +85,9 @@ void CDataUserHistoryBar::_UniInit()
 
 }
 
-void CDataUserHistoryBar::createRequest(unsigned int nInstrumentID, CSmartTraderClient* pMyTradeClient)
+void CDataUserHistoryBar::createRequest(
+	unsigned int nInstrumentID, enum BarType nBarType,
+	time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient)
 {
 	CHistoryDataManager* pHistoryDataManager = NULL;
 	Instrument* pInstrumentRef = NULL;
@@ -100,19 +102,25 @@ void CDataUserHistoryBar::createRequest(unsigned int nInstrumentID, CSmartTrader
 	}
 
 	pHistoryDataManager = new CHistoryDataManager();
-
 	pHistoryDataManager->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
-	pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
+	pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_Time);
 	pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
-	pHistoryDataManager->m_pHistoryRequest->setBarType(FIVE_SECOND);
-	pHistoryDataManager->m_pHistoryRequest->setTimeFrom(m_pProjectUtilityFun->getTimeNow_Qt() - 60 * 60 * 24 * 10);
-	pHistoryDataManager->m_pHistoryRequest->setBarCount(6000);
-	pHistoryDataManager->m_pHistoryRequest->setSubscribe(true);
+	pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
+	pHistoryDataManager->m_pHistoryRequest->setTimeFrom(timeFrom);
+	pHistoryDataManager->m_pHistoryRequest->setTimeTo(timeTo);
+	pHistoryDataManager->m_pHistoryRequest->setSubscribe(false);
 	pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
 	pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
-
 	m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
 	pHistoryDataManager = NULL;
+
+	/// Download history data from server from a time span 
+	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int from, unsigned int to );
+	/// Download the latest N bars and subscribe the following bars, the new bars will be pushed automatically after subscription 
+	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned short number, bool subscribe );
+	/// Download N bars since a time point, and subscribe the bar data from the time point when to subscribe. 
+	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int fromTime, unsigned short count, bool subscribe );
+
 }
 
 
@@ -181,7 +189,7 @@ void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsP
 
 
 
-CHistoryDataManager*  CDataUserHistoryBar::findByID(unsigned int requestID)
+CHistoryDataManager*  CDataUserHistoryBar::findByInstrumentID(unsigned int nInstrumentID)
 {
 	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
 	CHistoryDataManager* pHistoryDataManager = NULL;
@@ -193,7 +201,7 @@ CHistoryDataManager*  CDataUserHistoryBar::findByID(unsigned int requestID)
 	{
 		pHistoryDataManager = NULL;
 		pHistoryDataManager = iterMap.value();
-		if (pHistoryDataManager->m_pHistoryRequest->m_nRequestID == requestID)
+		if (pHistoryDataManager->getInstrumentID() == nInstrumentID)
 		{
 			break;
 		}
@@ -204,7 +212,7 @@ CHistoryDataManager*  CDataUserHistoryBar::findByID(unsigned int requestID)
 	{
 		//find error
 		//TODO.
-		MYLOG4CPP_ERROR<<" "<<"not find requestID="<<requestID;
+		MYLOG4CPP_ERROR<<" "<<"not find nInstrumentID="<<nInstrumentID;
 		pHistoryDataManager = NULL;
 		return pHistoryDataManager;
 	}

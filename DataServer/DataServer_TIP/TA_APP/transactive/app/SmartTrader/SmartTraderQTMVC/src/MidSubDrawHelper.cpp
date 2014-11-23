@@ -47,6 +47,8 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 	unsigned int nTimeTo = 0;
 	double nLeftAxisRangeMin = 0;
 	double nLeftAxisRangeMax = 0;
+	double nLeftAxisRangeMinAdjuest = 0;
+	double nLeftAxisRangeMaxAdjuest = 0;
 
 	int nBarWith = 0;
 	nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
@@ -62,6 +64,12 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 
 	nIndex = 0;
 	iterMap = pHistoryDataManager->m_pHistoryACK->m_MapBarData.begin();
+	if (iterMap != pHistoryDataManager->m_pHistoryACK->m_MapBarData.end())
+	{
+		//init first value
+		nLeftAxisRangeMin = iterMap->low;
+		nLeftAxisRangeMax = iterMap->high;
+	}
 	while (iterMap != pHistoryDataManager->m_pHistoryACK->m_MapBarData.end())
 	{
 		//iterMap->second;
@@ -128,8 +136,9 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 
 	// make key axis range scroll with the data (at a constant range size of 8):
 	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
-	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMin, nLeftAxisRangeMax);
-
+	nLeftAxisRangeMinAdjuest = nLeftAxisRangeMin * (1 - 5/100);
+	nLeftAxisRangeMaxAdjuest = nLeftAxisRangeMax * (1 + 5/100);
+	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
 
 // 	pCustomPlot->rescaleAxes();
 // 	pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
@@ -165,6 +174,8 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	unsigned int nTimeTo = 0;
 	double nLeftAxisRangeMin = 0;
 	double nLeftAxisRangeMax = 0;
+	double nLeftAxisRangeMinAdjuest = 0;
+	double nLeftAxisRangeMaxAdjuest = 0;
 	int nBarWith = 0;
 	nBarWith = pHistoryDataManager->getBarType();//FIVE_MINUTES
 	nTimeFrom = pHistoryDataManager->getTimeFrom();
@@ -242,9 +253,8 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 
 	// make key axis range scroll with the data (at a constant range size of 8):
 	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
-	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMin, nLeftAxisRangeMax);
-
-
+	nLeftAxisRangeMaxAdjuest = nLeftAxisRangeMax * (1 + 5/100);
+	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMin, nLeftAxisRangeMaxAdjuest);
 
 	pBoxBrushRef = NULL;
 	pBoxPenRef = NULL;

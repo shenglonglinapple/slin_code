@@ -72,6 +72,7 @@ public:
 	void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 public:
 	void setCurrentInstrument(unsigned int nInstrumentID);
+	void setHistoryBarType(enum BarType nBarType);
 public:
 	void _Test();
 private:
@@ -90,9 +91,11 @@ private:
 private:
 	CClientLoginParam* m_pClientLoginParam;
 	CSmartTraderClient* m_pSmartTraderClient;
-
+private:
+	CProjectUtilityFun* m_pProjectUtilityFun;
 private:
 	int m_nDoTest;
+	unsigned int m_nInstrumentID;
 };
 
 //QT_END_NAMESPACE

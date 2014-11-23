@@ -208,8 +208,8 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 	m_pCustomPlot->clearGraphs();
 	m_pCustomPlot->clearPlottables();
 
-	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectTop);
-	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectBottom);
+	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectTop);//m_pAxisRectTop
+	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectBottom);//m_pAxisRectBottom
 
 
 	//m_pCustomPlot->rescaleAxes();
