@@ -18,7 +18,6 @@
 #include "YahuoHistoryReqAck.h"
 
 #include "CheckTotalStocks.h"
-#include "TotalStocksForProject.h"
 
 
 
@@ -63,20 +62,7 @@ void testCYahuoRealTimeReqAck()
 	std::cout << petr4Quotes << std::endl;
 }
 
-void test_check_unknownStock()
-{
-	CCheckTotalStocks classCheckTotalStocks;
 
-	classCheckTotalStocks.do_check();
-
-}
-
-void test_load_good_stock()
-{
-	CTotalStocksForProject classTotalStocksForProject;
-	classTotalStocksForProject.do_init_data();
-
-}
 
 int main()
 {
@@ -84,10 +70,14 @@ int main()
 	CLog4cppLogger::getInstance().initLog();
 	CLog4cppLogger::getInstance().testLog();
 
-	//testCYahuoRealTimeReqAck();
-	//tetstCYahuoHistoryReqAck();
-	//test_check_unknownStock();
-	test_load_good_stock();
+
+	testCYahuoRealTimeReqAck();
+	tetstCYahuoHistoryReqAck();
+
+	CCheckTotalStocks classCheckTotalStocks;
+
+	classCheckTotalStocks.do_check();
+
 
 	CLog4cppLogger::removeInstance();
 	return 0;
