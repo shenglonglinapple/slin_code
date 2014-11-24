@@ -7,6 +7,7 @@
 
 class CMainWindowToolBar : public QToolBar 
 { 
+	Q_OBJECT
 public: 
 	CMainWindowToolBar(const QString &title, QWidget *parent = 0);
 	CMainWindowToolBar(QWidget *parent = 0); 
