@@ -4,7 +4,7 @@
 
 
 #include <QtGui/QMainWindow>
-
+#include "Bar.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -47,6 +47,8 @@ private:
 
 	void _CreateConnect();
 public slots:
+	void slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType );
+	void slotCurrentInstrumentChanged( unsigned int nInstrumentID );
 
 signals:
 

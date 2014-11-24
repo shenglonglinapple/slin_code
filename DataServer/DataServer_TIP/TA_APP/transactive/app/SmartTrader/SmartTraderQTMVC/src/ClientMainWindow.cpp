@@ -70,19 +70,13 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
 	translateLanguage();
 
 
-	//m_pClientDataManagerWorker = NULL:
-	//m_pClientDataManagerWorker = new CClientDataManagerWorker();
 	_CreateConnect();
 }
 
 
 CClientMainWindow::~CClientMainWindow()
 {
-// 	if (NULL != m_pClientDataManagerWorker)
-// 	{
-// 		delete m_pClientDataManagerWorker;
-// 		m_pClientDataManagerWorker = NULL;
-// 	}
+
 
 }
 
@@ -113,6 +107,11 @@ void CClientMainWindow::_CreateToolBars()
 	m_pMainWindowToolBar = new CMainWindowToolBar(this);
 	this->addToolBar(m_pMainWindowToolBar);
 	m_pMainWindowToolBar->show();
+
+	QObject::connect(m_pMainWindowToolBar, SIGNAL(signalRequestHistoryData(unsigned int, enum BarType)), 
+		this, SLOT(slotRequestHistoryData(unsigned int, enum BarType)));
+
+
 }
 
 
@@ -131,6 +130,10 @@ void CClientMainWindow::setupUi()
 	//add Samrt hot Quotes window
 	m_pLeftDockWidget = new CLeftDockWidget(this);
 	CSignalSlotManager::getInstance().setSignalSlot_UserInstrumentInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pLeftDockWidget);
+	QObject::connect(m_pLeftDockWidget, SIGNAL(signalCurrentInstrumentChanged(unsigned int)), 
+					this, SLOT(slotCurrentInstrumentChanged(unsigned int)));
+
+	
 
 	m_pBottomDockWidget = new CBottomDockWidget(this);
 	CSignalSlotManager::getInstance().setSignalSlot_OrderInfoChanged(&(CClientDataManagerWorker::getInstance()), m_pBottomDockWidget);
@@ -146,6 +149,7 @@ void CClientMainWindow::setupUi()
 	
 	//right
 	m_pEastMidSubWidget = new CMidSubWidget(this);
+	m_pEastMidSubWidget->setCurrentInstrumentID(0);
 	CSignalSlotManager::getInstance().setSignalSlot_HistoryDataChanged(&(CClientDataManagerWorker::getInstance()), m_pEastMidSubWidget);
 
 	//East West South North
@@ -191,5 +195,41 @@ void CClientMainWindow::translateLanguage()
 	m_pAction_Exit->setText(QObject::tr(DEFVALUE_String_Window_Menu_Files_Action_Exit_Text.c_str()));
 	//
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_CSmartTraderClientMainWindow_Title.c_str()));
+}
+
+void CClientMainWindow::slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType )
+{
+	if (NULL != m_pEastMidSubWidget)
+	{
+		if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
+		{
+			m_pEastMidSubWidget->setHistoryBarType(nBarType);
+			CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType);
+		}//if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
+
+
+	}//if (NULL != m_pEastMidSubWidget)
+	
+}
+
+void CClientMainWindow::slotCurrentInstrumentChanged( unsigned int nInstrumentID )
+{
+	MYLOG4CPP_DEBUG<<"CClientMainWindow process slotCurrentInstrumentChanged"
+		<<" "<<"param:"
+		<<" "<<"nInstrumentID="<<nInstrumentID;
+
+	if (NULL != m_pMainWindowToolBar)
+	{
+		m_pMainWindowToolBar->setCurrentInstrumentID(nInstrumentID);
+	}
+
+	if (NULL != m_pEastMidSubWidget)
+	{
+		enum BarType nBarType = m_pMainWindowToolBar->getHistoryBarType();
+		m_pEastMidSubWidget->setCurrentInstrumentID(nInstrumentID);
+		m_pEastMidSubWidget->setHistoryBarType(nBarType);
+		CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType);
+	}
+
 }
 

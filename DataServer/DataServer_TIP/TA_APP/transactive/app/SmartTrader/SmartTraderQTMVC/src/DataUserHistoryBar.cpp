@@ -89,11 +89,7 @@ void CDataUserHistoryBar::createRequest(
 	unsigned int nInstrumentID, enum BarType nBarType,
 	time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient)
 {
-	CHistoryDataManager* pHistoryDataManager = NULL;
 	Instrument* pInstrumentRef = NULL;
-
-	QMutexLocker lock(&m_mutexForMapHistoryData);
-
 	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	if (NULL == pInstrumentRef)
 	{
@@ -101,18 +97,44 @@ void CDataUserHistoryBar::createRequest(
 		return;
 	}
 
-	pHistoryDataManager = new CHistoryDataManager();
-	pHistoryDataManager->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
-	pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_Time);
-	pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
-	pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
-	pHistoryDataManager->m_pHistoryRequest->setTimeFrom(timeFrom);
-	pHistoryDataManager->m_pHistoryRequest->setTimeTo(timeTo);
-	pHistoryDataManager->m_pHistoryRequest->setSubscribe(false);
-	pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
-	pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
-	m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
-	pHistoryDataManager = NULL;
+
+	//check exist
+	{
+		QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
+		CHistoryDataManager* pHistoryDataManager = NULL;
+
+		QMutexLocker lock(&m_mutexForMapHistoryData);
+		if (m_MapHistoryData.contains(nInstrumentID))
+		{
+			//find ok		
+			iterMap = m_MapHistoryData.find(nInstrumentID);
+			pHistoryDataManager = iterMap.value();
+			delete pHistoryDataManager;
+			pHistoryDataManager = NULL;
+			iterMap.value() = NULL;
+			m_MapHistoryData.erase(iterMap);
+		}
+	}
+
+	//create new one
+	{
+		QMutexLocker lock(&m_mutexForMapHistoryData);
+		CHistoryDataManager* pHistoryDataManager = NULL;
+
+		pHistoryDataManager = new CHistoryDataManager();
+		pHistoryDataManager->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
+		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_Time);
+		pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
+		pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
+		pHistoryDataManager->m_pHistoryRequest->setTimeFrom(timeFrom);
+		pHistoryDataManager->m_pHistoryRequest->setTimeTo(timeTo);
+		pHistoryDataManager->m_pHistoryRequest->setSubscribe(false);
+		pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
+		pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
+		m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
+		pHistoryDataManager = NULL;
+	}
+	
 
 	/// Download history data from server from a time span 
 	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int from, unsigned int to );

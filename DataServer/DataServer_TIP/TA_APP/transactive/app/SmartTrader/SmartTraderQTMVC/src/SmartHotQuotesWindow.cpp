@@ -78,7 +78,8 @@ void CLeftDockWidget::setupUi()
 	CSignalSlotManager::getInstance().setSignalSlot_UserInstrumentViewColumnsChanged(m_pUserInstrumentInfoView, &(CClientDataManagerWorker::getInstance()));
 	CSignalSlotManager::getInstance().setSignalSlot_RemoveUserInstrument(m_pUserInstrumentInfoView, &(CClientDataManagerWorker::getInstance()));
 	CSignalSlotManager::getInstance().setSignalSlot_InstrumentViewResetData(m_pUserInstrumentInfoView, &(CClientDataManagerWorker::getInstance()));
-
+	QObject::connect(m_pUserInstrumentInfoView, SIGNAL(signalCurrentInstrumentChanged(unsigned int)), 
+		this, SLOT(slotCurrentInstrumentChanged(unsigned int)));
 
 	
  	m_pVBoxLayout = new QVBoxLayout(this);
@@ -126,6 +127,25 @@ void CLeftDockWidget::slotUserInstrumentInfoChanged( CItemUserInstrumentInfo* pT
 		m_pUserInstrumentInfoView->setCurrentIndex(inValidIndex);
 		m_pUserInstrumentInfoView->resizeColumnsToContents();
 	}
+}
+
+void CLeftDockWidget::slotCurrentInstrumentChanged( unsigned int nInstrumentID )
+{
+	MYLOG4CPP_DEBUG<<"CLeftDockWidget process slotCurrentInstrumentChanged"
+		<<" "<<"param:"
+		<<" "<<"nInstrumentID="<<nInstrumentID;
+
+
+	{
+		MYLOG4CPP_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CLeftDockWidget"
+			<<" "<<"fun:"<<"slotCurrentInstrumentChanged()"
+			<<" "<<"emit"
+			<<" "<<"signalCurrentInstrumentChanged(unsigned int)"
+			<<" "<<"nInstrumentID="<<nInstrumentID;
+		emit signalCurrentInstrumentChanged(nInstrumentID);
+	}
+
 }
 
 

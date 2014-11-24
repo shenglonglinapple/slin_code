@@ -37,9 +37,10 @@ protected:
 	
 public slots:
 	void slotUserInstrumentInfoChanged(CItemUserInstrumentInfo* pTreeItem);
+	void slotCurrentInstrumentChanged(unsigned int nInstrumentID);
 
 signals:
-
+	void signalCurrentInstrumentChanged(unsigned int nInstrumentID);
 
 private:
 	void _CreateAction();

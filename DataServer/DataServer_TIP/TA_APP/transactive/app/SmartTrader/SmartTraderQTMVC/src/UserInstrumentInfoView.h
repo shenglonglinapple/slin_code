@@ -34,72 +34,13 @@ public:
 	CUserInstrumentInfoView(QWidget* parent = 0); 
 	~CUserInstrumentInfoView(); 
 public slots:
-
-	/*
-	class: m_pActionAddHotQuotes
-	signals:
-	void triggered();
-	fun send signals: triggered()
-
-	class: CSmartHotQuotesWindow
-	public slots: 
 	void slotActionAddHotQuotesTriggered();
-	*/
-	void slotActionAddHotQuotesTriggered();
-
-	/*
-	class: m_pActionRemoveHotQuotes
-	signals:
-	void triggered();
-	fun send signals: triggered()
-
-	class: CSmartHotQuotesWindow
-	public slots: 
 	void slotActionRemoveHotQuotesTriggered();
-	*/
-	void slotActionRemoveHotQuotesTriggered();
-
-
-	/*
-	class: m_pActionCustomColumns
-	signals:
-	void triggered();
-	fun send signals: triggered()
-
-	class: CSmartHotQuotesWindow
-	public slots: 
 	void slotActionCustomColumnsTriggered();
-	*/
-	void slotActionCustomColumnsTriggered();
-
-
-	/*
-	class: CCustomColumnsDialog
-	signals:
-	void signalModifySelectedColumns(QStringList lstAllAvailableColums, QStringList lstSelectedColumns);
-	fun send signals: slotActionRemoveHotQuotesTriggered()
-
-	class: CQuotesTableView
-	public slots: 
 	void slotModifySelectedColumns(QStringList lstAllAvailableColums, QStringList lstSelectedColumns);
-	*/
-	void slotModifySelectedColumns(QStringList lstAllAvailableColums, QStringList lstSelectedColumns);
-
-	
-	/*
-	class: CQuotesTableViewHHeaderView
-	signals:
-	void signalMouseRightClickInHHeaderView(QMouseEvent*);
-	fun send signals: mousePressEvent(QMouseEvent* e);
-
-	class: CQuotesTableView
-	public slots: 
-	void slotMouseRightClickInHHeaderView(QMouseEvent* e;
-	*/
 	void slotMouseRightClickInHHeaderView(QMouseEvent* e);
-
 signals:
-
+	void signalCurrentInstrumentChanged(unsigned int nInstrumentID);
 protected:
 	//overwite QWight fun
 	void contextMenuEvent(QContextMenuEvent* pEvent);
@@ -108,6 +49,7 @@ protected:
 
 private:
 	void _CreateConnect();
+	void _SetCurrentInstrumentID(unsigned int nInstrumentID);
 
 private:
 	bool _CheckIsColumnModified(const QStringList& lstAllAvailableColums, const QStringList& lstSelectedColumns);

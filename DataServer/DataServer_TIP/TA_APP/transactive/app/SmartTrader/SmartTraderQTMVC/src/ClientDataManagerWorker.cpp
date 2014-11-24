@@ -60,7 +60,6 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 {	
 	m_pClientLoginParam = NULL;
 	m_pSmartTraderClient = NULL;	
-	m_nInstrumentID = 0;
 	m_pProjectUtilityFun = NULL;
 	m_pProjectUtilityFun = new CProjectUtilityFun();
 
@@ -114,16 +113,13 @@ void CClientDataManagerWorker::_UnInitLoginParam()
 
 
 void CClientDataManagerWorker::onInstrumentDownloaded( const Instrument& instrument )
-{
-	unsigned int nGetInstrumentID = 0;
-	std::string strLogInfo;
-
-	nGetInstrumentID = instrument.getInstrumentID();
-	
+{	
 	CDataTotalInstrument::getInstance().onInstrumentDownloaded(instrument);
 	CDataInstrument::getInstance().onInstrumentDownloaded(instrument);
 
-	
+
+	unsigned int nGetInstrumentID = 0;
+	nGetInstrumentID = instrument.getInstrumentID();
 	//subscribeMarketData user Instrument
 	QString strUserInstruemt = QString("%1").arg(nGetInstrumentID);
 	if (CConfigInfo::getInstance().checkUserInstrument(strUserInstruemt))
@@ -188,13 +184,7 @@ void CClientDataManagerWorker::slotAddUserInstrument( unsigned int nInstrumentID
 		_Emit_SignalUserInstrumentInfoChanged();
 	}
 
-	{
-		//set Current Instrument
-		setCurrentInstrument(nInstrumentID);
-	}
 
-
-		
 }
 
 void CClientDataManagerWorker::slotRemoveUserInstrument( unsigned int nInstrumentID )
@@ -699,36 +689,23 @@ void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInst
 	CSignalSlotManager::getInstance().emit_signalHistoryDataChanged(pHistoryDataManager);
 }//
 
-void CClientDataManagerWorker::setCurrentInstrument( unsigned int nInstrumentID )
+void CClientDataManagerWorker::slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType )
 {
-	time_t  timeFrom;
-	time_t  timeTo;
-	enum BarType nBarType = DAY;
-	m_nInstrumentID = nInstrumentID;
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker process slotRequestHistoryData"
+		<<" "<<"nInstrumentID="<<nInstrumentID
+		<<" "<<"nBarType="<<nBarType;
 
-	MYLOG4CPP_DEBUG<<" "<<"setCurrentInstrument="<<m_nInstrumentID;
-	
-	timeTo = m_pProjectUtilityFun->getTimeNow_Qt();
-	timeFrom = timeTo - MONTH;//ONE_HOUR
-
-	//unsigned int nInstrumentID, enum BarType nBarType,time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient);
-	CDataUserHistoryBar::getInstance().createRequest(
-		m_nInstrumentID, nBarType, timeFrom, timeTo, m_pSmartTraderClient);
-}
-
-void CClientDataManagerWorker::setHistoryBarType(enum BarType nBarType)
-{
 	time_t  timeFrom;
 	time_t  timeTo;
 	//enum BarType nBarType = nBarType;//ONE_HOUR;
-
-	MYLOG4CPP_DEBUG<<" "<<"setHistoryBarType="<<nBarType
-		<<" "<<"m_nInstrumentID="<<m_nInstrumentID;
+	//enum BarType nBarType = DAY;
 
 	timeTo = m_pProjectUtilityFun->getTimeNow_Qt();
 	timeFrom = timeTo - MONTH;//ONE_HOUR
 
 	//unsigned int nInstrumentID, enum BarType nBarType,time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient);
 	CDataUserHistoryBar::getInstance().createRequest(
-		m_nInstrumentID, nBarType, timeFrom, timeTo, m_pSmartTraderClient);
+		nInstrumentID, nBarType, timeFrom, timeTo, m_pSmartTraderClient);
 }
+
+

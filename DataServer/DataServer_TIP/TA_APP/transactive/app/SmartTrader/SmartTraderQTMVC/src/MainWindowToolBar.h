@@ -21,6 +21,13 @@ public slots:
 	void slotActionD1Triggered();
 	void slotActionW1Triggered();
 	void slotActionMNTriggered();
+signals:
+	void signalRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType );
+public:
+	void setCurrentInstrumentID(unsigned int nInstrumentID);
+	unsigned int getCurrentInstrumentID();
+	void setHistoryBarType(enum BarType nBarType);
+	enum BarType getHistoryBarType();
 private:
 	void _CreateActions();
 	void _AddAction();
@@ -35,6 +42,9 @@ private:
 	QAction* m_pAction_BarInfo_D1;
 	QAction* m_pAction_BarInfo_W1;
 	QAction* m_pAction_BarInfo_MN;
+private:
+	unsigned int m_nCurrentInstrumentID;
+	enum BarType m_nCurrentBarType;
 
 }; 
 

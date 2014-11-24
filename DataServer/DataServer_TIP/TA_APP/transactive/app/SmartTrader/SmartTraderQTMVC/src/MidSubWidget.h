@@ -9,6 +9,8 @@
 #include <QtGui/QTableView>
 #include <QtCore/QList>
 
+#include "Bar.h"
+
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
 QT_END_NAMESPACE
@@ -51,6 +53,11 @@ public:
 	void translateLanguage();
 public:
 	QSize sizeHint() const;
+public:
+	void setCurrentInstrumentID(unsigned int nInstrumentID);
+	unsigned int getCurrentInstrumentID();
+	void setHistoryBarType(enum BarType nBarType);
+	enum BarType getHistoryBarType();
 private:
 	void _CreateAction();
 	void _CreateConnect();
@@ -66,6 +73,9 @@ private:
 	QCPAxisRect* m_pAxisRectTop;
 	QCPAxisRect* m_pAxisRectBottom;
 	QCPMarginGroup* m_pMarginGroup;
+private:
+	unsigned int m_nCurrentInstrumentID;
+	enum BarType m_nCurrentBarType;
 
 };
 

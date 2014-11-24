@@ -27,19 +27,19 @@ CClientManager::CClientManager()
 	m_pClientLoginDialog = NULL;
 	m_pClientMainWindow = NULL;
 
+	CClientDataManagerWorker::getInstance();
 
 	m_pClientLoginDialog = new CClientLoginDialog();
 	CSignalSlotManager::getInstance().setSignalSlot_ClientLoginParamChanged(m_pClientLoginDialog, &(CClientDataManagerWorker::getInstance()));
 
 	m_pClientMainWindow = new CClientMainWindow();
-	CClientDataManagerWorker::getInstance();
 
 	_CreateConnect();
 
 	m_pClientLoginDialog->show();
 
 	//FOR Test, TODO.
-	//CClientDataManagerWorker::getInstance()._Test();
+	CClientDataManagerWorker::getInstance()._Test();
 }
 
 

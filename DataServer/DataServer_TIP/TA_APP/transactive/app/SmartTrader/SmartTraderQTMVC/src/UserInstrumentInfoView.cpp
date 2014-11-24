@@ -229,8 +229,7 @@ void CUserInstrumentInfoView::contextMenuEvent( QContextMenuEvent* pEvent )
 		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
 	//QMessageBox::about(this, strLogInfo, strLogInfo);
 
-	//set Current Instrument
-	CClientDataManagerWorker::getInstance().setCurrentInstrument(pCurrentTreeItem->getInstrumentID());
+	_SetCurrentInstrumentID(pCurrentTreeItem->getInstrumentID());
 	//set menu pos
 	QMenu menuRightClieck(this);
 	menuRightClieck.addAction(m_pActionAddUserInstrument);	//first ContractInfoWindow reset data
@@ -288,6 +287,21 @@ void CUserInstrumentInfoView::slotActionRemoveHotQuotesTriggered()
 
 }
 
+
+
+void CUserInstrumentInfoView::_SetCurrentInstrumentID(unsigned int nInstrumentID)
+{
+	{
+		MYLOG4CPP_DEBUG<<" "<<"emit"
+			<<" "<<"class:"<<"CQuotesTableView"
+			<<" "<<"fun:"<<"_SetCurrentInstrumentID()"
+			<<" "<<"emit"
+			<<" "<<"signalCurrentInstrumentChanged(unsigned int)"
+			<<" "<<"nInstrumentID="<<nInstrumentID;
+		emit signalCurrentInstrumentChanged(nInstrumentID);
+	}
+}
+
 void CUserInstrumentInfoView::slotActionAddHotQuotesTriggered()
 {
 	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionAddHotQuotesTriggered";
@@ -325,7 +339,7 @@ void CUserInstrumentInfoView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 		nCurrentTreeItemIndex = this->currentIndex();
 		pCurrentTreeItem = (CItemUserInstrumentInfo*)nCurrentTreeItemIndex.internalPointer();
 		//set Current Instrument
-		CClientDataManagerWorker::getInstance().setCurrentInstrument(pCurrentTreeItem->getInstrumentID());
+		_SetCurrentInstrumentID(pCurrentTreeItem->getInstrumentID());
 		pModel = this->model();
 
 		m_pUserOrderInfo->setDataByItem(pCurrentTreeItem);

@@ -20,8 +20,8 @@
 ////QT_END_NAMESPACE
 
 //////////////////////////////////////////////////////////////////////////
-static int DEFVALUE_INT_Window_Width = 100;
-static int DEFVALUE_INT_Window_Height = 100;
+static int DEFVALUE_INT_Window_Width = 200;
+static int DEFVALUE_INT_Window_Height = 200;
 static const std::string   DEFVALUE_String_Window_Title = "MidSubWidget";
 
 static std::string DEF_STRING_FORMAT_TIME = "yyyy-MM-dd hh:mm:ss";
@@ -30,13 +30,14 @@ static std::string DEF_STRING_FORMAT_TIME = "yyyy-MM-dd hh:mm:ss";
 CMidSubWidget::CMidSubWidget(QWidget* parent)
     : QWidget(parent)
 {
-
 	m_pCustomPlot = NULL;
 	m_pAxisRectTop = NULL;
 	m_pAxisRectBottom = NULL;
 	m_pMarginGroup = NULL;
 	m_pQCPItemTracerCrossHairTop = NULL;
 	m_pQCPItemTracerCrossHairBottom = NULL;
+	m_nCurrentInstrumentID = 0;
+	m_nCurrentBarType = DAY;
 
 	m_pMidSubDrawHelper = NULL;
 	m_pMidSubDrawHelper = new CMidSubDrawHelper();
@@ -197,6 +198,7 @@ void CMidSubWidget::doTest()
 
 void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataManager )
 {
+
 	//emit
 	{
 		MYLOG4CPP_DEBUG<<"CMidSubWidget process slotHistoryDataChanged"
@@ -204,6 +206,14 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
 	}
 
+	if ((m_nCurrentInstrumentID != pHistoryDataManager->getInstrumentID()) && (0 != m_nCurrentInstrumentID))
+	{
+		MYLOG4CPP_DEBUG<<" "<<"CMidSubWidget m_nCurrentInstrumentID="<<m_nCurrentInstrumentID
+			<<" "<<"but CHistoryDataManager InstrumentID="<<pHistoryDataManager->getInstrumentID()
+			<<" "<<"not draw bar";
+		return;
+	}
+	m_nCurrentInstrumentID = pHistoryDataManager->getInstrumentID();
 
 	m_pCustomPlot->clearGraphs();
 	m_pCustomPlot->clearPlottables();
@@ -238,6 +248,32 @@ void CMidSubWidget::QCPItemTracerCrossHairMouseMove( QMouseEvent *event )
 
 
 	m_pCustomPlot->replot();
+}
+
+void CMidSubWidget::setCurrentInstrumentID( unsigned int nInstrumentID )
+{
+	m_nCurrentInstrumentID = nInstrumentID;
+
+	MYLOG4CPP_DEBUG<<"CMidSubWidget setCurrentInstrumentID"
+		<<" "<<"m_nCurrentInstrumentID="<<m_nCurrentInstrumentID;
+}
+
+unsigned int CMidSubWidget::getCurrentInstrumentID()
+{
+	return m_nCurrentInstrumentID;
+}
+
+void CMidSubWidget::setHistoryBarType( enum BarType nBarType )
+{
+	m_nCurrentBarType = nBarType;
+	MYLOG4CPP_DEBUG<<"CMidSubWidget setHistoryBarType"
+		<<" "<<"m_nCurrentBarType="<<m_nCurrentBarType;
+
+}
+
+enum BarType CMidSubWidget::getHistoryBarType()
+{
+	return m_nCurrentBarType;
 }
 
 

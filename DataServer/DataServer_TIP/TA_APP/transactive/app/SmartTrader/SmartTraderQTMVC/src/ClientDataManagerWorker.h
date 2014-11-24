@@ -55,6 +55,8 @@ public slots:
 	void slotInstrumentViewResetData();
 	void slotUserInstrumentViewColumnsChanged();
 	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
+	void slotRequestHistoryData(unsigned int nInstrumentID, enum BarType nBarType);
+
 signals:
 	void signalLoginToServerResult(int nResult);
 public:
@@ -71,8 +73,6 @@ public:
 	void onBarDataUpdate(const BarSummary &barData);
 	void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 public:
-	void setCurrentInstrument(unsigned int nInstrumentID);
-	void setHistoryBarType(enum BarType nBarType);
 public:
 	void _Test();
 private:
@@ -95,7 +95,6 @@ private:
 	CProjectUtilityFun* m_pProjectUtilityFun;
 private:
 	int m_nDoTest;
-	unsigned int m_nInstrumentID;
 };
 
 //QT_END_NAMESPACE
