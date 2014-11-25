@@ -33,29 +33,9 @@ private:
 	QStringList _GetAllDataFormListWidget(QListWidget* pListWidget);
 
 signals:	
-	/*
-	class: CCustomColumnsDialog
-	signals:
-	void signalModifySelectedColumns(QStringList lstAllAvailableColums, QStringList lstSelectedColumns);
-	fun send signals: slotActionRemoveHotQuotesTriggered()
-
-	class: CQuotesTableView
-	public slots: 
-	void slotModifySelectedColumns(QStringList lstAllAvailableColums, QStringList lstSelectedColumns);
-	*/
 	void signalModifySelectedColumns(QStringList lstAllAvailableColums, QStringList lstSelectedColumns);
 
 private slots:
-	/*
-	class: QPushButton
-	signals:
-	void clicked(bool checked = false);
-	fun send signals: m_pPushButton_Remove
-
-	class: CCustomColumnsDialog
-	private slots: 
-	void slotPushButtonRemoveClick(bool checked = false);
-	*/
 	void slotPushButtonRemoveClick(bool checked = false);
 	void slotPushButtonRemoveAllClick(bool checked = false);
 	void slotPushButtonAddClick(bool checked = false);

@@ -44,9 +44,8 @@ signals:
 protected:
 	//overwite QWight fun
 	void contextMenuEvent(QContextMenuEvent* pEvent);
-
 	void mouseDoubleClickEvent(QMouseEvent* pEvent);
-
+	void currentChanged(const QModelIndex & current, const QModelIndex & previous);
 private:
 	void _CreateConnect();
 	void _SetCurrentInstrumentID(unsigned int nInstrumentID);

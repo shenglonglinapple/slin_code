@@ -131,6 +131,11 @@ CTreeItemOrder* CDataUserOrder::getRootHandle()
 	return m_pTreeItemOrder_root;
 }
 
+void CDataUserOrder::_Test()
+{
+
+}
+
 
 
 

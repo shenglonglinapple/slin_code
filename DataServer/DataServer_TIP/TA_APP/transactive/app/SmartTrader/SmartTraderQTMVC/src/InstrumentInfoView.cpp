@@ -138,8 +138,10 @@ void CInstrumentInfoView::slotTreeViewDoubleClick(const QModelIndex & index)
 
 void CInstrumentInfoView::slotInstrumentInfoChanged( CItemInstrumentInfo* pTreeItem )
 {
-	MYLOG4CPP_DEBUG<<"CContractInfoMainWindow process signalContractInfoChanged"
+	MYLOG4CPP_DEBUG<<"CContractInfoMainWindow process slotInstrumentInfoChanged"
 		<<" "<<"pTreeItem=ox"<<pTreeItem;
+
+	QModelIndex inValidIndex;
 
 	if (NULL == m_pItemModelInstrumentInfo)
 	{
@@ -149,11 +151,14 @@ void CInstrumentInfoView::slotInstrumentInfoChanged( CItemInstrumentInfo* pTreeI
 
 		//mvc
 		m_pTreeView_InstrumentInfo->setModel(m_pItemModelInstrumentInfo);
+		m_pTreeView_InstrumentInfo->setCurrentIndex(inValidIndex);
 		m_pTreeView_InstrumentInfo->setColumnWidth(0, 200);
 	}
 	else
 	{
 		m_pItemModelInstrumentInfo->setRootItem(pTreeItem);
+		m_pTreeView_InstrumentInfo->setCurrentIndex(inValidIndex);
+
 	}
 
 

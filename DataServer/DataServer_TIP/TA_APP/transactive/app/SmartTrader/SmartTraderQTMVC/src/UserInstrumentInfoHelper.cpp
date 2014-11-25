@@ -297,7 +297,7 @@ QString CUserInstrumentInfoHelper::getInstrumentCode() const
 
 void CUserInstrumentInfoHelper::setDefaultValue()
 {
-	m_nInstrumentID = 1;
+	m_nInstrumentID = 0;
 	m_strExchangeName = "AAAA";
 	m_strUnderlyingCode = "BB";
 	m_strInstrumentCode = "AAAA_BB_CC";

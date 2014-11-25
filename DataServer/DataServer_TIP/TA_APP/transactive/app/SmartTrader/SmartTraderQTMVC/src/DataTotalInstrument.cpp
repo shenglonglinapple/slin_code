@@ -82,7 +82,6 @@ void CDataTotalInstrument::onMarketDataUpdate(const Instrument& instrument)
 			MYLOG4CPP_ERROR<<"not find nInstrumentID="<<instrument.getInstrumentID()
 				<<" "<<"in m_MapInstrumentIDData"
 				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
-			//TODO.
 			return;
 		}
 
@@ -115,7 +114,6 @@ Instrument* CDataTotalInstrument::findInstrumentByID(unsigned int nInstrumentID)
 			MYLOG4CPP_ERROR<<"not find nInstrumentID="<<nInstrumentID
 				<<" "<<"in m_MapInstrumentIDData"
 				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
-			//TODO.
 			pInstrumentRef = NULL;
 			return pInstrumentRef;
 		}
@@ -138,7 +136,7 @@ void CDataTotalInstrument::_Test()
 
 	{
 		QMutexLocker lock(&m_mutexForMapInstrumentIDData);
-		nGetInstrumentID = 1;
+		nGetInstrumentID = 0;
 		pGetInstrument = NULL;
 		m_MapInstrumentIDData.insert(nGetInstrumentID, pGetInstrument);
 		MYLOG4CPP_DEBUG<<"CClientDataManagerWorker"

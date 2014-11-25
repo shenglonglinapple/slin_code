@@ -29,7 +29,8 @@ private:
 public:
 	void addAndUpdateData(const Order &order);
 	CTreeItemOrder* getRootHandle();
-
+public:
+	void _Test();
 private:
 	QMutex m_mutexForMapOrder;
 	QMap<unsigned int, Order*> m_MapOrder;//OrderID

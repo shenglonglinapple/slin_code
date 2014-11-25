@@ -20,16 +20,6 @@ public:
 public: 
 	void mousePressEvent(QMouseEvent* e);
 signals:	
-	/*
-	class: CQuotesTableViewHHeaderView
-	signals:
-	void signalMouseRightClickInHHeaderView(QMouseEvent*);
-	fun send signals: mousePressEvent(QMouseEvent* e);
-
-	class: CQuotesTableView
-	public slots: 
-	void slotMouseRightClickInHHeaderView(QMouseEvent* e;
-	*/
 	void signalMouseRightClickInHHeaderView(QMouseEvent* e);
 
 }; 

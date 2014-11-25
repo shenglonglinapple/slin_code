@@ -1,8 +1,9 @@
 #ifndef __CLASS_MAIN_WINDOW_TOOLBAR_HH__
 #define __CLASS_MAIN_WINDOW_TOOLBAR_HH__
 
-
+#include <QtCore/QObject>
 #include <QtGui/QToolBar>
+#include <QtGui/QActionGroup>
 #include "Bar.h"
 
 class CMainWindowToolBar : public QToolBar 
@@ -27,13 +28,15 @@ signals:
 public:
 	void setCurrentInstrumentID(unsigned int nInstrumentID);
 	unsigned int getCurrentInstrumentID();
-	void setHistoryBarType(enum BarType nBarType);
+	void setHistoryBarType( enum BarType nBarType, const QString& strBarType );
 	enum BarType getHistoryBarType();
 private:
 	void _CreateActions();
 	void _AddAction();
 	void _CreateConnect();
 	void translateLanguage();
+private:
+	QActionGroup* m_pAction_Group_BarType;
 private:
 	QAction* m_pAction_BarInfo_M1;
 	QAction* m_pAction_BarInfo_M5;

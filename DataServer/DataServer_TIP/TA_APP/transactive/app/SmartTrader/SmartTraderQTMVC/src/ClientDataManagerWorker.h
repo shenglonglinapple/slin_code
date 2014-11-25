@@ -86,7 +86,7 @@ private:
 private:
 	void _Emit_SignalUserInstrumentInfoChanged();
 	void _Emit_SignalOrderInfoChanged();
-	void _Emit_SignalContractInfoChanged();
+	void _Emit_SignalInstrumentInfoChanged();
 	void _Emit_SignalHistoryDataChanged(unsigned int nInstrumentID);
 private:
 	CClientLoginParam* m_pClientLoginParam;

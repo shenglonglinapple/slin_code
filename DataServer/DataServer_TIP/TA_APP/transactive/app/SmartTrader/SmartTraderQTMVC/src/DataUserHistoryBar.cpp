@@ -153,7 +153,6 @@ void CDataUserHistoryBar::onBarDataUpdate( const BarSummary &barData )
 	CHistoryDataManager* pHistoryDataManager = NULL;
 
 	{
-		//TODO. historydata test
 		QMutexLocker lock(&m_mutexForMapHistoryData);
 
 		if (!m_MapHistoryData.contains(barData.instrumentID))
@@ -179,7 +178,6 @@ void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsP
 	CHistoryDataManager* pHistoryDataManager = NULL;
 
 	{
-		//TODO. historydata test
 		QMutexLocker lock(&m_mutexForMapHistoryData);
 		iterMap = m_MapHistoryData.begin();
 		while (iterMap != m_MapHistoryData.end())
@@ -196,7 +194,6 @@ void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsP
 		if (iterMap == m_MapHistoryData.end())
 		{
 			//find error
-			//TODO.
 			MYLOG4CPP_ERROR<<" "<<"not find requestID="<<requestID;
 			return;
 		}
@@ -233,7 +230,6 @@ CHistoryDataManager*  CDataUserHistoryBar::findByInstrumentID(unsigned int nInst
 	if (iterMap == m_MapHistoryData.end())
 	{
 		//find error
-		//TODO.
 		MYLOG4CPP_ERROR<<" "<<"not find nInstrumentID="<<nInstrumentID;
 		pHistoryDataManager = NULL;
 		return pHistoryDataManager;

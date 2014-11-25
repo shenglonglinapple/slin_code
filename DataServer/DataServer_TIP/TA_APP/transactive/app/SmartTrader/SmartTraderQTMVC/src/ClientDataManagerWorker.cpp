@@ -159,7 +159,6 @@ void CClientDataManagerWorker::slotAddUserInstrument( unsigned int nInstrumentID
 
 	if (NULL == pInstrumentRef)
 	{
-		//TODO.
 		return;
 	}
 
@@ -203,7 +202,6 @@ void CClientDataManagerWorker::slotRemoveUserInstrument( unsigned int nInstrumen
 	//check
 	if (NULL == pInstrumentRef)
 	{
-		//TODO.
 		return;
 	}
 
@@ -230,7 +228,7 @@ void CClientDataManagerWorker::slotRemoveUserInstrument( unsigned int nInstrumen
 		_Emit_SignalUserInstrumentInfoChanged();
 
 		CDataInstrument::getInstance().addByData(pInstrumentRef);
-		_Emit_SignalContractInfoChanged();
+		_Emit_SignalInstrumentInfoChanged();
 	}
 
 }
@@ -249,7 +247,7 @@ void CClientDataManagerWorker::_UnInitTraderClient()
 	if (NULL != m_pSmartTraderClient)
 	{
 		//TODO. debug mode will crash
-		m_pSmartTraderClient->logoff();
+		//m_pSmartTraderClient->logoff();
 		m_pSmartTraderClient->setProcessRecvDataHandle(NULL);
 
 		delete m_pSmartTraderClient;
@@ -295,19 +293,20 @@ void CClientDataManagerWorker::_Test()
 		<<" "<<"emit"
 		<<" "<<"signalLoginToServerResult(int)"
 		<<" "<<"param:"
-		<<" "<<"nloginToServerRes="<<0;
-	emit signalLoginToServerResult(0);
+		<<" "<<"nloginToServerRes="<<33;
+	emit signalLoginToServerResult(33);
 
 	
 	CDataTotalInstrument::getInstance()._Test();
 	
 	CDataInstrument::getInstance()._Test();
-	_Emit_SignalContractInfoChanged();
+	_Emit_SignalInstrumentInfoChanged();
 
 
 	CDataUserInstrument::getInstance()._Test();
 	_Emit_SignalUserInstrumentInfoChanged();
 
+	CDataUserOrder::getInstance();
 	_Emit_SignalOrderInfoChanged();
 }
 
@@ -550,7 +549,6 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 
 
 	{
-		//TODO. historydata test
 		CDataUserHistoryBar::getInstance().onBarDataUpdate(barData);
 		_Emit_SignalHistoryDataChanged(barData.instrumentID);
 		
@@ -564,7 +562,6 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 		<<" "<<"bars->size.size="<<bars->size();
 
 	{
-		//TODO. historydata test
 		unsigned int nGetInstrumentID = 0;
 		CDataUserHistoryBar::getInstance().onHistoryDataDownloaded(requestID, bars, nGetInstrumentID);
 		_Emit_SignalHistoryDataChanged(nGetInstrumentID);
@@ -611,7 +608,7 @@ void CClientDataManagerWorker::slotInstrumentViewResetData()
 	}
 
 	{		
-		_Emit_SignalContractInfoChanged();
+		_Emit_SignalInstrumentInfoChanged();
 	}
 }
 
@@ -651,20 +648,20 @@ void CClientDataManagerWorker::_Emit_SignalOrderInfoChanged()
 
 
 
-void CClientDataManagerWorker::_Emit_SignalContractInfoChanged()
+void CClientDataManagerWorker::_Emit_SignalInstrumentInfoChanged()
 {
-	CItemInstrumentInfo* pTreeItemContract_Root = NULL;
-	pTreeItemContract_Root = CDataInstrument::getInstance().getRootHandle();
+	CItemInstrumentInfo* pItemInstrumentInfo = NULL;
+	pItemInstrumentInfo = CDataInstrument::getInstance().getRootHandle();
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
 		<<" "<<"fun:"<<"_Emit_SignalContractInfoChanged()"
 		<<" "<<"emit"
-		<<" "<<"signalContractInfoChanged(CTreeItemContract*)"
+		<<" "<<"signalInstrumentInfoChanged(CItemInstrumentInfo*)"
 		<<" "<<"param:"
-		<<" "<<"pTreeItemContract_Root=0x"<<pTreeItemContract_Root;
+		<<" "<<"pItemInstrumentInfo=0x"<<pItemInstrumentInfo;
 	
-	CSignalSlotManager::getInstance().emit_signalInstrumentInfoChanged(pTreeItemContract_Root);
+	CSignalSlotManager::getInstance().emit_signalInstrumentInfoChanged(pItemInstrumentInfo);
 }
 
 void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInstrumentID)

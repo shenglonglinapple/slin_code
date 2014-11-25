@@ -68,7 +68,6 @@ void CDataUserAccount::onAccountDownloaded( Account& account )
 
 Account* CDataUserAccount::getAccount(int nAccountID)
 {
-	//TODO.
 	Account* pAccount = NULL;
 	QMutexLocker lock(&m_mutexForMapAccount);
 	if (m_MapAccount.isEmpty())

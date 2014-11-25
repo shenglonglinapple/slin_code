@@ -105,8 +105,8 @@ void CClientMainWindow::_CreateMenus()
 void CClientMainWindow::_CreateToolBars()
 {
 	m_pMainWindowToolBar = new CMainWindowToolBar(this);
-	this->addToolBar(m_pMainWindowToolBar);
-	m_pMainWindowToolBar->show();
+	this->addToolBar(Qt::TopToolBarArea,m_pMainWindowToolBar);
+
 
 	QObject::connect(m_pMainWindowToolBar, SIGNAL(signalRequestHistoryData(unsigned int, enum BarType)), 
 		this, SLOT(slotRequestHistoryData(unsigned int, enum BarType)));
@@ -206,7 +206,11 @@ void CClientMainWindow::slotRequestHistoryData( unsigned int nInstrumentID, enum
 			m_pEastMidSubWidget->setHistoryBarType(nBarType);
 			CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType);
 		}//if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
-
+		else
+		{
+			MYLOG4CPP_ERROR<<" "<<"CClientMainWindow slotRequestHistoryData"
+				<<" "<<"not find nInstrumentID="<<nInstrumentID;
+		}
 
 	}//if (NULL != m_pEastMidSubWidget)
 	

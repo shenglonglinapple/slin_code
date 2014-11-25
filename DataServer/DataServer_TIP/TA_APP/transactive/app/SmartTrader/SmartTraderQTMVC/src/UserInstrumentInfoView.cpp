@@ -186,13 +186,13 @@ void CUserInstrumentInfoView::_CreateConnect()
 void CUserInstrumentInfoView::contextMenuEvent( QContextMenuEvent* pEvent )
 {
 
-	MYLOG4CPP_DEBUG<<"CQuotesTableView process contextMenuEvent"
+	MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView process contextMenuEvent"
 		<<" "<<"pEvent=0x"<<pEvent;
 
 	//prepare data for view
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CQuotesTableView"
+			<<" "<<"class:"<<"CUserInstrumentInfoView"
 			<<" "<<"fun:"<<"contextMenuEvent()"
 			<<" "<<"emit"
 			<<" "<<"signalContractInfoWindowResetData()";
@@ -223,13 +223,12 @@ void CUserInstrumentInfoView::contextMenuEvent( QContextMenuEvent* pEvent )
 
 	//treeview line have data
 	pCurrentTreeItem = (CItemUserInstrumentInfo*)nCurrentTreeItemIndex.internalPointer();
-	MYLOG4CPP_DEBUG<<"CQuotesTableView::contextMenuEvent"
+	MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView::contextMenuEvent"
 		<<" "<<"getInstrumentID="<<pCurrentTreeItem->getInstrumentID()
 		<<" "<<"getInstrumentCode="<<pCurrentTreeItem->getInstrumentCode().toStdString()
 		<<" "<<"getExchangeName="<<pCurrentTreeItem->getExchangeName().toStdString();
 	//QMessageBox::about(this, strLogInfo, strLogInfo);
 
-	_SetCurrentInstrumentID(pCurrentTreeItem->getInstrumentID());
 	//set menu pos
 	QMenu menuRightClieck(this);
 	menuRightClieck.addAction(m_pActionAddUserInstrument);	//first ContractInfoWindow reset data
@@ -237,13 +236,13 @@ void CUserInstrumentInfoView::contextMenuEvent( QContextMenuEvent* pEvent )
 	menuRightClieck.addAction(m_pActionCustomColumns);
 	//menuRightClieck.exec(currentCursor.pos());
 	menuRightClieck.exec(QCursor::pos());
-	pEvent->accept();
+	//pEvent->accept();
 }
 
 
 void CUserInstrumentInfoView::slotActionRemoveHotQuotesTriggered()
 {
-	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionRemoveHotQuotesTriggered";
+	MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView process slotActionRemoveHotQuotesTriggered";
 
 	QAbstractItemModel* pModel = NULL;
 	int nRowDoubleClick = 0;
@@ -272,7 +271,7 @@ void CUserInstrumentInfoView::slotActionRemoveHotQuotesTriggered()
 
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
-		<<" "<<"class:"<<"CQuotesTableView"
+		<<" "<<"class:"<<"CUserInstrumentInfoView"
 		<<" "<<"fun:"<<"slotActionRemoveHotQuotesTriggered()"
 		<<" "<<"emit"
 		<<" "<<"signalRemoveContractFromSmartQuotes(unsigned int)"
@@ -293,7 +292,7 @@ void CUserInstrumentInfoView::_SetCurrentInstrumentID(unsigned int nInstrumentID
 {
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CQuotesTableView"
+			<<" "<<"class:"<<"CUserInstrumentInfoView"
 			<<" "<<"fun:"<<"_SetCurrentInstrumentID()"
 			<<" "<<"emit"
 			<<" "<<"signalCurrentInstrumentChanged(unsigned int)"
@@ -304,7 +303,7 @@ void CUserInstrumentInfoView::_SetCurrentInstrumentID(unsigned int nInstrumentID
 
 void CUserInstrumentInfoView::slotActionAddHotQuotesTriggered()
 {
-	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionAddHotQuotesTriggered";
+	MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView process slotActionAddHotQuotesTriggered";
 
 	//first ContractInfoWindow reset data
 
@@ -319,16 +318,30 @@ void CUserInstrumentInfoView::slotActionAddHotQuotesTriggered()
 
 void CUserInstrumentInfoView::slotActionCustomColumnsTriggered()
 {
-	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotActionCustomColumnsTriggered";
+	MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView process slotActionCustomColumnsTriggered";
 	m_pCustomColumnsDialog->show();
 }
 
+
+void CUserInstrumentInfoView::currentChanged( const QModelIndex & current, const QModelIndex & previous )
+{
+	CItemUserInstrumentInfo* pCurrentTreeItem = NULL;
+
+	if (current.isValid())
+	{
+		MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView currentChanged";
+		pCurrentTreeItem = (CItemUserInstrumentInfo*)current.internalPointer();
+		//set Current Instrument
+		_SetCurrentInstrumentID(pCurrentTreeItem->getInstrumentID());
+	}
+
+}
 
 void CUserInstrumentInfoView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 {
 	if (Qt::LeftButton == pEvent->button())
 	{
-		MYLOG4CPP_DEBUG<<"CQuotesTableView process mouseDoubleClickEvent Qt::LeftButton";
+		MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView process mouseDoubleClickEvent Qt::LeftButton";
 
 		QAbstractItemModel* pModel = NULL;
 		QModelIndex nCurrentTreeItemIndex;
@@ -338,8 +351,6 @@ void CUserInstrumentInfoView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 
 		nCurrentTreeItemIndex = this->currentIndex();
 		pCurrentTreeItem = (CItemUserInstrumentInfo*)nCurrentTreeItemIndex.internalPointer();
-		//set Current Instrument
-		_SetCurrentInstrumentID(pCurrentTreeItem->getInstrumentID());
 		pModel = this->model();
 
 		m_pUserOrderInfo->setDataByItem(pCurrentTreeItem);
@@ -359,7 +370,7 @@ void CUserInstrumentInfoView::mouseDoubleClickEvent( QMouseEvent* pEvent )
 
 void CUserInstrumentInfoView::slotModifySelectedColumns( QStringList lstAllAvailableColums, QStringList lstSelectedColumns )
 {
-	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotModifySelectedColumns"
+	MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView process slotModifySelectedColumns"
 		<<" "<<"param:"
 		<<" "<<"lstAllAvailableColums.count="<<lstAllAvailableColums.count()
 		<<" "<<"lstSelectedColumns.count="<<lstSelectedColumns.count();
@@ -389,7 +400,7 @@ void CUserInstrumentInfoView::slotModifySelectedColumns( QStringList lstAllAvail
 	//emit
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CQuotesTableView"
+			<<" "<<"class:"<<"CUserInstrumentInfoView"
 			<<" "<<"function:"<<"slotModifySelectedColumns"
 			<<" "<<"emit"
 			<<" "<<"signalQuotesTableViewColumnsChanged()";
@@ -402,13 +413,13 @@ void CUserInstrumentInfoView::slotModifySelectedColumns( QStringList lstAllAvail
 
 void CUserInstrumentInfoView::slotMouseRightClickInHHeaderView( QMouseEvent* e )
 {
-	MYLOG4CPP_DEBUG<<"CQuotesTableView process slotMouseRightClickInHHeaderView"
+	MYLOG4CPP_DEBUG<<"CUserInstrumentInfoView process slotMouseRightClickInHHeaderView"
 		<<" "<<"param:"
 		<<" "<<"QMouseEvent* e=0x"<<e;
 
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CQuotesTableView"
+			<<" "<<"class:"<<"CUserInstrumentInfoView"
 			<<" "<<"fun:"<<"slotMouseRightClickInHHeaderView(e)"
 			<<" "<<"emit"
 			<<" "<<"signalContractInfoWindowResetData()";
