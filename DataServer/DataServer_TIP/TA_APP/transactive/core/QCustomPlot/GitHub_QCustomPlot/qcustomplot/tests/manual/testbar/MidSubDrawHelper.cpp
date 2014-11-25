@@ -7,7 +7,7 @@
 #include "HistoryDataManager.h"
 #include "../../src/qcp.h"
 
-static std::string DEF_STRING_FORMAT_TIME = "yyyy-MM-dd hh:mm:ss";
+static std::string DEF_STRING_FORMAT_TIME = "yyyy-MM-dd\nhh:mm:ss";
 
 CMidSubDrawHelper::CMidSubDrawHelper()
 {
