@@ -136,8 +136,8 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 
 	// make key axis range scroll with the data (at a constant range size of 8):
 	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
-	nLeftAxisRangeMinAdjuest = nLeftAxisRangeMin * (1 - 5/100);
-	nLeftAxisRangeMaxAdjuest = nLeftAxisRangeMax * (1 + 5/100);
+	nLeftAxisRangeMinAdjuest = nLeftAxisRangeMin * 0.9;
+	nLeftAxisRangeMaxAdjuest = nLeftAxisRangeMax * 1.1;
 	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
 
 // 	pCustomPlot->rescaleAxes();
@@ -253,7 +253,7 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 
 	// make key axis range scroll with the data (at a constant range size of 8):
 	pRect->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);
-	nLeftAxisRangeMaxAdjuest = nLeftAxisRangeMax * (1 + 5/100);
+	nLeftAxisRangeMaxAdjuest = nLeftAxisRangeMax * 1.1;
 	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMin, nLeftAxisRangeMaxAdjuest);
 
 	pBoxBrushRef = NULL;

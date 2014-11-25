@@ -8,6 +8,7 @@
 #include "HistoryDataManager.h"
 #include "MidSubDrawHelper.h"
 #include "qcp.h"
+#include "axis.h"
 #include <QtCore/QDateTime>
 #include <time.h>       /* time_t, struct tm, difftime, time, mktime */
 
@@ -322,7 +323,7 @@ void CMidSubWidget::slotVertScrollBarChanged( int value )
 {
 	if (qAbs(m_pCustomPlot->yAxis->range().center()+value/100.0) > 0.01) // if user is dragging plot, we don't want to replot twice
 	{
-		m_pCustomPlot->setRange(-value/100.0, m_pCustomPlot->yAxis->range().size(), Qt::AlignCenter);
+		m_pCustomPlot->yAxis->setRange(-value/100.0, m_pCustomPlot->yAxis->range().size(), Qt::AlignCenter);
 		m_pCustomPlot->replot();
 	}
 }

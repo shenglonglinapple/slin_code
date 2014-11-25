@@ -14,6 +14,8 @@
 #include <QtGui/QGridLayout>
 
 #include "Bar.h"
+#include "qcp.h"
+
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
