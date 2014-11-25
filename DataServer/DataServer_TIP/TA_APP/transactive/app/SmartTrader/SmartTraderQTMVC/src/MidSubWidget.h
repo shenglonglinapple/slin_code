@@ -1,13 +1,17 @@
 #ifndef __CLASS__MID_SUB_WIDGET_H__
 #define __CLASS__MID_SUB_WIDGET_H__
 
-
-
+#include <QtCore/QVariant>
+#include <QtGui/QAction>
+#include <QtGui/QApplication>
+#include <QtGui/QButtonGroup>
+#include <QtGui/QGridLayout>
+#include <QtGui/QHeaderView>
 #include <QtGui/QMainWindow>
-#include <QtCore/QModelIndex>
-#include <QtGui/QTabWidget>
-#include <QtGui/QTableView>
-#include <QtCore/QList>
+#include <QtGui/QScrollBar>
+#include <QtGui/QStatusBar>
+#include <QtGui/QWidget>
+#include <QtGui/QGridLayout>
 
 #include "Bar.h"
 
@@ -33,21 +37,13 @@ public:
 	~CMidSubWidget();
 	
 public slots:
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-	fun send signals: onHistoryDataDownloaded()
-
-	class: CMidSubWidget
-	public slots: 
 	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-	*/
-	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-
-
 	void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
-
+private slots:
+	void slotHorzScrollBarChanged(int value);
+	void slotVertScrollBarChanged(int value);
+	void slotQCustomPlotxAxisChanged(QCPRange range);
+	void slotQCustomPlotyAxisChanged(QCPRange range);
 public:
 	void setupUi();
 	void translateLanguage();
@@ -65,8 +61,9 @@ private:
 	void doTest();
 	void _ReSetCustomPlot();
 private:
-	QVBoxLayout* verticalLayout;
 	QCustomPlot* m_pCustomPlot;
+	QScrollBar* m_ScrollBar_Vertical;
+	QScrollBar* m_ScrollBar_Horizontal;
 	CMidSubDrawHelper* m_pMidSubDrawHelper;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairTop;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairBottom;
