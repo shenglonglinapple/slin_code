@@ -43,9 +43,9 @@ public slots:
 	void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
 private slots:
 	void slotHorzScrollBarChanged(int value);
-	void slotVertScrollBarChanged(int value);
-	void slotQCustomPlotxAxisChanged(QCPRange range);
-	void slotQCustomPlotyAxisChanged(QCPRange range);
+	void slotTopxAxisChanged(QCPRange range);
+	void slotBottomxAxisChanged(QCPRange range);
+
 public:
 	void setupUi();
 	void translateLanguage();
@@ -61,17 +61,16 @@ private:
 	void _CreateConnect();
 private:
 	void doTest();
-	void _ReSetCustomPlot();
+	void _InitCustomPlots();
+	void _InitScrollBar();
+	void _InitUIData();
 private:
-	QCustomPlot* m_pCustomPlot;
-	QScrollBar* m_ScrollBar_Vertical;
+	QCustomPlot* m_pCustomPlotTop;
+	QCustomPlot* m_pCustomPlotBottom;
 	QScrollBar* m_ScrollBar_Horizontal;
 	CMidSubDrawHelper* m_pMidSubDrawHelper;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairTop;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairBottom;
-	QCPAxisRect* m_pAxisRectTop;
-	QCPAxisRect* m_pAxisRectBottom;
-	QCPMarginGroup* m_pMarginGroup;
 private:
 	unsigned int m_nCurrentInstrumentID;
 	enum BarType m_nCurrentBarType;
