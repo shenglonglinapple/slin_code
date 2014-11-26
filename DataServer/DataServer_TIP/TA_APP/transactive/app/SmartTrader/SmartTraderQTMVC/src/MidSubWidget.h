@@ -42,7 +42,6 @@ public slots:
 	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
 	void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
 private slots:
-	void slotHorzScrollBarChanged(int value);
 	void slotTopxAxisChanged(QCPRange range);
 	void slotBottomxAxisChanged(QCPRange range);
 
@@ -67,7 +66,6 @@ private:
 private:
 	QCustomPlot* m_pCustomPlotTop;
 	QCustomPlot* m_pCustomPlotBottom;
-	QScrollBar* m_ScrollBar_Horizontal;
 	CMidSubDrawHelper* m_pMidSubDrawHelper;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairTop;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairBottom;

@@ -33,7 +33,6 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 {
 	m_pCustomPlotTop = NULL;
 	m_pCustomPlotBottom = NULL;
-	m_ScrollBar_Horizontal = NULL;
 	m_pQCPItemTracerCrossHairTop = NULL;
 	m_pQCPItemTracerCrossHairBottom = NULL;
 	m_nCurrentInstrumentID = 0;
@@ -80,15 +79,7 @@ void CMidSubWidget::_CreateConnect()
 }
 void CMidSubWidget::_InitScrollBar()
 {
-	if (NULL == m_ScrollBar_Horizontal)
-	{
-		m_ScrollBar_Horizontal = new QScrollBar(this);
-		m_ScrollBar_Horizontal->setOrientation(Qt::Horizontal);
-		m_ScrollBar_Horizontal->setRange(-1000, 1000);
-		m_ScrollBar_Horizontal->setValue(0); // adjust position of scroll bar slider
-		m_ScrollBar_Horizontal->setPageStep(500); // adjust size of scroll bar slider
 
-	}
 
 }
 
@@ -139,11 +130,13 @@ void CMidSubWidget::_InitCustomPlots()
 	}
 	
 	connect(m_pCustomPlotTop, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
-	m_pCustomPlotTop->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	//m_pCustomPlotTop->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	m_pCustomPlotTop->setInteractions(QCP::iRangeDrag);
 	m_pCustomPlotTop->replot();//draw again
 
 	connect(m_pCustomPlotBottom, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
-	m_pCustomPlotBottom->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	//m_pCustomPlotBottom->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	m_pCustomPlotBottom->setInteractions(QCP::iRangeDrag);
 	m_pCustomPlotBottom->replot();//draw again
 
 }
@@ -159,7 +152,6 @@ void CMidSubWidget::setupUi()
 
 	QObject::connect(m_pCustomPlotTop->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(slotTopxAxisChanged(QCPRange)));
 	QObject::connect(m_pCustomPlotBottom->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(slotBottomxAxisChanged(QCPRange)));
-	QObject::connect(m_ScrollBar_Horizontal, SIGNAL(valueChanged(int)), this, SLOT(slotHorzScrollBarChanged(int)));
 
 
 
@@ -170,7 +162,6 @@ void CMidSubWidget::setupUi()
 	pVBoxLayout->setContentsMargins(11, 11, 11, 11);
 	pVBoxLayout->addWidget(m_pCustomPlotTop);
 	pVBoxLayout->addWidget(m_pCustomPlotBottom);
-	pVBoxLayout->addWidget(m_ScrollBar_Horizontal);
 	this->setLayout(pVBoxLayout);
 	//setGeometry(400, 250, 542, 390);	
 	QMetaObject::connectSlotsByName(this);
@@ -273,49 +264,15 @@ enum BarType CMidSubWidget::getHistoryBarType()
 	return m_nCurrentBarType;
 }
 
-void CMidSubWidget::slotHorzScrollBarChanged( int value )
-{
-	double fValueCenter = 0.0;
-	double fChangeValue = 0.0;
-	QCPRange rangeXAxis;
-	double rangeSize = 0.0;
-	double newPostion = 0.0;
-
-	rangeXAxis = m_pCustomPlotTop->xAxis->range();
-	rangeSize = rangeXAxis.size();
-
-	fValueCenter = m_pCustomPlotTop->xAxis->range().center();
-	fChangeValue = qAbs(fValueCenter - value);
-
-	newPostion = value;
-
-	if (fChangeValue > 0.01) // if user is dragging plot, we don't want to replot twice
-	{
-		m_pCustomPlotTop->xAxis->setRange(newPostion, rangeSize, Qt::AlignCenter);
-		m_pCustomPlotBottom->yAxis->setRange(newPostion, rangeSize, Qt::AlignCenter);
-
-		m_pCustomPlotTop->replot();
-		m_pCustomPlotBottom->replot();
-	}	
-}
-
-
-
 void CMidSubWidget::slotTopxAxisChanged(QCPRange range)
 {
-	m_ScrollBar_Horizontal->setValue(qRound(range.center())); // adjust position of scroll bar slider
-	m_ScrollBar_Horizontal->setPageStep(qRound(range.size())); // adjust size of scroll bar slider
-	
-	m_pCustomPlotBottom->yAxis->setRange(range);
+	m_pCustomPlotBottom->xAxis->setRange(range);
 	m_pCustomPlotBottom->replot();
 
 }
 void CMidSubWidget::slotBottomxAxisChanged(QCPRange range)
 {
-	m_ScrollBar_Horizontal->setValue(qRound(range.center())); // adjust position of scroll bar slider
-	m_ScrollBar_Horizontal->setPageStep(qRound(range.size())); // adjust size of scroll bar slider
-
-	m_pCustomPlotTop->yAxis->setRange(range);
+	m_pCustomPlotTop->xAxis->setRange(range);
 	m_pCustomPlotTop->replot();
 
 }
@@ -324,8 +281,7 @@ void CMidSubWidget::slotBottomxAxisChanged(QCPRange range)
 void CMidSubWidget::_InitUIData()
 {
 	if (NULL == m_pCustomPlotTop
-		|| NULL == m_pCustomPlotBottom
-		|| NULL == m_ScrollBar_Horizontal)
+		|| NULL == m_pCustomPlotBottom)
 	{
 		return;
 	}
@@ -351,10 +307,6 @@ void CMidSubWidget::_InitUIData()
 	m_pCustomPlotTop->yAxis->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
 	m_pCustomPlotBottom->xAxis->setRange(fPositionValue, fSizeValue, nAlignment);
 	m_pCustomPlotBottom->yAxis->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
-	m_ScrollBar_Horizontal->setRange(m_pCustomPlotTop->xAxis->range().lower, m_pCustomPlotTop->xAxis->range().upper);
-	m_ScrollBar_Horizontal->setValue(m_pCustomPlotTop->xAxis->range().center());
-	m_ScrollBar_Horizontal->setPageStep(qRound(m_pCustomPlotTop->xAxis->range().size())); // adjust size of scroll bar slider
-
 	m_pCustomPlotTop->replot();//draw again
 	m_pCustomPlotBottom->replot();//draw again
 
