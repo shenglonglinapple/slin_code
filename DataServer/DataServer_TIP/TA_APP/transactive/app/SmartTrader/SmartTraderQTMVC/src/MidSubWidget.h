@@ -1,21 +1,13 @@
 #ifndef __CLASS__MID_SUB_WIDGET_H__
 #define __CLASS__MID_SUB_WIDGET_H__
 
-#include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGridLayout>
-#include <QtGui/QHeaderView>
+
+
 #include <QtGui/QMainWindow>
-#include <QtGui/QScrollBar>
-#include <QtGui/QStatusBar>
-#include <QtGui/QWidget>
-#include <QtGui/QGridLayout>
-
-#include "Bar.h"
-#include "qcp.h"
-
+#include <QtCore/QModelIndex>
+#include <QtGui/QTabWidget>
+#include <QtGui/QTableView>
+#include <QtCore/QList>
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
@@ -39,39 +31,40 @@ public:
 	~CMidSubWidget();
 	
 public slots:
+	/*
+	class: CClientDataManagerWorker
+	signals:
+	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
+	fun send signals: onHistoryDataDownloaded()
+
+	class: CMidSubWidget
+	public slots: 
 	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
+	*/
+	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
+
+
 	void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
-private slots:
-	void slotTopxAxisChanged(QCPRange range);
-	void slotBottomxAxisChanged(QCPRange range);
 
 public:
 	void setupUi();
 	void translateLanguage();
 public:
 	QSize sizeHint() const;
-public:
-	void setCurrentInstrumentID(unsigned int nInstrumentID);
-	unsigned int getCurrentInstrumentID();
-	void setHistoryBarType(enum BarType nBarType);
-	enum BarType getHistoryBarType();
 private:
 	void _CreateAction();
 	void _CreateConnect();
 private:
 	void doTest();
-	void _InitCustomPlots();
-	void _InitScrollBar();
-	void _InitUIData();
+	void _ReSetCustomPlot();
 private:
-	QCustomPlot* m_pCustomPlotTop;
-	QCustomPlot* m_pCustomPlotBottom;
+	QCustomPlot* m_pCustomPlot;
 	CMidSubDrawHelper* m_pMidSubDrawHelper;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairTop;
 	QCPItemTracerCrossHair* m_pQCPItemTracerCrossHairBottom;
-private:
-	unsigned int m_nCurrentInstrumentID;
-	enum BarType m_nCurrentBarType;
+	QCPAxisRect* m_pAxisRectTop;
+	QCPAxisRect* m_pAxisRectBottom;
+	
 
 };
 
