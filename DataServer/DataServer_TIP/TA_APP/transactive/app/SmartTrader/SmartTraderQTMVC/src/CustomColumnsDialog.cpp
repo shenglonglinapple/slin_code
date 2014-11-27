@@ -89,8 +89,8 @@ void CCustomColumnsDialog::setupUi()
 	m_pPushButton_OK = new QPushButton(this);//保存
 	m_pPushButton_Cancel = new QPushButton(this);//取消
 	//left
-	m_pLabel_AllAvailableColums = new QLabel(m_pGroupBox_ColumnConfiguation);//"[All Aaailable Columns]";//自定义列配置
-	m_pListWidget_AllAvailableColums = new QListWidget(m_pGroupBox_ColumnConfiguation);
+	m_pLabel_AllAvailableColums = new QLabel(this);//"[All Aaailable Columns]";//自定义列配置
+	m_pListWidget_AllAvailableColums = new QListWidget(this);
 	//mid
 	m_pPushButton_Add = new QPushButton(this);
 	m_pPushButton_AddAll = new QPushButton(this);
@@ -100,18 +100,18 @@ void CCustomColumnsDialog::setupUi()
 	m_pPushButton_Up = new QPushButton(this);
 	m_pPushButton_Down = new QPushButton(this);
 	//right
-	m_pLabel_SelectedColumns = new QLabel(m_pGroupBox_ColumnConfiguation);//"[Selected Columns]";//已选列
-	m_pListWidget_SelectedColumns = new QListWidget(m_pGroupBox_ColumnConfiguation);
+	m_pLabel_SelectedColumns = new QLabel(this);//"[Selected Columns]";//已选列
+	m_pListWidget_SelectedColumns = new QListWidget(this);
 
 
 	//main
 	m_pLayout_Main = new QVBoxLayout(NULL);
 	pHBoxLayout_Ok_Cancel = new QHBoxLayout(NULL);
 	//Column Configuration
-	pHBoxLayout_GroupBox_ColumnConfiguation = new QHBoxLayout(m_pGroupBox_ColumnConfiguation);
-	pVBoxLayout_GroupBox_ColumnConfiguation_Left = new QVBoxLayout(m_pGroupBox_ColumnConfiguation);
-	pVBoxLayout_GroupBox_ColumnConfiguation_Mid = new QVBoxLayout(m_pGroupBox_ColumnConfiguation);
-	pVBoxLayout_GroupBox_ColumnConfiguation_Right = new QVBoxLayout(m_pGroupBox_ColumnConfiguation);
+	pHBoxLayout_GroupBox_ColumnConfiguation = new QHBoxLayout();
+	pVBoxLayout_GroupBox_ColumnConfiguation_Left = new QVBoxLayout();
+	pVBoxLayout_GroupBox_ColumnConfiguation_Mid = new QVBoxLayout();
+	pVBoxLayout_GroupBox_ColumnConfiguation_Right = new QVBoxLayout();
 	pHBoxLayout_GroupBox_ColumnConfiguation->addLayout(pVBoxLayout_GroupBox_ColumnConfiguation_Left);
 	pHBoxLayout_GroupBox_ColumnConfiguation->addLayout(pVBoxLayout_GroupBox_ColumnConfiguation_Mid);
 	pHBoxLayout_GroupBox_ColumnConfiguation->addLayout(pVBoxLayout_GroupBox_ColumnConfiguation_Right);

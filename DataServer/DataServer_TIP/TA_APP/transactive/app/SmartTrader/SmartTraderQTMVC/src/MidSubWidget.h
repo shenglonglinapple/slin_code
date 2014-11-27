@@ -8,6 +8,8 @@
 #include <QtGui/QTabWidget>
 #include <QtGui/QTableView>
 #include <QtCore/QList>
+#include "Bar.h"
+#include "qcp.h"
 
 QT_BEGIN_NAMESPACE
 class QVBoxLayout;
@@ -31,32 +33,28 @@ public:
 	~CMidSubWidget();
 	
 public slots:
-	/*
-	class: CClientDataManagerWorker
-	signals:
-	void signalHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-	fun send signals: onHistoryDataDownloaded()
-
-	class: CMidSubWidget
-	public slots: 
 	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-	*/
-	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
-
-
 	void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
+	void slotTopxAxisChanged(QCPRange range);
+	void slotBottomxAxisChanged(QCPRange range);
 
 public:
 	void setupUi();
 	void translateLanguage();
 public:
 	QSize sizeHint() const;
+public:
+	void setCurrentInstrumentID(unsigned int nInstrumentID);
+	unsigned int getCurrentInstrumentID();
+	void setHistoryBarType( enum BarType nBarType, const QString& strBarType );
+
 private:
 	void _CreateAction();
 	void _CreateConnect();
 private:
 	void doTest();
 	void _ReSetCustomPlot();
+	void _InitUIData();
 private:
 	QCustomPlot* m_pCustomPlot;
 	CMidSubDrawHelper* m_pMidSubDrawHelper;
@@ -65,7 +63,9 @@ private:
 	QCPAxisRect* m_pAxisRectTop;
 	QCPAxisRect* m_pAxisRectBottom;
 	
-
+private:
+	unsigned int m_nInstrumentID;
+	enum BarType m_nBarType;
 };
 
 //QT_END_NAMESPACE

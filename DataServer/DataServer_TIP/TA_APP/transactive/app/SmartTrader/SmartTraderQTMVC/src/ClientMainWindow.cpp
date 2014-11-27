@@ -203,7 +203,7 @@ void CClientMainWindow::slotRequestHistoryData( unsigned int nInstrumentID, enum
 	{
 		if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
 		{
-			m_pEastMidSubWidget->setHistoryBarType(nBarType);
+			m_pEastMidSubWidget->setHistoryBarType(nBarType, "");
 			CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType);
 		}//if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
 		else
@@ -231,7 +231,7 @@ void CClientMainWindow::slotCurrentInstrumentChanged( unsigned int nInstrumentID
 	{
 		enum BarType nBarType = m_pMainWindowToolBar->getHistoryBarType();
 		m_pEastMidSubWidget->setCurrentInstrumentID(nInstrumentID);
-		m_pEastMidSubWidget->setHistoryBarType(nBarType);
+		m_pEastMidSubWidget->setHistoryBarType(nBarType, "");
 		CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType);
 	}
 

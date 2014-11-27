@@ -34,9 +34,9 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 	m_pCustomPlot = NULL;
 	m_pAxisRectTop = NULL;
 	m_pAxisRectBottom = NULL;
-	m_pMarginGroup = NULL;
 	m_pQCPItemTracerCrossHairTop = NULL;
 	m_pQCPItemTracerCrossHairBottom = NULL;
+	m_nInstrumentID = 0;
 
 	m_pMidSubDrawHelper = NULL;
 	m_pMidSubDrawHelper = new CMidSubDrawHelper();
@@ -100,9 +100,13 @@ void CMidSubWidget::_ReSetCustomPlot()
 		m_pAxisRectTop = new QCPAxisRect(m_pCustomPlot);
 		m_pAxisRectTop->setupFullAxesBox(true);
 		m_pAxisRectTop->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+
 		m_pAxisRectTop->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
 		m_pAxisRectTop->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
 		m_pAxisRectTop->axis(QCPAxis::atBottom)->setDateTimeFormat(DEF_STRING_FORMAT_TIME.c_str());
+
+		QObject::connect(m_pAxisRectTop->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), 
+			this, SLOT(slotTopxAxisChanged(QCPRange)));
 	}
 
 	if (NULL == m_pAxisRectBottom)
@@ -110,15 +114,18 @@ void CMidSubWidget::_ReSetCustomPlot()
 		m_pAxisRectBottom = new QCPAxisRect(m_pCustomPlot);
 		m_pAxisRectBottom->setupFullAxesBox(true);
 		m_pAxisRectBottom->axis(QCPAxis::atLeft)->setLabel(QObject::tr("Y-value"));
+
 		m_pAxisRectBottom->axis(QCPAxis::atBottom)->setLabel(QObject::tr("X-time"));
 		m_pAxisRectBottom->axis(QCPAxis::atBottom)->setTickLabelType(QCPAxis::ltDateTime);
 		m_pAxisRectBottom->axis(QCPAxis::atBottom)->setDateTimeFormat(DEF_STRING_FORMAT_TIME.c_str());//("yyyy-MM-dd hh-mm-ss");
 
-		m_pCustomPlot->plotLayout()->addElement(0, 0, m_pAxisRectTop); // insert axis rect in first row
-		m_pCustomPlot->plotLayout()->addElement(1, 0, m_pAxisRectBottom); // insert axis rect in first row
+		QObject::connect(m_pAxisRectBottom->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), 
+			this, SLOT(slotBottomxAxisChanged(QCPRange)));
 	}
 
-	
+	m_pCustomPlot->plotLayout()->addElement(0, 0, m_pAxisRectTop); // insert axis rect in first row
+	m_pCustomPlot->plotLayout()->addElement(1, 0, m_pAxisRectBottom); // insert axis rect in first row
+
 	{
 		QCPMarginGroup* m_pMarginGroup = NULL;
 		m_pMarginGroup = NULL;
@@ -156,7 +163,43 @@ void CMidSubWidget::_ReSetCustomPlot()
 
 	connect(m_pCustomPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
 	//m_pCustomPlot->rescaleAxes();
-	m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	//m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	m_pCustomPlot->setInteractions(QCP::iRangeDrag);
+	m_pCustomPlot->replot();//draw again
+
+}
+
+void CMidSubWidget::_InitUIData()
+{
+	if (NULL == m_pAxisRectTop
+		|| NULL == m_pAxisRectBottom)
+	{
+		return;
+	}
+
+	unsigned int nTimeFrom = 0;
+	unsigned int nTimeTo = 0;
+	double nLeftAxisRangeMinAdjuest = 0;
+	double nLeftAxisRangeMaxAdjuest = 0;
+	double fPositionValue = 0.0;
+	double fSizeValue = 0.0;
+	Qt::AlignmentFlag nAlignment = Qt::AlignCenter;
+
+	nTimeFrom = 0;
+	nTimeTo = MONTH;
+	nLeftAxisRangeMinAdjuest = 0;
+	nLeftAxisRangeMaxAdjuest = 100;
+
+	fSizeValue = nTimeTo - nTimeFrom;
+	fPositionValue = nTimeFrom + (fSizeValue/3);//3 page
+	nAlignment = Qt::AlignCenter;
+
+	m_pAxisRectTop->axis(QCPAxis::atBottom)->setRange(fPositionValue, fSizeValue, nAlignment);
+	m_pAxisRectTop->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
+
+	m_pAxisRectBottom->axis(QCPAxis::atBottom)->setRange(fPositionValue, fSizeValue, nAlignment);
+	m_pAxisRectBottom->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
+
 	m_pCustomPlot->replot();//draw again
 
 }
@@ -167,6 +210,7 @@ void CMidSubWidget::setupUi()
 	//this->setWindowFlags(Qt::Dialog);
 	
 	_ReSetCustomPlot();
+	_InitUIData();
 
 
 	{
@@ -178,9 +222,7 @@ void CMidSubWidget::setupUi()
 		this->setLayout(verticalLayout);
 	}
 
-
-	//setGeometry(400, 250, 542, 390);
-	
+	//setGeometry(400, 250, 542, 390);	
 	QMetaObject::connectSlotsByName(this);
 } 
 void CMidSubWidget::translateLanguage()
@@ -212,8 +254,8 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 	m_pCustomPlot->clearGraphs();
 	m_pCustomPlot->clearPlottables();
 
-	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectTop);
-	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectBottom);
+	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectBottom);
+	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectTop);
 
 
 	//m_pCustomPlot->rescaleAxes();
@@ -243,6 +285,36 @@ void CMidSubWidget::QCPItemTracerCrossHairMouseMove( QMouseEvent *event )
 
 	m_pCustomPlot->replot();
 }
+
+void CMidSubWidget::setCurrentInstrumentID(unsigned int nInstrumentID)
+{
+	m_nInstrumentID = nInstrumentID;
+
+}
+
+unsigned int CMidSubWidget::getCurrentInstrumentID()
+{
+	return m_nInstrumentID;
+
+}
+
+void CMidSubWidget::setHistoryBarType(enum BarType nBarType, const QString& strBarType)
+{
+	m_nBarType = nBarType;
+}
+
+void CMidSubWidget::slotTopxAxisChanged(QCPRange range)
+{
+	m_pAxisRectBottom->axis(QCPAxis::atBottom)->setRange(range);
+	m_pCustomPlot->replot();
+}
+
+void CMidSubWidget::slotBottomxAxisChanged(QCPRange range)
+{
+	m_pAxisRectTop->axis(QCPAxis::atBottom)->setRange(range);
+	m_pCustomPlot->replot();
+}
+
 
 
 

@@ -247,7 +247,7 @@ void CClientDataManagerWorker::_UnInitTraderClient()
 	if (NULL != m_pSmartTraderClient)
 	{
 		//TODO. debug mode will crash
-		//m_pSmartTraderClient->logoff();
+		m_pSmartTraderClient->logoff();
 		m_pSmartTraderClient->setProcessRecvDataHandle(NULL);
 
 		delete m_pSmartTraderClient;
