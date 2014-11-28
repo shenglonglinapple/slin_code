@@ -1,0 +1,16 @@
+﻿<Window x:Class="WPFToolChangeCodeInfile.WPFToolChangeCodeInfileWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="WPFToolChangeLongTypeWindow_Title" Height="714" Width="977">
+    <Grid>
+        <Label Margin="25,0,0,300" Name="label_DataSrcPath" HorizontalAlignment="Left" Width="133" Height="28" VerticalAlignment="Bottom">DataSrcPath:</Label>
+        <TextBox Margin="26,0,12,256.25" Name="textBox_DataSrcPath" Height="31.25" VerticalAlignment="Bottom" />
+        <Label HorizontalAlignment="Left" Margin="23.75,0,0,197.5" Name="label1_DataDestPath" Width="120" Height="28" VerticalAlignment="Bottom">DataDestPath</Label>
+        <TextBox Height="36.25" Margin="23,0,12,152.5" Name="textBox_DataDestPath" VerticalAlignment="Bottom" />
+        <Button Height="23" HorizontalAlignment="Left" Margin="30,0,0,91" Name="button_DoWork" VerticalAlignment="Bottom" Width="75" Click="button_DoWork_Click">DoWork</Button>
+        <Label Height="28" Name="label_StringSrc" HorizontalAlignment="Left" Margin="25,83,0,0"  VerticalAlignment="Top" Width="133">StringSrc:</Label>
+        <TextBox Height="38" Name="textBox_StringSrc" Margin="25,117,12,0"  VerticalAlignment="Top" />
+        <Label Height="28" Name="label_StringDest" HorizontalAlignment="Left" Margin="25,184,0,0" VerticalAlignment="Top" Width="133">StringDest:</Label>
+        <TextBox Height="38" Name="textBox_StringDest" Margin="23,218,14,0" VerticalAlignment="Top" />
+    </Grid>
+</Window>

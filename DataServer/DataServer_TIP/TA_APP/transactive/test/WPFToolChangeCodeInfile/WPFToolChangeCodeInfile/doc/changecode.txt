@@ -1,0 +1,8 @@
+StringSrc:
+U_LONGMAX
+StringDest:
+TA_ULONG_MAX
+PathSrc:
+./DataSrc
+PathDest:
+./DataDest
