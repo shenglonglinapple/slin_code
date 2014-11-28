@@ -741,7 +741,7 @@ void QCPStatisticalBoxTracerCrossData::setDrawInfo(QRect clipRect)
 		if (QColor(Qt::green) == m_fWhiskerBarPen.color().toRgb())
 		{
 			//green up
-			m_strInfo = QString("O:%1,L:%1,C:%2,H:%3")
+			m_strInfo = QString("O:%1,L:%2,C:%3,H:%4")
 				.arg(this->m_fLowerQuartile)
 				.arg(this->m_fMinimum)
 				.arg(this->m_fUpperQuartile)
@@ -750,7 +750,7 @@ void QCPStatisticalBoxTracerCrossData::setDrawInfo(QRect clipRect)
 		else //if (QColor(Qt::red) == m_fWhiskerBarPen.color())
 		{
 			//green down
-			m_strInfo = QString("O:%1,L:%1,C:%2,H:%3")
+			m_strInfo = QString("O:%1,L:%2,C:%3,H:%4")
 				.arg(this->m_fUpperQuartile)
 				.arg(this->m_fMinimum)
 				.arg(this->m_fLowerQuartile)
