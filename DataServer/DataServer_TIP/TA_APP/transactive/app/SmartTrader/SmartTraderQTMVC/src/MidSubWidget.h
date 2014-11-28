@@ -22,6 +22,9 @@ class CMidSubDrawHelper;
 class QCPItemTracerCrossHair;
 class QCPAxisRect;
 class QCPMarginGroup;
+class CProjectLogHelper;
+
+
 
 class CMidSubWidget : public QWidget
 {
@@ -52,7 +55,6 @@ private:
 	void _CreateAction();
 	void _CreateConnect();
 private:
-	void doTest();
 	void _ReSetCustomPlot();
 	void _InitUIData();
 private:
@@ -64,6 +66,7 @@ private:
 	QCPAxisRect* m_pAxisRectBottom;
 	
 private:
+	CProjectLogHelper* m_pProjectLogHelper;
 	unsigned int m_nInstrumentID;
 	enum BarType m_nBarType;
 };

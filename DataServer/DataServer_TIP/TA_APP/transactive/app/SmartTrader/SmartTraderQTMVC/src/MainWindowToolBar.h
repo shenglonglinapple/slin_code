@@ -6,6 +6,8 @@
 #include <QtGui/QActionGroup>
 #include "Bar.h"
 
+class CProjectLogHelper;
+
 class CMainWindowToolBar : public QToolBar 
 { 
 	Q_OBJECT
@@ -15,6 +17,7 @@ public:
 	virtual ~CMainWindowToolBar(); 
 
 public slots:
+	void slotActionS5Triggered();
 	void slotActionM1Triggered();
 	void slotActionM5Triggered();
 	void slotActionM15Triggered();
@@ -38,6 +41,7 @@ private:
 private:
 	QActionGroup* m_pAction_Group_BarType;
 private:
+	QAction* m_pAction_BarInfo_S5;
 	QAction* m_pAction_BarInfo_M1;
 	QAction* m_pAction_BarInfo_M5;
 	QAction* m_pAction_BarInfo_M15;
@@ -46,6 +50,8 @@ private:
 	QAction* m_pAction_BarInfo_D1;
 	QAction* m_pAction_BarInfo_W1;
 	QAction* m_pAction_BarInfo_MN;
+private:
+	CProjectLogHelper* m_pProjectLogHelper;
 private:
 	unsigned int m_nCurrentInstrumentID;
 	enum BarType m_nCurrentBarType;

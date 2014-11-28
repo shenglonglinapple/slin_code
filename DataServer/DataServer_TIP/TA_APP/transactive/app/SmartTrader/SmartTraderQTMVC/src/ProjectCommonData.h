@@ -30,6 +30,12 @@ static const std::string DEFVALUE_String_OrderType_STOP = "STOP";
 static const std::string DEFVALUE_String_OrderType_UNKNOWN = "UNKNOWN";
 //////////////////////////////////////////////////////////////////////////
 
+
+static const int DEFVALUE_Int_OnePage_HistoryBarNumber = 128;//1024
+static const std::string DEFVALUE_String_HistoryBarType = "FIVE_SECOND";
+static const int DEFVALUE_Int_InstrumentID = 1;//
+//////////////////////////////////////////////////////////////////////////
+
 #endif  // __DEF__HISTORY_DATA_SERVER_COMMON_DATA_H_
 
 

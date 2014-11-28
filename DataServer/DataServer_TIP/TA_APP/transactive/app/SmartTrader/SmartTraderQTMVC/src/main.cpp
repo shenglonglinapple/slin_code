@@ -16,6 +16,10 @@
 //
 //
 
+#pragma comment(lib,"ws2_32.lib")
+
+
+
 void setUpSplashScreen()
 {
 	QSplashScreen* splash = NULL;

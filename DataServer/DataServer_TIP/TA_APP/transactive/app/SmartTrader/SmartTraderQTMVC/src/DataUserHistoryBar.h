@@ -29,8 +29,14 @@ private:
 private:
 	void _Init();
 	void _UniInit();
+	void _FreeOldData(unsigned int nInstrumentID);
+
 public:
-	void createRequest(unsigned int nInstrumentID, enum BarType nBarType,time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient);
+	void createRequest_Time( unsigned int nInstrumentID, enum BarType nBarType, time_t timeFrom, time_t timeTo, CSmartTraderClient* pMyTradeClient);
+	void createRequest_NumberSubscribe( unsigned int nInstrumentID, enum BarType nBarType, int nBarCount, bool bSubscribe, CSmartTraderClient* pMyTradeClient);
+	void createRequest_NumberTimeSubscribe( unsigned int nInstrumentID, enum BarType nBarType, unsigned int nTimeFrom, int nBarCount, bool bSubscribe, CSmartTraderClient* pMyTradeClient);
+
+public:
 	void onBarDataUpdate( const BarSummary &barData );
 	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID);
 	CHistoryDataManager* findByInstrumentID(unsigned int nInstrumentID);

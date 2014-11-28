@@ -1,5 +1,6 @@
 #include "MidSubDrawHelper.h"
 #include "ProjectUtilityFun.h"
+#include "ProjectLogHelper.h"
 #include <set>
 #include <stdlib.h>
 #include <math.h>
@@ -16,12 +17,24 @@ static std::string DEF_STRING_FORMAT_TIME = "yyyy-MM-dd\nhh:mm:ss";
 
 CMidSubDrawHelper::CMidSubDrawHelper()
 {
+	m_pProjectLogHelper = NULL;
+	m_pProjectLogHelper = new CProjectLogHelper();
+
+	m_nBottomTimeFrom = m_pProjectLogHelper->getTimeNow_Qt();
+	m_nBottomTimeTo = m_pProjectLogHelper->getTimeNow_Qt();
+	
+	m_nBottomTimeTo += YEAR;
+	m_nBottomTimeFrom = m_nBottomTimeTo- MONTH;;
 
 }
 
 CMidSubDrawHelper::~CMidSubDrawHelper()
 {
-
+	if (NULL != m_pProjectLogHelper)
+	{
+		delete m_pProjectLogHelper;
+		m_pProjectLogHelper = NULL;
+	}
 }
 
 
@@ -139,6 +152,10 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 	nLeftAxisRangeMinAdjuest = nLeftAxisRangeMin * 0.95;
 	nLeftAxisRangeMaxAdjuest = nLeftAxisRangeMax * 1.05;
 	pRect->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
+
+	//bottom  x  min max value
+	m_nBottomTimeFrom = nTimeFrom;
+	m_nBottomTimeTo = nTimeTo;
 
 // 	pCustomPlot->rescaleAxes();
 // 	pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
@@ -259,5 +276,15 @@ void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataM
 	pBoxBrushRef = NULL;
 	pBoxPenRef = NULL;
 	pStatisticalBoxRef = NULL;
+}
+
+unsigned int CMidSubDrawHelper::getBottomTimeFrom()
+{
+	return m_nBottomTimeFrom;
+}
+
+unsigned int CMidSubDrawHelper::getBottomTimeTo()
+{
+	return m_nBottomTimeTo;
 }
 

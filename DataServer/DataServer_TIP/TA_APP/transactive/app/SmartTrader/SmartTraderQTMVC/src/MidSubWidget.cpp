@@ -3,7 +3,8 @@
 
 
 #include "ProjectQTInclude.h"
-
+#include "ProjectCommonData.h"
+#include "ProjectLogHelper.h"
 #include "ClientDataManagerWorker.h"
 #include "HistoryDataManager.h"
 #include "MidSubDrawHelper.h"
@@ -36,7 +37,10 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 	m_pAxisRectBottom = NULL;
 	m_pQCPItemTracerCrossHairTop = NULL;
 	m_pQCPItemTracerCrossHairBottom = NULL;
+	m_pProjectLogHelper = NULL;
+	m_pProjectLogHelper = new CProjectLogHelper();
 	m_nInstrumentID = 0;
+	m_nBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
 
 	m_pMidSubDrawHelper = NULL;
 	m_pMidSubDrawHelper = new CMidSubDrawHelper();
@@ -44,13 +48,8 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
     setupUi();
 	translateLanguage();
 
-
 	_CreateAction();
 	_CreateConnect();
-
-	//doTest(customPlot);
-
-
 }
 
 
@@ -60,6 +59,11 @@ CMidSubWidget::~CMidSubWidget()
 	{
 		delete m_pMidSubDrawHelper;
 		m_pMidSubDrawHelper = NULL;
+	}
+	if (NULL != m_pProjectLogHelper)
+	{
+		delete m_pProjectLogHelper;
+		m_pProjectLogHelper = NULL;
 	}
 }
 
@@ -164,41 +168,32 @@ void CMidSubWidget::_ReSetCustomPlot()
 	connect(m_pCustomPlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(QCPItemTracerCrossHairMouseMove(QMouseEvent*)));
 	//m_pCustomPlot->rescaleAxes();
 	//m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
-	m_pCustomPlot->setInteractions(QCP::iRangeDrag);
+	m_pAxisRectTop->setRangeDrag(Qt::Horizontal);//只在水平方向上可拖动
+	m_pAxisRectBottom->setRangeDrag(Qt::Horizontal);//只在水平方向上可拖动
+
+	m_pCustomPlot->setInteractions(QCP::iRangeDrag);//只可拖动
 	m_pCustomPlot->replot();//draw again
 
 }
 
 void CMidSubWidget::_InitUIData()
 {
-	if (NULL == m_pAxisRectTop
-		|| NULL == m_pAxisRectBottom)
-	{
-		return;
-	}
-
 	unsigned int nTimeFrom = 0;
 	unsigned int nTimeTo = 0;
 	double nLeftAxisRangeMinAdjuest = 0;
 	double nLeftAxisRangeMaxAdjuest = 0;
-	double fPositionValue = 0.0;
-	double fSizeValue = 0.0;
-	Qt::AlignmentFlag nAlignment = Qt::AlignCenter;
 
-	nTimeFrom = 0;
-	nTimeTo = MONTH;
+	nTimeFrom =  m_pMidSubDrawHelper->getBottomTimeFrom();;
+	nTimeTo = m_pMidSubDrawHelper->getBottomTimeTo();
+
 	nLeftAxisRangeMinAdjuest = 0;
 	nLeftAxisRangeMaxAdjuest = 100;
 
-	fSizeValue = nTimeTo - nTimeFrom;
-	fPositionValue = nTimeFrom + (fSizeValue/3);//3 page
-	nAlignment = Qt::AlignCenter;
+	m_pAxisRectTop->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);//x
+	m_pAxisRectTop->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);//y
 
-	m_pAxisRectTop->axis(QCPAxis::atBottom)->setRange(fPositionValue, fSizeValue, nAlignment);
-	m_pAxisRectTop->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
-
-	m_pAxisRectBottom->axis(QCPAxis::atBottom)->setRange(fPositionValue, fSizeValue, nAlignment);
-	m_pAxisRectBottom->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest, nLeftAxisRangeMaxAdjuest);
+	m_pAxisRectBottom->axis(QCPAxis::atBottom)->setRange(nTimeFrom, nTimeTo);//x
+	m_pAxisRectBottom->axis(QCPAxis::atLeft)->setRange(nLeftAxisRangeMinAdjuest*10000, nLeftAxisRangeMaxAdjuest*10000);//y
 
 	m_pCustomPlot->replot();//draw again
 
@@ -222,7 +217,6 @@ void CMidSubWidget::setupUi()
 		this->setLayout(verticalLayout);
 	}
 
-	//setGeometry(400, 250, 542, 390);	
 	QMetaObject::connectSlotsByName(this);
 } 
 void CMidSubWidget::translateLanguage()
@@ -230,16 +224,6 @@ void CMidSubWidget::translateLanguage()
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_Title.c_str()));
 
 }
-
-
-
-void CMidSubWidget::doTest()
-{
-
-
-
-}
-
 
 void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataManager )
 {
@@ -250,13 +234,11 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
 	}
 
-
 	m_pCustomPlot->clearGraphs();
 	m_pCustomPlot->clearPlottables();
 
 	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectBottom);
 	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectTop);
-
 
 	//m_pCustomPlot->rescaleAxes();
 	//m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
@@ -270,8 +252,6 @@ void CMidSubWidget::QCPItemTracerCrossHairMouseMove( QMouseEvent *event )
 	{ 
 		QPointF pointfValue_e_QPointF;
 		pointfValue_e_QPointF = event->posF();
-		//m_pQCPItemTracerCrossHair->setGraphKey(mCustomPlot->xAxis->pixelToCoord(event->pos().x()));
-		//m_pQCPItemTracerCrossHair->position->setCoords(event->posF());
 		m_pQCPItemTracerCrossHairTop->setCenterPos(pointfValue_e_QPointF);
 	}
 
@@ -305,13 +285,39 @@ void CMidSubWidget::setHistoryBarType(enum BarType nBarType, const QString& strB
 
 void CMidSubWidget::slotTopxAxisChanged(QCPRange range)
 {
-	m_pAxisRectBottom->axis(QCPAxis::atBottom)->setRange(range);
+
+	//check GUI have data
+	if (range.lower < m_pMidSubDrawHelper->getBottomTimeFrom())
+	{
+		//if no data sent req to server
+		CClientDataManagerWorker::getInstance().slotRequestHistoryData(m_nInstrumentID, m_nBarType, m_pMidSubDrawHelper->getBottomTimeFrom());
+	}
+
+	if (range == m_pAxisRectBottom->axis(QCPAxis::atBottom)->range())
+	{
+		return;
+	}
+	MYLOG4CPP_DEBUG<<"slotTopxAxisChanged"
+		<<" "<<"range.lower="<<m_pProjectLogHelper->dateTimeToStr_Qt(range.lower)
+		<<" "<<"range.upper="<<m_pProjectLogHelper->dateTimeToStr_Qt(range.upper);
+
+	m_pAxisRectBottom->axis(QCPAxis::atBottom)->setRange(range);//x
 	m_pCustomPlot->replot();
 }
 
 void CMidSubWidget::slotBottomxAxisChanged(QCPRange range)
-{
-	m_pAxisRectTop->axis(QCPAxis::atBottom)->setRange(range);
+{	
+
+	if (range == m_pAxisRectTop->axis(QCPAxis::atBottom)->range())
+	{
+		return;
+	}
+	MYLOG4CPP_DEBUG<<"slotBottomxAxisChanged"
+		<<" "<<"range.lower="<<m_pProjectLogHelper->dateTimeToStr_Qt(range.lower)
+		<<" "<<"range.upper="<<m_pProjectLogHelper->dateTimeToStr_Qt(range.upper);
+
+
+	m_pAxisRectTop->axis(QCPAxis::atBottom)->setRange(range);//x
 	m_pCustomPlot->replot();
 }
 

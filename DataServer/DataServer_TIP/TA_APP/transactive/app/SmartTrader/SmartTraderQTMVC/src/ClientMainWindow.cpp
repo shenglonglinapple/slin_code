@@ -5,7 +5,7 @@
 #include "Order.h"
 
 #include "ProjectQTInclude.h"
-
+#include "ProjectLogHelper.h"
 #include "ClientDataManagerWorker.h"
 #include "HistoryDataManager.h"
 
@@ -62,6 +62,8 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
 	m_pMdiArea = NULL;
 	m_pEastMidSubWidget = NULL;
 	m_pMainWindowToolBar = NULL;
+	m_pProjectLogHelper = NULL;
+	m_pProjectLogHelper = new CProjectLogHelper();
 
  	_CreateActions();
  	_CreateMenus();
@@ -76,7 +78,11 @@ CClientMainWindow::CClientMainWindow(QWidget* parent)
 
 CClientMainWindow::~CClientMainWindow()
 {
-
+	if (NULL != m_pProjectLogHelper)
+	{
+		delete m_pProjectLogHelper;
+		m_pProjectLogHelper = NULL;
+	}
 
 }
 
@@ -108,8 +114,8 @@ void CClientMainWindow::_CreateToolBars()
 	this->addToolBar(Qt::TopToolBarArea,m_pMainWindowToolBar);
 
 
-	QObject::connect(m_pMainWindowToolBar, SIGNAL(signalRequestHistoryData(unsigned int, enum BarType)), 
-		this, SLOT(slotRequestHistoryData(unsigned int, enum BarType)));
+	QObject::connect(m_pMainWindowToolBar, SIGNAL(signalRequestHistoryData(unsigned int, enum BarType, unsigned int)), 
+		this, SLOT(slotRequestHistoryData(unsigned int, enum BarType, unsigned int)));
 
 
 }
@@ -204,7 +210,7 @@ void CClientMainWindow::slotRequestHistoryData( unsigned int nInstrumentID, enum
 		if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
 		{
 			m_pEastMidSubWidget->setHistoryBarType(nBarType, "");
-			CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType);
+			CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType, m_pProjectLogHelper->getTimeNow_Qt());
 		}//if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
 		else
 		{
@@ -232,7 +238,7 @@ void CClientMainWindow::slotCurrentInstrumentChanged( unsigned int nInstrumentID
 		enum BarType nBarType = m_pMainWindowToolBar->getHistoryBarType();
 		m_pEastMidSubWidget->setCurrentInstrumentID(nInstrumentID);
 		m_pEastMidSubWidget->setHistoryBarType(nBarType, "");
-		CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType);
+		CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType, m_pProjectLogHelper->getTimeNow_Qt());
 	}
 
 }

@@ -55,7 +55,8 @@ public slots:
 	void slotInstrumentViewResetData();
 	void slotUserInstrumentViewColumnsChanged();
 	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
-	void slotRequestHistoryData(unsigned int nInstrumentID, enum BarType nBarType);
+	void slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType, unsigned int nTimeTo);
+	void slotRequestHistoryData_Subscribe( unsigned int nInstrumentID, enum BarType nBarType, int nBarCount, bool bSubscribe);
 
 signals:
 	void signalLoginToServerResult(int nResult);
@@ -93,6 +94,7 @@ private:
 	CSmartTraderClient* m_pSmartTraderClient;
 private:
 	CProjectUtilityFun* m_pProjectUtilityFun;
+	CProjectLogHelper* m_pProjectLogHelper;
 private:
 	int m_nDoTest;
 };

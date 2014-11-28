@@ -2,9 +2,13 @@
 
 #include <QtGui/QAction>
 #include "Bar.h"
+#include "ProjectCommonData.h"
+#include "ProjectLogHelper.h"
 #include "Log4cppLogger.h"
 
+
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Text = "BarInfo";
+static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_S5_Text = "S5";
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_M1_Text = "M1";
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_M5_Text = "M5";
 static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_M15_Text = "M15";
@@ -18,43 +22,65 @@ static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_MN_Text =
 CMainWindowToolBar::CMainWindowToolBar( const QString &title, QWidget *parent /*= 0*/ )
 :QToolBar(title, parent)
 {
-	m_nCurrentInstrumentID = 1;
-	m_nCurrentBarType = DAY;
+	m_pProjectLogHelper = NULL;
+	m_pProjectLogHelper = new CProjectLogHelper();
+	m_nCurrentInstrumentID = DEFVALUE_Int_InstrumentID;
+	m_nCurrentBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
+
 
 	_CreateActions();
 	_AddAction();
 	translateLanguage();
 	_CreateConnect();
 	
-	m_pAction_BarInfo_D1->setChecked(true);//default D1
-	m_pAction_BarInfo_D1->trigger();//default D1
-	
+	if (m_nCurrentBarType == FIVE_SECOND)
+	{
+		m_pAction_BarInfo_S5->setChecked(true);//default 
+		m_pAction_BarInfo_S5->trigger();//default 
+	}	
 }
 
 CMainWindowToolBar::CMainWindowToolBar( QWidget *parent /*= 0*/ )
 :QToolBar(parent)
 {
-	m_nCurrentInstrumentID = 1;
-	m_nCurrentBarType = DAY;
+	m_pProjectLogHelper = NULL;
+	m_pProjectLogHelper = new CProjectLogHelper();
+	m_nCurrentInstrumentID = DEFVALUE_Int_InstrumentID;
+	m_nCurrentBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
+
 
 	_CreateActions();
 	_AddAction();
 	translateLanguage();
 	_CreateConnect();
 	
-	m_pAction_BarInfo_D1->setChecked(true);//default D1
-	m_pAction_BarInfo_D1->trigger();//default D1
+	if (m_nCurrentBarType == FIVE_SECOND)
+	{
+		m_pAction_BarInfo_S5->setChecked(true);//default 
+		m_pAction_BarInfo_S5->trigger();//default 
+	}
+
 
 }
 
 CMainWindowToolBar::~CMainWindowToolBar()
 {
+	if (NULL != m_pProjectLogHelper)
+	{
+		delete m_pProjectLogHelper;
+		m_pProjectLogHelper = NULL;
+	}
 
 }
 
 void CMainWindowToolBar::_CreateActions()
 {
 	m_pAction_Group_BarType = new QActionGroup(this);
+
+	m_pAction_BarInfo_S5 = new QAction(this); 
+	m_pAction_BarInfo_S5->setCheckable(true);
+	m_pAction_BarInfo_S5->setChecked(false);
+	m_pAction_Group_BarType->addAction(m_pAction_BarInfo_S5);
 
 	m_pAction_BarInfo_M1 = new QAction(this); 
 	m_pAction_BarInfo_M1->setCheckable(true);
@@ -103,6 +129,9 @@ void CMainWindowToolBar::_AddAction()
 }
 void CMainWindowToolBar::_CreateConnect()
 {
+	QObject::connect(m_pAction_BarInfo_S5, SIGNAL(triggered()), 
+		this, SLOT(slotActionS5Triggered()));
+
 	QObject::connect(m_pAction_BarInfo_M1, SIGNAL(triggered()), 
 		this, SLOT(slotActionM1Triggered()));
 
@@ -131,6 +160,7 @@ void CMainWindowToolBar::_CreateConnect()
 void CMainWindowToolBar::translateLanguage()
 {
 	//
+	m_pAction_BarInfo_S5->setText(QObject::tr(DEFVALUE_String_Window_ToolBar_BarInfo_Action_S5_Text.c_str()));
 	m_pAction_BarInfo_M1->setText(QObject::tr(DEFVALUE_String_Window_ToolBar_BarInfo_Action_M1_Text.c_str()));
 	m_pAction_BarInfo_M5->setText(QObject::tr(DEFVALUE_String_Window_ToolBar_BarInfo_Action_M5_Text.c_str()));
 	m_pAction_BarInfo_M15->setText(QObject::tr(DEFVALUE_String_Window_ToolBar_BarInfo_Action_M15_Text.c_str()));
@@ -142,46 +172,63 @@ void CMainWindowToolBar::translateLanguage()
 }
 
 
+void CMainWindowToolBar::slotActionS5Triggered()
+{
+	enum BarType  nBarType = FIVE_SECOND;
+
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
+}
 
 void CMainWindowToolBar::slotActionM1Triggered()
 {
 	enum BarType  nBarType = MINUTE;
-	setHistoryBarType(nBarType, "MINUTE");
+
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
 }
 void CMainWindowToolBar::slotActionM5Triggered()
 {
 	enum BarType  nBarType = FIVE_MINUTE;
-	setHistoryBarType(nBarType, "FIVE_MINUTE");
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
 }
 void CMainWindowToolBar::slotActionM15Triggered()
 {
 	enum BarType  nBarType = FIFTEEN_MINUTE;
-	setHistoryBarType(nBarType, "FIFTEEN_MINUTE");
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
+
 }
 void CMainWindowToolBar::slotActionM30Triggered()
 {
 	enum BarType  nBarType = THIRTY_MINUTE;
-	setHistoryBarType(nBarType, "THIRTY_MINUTE");
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
 }
 void CMainWindowToolBar::slotActionH1Triggered()
 {
 	enum BarType  nBarType = ONE_HOUR;
-	setHistoryBarType(nBarType, "ONE_HOUR");
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
 }
 void CMainWindowToolBar::slotActionD1Triggered()
 {
 	enum BarType  nBarType = DAY;
-	setHistoryBarType(nBarType, "DAY");
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
 }
 void CMainWindowToolBar::slotActionW1Triggered()
 {
 	enum BarType  nBarType = WEEK;
-	setHistoryBarType(nBarType, "WEEK");
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
 }
 void CMainWindowToolBar::slotActionMNTriggered()
 {
 	enum BarType  nBarType = MONTH;
-	setHistoryBarType(nBarType, "MONTH");
+	QString strBarType = m_pProjectLogHelper->getString_BarType(nBarType).c_str();
+	setHistoryBarType(nBarType, strBarType);
 }
 
 void CMainWindowToolBar::setCurrentInstrumentID( unsigned int nInstrumentID )
@@ -203,10 +250,11 @@ void CMainWindowToolBar::setHistoryBarType( enum BarType nBarType, const QString
 				<<" "<<"m_nCurrentBarType="<<m_nCurrentBarType
 				<<" "<<"strBarType="<<strBarType.toStdString();
 
-	if (1 == m_nCurrentInstrumentID)
+	if (DEFVALUE_Int_InstrumentID == m_nCurrentInstrumentID)
 	{
 		MYLOG4CPP_DEBUG<<"CMainWindowToolBar setHistoryBarType"
-			<<" "<<"1 == m_nCurrentInstrumentID not emit signalRequestHistoryData";
+			<<" "<<"m_nCurrentInstrumentID == DEFVALUE_Int_InstrumentID"
+			<<" "<<"not emit signalRequestHistoryData";
 		return;
 	}
 

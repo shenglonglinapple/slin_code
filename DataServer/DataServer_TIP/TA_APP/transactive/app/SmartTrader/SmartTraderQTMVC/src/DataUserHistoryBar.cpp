@@ -85,19 +85,8 @@ void CDataUserHistoryBar::_UniInit()
 
 }
 
-void CDataUserHistoryBar::createRequest(
-	unsigned int nInstrumentID, enum BarType nBarType,
-	time_t timeFrom,time_t timeTo, CSmartTraderClient* pMyTradeClient)
+void CDataUserHistoryBar::_FreeOldData(unsigned int nInstrumentID)
 {
-	Instrument* pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef)
-	{
-		//TODO.
-		return;
-	}
-
-
 	//check exist
 	{
 		QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
@@ -115,7 +104,24 @@ void CDataUserHistoryBar::createRequest(
 			m_MapHistoryData.erase(iterMap);
 		}
 	}
+}
 
+
+void CDataUserHistoryBar::createRequest_Time(
+	unsigned int nInstrumentID, 
+	enum BarType nBarType,
+	time_t timeFrom,
+	time_t timeTo,
+	CSmartTraderClient* pMyTradeClient)
+{
+	Instrument* pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	if (NULL == pInstrumentRef)
+	{
+		//TODO.
+		return;
+	}
+	_FreeOldData(nInstrumentID);
 	//create new one
 	{
 		QMutexLocker lock(&m_mutexForMapHistoryData);
@@ -123,7 +129,7 @@ void CDataUserHistoryBar::createRequest(
 
 		pHistoryDataManager = new CHistoryDataManager();
 		pHistoryDataManager->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
-		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_Time);
+		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_Time);//HistoryRequestType_NumberSubscribe
 		pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
 		pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
 		pHistoryDataManager->m_pHistoryRequest->setTimeFrom(timeFrom);
@@ -134,14 +140,83 @@ void CDataUserHistoryBar::createRequest(
 		m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
 		pHistoryDataManager = NULL;
 	}
-	
 
-	/// Download history data from server from a time span 
-	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int from, unsigned int to );
-	/// Download the latest N bars and subscribe the following bars, the new bars will be pushed automatically after subscription 
-	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned short number, bool subscribe );
-	/// Download N bars since a time point, and subscribe the bar data from the time point when to subscribe. 
-	//unsigned int downloadHistoryData( const Instrument &instrument, BarType interval, unsigned int fromTime, unsigned short count, bool subscribe );
+}
+
+
+void CDataUserHistoryBar::createRequest_NumberSubscribe(
+	unsigned int nInstrumentID, 
+	enum BarType nBarType,
+	int nBarCount,
+	bool bSubscribe,
+	CSmartTraderClient* pMyTradeClient)
+{
+	Instrument* pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	if (NULL == pInstrumentRef)
+	{
+		//TODO.
+		return;
+	}
+
+	_FreeOldData(nInstrumentID);
+
+	//create new one
+	{
+		QMutexLocker lock(&m_mutexForMapHistoryData);
+		CHistoryDataManager* pHistoryDataManager = NULL;
+
+		pHistoryDataManager = new CHistoryDataManager();
+		pHistoryDataManager->setInstrumentID(nInstrumentID);//
+		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
+		pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
+		pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
+		pHistoryDataManager->m_pHistoryRequest->setBarCount(nBarCount);
+		pHistoryDataManager->m_pHistoryRequest->setSubscribe(bSubscribe);
+		pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
+		pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
+		m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
+		pHistoryDataManager = NULL;
+	}
+
+}
+
+void CDataUserHistoryBar::createRequest_NumberTimeSubscribe(
+	unsigned int nInstrumentID, 
+	enum BarType nBarType,
+	unsigned int nTimeFrom,
+	int nBarCount,
+	bool bSubscribe,
+	CSmartTraderClient* pMyTradeClient)
+{
+	Instrument* pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	if (NULL == pInstrumentRef)
+	{
+		//TODO.
+		return;
+	}
+
+	_FreeOldData(nInstrumentID);
+
+	//create new one
+	{
+		QMutexLocker lock(&m_mutexForMapHistoryData);
+		CHistoryDataManager* pHistoryDataManager = NULL;
+
+		pHistoryDataManager = new CHistoryDataManager();
+		pHistoryDataManager->setInstrumentID(nInstrumentID);//
+		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberTimeSubscribe);
+		pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
+		pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
+		pHistoryDataManager->m_pHistoryRequest->setBarCount(nBarCount);
+		pHistoryDataManager->m_pHistoryRequest->setTimeFrom(nTimeFrom);
+		pHistoryDataManager->m_pHistoryRequest->setSubscribe(bSubscribe);
+		pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
+		pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
+		m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
+		pHistoryDataManager = NULL;
+	}
 
 }
 

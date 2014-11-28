@@ -25,7 +25,7 @@ class CLeftDockWidget;
 class CBottomDockWidget;
 class CMidSubWidget;
 class CMainWindowToolBar;
-
+class CProjectLogHelper;
 
 
 class CClientMainWindow : public QMainWindow
@@ -75,6 +75,7 @@ private:
 
 private:
 	CMainWindowToolBar* m_pMainWindowToolBar;
+	CProjectLogHelper* m_pProjectLogHelper;
 };
 
 //QT_END_NAMESPACE

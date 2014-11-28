@@ -42,7 +42,7 @@ void CHistoryDataACK::onHistoryDataDownloaded(BarsPtr bars )
 	while (iterSet != bars->end())
 	{
 		Bar newBar = (*iterSet);
-		m_MapBarData.insert(newBar.timestamp, newBar);
+		m_MapBarData.insert(newBar.timestamp, newBar);//duplick will not insert 
 		iterSet++;
 	}
 
@@ -57,7 +57,7 @@ void CHistoryDataACK::onBarDataUpdate( const BarSummary &barData )
 	while (iterMap != barData.bars.end())
 	{
 		Bar newBar = iterMap->second;// (*iterMap).second;
-		m_MapBarData.insert(newBar.timestamp, newBar);
+		m_MapBarData.insert(newBar.timestamp, newBar);//duplick will not insert 
 		iterMap++;
 	}
 
