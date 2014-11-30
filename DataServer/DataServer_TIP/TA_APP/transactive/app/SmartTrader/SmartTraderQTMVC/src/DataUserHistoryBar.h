@@ -39,7 +39,10 @@ public:
 public:
 	void onBarDataUpdate( const BarSummary &barData );
 	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID);
-	CHistoryDataManager* findByInstrumentID(unsigned int nInstrumentID);
+	CHistoryDataManager* lockUseData(unsigned int nInstrumentID);
+public:
+	void lock();
+	void unlock();
 private:
 	QMutex m_mutexForMapHistoryData;
 	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//instrumentID

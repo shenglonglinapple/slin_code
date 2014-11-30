@@ -65,11 +65,11 @@ private:
 public:
 	void setSignalSlot_HistoryDataChanged(CClientDataManagerWorker* pSignal, CMidSubWidget* pSlot);
 public slots:
-	void slotHistoryDataChanged(CHistoryDataManager* pParam);
+	void slotHistoryDataChanged( unsigned int nInstrumentID );
 signals:
-	void signalHistoryDataChanged(CHistoryDataManager* pParam);
+	void signalHistoryDataChanged(unsigned int nParam);
 public:
-	void emit_signalHistoryDataChanged(CHistoryDataManager* pParam);
+	void emit_signalHistoryDataChanged( unsigned int nInstrumentID);
 	//////////////////////////////////////////////////////	
 
 

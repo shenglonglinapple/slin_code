@@ -29,14 +29,22 @@ class CProjectLogHelper;
 class CMidSubWidget : public QWidget
 {
     Q_OBJECT
-
+public:
+	enum EHistoryDataStates
+	{
+		EHistoryDataStates_Ready,
+		EHistoryDataStates_SentReqest,
+		EHistoryDataStates_WaitACK,
+		EHistoryDataStates_GetACK,		
+		EHistoryDataStates_End,
+	};
 
 public:
     CMidSubWidget(QWidget* parent = 0);
 	~CMidSubWidget();
 	
 public slots:
-	void slotHistoryDataChanged(CHistoryDataManager* pHistoryDataManager);
+	void slotHistoryDataChanged(unsigned int nInstrumentID );
 	void QCPItemTracerCrossHairMouseMove(QMouseEvent *event);
 	void slotTopxAxisChanged(QCPRange range);
 	void slotBottomxAxisChanged(QCPRange range);
@@ -69,6 +77,8 @@ private:
 	CProjectLogHelper* m_pProjectLogHelper;
 	unsigned int m_nInstrumentID;
 	enum BarType m_nBarType;
+	enum EHistoryDataStates  m_nEHistoryDataStates;
+	int m_nPage;
 };
 
 //QT_END_NAMESPACE

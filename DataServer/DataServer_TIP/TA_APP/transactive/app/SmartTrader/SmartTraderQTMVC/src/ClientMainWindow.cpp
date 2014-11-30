@@ -5,6 +5,7 @@
 #include "Order.h"
 
 #include "ProjectQTInclude.h"
+#include "ProjectCommonData.h"
 #include "ProjectLogHelper.h"
 #include "ClientDataManagerWorker.h"
 #include "HistoryDataManager.h"
@@ -114,8 +115,8 @@ void CClientMainWindow::_CreateToolBars()
 	this->addToolBar(Qt::TopToolBarArea,m_pMainWindowToolBar);
 
 
-	QObject::connect(m_pMainWindowToolBar, SIGNAL(signalRequestHistoryData(unsigned int, enum BarType, unsigned int)), 
-		this, SLOT(slotRequestHistoryData(unsigned int, enum BarType, unsigned int)));
+	QObject::connect(m_pMainWindowToolBar, SIGNAL(signalRequestHistoryData(unsigned int, enum BarType)), 
+		this, SLOT(slotRequestHistoryData(unsigned int, enum BarType)));
 
 
 }
@@ -209,8 +210,15 @@ void CClientMainWindow::slotRequestHistoryData( unsigned int nInstrumentID, enum
 	{
 		if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
 		{
+			unsigned int nTimeFrom = 0;
+			unsigned int nTimeTo = 0;
+
+			nTimeTo = m_pProjectLogHelper->getTimeNow_Qt();
+			nTimeFrom = nTimeTo - (nBarType * DEFVALUE_Int_OnePage_HistoryBarNumber);
+
 			m_pEastMidSubWidget->setHistoryBarType(nBarType, "");
-			CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType, m_pProjectLogHelper->getTimeNow_Qt());
+			CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType, 
+				nTimeFrom, nTimeTo);
 		}//if (nInstrumentID == m_pEastMidSubWidget->getCurrentInstrumentID())
 		else
 		{
@@ -238,7 +246,12 @@ void CClientMainWindow::slotCurrentInstrumentChanged( unsigned int nInstrumentID
 		enum BarType nBarType = m_pMainWindowToolBar->getHistoryBarType();
 		m_pEastMidSubWidget->setCurrentInstrumentID(nInstrumentID);
 		m_pEastMidSubWidget->setHistoryBarType(nBarType, "");
-		CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType, m_pProjectLogHelper->getTimeNow_Qt());
+		unsigned int nTimeFrom = 0;
+		unsigned int nTimeTo = 0;
+		nTimeTo = m_pProjectLogHelper->getTimeNow_Qt();
+		nTimeFrom = nTimeTo - (nBarType * DEFVALUE_Int_OnePage_HistoryBarNumber);
+		CClientDataManagerWorker::getInstance().slotRequestHistoryData(nInstrumentID, nBarType, 
+			nTimeFrom, nTimeTo);
 	}
 
 }

@@ -255,7 +255,7 @@ void CClientDataManagerWorker::_UnInitTraderClient()
 	if (NULL != m_pSmartTraderClient)
 	{
 		//TODO. debug mode will crash
-		//m_pSmartTraderClient->logoff();
+		m_pSmartTraderClient->logoff();
 		m_pSmartTraderClient->setProcessRecvDataHandle(NULL);
 
 		delete m_pSmartTraderClient;
@@ -674,15 +674,8 @@ void CClientDataManagerWorker::_Emit_SignalInstrumentInfoChanged()
 
 void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInstrumentID)
 {
-	CHistoryDataManager* pHistoryDataManager = NULL;
-	pHistoryDataManager = CDataUserHistoryBar::getInstance().findByInstrumentID(nInstrumentID);
-
-	if (NULL == pHistoryDataManager)
-	{
-		MYLOG4CPP_ERROR<<" "<<"CDataUserHistoryBar not find "
-			<<" "<<"nInstrumentID="<<nInstrumentID;
-		return;
-	}
+	//CHistoryDataManager* pHistoryDataManager = NULL;
+	//pHistoryDataManager = CDataUserHistoryBar::getInstance().findByInstrumentID(nInstrumentID);
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
@@ -690,27 +683,27 @@ void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInst
 		<<" "<<"emit"
 		<<" "<<"signalHistoryDataChanged()"
 		<<" "<<"param:"
-		<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
-	CSignalSlotManager::getInstance().emit_signalHistoryDataChanged(pHistoryDataManager);
+		<<" "<<"nInstrumentID="<<nInstrumentID;
+	CSignalSlotManager::getInstance().emit_signalHistoryDataChanged(nInstrumentID);
 }//
 
-void CClientDataManagerWorker::slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType, unsigned int nTimeTo)
+void CClientDataManagerWorker::slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType, unsigned int nTimeFrom, unsigned int nTimeTo)
 {
 	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker process slotRequestHistoryData"
 		<<" "<<"nInstrumentID="<<nInstrumentID
 		<<" "<<"nBarType="<<nBarType
 		<<" "<<"strBarType="<<m_pProjectLogHelper->getString_BarType(nBarType)
+		<<" "<<"nTimeFrom="<<m_pProjectLogHelper->dateTimeToStr_Qt((time_t)nTimeFrom)
 		<<" "<<"nTimeTo="<<m_pProjectLogHelper->dateTimeToStr_Qt((time_t)nTimeTo);
 
-	unsigned int  timeFrom = 0;
-	unsigned int  timeTo = 0;
-
-	timeTo = nTimeTo;
-	timeFrom = timeTo - (nBarType * DEFVALUE_Int_OnePage_HistoryBarNumber);//1024
+	//unsigned int  timeFrom = 0;
+	//unsigned int  timeTo = 0;
+	//timeTo = nTimeTo;
+	//timeFrom = timeTo - (nBarType * DEFVALUE_Int_OnePage_HistoryBarNumber);//1024
 
 	{
 		CDataUserHistoryBar::getInstance().createRequest_Time(
-			nInstrumentID, nBarType, timeFrom, timeTo, m_pSmartTraderClient);
+			nInstrumentID, nBarType, nTimeFrom, nTimeTo, m_pSmartTraderClient);
 	}
 
 

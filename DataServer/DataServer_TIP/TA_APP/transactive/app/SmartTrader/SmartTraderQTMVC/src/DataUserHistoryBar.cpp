@@ -280,16 +280,26 @@ void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsP
 	}//scoped_lock
 
 }
+void CDataUserHistoryBar::lock()
+{
+	MYLOG4CPP_DEBUG<<" "<<"m_mutexForMapHistoryData.lock";
+	m_mutexForMapHistoryData.lock();
+}
 
+void CDataUserHistoryBar::unlock()
+{
+	MYLOG4CPP_DEBUG<<" "<<"m_mutexForMapHistoryData.unlock";
+	m_mutexForMapHistoryData.unlock();
+}
 
-
-CHistoryDataManager*  CDataUserHistoryBar::findByInstrumentID(unsigned int nInstrumentID)
+CHistoryDataManager*  CDataUserHistoryBar::lockUseData(unsigned int nInstrumentID)
 {
 	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
 	CHistoryDataManager* pHistoryDataManager = NULL;
 
+	//CDataUserHistoryBar::getInstance().lock();
 
-	QMutexLocker lock(&m_mutexForMapHistoryData);
+	//QMutexLocker lock(&m_mutexForMapHistoryData);
 	iterMap = m_MapHistoryData.begin();
 	while (iterMap != m_MapHistoryData.end())
 	{
@@ -312,6 +322,8 @@ CHistoryDataManager*  CDataUserHistoryBar::findByInstrumentID(unsigned int nInst
 
 	pHistoryDataManager = iterMap.value();
 	return pHistoryDataManager;
+
+
 
 }
 

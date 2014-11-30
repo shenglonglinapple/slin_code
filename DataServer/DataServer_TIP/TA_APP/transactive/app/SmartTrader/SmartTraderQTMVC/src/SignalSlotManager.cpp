@@ -86,18 +86,18 @@ void CSignalSlotManager::setSignalSlot_HistoryDataChanged(CClientDataManagerWork
 	m_pSignal_HistoryDataChanged = pSignal;
 	m_pSlot_HistoryDataChanged = pSlot;
 
-	QObject::connect(this, SIGNAL(signalHistoryDataChanged(CHistoryDataManager*)),
-		this, SLOT(slotHistoryDataChanged(CHistoryDataManager*)));
+	QObject::connect(this, SIGNAL(signalHistoryDataChanged(unsigned int )),
+		this, SLOT(slotHistoryDataChanged(unsigned int )));
 }
 
-void CSignalSlotManager::emit_signalHistoryDataChanged( CHistoryDataManager* pParam )
+void CSignalSlotManager::emit_signalHistoryDataChanged( unsigned int nInstrumentID)
 {
-	emit signalHistoryDataChanged(pParam);
+	emit signalHistoryDataChanged(nInstrumentID);
 }
 
-void CSignalSlotManager::slotHistoryDataChanged( CHistoryDataManager* pParam )
+void CSignalSlotManager::slotHistoryDataChanged( unsigned int nInstrumentID )
 {
-	m_pSlot_HistoryDataChanged->slotHistoryDataChanged(pParam);
+	m_pSlot_HistoryDataChanged->slotHistoryDataChanged(nInstrumentID);
 }
 //////////////////////////////////////////////////////////////////////////
 

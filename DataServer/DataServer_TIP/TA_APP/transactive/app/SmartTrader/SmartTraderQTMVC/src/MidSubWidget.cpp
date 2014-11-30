@@ -8,6 +8,7 @@
 #include "ClientDataManagerWorker.h"
 #include "HistoryDataManager.h"
 #include "MidSubDrawHelper.h"
+#include "DataUserHistoryBar.h"
 #include "qcp.h"
 #include <QtCore/QDateTime>
 #include <time.h>       /* time_t, struct tm, difftime, time, mktime */
@@ -38,9 +39,11 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 	m_pQCPItemTracerCrossHairTop = NULL;
 	m_pQCPItemTracerCrossHairBottom = NULL;
 	m_pProjectLogHelper = NULL;
+	m_nEHistoryDataStates = EHistoryDataStates_Ready;
 	m_pProjectLogHelper = new CProjectLogHelper();
 	m_nInstrumentID = 0;
 	m_nBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
+	m_nPage = 1;
 
 	m_pMidSubDrawHelper = NULL;
 	m_pMidSubDrawHelper = new CMidSubDrawHelper();
@@ -55,6 +58,8 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 
 CMidSubWidget::~CMidSubWidget()
 {
+	m_nEHistoryDataStates = EHistoryDataStates_End;
+
 	if (NULL != m_pMidSubDrawHelper)
 	{
 		delete m_pMidSubDrawHelper;
@@ -148,7 +153,8 @@ void CMidSubWidget::_ReSetCustomPlot()
 		m_pCustomPlot->addItem(m_pQCPItemTracerCrossHairTop);
 		m_pQCPItemTracerCrossHairTop->setTracerAxisRect(m_pAxisRectTop);
 		m_pQCPItemTracerCrossHairTop->setStyle(QCPItemTracerCrossHair::tsCrosshair);
-		m_pQCPItemTracerCrossHairTop->setShowLeft(QCPAxis::ltNumber, true, QString(""));
+		//m_pQCPItemTracerCrossHairTop->setShowLeft(QCPAxis::ltNumber, true, QString(""));
+		m_pQCPItemTracerCrossHairTop->setShowLeft(QCPAxis::ltDateTime, true, QString(DEF_STRING_FORMAT_TIME.c_str()));
 		m_pQCPItemTracerCrossHairTop->setShowBottom(QCPAxis::ltDateTime, true, QString(DEF_STRING_FORMAT_TIME.c_str()));
 	}
 	
@@ -160,7 +166,8 @@ void CMidSubWidget::_ReSetCustomPlot()
 		m_pCustomPlot->addItem(m_pQCPItemTracerCrossHairBottom);
 		m_pQCPItemTracerCrossHairBottom->setTracerAxisRect(m_pAxisRectBottom);
 		m_pQCPItemTracerCrossHairBottom->setStyle(QCPItemTracerCrossHair::tsCrosshair);
-		m_pQCPItemTracerCrossHairBottom->setShowLeft(QCPAxis::ltNumber, true, QString(""));
+		//m_pQCPItemTracerCrossHairBottom->setShowLeft(QCPAxis::ltNumber, true, QString(""));
+		m_pQCPItemTracerCrossHairBottom->setShowLeft(QCPAxis::ltDateTime, true, QString(DEF_STRING_FORMAT_TIME.c_str()));
 		m_pQCPItemTracerCrossHairBottom->setShowBottom(QCPAxis::ltDateTime, true, QString(DEF_STRING_FORMAT_TIME.c_str()));
 	}
 	
@@ -225,13 +232,24 @@ void CMidSubWidget::translateLanguage()
 
 }
 
-void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataManager )
+void CMidSubWidget::slotHistoryDataChanged( unsigned int nInstrumentID  )
 {
+	m_nEHistoryDataStates = EHistoryDataStates_GetACK;
+
 	//emit
 	{
 		MYLOG4CPP_DEBUG<<"CMidSubWidget process slotHistoryDataChanged"
 			<<" "<<"param:"
-			<<" "<<"pHistoryDataManager=0x"<<pHistoryDataManager;
+			<<" "<<"nInstrumentID="<<nInstrumentID;
+	}
+
+	CHistoryDataManager* pHistoryDataManager = NULL;
+	CDataUserHistoryBar::getInstance().lock();
+	pHistoryDataManager = CDataUserHistoryBar::getInstance().lockUseData(nInstrumentID);
+	if (NULL == pHistoryDataManager)
+	{
+		CDataUserHistoryBar::getInstance().unlock();
+		return;
 	}
 
 	m_pCustomPlot->clearGraphs();
@@ -240,9 +258,12 @@ void CMidSubWidget::slotHistoryDataChanged( CHistoryDataManager* pHistoryDataMan
 	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectBottom);
 	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectTop);
 
-	//m_pCustomPlot->rescaleAxes();
-	//m_pCustomPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+	CDataUserHistoryBar::getInstance().unlock();
+
 	m_pCustomPlot->replot();//draw again
+
+	m_nEHistoryDataStates = EHistoryDataStates_Ready;
+
 
 }
 
@@ -269,7 +290,7 @@ void CMidSubWidget::QCPItemTracerCrossHairMouseMove( QMouseEvent *event )
 void CMidSubWidget::setCurrentInstrumentID(unsigned int nInstrumentID)
 {
 	m_nInstrumentID = nInstrumentID;
-
+	m_nPage = 1;//reset
 }
 
 unsigned int CMidSubWidget::getCurrentInstrumentID()
@@ -289,8 +310,20 @@ void CMidSubWidget::slotTopxAxisChanged(QCPRange range)
 	//check GUI have data
 	if (range.lower < m_pMidSubDrawHelper->getBottomTimeFrom())
 	{
-		//if no data sent req to server
-		CClientDataManagerWorker::getInstance().slotRequestHistoryData(m_nInstrumentID, m_nBarType, m_pMidSubDrawHelper->getBottomTimeFrom());
+		if (m_nEHistoryDataStates == EHistoryDataStates_Ready)
+		{
+			m_nEHistoryDataStates = EHistoryDataStates_SentReqest;
+			//if no data sent req to server
+			unsigned int nTimeFrom = 0;
+			unsigned int nTimeTo = 0;
+			nTimeTo = m_pProjectLogHelper->getTimeNow_Qt();
+			nTimeFrom = nTimeTo - (m_nPage * m_nBarType * DEFVALUE_Int_OnePage_HistoryBarNumber);
+			CClientDataManagerWorker::getInstance().slotRequestHistoryData(
+				m_nInstrumentID, m_nBarType, nTimeFrom, nTimeTo);
+			m_nPage = m_nPage + 1;
+			m_nEHistoryDataStates = EHistoryDataStates_WaitACK;
+		}
+
 	}
 
 	if (range == m_pAxisRectBottom->axis(QCPAxis::atBottom)->range())

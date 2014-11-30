@@ -121,11 +121,12 @@ void CDataInstrument::addByData(Instrument* pInstrument)
 		QMutexLocker lock(&m_mutexForNodeRootContract);	
 		m_pContractInfo->setValue(*pInstrument);
 
+		/*
 		MYLOG4CPP_DEBUG<<"CDataContract addByData CContractInfo"
 			<<" "<<"InstrumentID="<<m_pContractInfo->getInstrumentID()
 			<<" "<<"ExchangeName="<<m_pContractInfo->getExchangeName().toStdString()
 			<<" "<<"strInstrumentCode="<<m_pContractInfo->getInstrumentCode().toStdString();
-
+		*/
 		m_pTreeItemContract_Root->appendThreeChild(m_pContractInfo);
 	}
 }

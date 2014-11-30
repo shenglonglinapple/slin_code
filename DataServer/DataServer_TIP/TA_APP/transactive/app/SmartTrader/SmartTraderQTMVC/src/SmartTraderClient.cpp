@@ -72,8 +72,10 @@ void CSmartTraderClient::setProcessRecvDataHandle( IProcessRecvData* pHandle )
 
 void CSmartTraderClient::onInstrumentDownloaded( const Instrument &instrument )
 {
+	/*
 	MYLOG4CPP_DEBUG<<"onInstrumentDownloaded"
 		<<" "<<"getInstrumentID="<<instrument.getInstrumentID();
+	*/
 
 
 	if (NULL != m_pProcessRecvDataHandle)

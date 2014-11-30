@@ -38,6 +38,7 @@ private:
 	void _AddAction();
 	void _CreateConnect();
 	void translateLanguage();
+	void _Init();
 private:
 	QActionGroup* m_pAction_Group_BarType;
 private:

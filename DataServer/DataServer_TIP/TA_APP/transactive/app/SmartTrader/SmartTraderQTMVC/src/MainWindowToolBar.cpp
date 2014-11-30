@@ -22,44 +22,13 @@ static const std::string DEFVALUE_String_Window_ToolBar_BarInfo_Action_MN_Text =
 CMainWindowToolBar::CMainWindowToolBar( const QString &title, QWidget *parent /*= 0*/ )
 :QToolBar(title, parent)
 {
-	m_pProjectLogHelper = NULL;
-	m_pProjectLogHelper = new CProjectLogHelper();
-	m_nCurrentInstrumentID = DEFVALUE_Int_InstrumentID;
-	m_nCurrentBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
-
-
-	_CreateActions();
-	_AddAction();
-	translateLanguage();
-	_CreateConnect();
-	
-	if (m_nCurrentBarType == FIVE_SECOND)
-	{
-		m_pAction_BarInfo_S5->setChecked(true);//default 
-		m_pAction_BarInfo_S5->trigger();//default 
-	}	
+	_Init();	
 }
 
 CMainWindowToolBar::CMainWindowToolBar( QWidget *parent /*= 0*/ )
 :QToolBar(parent)
 {
-	m_pProjectLogHelper = NULL;
-	m_pProjectLogHelper = new CProjectLogHelper();
-	m_nCurrentInstrumentID = DEFVALUE_Int_InstrumentID;
-	m_nCurrentBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
-
-
-	_CreateActions();
-	_AddAction();
-	translateLanguage();
-	_CreateConnect();
-	
-	if (m_nCurrentBarType == FIVE_SECOND)
-	{
-		m_pAction_BarInfo_S5->setChecked(true);//default 
-		m_pAction_BarInfo_S5->trigger();//default 
-	}
-
+	_Init();
 
 }
 
@@ -69,6 +38,27 @@ CMainWindowToolBar::~CMainWindowToolBar()
 	{
 		delete m_pProjectLogHelper;
 		m_pProjectLogHelper = NULL;
+	}
+
+}
+
+void CMainWindowToolBar::_Init()
+{
+	m_pProjectLogHelper = NULL;
+	m_pProjectLogHelper = new CProjectLogHelper();
+	m_nCurrentInstrumentID = DEFVALUE_Int_InstrumentID;
+	m_nCurrentBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
+
+
+	_CreateActions();
+	_AddAction();
+	translateLanguage();
+	_CreateConnect();
+
+	if (m_nCurrentBarType == DAY)
+	{
+		m_pAction_BarInfo_D1->setChecked(true);//default 
+		m_pAction_BarInfo_D1->trigger();//default 
 	}
 
 }

@@ -23,7 +23,7 @@ CMidSubDrawHelper::CMidSubDrawHelper()
 	m_nBottomTimeFrom = m_pProjectLogHelper->getTimeNow_Qt();
 	m_nBottomTimeTo = m_pProjectLogHelper->getTimeNow_Qt();
 	
-	m_nBottomTimeTo += YEAR;
+	m_nBottomTimeTo = m_nBottomTimeTo - YEAR;
 	m_nBottomTimeFrom = m_nBottomTimeTo- MONTH;;
 
 }

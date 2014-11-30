@@ -56,11 +56,13 @@ void CDataTotalInstrument::onInstrumentDownloaded( const Instrument& instrument 
 		nGetInstrumentID = instrument.getInstrumentID();
 		pGetInstrument = instrument.getInstrument(nGetInstrumentID);
 		m_MapInstrumentIDData.insert(nGetInstrumentID, pGetInstrument);
+		/*
 		MYLOG4CPP_DEBUG<<"CDataTotalInstrument"
 			<<" "<<"onInstrumentDownloaded"
 			<<" "<<"m_MapInstrumentIDData.size="<<m_MapInstrumentIDData.size();
 		strLogInfo = "onInstrumentDownloaded";
 		m_pProjectLogHelper->log_Instrument_info(__FILE__, __LINE__, strLogInfo, instrument);
+		*/
 	}
 
 }//onInstrumentDownloaded

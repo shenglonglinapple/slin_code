@@ -55,7 +55,7 @@ public slots:
 	void slotInstrumentViewResetData();
 	void slotUserInstrumentViewColumnsChanged();
 	void slotNewOrder(CUserOrderInfo* pUserOrderInfo);
-	void slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType, unsigned int nTimeTo);
+	void slotRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType, unsigned int nTimeFrom, unsigned int nTimeTo);
 	void slotRequestHistoryData_Subscribe( unsigned int nInstrumentID, enum BarType nBarType, int nBarCount, bool bSubscribe);
 
 signals:

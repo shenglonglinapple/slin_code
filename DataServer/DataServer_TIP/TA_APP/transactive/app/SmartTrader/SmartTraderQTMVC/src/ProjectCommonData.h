@@ -32,7 +32,7 @@ static const std::string DEFVALUE_String_OrderType_UNKNOWN = "UNKNOWN";
 
 
 static const int DEFVALUE_Int_OnePage_HistoryBarNumber = 128;//1024
-static const std::string DEFVALUE_String_HistoryBarType = "FIVE_SECOND";
+static const std::string DEFVALUE_String_HistoryBarType = "DAY";
 static const int DEFVALUE_Int_InstrumentID = 1;//
 //////////////////////////////////////////////////////////////////////////
 
