@@ -31,7 +31,7 @@ void setUpSplashScreen()
 // 	QTextCodec::setCodecForLocale(QTextCodec::codecForName(QTextCodec::codecForLocale()->name()));
 // 	QTextCodec::setCodecForCStrings(QTextCodec::codecForName(QTextCodec::codecForLocale()->name()));
 
-	strSplashPictureFileName = QObject::tr(":/images/splash");
+	strSplashPictureFileName = QObject::tr(":/images/images/MainWidgetWindowIcon.ico");
 	topRight = Qt::AlignRight | Qt::AlignTop;
 
 	splash = new QSplashScreen();
@@ -78,12 +78,12 @@ int main(int argc, char *argv[])
 
 	//加载Qt中的资源文件，使Qt显示中文（包括QMessageBox、文本框右键菜单等）
 	QTranslator translator;  
-	translator.load(QString(":/language/qt_zh_CN"));  
+	translator.load(QString(":/language/language/qt_zh_CN.qm"));  
 	//app.installTranslator(&translator);  
 
 
 	//加载QSS样式表
-	QFile file(":/Qss/SmartTraderQTMVC");
+	QFile file(":/Qss/VistaQssStyle/VistaQssStyle.css");//:/Qss/VistaQssStyle/style.css
 	file.open(QFile::ReadOnly);
 	QTextStream filetext(&file);
 	QString stylesheet= filetext.readAll();

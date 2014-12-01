@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Qss/VistaQssStyle/checkbox_inter_disabled.png</file>
+        <file>Qss/VistaQssStyle/checkbox_inter_enabled.png</file>
+        <file>Qss/VistaQssStyle/checkbox_inter_enabled_hover.png</file>
+        <file>Qss/VistaQssStyle/checkbox_inter_enabled_pressed.png</file>
+        <file>Qss/VistaQssStyle/checkbox_off_disabled.png</file>
+        <file>Qss/VistaQssStyle/checkbox_off_enabled.png</file>
+        <file>Qss/VistaQssStyle/checkbox_off_enabled_hover.png</file>
+        <file>Qss/VistaQssStyle/checkbox_off_enabled_pressed.png</file>
+        <file>Qss/VistaQssStyle/checkbox_on_disabled.png</file>
+        <file>Qss/VistaQssStyle/checkbox_on_enabled.png</file>
+        <file>Qss/VistaQssStyle/checkbox_on_enabled_hover.png</file>
+        <file>Qss/VistaQssStyle/checkbox_on_enabled_pressed.png</file>
+        <file>Qss/VistaQssStyle/menu_indicator.png</file>
+        <file>Qss/VistaQssStyle/menu_indicator_disabled.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_off_disabled.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_off_enabled.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_off_enabled_hover.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_off_enabled_pressed.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_on_disabled.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_on_enabled.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_on_enabled_hover.png</file>
+        <file>Qss/VistaQssStyle/radiobutton_on_enabled_pressed.png</file>
+        <file>Qss/VistaQssStyle/spin_down_disabled.png</file>
+        <file>Qss/VistaQssStyle/spin_down_enabled.png</file>
+        <file>Qss/VistaQssStyle/spin_down_enabled_hover.png</file>
+        <file>Qss/VistaQssStyle/spin_down_enabled_pressed.png</file>
+        <file>Qss/VistaQssStyle/spin_up_disabled.png</file>
+        <file>Qss/VistaQssStyle/spin_up_enabled.png</file>
+        <file>Qss/VistaQssStyle/spin_up_enabled_hover.png</file>
+        <file>Qss/VistaQssStyle/spin_up_enabled_pressed.png</file>
+        <file>Qss/VistaQssStyle/VistaQssStyle.css</file>
+    </qresource>
+</RCC>

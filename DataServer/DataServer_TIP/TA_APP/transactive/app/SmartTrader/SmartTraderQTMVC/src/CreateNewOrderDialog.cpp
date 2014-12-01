@@ -191,6 +191,7 @@ void CCreateNewOrderDialog::translateLanguage()
 
 	m_pLabel_Price->setText(QObject::tr("Price:"));
 	m_pSpinBox_Price->setValue(m_pSpinBox_Price_Value);
+	m_pSpinBox_Price->setRange(0, 100000000);
 
 	m_pLabel_TagName->setText(QObject::tr("Tag Name:"));
 	nIndex = 0;

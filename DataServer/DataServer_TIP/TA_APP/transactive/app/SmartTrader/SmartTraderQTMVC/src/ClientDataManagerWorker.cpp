@@ -663,7 +663,7 @@ void CClientDataManagerWorker::_Emit_SignalInstrumentInfoChanged()
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
-		<<" "<<"fun:"<<"_Emit_SignalContractInfoChanged()"
+		<<" "<<"fun:"<<"_Emit_SignalInstrumentInfoChanged()"
 		<<" "<<"emit"
 		<<" "<<"signalInstrumentInfoChanged(CItemInstrumentInfo*)"
 		<<" "<<"param:"
