@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
 	file.open(QFile::ReadOnly);
 	QTextStream filetext(&file);
 	QString stylesheet= filetext.readAll();
-	//app.setStyleSheet(stylesheet);
+	app.setStyleSheet(stylesheet);
 	
 
 

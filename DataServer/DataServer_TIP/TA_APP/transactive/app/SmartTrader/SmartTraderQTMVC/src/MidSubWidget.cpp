@@ -40,6 +40,8 @@ CMidSubWidget::CMidSubWidget(QWidget* parent)
 	m_pQCPItemTracerCrossHairBottom = NULL;
 	m_pProjectLogHelper = NULL;
 	m_nEHistoryDataStates = EHistoryDataStates_Ready;
+	MYLOG4CPP_DEBUG<<"m_nEHistoryDataStates = EHistoryDataStates_Ready";
+
 	m_pProjectLogHelper = new CProjectLogHelper();
 	m_nInstrumentID = 0;
 	m_nBarType = m_pProjectLogHelper->getBarTypeByString(DEFVALUE_String_HistoryBarType);
@@ -235,6 +237,8 @@ void CMidSubWidget::translateLanguage()
 void CMidSubWidget::slotHistoryDataChanged( unsigned int nInstrumentID  )
 {
 	m_nEHistoryDataStates = EHistoryDataStates_GetACK;
+	MYLOG4CPP_DEBUG<<"m_nEHistoryDataStates = EHistoryDataStates_GetACK";
+
 
 	//emit
 	{
@@ -263,6 +267,8 @@ void CMidSubWidget::slotHistoryDataChanged( unsigned int nInstrumentID  )
 	m_pCustomPlot->replot();//draw again
 
 	m_nEHistoryDataStates = EHistoryDataStates_Ready;
+	MYLOG4CPP_DEBUG<<"m_nEHistoryDataStates = EHistoryDataStates_Ready";
+
 
 
 }
@@ -313,6 +319,8 @@ void CMidSubWidget::slotTopxAxisChanged(QCPRange range)
 		if (m_nEHistoryDataStates == EHistoryDataStates_Ready)
 		{
 			m_nEHistoryDataStates = EHistoryDataStates_SentReqest;
+			MYLOG4CPP_DEBUG<<"m_nEHistoryDataStates = EHistoryDataStates_SentReqest";
+
 			//if no data sent req to server
 			unsigned int nTimeFrom = 0;
 			unsigned int nTimeTo = 0;
@@ -322,6 +330,8 @@ void CMidSubWidget::slotTopxAxisChanged(QCPRange range)
 				m_nInstrumentID, m_nBarType, nTimeFrom, nTimeTo);
 			m_nPage = m_nPage + 1;
 			m_nEHistoryDataStates = EHistoryDataStates_WaitACK;
+			MYLOG4CPP_DEBUG<<"m_nEHistoryDataStates = EHistoryDataStates_WaitACK";
+
 		}
 
 	}
