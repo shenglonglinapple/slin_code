@@ -44,8 +44,9 @@ void testCYahuoHistoryReqAck()
 
 void testInitDBByYahuoData()
 {
-	CInitDBByYahuoData objInitDBByYahuoData;
-	objInitDBByYahuoData.dowork();
+	CInitDBByYahuoData::getInstance();
+	CInitDBByYahuoData::getInstance().doWork_initTotalStocksYahuoDataToFile();
+	CInitDBByYahuoData::removeInstance();
 	
 }
 

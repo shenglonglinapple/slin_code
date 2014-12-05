@@ -250,6 +250,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\InitYahuoDataToFile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\InitYahuoDataToFile.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Log4cppLogger.cpp"
 				>
 			</File>

@@ -11,23 +11,55 @@
 #include "TotalStocksData.h"
 #include "YahuoHistoryReqAck.h"
 #include "HistoryDataProcssHelper.h"
-
+#include "InitYahuoDataToFile.h"
 
 #include "Log4cppLogger.h"
 
 
 
+CInitDBByYahuoData* CInitDBByYahuoData::m_pInstance = 0;
+QMutex CInitDBByYahuoData::m_mutexInstance;
+
+CInitDBByYahuoData& CInitDBByYahuoData::getInstance()
+{	
+	QMutexLocker lock(&m_mutexInstance);	
+	if (NULL == m_pInstance)
+	{
+		m_pInstance = new CInitDBByYahuoData();
+	}
+	return (*m_pInstance);
+}
+
+void CInitDBByYahuoData::removeInstance()
+{
+	QMutexLocker lock(&m_mutexInstance);	
+	delete m_pInstance;
+	m_pInstance = NULL;
+
+}
 
 CInitDBByYahuoData::CInitDBByYahuoData()
 {
+	m_pInitYahuoDataToFile = NULL;
+	m_pInitYahuoDataToFile = new CInitYahuoDataToFile();
+
+
 	_FreeData_MapStockDataItemT_Total();
 	_LoadData_MapStockDataItemT_Total();
+
 
 }
 
 CInitDBByYahuoData::~CInitDBByYahuoData()
 {	
+
 	_FreeData_MapStockDataItemT_Total();
+
+	if (NULL != m_pInitYahuoDataToFile)
+	{
+		delete m_pInitYahuoDataToFile;
+		m_pInitYahuoDataToFile = NULL;
+	}
 }
 
 
@@ -117,7 +149,7 @@ void CInitDBByYahuoData::_FreeData_MapStockDataItemT(MapStockDataItemT& mapStock
 	return;
 }
 
-void CInitDBByYahuoData::_ProcessTotalStocks()
+void CInitDBByYahuoData::doWork_initTotalStocksYahuoDataToFile()
 {
 	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
 
@@ -131,8 +163,8 @@ void CInitDBByYahuoData::_ProcessTotalStocks()
 		qSleep(100);
 
 		pData = (iterMap->second);
-
-		_GetAndSaveHistoryData(pData->m_strSymbolUse);
+		m_pInitYahuoDataToFile->getAndSaveHistoryData(pData->m_strSymbolUse);
+		
 
 		pData = NULL;
 		iterMap++;
@@ -140,49 +172,6 @@ void CInitDBByYahuoData::_ProcessTotalStocks()
 
 }
 
-
-
-void CInitDBByYahuoData::_GetAndSaveHistoryData(const std::string& strSymbolUse)
-{
-	int nFunRes = 0;
-	CYahuoHistoryReqAck classCYahuoHistoryReqAck;
-	std::string petr4HistoricalPrices;
-
-	unsigned int startYear = 0;
-	unsigned int startMonth = 0;
-	unsigned int startDay = 0;
-	unsigned int endYear = 0;
-	unsigned int endMonth = 0;
-	unsigned int endDay = 0;
-
-	CHistoryDataProcessHelper    objHelper;
-	objHelper.getStartEndTimeValue(strSymbolUse, startYear, startMonth, startDay, endYear, endMonth, endDay);
-
-
-	try
-	{
-		//petr4HistoricalPrices = classCYahuoHistoryReqAck.getHistoricalQuotesCsv(
-		//	strSymbolUse, 1970, 1, 1, 2014, 12, 4, YahuoReqAck::daily);
-		petr4HistoricalPrices = classCYahuoHistoryReqAck.getHistoricalQuotesCsv(
-			strSymbolUse, startYear, startMonth, startDay, endYear, endMonth, endDay, YahuoReqAck::daily);
-	}
-	catch(CBaseException& e)
-	{
-		nFunRes = -1;
-	}
-	catch(...)
-	{
-		nFunRes = -1;
-	}
-
-	if (0 == nFunRes)
-	{
-		_SaveDataToFile(strSymbolUse, petr4HistoricalPrices);
-	}
-
-
-	
-}
 
 
 void CInitDBByYahuoData::qSleep(int nMilliseconds)
@@ -207,13 +196,5 @@ void CInitDBByYahuoData::qWait(int nMilliseconds)
 
 }
 
-void CInitDBByYahuoData::dowork()
-{
-	_ProcessTotalStocks();
-}
 
-void CInitDBByYahuoData::_SaveDataToFile(const std::string& strSymbolUse, const std::string& strData)
-{
-	CHistoryDataProcessHelper    objHelper;
-	objHelper.saveData(strSymbolUse, strData);
-}
+

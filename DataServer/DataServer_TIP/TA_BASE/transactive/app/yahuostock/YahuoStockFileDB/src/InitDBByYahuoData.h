@@ -6,27 +6,35 @@
 #include <QtCore/QMutexLocker>
 
 class CStockData;
+class CInitYahuoDataToFile;
+
 
 class CInitDBByYahuoData 
 {
+public:
+	static CInitDBByYahuoData& getInstance();
+	static void removeInstance();
+
+private:
+	static CInitDBByYahuoData* m_pInstance;
+	static QMutex m_mutexInstance;
+
+
 private:
 	//strSymbolUse  CStockData
 	typedef std::map<std::string, CStockData*>                      MapStockDataItemT;
 	typedef std::map<std::string, CStockData*>::iterator            MapStockDataItemIterT;
 	typedef std::map<std::string, CStockData*>::value_type          MapStockDataItemValueTypeT;
 
-public:
+private:
 	CInitDBByYahuoData();
 	virtual ~CInitDBByYahuoData();
 public:
-	void dowork();
+	void doWork_initTotalStocksYahuoDataToFile();
 private:
 	void _FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData);
 	void _FreeData_MapStockDataItemT_Total();
 	void _LoadData_MapStockDataItemT_Total();
-	void _GetAndSaveHistoryData(const std::string& strSymbolUse);
-	void _ProcessTotalStocks();
-	void _SaveDataToFile(const std::string& strSymbolUse, const std::string& strData);
 
 private:
 	void qSleep(int nMilliseconds);
@@ -34,6 +42,8 @@ private:
 private:
 	QMutex m_mutexMapStockDataItemT_Total;
 	MapStockDataItemT m_MapStockDataItemT_Total;
+private:
+	CInitYahuoDataToFile* m_pInitYahuoDataToFile;
 };
 
 
