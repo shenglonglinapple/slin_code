@@ -1,0 +1,4415 @@
+{
+	/*Symbol*/("600000"),
+	/*NamePinYin*/("PFYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600004"),
+	/*NamePinYin*/("BYJC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600005"),
+	/*NamePinYin*/("WGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600006"),
+	/*NamePinYin*/("DFQC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600007"),
+	/*NamePinYin*/("ZGGM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600008"),
+	/*NamePinYin*/("SCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600009"),
+	/*NamePinYin*/("SHJC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600010"),
+	/*NamePinYin*/("BGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600011"),
+	/*NamePinYin*/("HNGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600012"),
+	/*NamePinYin*/("WTGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600015"),
+	/*NamePinYin*/("HXYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600016"),
+	/*NamePinYin*/("MSYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600017"),
+	/*NamePinYin*/("RZG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600018"),
+	/*NamePinYin*/("SGJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600019"),
+	/*NamePinYin*/("BGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600020"),
+	/*NamePinYin*/("ZYGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600021"),
+	/*NamePinYin*/("SHDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600022"),
+	/*NamePinYin*/("JNGT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600026"),
+	/*NamePinYin*/("ZHFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600027"),
+	/*NamePinYin*/("HDGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600028"),
+	/*NamePinYin*/("ZGDH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600029"),
+	/*NamePinYin*/("NFHK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600030"),
+	/*NamePinYin*/("ZXZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600031"),
+	/*NamePinYin*/("SYCG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600033"),
+	/*NamePinYin*/("FJGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600035"),
+	/*NamePinYin*/("CTGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600036"),
+	/*NamePinYin*/("QSYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600037"),
+	/*NamePinYin*/("GHYX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600038"),
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600039"),
+	/*NamePinYin*/("SCLQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600048"),
+	/*NamePinYin*/("BLDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600050"),
+	/*NamePinYin*/("ZGLT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600051"),
+	/*NamePinYin*/("NBLG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600052"),
+	/*NamePinYin*/("ZJAS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600053"),
+	/*NamePinYin*/("ZJDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600054"),
+	/*NamePinYin*/("HSLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600055"),
+	/*NamePinYin*/("MDYL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600056"),
+	/*NamePinYin*/("ZGYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600058"),
+	/*NamePinYin*/("WKFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600059"),
+	/*NamePinYin*/("GYLS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600060"),
+	/*NamePinYin*/("HXDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600061"),
+	/*NamePinYin*/("ZFTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600062"),
+	/*NamePinYin*/("SHYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600063"),
+	/*NamePinYin*/("WWGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600064"),
+	/*NamePinYin*/("NJGK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600066"),
+	/*NamePinYin*/("YTKC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600067"),
+	/*NamePinYin*/("GCDT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600068"),
+	/*NamePinYin*/("GZB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600069"),
+	/*NamePinYin*/("YGTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600070"),
+	/*NamePinYin*/("ZJFR"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600071"),
+	/*NamePinYin*/("FHGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600072"),
+	/*NamePinYin*/("ZCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600073"),
+	/*NamePinYin*/("SHML"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600074"),
+	/*NamePinYin*/("ZDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600075"),
+	/*NamePinYin*/("XJTY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600076"),
+	/*NamePinYin*/("STHG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600077"),
+	/*NamePinYin*/("*STBK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600078"),
+	/*NamePinYin*/("CXGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600079"),
+	/*NamePinYin*/("RFYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600080"),
+	/*NamePinYin*/("*STJH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600081"),
+	/*NamePinYin*/("DFKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600082"),
+	/*NamePinYin*/("HTFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600083"),
+	/*NamePinYin*/("*STBX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600084"),
+	/*NamePinYin*/("*STZP"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600085"),
+	/*NamePinYin*/("TRT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600086"),
+	/*NamePinYin*/("DFJY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600087"),
+	/*NamePinYin*/("CHYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600088"),
+	/*NamePinYin*/("ZSCM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600089"),
+	/*NamePinYin*/("TBDG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600090"),
+	/*NamePinYin*/("PJH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600091"),
+	/*NamePinYin*/("*STMK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600093"),
+	/*NamePinYin*/("HJGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600095"),
+	/*NamePinYin*/("HGK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600096"),
+	/*NamePinYin*/("YTH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600097"),
+	/*NamePinYin*/("KCGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600098"),
+	/*NamePinYin*/("AZKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600099"),
+	/*NamePinYin*/("LHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600100"),
+	/*NamePinYin*/("TFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600101"),
+	/*NamePinYin*/("MXDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600102"),
+	/*NamePinYin*/("LGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600103"),
+	/*NamePinYin*/("QSZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600104"),
+	/*NamePinYin*/("SHQC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600105"),
+	/*NamePinYin*/("YDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600106"),
+	/*NamePinYin*/("CQLQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600107"),
+	/*NamePinYin*/("MEY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600108"),
+	/*NamePinYin*/("YCJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600109"),
+	/*NamePinYin*/("GJZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600110"),
+	/*NamePinYin*/("ZKYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600111"),
+	/*NamePinYin*/("BGXT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600112"),
+	/*NamePinYin*/("CZDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600113"),
+	/*NamePinYin*/("ZJDR"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600114"),
+	/*NamePinYin*/("DMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600115"),
+	/*NamePinYin*/("DFHK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600116"),
+	/*NamePinYin*/("SXSL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600117"),
+	/*NamePinYin*/("XNTG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600118"),
+	/*NamePinYin*/("ZGWX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600119"),
+	/*NamePinYin*/("CJTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600120"),
+	/*NamePinYin*/("ZJDF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600121"),
+	/*NamePinYin*/("ZZMD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600122"),
+	/*NamePinYin*/("HTGK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600123"),
+	/*NamePinYin*/("LHKC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600125"),
+	/*NamePinYin*/("TLWL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600126"),
+	/*NamePinYin*/("HGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600127"),
+	/*NamePinYin*/("JJMY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600128"),
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600129"),
+	/*NamePinYin*/("TJJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600130"),
+	/*NamePinYin*/("STBD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600131"),
+	/*NamePinYin*/("*STMD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600132"),
+	/*NamePinYin*/("CQPJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600133"),
+	/*NamePinYin*/("DHGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600135"),
+	/*NamePinYin*/("LKJP"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600136"),
+	/*NamePinYin*/("DBGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600137"),
+	/*NamePinYin*/("LSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600138"),
+	/*NamePinYin*/("ZQL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600139"),
+	/*NamePinYin*/("XBZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600141"),
+	/*NamePinYin*/("XFJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600143"),
+	/*NamePinYin*/("JFKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600145"),
+	/*NamePinYin*/("*STSW"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600146"),
+	/*NamePinYin*/("DYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600148"),
+	/*NamePinYin*/("CCYD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600149"),
+	/*NamePinYin*/("*STJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600150"),
+	/*NamePinYin*/("ZGCB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600151"),
+	/*NamePinYin*/("HTJD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600152"),
+	/*NamePinYin*/("WKJH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600153"),
+	/*NamePinYin*/("JFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600155"),
+	/*NamePinYin*/("*STBS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600156"),
+	/*NamePinYin*/("HSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600157"),
+	/*NamePinYin*/("YTNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600158"),
+	/*NamePinYin*/("ZTCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600159"),
+	/*NamePinYin*/("DLDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600160"),
+	/*NamePinYin*/("JHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600161"),
+	/*NamePinYin*/("TTSW"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600162"),
+	/*NamePinYin*/("XJKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600163"),
+	/*NamePinYin*/("FJNZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600165"),
+	/*NamePinYin*/("NXHL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600166"),
+	/*NamePinYin*/("FTQC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600167"),
+	/*NamePinYin*/("LMKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600168"),
+	/*NamePinYin*/("WHKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600169"),
+	/*NamePinYin*/("TYCG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600170"),
+	/*NamePinYin*/("SHJG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600171"),
+	/*NamePinYin*/("SHBL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600172"),
+	/*NamePinYin*/("HHXF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600173"),
+	/*NamePinYin*/("WLDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600175"),
+	/*NamePinYin*/("MDKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600176"),
+	/*NamePinYin*/("ZGBQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600177"),
+	/*NamePinYin*/("YGE"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600178"),
+	/*NamePinYin*/("DADL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600179"),
+	/*NamePinYin*/("*STHH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600180"),
+	/*NamePinYin*/("*STJF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600182"),
+	/*NamePinYin*/("SJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600183"),
+	/*NamePinYin*/("SYKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600184"),
+	/*NamePinYin*/("GDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600185"),
+	/*NamePinYin*/("GLDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600186"),
+	/*NamePinYin*/("LHWJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600187"),
+	/*NamePinYin*/("GZSW"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600188"),
+	/*NamePinYin*/("YZMY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600189"),
+	/*NamePinYin*/("JLSG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600190"),
+	/*NamePinYin*/("JZG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600191"),
+	/*NamePinYin*/("HZSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600192"),
+	/*NamePinYin*/("CCDG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600193"),
+	/*NamePinYin*/("CXZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600195"),
+	/*NamePinYin*/("ZMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600196"),
+	/*NamePinYin*/("FXYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600197"),
+	/*NamePinYin*/("YLT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600198"),
+	/*NamePinYin*/("DTDX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600199"),
+	/*NamePinYin*/("JCZJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600200"),
+	/*NamePinYin*/("JSWZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600201"),
+	/*NamePinYin*/("JYJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600202"),
+	/*NamePinYin*/("HKD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600203"),
+	/*NamePinYin*/("*STFR"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600206"),
+	/*NamePinYin*/("YYGG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600207"),
+	/*NamePinYin*/("STAC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600208"),
+	/*NamePinYin*/("XHZB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600209"),
+	/*NamePinYin*/("*STLD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600210"),
+	/*NamePinYin*/("ZJQY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600211"),
+	/*NamePinYin*/("XCYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600212"),
+	/*NamePinYin*/("JQSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600213"),
+	/*NamePinYin*/("YXKC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600215"),
+	/*NamePinYin*/("CCJK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600216"),
+	/*NamePinYin*/("ZJYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600217"),
+	/*NamePinYin*/("*STQL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600218"),
+	/*NamePinYin*/("QCDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600219"),
+	/*NamePinYin*/("NSLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600220"),
+	/*NamePinYin*/("JSYG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600221"),
+	/*NamePinYin*/("HNHK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600222"),
+	/*NamePinYin*/("TLYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600223"),
+	/*NamePinYin*/("LSZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600225"),
+	/*NamePinYin*/("TJSJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600226"),
+	/*NamePinYin*/("SHBK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600227"),
+	/*NamePinYin*/("CTH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600228"),
+	/*NamePinYin*/("CJSH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600229"),
+	/*NamePinYin*/("QDJY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600230"),
+	/*NamePinYin*/("CZDH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600231"),
+	/*NamePinYin*/("LGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600232"),
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600233"),
+	/*NamePinYin*/("DYCS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600234"),
+	/*NamePinYin*/("STTL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600235"),
+	/*NamePinYin*/("MFTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600236"),
+	/*NamePinYin*/("GGDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600237"),
+	/*NamePinYin*/("TFDZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600238"),
+	/*NamePinYin*/("HNYD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600239"),
+	/*NamePinYin*/("YNCT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600240"),
+	/*NamePinYin*/("HYDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600241"),
+	/*NamePinYin*/("SDMH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600242"),
+	/*NamePinYin*/("STHL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600243"),
+	/*NamePinYin*/("QHHD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600246"),
+	/*NamePinYin*/("MTDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600247"),
+	/*NamePinYin*/("CCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600248"),
+	/*NamePinYin*/("YCHJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600249"),
+	/*NamePinYin*/("LMZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600250"),
+	/*NamePinYin*/("NFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600251"),
+	/*NamePinYin*/("GNGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600252"),
+	/*NamePinYin*/("ZHJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600253"),
+	/*NamePinYin*/("TFYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600255"),
+	/*NamePinYin*/("XKCL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600256"),
+	/*NamePinYin*/("AHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600257"),
+	/*NamePinYin*/("DHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600258"),
+	/*NamePinYin*/("SLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600259"),
+	/*NamePinYin*/("ACYS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600260"),
+	/*NamePinYin*/("KLKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600261"),
+	/*NamePinYin*/("YGZM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600262"),
+	/*NamePinYin*/("BFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600263"),
+	/*NamePinYin*/("LQJS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600265"),
+	/*NamePinYin*/("JGLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600266"),
+	/*NamePinYin*/("BJCJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600267"),
+	/*NamePinYin*/("HZYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600268"),
+	/*NamePinYin*/("GDNZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600269"),
+	/*NamePinYin*/("GYGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600270"),
+	/*NamePinYin*/("WYFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600271"),
+	/*NamePinYin*/("HTXX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600272"),
+	/*NamePinYin*/("KKSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600273"),
+	/*NamePinYin*/("HFFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600275"),
+	/*NamePinYin*/("STCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600276"),
+	/*NamePinYin*/("HRYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600277"),
+	/*NamePinYin*/("YLNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600278"),
+	/*NamePinYin*/("DFCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600279"),
+	/*NamePinYin*/("CQGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600280"),
+	/*NamePinYin*/("NJZS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600281"),
+	/*NamePinYin*/("THGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600282"),
+	/*NamePinYin*/("NGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600283"),
+	/*NamePinYin*/("QJSL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600284"),
+	/*NamePinYin*/("PDJS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600285"),
+	/*NamePinYin*/("LRZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600287"),
+	/*NamePinYin*/("JSST"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600288"),
+	/*NamePinYin*/("DHKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600289"),
+	/*NamePinYin*/("YYXT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600290"),
+	/*NamePinYin*/("HYDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600291"),
+	/*NamePinYin*/("XSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600292"),
+	/*NamePinYin*/("JLDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600293"),
+	/*NamePinYin*/("SXXC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600295"),
+	/*NamePinYin*/("EEDS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600297"),
+	/*NamePinYin*/("MLYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600298"),
+	/*NamePinYin*/("AQJM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600299"),
+	/*NamePinYin*/("*STXC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600300"),
+	/*NamePinYin*/("WWGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600301"),
+	/*NamePinYin*/("*STNH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600302"),
+	/*NamePinYin*/("BZGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600303"),
+	/*NamePinYin*/("SGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600305"),
+	/*NamePinYin*/("HSCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600306"),
+	/*NamePinYin*/("SYC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600307"),
+	/*NamePinYin*/("JGHX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600308"),
+	/*NamePinYin*/("HTGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600309"),
+	/*NamePinYin*/("YTMH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600310"),
+	/*NamePinYin*/("GDDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600311"),
+	/*NamePinYin*/("RHSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600312"),
+	/*NamePinYin*/("PGDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600315"),
+	/*NamePinYin*/("SHGH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600316"),
+	/*NamePinYin*/("HDHK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600317"),
+	/*NamePinYin*/("YKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600318"),
+	/*NamePinYin*/("CDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600319"),
+	/*NamePinYin*/("YXHX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600320"),
+	/*NamePinYin*/("ZHCG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600321"),
+	/*NamePinYin*/("GDJS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600322"),
+	/*NamePinYin*/("TFFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600323"),
+	/*NamePinYin*/("NHFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600325"),
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600326"),
+	/*NamePinYin*/("XCTL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600327"),
+	/*NamePinYin*/("DSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600328"),
+	/*NamePinYin*/("LTSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600329"),
+	/*NamePinYin*/("ZXYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600330"),
+	/*NamePinYin*/("TTGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600331"),
+	/*NamePinYin*/("HDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600332"),
+	/*NamePinYin*/("AZYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600333"),
+	/*NamePinYin*/("CCRQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600335"),
+	/*NamePinYin*/("*STCG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600336"),
+	/*NamePinYin*/("AKM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600337"),
+	/*NamePinYin*/("MKGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600338"),
+	/*NamePinYin*/("STZF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600339"),
+	/*NamePinYin*/("TLGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600340"),
+	/*NamePinYin*/("STGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600343"),
+	/*NamePinYin*/("HTDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600345"),
+	/*NamePinYin*/("CJTX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600346"),
+	/*NamePinYin*/("DXS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600348"),
+	/*NamePinYin*/("GYXN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600350"),
+	/*NamePinYin*/("SDGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600351"),
+	/*NamePinYin*/("YBYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600352"),
+	/*NamePinYin*/("ZJLC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600353"),
+	/*NamePinYin*/("XGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600354"),
+	/*NamePinYin*/("DHCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600355"),
+	/*NamePinYin*/("*STJL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600356"),
+	/*NamePinYin*/("HFZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600358"),
+	/*NamePinYin*/("GLLG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600359"),
+	/*NamePinYin*/("XNKF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600360"),
+	/*NamePinYin*/("HWDZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600361"),
+	/*NamePinYin*/("HLZC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600362"),
+	/*NamePinYin*/("JXTY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600363"),
+	/*NamePinYin*/("LCGD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600365"),
+	/*NamePinYin*/("*STTP"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600366"),
+	/*NamePinYin*/("NBYS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600367"),
+	/*NamePinYin*/("GXFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600368"),
+	/*NamePinYin*/("WZJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600369"),
+	/*NamePinYin*/("XNZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600370"),
+	/*NamePinYin*/("SFH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600371"),
+	/*NamePinYin*/("MXDN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600372"),
+	/*NamePinYin*/("STCH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600373"),
+	/*NamePinYin*/("*STXX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600375"),
+	/*NamePinYin*/("XMQC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600376"),
+	/*NamePinYin*/("SKGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600377"),
+	/*NamePinYin*/("NHGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600378"),
+	/*NamePinYin*/("TKGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600379"),
+	/*NamePinYin*/("BGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600380"),
+	/*NamePinYin*/("JKY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600381"),
+	/*NamePinYin*/("STXC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600382"),
+	/*NamePinYin*/("ADMZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600383"),
+	/*NamePinYin*/("JDJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600385"),
+	/*NamePinYin*/("STJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600386"),
+	/*NamePinYin*/("BBCM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600387"),
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600388"),
+	/*NamePinYin*/("LJHB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600389"),
+	/*NamePinYin*/("JSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600390"),
+	/*NamePinYin*/("JRKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600391"),
+	/*NamePinYin*/("CFKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600392"),
+	/*NamePinYin*/("TGTC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600393"),
+	/*NamePinYin*/("DHSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600395"),
+	/*NamePinYin*/("PJGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600396"),
+	/*NamePinYin*/("JSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600397"),
+	/*NamePinYin*/("AYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600398"),
+	/*NamePinYin*/("KNKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600399"),
+	/*NamePinYin*/("FSTG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600400"),
+	/*NamePinYin*/("GDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600403"),
+	/*NamePinYin*/("DYNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600405"),
+	/*NamePinYin*/("DLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600406"),
+	/*NamePinYin*/("GDNR"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600408"),
+	/*NamePinYin*/("ATJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600409"),
+	/*NamePinYin*/("SYHG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600410"),
+	/*NamePinYin*/("HSTC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600415"),
+	/*NamePinYin*/("XSPC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600416"),
+	/*NamePinYin*/("XDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600418"),
+	/*NamePinYin*/("JHQC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600419"),
+	/*NamePinYin*/("STTH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600420"),
+	/*NamePinYin*/("XDZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600421"),
+	/*NamePinYin*/("STGY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600422"),
+	/*NamePinYin*/("KMZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600423"),
+	/*NamePinYin*/("LHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600425"),
+	/*NamePinYin*/("QSJH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600426"),
+	/*NamePinYin*/("HLHS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600428"),
+	/*NamePinYin*/("ZYHY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600429"),
+	/*NamePinYin*/("SYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600432"),
+	/*NamePinYin*/("JENY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600433"),
+	/*NamePinYin*/("GHGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600435"),
+	/*NamePinYin*/("ZBGD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600436"),
+	/*NamePinYin*/("PZH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600438"),
+	/*NamePinYin*/("TWGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600439"),
+	/*NamePinYin*/("RBK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600444"),
+	/*NamePinYin*/("*STGT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600446"),
+	/*NamePinYin*/("JZGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600448"),
+	/*NamePinYin*/("HFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600449"),
+	/*NamePinYin*/("SMSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600452"),
+	/*NamePinYin*/("FLDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600455"),
+	/*NamePinYin*/("*STBT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600456"),
+	/*NamePinYin*/("BTGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600458"),
+	/*NamePinYin*/("SDXC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600459"),
+	/*NamePinYin*/("GYBY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600460"),
+	/*NamePinYin*/("SLW"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600461"),
+	/*NamePinYin*/("HCSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600462"),
+	/*NamePinYin*/("*STDX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600463"),
+	/*NamePinYin*/("KGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600466"),
+	/*NamePinYin*/("DKYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600467"),
+	/*NamePinYin*/("HDG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600468"),
+	/*NamePinYin*/("BLDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600469"),
+	/*NamePinYin*/("FSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600470"),
+	/*NamePinYin*/("LGHG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600475"),
+	/*NamePinYin*/("HGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600476"),
+	/*NamePinYin*/("XYKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600477"),
+	/*NamePinYin*/("HXGG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600478"),
+	/*NamePinYin*/("KLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600479"),
+	/*NamePinYin*/("QJYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600480"),
+	/*NamePinYin*/("LYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600481"),
+	/*NamePinYin*/("SLJN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600482"),
+	/*NamePinYin*/("FFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600483"),
+	/*NamePinYin*/("FJNF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600485"),
+	/*NamePinYin*/("ZCXC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600486"),
+	/*NamePinYin*/("YNHG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600487"),
+	/*NamePinYin*/("HTGD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600488"),
+	/*NamePinYin*/("TYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600489"),
+	/*NamePinYin*/("ZJHJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600490"),
+	/*NamePinYin*/("*STGC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600491"),
+	/*NamePinYin*/("LYJS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600493"),
+	/*NamePinYin*/("FZFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600495"),
+	/*NamePinYin*/("JXCZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600496"),
+	/*NamePinYin*/("JGGG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600497"),
+	/*NamePinYin*/("CHXD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600498"),
+	/*NamePinYin*/("FHTX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600499"),
+	/*NamePinYin*/("KDJD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600500"),
+	/*NamePinYin*/("ZHGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600501"),
+	/*NamePinYin*/("HTCG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600502"),
+	/*NamePinYin*/("AHSL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600503"),
+	/*NamePinYin*/("HLGZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600505"),
+	/*NamePinYin*/("XCDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600506"),
+	/*NamePinYin*/("STXL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600507"),
+	/*NamePinYin*/("FDTG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600508"),
+	/*NamePinYin*/("SHNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600509"),
+	/*NamePinYin*/("TFRD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600510"),
+	/*NamePinYin*/("HMD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600511"),
+	/*NamePinYin*/("GYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600512"),
+	/*NamePinYin*/("TDJS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600513"),
+	/*NamePinYin*/("LHYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600515"),
+	/*NamePinYin*/("*STZX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600516"),
+	/*NamePinYin*/("FDTS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600517"),
+	/*NamePinYin*/("ZXDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600518"),
+	/*NamePinYin*/("KMYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600519"),
+	/*NamePinYin*/("GZMT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600520"),
+	/*NamePinYin*/("SJKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600521"),
+	/*NamePinYin*/("HHYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600522"),
+	/*NamePinYin*/("ZTKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600523"),
+	/*NamePinYin*/("GHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600525"),
+	/*NamePinYin*/("CYJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600526"),
+	/*NamePinYin*/("FDHB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600527"),
+	/*NamePinYin*/("JNGQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600528"),
+	/*NamePinYin*/("ZTEJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600529"),
+	/*NamePinYin*/("SDYB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600530"),
+	/*NamePinYin*/("JDAL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600531"),
+	/*NamePinYin*/("YGJQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600532"),
+	/*NamePinYin*/("HYKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600533"),
+	/*NamePinYin*/("QXJS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600535"),
+	/*NamePinYin*/("TSL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600536"),
+	/*NamePinYin*/("ZGRJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600537"),
+	/*NamePinYin*/("HTJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600538"),
+	/*NamePinYin*/("*STGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600539"),
+	/*NamePinYin*/("STGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600540"),
+	/*NamePinYin*/("XSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600543"),
+	/*NamePinYin*/("MGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600545"),
+	/*NamePinYin*/("XJCJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600546"),
+	/*NamePinYin*/("SMGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600547"),
+	/*NamePinYin*/("SDHJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600548"),
+	/*NamePinYin*/("SGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600549"),
+	/*NamePinYin*/("SMWY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600550"),
+	/*NamePinYin*/("TWBB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600551"),
+	/*NamePinYin*/("SDCB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600552"),
+	/*NamePinYin*/("FXKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600555"),
+	/*NamePinYin*/("JLS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600557"),
+	/*NamePinYin*/("KYYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600558"),
+	/*NamePinYin*/("DXX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600559"),
+	/*NamePinYin*/("LBGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600560"),
+	/*NamePinYin*/("JZTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600561"),
+	/*NamePinYin*/("JXCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600562"),
+	/*NamePinYin*/("*STGT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600563"),
+	/*NamePinYin*/("FLDZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600565"),
+	/*NamePinYin*/("DMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600566"),
+	/*NamePinYin*/("HCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600567"),
+	/*NamePinYin*/("SYZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600568"),
+	/*NamePinYin*/("ZZKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600569"),
+	/*NamePinYin*/("AYGT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600570"),
+	/*NamePinYin*/("HSDZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600571"),
+	/*NamePinYin*/("XYD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600572"),
+	/*NamePinYin*/("KEB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600573"),
+	/*NamePinYin*/("HQPJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600575"),
+	/*NamePinYin*/("WHG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600576"),
+	/*NamePinYin*/("MHMG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600577"),
+	/*NamePinYin*/("JDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600578"),
+	/*NamePinYin*/("JNRD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600579"),
+	/*NamePinYin*/("STHH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600580"),
+	/*NamePinYin*/("WLDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600581"),
+	/*NamePinYin*/("BYGT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600582"),
+	/*NamePinYin*/("TDKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600583"),
+	/*NamePinYin*/("HYGC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600584"),
+	/*NamePinYin*/("CDKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600585"),
+	/*NamePinYin*/("HLSN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600586"),
+	/*NamePinYin*/("JJKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600587"),
+	/*NamePinYin*/("XHYL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600588"),
+	/*NamePinYin*/("YYRJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600589"),
+	/*NamePinYin*/("ADRT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600590"),
+	/*NamePinYin*/("THKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600592"),
+	/*NamePinYin*/("LXGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600593"),
+	/*NamePinYin*/("DLSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600594"),
+	/*NamePinYin*/("YBZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600595"),
+	/*NamePinYin*/("ZFSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600596"),
+	/*NamePinYin*/("XAGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600597"),
+	/*NamePinYin*/("GMRY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600598"),
+	/*NamePinYin*/("BDH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600599"),
+	/*NamePinYin*/("XMYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600600"),
+	/*NamePinYin*/("QDPJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600601"),
+	/*NamePinYin*/("FZKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600602"),
+	/*NamePinYin*/("ADDZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600603"),
+	/*NamePinYin*/("STX Y"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600604"),
+	/*NamePinYin*/("STEF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600605"),
+	/*NamePinYin*/("HTNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600606"),
+	/*NamePinYin*/("JFTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600608"),
+	/*NamePinYin*/("*STHK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600609"),
+	/*NamePinYin*/("*STJB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600610"),
+	/*NamePinYin*/("SSTZF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600611"),
+	/*NamePinYin*/("DZJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600612"),
+	/*NamePinYin*/("LFX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600613"),
+	/*NamePinYin*/("YSTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600614"),
+	/*NamePinYin*/("DLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600615"),
+	/*NamePinYin*/("FHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600616"),
+	/*NamePinYin*/("JFJY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600617"),
+	/*NamePinYin*/("*STLH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600618"),
+	/*NamePinYin*/("LJHG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600619"),
+	/*NamePinYin*/("HLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600620"),
+	/*NamePinYin*/("TCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600621"),
+	/*NamePinYin*/("SHJL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600622"),
+	/*NamePinYin*/("JBJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600623"),
+	/*NamePinYin*/("SQGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600624"),
+	/*NamePinYin*/("FDFH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600626"),
+	/*NamePinYin*/("SDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600628"),
+	/*NamePinYin*/("XSJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600629"),
+	/*NamePinYin*/("LGSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600630"),
+	/*NamePinYin*/("LTGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600631"),
+	/*NamePinYin*/("BLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600634"),
+	/*NamePinYin*/("*STHD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600635"),
+	/*NamePinYin*/("DZGY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600636"),
+	/*NamePinYin*/("SAF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600637"),
+	/*NamePinYin*/("ADXX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600638"),
+	/*NamePinYin*/("XHP"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600639"),
+	/*NamePinYin*/("PDJQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600640"),
+	/*NamePinYin*/("ZWGM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600641"),
+	/*NamePinYin*/("MYQY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600642"),
+	/*NamePinYin*/("SNGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600643"),
+	/*NamePinYin*/("AJGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600644"),
+	/*NamePinYin*/("LSDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600645"),
+	/*NamePinYin*/("STZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600647"),
+	/*NamePinYin*/("TDCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600648"),
+	/*NamePinYin*/("WGQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600649"),
+	/*NamePinYin*/("CTKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600650"),
+	/*NamePinYin*/("JJTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600651"),
+	/*NamePinYin*/("FLYX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600652"),
+	/*NamePinYin*/("ASGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600653"),
+	/*NamePinYin*/("SHKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600654"),
+	/*NamePinYin*/("FLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600655"),
+	/*NamePinYin*/("YYSC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600656"),
+	/*NamePinYin*/("STFY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600657"),
+	/*NamePinYin*/("XDDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600658"),
+	/*NamePinYin*/("DZC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600660"),
+	/*NamePinYin*/("FYBL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600661"),
+	/*NamePinYin*/("XNX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600662"),
+	/*NamePinYin*/("JSKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600663"),
+	/*NamePinYin*/("LGZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600664"),
+	/*NamePinYin*/("HYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600665"),
+	/*NamePinYin*/("TDY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600666"),
+	/*NamePinYin*/("XNYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600667"),
+	/*NamePinYin*/("TJSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600668"),
+	/*NamePinYin*/("JFJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600671"),
+	/*NamePinYin*/("TMYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600673"),
+	/*NamePinYin*/("DYGL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600674"),
+	/*NamePinYin*/("CTNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600675"),
+	/*NamePinYin*/("ZHQY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600676"),
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600677"),
+	/*NamePinYin*/("HTTX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600678"),
+	/*NamePinYin*/("*STJD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600679"),
+	/*NamePinYin*/("JSKF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600680"),
+	/*NamePinYin*/("SHPT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600682"),
+	/*NamePinYin*/("NJXB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600683"),
+	/*NamePinYin*/("JTYT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600684"),
+	/*NamePinYin*/("ZJSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600685"),
+	/*NamePinYin*/("ACGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600686"),
+	/*NamePinYin*/("JLQC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600687"),
+	/*NamePinYin*/("GTKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600688"),
+	/*NamePinYin*/("SSDH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600689"),
+	/*NamePinYin*/("SHSM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600690"),
+	/*NamePinYin*/("QDHE"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600691"),
+	/*NamePinYin*/("*STDT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600692"),
+	/*NamePinYin*/("YTGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600693"),
+	/*NamePinYin*/("DBJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600694"),
+	/*NamePinYin*/("DSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600695"),
+	/*NamePinYin*/("DJGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600696"),
+	/*NamePinYin*/("DLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600697"),
+	/*NamePinYin*/("OYJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600698"),
+	/*NamePinYin*/("STQJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600699"),
+	/*NamePinYin*/("*STDH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600701"),
+	/*NamePinYin*/("GDGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600702"),
+	/*NamePinYin*/("DPQJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600703"),
+	/*NamePinYin*/("SAGD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600704"),
+	/*NamePinYin*/("ZDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600706"),
+	/*NamePinYin*/("STCX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600707"),
+	/*NamePinYin*/("CHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600708"),
+	/*NamePinYin*/("HBGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600710"),
+	/*NamePinYin*/("CLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600711"),
+	/*NamePinYin*/("XZKY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600712"),
+	/*NamePinYin*/("NNBH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600713"),
+	/*NamePinYin*/("NJYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600714"),
+	/*NamePinYin*/("STJR"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600715"),
+	/*NamePinYin*/("STSL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600716"),
+	/*NamePinYin*/("FHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600717"),
+	/*NamePinYin*/("TJG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600718"),
+	/*NamePinYin*/("DRJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600719"),
+	/*NamePinYin*/("DLRD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600720"),
+	/*NamePinYin*/("QLS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600721"),
+	/*NamePinYin*/("STBH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600722"),
+	/*NamePinYin*/("*STJH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600723"),
+	/*NamePinYin*/("XCSC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600724"),
+	/*NamePinYin*/("NBFD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600725"),
+	/*NamePinYin*/("YWGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600726"),
+	/*NamePinYin*/("HDNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600728"),
+	/*NamePinYin*/("STXT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600729"),
+	/*NamePinYin*/("CQBH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600730"),
+	/*NamePinYin*/("ZGGK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600731"),
+	/*NamePinYin*/("HNHL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600732"),
+	/*NamePinYin*/("SHXM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600733"),
+	/*NamePinYin*/("SQF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600734"),
+	/*NamePinYin*/("SDJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600735"),
+	/*NamePinYin*/("XHJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600736"),
+	/*NamePinYin*/("SZGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600737"),
+	/*NamePinYin*/("ZLTH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600738"),
+	/*NamePinYin*/("LZMB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600739"),
+	/*NamePinYin*/("LNCD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600740"),
+	/*NamePinYin*/("*STSJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600741"),
+	/*NamePinYin*/("HYQC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600742"),
+	/*NamePinYin*/("YQFW"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600743"),
+	/*NamePinYin*/("HYDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600744"),
+	/*NamePinYin*/("HYDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600745"),
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600746"),
+	/*NamePinYin*/("JSSP"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600747"),
+	/*NamePinYin*/("DLKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600748"),
+	/*NamePinYin*/("SSFZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600749"),
+	/*NamePinYin*/("XCLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600750"),
+	/*NamePinYin*/("JZYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600751"),
+	/*NamePinYin*/("SSTTH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600753"),
+	/*NamePinYin*/("DFYX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600754"),
+	/*NamePinYin*/("JJGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600755"),
+	/*NamePinYin*/("SMGM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600756"),
+	/*NamePinYin*/("LCRJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600757"),
+	/*NamePinYin*/("*STYF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600758"),
+	/*NamePinYin*/("GYNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600759"),
+	/*NamePinYin*/("ZHGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600760"),
+	/*NamePinYin*/("ZHHB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600761"),
+	/*NamePinYin*/("AHGL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600763"),
+	/*NamePinYin*/("TCYL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600764"),
+	/*NamePinYin*/("ZDAT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600765"),
+	/*NamePinYin*/("ZHCJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600766"),
+	/*NamePinYin*/("YCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600767"),
+	/*NamePinYin*/("YCSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600768"),
+	/*NamePinYin*/("NBFB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600769"),
+	/*NamePinYin*/("*STXL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600770"),
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600771"),
+	/*NamePinYin*/("STDC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600773"),
+	/*NamePinYin*/("XCCT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600774"),
+	/*NamePinYin*/("HSJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600775"),
+	/*NamePinYin*/("NJXM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600776"),
+	/*NamePinYin*/("DFTX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600777"),
+	/*NamePinYin*/("XCSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600778"),
+	/*NamePinYin*/("YHJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600779"),
+	/*NamePinYin*/("SJF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600780"),
+	/*NamePinYin*/("TBNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600781"),
+	/*NamePinYin*/("SHFR"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600782"),
+	/*NamePinYin*/("XGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600783"),
+	/*NamePinYin*/("LXGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600784"),
+	/*NamePinYin*/("LYTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600785"),
+	/*NamePinYin*/("XHBH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600787"),
+	/*NamePinYin*/("ZCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600789"),
+	/*NamePinYin*/("LKYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600790"),
+	/*NamePinYin*/("QFC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600791"),
+	/*NamePinYin*/("JNZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600792"),
+	/*NamePinYin*/("STML"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600793"),
+	/*NamePinYin*/("STYZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600794"),
+	/*NamePinYin*/("BSKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600795"),
+	/*NamePinYin*/("GDDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600796"),
+	/*NamePinYin*/("QJSH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600797"),
+	/*NamePinYin*/("ZDWX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600798"),
+	/*NamePinYin*/("NBHY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600800"),
+	/*NamePinYin*/("STCK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600801"),
+	/*NamePinYin*/("HXSN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600802"),
+	/*NamePinYin*/("FJSN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600803"),
+	/*NamePinYin*/("WYSH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600804"),
+	/*NamePinYin*/("PBS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600805"),
+	/*NamePinYin*/("YDTZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600806"),
+	/*NamePinYin*/("KMJC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600807"),
+	/*NamePinYin*/("TYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600808"),
+	/*NamePinYin*/("MGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600809"),
+	/*NamePinYin*/("SXFJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600810"),
+	/*NamePinYin*/("SMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600811"),
+	/*NamePinYin*/("DFJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600812"),
+	/*NamePinYin*/("HBZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600814"),
+	/*NamePinYin*/("HZJB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600815"),
+	/*NamePinYin*/("SGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600816"),
+	/*NamePinYin*/("AXXT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600818"),
+	/*NamePinYin*/("ZLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600819"),
+	/*NamePinYin*/("YPBL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600820"),
+	/*NamePinYin*/("SDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600821"),
+	/*NamePinYin*/("JQY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600822"),
+	/*NamePinYin*/("SHWM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600823"),
+	/*NamePinYin*/("SMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600824"),
+	/*NamePinYin*/("YMJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600825"),
+	/*NamePinYin*/("XHCM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600826"),
+	/*NamePinYin*/("LSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600827"),
+	/*NamePinYin*/("YYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600828"),
+	/*NamePinYin*/("CSJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600829"),
+	/*NamePinYin*/("SJZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600830"),
+	/*NamePinYin*/("XYRT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600831"),
+	/*NamePinYin*/("ADWL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600832"),
+	/*NamePinYin*/("DFMZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600833"),
+	/*NamePinYin*/("DYYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600834"),
+	/*NamePinYin*/("STDT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600835"),
+	/*NamePinYin*/("SHJD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600836"),
+	/*NamePinYin*/("JLSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600837"),
+	/*NamePinYin*/("HTZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600838"),
+	/*NamePinYin*/("SHJB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600839"),
+	/*NamePinYin*/("SCCH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600841"),
+	/*NamePinYin*/("SCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600843"),
+	/*NamePinYin*/("SGSB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600844"),
+	/*NamePinYin*/("DHKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600845"),
+	/*NamePinYin*/("BXRJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600846"),
+	/*NamePinYin*/("TJKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600847"),
+	/*NamePinYin*/("STYML"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600848"),
+	/*NamePinYin*/("ZYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600850"),
+	/*NamePinYin*/("HDDN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600851"),
+	/*NamePinYin*/("HXGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600853"),
+	/*NamePinYin*/("LJGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600854"),
+	/*NamePinYin*/("STCL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600855"),
+	/*NamePinYin*/("HTCF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600856"),
+	/*NamePinYin*/("CBJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600857"),
+	/*NamePinYin*/("GDSC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600858"),
+	/*NamePinYin*/("YZGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600859"),
+	/*NamePinYin*/("WFJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600860"),
+	/*NamePinYin*/("*STBR"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600861"),
+	/*NamePinYin*/("BJCX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600862"),
+	/*NamePinYin*/("NTKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600863"),
+	/*NamePinYin*/("NMHD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600864"),
+	/*NamePinYin*/("HTGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600865"),
+	/*NamePinYin*/("BDJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600866"),
+	/*NamePinYin*/("XHKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600867"),
+	/*NamePinYin*/("THDB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600868"),
+	/*NamePinYin*/("STMY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600869"),
+	/*NamePinYin*/("SPYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600870"),
+	/*NamePinYin*/("STSH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600871"),
+	/*NamePinYin*/("SYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600872"),
+	/*NamePinYin*/("ZJGX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600873"),
+	/*NamePinYin*/("WZMZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600874"),
+	/*NamePinYin*/("CYHB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600875"),
+	/*NamePinYin*/("DFDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600876"),
+	/*NamePinYin*/("STLB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600877"),
+	/*NamePinYin*/("ZGJL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600879"),
+	/*NamePinYin*/("HTDZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600880"),
+	/*NamePinYin*/("BRCB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600881"),
+	/*NamePinYin*/("YTJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600882"),
+	/*NamePinYin*/("DCGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600883"),
+	/*NamePinYin*/("BWKJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600884"),
+	/*NamePinYin*/("SSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600885"),
+	/*NamePinYin*/("*STLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600886"),
+	/*NamePinYin*/("GTDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600887"),
+	/*NamePinYin*/("YLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600888"),
+	/*NamePinYin*/("XJZH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600889"),
+	/*NamePinYin*/("NJHQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600890"),
+	/*NamePinYin*/("STZF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600891"),
+	/*NamePinYin*/("STQL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600892"),
+	/*NamePinYin*/("*STBC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600893"),
+	/*NamePinYin*/("HKDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600894"),
+	/*NamePinYin*/("AGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600895"),
+	/*NamePinYin*/("ZJGK"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600896"),
+	/*NamePinYin*/("ZHHC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600897"),
+	/*NamePinYin*/("SMKG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600900"),
+	/*NamePinYin*/("CJDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600960"),
+	/*NamePinYin*/("BZHS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600961"),
+	/*NamePinYin*/("ZYJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600962"),
+	/*NamePinYin*/("GTZL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600963"),
+	/*NamePinYin*/("YYZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600965"),
+	/*NamePinYin*/("FCWF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600966"),
+	/*NamePinYin*/("BHZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600967"),
+	/*NamePinYin*/("BFCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600969"),
+	/*NamePinYin*/("CDGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600970"),
+	/*NamePinYin*/("ZCGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600971"),
+	/*NamePinYin*/("HYMD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600973"),
+	/*NamePinYin*/("BSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600975"),
+	/*NamePinYin*/("XWF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600976"),
+	/*NamePinYin*/("WHJM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600978"),
+	/*NamePinYin*/("YHMY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600979"),
+	/*NamePinYin*/("AAAZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600980"),
+	/*NamePinYin*/("BKCC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600981"),
+	/*NamePinYin*/("JSKY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600982"),
+	/*NamePinYin*/("NBRD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600983"),
+	/*NamePinYin*/("GFSX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600984"),
+	/*NamePinYin*/("*STJJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600985"),
+	/*NamePinYin*/("LMKH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600986"),
+	/*NamePinYin*/("KDGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600987"),
+	/*NamePinYin*/("HMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600988"),
+	/*NamePinYin*/("*STBL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600990"),
+	/*NamePinYin*/("SCDZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600991"),
+	/*NamePinYin*/("AQCF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600992"),
+	/*NamePinYin*/("GSGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600993"),
+	/*NamePinYin*/("MYL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600995"),
+	/*NamePinYin*/("WSDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600997"),
+	/*NamePinYin*/("KLGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600998"),
+	/*NamePinYin*/("JZT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("600999"),
+	/*NamePinYin*/("QSZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601000"),
+	/*NamePinYin*/("TSG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601001"),
+	/*NamePinYin*/("DTMY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601002"),
+	/*NamePinYin*/("JYSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601003"),
+	/*NamePinYin*/("LGGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601005"),
+	/*NamePinYin*/("CQGT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601006"),
+	/*NamePinYin*/("DQTL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601007"),
+	/*NamePinYin*/("JLFD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601008"),
+	/*NamePinYin*/("LYG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601009"),
+	/*NamePinYin*/("NJYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601011"),
+	/*NamePinYin*/("BTL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601018"),
+	/*NamePinYin*/("NBG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601088"),
+	/*NamePinYin*/("ZGSH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601098"),
+	/*NamePinYin*/("ZNCM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601099"),
+	/*NamePinYin*/("TPX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601101"),
+	/*NamePinYin*/("HHNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601106"),
+	/*NamePinYin*/("ZGYC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601107"),
+	/*NamePinYin*/("SCCY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601111"),
+	/*NamePinYin*/("ZGGH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601116"),
+	/*NamePinYin*/("SJGW"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601117"),
+	/*NamePinYin*/("ZGHX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601118"),
+	/*NamePinYin*/("HNXJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601126"),
+	/*NamePinYin*/("SFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601137"),
+	/*NamePinYin*/("BWGJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601139"),
+	/*NamePinYin*/("SZRQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601158"),
+	/*NamePinYin*/("CQSW"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601166"),
+	/*NamePinYin*/("XYYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601168"),
+	/*NamePinYin*/("XBKY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601169"),
+	/*NamePinYin*/("BJYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601177"),
+	/*NamePinYin*/("HCQJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601179"),
+	/*NamePinYin*/("ZGXD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601186"),
+	/*NamePinYin*/("ZGTJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601188"),
+	/*NamePinYin*/("LJJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601216"),
+	/*NamePinYin*/("NMJZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601268"),
+	/*NamePinYin*/("ECCZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601288"),
+	/*NamePinYin*/("NYYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601299"),
+	/*NamePinYin*/("ZGBC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601318"),
+	/*NamePinYin*/("ZGPA"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601328"),
+	/*NamePinYin*/("JTYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601333"),
+	/*NamePinYin*/("ASTL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601369"),
+	/*NamePinYin*/("SGDL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601377"),
+	/*NamePinYin*/("XYZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601390"),
+	/*NamePinYin*/("ZGZT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601398"),
+	/*NamePinYin*/("GSYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601518"),
+	/*NamePinYin*/("JLGS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601519"),
+	/*NamePinYin*/("DZH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601558"),
+	/*NamePinYin*/("HRFD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601588"),
+	/*NamePinYin*/("BCSY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601600"),
+	/*NamePinYin*/("ZGLY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601601"),
+	/*NamePinYin*/("ZGTB"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601607"),
+	/*NamePinYin*/("SHYY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601616"),
+	/*NamePinYin*/("ADDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601618"),
+	/*NamePinYin*/("ZGZY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601628"),
+	/*NamePinYin*/("ZGRS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601666"),
+	/*NamePinYin*/("PMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601668"),
+	/*NamePinYin*/("ZGJZ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601678"),
+	/*NamePinYin*/("DRBHG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601688"),
+	/*NamePinYin*/("HTZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601699"),
+	/*NamePinYin*/("LAHN"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601700"),
+	/*NamePinYin*/("FFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601717"),
+	/*NamePinYin*/("ZMJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601718"),
+	/*NamePinYin*/("JHJT"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601727"),
+	/*NamePinYin*/("SHDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601766"),
+	/*NamePinYin*/("ZGNC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601777"),
+	/*NamePinYin*/("LFGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601788"),
+	/*NamePinYin*/("GDZQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601799"),
+	/*NamePinYin*/("XYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601801"),
+	/*NamePinYin*/("WXCM"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601808"),
+	/*NamePinYin*/("ZHYF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601818"),
+	/*NamePinYin*/("GDYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601857"),
+	/*NamePinYin*/("ZGDY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601866"),
+	/*NamePinYin*/("ZHJY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601872"),
+	/*NamePinYin*/("QSLC"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601877"),
+	/*NamePinYin*/("ZTDQ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601880"),
+	/*NamePinYin*/("DLG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601888"),
+	/*NamePinYin*/("ZGGL"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601890"),
+	/*NamePinYin*/("YXML"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601898"),
+	/*NamePinYin*/("ZMNY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601899"),
+	/*NamePinYin*/("ZJKY"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601918"),
+	/*NamePinYin*/("GTXJ"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601919"),
+	/*NamePinYin*/("ZGYX"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601933"),
+	/*NamePinYin*/("YHCS"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601939"),
+	/*NamePinYin*/("JSYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601958"),
+	/*NamePinYin*/("JMGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601988"),
+	/*NamePinYin*/("ZGYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601989"),
+	/*NamePinYin*/("ZGCG"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601991"),
+	/*NamePinYin*/("DTFD"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601992"),
+	/*NamePinYin*/("JYGF"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601998"),
+	/*NamePinYin*/("ZXYH"),
+	/*SymbolExtern*/(".SS")
+},
+{
+	/*Symbol*/("601999"),
+	/*NamePinYin*/("CBCM"),
+	/*SymbolExtern*/(".SS")
+},
