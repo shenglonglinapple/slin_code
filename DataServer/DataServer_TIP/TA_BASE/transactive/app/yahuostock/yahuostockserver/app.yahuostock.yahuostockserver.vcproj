@@ -226,6 +226,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\FileDataProcessHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FileDataProcessHelper.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\HistoryDataProcssHelper.cpp"
 				>
 			</File>
@@ -251,6 +259,14 @@
 			</File>
 			<File
 				RelativePath=".\src\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\QtTimeHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\QtTimeHelper.h"
 				>
 			</File>
 			<File

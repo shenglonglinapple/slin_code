@@ -66,7 +66,7 @@ void CInitDBByYahuoData::_LoadData_MapStockDataItemT_Total()
 			pCStockData->m_strSymbolExtern = strSymbolExtern;
 			pCStockData->m_nIndex = nIndex;
 			pCStockData->m_strSymbolUse = strSymbolUse;
-			pCStockData->m_strName = "";
+			pCStockData->m_strName = strNamePinYin;
 
 			m_MapStockDataItemT_Total.insert(
 				MapStockDataItemValueTypeT(strSymbolUse, pCStockData));
@@ -148,10 +148,23 @@ void CInitDBByYahuoData::_GetAndSaveHistoryData(const std::string& strSymbolUse)
 	CYahuoHistoryReqAck classCYahuoHistoryReqAck;
 	std::string petr4HistoricalPrices;
 
+	unsigned int startYear = 0;
+	unsigned int startMonth = 0;
+	unsigned int startDay = 0;
+	unsigned int endYear = 0;
+	unsigned int endMonth = 0;
+	unsigned int endDay = 0;
+
+	CHistoryDataProcessHelper    objHelper;
+	objHelper.getStartEndTimeValue(strSymbolUse, startYear, startMonth, startDay, endYear, endMonth, endDay);
+
+
 	try
 	{
+		//petr4HistoricalPrices = classCYahuoHistoryReqAck.getHistoricalQuotesCsv(
+		//	strSymbolUse, 1970, 1, 1, 2014, 12, 4, YahuoReqAck::daily);
 		petr4HistoricalPrices = classCYahuoHistoryReqAck.getHistoricalQuotesCsv(
-			strSymbolUse, 1970, 1, 1, 2014, 12, 4, YahuoReqAck::daily);
+			strSymbolUse, startYear, startMonth, startDay, endYear, endMonth, endDay, YahuoReqAck::daily);
 	}
 	catch(CBaseException& e)
 	{
@@ -202,5 +215,5 @@ void CInitDBByYahuoData::dowork()
 void CInitDBByYahuoData::_SaveDataToFile(const std::string& strSymbolUse, const std::string& strData)
 {
 	CHistoryDataProcessHelper    objHelper;
-	objHelper.saveDataToFile(strSymbolUse, strData);
+	objHelper.saveData(strSymbolUse, strData);
 }
