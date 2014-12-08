@@ -12,7 +12,7 @@
 #include "YahuoHistoryReqAck.h"
 #include "HistoryDataProcssHelper.h"
 #include "InitYahuoDataToFile.h"
-
+#include "ProcessFileDataToDB.h"
 #include "Log4cppLogger.h"
 
 
@@ -42,7 +42,8 @@ CInitDBByYahuoData::CInitDBByYahuoData()
 {
 	m_pInitYahuoDataToFile = NULL;
 	m_pInitYahuoDataToFile = new CInitYahuoDataToFile();
-
+	m_pProcessFileDataToDB = NULL;
+	m_pProcessFileDataToDB = new CProcessFileDataToDB();
 
 	_FreeData_MapStockDataItemT_Total();
 	_LoadData_MapStockDataItemT_Total();
@@ -59,6 +60,12 @@ CInitDBByYahuoData::~CInitDBByYahuoData()
 	{
 		delete m_pInitYahuoDataToFile;
 		m_pInitYahuoDataToFile = NULL;
+	}
+
+	if (NULL != m_pProcessFileDataToDB)
+	{
+		delete m_pProcessFileDataToDB;
+		m_pProcessFileDataToDB = NULL;
 	}
 }
 
@@ -160,11 +167,32 @@ void CInitDBByYahuoData::doWork_initTotalStocksYahuoDataToFile()
 	iterMap = m_MapStockDataItemT_Total.begin();
 	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
-		qSleep(100);
+		qSleep(10);
 
 		pData = (iterMap->second);
 		m_pInitYahuoDataToFile->getAndSaveHistoryData(pData->m_strSymbolUse);
-		
+
+		pData = NULL;
+		iterMap++;
+	}
+
+}
+
+void CInitDBByYahuoData::doWork_ProcessFileToSQliteDb()
+{
+	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+
+	MapStockDataItemIterT iterMap;
+	CStockData* pData = NULL;
+	int nFunCheckRes = 0;
+
+	iterMap = m_MapStockDataItemT_Total.begin();
+	while (iterMap != m_MapStockDataItemT_Total.end())
+	{
+		qSleep(10);
+
+		pData = (iterMap->second);
+		m_pProcessFileDataToDB->proceeFileData(pData->m_strSymbolUse);
 
 		pData = NULL;
 		iterMap++;

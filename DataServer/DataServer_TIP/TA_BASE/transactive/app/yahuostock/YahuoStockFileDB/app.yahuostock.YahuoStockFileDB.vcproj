@@ -226,35 +226,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\FileDataProcessHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\FileDataProcessHelper.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\HistoryDataProcssHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\HistoryDataProcssHelper.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\InitDBByYahuoData.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\InitDBByYahuoData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\InitYahuoDataToFile.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\InitYahuoDataToFile.h"
 				>
 			</File>
 			<File
@@ -311,6 +287,82 @@
 			</File>
 			<File
 				RelativePath=".\src\YahuoReqAck.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="filedb"
+			>
+			<File
+				RelativePath=".\src\FileDataProcessHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FileDataProcessHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\HistoryDataProcssHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\HistoryDataProcssHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\InitYahuoDataToFile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\InitYahuoDataToFile.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="sqliteDB"
+			>
+			<File
+				RelativePath=".\src\HistoryData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\HistoryData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessFileDataToDB.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessFileDataToDB.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOper.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="cfgfile"
+			>
+			<File
+				RelativePath=".\src\ConfigFileHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigFileHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigInfo.h"
 				>
 			</File>
 		</Filter>

@@ -15,18 +15,15 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////////////
 #include "BaseException.h"
-
-#include "Log4cppLogger.h"
 
 #include "YahuoReqAck.h"
 #include "YahuoRealTimeReqAck.h"
 #include "YahuoHistoryReqAck.h"
-
 #include "InitDBByYahuoData.h"
 
+#include "ConfigInfo.h"
+#include "Log4cppLogger.h"
 //////////////////////////////////////////////////////////////////////////
 
 void testCYahuoRealTimeReqAck()
@@ -44,10 +41,14 @@ void testCYahuoHistoryReqAck()
 
 void testInitDBByYahuoData()
 {
+	CConfigInfo::getInstance();
 	CInitDBByYahuoData::getInstance();
+
 	CInitDBByYahuoData::getInstance().doWork_initTotalStocksYahuoDataToFile();
+	CInitDBByYahuoData::getInstance().doWork_ProcessFileToSQliteDb();
+
 	CInitDBByYahuoData::removeInstance();
-	
+	CConfigInfo::removeInstance();	
 }
 
 

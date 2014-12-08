@@ -18,6 +18,11 @@ public:
 	void saveDataToFile(const std::string& strFileName, const QStringList& strListHistoryDataTmp);
 	void removeFile(const std::string& strFileName);
 	void renameFile(const std::string& strOldFileName, const std::string& strNewFileName);
+public:
+	std::string getSavaDataPath();
+
+private:
+	std::string m_strSaveDataPath;
 };
 
 

@@ -7,7 +7,7 @@
 
 class CStockData;
 class CInitYahuoDataToFile;
-
+class CProcessFileDataToDB;
 
 class CInitDBByYahuoData 
 {
@@ -31,6 +31,8 @@ private:
 	virtual ~CInitDBByYahuoData();
 public:
 	void doWork_initTotalStocksYahuoDataToFile();
+	void doWork_ProcessFileToSQliteDb();
+
 private:
 	void _FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData);
 	void _FreeData_MapStockDataItemT_Total();
@@ -44,6 +46,7 @@ private:
 	MapStockDataItemT m_MapStockDataItemT_Total;
 private:
 	CInitYahuoDataToFile* m_pInitYahuoDataToFile;
+	CProcessFileDataToDB* m_pProcessFileDataToDB;
 };
 
 

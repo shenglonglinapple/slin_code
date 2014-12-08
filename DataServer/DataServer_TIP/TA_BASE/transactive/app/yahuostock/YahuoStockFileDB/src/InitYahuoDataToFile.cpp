@@ -5,7 +5,6 @@
 #include "YahuoHistoryReqAck.h"
 #include "HistoryDataProcssHelper.h"
 
-
 #include "Log4cppLogger.h"
 
 

@@ -15,7 +15,6 @@
 #include "Log4cppLogger.h"
 
 
-static const std::string DEF_STRING_Path_SaveData="./SaveData/";
 static const int DEF_INT_One_Day_Seconds = 60*60*24;
 
 
@@ -75,7 +74,7 @@ void CHistoryDataProcessHelper::_SaveData(const QString& strSymbolUseTmp, const 
 	QStringList  strLstOldData;
 	bool bFileExist = false;
 
-	strSaveDataFileName = DEF_STRING_Path_SaveData;
+	strSaveDataFileName = m_pFileDataProcessHelper->getSavaDataPath();
 	strSaveDataFileName += strSymbolUseTmp.toStdString();
 	
 	bFileExist = m_pFileDataProcessHelper->checkFileExist(strSaveDataFileName);
@@ -110,7 +109,7 @@ void CHistoryDataProcessHelper::getStartEndTimeValue(
 	time_t time_start_local;
 	bool bFileExist = false;
 
-	strDataFileName = DEF_STRING_Path_SaveData;
+	strDataFileName = m_pFileDataProcessHelper->getSavaDataPath();
 	strDataFileName += strSymbolUse;
 	
 	bFileExist = m_pFileDataProcessHelper->checkFileExist(strDataFileName);

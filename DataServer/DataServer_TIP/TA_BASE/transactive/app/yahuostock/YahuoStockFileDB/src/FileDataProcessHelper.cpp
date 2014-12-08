@@ -6,14 +6,14 @@
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
-
+#include "ConfigInfo.h"
 
 static const int DEF_INT_Max_Line_Length = 10240;
 
 
 CFileDataProcessHelper::CFileDataProcessHelper()
 {
-
+	m_strSaveDataPath = CConfigInfo::getInstance().getFileDBPath().toStdString();
 
 }
 
@@ -143,4 +143,9 @@ void CFileDataProcessHelper::saveDataToFile(const std::string& strFileName, cons
 		streamSaveDataFileName.flush();
 		streamSaveDataFileName.close();
 	}
+}
+
+std::string CFileDataProcessHelper::getSavaDataPath()
+{
+	return m_strSaveDataPath;
 }
