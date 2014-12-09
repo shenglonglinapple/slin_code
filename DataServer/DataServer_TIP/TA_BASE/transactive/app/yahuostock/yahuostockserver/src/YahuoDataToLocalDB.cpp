@@ -1,38 +1,68 @@
-#include "InitDBByYahuoData.h"
-
-
+#include "YahuoDataToLocalDB.h"
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QElapsedTimer>
 
-
 #include "BaseException.h"
 #include "StockData.h"
 #include "TotalStocksData.h"
-#include "YahuoHistoryReqAck.h"
-#include "HistoryDataProcssHelper.h"
 
+#include "ProcessYahuoDataToLocalDB.h"
+#include "ProcessFileDataToDB.h"
 
 #include "Log4cppLogger.h"
 
 
 
+CYahuoDataToLocalDB* CYahuoDataToLocalDB::m_pInstance = 0;
+QMutex CYahuoDataToLocalDB::m_mutexInstance;
 
-CInitDBByYahuoData::CInitDBByYahuoData()
+CYahuoDataToLocalDB& CYahuoDataToLocalDB::getInstance()
+{	
+	QMutexLocker lock(&m_mutexInstance);	
+	if (NULL == m_pInstance)
+	{
+		m_pInstance = new CYahuoDataToLocalDB();
+	}
+	return (*m_pInstance);
+}
+
+void CYahuoDataToLocalDB::removeInstance()
 {
+	QMutexLocker lock(&m_mutexInstance);	
+	delete m_pInstance;
+	m_pInstance = NULL;
+
+}
+
+CYahuoDataToLocalDB::CYahuoDataToLocalDB()
+{
+	m_pProcessYahuoDataToLocalDB = NULL;
+	m_pProcessYahuoDataToLocalDB = new CProcessYahuoDataToLocalDB();
+
 	_FreeData_MapStockDataItemT_Total();
 	_LoadData_MapStockDataItemT_Total();
 
+
 }
 
-CInitDBByYahuoData::~CInitDBByYahuoData()
+CYahuoDataToLocalDB::~CYahuoDataToLocalDB()
 {	
+
 	_FreeData_MapStockDataItemT_Total();
+
+	if (NULL != m_pProcessYahuoDataToLocalDB)
+	{
+		delete m_pProcessYahuoDataToLocalDB;
+		m_pProcessYahuoDataToLocalDB = NULL;
+	}
+
+	
 }
 
 
 
-void CInitDBByYahuoData::_LoadData_MapStockDataItemT_Total()
+void CYahuoDataToLocalDB::_LoadData_MapStockDataItemT_Total()
 {
 	int nArrSize = 0;
 	CStockData* pCStockData = NULL;
@@ -60,11 +90,10 @@ void CInitDBByYahuoData::_LoadData_MapStockDataItemT_Total()
 			strSymbolExtern = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
 			strSymbolUse = strSymbol + strSymbolExtern;
 
-			
+			pCStockData->m_nIndex = nIndex;
 			pCStockData->m_strSymbol = strSymbol;
 			pCStockData->m_strNamePinYin = strNamePinYin;
 			pCStockData->m_strSymbolExtern = strSymbolExtern;
-			pCStockData->m_nIndex = nIndex;
 			pCStockData->m_strSymbolUse = strSymbolUse;
 			pCStockData->m_strName = strNamePinYin;
 
@@ -85,7 +114,7 @@ void CInitDBByYahuoData::_LoadData_MapStockDataItemT_Total()
 }
 
 
-void CInitDBByYahuoData::_FreeData_MapStockDataItemT_Total()
+void CYahuoDataToLocalDB::_FreeData_MapStockDataItemT_Total()
 {
 	{
 		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
@@ -95,7 +124,7 @@ void CInitDBByYahuoData::_FreeData_MapStockDataItemT_Total()
 }
 
 
-void CInitDBByYahuoData::_FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData)
+void CYahuoDataToLocalDB::_FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData)
 {
 
 	MapStockDataItemIterT iterMap;
@@ -117,7 +146,7 @@ void CInitDBByYahuoData::_FreeData_MapStockDataItemT(MapStockDataItemT& mapStock
 	return;
 }
 
-void CInitDBByYahuoData::_ProcessTotalStocks()
+void CYahuoDataToLocalDB::doWork_YahuoDataToLocalDB()
 {
 	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
 
@@ -128,11 +157,10 @@ void CInitDBByYahuoData::_ProcessTotalStocks()
 	iterMap = m_MapStockDataItemT_Total.begin();
 	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
-		qSleep(100);
+		qSleep(10);
 
 		pData = (iterMap->second);
-
-		_GetAndSaveHistoryData(pData->m_strSymbolUse);
+		m_pProcessYahuoDataToLocalDB->processStock(pData->m_strSymbolUse);
 
 		pData = NULL;
 		iterMap++;
@@ -141,51 +169,28 @@ void CInitDBByYahuoData::_ProcessTotalStocks()
 }
 
 
-
-void CInitDBByYahuoData::_GetAndSaveHistoryData(const std::string& strSymbolUse)
+void CYahuoDataToLocalDB::doWork_Local_FileDB_To_SQLiteDB()
 {
-	int nFunRes = 0;
-	CYahuoHistoryReqAck classCYahuoHistoryReqAck;
-	std::string petr4HistoricalPrices;
+	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+	CProcessFileDataToDB myProcessFileDataToDB;
+	MapStockDataItemIterT iterMap;
+	CStockData* pData = NULL;
+	int nFunCheckRes = 0;
 
-	unsigned int startYear = 0;
-	unsigned int startMonth = 0;
-	unsigned int startDay = 0;
-	unsigned int endYear = 0;
-	unsigned int endMonth = 0;
-	unsigned int endDay = 0;
-
-	CHistoryDataProcessHelper    objHelper;
-	objHelper.getStartEndTimeValue(strSymbolUse, startYear, startMonth, startDay, endYear, endMonth, endDay);
-
-
-	try
+	iterMap = m_MapStockDataItemT_Total.begin();
+	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
-		//petr4HistoricalPrices = classCYahuoHistoryReqAck.getHistoricalQuotesCsv(
-		//	strSymbolUse, 1970, 1, 1, 2014, 12, 4, YahuoReqAck::daily);
-		petr4HistoricalPrices = classCYahuoHistoryReqAck.getHistoricalQuotesCsv(
-			strSymbolUse, startYear, startMonth, startDay, endYear, endMonth, endDay, YahuoReqAck::daily);
-	}
-	catch(CBaseException& e)
-	{
-		nFunRes = -1;
-	}
-	catch(...)
-	{
-		nFunRes = -1;
-	}
+		qSleep(10);
 
-	if (0 == nFunRes)
-	{
-		_SaveDataToFile(strSymbolUse, petr4HistoricalPrices);
+		pData = (iterMap->second);
+		myProcessFileDataToDB.proceeFileData(pData->m_strSymbolUse);
+
+		pData = NULL;
+		iterMap++;
 	}
-
-
-	
 }
 
-
-void CInitDBByYahuoData::qSleep(int nMilliseconds)
+void CYahuoDataToLocalDB::qSleep(int nMilliseconds)
 {
 #ifdef Q_OS_WIN
 	Sleep(uint(nMilliseconds));
@@ -195,7 +200,7 @@ void CInitDBByYahuoData::qSleep(int nMilliseconds)
 #endif
 
 }
-void CInitDBByYahuoData::qWait(int nMilliseconds)
+void CYahuoDataToLocalDB::qWait(int nMilliseconds)
 {
 	QElapsedTimer timer;
 	timer.start();
@@ -207,13 +212,6 @@ void CInitDBByYahuoData::qWait(int nMilliseconds)
 
 }
 
-void CInitDBByYahuoData::dowork()
-{
-	_ProcessTotalStocks();
-}
 
-void CInitDBByYahuoData::_SaveDataToFile(const std::string& strSymbolUse, const std::string& strData)
-{
-	CHistoryDataProcessHelper    objHelper;
-	objHelper.saveData(strSymbolUse, strData);
-}
+
+

@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\;.\src;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\include&quot;;C:\Qt\4.8.5\include"
+				AdditionalIncludeDirectories=".\;.\src;.\include;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\include&quot;;C:\Qt\4.8.5\include"
 				PreprocessorDefinitions="_DEBUG;__WIN32__;__x86__;_NT_;_WIN32_WINNT=0x500;_CRT_SECURE_NO_DEPRECATE;__OSVERSION__=4;WIN32;_CONSOLE;_USE_32BIT_TIME_T;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -207,7 +207,7 @@
 	</References>
 	<Files>
 		<Filter
-			Name="src"
+			Name="dataPro"
 			>
 			<File
 				RelativePath=".\src\BaseException.cpp"
@@ -215,6 +215,22 @@
 			</File>
 			<File
 				RelativePath=".\src\BaseException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigFileHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigFileHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigInfo.h"
 				>
 			</File>
 			<File
@@ -226,27 +242,27 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\FileDataProcessHelper.cpp"
+				RelativePath=".\src\FileDBOper.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\FileDataProcessHelper.h"
+				RelativePath=".\src\FileDBOper.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\HistoryDataProcssHelper.cpp"
+				RelativePath=".\src\FileDBOperHelper.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\HistoryDataProcssHelper.h"
+				RelativePath=".\src\FileDBOperHelper.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\InitDBByYahuoData.cpp"
+				RelativePath=".\src\HistoryData.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\InitDBByYahuoData.h"
+				RelativePath=".\src\HistoryData.h"
 				>
 			</File>
 			<File
@@ -262,11 +278,67 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\ProcessFileDataToDB.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessFileDataToDB.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessYahuoDataToLocalDB.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessYahuoDataToLocalDB.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectCommonData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectCommonDef.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectQTInclude.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectSysInclude.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\QtTimeHelper.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\QtTimeHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RequestYahuoDataHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RequestYahuoDataHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOperHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOperHelper.h"
 				>
 			</File>
 			<File
@@ -279,6 +351,14 @@
 			</File>
 			<File
 				RelativePath=".\src\TotalStocksData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\YahuoDataToLocalDB.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\YahuoDataToLocalDB.h"
 				>
 			</File>
 			<File
@@ -305,6 +385,18 @@
 				RelativePath=".\src\YahuoReqAck.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="include"
+			>
+		</Filter>
+		<Filter
+			Name="src"
+			>
+		</Filter>
+		<Filter
+			Name="server"
+			>
 		</Filter>
 		<File
 			RelativePath=".\log4cpp.conf"

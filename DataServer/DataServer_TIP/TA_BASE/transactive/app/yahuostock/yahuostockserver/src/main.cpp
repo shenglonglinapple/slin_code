@@ -15,17 +15,14 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////////////////
 #include "BaseException.h"
 
-#include "Log4cppLogger.h"
-
-#include "YahuoReqAck.h"
 #include "YahuoRealTimeReqAck.h"
 #include "YahuoHistoryReqAck.h"
+#include "YahuoDataToLocalDB.h"
 
-#include "InitDBByYahuoData.h"
+#include "ConfigInfo.h"
+#include "Log4cppLogger.h"
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -42,11 +39,16 @@ void testCYahuoHistoryReqAck()
 	objCYahuoHistoryReqAck.test_CYahuoHistoryReqAck();
 }
 
-void testInitDBByYahuoData()
+void testCYahuoDataToLocalDB()
 {
-	CInitDBByYahuoData objInitDBByYahuoData;
-	objInitDBByYahuoData.dowork();
-	
+	CConfigInfo::getInstance();
+	CYahuoDataToLocalDB::getInstance();
+
+	//CYahuoDataToLocalDB::getInstance().doWork_YahuoDataToLocalDB();
+	CYahuoDataToLocalDB::getInstance().doWork_Local_FileDB_To_SQLiteDB();
+
+	CYahuoDataToLocalDB::removeInstance();
+	CConfigInfo::removeInstance();	
 }
 
 
@@ -58,7 +60,7 @@ int main()
 
 	//testCYahuoRealTimeReqAck();
 	//testCYahuoHistoryReqAck();
-	testInitDBByYahuoData();
+	testCYahuoDataToLocalDB();
 	
 
 	CLog4cppLogger::removeInstance();

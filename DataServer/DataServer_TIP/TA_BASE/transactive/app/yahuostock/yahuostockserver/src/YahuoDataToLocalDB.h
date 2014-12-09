@@ -1,32 +1,44 @@
-#ifndef __CLASS_INIT_DB_BY_YAHUO_DATA_H__
-#define __CLASS_INIT_DB_BY_YAHUO_DATA_H__
+#ifndef __CLASS_YAHUO_DATA_TO_LOCAL_DB_H__
+#define __CLASS_YAHUO_DATA_TO_LOCAL_DB_H__
 
 #include <map>
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 
 class CStockData;
+class CProcessYahuoDataToLocalDB;
 
-class CInitDBByYahuoData 
+class CYahuoDataToLocalDB 
 {
+public:
+	static CYahuoDataToLocalDB& getInstance();
+	static void removeInstance();
+
+private:
+	static CYahuoDataToLocalDB* m_pInstance;
+	static QMutex m_mutexInstance;
+
+
 private:
 	//strSymbolUse  CStockData
 	typedef std::map<std::string, CStockData*>                      MapStockDataItemT;
 	typedef std::map<std::string, CStockData*>::iterator            MapStockDataItemIterT;
 	typedef std::map<std::string, CStockData*>::value_type          MapStockDataItemValueTypeT;
 
+private:
+	CYahuoDataToLocalDB();
+	virtual ~CYahuoDataToLocalDB();
 public:
-	CInitDBByYahuoData();
-	virtual ~CInitDBByYahuoData();
-public:
-	void dowork();
+	//yahuo data to  C:\LSL\LSL_DATA\SaveDataFile\000001.SS file
+	void doWork_YahuoDataToLocalDB();
+
+	//C:\LSL\LSL_DATA\SaveDataFile\000001.SS file to C:\LSL\LSL_DATA\SaveDataSqliteDB\000001.SS sqlite db file
+	void doWork_Local_FileDB_To_SQLiteDB();
+
 private:
 	void _FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData);
 	void _FreeData_MapStockDataItemT_Total();
 	void _LoadData_MapStockDataItemT_Total();
-	void _GetAndSaveHistoryData(const std::string& strSymbolUse);
-	void _ProcessTotalStocks();
-	void _SaveDataToFile(const std::string& strSymbolUse, const std::string& strData);
 
 private:
 	void qSleep(int nMilliseconds);
@@ -34,7 +46,9 @@ private:
 private:
 	QMutex m_mutexMapStockDataItemT_Total;
 	MapStockDataItemT m_MapStockDataItemT_Total;
+private:
+	CProcessYahuoDataToLocalDB* m_pProcessYahuoDataToLocalDB;
 };
 
 
-#endif //__CLASS_INIT_DB_BY_YAHUO_DATA_H__
+#endif //__CLASS_YAHUO_DATA_TO_LOCAL_DB_H__
