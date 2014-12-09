@@ -2,18 +2,15 @@
 #define  __DEF__HISTORY_DATA_SERVER_COMMON_DEF_H_
 
 
+#define  USING_MY_CLIENT  1
+
+
 #define  DEF_VALUE_STRING_DB_ORACLE          "ORACLE"
 #define  DEF_VALUE_STRING_DB_MYSQL           "MYSQL"
 #define  DEF_VALUE_STRING_DB_SQLITE          "SQLITE"
 
 #define  DEF_VALUE_STRING_QT_SUPPORT_DB_QMYSQL           "QMYSQL"
 #define  DEF_VALUE_STRING_QT_SUPPORT_DB_QSQLITE          "QSQLITE"
-
-
-
-
-
-
 
 
 // the database server type support in the system
@@ -68,13 +65,6 @@ enum TimeBaseSecond
 	TIME_BASE_S_1YEAR		= 365   * TIME_BASE_S_1DAY,
 
 };
-
-
-
-
-
-
-
 
 enum enLanguageType
 {

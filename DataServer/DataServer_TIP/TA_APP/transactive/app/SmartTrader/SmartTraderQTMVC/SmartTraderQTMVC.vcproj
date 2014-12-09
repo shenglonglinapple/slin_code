@@ -2375,6 +2375,26 @@
 				</FileConfiguration>
 			</File>
 		</Filter>
+		<Filter
+			Name="MyTradeClient"
+			>
+			<File
+				RelativePath=".\src\MyInstrument.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyInstrument.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyTradeClient.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyTradeClient.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 		<Global

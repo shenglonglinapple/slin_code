@@ -95,8 +95,7 @@ private:
 private:
 	CProjectUtilityFun* m_pProjectUtilityFun;
 	CProjectLogHelper* m_pProjectLogHelper;
-private:
-	int m_nDoTest;
+
 };
 
 //QT_END_NAMESPACE

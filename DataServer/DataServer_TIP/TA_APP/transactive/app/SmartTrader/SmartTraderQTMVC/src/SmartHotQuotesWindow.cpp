@@ -103,7 +103,7 @@ void CLeftDockWidget::translateLanguage()
 
 void CLeftDockWidget::slotUserInstrumentInfoChanged( CItemUserInstrumentInfo* pTreeItem )
 {
-	MYLOG4CPP_DEBUG<<"CSmartHotQuotesWindow process slotUserInstrumentInfoChanged"
+	MYLOG4CPP_DEBUG<<"CLeftDockWidget process slotUserInstrumentInfoChanged"
 		<<" "<<"pTreeItem=ox"<<pTreeItem;
 
 	QModelIndex inValidIndex;

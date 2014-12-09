@@ -3,7 +3,10 @@
 
 #include <QtCore/QObject>
 
+#include "ProjectCommonDef.h"
 #include "TradeClient.h"
+#include "MyTradeClient.h"
+
 #include "ClientLoginParam.h"
 
 
@@ -12,12 +15,13 @@
 
 class IProcessRecvData;
 
+#ifdef USING_MY_CLIENT
+class CSmartTraderClient : public QObject, public CMyTradeClient
+#else
 class CSmartTraderClient : public QObject, public TradeClient
+#endif
 { 
 	Q_OBJECT
-
-
-
 public:
 	CSmartTraderClient(const CClientLoginParam& clientLoginParam);
 	virtual ~CSmartTraderClient();
@@ -52,7 +56,7 @@ public:
 	virtual void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 
 private:
-	CClientLoginParam* m_pClientLoginParam;
+	CClientLoginParam m_clientLoginParam;
 	IProcessRecvData* m_pProcessRecvDataHandle;
 }; 
 

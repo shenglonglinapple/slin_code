@@ -74,9 +74,6 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 	
 	_InitLoginParam();
 	_InitTraderClient();
-
-	//TODO. for Test
-	m_nDoTest = 0;
 }
 
 CClientDataManagerWorker::~CClientDataManagerWorker(void)
