@@ -8,6 +8,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QDateTime>
 
+#include "ProjectCommonData.h"
 #include "QtTimeHelper.h"
 #include "FileDBOper.h"
 #include "ConfigInfo.h"
@@ -15,7 +16,6 @@
 #include "Log4cppLogger.h"
 
 
-static const int DEF_INT_One_Day_Seconds = 60*60*24;
 
 
 CRequestYahuoDataHelper::CRequestYahuoDataHelper()
@@ -68,7 +68,7 @@ void CRequestYahuoDataHelper::getStartEndTimeValue(
 		CConfigInfo::getInstance().setLastUpdateTime(strLastUpdateTime_FileDB);
 	}
 
-	nTimeLastUpdateDateTime += DEF_INT_One_Day_Seconds;
+	nTimeLastUpdateDateTime += DEF_INT_ONE_DAY_SECONDS;
 	nTimeNow = m_pQtTimeHelper->getTimeNow_Qt();
 
 	m_pQtTimeHelper->getTimeInfo_Qt(nTimeNow, endYear, endMonth, endDay);

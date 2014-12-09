@@ -10,7 +10,6 @@
 #include "ProjectCommonData.h"
 #include "ConfigInfo.h"
 
-static const int DEF_INT_Max_Line_Length = 10240;
 
 
 CFileDBOper::CFileDBOper()
@@ -84,8 +83,8 @@ void CFileDBOper::getAllDataFromFile(const std::string& strFileName, QStringList
 
 	if (NULL == pszLine)
 	{
-		pszLine = new char[DEF_INT_Max_Line_Length];
-		memset(pszLine, 0, DEF_INT_Max_Line_Length);
+		pszLine = new char[DEF_INT_MAX_LINE_LENGTH];
+		memset(pszLine, 0, DEF_INT_MAX_LINE_LENGTH);
 	}
 
 	streamDataFileName.open(strFileName.c_str(), std::ios::in);
@@ -98,8 +97,8 @@ void CFileDBOper::getAllDataFromFile(const std::string& strFileName, QStringList
 	nLineIndex = 0;
 	while (false == streamDataFileName.eof())
 	{
-		memset(pszLine, 0, DEF_INT_Max_Line_Length);
-		streamDataFileName.getline(pszLine, DEF_INT_Max_Line_Length);
+		memset(pszLine, 0, DEF_INT_MAX_LINE_LENGTH);
+		streamDataFileName.getline(pszLine, DEF_INT_MAX_LINE_LENGTH);
 		
 		strLstLines.push_back(pszLine);
 

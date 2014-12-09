@@ -9,13 +9,13 @@ static const std::string str_QtDbType_QMYSQL = "QMYSQL";
 
 static const std::string str_Table_bar_data_1day = "TABLE_BAR_DATA_1DAY";
 
-static const std::string str_BarData_Column_Timestamp = "COLUMN_DATE";
-static const std::string str_BarData_Column_Open = "COLUMN_OPEN";
-static const std::string str_BarData_Column_High = "COLUMN_HIGH";
-static const std::string str_BarData_Column_Low = "COLUMN_LOW";
-static const std::string str_BarData_Column_Close = "COLUMN_CLOSE";
-static const std::string str_BarData_Column_Volume = "COLUMN_VOLUME";
-static const std::string str_BarData_Column_AdjClose = "COLUMN_ADJCLOSE";
+static const std::string str_BarData_Column_DATE = "COLUMN_DATE";
+static const std::string str_BarData_Column_OPEN = "COLUMN_OPEN";
+static const std::string str_BarData_Column_HIGH = "COLUMN_HIGH";
+static const std::string str_BarData_Column_LOW = "COLUMN_LOW";
+static const std::string str_BarData_Column_CLOSE = "COLUMN_CLOSE";
+static const std::string str_BarData_Column_VOLUME = "COLUMN_VOLUME";
+static const std::string str_BarData_Column_ADJCLOSE = "COLUMN_ADJCLOSE";
 
 
 
@@ -245,14 +245,14 @@ std::string CSqliteDbOper::_BuildSQLForCreateDBTable()
 		sreaamTmp<<"CREATE TABLE IF NOT EXISTS "<<strTableName
 			<<" "<<"("
 			//<<" "<<str_BarData_Column_InstrumentID<<" "<<"INTEGER NOT NULL"<<","
-			<<" "<<str_BarData_Column_Timestamp<<" "<<"TIMESTAMP NOT NULL"<<","
-			<<" "<<str_BarData_Column_Open<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_Close<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_High<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_Low<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_Volume<<" "<<"INTEGER NOT NULL"<<","
-			<<" "<<str_BarData_Column_AdjClose<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<"PRIMARY KEY ("<<str_BarData_Column_Timestamp<<")"
+			<<" "<<str_BarData_Column_DATE<<" "<<"TIMESTAMP NOT NULL"<<","
+			<<" "<<str_BarData_Column_OPEN<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_BarData_Column_CLOSE<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_BarData_Column_HIGH<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_BarData_Column_LOW<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_BarData_Column_VOLUME<<" "<<"INTEGER NOT NULL"<<","
+			<<" "<<str_BarData_Column_ADJCLOSE<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<"PRIMARY KEY ("<<str_BarData_Column_DATE<<")"
 			//<<" "<<"PRIMARY KEY ("<<str_BarData_Column_InstrumentID<<", "<<str_BarData_Column_Timestamp<<")"
 			<<" "<<")";
 	}
@@ -294,13 +294,13 @@ std::string CSqliteDbOper::_BuildSQLForInsert()
 	sreaamTmp.str("");
 	sreaamTmp<<"INSERT INTO "<<str_Table_bar_data_1day
 		<<" "<<"("
-		<<" "<<str_BarData_Column_Timestamp<<","
-		<<" "<<str_BarData_Column_Open<<","
-		<<" "<<str_BarData_Column_High<<","
-		<<" "<<str_BarData_Column_Low<<","
-		<<" "<<str_BarData_Column_Close<<","
-		<<" "<<str_BarData_Column_Volume<<","
-		<<" "<<str_BarData_Column_AdjClose
+		<<" "<<str_BarData_Column_DATE<<","
+		<<" "<<str_BarData_Column_OPEN<<","
+		<<" "<<str_BarData_Column_HIGH<<","
+		<<" "<<str_BarData_Column_LOW<<","
+		<<" "<<str_BarData_Column_CLOSE<<","
+		<<" "<<str_BarData_Column_VOLUME<<","
+		<<" "<<str_BarData_Column_ADJCLOSE
 		<<" "<<")"
 		<<" "<<"VALUES"
 		<<" "<<"("

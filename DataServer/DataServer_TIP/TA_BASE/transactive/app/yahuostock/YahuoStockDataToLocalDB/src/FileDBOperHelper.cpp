@@ -8,7 +8,6 @@
 #include <QtCore/QStringList>
 #include <QtCore/QDateTime>
 
-#include "ProjectCommonData.h"
 #include "QtTimeHelper.h"
 #include "ConfigInfo.h"
 #include "FileDBOper.h"

@@ -1,6 +1,6 @@
 #include "HistoryData.h"
 
-
+#include "ProjectCommonData.h"
 
 CHistoryData::CHistoryData()
 {
@@ -41,7 +41,8 @@ void CHistoryData::resetValue(const QString& strLine)
 	{
 		nIndex = 0;
 		m_strDate = strLstData[nIndex];
-		m_strDate += " 23:00:00";
+		m_strDate += " ";
+		m_strDate += DEF_VALUE_STRING_UTC_START_TIME.c_str();
 
 		nIndex++;
 		m_strOpen = strLstData[nIndex];

@@ -45,6 +45,7 @@ void testCYahuoDataToLocalDB()
 	CYahuoDataToLocalDB::getInstance();
 
 	CYahuoDataToLocalDB::getInstance().doWork_YahuoDataToLocalDB();
+	//CYahuoDataToLocalDB::getInstance().doWork_Local_FileDB_To_SQLiteDB();
 
 	CYahuoDataToLocalDB::removeInstance();
 	CConfigInfo::removeInstance();	
