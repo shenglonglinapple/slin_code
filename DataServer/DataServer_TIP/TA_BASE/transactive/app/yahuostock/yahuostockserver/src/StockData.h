@@ -16,15 +16,17 @@ public:
 	std::string m_strSymbolExtern;// = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
 public:
 	int m_nIndex;
+	int m_nStockID;
 	std::string m_strSymbolUse;//m_strSymbol+m_strSymbolExtern
 	std::string m_strName;// = s_SSSZ_Stocks[nIndex].m_psz_Name;
+private:
+	void _Clear();
 public:
 	void logInfo();
 	void logInfo(const std::string &fileName, 
 		unsigned lineNumber, 
 		const std::string &errorMessage);
-public:
-	std::string getStringInfo();
+
 };
 
 

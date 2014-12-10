@@ -33,6 +33,8 @@ public:
 	void resetDataBaseValue(const QString& strSqliteDbFileName);
 	
 	void saveData(LstHistoryDataT* pLstData);
+public:
+	int selectData(const std::string& strFrom, const std::string& strTo, LstHistoryDataT& lstData);
 
 private:
 	void _UnInitDataBase();
@@ -40,9 +42,10 @@ private:
 	int _StartTransaction();
 	int _CommitTransaction();
 	int _CreateDBTable();
-	std::string _BuildSQLForCreateDBTable();
-	std::string _BuildSQLForInsert();
+	std::string _BuildSQL_CreateTable();
+	std::string _BuildSQL_Insert();
 	int _AddDataArray(LstHistoryDataT* pLstData);
+	std::string _BuildSQL_Select(const std::string& strFrom, const std::string& strTo);
 private:
 	QSqlDatabase* m_pQSqlDataBase;
 	QString m_strQTDbType;//"QSQLITE" "QMYSQL"

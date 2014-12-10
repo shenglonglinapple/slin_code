@@ -207,7 +207,99 @@
 	</References>
 	<Files>
 		<Filter
-			Name="dataPro"
+			Name="ProcessData"
+			>
+			<File
+				RelativePath=".\src\ProcessFileDataToDB.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessFileDataToDB.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessYahuoDataToLocalDB.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProcessYahuoDataToLocalDB.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RequestYahuoDataHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RequestYahuoDataHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\YahuoDataToLocalDB.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\YahuoDataToLocalDB.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="FileDB"
+			>
+			<File
+				RelativePath=".\src\FileDBOper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FileDBOper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FileDBOperHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FileDBOperHelper.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="src"
+			>
+			<File
+				RelativePath=".\src\main.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="server"
+			>
+			<File
+				RelativePath=".\src\HistoryStockManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\HistoryStockManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RealTimeStockManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\RealTimeStockManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockManager.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="common"
 			>
 			<File
 				RelativePath=".\src\BaseException.cpp"
@@ -234,63 +326,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\CurlUtil.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\CurlUtil.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\FileDBOper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\FileDBOper.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\FileDBOperHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\FileDBOperHelper.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\HistoryData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\HistoryData.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\Log4cppLogger.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\Log4cppLogger.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ProcessFileDataToDB.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ProcessFileDataToDB.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ProcessYahuoDataToLocalDB.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ProcessYahuoDataToLocalDB.h"
 				>
 			</File>
 			<File
@@ -317,14 +357,10 @@
 				RelativePath=".\src\QtTimeHelper.h"
 				>
 			</File>
-			<File
-				RelativePath=".\src\RequestYahuoDataHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\RequestYahuoDataHelper.h"
-				>
-			</File>
+		</Filter>
+		<Filter
+			Name="SQLiteDB"
+			>
 			<File
 				RelativePath=".\src\SqliteDbOper.cpp"
 				>
@@ -341,24 +377,16 @@
 				RelativePath=".\src\SqliteDbOperHelper.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="YahuoData"
+			>
 			<File
-				RelativePath=".\src\StockData.cpp"
+				RelativePath=".\src\CurlUtil.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\StockData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\TotalStocksData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\YahuoDataToLocalDB.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\YahuoDataToLocalDB.h"
+				RelativePath=".\src\CurlUtil.h"
 				>
 			</File>
 			<File
@@ -387,16 +415,28 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="include"
+			Name="Data"
 			>
-		</Filter>
-		<Filter
-			Name="src"
-			>
-		</Filter>
-		<Filter
-			Name="server"
-			>
+			<File
+				RelativePath=".\src\HistoryData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\HistoryData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\TotalStocksData.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\log4cpp.conf"

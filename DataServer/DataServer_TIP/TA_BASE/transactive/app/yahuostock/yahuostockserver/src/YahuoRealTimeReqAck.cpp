@@ -103,4 +103,8 @@ void CYahuoRealTimeReqAck::test_CYahuoRealTimeReqAck()
 	CYahuoRealTimeReqAck  classCYahuoRealTimeReqAck;
 	std::string petr4Quotes = classCYahuoRealTimeReqAck.getLatestQuotesCsv("600667.SS", lstQuoteTypes);//"Ì«¼«ÊµÒµ"
 	std::cout << petr4Quotes << std::endl;
+
+	/*
+	"Shanghai","600667.SS","+0.26","+4.60%","12/10/2014","2:00am",5.76,5.91,5.92,5.44,6.11,"5.44 - 6.11",5.91,N/A,128066608,0,""
+	*/
 }

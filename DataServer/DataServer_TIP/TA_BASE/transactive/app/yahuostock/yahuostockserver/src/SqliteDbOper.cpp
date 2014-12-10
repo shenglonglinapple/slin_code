@@ -7,7 +7,7 @@
 static const std::string str_QtDbType_QSQLITE = "QSQLITE";
 static const std::string str_QtDbType_QMYSQL = "QMYSQL";
 
-static const std::string str_Table_bar_data_1day = "TABLE_BAR_DATA_1DAY";
+static const std::string str_TABLE_BAR_DATA_1DAY = "TABLE_BAR_DATA_1DAY";
 
 static const std::string str_BarData_Column_DATE = "COLUMN_DATE";
 static const std::string str_BarData_Column_OPEN = "COLUMN_OPEN";
@@ -216,13 +216,13 @@ void CSqliteDbOper::saveData(LstHistoryDataT* pLstData)
 }
 
 
-std::string CSqliteDbOper::_BuildSQLForCreateDBTable()
+std::string CSqliteDbOper::_BuildSQL_CreateTable()
 {
 	std::ostringstream sreaamTmp;
 	std::string strSQL;
 	std::string strTableName;
 
-	strTableName = str_Table_bar_data_1day;
+	strTableName = str_TABLE_BAR_DATA_1DAY;
 
 	/*
 	enumSqliteDb
@@ -262,7 +262,7 @@ std::string CSqliteDbOper::_BuildSQLForCreateDBTable()
 }
 
 
-std::string CSqliteDbOper::_BuildSQLForInsert()
+std::string CSqliteDbOper::_BuildSQL_Insert()
 {	
 	std::ostringstream sreaamTmp;
 	std::string strSQL;	
@@ -292,7 +292,7 @@ std::string CSqliteDbOper::_BuildSQLForInsert()
 
 
 	sreaamTmp.str("");
-	sreaamTmp<<"INSERT INTO "<<str_Table_bar_data_1day
+	sreaamTmp<<"INSERT INTO "<<str_TABLE_BAR_DATA_1DAY
 		<<" "<<"("
 		<<" "<<str_BarData_Column_DATE<<","
 		<<" "<<str_BarData_Column_OPEN<<","
@@ -319,6 +319,56 @@ std::string CSqliteDbOper::_BuildSQLForInsert()
 }
 
 
+std::string CSqliteDbOper::_BuildSQL_Select(const std::string& strFrom, const std::string& strTo)
+{	
+	std::ostringstream sreaamTmp;
+	std::string strSQL;	
+
+	/*
+	SELECT 
+	COLUMN_DATE, 
+	COLUMN_OPEN, 
+	COLUMN_HIGH, 
+	COLUMN_LOW, 
+	COLUMN_CLOSE, 
+	COLUMN_VOLUME, 
+	COLUMN_ADJCLOSE  
+	FROM 
+	TABLE_BAR_DATA_1DAY 
+	WHERE 
+	COLUMN_DATE > "2014-12-04 07:00:00"
+	AND
+	COLUMN_DATE > "2014-12-14 07:00:00";
+
+	QSqlQuery query( "select name from customer" );
+	while ( query.next() ) {
+	QString name = query.value(0).toString();
+	doSomething( name );
+	}
+	*/
+
+
+	sreaamTmp.str("");
+	sreaamTmp<<"SELECT"
+		<<" "<<str_BarData_Column_DATE<<","
+		<<" "<<str_BarData_Column_OPEN<<","
+		<<" "<<str_BarData_Column_HIGH<<","
+		<<" "<<str_BarData_Column_LOW<<","
+		<<" "<<str_BarData_Column_CLOSE<<","
+		<<" "<<str_BarData_Column_VOLUME<<","
+		<<" "<<str_BarData_Column_ADJCLOSE
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_BAR_DATA_1DAY
+		<<" "<<"COLUMN_DATE >="<<strFrom
+		<<" "<<"AND"
+		<<" "<<"COLUMN_DATE <="<<strTo;
+
+
+	strSQL = sreaamTmp.str();
+	return strSQL;	
+}
+
+
 int CSqliteDbOper::_CreateDBTable()
 {
 	int nFunRes = 0;
@@ -328,7 +378,7 @@ int CSqliteDbOper::_CreateDBTable()
 	QSqlQuery* pSqlQuery = NULL;
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = _BuildSQLForCreateDBTable();
+	strSQL = _BuildSQL_CreateTable();
 
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL;
@@ -377,8 +427,8 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 
 	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
 
-	strDBTableName = str_Table_bar_data_1day;
-	strSQL = _BuildSQLForInsert();
+	strDBTableName = str_TABLE_BAR_DATA_1DAY;
+	strSQL = _BuildSQL_Insert();
 
 	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL
@@ -426,5 +476,70 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 		delete pQSqlQueryForInseert;
 		pQSqlQueryForInseert = NULL;
 	}
+	return nFunRes;
+}
+
+int CSqliteDbOper::selectData(const std::string& strFrom, const std::string& strTo, LstHistoryDataT& lstData)
+{
+	int nFunRes = 0;
+	bool bExecRes = true;
+	std::string strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+
+	lstData.clear();
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = _BuildSQL_Select(strFrom, strTo);
+
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+
+	bExecRes = pSqlQuery->exec(strSQL.c_str());
+
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	while ( pSqlQuery->next() )
+	{
+		CHistoryData* pHistoryData = NULL;
+		pHistoryData = new CHistoryData();
+		nColumnIndex = 0;
+
+		pHistoryData->m_strDate = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pHistoryData->m_strOpen = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pHistoryData->m_strHigh = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pHistoryData->m_strLow = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pHistoryData->m_strClose = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pHistoryData->m_strVolume = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pHistoryData->m_strAdjClose = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+	
+		lstData.push_back(pHistoryData);
+		pHistoryData = NULL;
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
 	return nFunRes;
 }

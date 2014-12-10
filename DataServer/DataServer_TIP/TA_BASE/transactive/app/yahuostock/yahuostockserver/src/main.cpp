@@ -44,8 +44,8 @@ void testCYahuoDataToLocalDB()
 	CConfigInfo::getInstance();
 	CYahuoDataToLocalDB::getInstance();
 
-	//CYahuoDataToLocalDB::getInstance().doWork_YahuoDataToLocalDB();
-	CYahuoDataToLocalDB::getInstance().doWork_Local_FileDB_To_SQLiteDB();
+	CYahuoDataToLocalDB::getInstance().doWork_YahuoDataToLocalDB();
+	//CYahuoDataToLocalDB::getInstance().doWork_Local_FileDB_To_SQLiteDB();
 
 	CYahuoDataToLocalDB::removeInstance();
 	CConfigInfo::removeInstance();	
@@ -58,9 +58,9 @@ int main()
 	CLog4cppLogger::getInstance().initLog();
 	CLog4cppLogger::getInstance().testLog();
 
-	//testCYahuoRealTimeReqAck();
+	testCYahuoRealTimeReqAck();
 	//testCYahuoHistoryReqAck();
-	testCYahuoDataToLocalDB();
+	//testCYahuoDataToLocalDB();
 	
 
 	CLog4cppLogger::removeInstance();

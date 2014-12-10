@@ -1,68 +1,47 @@
-#include "YahuoDataToLocalDB.h"
-
-#include <QtCore/QCoreApplication>
-#include <QtCore/QElapsedTimer>
+#include "StockManager.h"
 
 #include "BaseException.h"
 #include "StockData.h"
 #include "TotalStocksData.h"
 
-#include "ProcessYahuoDataToLocalDB.h"
-#include "ProcessFileDataToDB.h"
-
 #include "Log4cppLogger.h"
 
 
 
-CYahuoDataToLocalDB* CYahuoDataToLocalDB::m_pInstance = 0;
-QMutex CYahuoDataToLocalDB::m_mutexInstance;
+CStockManager* CStockManager::m_pInstance = 0;
+QMutex CStockManager::m_mutexInstance;
 
-CYahuoDataToLocalDB& CYahuoDataToLocalDB::getInstance()
+CStockManager& CStockManager::getInstance()
 {	
 	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL == m_pInstance)
 	{
-		m_pInstance = new CYahuoDataToLocalDB();
+		m_pInstance = new CStockManager();
 	}
 	return (*m_pInstance);
 }
 
-void CYahuoDataToLocalDB::removeInstance()
+void CStockManager::removeInstance()
 {
 	QMutexLocker lock(&m_mutexInstance);	
 	delete m_pInstance;
 	m_pInstance = NULL;
-
 }
 
-CYahuoDataToLocalDB::CYahuoDataToLocalDB()
+CStockManager::CStockManager()
 {
-	m_pProcessYahuoDataToLocalDB = NULL;
-	m_pProcessYahuoDataToLocalDB = new CProcessYahuoDataToLocalDB();
-
 	_FreeData_MapStockDataItemT_Total();
 	_LoadData_MapStockDataItemT_Total();
-
-
 }
 
-CYahuoDataToLocalDB::~CYahuoDataToLocalDB()
+CStockManager::~CStockManager()
 {	
-
-	_FreeData_MapStockDataItemT_Total();
-
-	if (NULL != m_pProcessYahuoDataToLocalDB)
-	{
-		delete m_pProcessYahuoDataToLocalDB;
-		m_pProcessYahuoDataToLocalDB = NULL;
-	}
-
-	
+	_FreeData_MapStockDataItemT_Total();	
 }
 
 
 
-void CYahuoDataToLocalDB::_LoadData_MapStockDataItemT_Total()
+void CStockManager::_LoadData_MapStockDataItemT_Total()
 {
 	int nArrSize = 0;
 	CStockData* pCStockData = NULL;
@@ -74,7 +53,6 @@ void CYahuoDataToLocalDB::_LoadData_MapStockDataItemT_Total()
 	std::string strSymbolUse;
 	std::string strStockID;
 	int nStockID = 0;
-
 
 	nArrSize = sizeof(s_SSSZ_Stocks) / sizeof (*s_SSSZ_Stocks);
 	MYLOG4CPP_INFO<<"s_SSSZ_Stocks ArrSize="<<nArrSize;
@@ -109,29 +87,22 @@ void CYahuoDataToLocalDB::_LoadData_MapStockDataItemT_Total()
 		}//for
 	}
 
-
 	if (NULL != pCStockData)
 	{
 		delete pCStockData;
 		pCStockData = NULL;
 	}
+}
 
+void CStockManager::_FreeData_MapStockDataItemT_Total()
+{
+	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+	_FreeData_MapStockDataItemT(m_MapStockDataItemT_Total);
 }
 
 
-void CYahuoDataToLocalDB::_FreeData_MapStockDataItemT_Total()
+void CStockManager::_FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData)
 {
-	{
-		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-		_FreeData_MapStockDataItemT(m_MapStockDataItemT_Total);
-	}
-
-}
-
-
-void CYahuoDataToLocalDB::_FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData)
-{
-
 	MapStockDataItemIterT iterMap;
 	CStockData* pData = NULL;
 
@@ -145,55 +116,11 @@ void CYahuoDataToLocalDB::_FreeData_MapStockDataItemT(MapStockDataItemT& mapStoc
 
 		iterMap++;
 	}
-
 	mapStockData.clear();
-
 	return;
 }
 
-void CYahuoDataToLocalDB::doWork_YahuoDataToLocalDB()
-{
-	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-
-	MapStockDataItemIterT iterMap;
-	CStockData* pData = NULL;
-
-	iterMap = m_MapStockDataItemT_Total.begin();
-	while (iterMap != m_MapStockDataItemT_Total.end())
-	{
-		qSleep(10);
-
-		pData = (iterMap->second);
-		m_pProcessYahuoDataToLocalDB->processStock(pData->m_strSymbolUse);
-
-		pData = NULL;
-		iterMap++;
-	}
-
-}
-
-
-void CYahuoDataToLocalDB::doWork_Local_FileDB_To_SQLiteDB()
-{
-	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-	CProcessFileDataToDB myProcessFileDataToDB;
-	MapStockDataItemIterT iterMap;
-	CStockData* pData = NULL;
-
-	iterMap = m_MapStockDataItemT_Total.begin();
-	while (iterMap != m_MapStockDataItemT_Total.end())
-	{
-		qSleep(10);
-
-		pData = (iterMap->second);
-		myProcessFileDataToDB.proceeFileData(pData->m_strSymbolUse);
-
-		pData = NULL;
-		iterMap++;
-	}
-}
-
-void CYahuoDataToLocalDB::doWork_getStockID(std::list<int>& LstStockID)
+void CStockManager::doWork_getStockID(std::list<int>& LstStockID)
 {
 	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
 
@@ -204,8 +131,6 @@ void CYahuoDataToLocalDB::doWork_getStockID(std::list<int>& LstStockID)
 	iterMap = m_MapStockDataItemT_Total.begin();
 	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
-		qSleep(10);
-
 		pData = (iterMap->second);
 		
 		LstStockID.push_back(pData->m_nStockID);
@@ -214,7 +139,8 @@ void CYahuoDataToLocalDB::doWork_getStockID(std::list<int>& LstStockID)
 		iterMap++;
 	}
 }
-void CYahuoDataToLocalDB::doWork_getStockSymbolUse(std::list<std::string>& LstStockSymbolUse)
+
+void CStockManager::doWork_getStockSymbolUse(std::list<std::string>& LstStockSymbolUse)
 {
 	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
 
@@ -224,8 +150,6 @@ void CYahuoDataToLocalDB::doWork_getStockSymbolUse(std::list<std::string>& LstSt
 	iterMap = m_MapStockDataItemT_Total.begin();
 	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
-		qSleep(10);
-
 		pData = (iterMap->second);
 
 		LstStockSymbolUse.push_back(pData->m_strSymbolUse);
@@ -235,28 +159,53 @@ void CYahuoDataToLocalDB::doWork_getStockSymbolUse(std::list<std::string>& LstSt
 	}
 }
 
-void CYahuoDataToLocalDB::qSleep(int nMilliseconds)
+void CStockManager::doWork_getStockData( std::list<CStockData*>& LstStockData )
 {
-#ifdef Q_OS_WIN
-	Sleep(uint(nMilliseconds));
-#else
-	struct timespec ts = { nMilliseconds / 1000, (nMilliseconds % 1000) * 1000 * 1000 };
-	nanosleep(&ts, NULL);
-#endif
+	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
 
-}
-void CYahuoDataToLocalDB::qWait(int nMilliseconds)
-{
-	QElapsedTimer timer;
-	timer.start();
-	do 
+	MapStockDataItemIterT iterMap;
+	CStockData* pData = NULL;
+	CStockData* pStockDataTmp = NULL;
+
+	iterMap = m_MapStockDataItemT_Total.begin();
+	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
-		QCoreApplication::processEvents(QEventLoop::AllEvents, nMilliseconds);
-		qSleep(10);
-	} while (timer.elapsed() < nMilliseconds);
+		pData = (iterMap->second);
 
+		pStockDataTmp = new CStockData();
+		*pStockDataTmp =*pData;
+
+		LstStockData.push_back(pStockDataTmp);
+
+		pData = NULL;
+		pStockDataTmp = NULL;
+		iterMap++;
+	}
 }
 
+const CStockData* CStockManager::find_StockData_BySymbolUse( const std::string& strSymbolUse )
+{
+	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+
+	MapStockDataItemIterT iterMap;
+	CStockData* pData = NULL;
+
+	iterMap = m_MapStockDataItemT_Total.begin();
+	while (iterMap != m_MapStockDataItemT_Total.end())
+	{
+		pData = (iterMap->second);
+		
+		if (pData->m_strSymbolUse == strSymbolUse)
+		{
+			break;
+		}
+
+		pData = NULL;
+		iterMap++;
+	}
+	
+	return pData;
+}
 
 
 

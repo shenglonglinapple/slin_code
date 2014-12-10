@@ -69,6 +69,6 @@ void CProcessYahuoDataToLocalDB::_SaveDataToLocalDB(const std::string& strSymbol
 	CFileDBOperHelper    myFileDBOperHelper;
 	myFileDBOperHelper.saveData(strSymbolUse, strData);
 
-	CSqliteDbOperHelper mySqliteDbOperHelper;
+	CSqliteDbOperHelper mySqliteDbOperHelper(strSymbolUse);
 	mySqliteDbOperHelper.saveData(strSymbolUse, strData);
 }
