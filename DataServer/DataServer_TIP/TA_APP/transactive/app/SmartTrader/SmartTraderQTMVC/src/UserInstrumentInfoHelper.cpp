@@ -264,7 +264,7 @@ void CUserInstrumentInfoHelper::setValue( const Instrument &instrument)
 
 	m_fValuePerPoint  = instrument.getValuePerPoint();
 	m_nLegSize = instrument.getLegSize();
-	//m_nLegSecurityID  = instrument.getLegSecurityID();
+	m_nLegSecurityID  = instrument.getLegSecurityID(0);
 	m_nMarketStatus = instrument.getMarketStatus();
 	m_nSecurityType = instrument.getSecurityType();
 	m_nOrderTypes  = instrument.getOrderTypes();

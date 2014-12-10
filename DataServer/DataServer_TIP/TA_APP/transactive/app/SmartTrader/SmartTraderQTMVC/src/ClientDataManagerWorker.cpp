@@ -74,6 +74,9 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 	
 	_InitLoginParam();
 	_InitTraderClient();
+
+	//TODO. for Test
+	m_nDoTest = 0;
 }
 
 CClientDataManagerWorker::~CClientDataManagerWorker(void)
@@ -174,7 +177,7 @@ void CClientDataManagerWorker::slotAddUserInstrument( unsigned int nInstrumentID
 		CConfigInfo::getInstance().addInstrument(strUserInstruemt);
 		//subscribe this instrument
 		MYLOG4CPP_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
-		m_pSmartTraderClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
+		m_pSmartTraderClient->subscribeMarketData(*pInstrumentRef);//subscribe this Instrument market data
 
 	}
 
@@ -215,8 +218,9 @@ void CClientDataManagerWorker::slotRemoveUserInstrument( unsigned int nInstrumen
 		//unsubscribe this instrument
 		MYLOG4CPP_DEBUG<<"unsubscribeMarketData"
 			<<" "<<"InstrumentID="<<pInstrumentRef->getInstrumentID();
-		m_pSmartTraderClient->unsubscribeMarketData(pInstrumentRef->getInstrumentID());
-
+		//m_pSmartTraderClient->unsubscribeMarketData(pInstrumentRef->getInstrumentID());
+		m_pSmartTraderClient->unsubscribeMarketData(pInstrumentRef->getLegSecurityID(0));
+		
 		//save to config file
 		QString strInstrumentID = QString("%1").arg(pInstrumentRef->getInstrumentID());
 		CConfigInfo::getInstance().removeInstrument(strInstrumentID);

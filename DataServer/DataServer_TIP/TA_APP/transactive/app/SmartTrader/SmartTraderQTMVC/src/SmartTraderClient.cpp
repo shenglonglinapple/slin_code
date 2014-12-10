@@ -6,27 +6,32 @@
 #include "Log4cppLogger.h"
 
 
-#ifdef USING_MY_CLIENT
-CSmartTraderClient::CSmartTraderClient( const CClientLoginParam& clientLoginParam )
-:CMyTradeClient(clientLoginParam.m_strUserName,
-			 clientLoginParam.m_strPassWord,
-			 clientLoginParam.m_bEnableDebug)
-#else
+
+//QT_BEGIN_NAMESPACE
+////QT_END_NAMESPACE
+
+
 CSmartTraderClient::CSmartTraderClient( const CClientLoginParam& clientLoginParam )
 :TradeClient(clientLoginParam.m_strUserName,
 			 clientLoginParam.m_strPassWord,
 			 clientLoginParam.m_bEnableDebug)
-#endif
 {
+	m_pClientLoginParam = NULL;
 	m_pProcessRecvDataHandle = NULL;
 
 	//////////////////////////////////////////////////////////////////////////
-	m_clientLoginParam = clientLoginParam;
+	m_pClientLoginParam = new CClientLoginParam();
+	*m_pClientLoginParam = clientLoginParam;
 }
 
 CSmartTraderClient::~CSmartTraderClient()
 {
 
+	if (NULL != m_pClientLoginParam)
+	{
+		delete m_pClientLoginParam;
+		m_pClientLoginParam = NULL;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -39,9 +44,9 @@ int CSmartTraderClient::loginToServer()
 
 	try
 	{
-		nFunRes = this->logon(m_clientLoginParam.m_strServerIP,
-			m_clientLoginParam.m_nServerPort,
-			m_clientLoginParam.m_bSynchronous);
+		nFunRes = this->logon(m_pClientLoginParam->m_strServerIP,
+			m_pClientLoginParam->m_nServerPort,
+			m_pClientLoginParam->m_bSynchronous);
 	}
 	catch (...)
 	{

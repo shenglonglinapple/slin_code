@@ -1,15 +1,10 @@
 #ifndef __CLASS_PROJECT_LOG_HELPER_H__
 #define __CLASS_PROJECT_LOG_HELPER_H__
 
-
-
-
-#include "TradeClient.h"
+#include <string>
+#include <time.h>
 #include "Bar.h"
-
-//QT_BEGIN_NAMESPACE
-////QT_END_NAMESPACE
-
+#include "Instrument.h"
 
 class CProjectLogHelper
 {

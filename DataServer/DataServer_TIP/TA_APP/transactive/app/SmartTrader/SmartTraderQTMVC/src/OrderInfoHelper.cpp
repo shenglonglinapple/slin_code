@@ -1,13 +1,17 @@
 #include "OrderInfoHelper.h"
 
+#include "Bar.h"
+#include "Order.h"
+#include "Account.h"
+#include "Currency.h"
+#include "Instrument.h"
+#include "MarketData.h"
+
 #include <QtCore/QStringList>
 
 
 #include "ProjectCommonData.h"
 #include "ProjectUtilityFun.h"
-#include "Order.h"
-#include "Instrument.h"
-#include "Account.h"
 
 #include "Log4cppLogger.h"
 

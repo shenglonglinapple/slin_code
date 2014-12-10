@@ -1,14 +1,8 @@
 #ifndef __CLASS_PROJECT_UTILITY_FUN_H__
 #define __CLASS_PROJECT_UTILITY_FUN_H__ 
 
-
-
-
-#include "TradeClient.h"
-
-//QT_BEGIN_NAMESPACE
-////QT_END_NAMESPACE
-
+#include <string>
+#include <time.h>
 
 class CProjectUtilityFun
 {
