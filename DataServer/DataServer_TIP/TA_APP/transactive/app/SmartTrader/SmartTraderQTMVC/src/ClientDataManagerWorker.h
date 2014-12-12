@@ -62,6 +62,10 @@ signals:
 	void signalLoginToServerResult(int nResult);
 public:
 	void onInstrumentDownloaded(const Instrument& instrument);//IProcessRecvData
+	//MYCODE ERROR HERE
+	/// Hook method when receive market data
+	//virtual void onMarketDataUpdate(const MarketData &marketData);
+
 	void onMarketDataUpdate(const Instrument& instrument);
 	void onAccountDownloaded(Account& account);
 	//order

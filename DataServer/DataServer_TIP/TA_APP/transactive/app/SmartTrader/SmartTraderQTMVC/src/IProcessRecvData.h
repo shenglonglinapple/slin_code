@@ -30,6 +30,10 @@ public:
 	/// process receiving instrument information 
 	virtual void onInstrumentDownloaded(const Instrument& instrument) = 0;
 
+	//MYCODE ERROR HERE
+	/// Hook method when receive market data
+	//virtual void onMarketDataUpdate(const MarketData &marketData);
+
 	virtual void onMarketDataUpdate( const Instrument &instrument ) = 0;
 
 	virtual void onAccountDownloaded(Account& account) = 0;

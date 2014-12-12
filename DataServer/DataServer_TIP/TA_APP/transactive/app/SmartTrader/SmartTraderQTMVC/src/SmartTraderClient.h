@@ -27,6 +27,11 @@ public:
 public:
 	/// Hook method when receiving instrument information 
 	virtual void onInstrumentDownloaded(const Instrument &instrument);
+
+	//MYCODE ERROR HERE
+	/// Hook method when receive market data
+	//virtual void onMarketDataUpdate(const MarketData &marketData);
+
 	virtual void onMarketDataUpdate(const Instrument &instrument);
 	/// Hook method when account downloaded
 	virtual void onAccountDownloaded(Account& account);
