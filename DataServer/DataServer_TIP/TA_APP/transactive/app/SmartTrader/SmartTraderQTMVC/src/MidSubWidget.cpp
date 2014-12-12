@@ -247,12 +247,12 @@ void CMidSubWidget::slotHistoryDataChanged( unsigned int nInstrumentID  )
 			<<" "<<"nInstrumentID="<<nInstrumentID;
 	}
 
-	CHistoryDataManager* pHistoryDataManager = NULL;
-	CDataUserHistoryBar::getInstance().lock();
-	pHistoryDataManager = CDataUserHistoryBar::getInstance().lockUseData(nInstrumentID);
+	CHistoryQutoes* pHistoryDataManager = NULL;
+	CDataHistoryQuotesManager::getInstance().lock();
+	pHistoryDataManager = CDataHistoryQuotesManager::getInstance().lockUseData(nInstrumentID);
 	if (NULL == pHistoryDataManager)
 	{
-		CDataUserHistoryBar::getInstance().unlock();
+		CDataHistoryQuotesManager::getInstance().unlock();
 		return;
 	}
 
@@ -262,7 +262,7 @@ void CMidSubWidget::slotHistoryDataChanged( unsigned int nInstrumentID  )
 	m_pMidSubDrawHelper->drawHistoryVolumeData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectBottom);
 	m_pMidSubDrawHelper->drawHistoryBarData(pHistoryDataManager, m_pCustomPlot, m_pAxisRectTop);
 
-	CDataUserHistoryBar::getInstance().unlock();
+	CDataHistoryQuotesManager::getInstance().unlock();
 
 	m_pCustomPlot->replot();//draw again
 

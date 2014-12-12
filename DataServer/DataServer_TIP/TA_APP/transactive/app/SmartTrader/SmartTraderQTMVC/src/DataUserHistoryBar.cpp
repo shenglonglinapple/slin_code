@@ -12,20 +12,20 @@
 #include "DataTotalInstrument.h"
 
 
-CDataUserHistoryBar* CDataUserHistoryBar::m_pInstance = 0;
-QMutex CDataUserHistoryBar::m_mutexInstance;
+CDataHistoryQuotesManager* CDataHistoryQuotesManager::m_pInstance = 0;
+QMutex CDataHistoryQuotesManager::m_mutexInstance;
 
-CDataUserHistoryBar& CDataUserHistoryBar::getInstance()
+CDataHistoryQuotesManager& CDataHistoryQuotesManager::getInstance()
 {	
 	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL == m_pInstance)
 	{
-		m_pInstance = new CDataUserHistoryBar();
+		m_pInstance = new CDataHistoryQuotesManager();
 	}
 	return (*m_pInstance);
 }
 
-void CDataUserHistoryBar::removeInstance()
+void CDataHistoryQuotesManager::removeInstance()
 {
 	QMutexLocker lock(&m_mutexInstance);	
 	delete m_pInstance;
@@ -33,7 +33,7 @@ void CDataUserHistoryBar::removeInstance()
 
 }
 
-CDataUserHistoryBar::CDataUserHistoryBar()
+CDataHistoryQuotesManager::CDataHistoryQuotesManager()
 {
 	m_pProjectLogHelper = NULL;
 	m_pProjectLogHelper = new CProjectLogHelper();
@@ -42,7 +42,7 @@ CDataUserHistoryBar::CDataUserHistoryBar()
 
 }
 
-CDataUserHistoryBar::~CDataUserHistoryBar()
+CDataHistoryQuotesManager::~CDataHistoryQuotesManager()
 {
 	if (NULL != m_pProjectLogHelper)
 	{
@@ -58,18 +58,18 @@ CDataUserHistoryBar::~CDataUserHistoryBar()
 
 }
 
-void CDataUserHistoryBar::_Init()
+void CDataHistoryQuotesManager::_Init()
 {
 	_UniInit();
 }
 
-void CDataUserHistoryBar::_UniInit()
+void CDataHistoryQuotesManager::_UniInit()
 {
 
 	{
 		QMutexLocker lock(&m_mutexForMapHistoryData);
-		QMap<unsigned int, CHistoryDataManager*>::Iterator iterMap;
-		CHistoryDataManager* pDataRef = NULL;
+		QMap<unsigned int, CHistoryQutoes*>::Iterator iterMap;
+		CHistoryQutoes* pDataRef = NULL;
 		iterMap = m_MapHistoryData.begin();
 		while (iterMap != m_MapHistoryData.end())
 		{
@@ -85,12 +85,12 @@ void CDataUserHistoryBar::_UniInit()
 
 }
 
-void CDataUserHistoryBar::_FreeOldData(unsigned int nInstrumentID)
+void CDataHistoryQuotesManager::_FreeOldData(unsigned int nInstrumentID)
 {
 	//check exist
 	{
-		QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
-		CHistoryDataManager* pHistoryDataManager = NULL;
+		QMap<unsigned int, CHistoryQutoes*>::iterator iterMap;
+		CHistoryQutoes* pHistoryDataManager = NULL;
 
 		QMutexLocker lock(&m_mutexForMapHistoryData);
 		if (m_MapHistoryData.contains(nInstrumentID))
@@ -107,7 +107,7 @@ void CDataUserHistoryBar::_FreeOldData(unsigned int nInstrumentID)
 }
 
 
-void CDataUserHistoryBar::createRequest_Time(
+void CDataHistoryQuotesManager::createRequest_Time(
 	unsigned int nInstrumentID, 
 	enum BarType nBarType,
 	time_t timeFrom,
@@ -125,26 +125,34 @@ void CDataUserHistoryBar::createRequest_Time(
 	//create new one
 	{
 		QMutexLocker lock(&m_mutexForMapHistoryData);
-		CHistoryDataManager* pHistoryDataManager = NULL;
+		CHistoryQutoes* pHistoryQutoes = NULL;
+		CHistoryDataRequest* pHistoryRequest = NULL;
+		pHistoryRequest = new CHistoryDataRequest();
 
-		pHistoryDataManager = new CHistoryDataManager();
-		pHistoryDataManager->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
-		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_Time);//HistoryRequestType_NumberSubscribe
-		pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
-		pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
-		pHistoryDataManager->m_pHistoryRequest->setTimeFrom(timeFrom);
-		pHistoryDataManager->m_pHistoryRequest->setTimeTo(timeTo);
-		pHistoryDataManager->m_pHistoryRequest->setSubscribe(false);
-		pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
-		pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
-		m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
-		pHistoryDataManager = NULL;
+		pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_Time);//HistoryRequestType_NumberSubscribe
+		pHistoryRequest->setInstrumentHandle(pInstrumentRef);
+		pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
+		pHistoryRequest->setTimeFrom(timeFrom);
+		pHistoryRequest->setTimeTo(timeTo);
+		pHistoryRequest->setSubscribe(false);
+		pHistoryRequest->sentRequest(pMyTradeClient);
+		pHistoryRequest->logInfo(__FILE__,__LINE__);
+
+		pHistoryQutoes = new CHistoryQutoes();
+		pHistoryQutoes->setHistoryDataRequest(pHistoryRequest);
+		pHistoryQutoes->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
+
+		delete pHistoryRequest;
+		pHistoryRequest = NULL;
+
+		m_MapHistoryData.insert(nInstrumentID, pHistoryQutoes);
+		pHistoryQutoes = NULL;
 	}
 
 }
 
 
-void CDataUserHistoryBar::createRequest_NumberSubscribe(
+void CDataHistoryQuotesManager::createRequest_NumberSubscribe(
 	unsigned int nInstrumentID, 
 	enum BarType nBarType,
 	int nBarCount,
@@ -164,24 +172,34 @@ void CDataUserHistoryBar::createRequest_NumberSubscribe(
 	//create new one
 	{
 		QMutexLocker lock(&m_mutexForMapHistoryData);
-		CHistoryDataManager* pHistoryDataManager = NULL;
+		CHistoryQutoes* pHistoryQutoes = NULL;
+		CHistoryDataRequest* pHistoryRequest = NULL;
+		pHistoryRequest = new CHistoryDataRequest();
 
-		pHistoryDataManager = new CHistoryDataManager();
-		pHistoryDataManager->setInstrumentID(nInstrumentID);//
-		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
-		pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
-		pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
-		pHistoryDataManager->m_pHistoryRequest->setBarCount(nBarCount);
-		pHistoryDataManager->m_pHistoryRequest->setSubscribe(bSubscribe);
-		pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
-		pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
-		m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
-		pHistoryDataManager = NULL;
+
+		pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberSubscribe);
+		pHistoryRequest->setInstrumentHandle(pInstrumentRef);
+		pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
+		pHistoryRequest->setBarCount(nBarCount);
+		pHistoryRequest->setSubscribe(bSubscribe);
+		pHistoryRequest->sentRequest(pMyTradeClient);
+		pHistoryRequest->logInfo(__FILE__,__LINE__);
+
+
+		pHistoryQutoes = new CHistoryQutoes();
+		pHistoryQutoes->setHistoryDataRequest(pHistoryRequest);
+		pHistoryQutoes->setInstrumentID(nInstrumentID);//m_nInstrumentID = nInstrumentID;
+
+		delete pHistoryRequest;
+		pHistoryRequest = NULL;
+
+		m_MapHistoryData.insert(nInstrumentID, pHistoryQutoes);
+		pHistoryQutoes = NULL;
 	}
 
 }
 
-void CDataUserHistoryBar::createRequest_NumberTimeSubscribe(
+void CDataHistoryQuotesManager::createRequest_NumberTimeSubscribe(
 	unsigned int nInstrumentID, 
 	enum BarType nBarType,
 	unsigned int nTimeFrom,
@@ -202,30 +220,39 @@ void CDataUserHistoryBar::createRequest_NumberTimeSubscribe(
 	//create new one
 	{
 		QMutexLocker lock(&m_mutexForMapHistoryData);
-		CHistoryDataManager* pHistoryDataManager = NULL;
+		CHistoryQutoes* pHistoryQutoes = NULL;
+		CHistoryDataRequest* pHistoryRequest = NULL;
 
-		pHistoryDataManager = new CHistoryDataManager();
-		pHistoryDataManager->setInstrumentID(nInstrumentID);//
-		pHistoryDataManager->m_pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberTimeSubscribe);
-		pHistoryDataManager->m_pHistoryRequest->setInstrumentHandle(pInstrumentRef);
-		pHistoryDataManager->m_pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
-		pHistoryDataManager->m_pHistoryRequest->setBarCount(nBarCount);
-		pHistoryDataManager->m_pHistoryRequest->setTimeFrom(nTimeFrom);
-		pHistoryDataManager->m_pHistoryRequest->setSubscribe(bSubscribe);
-		pHistoryDataManager->m_pHistoryRequest->sentRequest(pMyTradeClient);
-		pHistoryDataManager->m_pHistoryRequest->logInfo(__FILE__,__LINE__);
-		m_MapHistoryData.insert(nInstrumentID, pHistoryDataManager);
-		pHistoryDataManager = NULL;
+		pHistoryRequest = new CHistoryDataRequest();
+
+		pHistoryRequest->setRequestType(CHistoryDataRequest::HistoryRequestType_NumberTimeSubscribe);
+		pHistoryRequest->setInstrumentHandle(pInstrumentRef);
+		pHistoryRequest->setBarType(nBarType);//nBarType FIVE_SECOND
+		pHistoryRequest->setBarCount(nBarCount);
+		pHistoryRequest->setTimeFrom(nTimeFrom);
+		pHistoryRequest->setSubscribe(bSubscribe);
+		pHistoryRequest->sentRequest(pMyTradeClient);
+		pHistoryRequest->logInfo(__FILE__,__LINE__);
+
+		pHistoryQutoes = new CHistoryQutoes();
+		pHistoryQutoes->setHistoryDataRequest(pHistoryRequest);
+		pHistoryQutoes->setInstrumentID(nInstrumentID);//
+
+		delete pHistoryRequest;
+		pHistoryRequest = NULL;
+
+		m_MapHistoryData.insert(nInstrumentID, pHistoryQutoes);
+		pHistoryQutoes = NULL;
 	}
 
 }
 
 
 
-void CDataUserHistoryBar::onBarDataUpdate( const BarSummary &barData )
+void CDataHistoryQuotesManager::onBarDataUpdate( const BarSummary &barData )
 {
-	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
-	CHistoryDataManager* pHistoryDataManager = NULL;
+	QMap<unsigned int, CHistoryQutoes*>::iterator iterMap;
+	CHistoryQutoes* pHistoryDataManager = NULL;
 
 	{
 		QMutexLocker lock(&m_mutexForMapHistoryData);
@@ -247,22 +274,22 @@ void CDataUserHistoryBar::onBarDataUpdate( const BarSummary &barData )
 
 
 
-void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID)
+void CDataHistoryQuotesManager::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID)
 {
-	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
-	CHistoryDataManager* pHistoryDataManager = NULL;
+	QMap<unsigned int, CHistoryQutoes*>::iterator iterMap;
+	CHistoryQutoes* pHistoryQutoes = NULL;
 
 	{
 		QMutexLocker lock(&m_mutexForMapHistoryData);
 		iterMap = m_MapHistoryData.begin();
 		while (iterMap != m_MapHistoryData.end())
 		{
-			pHistoryDataManager = iterMap.value();
-			if (pHistoryDataManager->m_pHistoryRequest->m_nRequestID == requestID)
+			pHistoryQutoes = iterMap.value();
+			if (pHistoryQutoes->m_nRequestID == requestID)
 			{
 				break;
 			}
-			pHistoryDataManager = NULL;
+			pHistoryQutoes = NULL;
 			iterMap++;
 		}
 
@@ -273,31 +300,31 @@ void CDataUserHistoryBar::onHistoryDataDownloaded( unsigned int requestID, BarsP
 			return;
 		}
 
-		pHistoryDataManager = iterMap.value();
-		pHistoryDataManager->m_pHistoryACK->onHistoryDataDownloaded(bars);
-		pHistoryDataManager->m_pHistoryACK->logInfo(__FILE__, __LINE__);
-		nGetInstrumentID = pHistoryDataManager->getInstrumentID();
+		pHistoryQutoes = iterMap.value();
+		pHistoryQutoes->m_pHistoryACK->onHistoryDataDownloaded(bars);
+		pHistoryQutoes->m_pHistoryACK->logInfo(__FILE__, __LINE__);
+		nGetInstrumentID = pHistoryQutoes->getInstrumentID();
 	}//scoped_lock
 
 }
-void CDataUserHistoryBar::lock()
+void CDataHistoryQuotesManager::lock()
 {
 	MYLOG4CPP_DEBUG<<" "<<"m_mutexForMapHistoryData.lock";
 	m_mutexForMapHistoryData.lock();
 }
 
-void CDataUserHistoryBar::unlock()
+void CDataHistoryQuotesManager::unlock()
 {
 	MYLOG4CPP_DEBUG<<" "<<"m_mutexForMapHistoryData.unlock";
 	m_mutexForMapHistoryData.unlock();
 }
 
-CHistoryDataManager*  CDataUserHistoryBar::lockUseData(unsigned int nInstrumentID)
+CHistoryQutoes*  CDataHistoryQuotesManager::lockUseData(unsigned int nInstrumentID)
 {
-	QMap<unsigned int, CHistoryDataManager*>::iterator iterMap;
-	CHistoryDataManager* pHistoryDataManager = NULL;
+	QMap<unsigned int, CHistoryQutoes*>::iterator iterMap;
+	CHistoryQutoes* pHistoryDataManager = NULL;
 
-	//CDataUserHistoryBar::getInstance().lock();
+	//CDataHistoryQuotesManager::getInstance().lock();
 
 	//QMutexLocker lock(&m_mutexForMapHistoryData);
 	iterMap = m_MapHistoryData.begin();

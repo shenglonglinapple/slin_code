@@ -15,7 +15,7 @@ class CUserOrderInfo;
 class CItemInstrumentInfo;
 class CItemUserInstrumentInfo;
 class CTreeItemOrder;
-class CHistoryDataManager;
+class CHistoryQutoes;
 class CClientLoginParam;
 class CClientDataManagerWorker;
 

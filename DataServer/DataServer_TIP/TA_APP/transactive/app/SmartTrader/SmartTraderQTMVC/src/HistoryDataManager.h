@@ -5,23 +5,25 @@
 #include "HistoryDataRequest.h"
 #include "HistoryDataACK.h"
 
-class CHistoryDataManager
+class CHistoryQutoes
 {
 public:
-	CHistoryDataManager();
-	~CHistoryDataManager();
+	CHistoryQutoes();
+	~CHistoryQutoes();
 public:
 	CHistoryDataRequest* m_pHistoryRequest;
 	CHistoryDataACK* m_pHistoryACK;
 public:
+	void setHistoryDataRequest(const CHistoryDataRequest* pReq);
 	int getBarType();
 	unsigned int getTimeFrom();
 	unsigned int getTimeTo();
 public:
 	void setInstrumentID(unsigned int nInstrumentID);
 	unsigned int getInstrumentID();
-private:
+public:
 	unsigned int m_nInstrumentID;
+	unsigned int m_nRequestID;
 };
 
 #endif// __CLASS__MY_BAR_SUMARY_H__

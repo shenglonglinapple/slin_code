@@ -19,6 +19,9 @@ public:
 	CHistoryDataRequest();
 	~CHistoryDataRequest();
 public:
+	CHistoryDataRequest& operator=(const CHistoryDataRequest& objectCopy);
+
+public:
 	enum enCHistoryRequestType
 	{
 		HistoryRequestType_Time,

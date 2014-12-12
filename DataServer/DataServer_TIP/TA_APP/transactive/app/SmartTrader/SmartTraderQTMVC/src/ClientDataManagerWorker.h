@@ -26,7 +26,7 @@ class CSmartTraderClient;
 class COrderInfo;
 class CUserOrderInfo;
 class CTreeItemOrder;
-class CHistoryDataManager;
+class CHistoryQutoes;
 class CProjectUtilityFun;
 class CProjectLogHelper;
 

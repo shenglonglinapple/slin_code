@@ -15,7 +15,7 @@ QT_BEGIN_NAMESPACE
 class QVBoxLayout;
 QT_END_NAMESPACE
 
-class CHistoryDataManager;
+class CHistoryQutoes;
 class QCPStatisticalBox;
 class QCustomPlot;
 class CMidSubDrawHelper;

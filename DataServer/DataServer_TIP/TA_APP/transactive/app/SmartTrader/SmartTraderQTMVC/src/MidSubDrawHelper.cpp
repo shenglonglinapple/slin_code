@@ -38,7 +38,7 @@ CMidSubDrawHelper::~CMidSubDrawHelper()
 }
 
 
-void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect)
+void CMidSubDrawHelper::drawHistoryBarData(CHistoryQutoes* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect)
 {
 	QBrush redBrush(QColor(255, 0, 0, 255));//red
 	QPen redPen(QColor(255, 0, 0, 255));//red
@@ -167,7 +167,7 @@ void CMidSubDrawHelper::drawHistoryBarData(CHistoryDataManager* pHistoryDataMana
 
 
 
-void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect)
+void CMidSubDrawHelper::drawHistoryVolumeData(CHistoryQutoes* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect)
 {
 	QBrush redBrush(QColor(255, 0, 0, 255));//red
 	QPen redPen(QColor(255, 0, 0, 255));//red

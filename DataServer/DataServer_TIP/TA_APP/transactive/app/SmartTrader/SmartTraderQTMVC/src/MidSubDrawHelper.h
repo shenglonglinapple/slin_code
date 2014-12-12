@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-class CHistoryDataManager;
+class CHistoryQutoes;
 class QCustomPlot;
 class QCPAxisRect;
 class CProjectLogHelper;
@@ -15,8 +15,8 @@ public:
 	CMidSubDrawHelper();
 	~CMidSubDrawHelper();
 public:
-	void drawHistoryBarData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect);
-	void drawHistoryVolumeData(CHistoryDataManager* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect);
+	void drawHistoryBarData(CHistoryQutoes* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect);
+	void drawHistoryVolumeData(CHistoryQutoes* pHistoryDataManager, QCustomPlot* pCustomPlot, QCPAxisRect* pRect);
 public:
 	unsigned int getBottomTimeFrom();
 	unsigned int getBottomTimeTo();

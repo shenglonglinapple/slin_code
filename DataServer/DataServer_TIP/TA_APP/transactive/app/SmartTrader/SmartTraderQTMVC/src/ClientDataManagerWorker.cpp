@@ -69,7 +69,7 @@ CClientDataManagerWorker::CClientDataManagerWorker(void)
 	CDataInstrument::getInstance();
 	CDataUserInstrument::getInstance();
 	CDataUserOrder::getInstance();
-	CDataUserHistoryBar::getInstance();
+	CDataHistoryQuotesManager::getInstance();
 	CDataTotalInstrument::getInstance();
 	
 	_InitLoginParam();
@@ -85,7 +85,7 @@ CClientDataManagerWorker::~CClientDataManagerWorker(void)
 	_UnInitLoginParam();
 
 	CDataTotalInstrument::removeInstance();
-	CDataUserHistoryBar::removeInstance();
+	CDataHistoryQuotesManager::removeInstance();
 	CDataUserOrder::removeInstance();
 	CDataUserInstrument::removeInstance();
 	CDataInstrument::removeInstance();
@@ -558,7 +558,7 @@ void CClientDataManagerWorker::onBarDataUpdate( const BarSummary &barData )
 
 
 	{
-		CDataUserHistoryBar::getInstance().onBarDataUpdate(barData);
+		CDataHistoryQuotesManager::getInstance().onBarDataUpdate(barData);
 		_Emit_SignalHistoryDataChanged(barData.instrumentID);
 		
 	}//
@@ -572,7 +572,7 @@ void CClientDataManagerWorker::onHistoryDataDownloaded( unsigned int requestID, 
 
 	{
 		unsigned int nGetInstrumentID = 0;
-		CDataUserHistoryBar::getInstance().onHistoryDataDownloaded(requestID, bars, nGetInstrumentID);
+		CDataHistoryQuotesManager::getInstance().onHistoryDataDownloaded(requestID, bars, nGetInstrumentID);
 		_Emit_SignalHistoryDataChanged(nGetInstrumentID);
 	}//
 
@@ -676,7 +676,7 @@ void CClientDataManagerWorker::_Emit_SignalInstrumentInfoChanged()
 void CClientDataManagerWorker::_Emit_SignalHistoryDataChanged(unsigned int nInstrumentID)
 {
 	//CHistoryDataManager* pHistoryDataManager = NULL;
-	//pHistoryDataManager = CDataUserHistoryBar::getInstance().findByInstrumentID(nInstrumentID);
+	//pHistoryDataManager = CDataHistoryQuotesManager::getInstance().findByInstrumentID(nInstrumentID);
 
 	MYLOG4CPP_DEBUG<<" "<<"emit"
 		<<" "<<"class:"<<"CClientDataManagerWorker"
@@ -703,7 +703,7 @@ void CClientDataManagerWorker::slotRequestHistoryData( unsigned int nInstrumentI
 	//timeFrom = timeTo - (nBarType * DEFVALUE_Int_OnePage_HistoryBarNumber);//1024
 
 	{
-		CDataUserHistoryBar::getInstance().createRequest_Time(
+		CDataHistoryQuotesManager::getInstance().createRequest_Time(
 			nInstrumentID, nBarType, nTimeFrom, nTimeTo, m_pSmartTraderClient);
 	}
 
@@ -719,7 +719,7 @@ void CClientDataManagerWorker::slotRequestHistoryData_Subscribe( unsigned int nI
 	<<" "<<"strBarType="<<m_pProjectLogHelper->getString_BarType(nBarType);
 
 	{
-		CDataUserHistoryBar::getInstance().createRequest_NumberSubscribe(
+		CDataHistoryQuotesManager::getInstance().createRequest_NumberSubscribe(
 			nInstrumentID, nBarType, nBarCount, bSubscribe, m_pSmartTraderClient);
 
 	}

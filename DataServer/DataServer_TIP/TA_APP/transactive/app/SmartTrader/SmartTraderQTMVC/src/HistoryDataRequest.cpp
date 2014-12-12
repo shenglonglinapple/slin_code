@@ -57,6 +57,19 @@ CHistoryDataRequest::~CHistoryDataRequest()
 	m_pMyTradeClientRef = NULL;
 }
 
+CHistoryDataRequest& CHistoryDataRequest::operator=( const CHistoryDataRequest& objectCopy )
+{
+	m_nRequestType = objectCopy.m_nRequestType;
+	m_pInstrumentRef = objectCopy.m_pInstrumentRef;
+	m_nBarType = objectCopy.m_nBarType;
+	m_nTimeFrom = objectCopy.m_nTimeFrom;
+	m_nTimeTo = objectCopy.m_nTimeTo;
+	m_nBarCount = objectCopy.m_nBarCount;
+	m_bSubscribe = objectCopy.m_bSubscribe;
+	m_pMyTradeClientRef = objectCopy.m_pMyTradeClientRef;
+
+	return *this;
+}
 
 std::string CHistoryDataRequest::_GetRequestStrValue()
 {
@@ -181,3 +194,4 @@ int CHistoryDataRequest::getBarType()
 {
 	return m_nBarType;
 }
+

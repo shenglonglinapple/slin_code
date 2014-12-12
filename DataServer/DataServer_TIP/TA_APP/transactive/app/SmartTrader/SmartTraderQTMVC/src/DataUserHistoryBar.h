@@ -9,23 +9,23 @@
 #include "Bar.h"
 
 class CProjectLogHelper;
-class CHistoryDataManager;
+class CHistoryQutoes;
 class CProjectUtilityFun;
 class CSmartTraderClient;
 
 
-class CDataUserHistoryBar
+class CDataHistoryQuotesManager
 { 
 public:
-	static CDataUserHistoryBar& getInstance();
+	static CDataHistoryQuotesManager& getInstance();
 	static void removeInstance();
 
 private:
-	static CDataUserHistoryBar* m_pInstance;
+	static CDataHistoryQuotesManager* m_pInstance;
 	static QMutex m_mutexInstance;
 private: 
-	CDataUserHistoryBar(); 
-	virtual ~CDataUserHistoryBar(); 
+	CDataHistoryQuotesManager(); 
+	virtual ~CDataHistoryQuotesManager(); 
 private:
 	void _Init();
 	void _UniInit();
@@ -39,13 +39,13 @@ public:
 public:
 	void onBarDataUpdate( const BarSummary &barData );
 	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars, unsigned int& nGetInstrumentID);
-	CHistoryDataManager* lockUseData(unsigned int nInstrumentID);
+	CHistoryQutoes* lockUseData(unsigned int nInstrumentID);
 public:
 	void lock();
 	void unlock();
 private:
 	QMutex m_mutexForMapHistoryData;
-	QMap<unsigned int, CHistoryDataManager*> m_MapHistoryData;//instrumentID
+	QMap<unsigned int, CHistoryQutoes*> m_MapHistoryData;//instrumentID
 
 private:
 	CProjectLogHelper* m_pProjectLogHelper;

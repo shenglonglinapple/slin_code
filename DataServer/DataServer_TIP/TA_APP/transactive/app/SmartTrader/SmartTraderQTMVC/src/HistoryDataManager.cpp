@@ -5,7 +5,7 @@
 
 
 
-CHistoryDataManager::CHistoryDataManager()
+CHistoryQutoes::CHistoryQutoes()
 {
 	m_pHistoryRequest = NULL;
 	m_pHistoryACK = NULL;
@@ -15,7 +15,7 @@ CHistoryDataManager::CHistoryDataManager()
 	
 }
 
-CHistoryDataManager::~CHistoryDataManager()
+CHistoryQutoes::~CHistoryQutoes()
 {
 
 	if (NULL != m_pHistoryRequest)
@@ -31,14 +31,14 @@ CHistoryDataManager::~CHistoryDataManager()
 	}
 }
 
-int CHistoryDataManager::getBarType()
+int CHistoryQutoes::getBarType()
 {
 	int nBarType;//FIVE_SECOND
 	nBarType = m_pHistoryRequest->getBarType();
 	return nBarType;
 }
 
-unsigned int CHistoryDataManager::getTimeFrom()
+unsigned int CHistoryQutoes::getTimeFrom()
 {
 	unsigned int nTimeFrom;
 
@@ -46,14 +46,14 @@ unsigned int CHistoryDataManager::getTimeFrom()
 	return nTimeFrom;
 }
 
-unsigned int CHistoryDataManager::getTimeTo()
+unsigned int CHistoryQutoes::getTimeTo()
 {
 	unsigned int nTimeTo;
 	nTimeTo = m_pHistoryACK->getTimeTo();
 	return nTimeTo;
 }
 
-void CHistoryDataManager::setInstrumentID( unsigned int nInstrumentID )
+void CHistoryQutoes::setInstrumentID( unsigned int nInstrumentID )
 {
 	if (NULL != m_pHistoryACK)
 	{
@@ -62,7 +62,14 @@ void CHistoryDataManager::setInstrumentID( unsigned int nInstrumentID )
 	m_nInstrumentID = nInstrumentID;
 }
 
-unsigned int CHistoryDataManager::getInstrumentID()
+unsigned int CHistoryQutoes::getInstrumentID()
 {
 	return m_nInstrumentID;
+}
+
+void CHistoryQutoes::setHistoryDataRequest( const CHistoryDataRequest* pReq )
+{
+	*m_pHistoryRequest = *pReq;
+
+	m_nRequestID = m_pHistoryRequest->m_nRequestID;
 }
