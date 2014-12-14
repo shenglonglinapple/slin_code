@@ -450,47 +450,7 @@
 			Name="client"
 			>
 			<File
-				RelativePath=".\src\BaseException.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\BaseException.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\IProcessRecvData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\MyBar.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\MyBar.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\MyInstrument.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\MyInstrument.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\MyTradeClient.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\MyTradeClient.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqData.h"
 				>
 			</File>
 			<File
@@ -522,18 +482,6 @@
 						Outputs=""
 					/>
 				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\src\StockData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StockData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\TotalStocksData.h"
-				>
 			</File>
 		</Filter>
 		<Filter
@@ -836,6 +784,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\TotalStocksData.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\YahuoRealTimeReqAck.cpp"
 				>
 			</File>
@@ -849,6 +801,58 @@
 			</File>
 			<File
 				RelativePath=".\src\YahuoReqAck.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="csdata"
+			>
+			<File
+				RelativePath=".\src\BaseException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\BaseException.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyBar.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyBar.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyInstrument.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyInstrument.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyTradeClient.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyTradeClient.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockData.h"
 				>
 			</File>
 		</Filter>
