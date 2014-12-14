@@ -3,7 +3,7 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
-
+#include "QtTimeHelper.h"
 
 CMyMarketData::CMyMarketData()
 {
@@ -138,7 +138,9 @@ void CMyMarketData::setValue( const std::string& strData )
 {
 	//TODO
 	/*
-	"Shanghai","600667.SS","+0.26","+4.60%","12/10/2014","2:00am",5.76,5.91,5.92,5.44,6.11,"5.44 - 6.11",5.91,N/A,128066608,0,""
+	"Shanghai","600667.SS","+0.26","+4.60%","12/10/2014","2:00am",
+	5.76,5.91,5.92,5.44,6.11,
+	"5.44 - 6.11",5.91,N/A,128066608,0,""
 	*/
 	/*
 	lstQuoteTypes.push_back(YahuoReqAck::stockExchange);
@@ -164,6 +166,7 @@ void CMyMarketData::setValue( const std::string& strData )
 	QString strGetData;
 	QStringList strLstGetData;
 	int nIndex = 0;
+	CQtTimeHelper  qtTimeHelper;
 
 	strGetData = strData.c_str();
 	strLstGetData = strGetData.split(",");
@@ -185,10 +188,10 @@ void CMyMarketData::setValue( const std::string& strData )
 	QString volume;
 	QString averageDailyVolume;
 	QString name;
+	QString symbolID;//symbolID = symbol.substr(0, symbol.find("."));
+	QString lastTradeDataTime;//lastTradeDate+" "+lastTradeTime
 
-
-	nIndex = 0;
-	stockExchange = strLstGetData[nIndex];
+	nIndex = 0;	stockExchange = strLstGetData[nIndex];
 	nIndex++;
 	symbol = strLstGetData[nIndex];
 	nIndex++;
@@ -221,5 +224,52 @@ void CMyMarketData::setValue( const std::string& strData )
 	averageDailyVolume = strLstGetData[nIndex];
 	nIndex++;
 	name = strLstGetData[nIndex];
-	
+
+	stockExchange.replace(QChar('"'), QChar(' '));
+	symbol.replace(QChar('"'), QChar(' '));
+	changeRealTime.replace(QChar('"'), QChar(' '));
+	changeinPercent.replace(QChar('"'), QChar(' '));
+	lastTradeDate.replace(QChar('"'), QChar(' '));
+	lastTradeTime.replace(QChar('"'), QChar(' '));
+	open.replace(QChar('"'), QChar(' '));
+	bid.replace(QChar('"'), QChar(' '));
+	ask.replace(QChar('"'), QChar(' '));
+	dayLow.replace(QChar('"'), QChar(' '));
+	dayHigh.replace(QChar('"'), QChar(' '));
+	dayRange.replace(QChar('"'), QChar(' '));
+	lastTradePriceOnly.replace(QChar('"'), QChar(' '));
+	str_1yrTargetPrice.replace(QChar('"'), QChar(' '));
+	volume.replace(QChar('"'), QChar(' '));
+	averageDailyVolume.replace(QChar('"'), QChar(' '));
+	name.replace(QChar('"'), QChar(' '));
+
+	symbol = symbol.trimmed();
+	symbolID = symbol.mid(0, symbol.indexOf("."));
+	symbolID = symbolID.trimmed();
+
+	stockExchange = stockExchange.trimmed();
+	symbol = symbol.trimmed();
+	changeRealTime = changeRealTime.trimmed();
+	changeinPercent = changeinPercent.trimmed();
+	lastTradeDate = lastTradeDate.trimmed();
+	lastTradeTime = lastTradeTime.trimmed();
+	open = open.trimmed();
+	bid = bid.trimmed();
+	ask = ask.trimmed();
+	dayLow = dayLow.trimmed();
+	dayHigh = dayHigh.trimmed();
+	dayRange = dayRange.trimmed();
+	lastTradePriceOnly = lastTradePriceOnly.trimmed();
+	str_1yrTargetPrice = str_1yrTargetPrice.trimmed();
+	volume = volume.trimmed();
+	averageDailyVolume = averageDailyVolume.trimmed();
+	name = name.trimmed();
+
+
+	m_nSecurityID = symbolID.toUInt();
+	m_fPrice_LAST_TRADED_PRICE = lastTradePriceOnly.toFloat();
+	//"12/10/2014","2:00am",
+	lastTradeDataTime = lastTradeDate + " " + lastTradeTime;
+	m_nTime = qtTimeHelper.strToDateTime_Qt_AmPm(lastTradeDataTime.toStdString());
+
 }

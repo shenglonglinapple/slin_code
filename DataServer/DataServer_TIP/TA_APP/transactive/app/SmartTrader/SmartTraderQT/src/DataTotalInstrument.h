@@ -8,6 +8,7 @@
 #include "MyInstrument.h"
 
 class CProjectLogHelper;
+class CQtTimeHelper;
 
 class CDataTotalInstrument 
 { 
@@ -32,7 +33,7 @@ private:
 	QMap<unsigned int, CMyInstrument*> m_MapInstrumentIDData;
 private:
 	CProjectLogHelper* m_pProjectLogHelper;
-
+	CQtTimeHelper* m_pQtTimeHelper;
 }; 
 
 

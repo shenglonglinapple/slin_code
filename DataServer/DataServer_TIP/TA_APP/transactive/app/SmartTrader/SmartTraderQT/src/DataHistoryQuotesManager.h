@@ -8,6 +8,7 @@
 #include "MyBar.h"
 
 class CHistoryDataRequest;
+class CDataHistoryQuotes;
 
 class CDataHistoryQuotesManager
 { 
@@ -25,13 +26,18 @@ private:
 public:
 	void addReqest(unsigned int nReqID, const CHistoryDataRequest* pReqest);
 	void onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars );
+	void onBarDataUpdate(const CMyBarSummary &barData);
+
 private:
-	CHistoryDataRequest* _TryGetReq(unsigned int requestID);
 	void _RemoveReq( unsigned int requestID );
+	void _FreeData_MapRequest();
+	void _FreeData_MapHistoryQuotes();
 private:
 	QMutex m_mutex_MapRequest;
-	QMap<unsigned int, CHistoryDataRequest*> m_MapRequest;
+	QMap<unsigned int, CHistoryDataRequest*> m_MapRequest;//ReqID Data
 
+	QMutex m_mutex_MapHistoryQuotes;
+	QMap<unsigned int, CDataHistoryQuotes*> m_MapHistoryQuotes;//InstrumentID  Data
 
 }; 
 

@@ -153,7 +153,18 @@ void CClientDataManager::onHistoryDataDownloaded( unsigned int requestID, CMyBar
 		<<" "<<"std::auto_ptr<CMyBars> CMyBarsPtr  bars->size="<<bars->size();
 
 	//std::auto_ptr<CMyBars> CMyBarsPtr 
-	//CDataHistoryQuotesManager::getInstance().addReqest(requestID, pHistoryDataRequest);
+	CDataHistoryQuotesManager::getInstance().onHistoryDataDownloaded(requestID, bars);
+
+}
+
+void CClientDataManager::onBarDataUpdate(const CMyBarSummary &barData)
+{
+	MYLOG4CPP_WARNING<<"CClientDataManager::onBarDataUpdate"
+		<<" "<<"barData.instrumentID="<<barData.instrumentID
+		<<" "<<"barData.bars.size()="<<barData.bars.size();
+
+	//std::auto_ptr<CMyBars> CMyBarsPtr 
+	CDataHistoryQuotesManager::getInstance().onBarDataUpdate(barData);
 
 }
 

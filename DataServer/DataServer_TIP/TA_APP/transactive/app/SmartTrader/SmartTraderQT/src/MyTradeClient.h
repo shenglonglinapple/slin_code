@@ -37,6 +37,8 @@ public:
 	virtual void onMarketDataUpdate(const CMyMarketData &marketData);
 	/// Hook method when history data is downloaded
 	virtual void onHistoryDataDownloaded(unsigned int requestID, CMyBarsPtr bars);
+	/// Hook method when receive bar summary update
+	virtual void onBarDataUpdate(const CMyBarSummary &barData);
 
 private:
 	std::string m_strUserName;

@@ -127,3 +127,12 @@ void CMyTradeClient::onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr
 
 }
 
+void CMyTradeClient::onBarDataUpdate(const CMyBarSummary &barData)
+{
+	MYLOG4CPP_WARNING<<"CMyTradeClient::onBarDataUpdate"
+		<<" "<<"barData.instrumentID="<<barData.instrumentID
+		<<" "<<"barData.bars.size()="<<barData.bars.size()
+		<<" "<<"you must create class like:  CYourClient : public CMyTradeClient";
+
+}
+

@@ -98,3 +98,17 @@ void CQtTimeHelper::getTimeInfo_Qt(time_t secsSince1Jan1970UTC,
 	nMonth = nMonthGet;
 	nDay = nDayGet;
 }
+
+//"12/10/2014 2:00am"
+time_t CQtTimeHelper::strToDateTime_Qt_AmPm(const std::string& strTimeValue)
+{
+	QString   strTime_local;
+	time_t    nTime_local;
+	QDateTime time_local;
+
+	strTime_local = strTimeValue.c_str();
+	time_local = QDateTime::fromString(strTime_local, "MM/dd/yyyy h:mmap");
+	time_local.setTimeSpec(Qt::LocalTime);
+	nTime_local = time_local.toTime_t();
+	return nTime_local;
+}

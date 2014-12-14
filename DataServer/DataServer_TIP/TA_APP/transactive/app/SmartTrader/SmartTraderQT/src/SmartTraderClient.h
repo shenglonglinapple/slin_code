@@ -27,6 +27,7 @@ public:
 	virtual void onMarketDataUpdate(const CMyMarketData &marketData);
 	/// Hook method when history data is downloaded
 	virtual void onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars );
+	virtual void onBarDataUpdate(const CMyBarSummary &barData);
 
 
 private:

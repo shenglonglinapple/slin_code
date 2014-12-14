@@ -40,6 +40,8 @@ public:
 	void onInstrumentDownloaded(const CMyInstrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate( const CMyMarketData &marketData );
 	void onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars );
+	void onBarDataUpdate(const CMyBarSummary &barData);
+
 public:
 	void downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest);
 

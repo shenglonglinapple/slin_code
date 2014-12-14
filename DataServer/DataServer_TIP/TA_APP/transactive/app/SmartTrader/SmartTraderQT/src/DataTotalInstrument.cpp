@@ -8,6 +8,7 @@
 
 #include "ProjectLogHelper.h"
 #include "Log4cppLogger.h"
+#include "QtTimeHelper.h"
 
 
 CDataTotalInstrument* CDataTotalInstrument::m_pInstance = 0;
@@ -35,6 +36,8 @@ CDataTotalInstrument::CDataTotalInstrument()
 {
 	m_pProjectLogHelper = NULL;
 	m_pProjectLogHelper = new CProjectLogHelper();
+	m_pQtTimeHelper = NULL;
+	m_pQtTimeHelper = new CQtTimeHelper();
 	_FreeData_MapInstrumentIDData();
 }
 
@@ -45,6 +48,11 @@ CDataTotalInstrument::~CDataTotalInstrument()
 	{
 		delete m_pProjectLogHelper;
 		m_pProjectLogHelper = NULL;
+	}
+	if (NULL != m_pQtTimeHelper)
+	{
+		delete m_pQtTimeHelper;
+		m_pQtTimeHelper = NULL;
 	}
 }
 
@@ -99,7 +107,10 @@ void CDataTotalInstrument::onMarketDataUpdate( const CMyMarketData &marketData )
 
 		MYLOG4CPP_DEBUG<<"onMarketDataUpdate reset Instrument data"
 			<<" "<<"getInstrumentID="<<pInstrumentGet->getInstrumentID()
-			<<" "<<"strInstrumentCode="<<pInstrumentGet->getInstrumentCode();
+			<<" "<<"strInstrumentCode="<<pInstrumentGet->getInstrumentCode()
+			<<" "<<"getUpdateTime="<< m_pQtTimeHelper->dateTimeToStr_Qt(pInstrumentGet->getUpdateTime())
+			<<" "<<"fLastPrice="<<pInstrumentGet->getLastPrice();
+		
 		strLogInfo = "onMarketDataUpdate";
 		m_pProjectLogHelper->log_Instrument_info(__FILE__, __LINE__, strLogInfo, pInstrumentGet);
 	}

@@ -25,6 +25,7 @@ public:
 	virtual void onInstrumentDownloaded(const CMyInstrument& instrument) = 0;
 	virtual void onMarketDataUpdate( const CMyMarketData &marketData ) = 0;
 	virtual void onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars ) =0;
+	virtual void onBarDataUpdate(const CMyBarSummary &barData) = 0;
 
 
 };

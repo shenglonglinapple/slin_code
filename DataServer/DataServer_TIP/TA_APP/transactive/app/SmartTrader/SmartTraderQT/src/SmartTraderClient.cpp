@@ -107,6 +107,20 @@ void CSmartTraderClient::onHistoryDataDownloaded( unsigned int requestID, CMyBar
 }
 
 
+void CSmartTraderClient::onBarDataUpdate(const CMyBarSummary &barData)
+{
+	MYLOG4CPP_WARNING<<"CSmartTraderClient::onBarDataUpdate"
+		<<" "<<"barData.instrumentID="<<barData.instrumentID
+		<<" "<<"barData.bars.size()="<<barData.bars.size();
+	if (NULL != m_pProcessRecvDataHandle)
+	{
+		m_pProcessRecvDataHandle->onBarDataUpdate(barData);
+
+	}
+
+}
+
+
 
 //QT_END_NAMESPACE
 

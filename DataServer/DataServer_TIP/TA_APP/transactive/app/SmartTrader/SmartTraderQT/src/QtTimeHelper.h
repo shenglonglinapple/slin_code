@@ -16,7 +16,9 @@ public:
 		unsigned int& nYear, unsigned int& nMonth, unsigned int& nDay);
 	time_t strToDateTime_Qt(const std::string& strTimeValue);
 
-
+public:
+	//"12/10/2014 2:00am"
+	time_t strToDateTime_Qt_AmPm(const std::string& strTimeValue);
 
 
 };
