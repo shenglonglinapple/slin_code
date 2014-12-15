@@ -32,6 +32,8 @@
 
 #define  MYLOG4CPP_ERROR_Base      log4cpp::Category::getInstance("rootAppender").errorStream()<<""
 #define  MYLOG4CPP_DEBUG_Base      log4cpp::Category::getInstance("rootAppender").debugStream()<<""
+//	MYLOG4CPP_DEBUG_Base<<" "<<"["<<file<<":"<<line<<"]"<<" "
+
 
 //////////////////////////////////////////////////////////////////////////
 

@@ -14,7 +14,7 @@ CMyBarTypeHeler::~CMyBarTypeHeler()
 }
 
 
-std::string CMyBarTypeHeler::getString_BarType( enum EMyBarType nBarType )
+std::string CMyBarTypeHeler::getString_BarType( enum BarType nBarType )
 {
 	std::string strRes;
 
@@ -67,10 +67,10 @@ std::string CMyBarTypeHeler::getString_BarType( enum EMyBarType nBarType )
 	return strRes;
 }
 
-enum EMyBarType CMyBarTypeHeler::getBarTypeByString(const std::string& strBarType )
+enum BarType CMyBarTypeHeler::getBarTypeByString(const std::string& strBarType )
 {
 	std::string strTemp;
-	enum EMyBarType nBarType = FIVE_SECOND;
+	enum BarType nBarType = FIVE_SECOND;
 
 	strTemp = "FIVE_SECOND";
 	if (strBarType == strTemp)
@@ -173,29 +173,6 @@ enum EMyBarType CMyBarTypeHeler::getBarTypeByString(const std::string& strBarTyp
 }
 
 
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-CMyBar::CMyBar()
-{
-
-}
-
-CMyBar::~CMyBar()
-{
-
-}
-
-void CMyBar::setValue( const CHistoryData* pHistoryData )
-{
-	CQtTimeHelper timeHelper;
-	this->timestamp = (unsigned int)timeHelper.strToDateTime_Qt(pHistoryData->m_strDate.toStdString());
-	this->open = pHistoryData->m_strOpen.toDouble();
-	this->high = pHistoryData->m_strHigh.toDouble();
-	this->low = pHistoryData->m_strLow.toDouble();
-	this->close = pHistoryData->m_strClose.toDouble();
-	this->volume = pHistoryData->m_strVolume.toDouble();
-
-}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -209,21 +186,32 @@ CMyBarsPtrHelper::~CMyBarsPtrHelper()
 
 }
 
-CMyBarsPtr CMyBarsPtrHelper::convertValue( const std::list<CHistoryData*>& lstHistoryData )
+BarsPtr CMyBarsPtrHelper::convertValue( const std::list<CHistoryData*>& lstHistoryData )
 {
-	CMyBar MyBarData;
-
-	CMyBarsPtr pMyBars(new CMyBars());  
+	CQtTimeHelper timeHelper;
+	Bar MyBarData;
+	const CHistoryData* pHistoryData = NULL;
+	BarsPtr pMyBars(new Bars());  
 
 	std::list<CHistoryData*>::const_iterator constIterLst;
 
 	constIterLst = lstHistoryData.begin();
 	while (constIterLst != lstHistoryData.end())
 	{
-		MyBarData.setValue(*constIterLst);
+		pHistoryData = (*constIterLst);
+		//MyBarData.setValue(*constIterLst);
+		MyBarData.timestamp = (unsigned int)timeHelper.strToDateTime_Qt(pHistoryData->m_strDate.toStdString());
+		MyBarData.open = pHistoryData->m_strOpen.toDouble();
+		MyBarData.high = pHistoryData->m_strHigh.toDouble();
+		MyBarData.low = pHistoryData->m_strLow.toDouble();
+		MyBarData.close = pHistoryData->m_strClose.toDouble();
+		MyBarData.volume = pHistoryData->m_strVolume.toDouble();
+
 		pMyBars->insert(MyBarData);
 		constIterLst++;
 	}//while
 
 	return pMyBars;
 }
+
+

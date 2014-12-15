@@ -1,9 +1,14 @@
 #include "MyInstrument.h"
 
+#include <time.h>
+#include <math.h>       /* isnan, sqrt */
+#include <limits>
+
 #include "StockData.h"
 #include "MyMarketData.h"
+#include "Instrument.h"
 
-
+#include "QtTimeHelper.h"
 #include "Log4cppLogger.h"
 
 
@@ -304,11 +309,133 @@ void CMyInstrument::setValue(const CMyMarketData* pMyMarketData)
 	{
 		return;
 	}
+	CQtTimeHelper timerHelper;
 
 	this->m_nInstrumentID = pMyMarketData->getSecurityID();
 	this->m_timeUpdateTime = pMyMarketData->getTime();
-	this->m_fLastPrice = pMyMarketData->getPrice(CMyMarketData::LAST_TRADED_PRICE);
-	this->m_nLastVolume = pMyMarketData->getVolume(CMyMarketData::LAST_TRADED_VOLUME);
+	this->m_strGetupdateTime = timerHelper.dateTimeToStr_Qt(m_timeUpdateTime);
+
+	this->m_fLastPrice = pMyMarketData->getPrice(MarketData::LAST_TRADED_PRICE);
+	this->m_nLastVolume = pMyMarketData->getVolume(MarketData::LAST_TRADED_VOLUME);
+}
+template<typename T>
+bool CMyInstrument::uti_isnan(T value)
+{
+	return value != value;
+}
+
+// requires #include <limits>
+template<typename T>
+bool CMyInstrument::uti_isinf(T value)
+{
+	return std::numeric_limits<T>::has_infinity() &&
+		value == std::numeric_limits<T>::infinity();
+}
+float CMyInstrument::checkFloatNanValue(const float& fValueTmp)
+{
+	/*
+	According to the IEEE standard, 
+	NaN values have the odd property that comparisons involving them are always false. 
+	That is, for a float f, f != f will be true only if f is NaN
+	*/
+
+	/*
+	#include <boost/algorithm/string.hpp>
+	#include <boost/math/special_functions/fpclassify.hpp> 
+	if ((boost::math::isnan)(fValueTmp))
+	{
+	//x is NaN
+	return 0;
+	} 
+	*/
+	if (uti_isnan(fValueTmp))
+	{
+		//x is NaN
+		return 0;
+	}
+
+	return fValueTmp;
+}
+void CMyInstrument::setValue( const Instrument& instrument )
+{
+	unsigned int nInstrumentID = 0;
+	Instrument* pInstrument = NULL;
+
+	nInstrumentID = instrument.getInstrumentID();
+	pInstrument = instrument.getInstrument(nInstrumentID);
+	if (NULL != pInstrument)
+	{
+		setValue(pInstrument);
+	}
+	
+}
+void CMyInstrument::setValue( const Instrument* pInstrument )
+{
+	if (NULL == pInstrument)
+	{
+		return;
+	}
+
+	CQtTimeHelper  timerHelper;
+
+
+	m_fOpeningPrice  = pInstrument->getOpeningPrice();
+	m_fOpeningPrice = checkFloatNanValue(m_fOpeningPrice);
+
+	m_fLastPrice = pInstrument->getLastPrice();
+	m_fLastPrice = checkFloatNanValue(m_fLastPrice);
+
+	m_nInstrumentID = pInstrument->getInstrumentID();
+	m_strInstrumentCode = pInstrument->getInstrumentCode();
+	m_strUnderlyingCode = pInstrument->getUnderlyingCode();
+	m_strExchangeName = pInstrument->getExchangeName();
+
+	m_chDecimalPlace = pInstrument->getDecimalPlace();
+	m_fTickSize = pInstrument->getTickSize();
+	m_fTickSize = checkFloatNanValue(m_fTickSize);
+
+	m_fTickValue  = pInstrument->getTickValue();
+	m_fTickValue = checkFloatNanValue(m_fTickValue);
+
+	m_nBidVolume  = pInstrument->getBidVolume();
+
+	m_nAskVolume  = pInstrument->getAskVolume();
+	m_nLastVolume  = pInstrument->getLastVolume();
+	m_nTotalVolume  = pInstrument->getTotalVolume();
+
+	m_fBidPrice  = pInstrument->getBidPrice();
+	m_fBidPrice = checkFloatNanValue(m_fBidPrice);
+
+	m_fAskPrice = pInstrument->getAskPrice();
+	m_fAskPrice = checkFloatNanValue(m_fAskPrice);
+
+	m_fLowPrice = pInstrument->getLowPrice();
+	m_fLowPrice = checkFloatNanValue(m_fLowPrice);
+
+	m_fHighPrice  = pInstrument->getHighPrice();
+	m_fHighPrice = checkFloatNanValue(m_fHighPrice);
+
+	m_fLastPrice = pInstrument->getLastPrice();
+	m_fLastPrice = checkFloatNanValue(m_fLastPrice);
+
+	m_fOpeningPrice  = pInstrument->getOpeningPrice();
+	m_fOpeningPrice = checkFloatNanValue(m_fOpeningPrice);
+
+	m_fSettlementPrice  = pInstrument->getSettlementPrice();
+	m_fSettlementPrice = checkFloatNanValue(m_fSettlementPrice);
+
+	m_timeUpdateTime  = pInstrument->getUpdateTime();
+	m_strGetupdateTime = timerHelper.dateTimeToStr_Qt(m_timeUpdateTime);
+
+
+	m_fValuePerPoint  = pInstrument->getValuePerPoint();
+	m_nLegSize = pInstrument->getLegSize();
+	m_nLegSecurityID  = pInstrument->getLegSecurityID(0);
+	m_nMarketStatus = pInstrument->getMarketStatus();
+	m_nSecurityType = pInstrument->getSecurityType();
+	m_nOrderTypes  = pInstrument->getOrderTypes();
+
+
 }
 
 

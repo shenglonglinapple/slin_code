@@ -10,6 +10,7 @@
 #include "HistoryDataRequest.h"
 //
 #include "DataTotalInstrument.h"
+#include "DataTotalMyInstrument.h"
 #include "StaticStockManager.h"
 
 #include "DataHistoryQuotesManager.h"
@@ -39,13 +40,11 @@ void CClientDataManager::removeInstance()
 
 CClientDataManager::CClientDataManager(void)
 {	
-	m_pClientLoginParam = NULL;
 	m_pSmartTraderClient = NULL;	
-	
-	_InitLoginParam();
-	_InitTraderClient();
+	_InitTraderClient(NULL);
 
 	CStaticStockManager::getInstance();
+	CDataTotalMyInstrument::getInstance();
 	CDataTotalInstrument::getInstance();
 	CDataHistoryQuotesManager::getInstance();
 }
@@ -53,35 +52,22 @@ CClientDataManager::CClientDataManager(void)
 CClientDataManager::~CClientDataManager(void)
 {		
 	CDataHistoryQuotesManager::removeInstance();
-	CDataTotalInstrument::removeInstance();
+	CDataTotalMyInstrument::removeInstance();
 	CStaticStockManager::removeInstance();
+	CDataTotalInstrument::removeInstance();
 
 	_UnInitTraderClient();
-	_UnInitLoginParam();
-
 }
 
-
-
-void CClientDataManager::_InitLoginParam()
+void CClientDataManager::_InitTraderClient(CClientLoginParam* pClientLoginParam)
 {
-	m_pClientLoginParam = new CClientLoginParam();
-	m_pClientLoginParam->setDefaultValue();
-}
-void CClientDataManager::_UnInitLoginParam()
-{
-	if (NULL != m_pClientLoginParam)
+	if (NULL == pClientLoginParam)
 	{
-		delete m_pClientLoginParam;
-		m_pClientLoginParam = NULL;
+		return;
 	}
-}
-
-void CClientDataManager::_InitTraderClient()
-{
 	if (NULL == m_pSmartTraderClient)
 	{
-		m_pSmartTraderClient = new CSmartTraderClient(*m_pClientLoginParam);
+		m_pSmartTraderClient = new CSmartTraderClient(*pClientLoginParam);
 		m_pSmartTraderClient->setProcessRecvDataHandle(this);
 	}
 }
@@ -100,41 +86,38 @@ void CClientDataManager::_UnInitTraderClient()
 
 
 
-void CClientDataManager::slotClientLoginParamChanged(CClientLoginParam* pClientLoginParam )
+int CClientDataManager::loginToServer(CClientLoginParam* pClientLoginParam )
 {
-	int nloginToServerRes = 0;
+	int nloginToServerRes = -1;
 
-	MYLOG4CPP_DEBUG<<"CClientDataManager process slotClientLoginParamChanged"
-		<<" "<<"pClientLoginParam=0x"<<pClientLoginParam;
+	MYLOG4CPP_DEBUG<<"CClientDataManager loginToServer";
 
-	_UnInitLoginParam();
-	_InitLoginParam();
-	*m_pClientLoginParam = *pClientLoginParam;
+	pClientLoginParam->logInfo(__FILE__, __LINE__);
 
-	_InitTraderClient();
-	nloginToServerRes = m_pSmartTraderClient->loginToServer();
+	_InitTraderClient(pClientLoginParam);
 
-	MYLOG4CPP_DEBUG<<" "<<"emit"
-		<<" "<<"class:"<<"CClientDataManager"
-		<<" "<<"fun:"<<"slotClientLoginParamChanged()"
-		<<" "<<"emit"
-		<<" "<<"signalLoginToServerResult(int)"
-		<<" "<<"param:"
-		<<" "<<"nloginToServerRes="<<nloginToServerRes;
+	if (NULL != m_pSmartTraderClient)
+	{
+		nloginToServerRes = m_pSmartTraderClient->loginToServer();
+	}
 
-	emit signalLoginToServerResult(nloginToServerRes);
+	return nloginToServerRes;
 }
 
 void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument )
 {	
-	MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::onInstrumentDownloaded"
-		<<" "<<"getInstrumentID="<<instrument.getInstrumentID();
+	if (instrument.getInstrumentID() == 900957)
+	{
+		MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::onInstrumentDownloaded"
+			<<" "<<"getInstrumentID="<<instrument.getInstrumentID();
+	}
 
-	CDataTotalInstrument::getInstance().onInstrumentDownloaded(instrument);
+
+	CDataTotalMyInstrument::getInstance().onInstrumentDownloaded(instrument);
 
 	if (1 == instrument.getInstrumentID())
 	{
-		m_pSmartTraderClient->subscribeMarketData(instrument);
+		m_pSmartTraderClient->subscribeMarketData(instrument.getInstrumentID());
 	}
 }
 
@@ -143,11 +126,11 @@ void CClientDataManager::onMarketDataUpdate( const CMyMarketData &marketData )
 	MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::onInstrumentDownloaded"
 		<<" "<<"getSecurityID="<<marketData.getSecurityID();
 
-	CDataTotalInstrument::getInstance().onMarketDataUpdate(marketData);
+	CDataTotalMyInstrument::getInstance().onMarketDataUpdate(marketData);
 
 }
 
-void CClientDataManager::onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars )
+void CClientDataManager::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
 {
 	MYLOG4CPP_WARNING<<"CSmartTraderClient::onHistoryDataDownloaded"
 		<<" "<<"std::auto_ptr<CMyBars> CMyBarsPtr  bars->size="<<bars->size();
@@ -157,7 +140,7 @@ void CClientDataManager::onHistoryDataDownloaded( unsigned int requestID, CMyBar
 
 }
 
-void CClientDataManager::onBarDataUpdate(const CMyBarSummary &barData)
+void CClientDataManager::onBarDataUpdate(const BarSummary &barData)
 {
 	MYLOG4CPP_WARNING<<"CClientDataManager::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
@@ -171,12 +154,12 @@ void CClientDataManager::onBarDataUpdate(const CMyBarSummary &barData)
 void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest)
 {
 	CMyInstrument* pInstrument = NULL;
-	enum EMyBarType interval;
+	enum BarType interval;
 	unsigned int from;
 	unsigned int to ;
 	unsigned int requestID = 0;
 
-	pInstrument = CDataTotalInstrument::getInstance().findInstrumentByID(pHistoryDataRequest->m_nInstruemntID);
+	pInstrument = CDataTotalMyInstrument::getInstance().findInstrumentByID(pHistoryDataRequest->m_nInstruemntID);
 	if (NULL == pInstrument)
 	{
 		return;
@@ -190,7 +173,7 @@ void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistory
 	from = pHistoryDataRequest->m_nTimeFrom;
 	to = pHistoryDataRequest->m_nTimeTo;
 
-	requestID = m_pSmartTraderClient->downloadHistoryData(*pInstrument, interval, from, to);
+	requestID = m_pSmartTraderClient->my_downloadHistoryData(*pInstrument, interval, from, to);
 
 	CDataHistoryQuotesManager::getInstance().addReqest(requestID, pHistoryDataRequest);
 

@@ -2,38 +2,12 @@
 #define __CLASS_MY_MARKET_DATA_H__
 
 #include <string>
+#include "Bar.h"
+
 
 class CMyMarketData
 {
 public:
-	enum MarketStatus
-	{
-		PRE_OPEN = 48,
-		OPENED,
-		PRE_CLOSE,
-		CLOSED,
-		SUSPENDED,
-	};
-
-	enum PriceType
-	{
-		OPENNING_PRICE = 0,
-		SESSION_HIGH,
-		SESSION_LOW,
-		REFERENCE_PRICE,
-		YESTERDAY_SETTLMENT_PRICE,
-		LAST_TRADED_PRICE,
-		SETTLEMENT_PRICE,
-	};
-
-	enum VolumeType
-	{
-		OPEN_INTEREST = 0,
-		OPENING_VOLUME,
-		LAST_TRADED_VOLUME,
-		TOTAL_TRADED_VOLUME,
-	};
-
 	CMyMarketData();
 	CMyMarketData(unsigned int secID);
 	~CMyMarketData();
@@ -59,6 +33,7 @@ public:
 	unsigned int getChangeBits() const;
 public:
 	void setValue(const std::string& strData);
+	void setValue(const MarketData& marketData);
 private:
 	unsigned int m_nSecurityID;
 	int m_nMarketStatus;

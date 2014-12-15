@@ -17,6 +17,8 @@ public:
 	CClientLoginParam& operator=(const CClientLoginParam& clinetLoginParam);
 public:
 	void setDefaultValue();
+	void logInfo(const std::string& file, int line);
+
 public:
 	std::string m_strUserName;
 	std::string m_strPassWord;

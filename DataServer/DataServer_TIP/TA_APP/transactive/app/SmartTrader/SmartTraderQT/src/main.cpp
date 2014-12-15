@@ -2,7 +2,7 @@
 
 
 #include "QTProjectEnvironment.h"
-#include "ClientMainWindow.h"
+#include "ClientUIManager.h"
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -19,6 +19,8 @@
 #pragma comment(lib,"QtGuid4.lib")
 #pragma comment(lib,"QtSqld4.lib")
 
+
+#pragma comment(lib,"StrategyEngine.lib")
 //////////////////////////////////////////////////////////////////////////
 
 int main(int argc, char *argv[])
@@ -28,8 +30,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 	CQTProjectEnviroment::getInstance();
 
-    CClientMainWindow w;
-    w.show();
+    CClientUIManager clientUIManager;
+    clientUIManager.showClientLoginWindow(true);
+
     nFunRes = app.exec();
 
 	CQTProjectEnviroment::removeInstance();

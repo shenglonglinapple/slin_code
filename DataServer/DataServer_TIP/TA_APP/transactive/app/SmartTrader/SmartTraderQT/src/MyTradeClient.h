@@ -23,22 +23,22 @@ public:
 
 	/// Subscribe real-time market data for specific instrument
 	void subscribeMarketData(const CMyInstrument &instrument);
+	void subscribeMarketData(unsigned int securityID);
 
 	/// Unsubscribe the market data
 	void unsubscribeMarketData(unsigned int nInstrumentID);
+	unsigned int downloadHistoryData( const CMyInstrument &instrument, enum BarType interval, unsigned int from, unsigned int to );
 
 
-	/// Download history data from server from a time span 
-	unsigned int downloadHistoryData( const CMyInstrument &instrument, enum EMyBarType interval, unsigned int from, unsigned int to );
 public:
 	/// Hook method when receiving instrument information 
 	virtual void onInstrumentDownloaded(const CMyInstrument &instrument);
 	/// Hook method when receive market data
 	virtual void onMarketDataUpdate(const CMyMarketData &marketData);
 	/// Hook method when history data is downloaded
-	virtual void onHistoryDataDownloaded(unsigned int requestID, CMyBarsPtr bars);
+	virtual void onHistoryDataDownloaded(unsigned int requestID, BarsPtr bars);
 	/// Hook method when receive bar summary update
-	virtual void onBarDataUpdate(const CMyBarSummary &barData);
+	virtual void onBarDataUpdate(const BarSummary &barData);
 
 private:
 	std::string m_strUserName;

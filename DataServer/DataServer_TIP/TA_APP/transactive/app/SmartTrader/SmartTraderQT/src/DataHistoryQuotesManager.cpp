@@ -95,9 +95,9 @@ void CDataHistoryQuotesManager::addReqest( unsigned int nReqID, const CHistoryDa
 
 }
 
-void CDataHistoryQuotesManager::onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars )
+void CDataHistoryQuotesManager::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
 {
-	enum EMyBarType nBarType;
+	enum BarType nBarType;
 	unsigned int nTimeFrom;
 	unsigned int nTimeTo;	
 	std::string strInstrumentCode;
@@ -151,7 +151,7 @@ void CDataHistoryQuotesManager::onHistoryDataDownloaded( unsigned int requestID,
 
 }
 
-void CDataHistoryQuotesManager::onBarDataUpdate(const CMyBarSummary &barData)
+void CDataHistoryQuotesManager::onBarDataUpdate(const BarSummary &barData)
 {
 	int nInstruemntID;
 	CDataHistoryQuotes* pDataHistoryQuotes = NULL;

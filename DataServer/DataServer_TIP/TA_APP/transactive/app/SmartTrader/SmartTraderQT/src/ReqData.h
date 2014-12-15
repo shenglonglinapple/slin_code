@@ -32,8 +32,8 @@ public:
 	void setInstrumentCode(const std::string& strInstrumentCode);
 	std::string getInstrumentCode();
 public:
-	void setMyBarType(EMyBarType nMyBarType);
-	EMyBarType getMyBarType();
+	void setMyBarType(BarType nMyBarType);
+	BarType getMyBarType();
 	void setTimeFrom(const std::string& strTimeFrom);
 	std::string getTimeFrom();
 	void setTimeTo(const std::string& strTimeTo);
@@ -48,7 +48,7 @@ private:
 	std::string m_strTimeFrom;
 	std::string m_strTimeTo;
 private:
-	EMyBarType m_nMyBarType;
+	BarType m_nMyBarType;
 };
 
 

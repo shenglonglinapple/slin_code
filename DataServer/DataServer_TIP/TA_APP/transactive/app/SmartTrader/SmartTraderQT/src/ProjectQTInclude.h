@@ -78,7 +78,20 @@
 
 
 
-
+/*
+QT_BEGIN_NAMESPACE
+class QFormLayout;
+class QHBoxLayout;
+class QVBoxLayout;
+class QLabel;
+class QComboBox;
+class QLineEdit;
+class QPushButton;
+class QMdiArea;
+class QToolBar;
+class QAction;
+QT_END_NAMESPACE
+*/
 
 
 

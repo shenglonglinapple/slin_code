@@ -7,9 +7,11 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
+#include "Instrument.h"
+
+
 class CStockData;
 class CMyMarketData;
-
 
 class CMyInstrument
 { 
@@ -112,10 +114,16 @@ public:
 	virtual unsigned int getOrderTypes() const;
 public:
 	void logInfo(const std::string& file, int line);
+	float checkFloatNanValue(const float& fValueTmp);
+	template<typename T> bool uti_isinf(T value);
+	template<typename T> bool uti_isnan(T value);
+
 public:
 	void setDefaultValue();
 	void setValue(const CStockData* pStockData);
 	void setValue(const CMyMarketData* pMyMarketData);
+	void setValue(const Instrument* pInstrument);
+	void setValue( const Instrument& Instrument );
 private:
 	void _ClearData();
 public:

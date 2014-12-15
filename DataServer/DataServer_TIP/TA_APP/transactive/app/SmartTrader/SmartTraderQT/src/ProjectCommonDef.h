@@ -2,6 +2,12 @@
 #define  __DEF__HISTORY_DATA_SERVER_COMMON_DEF_H_
 
 
+#define USING_YAHUO_DATA 1
+//#define USING_STRATEGY_ENGINE_DATA 1
+
+
+
+
 #define  DEF_VALUE_STRING_DB_ORACLE          "ORACLE"
 #define  DEF_VALUE_STRING_DB_MYSQL           "MYSQL"
 #define  DEF_VALUE_STRING_DB_SQLITE          "SQLITE"

@@ -50,11 +50,11 @@ std::string CReqData::getInstrumentCode()
 	return m_strInstrumentCode;
 }
 
-void CReqData::setMyBarType(EMyBarType nMyBarType)
+void CReqData::setMyBarType(BarType nMyBarType)
 {
 	m_nMyBarType = nMyBarType;
 }
-EMyBarType CReqData::getMyBarType()
+BarType CReqData::getMyBarType()
 {
 	return m_nMyBarType;
 }

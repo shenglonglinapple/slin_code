@@ -63,6 +63,18 @@ void CMyTradeClient::subscribeMarketData( const CMyInstrument &instrument )
 
 	m_pDataWorker->append_req(pReqData);
 }
+void CMyTradeClient::subscribeMarketData(unsigned int securityID)
+{
+	CReqData* pReqData = NULL;
+	const CStockData* pStockData = NULL;
+	pStockData = CStaticStockManager::getInstance().find_StockData_BySymbolUse(securityID);
+
+	pReqData = new CReqData();
+	pReqData->setAutoRequestID();
+	pReqData->setReqType(EReqType_SubscribeMarketData);
+	pReqData->setInstrumentCode(pStockData->m_strSymbolUse);
+	m_pDataWorker->append_req(pReqData);
+}
 
 void CMyTradeClient::unsubscribeMarketData( unsigned int nInstrumentID )
 {
@@ -84,7 +96,7 @@ void CMyTradeClient::unsubscribeMarketData( unsigned int nInstrumentID )
 }
 
 
-unsigned int CMyTradeClient::downloadHistoryData( const CMyInstrument &instrument, enum EMyBarType interval, unsigned int from, unsigned int to )
+unsigned int CMyTradeClient::downloadHistoryData( const CMyInstrument &instrument, enum BarType interval, unsigned int from, unsigned int to )
 {
 	CReqData* pReqData = NULL;	
 	unsigned int requestID = 0;
@@ -117,7 +129,7 @@ void CMyTradeClient::onMarketDataUpdate( const CMyMarketData &marketData )
 }
 
 
-void CMyTradeClient::onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars )
+void CMyTradeClient::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
 {
 	MYLOG4CPP_WARNING<<"CMyTradeClient::onHistoryDataDownloaded"
 		<<" "<<"std::auto_ptr<CMyBars> CMyBarsPtr  bars->size="<<bars->size()
@@ -127,7 +139,7 @@ void CMyTradeClient::onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr
 
 }
 
-void CMyTradeClient::onBarDataUpdate(const CMyBarSummary &barData)
+void CMyTradeClient::onBarDataUpdate(const BarSummary &barData)
 {
 	MYLOG4CPP_WARNING<<"CMyTradeClient::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID

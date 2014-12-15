@@ -6,6 +6,7 @@
 
 #include "MyBar.h"
 
+class Instrument;
 class CMyInstrument;
 class CQtTimeHelper;
 
@@ -15,10 +16,16 @@ public:
 	CProjectLogHelper(void);	
 	~CProjectLogHelper(void);
 public:
-	void log_Instrument_info(
+	void log_MyInstrument_info(
 		const std::string& file, int line, 
 		const std::string& strLogInfo, 
 		CMyInstrument* pInstrument);
+
+	void log_MyInstrument_info(
+		const std::string& file, int line, 
+		const std::string& strLogInfo, 
+		Instrument* pInstrument);
+
 
 private:
 	CQtTimeHelper* m_QtTimeHelper;

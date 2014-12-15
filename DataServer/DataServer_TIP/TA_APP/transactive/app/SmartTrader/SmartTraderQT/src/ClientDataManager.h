@@ -32,26 +32,24 @@ private:
 	CClientDataManager(void);
 	~CClientDataManager(void);
 public slots:
-	void slotClientLoginParamChanged(CClientLoginParam* pClientLoginParam);
 
 signals:
-	void signalLoginToServerResult(int nResult);
+	
+
+public:
+	int loginToServer(CClientLoginParam* pClientLoginParam);
+
+	void downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest);
 public:
 	void onInstrumentDownloaded(const CMyInstrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate( const CMyMarketData &marketData );
-	void onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars );
-	void onBarDataUpdate(const CMyBarSummary &barData);
-
-public:
-	void downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest);
+	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars );
+	void onBarDataUpdate(const BarSummary &barData);
 
 private:
-	void _InitLoginParam();
-	void _UnInitLoginParam();
-	void _InitTraderClient();
+	void _InitTraderClient(CClientLoginParam* pClientLoginParam);
 	void _UnInitTraderClient();
 private:
-	CClientLoginParam* m_pClientLoginParam;
 	CSmartTraderClient* m_pSmartTraderClient;
 
 };

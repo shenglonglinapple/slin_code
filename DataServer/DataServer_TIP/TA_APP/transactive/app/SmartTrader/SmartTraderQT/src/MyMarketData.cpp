@@ -53,19 +53,19 @@ unsigned int CMyMarketData::getTime() const
 
 int CMyMarketData::getVolume( int type ) const
 {
-	enum VolumeType nVolumeType = (enum VolumeType)type;
+	MarketData::VolumeType nVolumeType = (MarketData::VolumeType)type;
 	switch (nVolumeType)
 	{
-	case OPEN_INTEREST:
+	case MarketData::OPEN_INTEREST:
 		return m_nVolume_OPEN_INTEREST;
 		break;
-	case OPENING_VOLUME:
+	case MarketData::OPENING_VOLUME:
 		return m_nVolume_OPENING_VOLUME;
 		break;
-	case LAST_TRADED_VOLUME:
+	case MarketData::LAST_TRADED_VOLUME:
 		return m_nVolume_LAST_TRADED_VOLUME;
 		break;
-	case TOTAL_TRADED_VOLUME:
+	case MarketData::TOTAL_TRADED_VOLUME:
 		return m_nVolume_TOTAL_TRADED_VOLUME;
 		break;
 	}
@@ -85,28 +85,28 @@ int CMyMarketData::getAskVol( int level ) const
 
 float CMyMarketData::getPrice( int type ) const
 {
-	enum PriceType nPriceType = (enum PriceType)type;
+	MarketData::PriceType nPriceType = (MarketData::PriceType)type;
 	switch (nPriceType)
 	{
-	case OPENNING_PRICE:
+	case MarketData::OPENNING_PRICE:
 		return m_fPrice_OPENNING_PRICE;
 		break;
-	case SESSION_HIGH:
+	case MarketData::SESSION_HIGH:
 		return m_fPrice_SESSION_HIGH;
 		break;
-	case SESSION_LOW:
+	case MarketData::SESSION_LOW:
 		return m_fPrice_SESSION_LOW;
 		break;
-	case REFERENCE_PRICE:
+	case MarketData::REFERENCE_PRICE:
 		return m_fPrice_REFERENCE_PRICE;
 		break;
-	case YESTERDAY_SETTLMENT_PRICE:
+	case MarketData::YESTERDAY_SETTLMENT_PRICE:
 		return m_fPrice_YESTERDAY_SETTLMENT_PRICE;
 		break;
-	case LAST_TRADED_PRICE:
+	case MarketData::LAST_TRADED_PRICE:
 		return m_fPrice_LAST_TRADED_PRICE;
 		break;
-	case SETTLEMENT_PRICE:
+	case MarketData::SETTLEMENT_PRICE:
 		return m_fPrice_SETTLEMENT_PRICE;
 		break;
 	}
@@ -272,4 +272,11 @@ void CMyMarketData::setValue( const std::string& strData )
 	lastTradeDataTime = lastTradeDate + " " + lastTradeTime;
 	m_nTime = qtTimeHelper.strToDateTime_Qt_AmPm(lastTradeDataTime.toStdString());
 
+}
+
+void CMyMarketData::setValue( const MarketData& marketData )
+{
+	m_nSecurityID = marketData.getSecurityID();
+	m_fPrice_LAST_TRADED_PRICE = marketData.getPrice(MarketData::LAST_TRADED_PRICE);
+	m_nTime = marketData.getTime();
 }

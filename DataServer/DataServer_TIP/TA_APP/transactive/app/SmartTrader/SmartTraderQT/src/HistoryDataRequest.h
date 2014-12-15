@@ -20,7 +20,7 @@ public:
 	};
 public:
 	enCHistoryRequestType m_nRequestType;
-	enum EMyBarType m_nBarType;
+	enum BarType m_nBarType;
 	bool m_bSubscribe;
 	unsigned short m_nBarCount;
 	unsigned int m_nTimeFrom;

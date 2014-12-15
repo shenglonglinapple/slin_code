@@ -5,7 +5,7 @@
 #include <QtCore/QMutexLocker>
 #include <QtCore/QMap>
 
-#include "MyInstrument.h"
+#include "Instrument.h"
 
 class CProjectLogHelper;
 class CQtTimeHelper;
@@ -23,14 +23,13 @@ private:
 	CDataTotalInstrument(); 
 	virtual ~CDataTotalInstrument(); 
 public:
-	void onInstrumentDownloaded( const CMyInstrument& instrument );
-	void onMarketDataUpdate( const CMyMarketData &marketData );
-	CMyInstrument* findInstrumentByID(unsigned int nInstrumentID);
+	void onInstrumentDownloaded( const Instrument& instrument );
+	Instrument* findInstrumentByID(unsigned int nInstrumentID);
 private:
 	void _FreeData_MapInstrumentIDData();
 private:
 	QMutex m_mutexForMapInstrumentIDData;
-	QMap<unsigned int, CMyInstrument*> m_MapInstrumentIDData;
+	QMap<unsigned int, Instrument*> m_MapInstrumentIDData;
 private:
 	CProjectLogHelper* m_pProjectLogHelper;
 	CQtTimeHelper* m_pQtTimeHelper;

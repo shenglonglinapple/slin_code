@@ -25,8 +25,8 @@ private:
 
 public:
 	void addReqest(unsigned int nReqID, const CHistoryDataRequest* pReqest);
-	void onHistoryDataDownloaded( unsigned int requestID, CMyBarsPtr bars );
-	void onBarDataUpdate(const CMyBarSummary &barData);
+	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars );
+	void onBarDataUpdate(const BarSummary &barData);
 
 private:
 	void _RemoveReq( unsigned int requestID );

@@ -334,7 +334,7 @@ void CDataWorker::_ProcessReq_DownloadHistoryData()
 		lstHistoryData);
 
 	CMyBarsPtrHelper myBarsPtrhelper;
-	CMyBarsPtr pMyBars = myBarsPtrhelper.convertValue(lstHistoryData);
+	BarsPtr pMyBars = myBarsPtrhelper.convertValue(lstHistoryData);
 
 
 	if (NULL != m_pMyTradeClientRef)
