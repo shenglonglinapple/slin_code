@@ -24,19 +24,21 @@ CUserInstrumentWindow::CUserInstrumentWindow(QWidget* parent)
 
 
 
-
+	//
 	m_pItemModelUserInstrument = NULL;
 	m_pItemModelUserInstrument = new CItemModelUserInstrument(this);
+	//
 	m_pUserInstrumentTableView = NULL;
 	m_pUserInstrumentTableView = new CUserInstrumentTableView(this);
 
 
-	CItemUserInstrument* pGetRootItem = NULL;
-	pGetRootItem = CDataUserInstrument::getInstance().getRootItem();
-	m_pItemModelUserInstrument->setRootItem(pGetRootItem);
+	CItemUserInstrument* pGetRootItemRef = NULL;
+	pGetRootItemRef = CDataUserInstrument::getInstance().getRootItem();
+	m_pItemModelUserInstrument->setRootItem(pGetRootItemRef);
 
 	m_pUserInstrumentTableView->setModel(m_pItemModelUserInstrument);
-
+	m_pUserInstrumentTableView->move(10, 10);
+	m_pUserInstrumentTableView->resize(200, 200);
 
 	QVBoxLayout* pVBoxLayout;
 	pVBoxLayout = new QVBoxLayout(this);

@@ -31,7 +31,7 @@ void CClientMainWindowMdiArea::_SetupUi()
 	{
 		//TestChildWindow *mdiChild = qobject_cast<TestChildWindow *>(window->widget());
 		//pSubWindow->move(10, 10);
-		pSubWindow->resize(200, 300);
+		//pSubWindow->resize(200, 300);
 		this->setActiveSubWindow(pSubWindow);
 	}
 }
