@@ -5,6 +5,7 @@
 #include <QtGui/QCursor> 
 #include <QtGui/QMessageBox>
 
+#include "SignalSlotManager.h"
 #include "ClientDataManager.h"
 
 #include "ClientLoginWindow.h"
@@ -25,7 +26,9 @@ CClientUIManager::CClientUIManager()
 	m_pClientLoginDialog = NULL;
 	m_pClientMainWindow = NULL;
 	//data
+	CSignalSlotManager::getInstance();
 	CClientDataManager::getInstance();
+
 
 	m_pClientLoginDialog = new CClientLoginWindow();
 	m_pClientMainWindow = new CClientMainWindow();
@@ -36,6 +39,10 @@ CClientUIManager::CClientUIManager()
 
 
 CClientUIManager::~CClientUIManager()
+{
+	_Unit();
+}
+void CClientUIManager::_Unit()
 {
 	if (NULL != m_pClientLoginDialog)
 	{
@@ -49,6 +56,7 @@ CClientUIManager::~CClientUIManager()
 		m_pClientMainWindow = NULL;
 	}
 	CClientDataManager::removeInstance();
+	CSignalSlotManager::removeInstance();
 }
 
 void CClientUIManager::_CreateConnect()
@@ -57,6 +65,11 @@ void CClientUIManager::_CreateConnect()
 		SIGNAL(signalLoginToServerRes(int)),
 		this, 
 		SLOT(slotLoginToServerRes(int)));
+
+	QObject::connect(m_pClientMainWindow, 
+		SIGNAL(signal_Exit_ClientMainWindow()),
+		this, 
+		SLOT(slot_Exit_ClientMainWindow()));
 	
 }
 void CClientUIManager::showClientLoginWindow(bool bShow)
@@ -87,6 +100,11 @@ void CClientUIManager::slotLoginToServerRes( int nLoginToServerRes )
 	{
 		QMessageBox::about(NULL, "login to server Error!", "login to server Error!");
 	}
+}
+
+void CClientUIManager::slot_Exit_ClientMainWindow()
+{
+	_Unit();
 }
 
 

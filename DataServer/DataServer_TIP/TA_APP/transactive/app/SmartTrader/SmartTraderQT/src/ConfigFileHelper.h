@@ -31,6 +31,9 @@ public:
 
 	QString getLastUpdateTimeFormConfig();
 	void setLastUpdateTimeToConfig(const QString& strValue);
+
+	QString getUserInstrumentFormConfig();
+	void setUserInstrumentToConfig(const QString& strValue);
 private:
 	QString m_strConfigFileName;
 	QMutex m_mutexConfigFileName;

@@ -3,12 +3,18 @@
 
 #include <QtGui/QTableView>
 
+class CItemModelUserInstrument;
 
 class CUserInstrumentTableView : public QTableView
 { 
 public: 
 	CUserInstrumentTableView(QWidget* parent = 0); 
 	~CUserInstrumentTableView(); 
+public:
+	void slot_DataChange_UserInstrument();
+private:
+	CItemModelUserInstrument* m_pItemModelUserInstrument;
+
 }; 
 
 

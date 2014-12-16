@@ -1,9 +1,7 @@
 #include "UserInstrumentWindow.h"
 
 #include "ProjectQTInclude.h"
-#include "UserInstrumentTableView.h"
-#include "ItemModelUserInstrument.h"
-#include "DataUserInstrument.h"
+
 
 //QT_BEGIN_NAMESPACE
 ////QT_END_NAMESPACE
@@ -23,40 +21,13 @@ CUserInstrumentWindow::CUserInstrumentWindow(QWidget* parent)
 	this->setWindowFlags(Qt::WindowTitleHint);
 
 
-
-	//
-	m_pItemModelUserInstrument = NULL;
-	m_pItemModelUserInstrument = new CItemModelUserInstrument(this);
-	//
-	m_pUserInstrumentTableView = NULL;
-	m_pUserInstrumentTableView = new CUserInstrumentTableView(this);
-
-
-	CItemUserInstrument* pGetRootItemRef = NULL;
-	pGetRootItemRef = CDataUserInstrument::getInstance().getRootItem();
-	m_pItemModelUserInstrument->setRootItem(pGetRootItemRef);
-
-	m_pUserInstrumentTableView->setModel(m_pItemModelUserInstrument);
-	m_pUserInstrumentTableView->move(10, 10);
-	m_pUserInstrumentTableView->resize(200, 200);
-
-	QVBoxLayout* pVBoxLayout;
-	pVBoxLayout = new QVBoxLayout(this);
-	pVBoxLayout->addWidget(m_pUserInstrumentTableView);
-	this->setLayout(pVBoxLayout);
-
 	
 }
 
 
 CUserInstrumentWindow::~CUserInstrumentWindow()
 {
-	if (NULL != m_pItemModelUserInstrument)
-	{
-		delete m_pItemModelUserInstrument;
-		m_pItemModelUserInstrument = NULL;
-	}
-	
+
 }
 
 

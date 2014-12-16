@@ -8,14 +8,13 @@
 #include "StaticStockManager.h"
 #include "RealTimeStockManager.h"
 #include "HistoryStockManager.h"
-
+#include "DataRealTimeWorker.h"
 
 //////////////////////////////////////////////////////////////////////////
 CDataWorker::CDataWorker(void)
 {	
 	m_toTerminate = false;
 	m_nReqWorkerState = ReqWokerState_Begin;
-	m_nDataWorkerState = DataWorkerState_Begin;
 
 	m_pMyTradeClientRef = NULL;
 
@@ -27,6 +26,7 @@ CDataWorker::CDataWorker(void)
 		QMutexLocker lock(&m_mutex_CurrentReqData);
 		m_pCurrentReqData = NULL;
 	}
+	
 }
 
 CDataWorker::~CDataWorker(void)
@@ -39,7 +39,6 @@ CDataWorker::~CDataWorker(void)
 void CDataWorker::run()
 {
 	m_nReqWorkerState = ReqWokerState_Begin;
-	m_nDataWorkerState = DataWorkerState_Begin;
 
 	while (false == m_toTerminate)
 	{
@@ -61,7 +60,6 @@ int CDataWorker::_ProcessUserTerminate()
 	int nFunRes = 0;
 	m_toTerminate = true;
 	m_nReqWorkerState = ReqWokerState_End;
-	m_nDataWorkerState = DataWorkerState_End;
 	return nFunRes;
 }
 
@@ -94,22 +92,6 @@ void CDataWorker::_ThreadJob()
 		break;
 	}//switch (m_nReqWorkerState)
 
-
-	switch (m_nDataWorkerState)
-	{
-	case DataWorkerState_Begin:
-		m_nDataWorkerState = DataWorkerState_UpdateStockRealTimeInfo;
-		break;
-	case DataWorkerState_UpdateStockRealTimeInfo:
-		_DoJob_UpdateStockRealTimeInfo();
-		break;
-	case DataWorkerState_End:
-		this->my_msleep(100);
-		break;
-	default:
-		this->my_msleep(100);
-		break;
-	}//switch (m_nDataWorkerState)
 
 }
 
@@ -217,33 +199,6 @@ void CDataWorker::_DoJob_CheckProcessReq()
 
 	m_nReqWorkerState = ReqWokerState_CheckProcessReq;
 	return;
-}
-
-void CDataWorker::_DoJob_UpdateStockRealTimeInfo()
-{
-	std::list<CMyMarketData*> lstMyMarketData;
-	std::list<CMyMarketData*>::iterator iterLst;
-	CMyMarketData* pMyMarketData = NULL;
-
-	CRealTimeStockManager::getInstance().getRealTimeMarketData(lstMyMarketData);
-
-	iterLst = lstMyMarketData.begin();
-	while (iterLst != lstMyMarketData.end())
-	{
-		pMyMarketData = (*iterLst);
-
-		if (NULL != m_pMyTradeClientRef)
-		{
-			m_pMyTradeClientRef->onMarketDataUpdate(*pMyMarketData);
-		}
-		delete pMyMarketData;
-		pMyMarketData = NULL;
-		(*iterLst) = NULL;
-		iterLst++;
-	}//while
-	lstMyMarketData.clear();
-
-	m_nDataWorkerState = DataWorkerState_UpdateStockRealTimeInfo;
 }
 
 void CDataWorker::_ProcessReq_DownLoadStockID()

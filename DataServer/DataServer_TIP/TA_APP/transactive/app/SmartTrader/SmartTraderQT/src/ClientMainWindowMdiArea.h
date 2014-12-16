@@ -3,7 +3,7 @@
 
 #include <QtGui/QMdiArea>
 
-class CUserInstrumentWindow;
+class CUserInstrumentTableView;
 
 class CClientMainWindowMdiArea : public QMdiArea
 {
@@ -16,7 +16,7 @@ private:
 	void _SetupUi();
 	void _TranslateLanguage();
 private:
-	CUserInstrumentWindow* m_pUserInstrumentWindow;
+	CUserInstrumentTableView* m_pUserInstrumentTableView;
 
 };
 

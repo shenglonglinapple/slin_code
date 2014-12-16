@@ -22,17 +22,16 @@ public:
 	~CClientUIManager();
 public slots:
 	void slotLoginToServerRes(int nLoginToServerRes);
-
+	void slot_Exit_ClientMainWindow();
 public:
 	void showClientLoginWindow(bool bShow);
 
 private:
 	void _CreateConnect();
-
+	void _Unit();
 private:
 	CClientLoginWindow* m_pClientLoginDialog;
 	CClientMainWindow* m_pClientMainWindow;
-
 };
 
 //QT_END_NAMESPACE

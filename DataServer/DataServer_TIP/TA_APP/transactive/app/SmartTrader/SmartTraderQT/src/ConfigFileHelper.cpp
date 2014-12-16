@@ -5,6 +5,8 @@
 #include <QtCore/QStringList>
 #include <QtGui/QFontMetrics>
 
+#include <QtCore/QFile>
+
 #include "Log4cppLogger.h"
 
 
@@ -17,6 +19,8 @@ static const std::string  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath_defValu
 static const std::string  DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime = "lastupdatetime";
 static const std::string  DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime_defValue = "1970-01-01 08:00:00";
 //static const std::string DEF_VALUE_STRING_UTC_START_DATE_TIME = "1970-01-01 08:00:00";
+static const std::string  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument = "userinstrument";
+static const std::string  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument_defValue = "";//5614,5378
 
 
 CConfigFileHelper::CConfigFileHelper()
@@ -81,7 +85,6 @@ int CConfigFileHelper::_WriteToConfig(const QString& strConfigFileName,
 		<<" "<<"strKey="<<strKey.toStdString()
 		<<" "<<"strValue="<<strValue.toStdString();
 
-	settings.clear();
 	return nRunRes;
 }
 
@@ -134,7 +137,6 @@ int CConfigFileHelper::_ReadFormConfig(const QString& strConfigFileName, const Q
 		<<" "<<"strValue="<<strValue.toStdString();
 
 	nRunRes = 0;
-	settings.clear();
 	return nRunRes;
 }
 
@@ -260,3 +262,40 @@ void CConfigFileHelper::setLastUpdateTimeToConfig(const QString& strValue)
 	return;
 }
 
+
+QString CConfigFileHelper::getUserInstrumentFormConfig()
+{
+	int nFunRes = 0;
+	QString strConfigFileName;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	strConfigFileName = m_strConfigFileName;
+	strGroup = DEF_VALUE_CONFIG_GROUP_config.c_str();
+	strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument.c_str();
+	strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument_defValue.c_str();
+
+	nFunRes = _ReadFormConfig(strConfigFileName, strGroup, strKey, strValue);
+	if (0 != nFunRes)
+	{
+		strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument_defValue.c_str();
+	}
+	return strValue;
+}
+
+void CConfigFileHelper::setUserInstrumentToConfig(const QString& strValue)
+{
+	int nFunRes = 0;
+	QString strConfigFileName;
+	QString strGroup;
+	QString strKey;
+
+	strConfigFileName = m_strConfigFileName;
+	strGroup = DEF_VALUE_CONFIG_GROUP_config.c_str();
+	strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument.c_str();
+
+	nFunRes = _WriteToConfig(strConfigFileName, strGroup, strKey, strValue);
+
+	return;
+}

@@ -32,6 +32,15 @@ public:
 	QString getFileDBPath();
 	void setLastUpdateTime(const QString& strLastUpdateTime);
 	QString getLastUpdateTime();
+public:
+	QStringList getLstUserInstrument();
+	void setLstUserInstrument(QStringList& lstStringValue);
+	void removeInstrument(const QString& strInstrumentID);
+	void addInstrument(const QString& strInstrumentID);
+	void addInstrument(unsigned int nInstrumentID);
+	bool checkUserInstrument(const QString& strInstrumentID);
+	bool checkUserInstrument(unsigned int nInstrumentID);
+
 private:
 	void _LoadDataFromCfgFile();
 	void _WriteDataToCfgFile();
@@ -40,6 +49,7 @@ private:
 	QString m_strFileDBPath;
 	QString m_strSQLiteDBPath;
 	QString m_strLastUpdateTime;
+	QStringList m_LstUserInstrument;
 
 private:
 	CConfigFileHelper* m_pConfigFileHelper;

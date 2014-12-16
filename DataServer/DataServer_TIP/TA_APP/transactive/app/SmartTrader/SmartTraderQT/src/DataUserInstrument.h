@@ -7,6 +7,7 @@
 #include <QtCore/QMutexLocker>
 
 class CItemUserInstrument;
+class CItemUserInstrumentHelper;
 
 class CDataUserInstrument
 {
@@ -22,9 +23,13 @@ private:
 	~CDataUserInstrument(void);
 public:
 	CItemUserInstrument*  getRootItem();
+	void addUserInstrument(unsigned int nInstrumentID);
+	void updateDataUserInstrument( unsigned int nInstrumentID );
 private:
-	CItemUserInstrument* m_pItemUserInstrument;
-
+	QMutex m_mutex_ItemUserInstrument_Root;
+	CItemUserInstrument* m_pItemUserInstrument_Root;
+	CItemUserInstrumentHelper* m_pItemUserInstrumentHelper;
+	//QList<unsigned int> m_LstInstrumentID;
 };
 
 //QT_END_NAMESPACE

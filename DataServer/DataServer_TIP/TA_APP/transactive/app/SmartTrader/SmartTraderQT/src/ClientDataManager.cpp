@@ -6,14 +6,17 @@
 //
 #include "SmartTraderClient.h"
 #include "ClientLoginParam.h"
+#include "ConfigInfo.h"
 //
 #include "HistoryDataRequest.h"
+#include "DataUserInstrument.h"
 //
 #include "DataTotalInstrument.h"
 #include "DataTotalMyInstrument.h"
 #include "StaticStockManager.h"
 
 #include "DataHistoryQuotesManager.h"
+#include "SignalSlotManager.h"
 //
 #include "Log4cppLogger.h"
 
@@ -43,10 +46,14 @@ CClientDataManager::CClientDataManager(void)
 	m_pSmartTraderClient = NULL;	
 	_InitTraderClient(NULL);
 
+	CConfigInfo::getInstance();
 	CStaticStockManager::getInstance();
 	CDataTotalMyInstrument::getInstance();
 	CDataTotalInstrument::getInstance();
 	CDataHistoryQuotesManager::getInstance();
+
+	CSignalSlotManager::getInstance().set_SignalSlot_DataChange_UserInstrument(this, NULL);
+
 }
 
 CClientDataManager::~CClientDataManager(void)
@@ -55,7 +62,7 @@ CClientDataManager::~CClientDataManager(void)
 	CDataTotalMyInstrument::removeInstance();
 	CStaticStockManager::removeInstance();
 	CDataTotalInstrument::removeInstance();
-
+	CConfigInfo::removeInstance();
 	_UnInitTraderClient();
 }
 
@@ -115,9 +122,9 @@ void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument
 
 	CDataTotalMyInstrument::getInstance().onInstrumentDownloaded(instrument);
 
-	if (1 == instrument.getInstrumentID())
+	if (CConfigInfo::getInstance().checkUserInstrument(instrument.getInstrumentID()))
 	{
-		m_pSmartTraderClient->subscribeMarketData(instrument.getInstrumentID());
+		_AddUserInstrument(instrument.getInstrumentID());
 	}
 }
 
@@ -127,7 +134,12 @@ void CClientDataManager::onMarketDataUpdate( const CMyMarketData &marketData )
 		<<" "<<"getSecurityID="<<marketData.getSecurityID();
 
 	CDataTotalMyInstrument::getInstance().onMarketDataUpdate(marketData);
-
+	if (CConfigInfo::getInstance().checkUserInstrument(marketData.getSecurityID()))
+	{
+		CDataUserInstrument::getInstance().updateDataUserInstrument(marketData.getSecurityID());
+		//emit
+		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
+	}
 }
 
 void CClientDataManager::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
@@ -179,5 +191,46 @@ void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistory
 
 }
 
+void CClientDataManager::_AddUserInstrument( unsigned int nInstrumentID )
+{
+	std::string strExchangeName;
+	std::string strUnderlyingCode;
+	std::string strInstrumentCode;
+	Instrument* pInstrumentRef = NULL;
+	CMyInstrument* pMyInstrumentRef = NULL;
 
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker _AddUserInstrument"
+		<<" "<<"nInstrumentID="<<nInstrumentID;
+
+	pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	pMyInstrumentRef = NULL;
+	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	{
+		return;
+	}
+
+	//save to configfile
+	CConfigInfo::getInstance().addInstrument(nInstrumentID);
+
+	{
+		//subscribe this instrument
+		MYLOG4CPP_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
+		m_pSmartTraderClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
+	}
+
+
+	{
+		/*	
+		add to CDataUserInstrument
+		remove from CDataInstrument will at slotInstrumentViewResetData()
+		*/
+		CDataUserInstrument::getInstance().addUserInstrument(nInstrumentID);
+		//emit
+		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
+	}
+
+
+}
 

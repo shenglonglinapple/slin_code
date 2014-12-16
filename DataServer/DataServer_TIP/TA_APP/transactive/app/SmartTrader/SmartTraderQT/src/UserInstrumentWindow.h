@@ -4,8 +4,6 @@
 #include <QtGui/QWidget>
 #include <QtGui/QMdiSubWindow>
 
-class CItemModelUserInstrument;
-class CUserInstrumentTableView;
 
 //class IconDelegate;
 class CUserInstrumentWindow : public QMdiSubWindow
@@ -16,9 +14,6 @@ public:
 	~CUserInstrumentWindow();
 public:
 	QSize sizeHint() const;
-private:
-	CItemModelUserInstrument* m_pItemModelUserInstrument;
-	CUserInstrumentTableView* m_pUserInstrumentTableView;
 };
 
 //QT_END_NAMESPACE

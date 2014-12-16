@@ -7,6 +7,7 @@
 
 #include "Log4cppLogger.h"
 
+static const std::string DEFAULT_STRING_VALUE_STRING_SPLIT = ",";
 
 
 CConfigInfo* CConfigInfo::m_pInstance = 0;
@@ -91,6 +92,8 @@ void CConfigInfo::_LoadDataFromCfgFile()
 {
 	m_strFileDBPath = m_pConfigFileHelper->getFileDBPathFormConfig();
 	m_strSQLiteDBPath = m_pConfigFileHelper->getSQLiteDBPathFormConfig();
+	m_strLastUpdateTime = m_pConfigFileHelper->getLastUpdateTimeFormConfig();
+	m_LstUserInstrument = m_pConfigFileHelper->getUserInstrumentFormConfig().split(DEFAULT_STRING_VALUE_STRING_SPLIT.c_str());
 }
 
 void CConfigInfo::_WriteDataToCfgFile()
@@ -98,10 +101,91 @@ void CConfigInfo::_WriteDataToCfgFile()
 	m_pConfigFileHelper->setFileDBPathToConfig(m_strFileDBPath);
 	m_pConfigFileHelper->setSQLiteDBPathToConfig(m_strSQLiteDBPath);
 	m_pConfigFileHelper->setLastUpdateTimeToConfig(m_strLastUpdateTime);
-
+	m_pConfigFileHelper->setUserInstrumentToConfig(m_LstUserInstrument.join(DEFAULT_STRING_VALUE_STRING_SPLIT.c_str()));
 }
 
 
+QStringList CConfigInfo::getLstUserInstrument()
+{
+	return m_LstUserInstrument;
+}
 
-//QT_END_NAMESPACE
+void CConfigInfo::removeInstrument(const QString& strInstrumentID)
+{
+	QStringList lstStringValue;
+	QStringList lstStringValueNew;
+	QString  strValue;
 
+	lstStringValue = getLstUserInstrument();
+
+	foreach (const QString& strValue, lstStringValue)
+	{
+		if (strInstrumentID != strValue)
+		{
+			lstStringValueNew.push_back(strValue);
+		}
+	}
+
+	setLstUserInstrument(lstStringValueNew);
+
+
+}
+
+void CConfigInfo::addInstrument(const QString& strInstrumentID)
+{
+	QStringList lstStringValue;
+	lstStringValue = getLstUserInstrument();
+
+	if (!lstStringValue.contains(strInstrumentID))
+	{
+		lstStringValue.push_back(strInstrumentID);
+		setLstUserInstrument(lstStringValue);
+	}
+}
+
+void CConfigInfo::addInstrument( unsigned int nInstrumentID )
+{
+	QString strUserInstruemt;
+	strUserInstruemt = QString("%1").arg(nInstrumentID);
+
+	addInstrument(strUserInstruemt);
+}
+
+void CConfigInfo::setLstUserInstrument( QStringList& lstStringValue )
+{
+	QString strValue;
+	QString strValueGet;
+
+	strValue = lstStringValue.join(DEFAULT_STRING_VALUE_STRING_SPLIT.c_str());//","
+	m_pConfigFileHelper->setUserInstrumentToConfig(strValue);
+
+	//refush memory data
+	strValueGet = m_pConfigFileHelper->getUserInstrumentFormConfig();
+	m_LstUserInstrument.clear();
+	if (!strValueGet.isEmpty())
+	{
+		m_LstUserInstrument = strValueGet.split(DEFAULT_STRING_VALUE_STRING_SPLIT.c_str());//","
+	}
+
+
+}
+bool CConfigInfo::checkUserInstrument( const QString& strInstrumentID )
+{
+	bool bFunRes = false;
+	//subscribeMarketData user hot Instrument
+	QStringList LstUserInstrument;
+	LstUserInstrument = CConfigInfo::getInstance().getLstUserInstrument();
+	if (LstUserInstrument.contains(strInstrumentID))
+	{
+		bFunRes = true;
+	}
+
+	return bFunRes;
+}
+
+bool CConfigInfo::checkUserInstrument( unsigned int nInstrumentID )
+{
+	QString strUserInstruemt;
+	strUserInstruemt = QString("%1").arg(nInstrumentID);
+	return checkUserInstrument(strUserInstruemt);
+}

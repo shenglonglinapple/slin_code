@@ -2,6 +2,7 @@
 #define __CLASS_CLIENT_MAIN_WINDOW_HH__
 
 #include <QtGui/QMainWindow>
+#include <QtGui/QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 class QFormLayout;
@@ -28,6 +29,11 @@ class CClientMainWindow : public QMainWindow
 public:
     CClientMainWindow(QWidget *parent = 0);
     ~CClientMainWindow();
+signals:
+	void signal_Exit_ClientMainWindow();
+public:
+	//QWidget virtual void closeEvent(QCloseEvent *);
+	void closeEvent(QCloseEvent* pEvent);
 private:
 	void _SetupUi();
 

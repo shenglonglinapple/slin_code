@@ -38,13 +38,14 @@ signals:
 
 public:
 	int loginToServer(CClientLoginParam* pClientLoginParam);
-
 	void downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest);
 public:
 	void onInstrumentDownloaded(const CMyInstrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate( const CMyMarketData &marketData );
 	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars );
 	void onBarDataUpdate(const BarSummary &barData);
+private:
+	void _AddUserInstrument( unsigned int nInstrumentID );
 
 private:
 	void _InitTraderClient(CClientLoginParam* pClientLoginParam);

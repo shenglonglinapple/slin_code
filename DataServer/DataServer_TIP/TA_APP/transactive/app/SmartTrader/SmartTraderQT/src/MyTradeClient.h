@@ -6,6 +6,7 @@
 #include "MyMarketData.h"
 
 class CDataWorker;
+class CDataRealTimeWorker;
 
 class CMyTradeClient
 {
@@ -51,6 +52,7 @@ private:
 
 private:
 	CDataWorker* m_pDataWorker;
+	CDataRealTimeWorker* m_pDataRealTimeWorker;
 };
 
 

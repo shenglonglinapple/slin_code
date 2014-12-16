@@ -73,7 +73,7 @@ void CDataTotalInstrument::onInstrumentDownloaded( const Instrument& instrument 
 
 		m_MapInstrumentIDData.insert(nGetInstrumentID, pInstrumentRef);
 		
-		if (m_MapInstrumentIDData.size() == 2298)
+		//if (m_MapInstrumentIDData.size() == 2298)
 		{
 			MYLOG4CPP_DEBUG<<"CDataTotalInstrument"
 				<<" "<<"onInstrumentDownloaded"
@@ -101,9 +101,11 @@ Instrument* CDataTotalInstrument::findInstrumentByID(unsigned int nInstrumentID)
 		QMutexLocker lock(&m_mutexForMapInstrumentIDData);
 		if (false == m_MapInstrumentIDData.contains(nInstrumentID))
 		{
+			/*
 			MYLOG4CPP_ERROR<<"not find nInstrumentID="<<nInstrumentID
-				<<" "<<"in m_MapInstrumentIDData"
-				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
+			<<" "<<"in m_MapInstrumentIDData"
+			<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
+			*/
 			pInstrumentRef = NULL;
 			return pInstrumentRef;
 		}

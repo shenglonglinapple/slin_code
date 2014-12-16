@@ -206,7 +206,28 @@ void CItemUserInstrument::resetCurrentNodeData(CItemUserInstrumentHelper* pItemU
 {
 	m_ItemData.clear();
 	pItemUserInstrumentHelper->getItemNodeData(m_ItemData);
+	m_nNodeKey = pItemUserInstrumentHelper->getInstrumentID();
 }
+void CItemUserInstrument::findAndResetSubNodeData( CItemUserInstrumentHelper* pItemUserInstrumentHelper )
+{
+	QList<CItemUserInstrument*>::iterator iterLst;
+	CItemUserInstrument* pSubNode = NULL;
+
+	iterLst = m_LstChildItems.begin();
+	while (iterLst != m_LstChildItems.end())
+	{
+		pSubNode = NULL;
+		pSubNode = (*iterLst);
+		if (NULL != pSubNode && (pSubNode->m_nNodeKey == pItemUserInstrumentHelper->getInstrumentID()))
+		{
+			pSubNode->resetCurrentNodeData(pItemUserInstrumentHelper);
+			break;
+		}
+		iterLst++;
+	}
+
+}
+
 void CItemUserInstrument::appendChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper)
 {
 	CItemUserInstrument* pNewNode = NULL;
@@ -225,5 +246,6 @@ CItemUserInstrument::EItemType CItemUserInstrument::getItemType()
 {
 	return m_nItemType;
 }
+
 
 

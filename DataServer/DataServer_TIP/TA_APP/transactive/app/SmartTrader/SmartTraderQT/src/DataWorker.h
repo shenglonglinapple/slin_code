@@ -22,15 +22,6 @@ private:
 		ReqWokerState_End,
 	};
 
-	enum EDataWorkerState
-	{
-		DataWorkerState_Begin,
-		
-		DataWorkerState_UpdateStockRealTimeInfo,
-
-		DataWorkerState_End,
-	};
-
 public:
 	CDataWorker(void);
 	~CDataWorker(void);
@@ -45,8 +36,6 @@ private:
 private:
 	bool	m_toTerminate;
 	EReqWorkerState  m_nReqWorkerState;
-	EDataWorkerState m_nDataWorkerState;
-
 
 public:
 	void setDataProcessHandle(CMyTradeClient* pHandle);
@@ -54,7 +43,6 @@ public:
 private:
 	void _Free_LstReqData();
 	void _DoJob_CheckProcessReq();
-	void _DoJob_UpdateStockRealTimeInfo();
 	CReqData* _TryGet_ReqData();
 	void _ProcessReq_DownLoadStockID();
 	void _ProcessReq_SubscribeMarketData();

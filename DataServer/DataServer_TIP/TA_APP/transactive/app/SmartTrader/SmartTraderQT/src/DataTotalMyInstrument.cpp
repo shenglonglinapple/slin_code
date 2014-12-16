@@ -71,11 +71,14 @@ void CDataTotalMyInstrument::onInstrumentDownloaded( const CMyInstrument& instru
 		*pNewInstrument = instrument;
 		m_MapInstrumentIDData.insert(nGetInstrumentID, pNewInstrument);
 		
-		MYLOG4CPP_DEBUG<<"CDataTotalInstrument"
-			<<" "<<"onInstrumentDownloaded"
-			<<" "<<"m_MapInstrumentIDData.size="<<m_MapInstrumentIDData.size();
-		strLogInfo = "onInstrumentDownloaded";
-		m_pProjectLogHelper->log_MyInstrument_info(__FILE__, __LINE__, strLogInfo, pNewInstrument);
+		if (m_MapInstrumentIDData.size() == 2298)
+		{
+			MYLOG4CPP_DEBUG<<"CDataTotalMyInstrument"
+				<<" "<<"onInstrumentDownloaded"
+				<<" "<<"m_MapInstrumentIDData.size="<<m_MapInstrumentIDData.size();
+			strLogInfo = "onInstrumentDownloaded";
+			m_pProjectLogHelper->log_MyInstrument_info(__FILE__, __LINE__, strLogInfo, pNewInstrument);
+		}
 		pNewInstrument = NULL;		
 	}
 
@@ -129,9 +132,12 @@ CMyInstrument* CDataTotalMyInstrument::findInstrumentByID(unsigned int nInstrume
 		QMutexLocker lock(&m_mutexForMapInstrumentIDData);
 		if (false == m_MapInstrumentIDData.contains(nInstrumentID))
 		{
+			/*
 			MYLOG4CPP_ERROR<<"not find nInstrumentID="<<nInstrumentID
-				<<" "<<"in m_MapInstrumentIDData"
-				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
+			<<" "<<"in m_MapInstrumentIDData"
+			<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
+			*/
+			
 			pInstrumentRef = NULL;
 			return pInstrumentRef;
 		}

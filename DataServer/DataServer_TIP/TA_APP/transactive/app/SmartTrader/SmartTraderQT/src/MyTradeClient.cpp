@@ -1,10 +1,14 @@
 #include "MyTradeClient.h"
 
 #include "DataWorker.h"
+#include "DataRealTimeWorker.h"
+
 #include "ReqData.h"
 #include "StockData.h"
 #include "StaticStockManager.h"
 #include "Log4cppLogger.h"
+
+
 
 CMyTradeClient::CMyTradeClient( const std::string &username, const std::string &password, bool enableDebug /*= false*/ )
 {
@@ -21,6 +25,11 @@ CMyTradeClient::CMyTradeClient( const std::string &username, const std::string &
 	m_pDataWorker = new CDataWorker();
 	m_pDataWorker->setDataProcessHandle(this);
 	m_pDataWorker->start();
+
+	m_pDataRealTimeWorker = NULL;
+	m_pDataRealTimeWorker = new CDataRealTimeWorker();
+	m_pDataRealTimeWorker->setDataProcessHandle(this);
+	m_pDataRealTimeWorker->start();
 }
 
 CMyTradeClient::~CMyTradeClient( void )
@@ -30,6 +39,13 @@ CMyTradeClient::~CMyTradeClient( void )
 		m_pDataWorker->terminateAndWait();
 		delete m_pDataWorker;
 		m_pDataWorker = NULL;
+	}
+
+	if (NULL != m_pDataRealTimeWorker)
+	{
+		m_pDataRealTimeWorker->terminateAndWait();
+		delete m_pDataRealTimeWorker;
+		m_pDataRealTimeWorker = NULL;
 	}
 }
 

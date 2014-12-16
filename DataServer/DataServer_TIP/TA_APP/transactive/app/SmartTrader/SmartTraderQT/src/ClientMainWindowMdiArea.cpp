@@ -1,12 +1,16 @@
 #include "ClientMainWindowMdiArea.h"
-#include "UserInstrumentWindow.h"
+
+
+
+#include "UserInstrumentTableView.h"
 
 
 CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)
     : QMdiArea(parent)
 {
     //this->resize(200, 300);
-	m_pUserInstrumentWindow = NULL;
+
+	m_pUserInstrumentTableView = NULL;
 
 	_SetupUi();
 	_TranslateLanguage();
@@ -21,11 +25,14 @@ CClientMainWindowMdiArea::~CClientMainWindowMdiArea()
 
 void CClientMainWindowMdiArea::_SetupUi()
 {
+	m_pUserInstrumentTableView = new CUserInstrumentTableView(this);
+	//m_pUserInstrumentTableView->move(10, 10);
+	//m_pUserInstrumentTableView->resize(200, 200);
+
 	this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	this->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+	this->addSubWindow(m_pUserInstrumentTableView);
 
-	m_pUserInstrumentWindow = new CUserInstrumentWindow(this);
-	this->addSubWindow(m_pUserInstrumentWindow);
 
 	foreach (QMdiSubWindow *pSubWindow, this->subWindowList()) 
 	{

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <time.h>
+#include <QtCore/QString>
 
 #include "MyBar.h"
 
@@ -25,7 +26,9 @@ public:
 		const std::string& file, int line, 
 		const std::string& strLogInfo, 
 		Instrument* pInstrument);
-
+public:
+	std::string getStdString(const std::string& strValue);
+	std::string getStdString(const QString& strValue);
 
 private:
 	CQtTimeHelper* m_QtTimeHelper;

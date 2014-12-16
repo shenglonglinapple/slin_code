@@ -28,6 +28,14 @@ CClientMainWindow::~CClientMainWindow()
 
 }
 
+
+void CClientMainWindow::closeEvent( QCloseEvent* pEvent )
+{
+	pEvent->accept();
+	emit signal_Exit_ClientMainWindow();
+}
+
+
 void CClientMainWindow::_CreateMenuBar()
 {
 	m_pClientMainWindowMenuBar = new CClientMainWindowMenuBar(this);

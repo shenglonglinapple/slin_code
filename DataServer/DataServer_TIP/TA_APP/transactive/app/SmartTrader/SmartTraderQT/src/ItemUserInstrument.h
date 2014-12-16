@@ -43,6 +43,7 @@ public:
 	bool setData(int column, const QVariant &value);
 ///////////////////
 public:
+	void findAndResetSubNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
 	void resetCurrentNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
 	void appendChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper);
 	EItemType getItemType();
@@ -58,6 +59,8 @@ private:
 	QList<CItemUserInstrument*> m_LstChildItems;
 private:
 	CItemUserInstrumentHelper* m_pItemUserInstrumentHelper;
+public:
+	unsigned int m_nNodeKey;
 };//CItemUserInstrument
 
 
