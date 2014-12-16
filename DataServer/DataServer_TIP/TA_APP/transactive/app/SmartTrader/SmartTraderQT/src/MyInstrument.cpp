@@ -430,7 +430,7 @@ void CMyInstrument::setValue( const Instrument* pInstrument )
 
 	m_fValuePerPoint  = pInstrument->getValuePerPoint();
 	m_nLegSize = pInstrument->getLegSize();
-	m_nLegSecurityID  = pInstrument->getLegSecurityID(0);
+	//m_nLegSecurityID  = pInstrument->getLegSecurityID(0);
 	m_nMarketStatus = pInstrument->getMarketStatus();
 	m_nSecurityType = pInstrument->getSecurityType();
 	m_nOrderTypes  = pInstrument->getOrderTypes();
