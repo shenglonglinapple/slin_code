@@ -9,11 +9,13 @@
 #include "ConfigInfo.h"
 //
 #include "HistoryDataRequest.h"
-#include "DataUserInstrument.h"
 //
 #include "DataTotalInstrument.h"
 #include "DataTotalMyInstrument.h"
 #include "StaticStockManager.h"
+//
+#include "DataUserInstrument.h"
+#include "DataWaitingInstrument.h"
 
 #include "DataHistoryQuotesManager.h"
 #include "SignalSlotManager.h"
@@ -51,6 +53,8 @@ CClientDataManager::CClientDataManager(void)
 	CDataTotalMyInstrument::getInstance();
 	CDataTotalInstrument::getInstance();
 	CDataHistoryQuotesManager::getInstance();
+	CDataUserInstrument::getInstance();
+	CDataWaitingInstrument::getInstance();
 
 	CSignalSlotManager::getInstance().set_SignalSlot_DataChange_UserInstrument(this, NULL);
 
@@ -58,6 +62,8 @@ CClientDataManager::CClientDataManager(void)
 
 CClientDataManager::~CClientDataManager(void)
 {		
+	CDataWaitingInstrument::removeInstance();
+	CDataUserInstrument::removeInstance();
 	CDataHistoryQuotesManager::removeInstance();
 	CDataTotalMyInstrument::removeInstance();
 	CStaticStockManager::removeInstance();
@@ -121,6 +127,8 @@ void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument
 
 
 	CDataTotalMyInstrument::getInstance().onInstrumentDownloaded(instrument);
+	CDataWaitingInstrument::getInstance().addInstrument(instrument.getInstrumentID());
+
 
 	if (CConfigInfo::getInstance().checkUserInstrument(instrument.getInstrumentID()))
 	{

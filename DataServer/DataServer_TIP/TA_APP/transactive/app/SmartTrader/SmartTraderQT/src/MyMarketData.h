@@ -13,7 +13,7 @@ public:
 	~CMyMarketData();
 
 	CMyMarketData(const CMyMarketData &);
-	CMyMarketData & operator= (const CMyMarketData &);
+	CMyMarketData & operator= (const CMyMarketData &objcopy);
 
 	void setSecurityID(unsigned int secID);
 	unsigned int getSecurityID() const;
@@ -34,6 +34,8 @@ public:
 public:
 	void setValue(const std::string& strData);
 	void setValue(const MarketData& marketData);
+private:
+	void _Clear();
 private:
 	unsigned int m_nSecurityID;
 	int m_nMarketStatus;

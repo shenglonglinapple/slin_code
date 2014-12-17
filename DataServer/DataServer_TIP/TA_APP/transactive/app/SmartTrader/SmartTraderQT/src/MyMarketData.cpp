@@ -7,30 +7,73 @@
 
 CMyMarketData::CMyMarketData()
 {
-
+	_Clear();
 }
 
 CMyMarketData::CMyMarketData( unsigned int secID )
 {
-
-}
+	_Clear();
+}	
 
 CMyMarketData::CMyMarketData( const CMyMarketData & )
 {
-
+	_Clear();
 }
 
 CMyMarketData::~CMyMarketData()
 {
-
+	_Clear();
 }
 
-CMyMarketData & CMyMarketData::operator=( const CMyMarketData & )
+CMyMarketData & CMyMarketData::operator=( const CMyMarketData & objcopy)
 {
+	m_nSecurityID = objcopy.m_nSecurityID;
+	m_nMarketStatus = objcopy.m_nMarketStatus;
+	m_nTime = objcopy.m_nTime;
+	m_nVolume_OPEN_INTEREST = objcopy.m_nVolume_OPEN_INTEREST;
+	m_nVolume_OPENING_VOLUME = objcopy.m_nVolume_OPENING_VOLUME;
+	m_nVolume_LAST_TRADED_VOLUME = objcopy.m_nVolume_LAST_TRADED_VOLUME;
+	m_nVolume_TOTAL_TRADED_VOLUME = objcopy.m_nVolume_TOTAL_TRADED_VOLUME;
+	m_nBidVol = objcopy.m_nBidVol;
+	m_nAskVol = objcopy.m_nAskVol;
+	m_fPrice_OPENNING_PRICE = objcopy.m_fPrice_OPENNING_PRICE;
+	m_fPrice_SESSION_HIGH = objcopy.m_fPrice_SESSION_HIGH;
+	m_fPrice_SESSION_LOW = objcopy.m_fPrice_SESSION_LOW;
+	m_fPrice_REFERENCE_PRICE = objcopy.m_fPrice_REFERENCE_PRICE;
+	m_fPrice_YESTERDAY_SETTLMENT_PRICE = objcopy.m_fPrice_YESTERDAY_SETTLMENT_PRICE;
+	m_fPrice_LAST_TRADED_PRICE = objcopy.m_fPrice_LAST_TRADED_PRICE;
+	m_fPrice_SETTLEMENT_PRICE = objcopy.m_fPrice_SETTLEMENT_PRICE;
+	m_fBidPx = objcopy.m_fBidPx;
+	m_fAskPx = objcopy.m_fAskPx;
+	m_nDataBits = objcopy.m_nDataBits;
+	m_nChangeBits = objcopy.m_nChangeBits;
 
 	return *this;
 }
+void CMyMarketData::_Clear()
+{
+	m_nSecurityID = 0;
+	m_nMarketStatus = 0;
+	m_nTime = 0;
+	m_nVolume_OPEN_INTEREST = 0;
+	m_nVolume_OPENING_VOLUME = 0;
+	m_nVolume_LAST_TRADED_VOLUME = 0;
+	m_nVolume_TOTAL_TRADED_VOLUME = 0;
+	m_nBidVol = 0;
+	m_nAskVol = 0;
+	m_fPrice_OPENNING_PRICE = 0;
+	m_fPrice_SESSION_HIGH = 0;
+	m_fPrice_SESSION_LOW = 0;
+	m_fPrice_REFERENCE_PRICE = 0;
+	m_fPrice_YESTERDAY_SETTLMENT_PRICE = 0;
+	m_fPrice_LAST_TRADED_PRICE = 0;
+	m_fPrice_SETTLEMENT_PRICE = 0;
+	m_fBidPx = 0;
+	m_fAskPx = 0;
+	m_nDataBits = 0;
+	m_nChangeBits = 0;
 
+}
 void CMyMarketData::setSecurityID( unsigned int secID )
 {
 	m_nSecurityID = secID;

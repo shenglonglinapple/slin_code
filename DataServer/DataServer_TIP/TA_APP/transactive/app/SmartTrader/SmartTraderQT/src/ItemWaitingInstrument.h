@@ -1,5 +1,5 @@
-#ifndef __CLASS_ITEM_USER_INSTRUMENT_HH__
-#define __CLASS_ITEM_USER_INSTRUMENT_HH__
+#ifndef __CLASS_ITEM_WAITING_INSTRUMENT_HH__
+#define __CLASS_ITEM_WAITING_INSTRUMENT_HH__
 
 
 #include <QtCore/QObject>
@@ -12,57 +12,61 @@
 //QT_BEGIN_NAMESPACE
 //QT_END_NAMESPACE
 
-class CItemUserInstrumentHelper;
+class CItemWaitingInstrumentHelper;
 
-class CItemUserInstrument
+class CItemWaitingInstrument
 {
 public:
 	enum EItemType
 	{ 
 		ItemType_ROOT,
-		ItemType_ITEM,
+		ItemType_ITEM1_ExchangeName,
+		ItemType_ITEM2_UnderlyingCode,
+		ItemType_ITEM3_InstrumentCode,
 	};
 public:
 	/*init item ROOT*/
-	CItemUserInstrument();
+	CItemWaitingInstrument();
 	/*init item ITEM*/
-	CItemUserInstrument(QList<QVariant>& ItemData, CItemUserInstrument *parent);
-	~CItemUserInstrument();
+	CItemWaitingInstrument(QList<QVariant>& ItemData, CItemWaitingInstrument *parent);
+	~CItemWaitingInstrument();
 
-	void appendChild(CItemUserInstrument** ppItem);
-	CItemUserInstrument *child(int number);
+	void appendChild(CItemWaitingInstrument** ppItem);
+	CItemWaitingInstrument *child(int number);
 	int childCount() const;
 	int columnCount() const;
 	QVariant data(int column) const;
 	bool insertChildren(int position, int count, int columns);
 	bool insertColumns(int position, int columns);
-	CItemUserInstrument *parent();
+	CItemWaitingInstrument *parent();
 	bool removeChildren(int position, int count);
 	bool removeColumns(int position, int columns);
 	int childNumber() const;
 	bool setData(int column, const QVariant &value);
 ///////////////////
 public:
-	void findAndResetSubNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
-	void resetCurrentNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
-	void appendChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper);
+	void AnalysisAndAppendChild( CItemWaitingInstrumentHelper* pHelper);
+	void resetCurrentNodeData(CItemWaitingInstrumentHelper* pHelper );
+	void appendChildByData(CItemWaitingInstrumentHelper* pHelper);
 	EItemType getItemType();
+	void setItemType(EItemType nType);
 	unsigned int getNodeKey();
+	void AnalysisAndRemoveChild(CItemWaitingInstrumentHelper* pHelper);
 private:
 	/*
 	if ItemDataType_ROOT itemData is column Name parentItem is NULL
 	if ItemDataType_ITEM itemData is one row columns value parentItem have value
 	*/
 	QList<QVariant> m_ItemData;
-	CItemUserInstrument* m_pParentItem;
+	CItemWaitingInstrument* m_pParentItem;
 	EItemType m_nItemType;
 private:
-	QList<CItemUserInstrument*> m_LstChildItems;
+	QList<CItemWaitingInstrument*> m_LstChildItems;
 private:
-	CItemUserInstrumentHelper* m_pItemUserInstrumentHelper;
+	CItemWaitingInstrumentHelper* m_pItemWaitingInstrumentHelper;
 private:
 	unsigned int m_nNodeKey;
-};//CItemUserInstrument
+};//CItemWaitingInstrument
 
 
 #endif//__CLASS_ITEM_USER_INSTRUMENT_HH__

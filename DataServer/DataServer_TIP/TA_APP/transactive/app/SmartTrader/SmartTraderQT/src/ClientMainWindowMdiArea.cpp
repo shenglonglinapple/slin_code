@@ -25,20 +25,16 @@ CClientMainWindowMdiArea::~CClientMainWindowMdiArea()
 
 void CClientMainWindowMdiArea::_SetupUi()
 {
-	m_pUserInstrumentTableView = new CUserInstrumentTableView(this);
-	//m_pUserInstrumentTableView->move(10, 10);
-	//m_pUserInstrumentTableView->resize(200, 200);
-
 	this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	this->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+	m_pUserInstrumentTableView = new CUserInstrumentTableView(this);
 	this->addSubWindow(m_pUserInstrumentTableView);
 
 
 	foreach (QMdiSubWindow *pSubWindow, this->subWindowList()) 
 	{
 		//TestChildWindow *mdiChild = qobject_cast<TestChildWindow *>(window->widget());
-		//pSubWindow->move(10, 10);
-		//pSubWindow->resize(200, 300);
 		this->setActiveSubWindow(pSubWindow);
 	}
 }

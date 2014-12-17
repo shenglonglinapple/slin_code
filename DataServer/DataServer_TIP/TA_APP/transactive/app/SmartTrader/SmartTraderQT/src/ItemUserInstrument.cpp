@@ -218,7 +218,7 @@ void CItemUserInstrument::findAndResetSubNodeData( CItemUserInstrumentHelper* pI
 	{
 		pSubNode = NULL;
 		pSubNode = (*iterLst);
-		if (NULL != pSubNode && (pSubNode->m_nNodeKey == pItemUserInstrumentHelper->getInstrumentID()))
+		if (NULL != pSubNode && (pSubNode->getNodeKey() == pItemUserInstrumentHelper->getInstrumentID()))
 		{
 			pSubNode->resetCurrentNodeData(pItemUserInstrumentHelper);
 			break;
@@ -245,6 +245,11 @@ void CItemUserInstrument::appendChildByData(CItemUserInstrumentHelper* pItemUser
 CItemUserInstrument::EItemType CItemUserInstrument::getItemType()
 {
 	return m_nItemType;
+}
+
+unsigned int CItemUserInstrument::getNodeKey()
+{
+	return m_nNodeKey;
 }
 
 
