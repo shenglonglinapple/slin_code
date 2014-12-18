@@ -36,22 +36,27 @@ public:
 	int childCount() const;
 	int columnCount() const;
 	QVariant data(int column) const;
-	bool insertChildren(int position, int count, int columns);
-	bool insertColumns(int position, int columns);
 	CItemWaitingInstrument *parent();
 	bool removeChildren(int position, int count);
-	bool removeColumns(int position, int columns);
 	int childNumber() const;
 	bool setData(int column, const QVariant &value);
 ///////////////////
 public:
+	int indexOfChildren(CItemWaitingInstrument* pChildrenItem) const;
+
+public:
 	void AnalysisAndAppendChild( CItemWaitingInstrumentHelper* pHelper);
+	void AnalysisAndRemoveChild(CItemWaitingInstrumentHelper* pHelper);
+
 	void resetCurrentNodeData(CItemWaitingInstrumentHelper* pHelper );
 	void appendChildByData(CItemWaitingInstrumentHelper* pHelper);
+
+public:
 	EItemType getItemType();
 	void setItemType(EItemType nType);
 	unsigned int getNodeKey();
-	void AnalysisAndRemoveChild(CItemWaitingInstrumentHelper* pHelper);
+private:
+	void _FreeMap();
 private:
 	/*
 	if ItemDataType_ROOT itemData is column Name parentItem is NULL
@@ -61,7 +66,9 @@ private:
 	CItemWaitingInstrument* m_pParentItem;
 	EItemType m_nItemType;
 private:
-	QList<CItemWaitingInstrument*> m_LstChildItems;
+	//use map for sort string
+	QMap<QString, CItemWaitingInstrument*> m_MapChildItems;
+	//QList<CItemWaitingInstrument*> m_LstChildItems;
 private:
 	CItemWaitingInstrumentHelper* m_pItemWaitingInstrumentHelper;
 private:

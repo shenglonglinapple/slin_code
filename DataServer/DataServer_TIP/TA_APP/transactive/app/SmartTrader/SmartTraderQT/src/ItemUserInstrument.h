@@ -46,6 +46,8 @@ public:
 	void findAndResetSubNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
 	void resetCurrentNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
 	void appendChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper);
+	void removeChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper);
+
 	EItemType getItemType();
 	unsigned int getNodeKey();
 private:

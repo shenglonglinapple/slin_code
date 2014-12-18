@@ -56,7 +56,7 @@ CClientDataManager::CClientDataManager(void)
 	CDataUserInstrument::getInstance();
 	CDataWaitingInstrument::getInstance();
 
-	CSignalSlotManager::getInstance().set_SignalSlot_DataChange_UserInstrument(this, NULL);
+	CSignalSlotManager::getInstance().set_Signal_DataChange_UserInstrument(this);
 
 }
 
@@ -132,7 +132,7 @@ void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument
 
 	if (CConfigInfo::getInstance().checkUserInstrument(instrument.getInstrumentID()))
 	{
-		_AddUserInstrument(instrument.getInstrumentID());
+		addUserInstrument(instrument.getInstrumentID());
 	}
 }
 
@@ -199,7 +199,7 @@ void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistory
 
 }
 
-void CClientDataManager::_AddUserInstrument( unsigned int nInstrumentID )
+void CClientDataManager::addUserInstrument( unsigned int nInstrumentID )
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -207,7 +207,7 @@ void CClientDataManager::_AddUserInstrument( unsigned int nInstrumentID )
 	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker _AddUserInstrument"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker addUserInstrument"
 		<<" "<<"nInstrumentID="<<nInstrumentID;
 
 	pInstrumentRef = NULL;
@@ -232,8 +232,9 @@ void CClientDataManager::_AddUserInstrument( unsigned int nInstrumentID )
 	{
 		/*	
 		add to CDataUserInstrument
-		remove from CDataInstrument will at slotInstrumentViewResetData()
+		remove from CDataWaitingInstrument
 		*/
+		CDataWaitingInstrument::getInstance().removeInstrument(nInstrumentID);
 		CDataUserInstrument::getInstance().addUserInstrument(nInstrumentID);
 		//emit
 		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
@@ -242,3 +243,47 @@ void CClientDataManager::_AddUserInstrument( unsigned int nInstrumentID )
 
 }
 
+
+void CClientDataManager::removeUserInstrument( unsigned int nInstrumentID )
+{
+	std::string strExchangeName;
+	std::string strUnderlyingCode;
+	std::string strInstrumentCode;
+	Instrument* pInstrumentRef = NULL;
+	CMyInstrument* pMyInstrumentRef = NULL;
+
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker removeUserInstrument"
+		<<" "<<"nInstrumentID="<<nInstrumentID;
+
+	pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	pMyInstrumentRef = NULL;
+	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	{
+		return;
+	}
+
+	//save to configfile
+	CConfigInfo::getInstance().removeInstrument(nInstrumentID);
+
+	{
+		//subscribe this instrument
+		MYLOG4CPP_DEBUG<<"unsubscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
+		m_pSmartTraderClient->unsubscribeMarketData(nInstrumentID);//subscribe this Instrument market data
+	}
+
+
+	{
+		/*	
+		add to CDataWaitingInstrument
+		remove from CDataUserInstrument
+		*/
+		CDataUserInstrument::getInstance().removeUserInstrument(nInstrumentID);
+		CDataWaitingInstrument::getInstance().addInstrument(nInstrumentID);
+		//emit
+		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
+	}
+
+
+}

@@ -25,6 +25,7 @@ public:
 	CItemUserInstrument*  getRootItem();
 	void addUserInstrument(unsigned int nInstrumentID);
 	void updateDataUserInstrument( unsigned int nInstrumentID );
+	void removeUserInstrument( unsigned int nInstrumentID );
 private:
 	QMutex m_mutex_ItemUserInstrument_Root;
 	CItemUserInstrument* m_pItemUserInstrument_Root;

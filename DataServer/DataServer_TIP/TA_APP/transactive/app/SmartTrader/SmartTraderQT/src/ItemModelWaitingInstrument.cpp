@@ -229,44 +229,8 @@ CItemWaitingInstrument* CItemModelWaitingInstrument::_GetItem( const QModelIndex
 	return m_pRootItemRef;
 }
 
-bool CItemModelWaitingInstrument::insertRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
-{
-	CItemWaitingInstrument *parentItem = _GetItem(parent);
-	bool success;
 
-	beginInsertRows(parent, position, position + rows - 1);
-	success = parentItem->insertChildren(position, rows, m_pRootItemRef->columnCount());
-	endInsertRows();
 
-	return success;
-}
-
-bool CItemModelWaitingInstrument::removeColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
-{
-	bool success;
-
-	beginRemoveColumns(parent, position, position + columns - 1);
-	success = m_pRootItemRef->removeColumns(position, columns);
-	endRemoveColumns();
-
-	if (m_pRootItemRef->columnCount() == 0)
-	{
-		removeRows(0, rowCount());
-	}
-
-	return success;
-}
-
-bool CItemModelWaitingInstrument::insertColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
-{
-	bool success;
-
-	beginInsertColumns(parent, position, position + columns - 1);
-	success = m_pRootItemRef->insertColumns(position, columns);
-	endInsertColumns();
-
-	return success;
-}
 
 bool CItemModelWaitingInstrument::setHeaderData( int section, Qt::Orientation orientation, const QVariant &value, int role /*= Qt::EditRole*/ )
 {

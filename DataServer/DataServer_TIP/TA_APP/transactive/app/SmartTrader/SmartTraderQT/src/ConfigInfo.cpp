@@ -131,6 +131,15 @@ void CConfigInfo::removeInstrument(const QString& strInstrumentID)
 
 }
 
+void CConfigInfo::removeInstrument( unsigned int nInstrumentID )
+{
+	QString strUserInstruemt;
+	strUserInstruemt = QString("%1").arg(nInstrumentID);
+
+	removeInstrument(strUserInstruemt);
+
+}
+
 void CConfigInfo::addInstrument(const QString& strInstrumentID)
 {
 	QStringList lstStringValue;

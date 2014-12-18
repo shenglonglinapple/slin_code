@@ -29,14 +29,15 @@ private:
 	CClientDataManager* m_pRefSignal_DataChange_UserInstrument;
 	CUserInstrumentTableView* m_pRefSlot_DataChange_UserInstrument;
 public:
-	void set_SignalSlot_DataChange_UserInstrument(CClientDataManager* pRefSignal, CUserInstrumentTableView* pRefSlot);
+	void set_Signal_DataChange_UserInstrument( CClientDataManager* pRefSignal);
+	void set_Slot_DataChange_UserInstrument(CUserInstrumentTableView* pRefSlot);
 signals:
 	void signal_DataChange_UserInstrument();
 public slots:
 	void slot_DataChange_UserInstrument();
 public:
 	void emit_DataChange_UserInstrument();
-//////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////
 
 };
 

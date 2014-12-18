@@ -125,3 +125,35 @@ void CDataUserInstrument::updateDataUserInstrument( unsigned int nInstrumentID )
 	m_pItemUserInstrument_Root->findAndResetSubNodeData(m_pItemUserInstrumentHelper);
 }
 
+
+void CDataUserInstrument::removeUserInstrument( unsigned int nInstrumentID )
+{	
+	QMutexLocker lock(&m_mutex_ItemUserInstrument_Root);
+	Instrument* pInstrumentRef = NULL;
+	CMyInstrument* pMyInstrumentRef = NULL;
+
+	pInstrumentRef = NULL;
+	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	pMyInstrumentRef = NULL;
+	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
+	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	{
+		return;
+	}
+
+	if (NULL != pInstrumentRef)
+	{
+		m_pItemUserInstrumentHelper->setValue(*pInstrumentRef);
+	}
+
+	if (NULL != pMyInstrumentRef)
+	{
+		m_pItemUserInstrumentHelper->setValue(*pMyInstrumentRef);
+	}
+
+	MYLOG4CPP_DEBUG<<"CDataUserInstrument removeUserInstrument"
+		<<" "<<"getInstrumentID="<<m_pItemUserInstrumentHelper->getInstrumentID()
+		<<" "<<"getInstrumentCode="<<m_pItemUserInstrumentHelper->getInstrumentCode().toStdString();
+
+	m_pItemUserInstrument_Root->removeChildByData(m_pItemUserInstrumentHelper);
+}

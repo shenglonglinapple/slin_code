@@ -16,7 +16,8 @@ public slots:
 	void slotActionAddUserInstrument();
 	void slotActionRemoveUserInstrument();
 	void slotActionCustomColumns();
-
+signals:
+	void signalParpareWaitingInstrument();
 protected:
 	//overwite QWight fun
 	void contextMenuEvent(QContextMenuEvent* pEvent);

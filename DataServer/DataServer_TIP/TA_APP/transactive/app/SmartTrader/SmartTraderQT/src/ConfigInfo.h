@@ -36,6 +36,7 @@ public:
 	QStringList getLstUserInstrument();
 	void setLstUserInstrument(QStringList& lstStringValue);
 	void removeInstrument(const QString& strInstrumentID);
+	void removeInstrument(unsigned int nInstrumentID);
 	void addInstrument(const QString& strInstrumentID);
 	void addInstrument(unsigned int nInstrumentID);
 	bool checkUserInstrument(const QString& strInstrumentID);

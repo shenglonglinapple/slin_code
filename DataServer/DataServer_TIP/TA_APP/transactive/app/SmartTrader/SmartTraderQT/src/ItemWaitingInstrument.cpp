@@ -11,9 +11,9 @@ CItemWaitingInstrument::CItemWaitingInstrument()
 	//clear
 	m_pParentItem = NULL;
 	m_ItemData.clear();
-	m_LstChildItems.clear();
 	m_nItemType = ItemType_ROOT;
 	m_pItemWaitingInstrumentHelper = NULL;
+	_FreeMap();
 
 	//set value
 	m_pParentItem = NULL;
@@ -31,9 +31,9 @@ CItemWaitingInstrument::CItemWaitingInstrument(QList<QVariant>& ItemData, CItemW
 	//clear
 	m_pParentItem = NULL;
 	m_ItemData.clear();
-	m_LstChildItems.clear();
 	m_nItemType = ItemType_ITEM1_ExchangeName;
 	m_pItemWaitingInstrumentHelper = NULL;
+	_FreeMap();
 
 	//set value
 	m_pParentItem = parent;
@@ -50,19 +50,7 @@ CItemWaitingInstrument::~CItemWaitingInstrument()
 {
 	m_pParentItem = NULL;
 	m_ItemData.clear();
-
-	CItemWaitingInstrument* pItemTmp = NULL;
-	QList<CItemWaitingInstrument*>::iterator iterList;
-	iterList = m_LstChildItems.begin();
-	while (iterList != m_LstChildItems.end())
-	{
-		pItemTmp = *iterList;
-
-		delete pItemTmp;
-		pItemTmp = NULL;
-
-		iterList++;
-	}//while
+	_FreeMap();
 
     //qDeleteAll(childItems);
 
@@ -73,25 +61,92 @@ CItemWaitingInstrument::~CItemWaitingInstrument()
 	}
 }
 
-
-
-CItemWaitingInstrument *CItemWaitingInstrument::child(int number)
+void CItemWaitingInstrument::_FreeMap()
 {
-    return m_LstChildItems.value(number);
+	QMap<QString, CItemWaitingInstrument*>::iterator iterMap;
+	CItemWaitingInstrument* pTreeItem = NULL;
+
+	iterMap = m_MapChildItems.begin();
+	while (iterMap != m_MapChildItems.end())
+	{
+		pTreeItem = iterMap.value();
+
+		if (NULL != pTreeItem)
+		{
+			delete pTreeItem;
+			pTreeItem = NULL;
+		}
+
+		iterMap++;
+	}
+	m_MapChildItems.clear();
+}
+
+CItemWaitingInstrument *CItemWaitingInstrument::child(int number)//row
+{
+	int nIndex = 0;
+	CItemWaitingInstrument* pTreeItem = NULL;
+	QMap<QString, CItemWaitingInstrument*>::iterator iterMap;
+
+	iterMap = m_MapChildItems.begin();
+	nIndex = 0;
+	while (iterMap != m_MapChildItems.end())
+	{
+		if (nIndex == number)
+		{
+			pTreeItem = iterMap.value();
+			break;
+		}
+		nIndex++;
+		iterMap++;
+	}
+
+	return pTreeItem;
 }
 
 int CItemWaitingInstrument::childCount() const
 {
-    return m_LstChildItems.count();
+    return m_MapChildItems.count();
 }
 
 int CItemWaitingInstrument::childNumber() const
 {
-    if (m_pParentItem)
-        return m_pParentItem->m_LstChildItems.indexOf(const_cast<CItemWaitingInstrument*>(this));
+	int nIndex = 0;
 
-    return 0;
+	if (NULL != m_pParentItem)
+	{
+		//nIndex = m_pParentItem->m_LstChildItems.indexOf(const_cast<TreeItem*>(this));
+		nIndex = m_pParentItem->indexOfChildren(const_cast<CItemWaitingInstrument*>(this));
+		return nIndex;
+	}
+
+	return nIndex;
 }
+
+int CItemWaitingInstrument::indexOfChildren(CItemWaitingInstrument* pChildrenItem) const
+{
+	int nIndex = 0;
+	CItemWaitingInstrument* pTreeItemTmp = NULL;
+	QMap<QString,CItemWaitingInstrument*>::const_iterator iterMap;
+
+	iterMap = m_MapChildItems.constBegin();
+	nIndex = 0;
+	while (iterMap != m_MapChildItems.constEnd())
+	{
+		pTreeItemTmp = iterMap.value();
+
+		if (pChildrenItem == pTreeItemTmp)
+		{
+			break;
+		}
+		nIndex++;
+		iterMap++;
+	}
+
+	return nIndex;
+}
+
+
 
 int CItemWaitingInstrument::columnCount() const
 {
@@ -103,36 +158,7 @@ QVariant CItemWaitingInstrument::data(int column) const
     return m_ItemData.value(column);
 }
 
-bool CItemWaitingInstrument::insertChildren(int position, int count, int columns)
-{
-    if (position < 0 || position > m_LstChildItems.size())
-        return false;
 
-    for (int row = 0; row < count; ++row) 
-	{
-        QList<QVariant> data;
-		data.reserve(columns);
-		CItemWaitingInstrument *item = NULL;
-        item = new CItemWaitingInstrument(data, this);
-        m_LstChildItems.insert(position, item);
-    }
-
-    return true;
-}
-
-bool CItemWaitingInstrument::insertColumns(int position, int columns)
-{
-    if (position < 0 || position > m_ItemData.size())
-        return false;
-
-    for (int column = 0; column < columns; ++column)
-        m_ItemData.insert(position, QVariant());
-
-    foreach (CItemWaitingInstrument *child, m_LstChildItems)
-        child->insertColumns(position, columns);
-
-    return true;
-}
 
 CItemWaitingInstrument *CItemWaitingInstrument::parent()
 {
@@ -141,38 +167,39 @@ CItemWaitingInstrument *CItemWaitingInstrument::parent()
 
 bool CItemWaitingInstrument::removeChildren(int position, int count)
 {
-    if (position < 0 || position + count > m_LstChildItems.size())
-        return false;
+	int nIndex = 0;
+	CItemWaitingInstrument* pTreeItemTmp = NULL;
+	QMap<QString,CItemWaitingInstrument*>::iterator iterMap;
 
-    for (int row = 0; row < count; ++row)
-        delete m_LstChildItems.takeAt(position);
-
-    return true;
-}
-
-
-bool CItemWaitingInstrument::removeColumns(int position, int columns)
-{
-	QList<QVariant>::Iterator iterList;
-
-    if (position < 0 || position + columns > m_ItemData.size())
+	if (position < 0 || position > m_MapChildItems.size())
 	{
-        return false;
+		// 		MYLOG4CPP_ERROR<<"removeChildren() error!"
+		// 			<<" "<<"position="<<position
+		// 			<<" "<<"m_MapChildItems.size()="<<m_MapChildItems.size();
+
+		return false;
 	}
 
-    for (int column = 0; column < columns; ++column)
+	nIndex = 0;
+	iterMap = m_MapChildItems.begin();
+	while (iterMap != m_MapChildItems.end())
 	{
-		//itemData.remove(position);
+		if (nIndex == position)
+		{
+			pTreeItemTmp = iterMap.value();
 
-		iterList = m_ItemData.begin();
-		iterList += position;
-		m_ItemData.erase(iterList);
-	}
+			delete pTreeItemTmp;
+			pTreeItemTmp = NULL;
 
-    foreach (CItemWaitingInstrument *child, m_LstChildItems)
-        child->removeColumns(position, columns);
+			m_MapChildItems.erase(iterMap);
+			break;
+		}//if (nIndex == position)
 
-    return true;
+		nIndex++;
+		iterMap++;
+	}//while
+
+	return true;
 }
 
 
@@ -188,12 +215,25 @@ bool CItemWaitingInstrument::setData(int column, const QVariant &value)
 void CItemWaitingInstrument::appendChild( CItemWaitingInstrument** ppItem )
 {
 	CItemWaitingInstrument* pItem = NULL;
+	QString strMapKey;
+
 	if (NULL == ppItem || NULL == *ppItem)
 	{
 		return;
 	}
 	pItem = *ppItem;
-	m_LstChildItems.push_back(pItem);
+	strMapKey = pItem->data(0).toString();
+
+
+	if (m_MapChildItems.contains(strMapKey))
+	{
+		delete pItem;
+		pItem = NULL;
+	}
+	else
+	{
+		m_MapChildItems.insert(strMapKey, pItem);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -233,8 +273,8 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 		pNewNode->resetCurrentNodeData(pHelper);	
 		this->appendChild(&pNewNode);
 		pNewNode->appendChildByData(pHelper);
-		MYLOG4CPP_DEBUG<<"ItemType_ROOT appendChild"
-			<<" "<<"m_strExchangeName="<<pHelper->m_strExchangeName.toStdString();
+		//MYLOG4CPP_DEBUG<<"ItemType_ROOT appendChild"
+		//	<<" "<<"m_strExchangeName="<<pHelper->m_strExchangeName.toStdString();
 	}
 
 	if (ItemType_ITEM1_ExchangeName == m_nItemType)
@@ -244,8 +284,8 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 		pNewNode->resetCurrentNodeData(pHelper);	
 		this->appendChild(&pNewNode);
 		pNewNode->appendChildByData(pHelper);
-		MYLOG4CPP_DEBUG<<"ItemType_ITEM1_ExchangeName appendChild"
-			<<" "<<"m_strUnderlyingCode="<<pHelper->m_strUnderlyingCode.toStdString();
+		//MYLOG4CPP_DEBUG<<"ItemType_ITEM1_ExchangeName appendChild"
+		//	<<" "<<"m_strUnderlyingCode="<<pHelper->m_strUnderlyingCode.toStdString();
 
 	}
 
@@ -255,8 +295,8 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 		pNewNode->setItemType(ItemType_ITEM3_InstrumentCode);
 		pNewNode->resetCurrentNodeData(pHelper);	
 		this->appendChild(&pNewNode);
-		MYLOG4CPP_DEBUG<<"ItemType_ITEM2_UnderlyingCode appendChild"
-			<<" "<<"m_strInstrumentCode="<<pHelper->m_strInstrumentCode.toStdString();
+		//MYLOG4CPP_DEBUG<<"ItemType_ITEM2_UnderlyingCode appendChild"
+		//	<<" "<<"m_strInstrumentCode="<<pHelper->m_strInstrumentCode.toStdString();
 
 	}
 	pNewNode = NULL;
@@ -354,7 +394,7 @@ void CItemWaitingInstrument::AnalysisAndRemoveChild(CItemWaitingInstrumentHelper
 			{
 				if (ItemType_ITEM2_UnderlyingCode == m_nItemType)
 				{
-					pData->removeChildren(nChildIndex, 1);
+					this->removeChildren(nChildIndex, 1);
 					bFind = true;
 				}
 				else

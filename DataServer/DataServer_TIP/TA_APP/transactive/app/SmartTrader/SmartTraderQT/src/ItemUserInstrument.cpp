@@ -252,5 +252,26 @@ unsigned int CItemUserInstrument::getNodeKey()
 	return m_nNodeKey;
 }
 
+void CItemUserInstrument::removeChildByData( CItemUserInstrumentHelper* pItemUserInstrumentHelper )
+{
+	QList<CItemUserInstrument*>::iterator iterLst;
+	CItemUserInstrument* pSubNode = NULL;
+	int nIndex = 0;
+
+	iterLst = m_LstChildItems.begin();
+	while (iterLst != m_LstChildItems.end())
+	{
+		pSubNode = NULL;
+		pSubNode = (*iterLst);
+		if (NULL != pSubNode && (pSubNode->getNodeKey() == pItemUserInstrumentHelper->getInstrumentID()))
+		{
+			this->removeChildren(nIndex, 1);
+			break;
+		}
+		iterLst++;
+		nIndex++;
+	}
+}
+
 
 

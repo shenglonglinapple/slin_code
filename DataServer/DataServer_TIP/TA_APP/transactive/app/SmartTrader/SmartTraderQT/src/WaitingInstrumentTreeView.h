@@ -10,8 +10,11 @@ class CWaitingInstrumentTreeView : public QTreeView
 public: 
 	CWaitingInstrumentTreeView(QWidget* parent = 0); 
 	~CWaitingInstrumentTreeView(); 
-public: 
-	void resetData();
+public slots: 
+	void slotParpareWaitingInstrument();
+	void slotdoubleClicked(const QModelIndex &index);
+private:
+	void _CreateConnect();
 private:
 	CItemModelWaitingInstrument* m_pItemModelWaitingInstrument;
 

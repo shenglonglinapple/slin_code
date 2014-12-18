@@ -44,8 +44,9 @@ public:
 	void onMarketDataUpdate( const CMyMarketData &marketData );
 	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars );
 	void onBarDataUpdate(const BarSummary &barData);
-private:
-	void _AddUserInstrument( unsigned int nInstrumentID );
+public:
+	void addUserInstrument( unsigned int nInstrumentID );
+	void removeUserInstrument( unsigned int nInstrumentID );
 
 private:
 	void _InitTraderClient(CClientLoginParam* pClientLoginParam);
