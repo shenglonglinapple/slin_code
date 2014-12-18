@@ -27,7 +27,7 @@ void CDataRealTimeWorker::run()
 	while (false == m_toTerminate)
 	{
 		_ThreadJob();
-		this->my_msleep(5000);
+		this->my_msleep(500);
 	}
 
 	_ProcessUserTerminate();

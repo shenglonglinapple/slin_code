@@ -273,8 +273,8 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 		pNewNode->resetCurrentNodeData(pHelper);	
 		this->appendChild(&pNewNode);
 		pNewNode->appendChildByData(pHelper);
-		//MYLOG4CPP_DEBUG<<"ItemType_ROOT appendChild"
-		//	<<" "<<"m_strExchangeName="<<pHelper->m_strExchangeName.toStdString();
+		MYLOG4CPP_DEBUG<<"ItemType_ROOT appendChild"
+			<<" "<<"m_strExchangeName="<<pHelper->m_strExchangeName.toStdString();
 	}
 
 	if (ItemType_ITEM1_ExchangeName == m_nItemType)
@@ -284,8 +284,8 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 		pNewNode->resetCurrentNodeData(pHelper);	
 		this->appendChild(&pNewNode);
 		pNewNode->appendChildByData(pHelper);
-		//MYLOG4CPP_DEBUG<<"ItemType_ITEM1_ExchangeName appendChild"
-		//	<<" "<<"m_strUnderlyingCode="<<pHelper->m_strUnderlyingCode.toStdString();
+		MYLOG4CPP_DEBUG<<"ItemType_ITEM1_ExchangeName appendChild"
+			<<" "<<"m_strUnderlyingCode="<<pHelper->m_strUnderlyingCode.toStdString();
 
 	}
 
@@ -295,8 +295,8 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 		pNewNode->setItemType(ItemType_ITEM3_InstrumentCode);
 		pNewNode->resetCurrentNodeData(pHelper);	
 		this->appendChild(&pNewNode);
-		//MYLOG4CPP_DEBUG<<"ItemType_ITEM2_UnderlyingCode appendChild"
-		//	<<" "<<"m_strInstrumentCode="<<pHelper->m_strInstrumentCode.toStdString();
+		MYLOG4CPP_DEBUG<<"ItemType_ITEM2_UnderlyingCode appendChild"
+			<<" "<<"m_strInstrumentCode="<<pHelper->m_strInstrumentCode.toStdString();
 
 	}
 	pNewNode = NULL;

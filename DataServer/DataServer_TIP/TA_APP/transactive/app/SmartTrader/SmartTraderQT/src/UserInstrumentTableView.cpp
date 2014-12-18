@@ -35,6 +35,8 @@ CUserInstrumentTableView::CUserInstrumentTableView( QWidget* parent)
 	m_pItemModelUserInstrument = new CItemModelUserInstrument(this);
 	m_pItemModelUserInstrument->setRootItem(CDataUserInstrument::getInstance().getRootItem());
 	this->setModel(m_pItemModelUserInstrument);
+	QModelIndex inValidIndex;
+	this->setCurrentIndex(inValidIndex);
 	CSignalSlotManager::getInstance().set_Slot_DataChange_UserInstrument(this);
 
 	//action
@@ -113,8 +115,8 @@ void CUserInstrumentTableView::slot_DataChange_UserInstrument()
 {
 	MYLOG4CPP_DEBUG<<"CUserInstrumentTableView process slot_DataChange_UserInstrument";
 	m_pItemModelUserInstrument->setRootItem(CDataUserInstrument::getInstance().getRootItem());
-	//QModelIndex inValidIndex;
-	//this->setCurrentIndex(inValidIndex);
+	QModelIndex inValidIndex;
+	this->setCurrentIndex(inValidIndex);
 	this->resizeColumnsToContents();
 
 }

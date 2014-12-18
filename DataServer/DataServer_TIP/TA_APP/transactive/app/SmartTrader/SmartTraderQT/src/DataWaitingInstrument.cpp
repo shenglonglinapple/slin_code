@@ -85,13 +85,13 @@ void CDataWaitingInstrument::addInstrument( unsigned int nInstrumentID )
 		m_pItemWaitingInstrumentHelper->setValue(*pMyInstrumentRef);
 	}
 
-	/*	
+		
 	MYLOG4CPP_DEBUG<<"CDataWaitingInstrument addInstrument"
 		<<" "<<"m_nInstrumentID="<<m_pItemWaitingInstrumentHelper->m_nInstrumentID
 		<<" "<<"m_strExchangeName="<<m_pItemWaitingInstrumentHelper->m_strExchangeName.toStdString()
 		<<" "<<"m_strUnderlyingCode="<<m_pItemWaitingInstrumentHelper->m_strUnderlyingCode.toStdString()
 		<<" "<<"m_strInstrumentCode="<<m_pItemWaitingInstrumentHelper->m_strInstrumentCode.toStdString();
-	*/	
+		
 	m_pItemWaitInstrument_Root->AnalysisAndAppendChild(m_pItemWaitingInstrumentHelper);
 }
 

@@ -28,12 +28,13 @@ CWaitingInstrumentTreeView::CWaitingInstrumentTreeView( QWidget* parent /*= 0*/ 
 	m_pItemModelWaitingInstrument = NULL;
 	m_pItemModelWaitingInstrument = new CItemModelWaitingInstrument(this);
 	m_pItemModelWaitingInstrument->setRootItem(CDataWaitingInstrument::getInstance().getRootItem());
-
+	
 	//mvc
 	this->setModel(m_pItemModelWaitingInstrument);
 	//this->setColumnWidth(0, 200);
 	_CreateConnect();
-
+	QModelIndex inValidIndex;
+	this->setCurrentIndex(inValidIndex);
 }
 
 CWaitingInstrumentTreeView::~CWaitingInstrumentTreeView()
@@ -58,6 +59,9 @@ void CWaitingInstrumentTreeView::slotParpareWaitingInstrument()
 	MYLOG4CPP_DEBUG<<"CWaitingInstrumentTreeView process slotParpareWaitingInstrument";
 
 	m_pItemModelWaitingInstrument->setRootItem(CDataWaitingInstrument::getInstance().getRootItem());
+	QModelIndex inValidIndex;
+	this->setCurrentIndex(inValidIndex);
+
 }
 
 void CWaitingInstrumentTreeView::slotdoubleClicked( const QModelIndex &index )
