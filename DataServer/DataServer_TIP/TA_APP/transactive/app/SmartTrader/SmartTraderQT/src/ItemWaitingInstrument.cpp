@@ -305,8 +305,6 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 
 void CItemWaitingInstrument::AnalysisAndAppendChild( CItemWaitingInstrumentHelper* pHelper)
 {
-	int nChildCount = 0;
-	int nChildIndex = 0;
 	CItemWaitingInstrument* pData = NULL;
 	bool bFind = false;
 	QString strAnalysisKey;
@@ -326,28 +324,29 @@ void CItemWaitingInstrument::AnalysisAndAppendChild( CItemWaitingInstrumentHelpe
 		strAnalysisKey = pHelper->m_strInstrumentCode;
 	}
 
-
 	{
-		nChildCount = this->childCount();
-		for (nChildIndex = 0; nChildIndex < nChildCount; nChildIndex++)
+		QMap<QString, CItemWaitingInstrument*>::iterator iterFind;
+		iterFind = this->m_MapChildItems.find(strAnalysisKey);
+		if (iterFind != this->m_MapChildItems.end())
 		{
-			pData = NULL;
-			pData = this->child(nChildIndex);
-			if (pData->data(0).toString() == strAnalysisKey)
+			//find ok
+			if (ItemType_ITEM2_UnderlyingCode == m_nItemType)
 			{
-				if (ItemType_ITEM2_UnderlyingCode == m_nItemType)
-				{
-					bFind = true;//instrumentCode
-				}
-				else
-				{
-					pData->AnalysisAndAppendChild(pHelper);
-					bFind = true;
-				}
-				return;
+				bFind = true;//instrumentCode
+			}
+			else
+			{
+				pData = iterFind.value();
+				pData->AnalysisAndAppendChild(pHelper);
+				bFind = true;
 			}
 		}
+		else
+		{
+			//not find
+		}
 	}
+
 
 
 	if (false == bFind)
@@ -383,33 +382,31 @@ void CItemWaitingInstrument::AnalysisAndRemoveChild(CItemWaitingInstrumentHelper
 		strAnalysisKey = pHelper->m_strInstrumentCode;
 	}
 
-
 	{
-		nChildCount = this->childCount();
-		for (nChildIndex = 0; nChildIndex < nChildCount; nChildIndex++)
+		QMap<QString, CItemWaitingInstrument*>::iterator iterFind;
+		iterFind = this->m_MapChildItems.find(strAnalysisKey);
+		if (iterFind != this->m_MapChildItems.end())
 		{
-			pData = NULL;
-			pData = this->child(nChildIndex);
-			if (pData->data(0).toString() == strAnalysisKey)
+			//find ok
+			if (ItemType_ITEM2_UnderlyingCode == m_nItemType)
 			{
-				if (ItemType_ITEM2_UnderlyingCode == m_nItemType)
-				{
-					this->removeChildren(nChildIndex, 1);
-					bFind = true;
-				}
-				else
-				{
-					pData->AnalysisAndRemoveChild(pHelper);
-					bFind = true;
-				}
-
-				return;
+				this->removeChildren(nChildIndex, 1);
+				bFind = true;
 			}
+			else
+			{
+				pData = iterFind.value();
+				pData->AnalysisAndRemoveChild(pHelper);
+				bFind = true;
+			}
+		}
+		else
+		{
+			//not find
 		}
 	}
 
-
-
+	
 }
 
 
