@@ -6,6 +6,7 @@
 #include "SignalSlotManager.h"
 #include "WaitingInstrumentTreeView.h"
 #include "ClientDataManager.h"
+#include "OrderData.h"
 
 #include "Log4cppLogger.h"
 
@@ -15,6 +16,7 @@ static const int DEFVALUE_INT_Window_Height = 500;
 static const std::string DEFVALUE_String_ActionAddHotQuotes = "AddQuotes";//"添加合约报价";
 static const std::string DEFVALUE_String_ActionRemoveHotQuotes = "RemoveQuotes";//"从列表中移除此合约报价";
 static const std::string DEFVALUE_String_ActionCustomColumns = "CustomColumns";//"自定义列";
+static const std::string DEFVALUE_String_ActionNewOrder = "NewOrder";//"下单";
 
 
 
@@ -43,9 +45,12 @@ CUserInstrumentTableView::CUserInstrumentTableView( QWidget* parent)
 	m_pActionAddUserInstrument = NULL;
 	m_pActionRemoveUserInstrument = NULL;
 	m_pActionCustomColumns = NULL;
+	m_pActionNewOrder = NULL;
+	m_pNewOrderWindow = NULL;
 	//
 	m_pWaitingInstrumentTreeView = NULL;
 	m_pWaitingInstrumentTreeView = new CWaitingInstrumentTreeView(this);
+	m_pNewOrderWindow = new CNewOrderWindow(this);
 
 	_CreateAction();
 	_CreateConnect();
@@ -54,6 +59,12 @@ CUserInstrumentTableView::CUserInstrumentTableView( QWidget* parent)
 CUserInstrumentTableView::~CUserInstrumentTableView()
 {
 	CSignalSlotManager::getInstance().set_Slot_DataChange_UserInstrument(NULL);
+
+	if (NULL != m_pNewOrderWindow)
+	{
+		delete m_pNewOrderWindow;
+		m_pNewOrderWindow = NULL;
+	}
 
 	if (NULL != m_pWaitingInstrumentTreeView)
 	{
@@ -79,11 +90,19 @@ CUserInstrumentTableView::~CUserInstrumentTableView()
 		m_pActionCustomColumns = NULL;
 	}
 
+	if (NULL != m_pActionNewOrder)
+	{
+		delete m_pActionNewOrder;
+		m_pActionNewOrder = NULL;
+	}
+
 	if (NULL != m_pItemModelUserInstrument)
 	{
 		delete m_pItemModelUserInstrument;
 		m_pItemModelUserInstrument = NULL;
 	}
+
+
 }
 void CUserInstrumentTableView::_CreateAction()
 {
@@ -91,7 +110,7 @@ void CUserInstrumentTableView::_CreateAction()
 	m_pActionAddUserInstrument = new QAction(QObject::tr(DEFVALUE_String_ActionAddHotQuotes.c_str()), this); 
 	m_pActionRemoveUserInstrument = new QAction(QObject::tr(DEFVALUE_String_ActionRemoveHotQuotes.c_str()), this); 
 	m_pActionCustomColumns = new QAction(QObject::tr(DEFVALUE_String_ActionCustomColumns.c_str()), this); 
-
+	m_pActionNewOrder = new QAction(QObject::tr(DEFVALUE_String_ActionNewOrder.c_str()), this); 
 
 }
 void CUserInstrumentTableView::_CreateConnect()
@@ -105,6 +124,10 @@ void CUserInstrumentTableView::_CreateConnect()
 	QObject::connect(m_pActionCustomColumns, SIGNAL(triggered()), 
 		this, SLOT(slotActionCustomColumns())); 
 
+	QObject::connect(m_pActionNewOrder, SIGNAL(triggered()), 
+		this, SLOT(slotActionNewOrder())); 
+
+	
 	//
 	QObject::connect(this, SIGNAL(signalParpareWaitingInstrument()), 
 		m_pWaitingInstrumentTreeView, SLOT(slotParpareWaitingInstrument())); 
@@ -153,6 +176,35 @@ void CUserInstrumentTableView::slotActionRemoveUserInstrument()
 	CClientDataManager::getInstance().removeUserInstrument(pCurrentItem->getNodeKey());
 
 }
+void CUserInstrumentTableView::slotActionNewOrder()
+{
+	MYLOG4CPP_DEBUG<<"CUserInstrumentTableView process slotActionNewOrder";
+
+	QModelIndex nCurrentIndex;
+	CItemUserInstrument* pCurrentItemRef = NULL;
+	COrderData* pOrderData = NULL;
+
+	nCurrentIndex = this->currentIndex();	
+	if (false == nCurrentIndex.isValid())
+	{
+		return;
+	}
+
+	//treeview line have data
+	pCurrentItemRef = (CItemUserInstrument*)nCurrentIndex.internalPointer();
+
+	pOrderData = new COrderData();
+	pOrderData->setDataByItem(pCurrentItemRef);
+
+	m_pNewOrderWindow
+
+	if (NULL != pOrderData)
+	{
+		delete pOrderData;
+		pOrderData = NULL;
+	}
+
+}
 
 void CUserInstrumentTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 {
@@ -196,4 +248,5 @@ void CUserInstrumentTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 	menuRightClieck.addAction(m_pActionCustomColumns);
 	menuRightClieck.exec(QCursor::pos());
 }
+
 

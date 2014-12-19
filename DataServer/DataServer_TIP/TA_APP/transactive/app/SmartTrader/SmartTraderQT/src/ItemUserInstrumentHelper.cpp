@@ -111,6 +111,8 @@ void CItemUserInstrumentHelper::getLstClumnName( QStringList& lstClumnName )
 
 	strColumnName = QObject::tr(DEFVALUE_String_ColumnName_InstrumentID.c_str());
 	lstClumnName.append(strColumnName);
+	strColumnName = QObject::tr(DEFVALUE_String_ColumnName_InstrumentCode.c_str());
+	lstClumnName.append(strColumnName);
 	strColumnName = QObject::tr(DEFVALUE_String_ColumnName_UpdateTime.c_str());
 	lstClumnName.append(strColumnName);
 	strColumnName = QObject::tr(DEFVALUE_String_ColumnName_LastTradePrice.c_str());

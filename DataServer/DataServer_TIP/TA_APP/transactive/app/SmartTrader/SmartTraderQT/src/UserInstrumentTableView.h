@@ -5,6 +5,7 @@
 
 class CItemModelUserInstrument;
 class CWaitingInstrumentTreeView;
+class CNewOrderWindow;
 
 class CUserInstrumentTableView : public QTableView
 { 
@@ -16,6 +17,7 @@ public slots:
 	void slotActionAddUserInstrument();
 	void slotActionRemoveUserInstrument();
 	void slotActionCustomColumns();
+	void slotActionNewOrder();
 signals:
 	void signalParpareWaitingInstrument();
 protected:
@@ -32,8 +34,11 @@ private:
 	QAction* m_pActionAddUserInstrument;
 	QAction* m_pActionRemoveUserInstrument;
 	QAction* m_pActionCustomColumns;
+	QAction* m_pActionNewOrder;
+
 private:
 	CWaitingInstrumentTreeView* m_pWaitingInstrumentTreeView;
+	CNewOrderWindow* m_pNewOrderWindow;
 }; 
 
 
