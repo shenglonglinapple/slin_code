@@ -1,13 +1,11 @@
-#include "CreateNewOrderDialog.h"
+#include "NewOrderWindow.h"
 
 #include "ProjectQTInclude.h"
 #include "ProjectCommonData.h"
 
-#include "OrderInfoHelper.h"
-#include "UserOrderInfo.h"
-#include "OrderInfoWidget.h"
 #include "SignalSlotManager.h"
-
+#include "OrderData.h"
+#include "NewOrderConfirmWindow.h"
 #include "Log4cppLogger.h"
 
 
@@ -36,8 +34,7 @@ CNewOrderWindow::CNewOrderWindow(QWidget *parent)
 	m_pComboBox_TagName = NULL;
 	m_pPushButtonBuy = NULL;
 	m_pPushButtonSell = NULL;
-	m_pOrderInfoWidget = NULL;
-	m_pOrderInfo = NULL;
+	m_pNewOrderConfirmWindow = NULL;
 	m_pOrderData = NULL;
 
 	m_pTextEdit_Symbol_Value.clear();
@@ -45,13 +42,7 @@ CNewOrderWindow::CNewOrderWindow(QWidget *parent)
 	m_pSpinBox_Volume_Value = 0;
 	m_pSpinBox_Price_Value = 0;
 
-
-	m_pTextEdit_Symbol_Value = "IF1401";
-	m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
-	m_pSpinBox_Volume_Value = 1;
-	m_pSpinBox_Price_Value = 000000000.00000f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
-
-	m_pOrderInfo = new COrderInfo();
+	_InitData();
 	m_pOrderData = new COrderData();
 
 	this->setupUi();
@@ -63,12 +54,6 @@ CNewOrderWindow::CNewOrderWindow(QWidget *parent)
 
 CNewOrderWindow::~CNewOrderWindow()
 {
-	if (NULL != m_pOrderInfo)
-	{
-		delete m_pOrderInfo;
-		m_pOrderInfo = NULL;
-	}
-
 	if (NULL != m_pOrderData)
 	{
 		delete m_pOrderData;
@@ -76,7 +61,14 @@ CNewOrderWindow::~CNewOrderWindow()
 	}
 }
 
+void CNewOrderWindow::_InitData()
+{
+	m_pTextEdit_Symbol_Value = "";
+	m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
+	m_pSpinBox_Volume_Value = 1;
+	m_pSpinBox_Price_Value = 000000000.00000f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
+}
 
 void CNewOrderWindow::setupUi()
 {
@@ -94,8 +86,8 @@ void CNewOrderWindow::setupUi()
 	QSize qSizeButtonBuy(200, 20);
 	QSize qSizeButtonSell(80, 20);
 
-	m_pOrderInfoWidget = new COrderInfoWidget(this);
-	m_pOrderInfoWidget->hide();
+	m_pNewOrderConfirmWindow = new CNewOrderConfirmWindow(this);
+	m_pNewOrderConfirmWindow->hide();
 
 	//eg: Symbol: IF1401
 	m_pLabel_Symbol = new QLabel(this);
@@ -209,7 +201,10 @@ void CNewOrderWindow::translateLanguage()
 
 void CNewOrderWindow::resetData( COrderData* pData )
 {
+	_InitData();
+
 	m_pTextEdit_Symbol_Value = pData->m_strInstrumentCode;
+	//m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
 	m_pSpinBox_Volume_Value = pData->m_nQuantity;
 	m_pSpinBox_Price_Value = pData->m_fLastPrice;
 
@@ -229,15 +224,15 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
 
-	m_pOrderData->m_nSide = CMyOrder::BUY;
-	m_pOrderData->m_nOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
+	m_pOrderData->m_nSide = COrderData::BUY;
+	m_pOrderData->m_nOrderType = m_pOrderData->getEOrderType(strOrderType);
 	m_pOrderData->m_fLastPrice = m_pSpinBox_Price->value();
 	m_pOrderData->m_nQuantity = m_pSpinBox_Volume->value();
 	
 	//
-	m_pOrderInfoWidget->setOrderInfo(m_pOrderData);
-	//m_pOrderInfoWidget->move(this->cursor().pos());
-	m_pOrderInfoWidget->show();
+	m_pNewOrderConfirmWindow->resetData(m_pOrderData);
+	m_pNewOrderConfirmWindow->move(this->pos().x()+this->width()+10, this->pos().y());
+	m_pNewOrderConfirmWindow->show();
 
 }
 
@@ -250,15 +245,15 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
 
-	m_pOrderData->m_nSide = CMyOrder::SELL;
-	m_pOrderData->m_nOrderType = m_pOrderInfo->getEnumOrderType(strOrderType);
+	m_pOrderData->m_nSide = COrderData::SELL;
+	m_pOrderData->m_nOrderType = m_pOrderData->getEOrderType(strOrderType);
 	m_pOrderData->m_fLastPrice = m_pSpinBox_Price->value();
 	m_pOrderData->m_nQuantity = m_pSpinBox_Volume->value();
 
 	//
-	m_pOrderInfoWidget->setOrderInfo(m_pOrderData);
-	//m_pOrderInfoWidget->move(this->cursor().pos());
-	m_pOrderInfoWidget->show();
+	m_pNewOrderConfirmWindow->resetData(m_pOrderData);
+	m_pNewOrderConfirmWindow->move(this->pos().x()+this->width()+10, this->pos().y());
+	m_pNewOrderConfirmWindow->show();
 
 
 }
@@ -276,7 +271,7 @@ void CNewOrderWindow::_CreateConnect()
 		this, 
 		SLOT(slotPushButtonSellClicked(bool)));
 
-	QObject::connect(m_pOrderInfoWidget, 
+	QObject::connect(m_pNewOrderConfirmWindow, 
 		SIGNAL(signalOrderCheck(COrderData*)),
 		this, 
 		SLOT(slotOrderCheck(COrderData*)));
@@ -286,9 +281,9 @@ void CNewOrderWindow::_CreateConnect()
 
 void CNewOrderWindow::slotOrderCheck(COrderData* pUserOrderInfo)
 {
-	m_pOrderInfoWidget->hide();
+	m_pNewOrderConfirmWindow->hide();
 	//emit
-	if (COrderData::OrderCheckRes_OK == pUserOrderInfo->m_nCheckRes)
+	if (COrderData::OrderConfirm_OK == pUserOrderInfo->m_nOrderConfirm)
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
 			<<" "<<"class:"<<"CCreateNewOrderDialog"
@@ -303,9 +298,9 @@ void CNewOrderWindow::slotOrderCheck(COrderData* pUserOrderInfo)
 			<<" "<<"fPrice="<<pUserOrderInfo->m_fLastPrice
 			<<" "<<"quantity="<<pUserOrderInfo->m_nQuantity;
 
-		CSignalSlotManager::getInstance().emit_signalNewOrder(pUserOrderInfo);
+		//CSignalSlotManager::getInstance().emit_signalNewOrder(pUserOrderInfo);
 	}
-	else if (COrderData::OrderCheckRes_Cancel ==  pUserOrderInfo->m_nCheckRes)
+	else if (COrderData::OrderConfirm_Cancel ==  pUserOrderInfo->m_nOrderConfirm)
 	{
 		MYLOG4CPP_DEBUG<<" "<<"user Cancel new order";
 	}

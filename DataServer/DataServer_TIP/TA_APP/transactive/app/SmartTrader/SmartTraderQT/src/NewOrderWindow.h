@@ -12,8 +12,6 @@
 #include <QtCore/QModelIndex>
 
 #include <QtGui/QDialog>
-#include "OrderInfoWidget.h"
-#include "Order.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -34,6 +32,7 @@ class QGridLayout;
 QT_END_NAMESPACE
 
 class COrderData;
+class CNewOrderConfirmWindow;
 
 class CNewOrderWindow : public QDialog
 {
@@ -73,6 +72,7 @@ public:
 	void resetData(COrderData* pData);
 private:
 	void _CreateConnect();
+	void _InitData();
 private:
 	QString m_pTextEdit_Symbol_Value;
 	QString m_pComboBox_OrderType_Value;
@@ -110,8 +110,7 @@ private:
 	QPushButton* m_pPushButtonSell;
 
 public:
-	COrderInfoWidget* m_pOrderInfoWidget;
-	COrderInfo* m_pOrderInfo;
+	CNewOrderConfirmWindow* m_pNewOrderConfirmWindow;
 	COrderData* m_pOrderData;
 };
 

@@ -1,10 +1,8 @@
-#include "OrderInfoWidget.h"
+#include "NewOrderConfirmWindow.h"
 
 #include "ProjectQTInclude.h"
 #include "ProjectCommonData.h"
-#include "OrderInfoHelper.h"
-#include "UserOrderInfo.h"
-
+#include "OrderData.h"
 
 #include "Log4cppLogger.h"
 
@@ -19,7 +17,7 @@ static const std::string DEFVALUE_String_Label_InstrumentCode_Text = "Instrument
 static const std::string DEFVALUE_String_Label_OrderType_Text = "Order Type:";
 
 
-COrderInfoWidget::COrderInfoWidget(QWidget *parent)
+CNewOrderConfirmWindow::CNewOrderConfirmWindow(QWidget *parent)
 : QDialog(parent)
 {
 	m_pLabel_InstrumentCode = NULL;
@@ -32,8 +30,7 @@ COrderInfoWidget::COrderInfoWidget(QWidget *parent)
 	m_pLabel_Price_Value = NULL;
 	m_pPushButtonOK = NULL;
 	m_pPushButtonCancel = NULL;
-	m_pOrderInfo = NULL;
-	m_pUserOrderInfo = NULL;
+	m_pOrderData = NULL;
 
 	m_str_OrderSide_Value.clear();
 	m_str_OrderType_Value.clear();
@@ -48,8 +45,7 @@ COrderInfoWidget::COrderInfoWidget(QWidget *parent)
 	m_str_Quantity_Value = "1";
 	m_str_Price_Value = "000000000.00000";//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
-	m_pOrderInfo = new COrderInfo();
-	m_pUserOrderInfo = new COrderData();
+	m_pOrderData = new COrderData();
 	this->setupUi();
 	this->translateLanguage();
 	this->_CreateConnect();
@@ -57,24 +53,18 @@ COrderInfoWidget::COrderInfoWidget(QWidget *parent)
 }
 
 
-COrderInfoWidget::~COrderInfoWidget()
+CNewOrderConfirmWindow::~CNewOrderConfirmWindow()
 {
-	if (NULL != m_pOrderInfo)
+	if (NULL != m_pOrderData)
 	{
-		delete m_pOrderInfo;
-		m_pOrderInfo = NULL;
-	}
-
-	if (NULL != m_pUserOrderInfo)
-	{
-		delete m_pUserOrderInfo;
-		m_pUserOrderInfo = NULL;
+		delete m_pOrderData;
+		m_pOrderData = NULL;
 	}
 }
 
 
 
-void COrderInfoWidget::setupUi()
+void CNewOrderConfirmWindow::setupUi()
 {
 	//eg: Symbol: IF1401
 	m_pLabel_InstrumentCode = new QLabel(this);
@@ -116,7 +106,7 @@ void COrderInfoWidget::setupUi()
 }
 
 
-void COrderInfoWidget::translateLanguage()
+void CNewOrderConfirmWindow::translateLanguage()
 {
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_COrderInfoWidget_WindowTitle.c_str()));
 
@@ -141,55 +131,44 @@ void COrderInfoWidget::translateLanguage()
 
 
 
-void COrderInfoWidget::slotPushButtonOKClicked( bool checked )
+void CNewOrderConfirmWindow::slotPushButtonOKClicked( bool checked )
 {
-	m_pUserOrderInfo->m_nCheckRes = COrderData::OrderCheckRes_OK;
+	m_pOrderData->m_nOrderConfirm = COrderData::OrderConfirm_OK;
 
 	//emit
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"COrderInfoWidget"
+			<<" "<<"class:"<<"CNewOrderConfirmWindow"
 			<<" "<<"fun:"<<"slotPushButtonOKClicked()"
 			<<" "<<"emit"
-			<<" "<<"signalOrderCheck(CUserOrderInfo*)"
+			<<" "<<"signalConfirmOrder()"
 			<<" "<<"param:"
-			<<" "<<"m_pUserOrderInfo=0x"<<m_pUserOrderInfo
-			<<" "<<"m_nSide="<<m_pUserOrderInfo->m_nSide
-			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
-			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString()
-			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
-			<<" "<<"m_quantity="<<m_pUserOrderInfo->m_nQuantity
-			<<" "<<"m_nCheckRes="<<m_pUserOrderInfo->m_nCheckRes;
+			<<" "<<"COrderData::EOrderConfirm="<<COrderData::OrderConfirm_OK;
 
-		emit signalOrderCheck(m_pUserOrderInfo);
+		emit signalConfirmOrder(COrderData::OrderConfirm_OK);
 	}
 }
 
-void COrderInfoWidget::slotPushButtonCancelClicked( bool checked )
+void CNewOrderConfirmWindow::slotPushButtonCancelClicked( bool checked )
 {
-	m_pUserOrderInfo->m_nCheckRes = COrderData::OrderCheckRes_Cancel;
+	m_pOrderData->m_nOrderConfirm = COrderData::OrderConfirm_Cancel;
 
+	//emit
 	//emit
 	{
 		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"COrderInfoWidget"
+			<<" "<<"class:"<<"CNewOrderConfirmWindow"
 			<<" "<<"fun:"<<"slotPushButtonCancelClicked()"
 			<<" "<<"emit"
-			<<" "<<"signalOrderCheck(CUserOrderInfo*)"
+			<<" "<<"signalConfirmOrder()"
 			<<" "<<"param:"
-			<<" "<<"m_pUserOrderInfo=0x"<<m_pUserOrderInfo
-			<<" "<<"m_nSide="<<m_pUserOrderInfo->m_nSide
-			<<" "<<"m_nOrderType="<<m_pUserOrderInfo->m_nOrderType
-			<<" "<<"strInstrumentCode="<<m_pUserOrderInfo->m_strInstrumentCode.toStdString()
-			<<" "<<"m_fPrice="<< m_pUserOrderInfo->m_fLastPrice
-			<<" "<<"m_quantity="<<m_pUserOrderInfo->m_nQuantity
-			<<" "<<"m_nCheckRes="<<m_pUserOrderInfo->m_nCheckRes;
+			<<" "<<"COrderData::EOrderConfirm="<<COrderData::OrderConfirm_Cancel;
 
-		emit signalOrderCheck(m_pUserOrderInfo);
+		emit signalConfirmOrder(COrderData::OrderConfirm_Cancel);
 	}
 }
 
-void COrderInfoWidget::_CreateConnect()
+void CNewOrderConfirmWindow::_CreateConnect()
 {
 
 	QObject::connect(m_pPushButtonOK, 
@@ -204,15 +183,15 @@ void COrderInfoWidget::_CreateConnect()
 }
 
 
-void COrderInfoWidget::setOrderInfo( COrderData* pUserOrderInfo )
+void CNewOrderConfirmWindow::resetData( COrderData* pOrderData )
 {
-	(*m_pUserOrderInfo) = (*pUserOrderInfo);
+	(*m_pOrderData) = (*pOrderData);
 
-	m_str_OrderSide_Value = m_pOrderInfo->getStrOrderSide(m_pUserOrderInfo->m_nSide);
-	m_str_OrderType_Value = m_pOrderInfo->getStrOrderType(m_pUserOrderInfo->m_nOrderType);
-	m_str_InstrumentCode_Value = m_pUserOrderInfo->m_strInstrumentCode;
-	m_str_Price_Value = QVariant(m_pUserOrderInfo->m_fLastPrice).toString();
-	m_str_Quantity_Value = QVariant(m_pUserOrderInfo->m_nQuantity).toString();
+	m_str_OrderSide_Value = m_pOrderData->getESide(m_pOrderData->m_nSide);
+	m_str_OrderType_Value = m_pOrderData->getEOrderType(m_pOrderData->m_nOrderType);
+	m_str_InstrumentCode_Value = m_pOrderData->m_strInstrumentCode;
+	m_str_Price_Value = QVariant(m_pOrderData->m_fLastPrice).toString();
+	m_str_Quantity_Value = QVariant(m_pOrderData->m_nQuantity).toString();
 
 	this->translateLanguage();
 	//this->show();

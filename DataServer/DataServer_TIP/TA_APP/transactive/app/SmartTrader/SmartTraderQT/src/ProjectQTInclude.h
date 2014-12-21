@@ -79,6 +79,7 @@
 
 
 /*
+
 QT_BEGIN_NAMESPACE
 class QFormLayout;
 class QHBoxLayout;
@@ -90,7 +91,12 @@ class QPushButton;
 class QMdiArea;
 class QToolBar;
 class QAction;
+class QCheckBox;
+class QSpinBox;
+class QDoubleSpinBox;
+class QGridLayout;
 QT_END_NAMESPACE
+
 */
 
 

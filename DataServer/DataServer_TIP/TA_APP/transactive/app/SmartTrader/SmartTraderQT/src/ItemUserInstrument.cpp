@@ -1,4 +1,6 @@
 #include "ItemUserInstrument.h"
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 #include "ItemUserInstrumentHelper.h"
 
 //QT_BEGIN_NAMESPACE
@@ -53,6 +55,8 @@ CItemUserInstrument::CItemUserInstrument(QList<QVariant>& ItemData, CItemUserIns
 
 CItemUserInstrument::~CItemUserInstrument()
 {
+	QMutexLocker lock(&m_mutex_LstChildItems);
+
 	m_pParentItem = NULL;
 	m_ItemData.clear();
 
@@ -100,11 +104,15 @@ int CItemUserInstrument::childNumber() const
 
 int CItemUserInstrument::columnCount() const
 {
+	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
+
     return m_ItemData.count();
 }
 
 QVariant CItemUserInstrument::data(int column) const
 {
+	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
+
     return m_ItemData.value(column);
 }
 
@@ -127,14 +135,20 @@ bool CItemUserInstrument::insertChildren(int position, int count, int columns)
 
 bool CItemUserInstrument::insertColumns(int position, int columns)
 {
+	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
+
     if (position < 0 || position > m_ItemData.size())
         return false;
 
     for (int column = 0; column < columns; ++column)
+	{
         m_ItemData.insert(position, QVariant());
+	}
 
     foreach (CItemUserInstrument *child, m_LstChildItems)
+	{
         child->insertColumns(position, columns);
+	}
 
     return true;
 }
@@ -158,6 +172,8 @@ bool CItemUserInstrument::removeChildren(int position, int count)
 
 bool CItemUserInstrument::removeColumns(int position, int columns)
 {
+	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
+
 	QList<QVariant>::Iterator iterList;
 
     if (position < 0 || position + columns > m_ItemData.size())
@@ -183,6 +199,8 @@ bool CItemUserInstrument::removeColumns(int position, int columns)
 
 bool CItemUserInstrument::setData(int column, const QVariant &value)
 {
+	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
+	
     if (column < 0 || column >= m_ItemData.size())
         return false;
 
@@ -202,14 +220,18 @@ void CItemUserInstrument::appendChild( CItemUserInstrument** ppItem )
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CItemUserInstrument::resetCurrentNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper )
+void CItemUserInstrument::_ResetCurrentNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper )
 {
+	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
+
 	m_ItemData.clear();
 	pItemUserInstrumentHelper->getItemNodeData(m_ItemData);
 	m_nNodeKey = pItemUserInstrumentHelper->getInstrumentID();
 }
 void CItemUserInstrument::findAndResetSubNodeData( CItemUserInstrumentHelper* pItemUserInstrumentHelper )
 {
+	QMutexLocker lock(&m_mutex_LstChildItems);
+
 	QList<CItemUserInstrument*>::iterator iterLst;
 	CItemUserInstrument* pSubNode = NULL;
 
@@ -220,7 +242,7 @@ void CItemUserInstrument::findAndResetSubNodeData( CItemUserInstrumentHelper* pI
 		pSubNode = (*iterLst);
 		if (NULL != pSubNode && (pSubNode->getNodeKey() == pItemUserInstrumentHelper->getInstrumentID()))
 		{
-			pSubNode->resetCurrentNodeData(pItemUserInstrumentHelper);
+			pSubNode->_ResetCurrentNodeData(pItemUserInstrumentHelper);
 			break;
 		}
 		iterLst++;
@@ -230,12 +252,14 @@ void CItemUserInstrument::findAndResetSubNodeData( CItemUserInstrumentHelper* pI
 
 void CItemUserInstrument::appendChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper)
 {
+	QMutexLocker lock(&m_mutex_LstChildItems);
+
 	CItemUserInstrument* pNewNode = NULL;
 	CItemUserInstrument* pParentNode = this;
 	QList<QVariant> ItemDataNULL;
 
 	pNewNode = new CItemUserInstrument(ItemDataNULL, pParentNode);
-	pNewNode->resetCurrentNodeData(pItemUserInstrumentHelper);
+	pNewNode->_ResetCurrentNodeData(pItemUserInstrumentHelper);
 
 	pParentNode->appendChild(&pNewNode);
 	pNewNode = NULL;
@@ -254,6 +278,8 @@ unsigned int CItemUserInstrument::getNodeKey()
 
 void CItemUserInstrument::removeChildByData( CItemUserInstrumentHelper* pItemUserInstrumentHelper )
 {
+	QMutexLocker lock(&m_mutex_LstChildItems);
+
 	QList<CItemUserInstrument*>::iterator iterLst;
 	CItemUserInstrument* pSubNode = NULL;
 	int nIndex = 0;

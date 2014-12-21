@@ -100,7 +100,8 @@ Qt::ItemFlags CItemModelUserInstrument::flags(const QModelIndex &index) const
 	if (CItemUserInstrument::ItemType_ITEM == nDataType)
 	{
 		//nFlagsTreeItem = Qt::ItemIsEditable;
-		nFlagsTreeItem = Qt::ItemIsEnabled | Qt::ItemIsSelectable |  Qt::ItemIsEditable;
+		//nFlagsTreeItem = Qt::ItemIsEnabled | Qt::ItemIsSelectable |  Qt::ItemIsEditable;
+		nFlagsTreeItem = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 		return nFlagsTreeItem;
 	}
 
@@ -208,19 +209,6 @@ void CItemModelUserInstrument::setRootItem( CItemUserInstrument* rootItem )
 }
 
 
-bool CItemModelUserInstrument::removeRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
-{
-	CItemUserInstrument* parentItem = _GetItem(parent);
-	bool success = true;
-
-	beginRemoveRows(parent, position, position + rows - 1);
-	success = parentItem->removeChildren(position, rows);
-	endRemoveRows();
-
-	return success;
-}
-
-
 CItemUserInstrument* CItemModelUserInstrument::_GetItem( const QModelIndex& index ) const
 {
 	CItemUserInstrument *item = NULL;
@@ -236,81 +224,6 @@ CItemUserInstrument* CItemModelUserInstrument::_GetItem( const QModelIndex& inde
 
 	return m_pRootItemRef;
 }
-
-bool CItemModelUserInstrument::insertRows( int position, int rows, const QModelIndex &parent /*= QModelIndex()*/ )
-{
-	CItemUserInstrument *parentItem = _GetItem(parent);
-	bool success;
-
-	beginInsertRows(parent, position, position + rows - 1);
-	success = parentItem->insertChildren(position, rows, m_pRootItemRef->columnCount());
-	endInsertRows();
-
-	return success;
-}
-
-bool CItemModelUserInstrument::removeColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
-{
-	bool success;
-
-	beginRemoveColumns(parent, position, position + columns - 1);
-	success = m_pRootItemRef->removeColumns(position, columns);
-	endRemoveColumns();
-
-	if (m_pRootItemRef->columnCount() == 0)
-	{
-		removeRows(0, rowCount());
-	}
-
-	return success;
-}
-
-bool CItemModelUserInstrument::insertColumns( int position, int columns, const QModelIndex &parent /*= QModelIndex()*/ )
-{
-	bool success;
-
-	beginInsertColumns(parent, position, position + columns - 1);
-	success = m_pRootItemRef->insertColumns(position, columns);
-	endInsertColumns();
-
-	return success;
-}
-
-bool CItemModelUserInstrument::setHeaderData( int section, Qt::Orientation orientation, const QVariant &value, int role /*= Qt::EditRole*/ )
-{
-	if (role != Qt::EditRole || orientation != Qt::Horizontal)
-		return false;
-
-	bool result = m_pRootItemRef->setData(section, value);
-
-	if (result)
-	{
-		emit headerDataChanged(orientation, section, section);
-	}
-
-	return result;
-}
-
-bool CItemModelUserInstrument::setData( const QModelIndex &index, const QVariant &value, int role /*= Qt::EditRole*/ )
-{
-	if (role != Qt::EditRole)
-		return false;
-
-	CItemUserInstrument *item = _GetItem(index);
-	bool result = item->setData(index.column(), value);
-
-	if (result)
-	{
-		emit dataChanged(index, index);
-	}
-
-	return result;
-}
-
-
-//QT_END_NAMESPACE
-
-
 
 
 

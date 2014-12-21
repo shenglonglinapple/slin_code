@@ -8,6 +8,8 @@
 #include <QtCore/QVariant>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 //QT_BEGIN_NAMESPACE
 //QT_END_NAMESPACE
@@ -44,7 +46,7 @@ public:
 ///////////////////
 public:
 	void findAndResetSubNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
-	void resetCurrentNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
+	void _ResetCurrentNodeData(CItemUserInstrumentHelper* pItemUserInstrumentHelper );
 	void appendChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper);
 	void removeChildByData(CItemUserInstrumentHelper* pItemUserInstrumentHelper);
 
@@ -54,11 +56,14 @@ private:
 	/*
 	if ItemDataType_ROOT itemData is column Name parentItem is NULL
 	if ItemDataType_ITEM itemData is one row columns value parentItem have value
-	*/
+	*/	
+	QMutex m_mutex_ItemData;
 	QList<QVariant> m_ItemData;
 	CItemUserInstrument* m_pParentItem;
 	EItemType m_nItemType;
 private:
+	//	QMutexLocker lock(&m_mutex_LstChildItems);	
+	QMutex m_mutex_LstChildItems;
 	QList<CItemUserInstrument*> m_LstChildItems;
 private:
 	CItemUserInstrumentHelper* m_pItemUserInstrumentHelper;

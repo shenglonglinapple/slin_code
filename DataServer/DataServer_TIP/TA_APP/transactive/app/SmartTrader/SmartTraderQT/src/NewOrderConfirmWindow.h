@@ -12,8 +12,8 @@
 #include <QtCore/QModelIndex>
 
 #include <QtGui/QDialog>
-#include "Order.h"
 
+#include "OrderData.h"
 
 QT_BEGIN_NAMESPACE
 class QFormLayout;
@@ -32,32 +32,21 @@ class QDoubleSpinBox;
 class QGridLayout;
 QT_END_NAMESPACE
 
-class COrderInfo;
-class COrderData;
 
-class COrderInfoWidget : public QDialog
+class CNewOrderConfirmWindow : public QDialog
 {
     Q_OBJECT
 
 public:
-    COrderInfoWidget(QWidget *parent = 0);
-	~COrderInfoWidget();
+    CNewOrderConfirmWindow(QWidget *parent = 0);
+	~CNewOrderConfirmWindow();
 signals:
-	/*
-	class: COrderInfoWidget
-	signals:
-	void signalOrderCheck(CUserOrderInfo* pUserOrderInfo);
-	fun send signals: slotPushButtonOKClicked() slotPushButtonCancelClicked()
-
-	class: CCreateNewOrderDialog
-	public slots: 
-	void slotOrderCheck(CUserOrderInfo* pUserOrderInfo);
-	*/
-	void signalOrderCheck(COrderData* pUserOrderInfo);
+	//COrderData::EOrderConfirm
+	void signalConfirmOrder(COrderData::EOrderConfirm nEOrderConfirm);
 
 
 public:
-	void setOrderInfo(COrderData* pUserOrderInfo);
+	void resetData(COrderData* pOrderData);
 
 private slots:
 	void slotPushButtonOKClicked(bool checked);
@@ -70,8 +59,7 @@ public:
 private:
 	void _CreateConnect();
 private:
-	COrderInfo* m_pOrderInfo;
-	COrderData* m_pUserOrderInfo ;
+	COrderData* m_pOrderData ;
 private:
 	QString m_str_OrderSide_Value;
 	QString m_str_OrderType_Value;
@@ -79,9 +67,6 @@ private:
 	QString m_str_Price_Value;
 	QString m_str_Quantity_Value;
 	
-
-
-
 private:
 	QGridLayout* m_pGridLayout;
 

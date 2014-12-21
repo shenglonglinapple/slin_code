@@ -7,6 +7,7 @@
 #include "WaitingInstrumentTreeView.h"
 #include "ClientDataManager.h"
 #include "OrderData.h"
+#include "NewOrderWindow.h"
 
 #include "Log4cppLogger.h"
 
@@ -196,13 +197,16 @@ void CUserInstrumentTableView::slotActionNewOrder()
 	pOrderData = new COrderData();
 	pOrderData->setDataByItem(pCurrentItemRef);
 
-	m_pNewOrderWindow
+	m_pNewOrderWindow->resetData(pOrderData);
 
 	if (NULL != pOrderData)
 	{
 		delete pOrderData;
 		pOrderData = NULL;
 	}
+
+	m_pNewOrderWindow->move(QCursor::pos());
+	m_pNewOrderWindow->show();
 
 }
 
@@ -246,6 +250,8 @@ void CUserInstrumentTableView::contextMenuEvent( QContextMenuEvent* pEvent )
 	menuRightClieck.addAction(m_pActionAddUserInstrument);	//first ContractInfoWindow reset data
 	menuRightClieck.addAction(m_pActionRemoveUserInstrument);
 	menuRightClieck.addAction(m_pActionCustomColumns);
+	menuRightClieck.addAction(m_pActionNewOrder);
+	
 	menuRightClieck.exec(QCursor::pos());
 }
 
