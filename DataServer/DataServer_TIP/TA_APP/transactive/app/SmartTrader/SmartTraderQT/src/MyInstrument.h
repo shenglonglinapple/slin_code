@@ -7,7 +7,6 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariant>
 
-#include "Instrument.h"
 
 
 class CStockData;
@@ -122,8 +121,6 @@ public:
 	void setDefaultValue();
 	void setValue(const CStockData* pStockData);
 	void setValue(const CMyMarketData* pMyMarketData);
-	void setValue(const Instrument* pInstrument);
-	void setValue( const Instrument& Instrument );
 private:
 	void _ClearData();
 public:

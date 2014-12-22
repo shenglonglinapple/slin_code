@@ -11,10 +11,13 @@
 #include <QtCore/QMutexLocker>
 
 #include "IProcessRecvData.h"
+#include "OrderData.h"
 
 class CClientLoginParam;
 class CSmartTraderClient;
 class CHistoryDataRequest;
+
+
 
 class CClientDataManager : 
 	public QObject,
@@ -42,12 +45,12 @@ public:
 public:
 	void onInstrumentDownloaded(const CMyInstrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate( const CMyMarketData &marketData );
-	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars );
-	void onBarDataUpdate(const BarSummary &barData);
+	void onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars );
+	void onBarDataUpdate(const CMyBarSummary &barData);
 public:
 	void addUserInstrument( unsigned int nInstrumentID );
 	void removeUserInstrument( unsigned int nInstrumentID );
-
+	void newOrder(COrderData newOrderData);
 private:
 	void _InitTraderClient(CClientLoginParam* pClientLoginParam);
 	void _UnInitTraderClient();

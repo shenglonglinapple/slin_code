@@ -34,18 +34,22 @@ CMyTradeClient::CMyTradeClient( const std::string &username, const std::string &
 
 CMyTradeClient::~CMyTradeClient( void )
 {
-	if (NULL != m_pDataWorker)
-	{
-		m_pDataWorker->terminateAndWait();
-		delete m_pDataWorker;
-		m_pDataWorker = NULL;
-	}
+
 
 	if (NULL != m_pDataRealTimeWorker)
 	{
+		m_pDataRealTimeWorker->setDataProcessHandle(NULL);
 		m_pDataRealTimeWorker->terminateAndWait();
 		delete m_pDataRealTimeWorker;
 		m_pDataRealTimeWorker = NULL;
+	}
+
+	if (NULL != m_pDataWorker)
+	{
+		m_pDataWorker->setDataProcessHandle(NULL);
+		m_pDataWorker->terminateAndWait();
+		delete m_pDataWorker;
+		m_pDataWorker = NULL;
 	}
 }
 
@@ -57,7 +61,7 @@ int CMyTradeClient::logon( const std::string &ip, unsigned int port, bool synchr
 	m_nLoginRes = 33;
 
 	CReqData* pReqData = new CReqData();
-	pReqData->setAutoRequestID();
+	pReqData->setAutoRequestUUID();
 	pReqData->setReqType(EReqType_DownLoadStockID);
 	m_pDataWorker->append_req(pReqData);
 	return m_nLoginRes;
@@ -73,7 +77,7 @@ void CMyTradeClient::subscribeMarketData( const CMyInstrument &instrument )
 	CReqData* pReqData = NULL;	
 
 	pReqData = new CReqData();
-	pReqData->setAutoRequestID();
+	pReqData->setAutoRequestUUID();
 	pReqData->setReqType(EReqType_SubscribeMarketData);
 	pReqData->setInstrumentCode(instrument.getInstrumentCode());
 
@@ -86,7 +90,7 @@ void CMyTradeClient::subscribeMarketData(unsigned int securityID)
 	pStockData = CStaticStockManager::getInstance().find_StockData_BySymbolUse(securityID);
 
 	pReqData = new CReqData();
-	pReqData->setAutoRequestID();
+	pReqData->setAutoRequestUUID();
 	pReqData->setReqType(EReqType_SubscribeMarketData);
 	pReqData->setInstrumentCode(pStockData->m_strSymbolUse);
 	m_pDataWorker->append_req(pReqData);
@@ -102,7 +106,7 @@ void CMyTradeClient::unsubscribeMarketData( unsigned int nInstrumentID )
 	if (NULL != pStockeData)
 	{
 		pReqData = new CReqData();
-		pReqData->setAutoRequestID();
+		pReqData->setAutoRequestUUID();
 		pReqData->setReqType(EReqType_UnSubscribeMarketData);
 
 		pReqData->setInstrumentCode(pStockeData->m_strSymbolUse);
@@ -112,55 +116,55 @@ void CMyTradeClient::unsubscribeMarketData( unsigned int nInstrumentID )
 }
 
 
-unsigned int CMyTradeClient::downloadHistoryData( const CMyInstrument &instrument, enum BarType interval, unsigned int from, unsigned int to )
+QString CMyTradeClient::downloadHistoryData( const CMyInstrument &instrument, enum EMyBarType interval, unsigned int from, unsigned int to )
 {
 	CReqData* pReqData = NULL;	
-	unsigned int requestID = 0;
+	QString requestID = 0;
 
 	pReqData = new CReqData();
-	pReqData->setAutoRequestID();
+	pReqData->setAutoRequestUUID();
 	pReqData->setReqType(EReqType_DownloadHistoryData);
 	pReqData->setMyBarType(interval);
 	pReqData->setInstrumentCode(instrument.getInstrumentCode());
 
 	m_pDataWorker->append_req(pReqData);
-	requestID = pReqData->getRequestID();
+	requestID = pReqData->getRequestUUID();
 
 	return requestID;
 }
 
-void CMyTradeClient::onInstrumentDownloaded( const CMyInstrument &instrument )
+QString CMyTradeClient::buyMarket( const CMyInstrument &instrument, int nVolume )
 {
-	MYLOG4CPP_WARNING<<"CMyTradeClient::onInstrumentDownloaded"
-		<<" "<<"you must create class like:  CYourClient : public CMyTradeClient";
-}
+	CReqData* pReqData = NULL;	
+	QString requestID = 0;
 
+	pReqData = new CReqData();
+	pReqData->setAutoRequestUUID();
+	pReqData->setReqType(EReqType_BUYMARKET);
+	pReqData->setInstrumentCode(instrument.getInstrumentCode());
+	pReqData->setVolume(nVolume);
 
-void CMyTradeClient::onMarketDataUpdate( const CMyMarketData &marketData )
-{
-	MYLOG4CPP_WARNING<<"CMyTradeClient::onMarketDataUpdate"
-		<<" "<<"you must create class like:  CYourClient : public CMyTradeClient";
+	m_pDataWorker->append_req(pReqData);
+	requestID = pReqData->getRequestUUID();
 
-
-}
-
-
-void CMyTradeClient::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
-{
-	MYLOG4CPP_WARNING<<"CMyTradeClient::onHistoryDataDownloaded"
-		<<" "<<"std::auto_ptr<CMyBars> CMyBarsPtr  bars->size="<<bars->size()
-		<<" "<<"you must create class like:  CYourClient : public CMyTradeClient";
-
-	//std::auto_ptr<CMyBars> CMyBarsPtr 
+	return requestID;
 
 }
 
-void CMyTradeClient::onBarDataUpdate(const BarSummary &barData)
+QString CMyTradeClient::sellMarket( const CMyInstrument &instrument, int nVolume )
 {
-	MYLOG4CPP_WARNING<<"CMyTradeClient::onBarDataUpdate"
-		<<" "<<"barData.instrumentID="<<barData.instrumentID
-		<<" "<<"barData.bars.size()="<<barData.bars.size()
-		<<" "<<"you must create class like:  CYourClient : public CMyTradeClient";
+	CReqData* pReqData = NULL;	
+	QString requestID = 0;
+
+	pReqData = new CReqData();
+	pReqData->setAutoRequestUUID();
+	pReqData->setReqType(EReqType_SELLMARKET);
+	pReqData->setInstrumentCode(instrument.getInstrumentCode());
+	pReqData->setVolume(nVolume);
+
+	m_pDataWorker->append_req(pReqData);
+	requestID = pReqData->getRequestUUID();
+
+	return requestID;
 
 }
-

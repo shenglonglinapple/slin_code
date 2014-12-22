@@ -35,7 +35,7 @@ CHistoryDataRequest& CHistoryDataRequest::operator=( const CHistoryDataRequest& 
 	m_nBarCount = objectCopy.m_nBarCount;
 	m_bSubscribe = objectCopy.m_bSubscribe;
 
-	m_nRequestID = objectCopy.m_nRequestID;
+	m_strRequestID = objectCopy.m_strRequestID;
 	m_strInstrumentCode = objectCopy.m_strInstrumentCode;
 	m_nInstruemntID = objectCopy.m_nInstruemntID;
 
@@ -67,5 +67,5 @@ void CHistoryDataRequest::logInfo(const std::string& file, int line)
 		<<" "<<"m_nTimeTo="<<qtTimehelper.dateTimeToStr_Qt(m_nTimeTo)
 		<<" "<<"m_nBarCount="<<m_nBarCount
 		<<" "<<"m_bSubscribe="<<m_bSubscribe
-		<<" "<<"m_nRequestID="<<m_nRequestID;
+		<<" "<<"m_strRequestID="<<m_strRequestID.toStdString();
 }

@@ -2,7 +2,6 @@
 
 #include "ItemWaitingInstrument.h"
 #include "ItemWaitingInstrumentHelper.h"
-#include "DataTotalInstrument.h"
 #include "DataTotalMyInstrument.h"
 //
 #include "Log4cppLogger.h"
@@ -63,21 +62,13 @@ CItemWaitingInstrument* CDataWaitingInstrument::getRootItem()
 void CDataWaitingInstrument::addInstrument( unsigned int nInstrumentID )
 {	
 	QMutexLocker lock(&m_mutex_ItemWaitingInstrument_Root);
-	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	if (NULL == pMyInstrumentRef)
 	{
 		return;
-	}
-
-	if (NULL != pInstrumentRef)
-	{
-		m_pItemWaitingInstrumentHelper->setValue(*pInstrumentRef);
 	}
 
 	if (NULL != pMyInstrumentRef)
@@ -99,21 +90,13 @@ void CDataWaitingInstrument::addInstrument( unsigned int nInstrumentID )
 void CDataWaitingInstrument::removeInstrument( unsigned int nInstrumentID )
 {	
 	QMutexLocker lock(&m_mutex_ItemWaitingInstrument_Root);
-	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	if (NULL == pMyInstrumentRef)
 	{
 		return;
-	}
-
-	if (NULL != pInstrumentRef)
-	{
-		m_pItemWaitingInstrumentHelper->setValue(*pInstrumentRef);
 	}
 
 	if (NULL != pMyInstrumentRef)

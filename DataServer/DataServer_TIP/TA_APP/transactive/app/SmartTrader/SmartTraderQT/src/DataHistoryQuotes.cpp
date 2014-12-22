@@ -25,17 +25,17 @@ CDataHistoryQuotes::~CDataHistoryQuotes()
 	m_MapBarData.clear();
 }
 
-void CDataHistoryQuotes::onHistoryDataDownloaded(BarsPtr bars )
+void CDataHistoryQuotes::onHistoryDataDownloaded(pSetMyBarsPtr bars )
 {
 	//std::set<Bar>;
-	Bars::iterator iterSet;
+	setMyBars::iterator iterSet;
 	iterSet = bars->begin();
 
 	m_MapBarData.clear();
 
 	while (iterSet != bars->end())
 	{
-		Bar newBar = (*iterSet);
+		CMyBar newBar = (*iterSet);
 		m_MapBarData.insert(newBar.timestamp, newBar);//duplick will not insert 
 		iterSet++;
 	}
@@ -43,14 +43,14 @@ void CDataHistoryQuotes::onHistoryDataDownloaded(BarsPtr bars )
 	_ResetTimeValue();
 }
 
-void CDataHistoryQuotes::onBarDataUpdate( const BarSummary &barData )
+void CDataHistoryQuotes::onBarDataUpdate( const CMyBarSummary &barData )
 {
-	std::map<int, Bar>::const_iterator iterMap;// bars; //bars indexed by interval
+	std::map<int, CMyBar>::const_iterator iterMap;// bars; //bars indexed by interval
 
 	iterMap = barData.bars.begin();
 	while (iterMap != barData.bars.end())
 	{
-		Bar newBar = iterMap->second;// (*iterMap).second;
+		CMyBar newBar = iterMap->second;// (*iterMap).second;
 		m_MapBarData.insert(newBar.timestamp, newBar);//duplick will not insert 
 		iterMap++;
 	}
@@ -60,8 +60,8 @@ void CDataHistoryQuotes::onBarDataUpdate( const BarSummary &barData )
 
 void CDataHistoryQuotes::_ResetTimeValue()
 {
-	QMap<unsigned int, Bar>::iterator iterMapFirst;
-	QMap<unsigned int, Bar>::iterator iterMapLast;
+	QMap<unsigned int, CMyBar>::iterator iterMapFirst;
+	QMap<unsigned int, CMyBar>::iterator iterMapLast;
 	CQtTimeHelper timeHelper;
 	//if (RequestType_From_To == m_nRequestType)
 	if (m_MapBarData.size() > 0)
@@ -96,7 +96,7 @@ void CDataHistoryQuotes::logInfo(const std::string& file, int line)
 void CDataHistoryQuotes::initTestData()
 {
 	unsigned int nBarIndex = 0;
-	Bar barData;
+	CMyBar barData;
 	unsigned int nTimeNow;
 	unsigned int nBarCount = 200;
 	double tmp1 = 0;
@@ -164,11 +164,11 @@ unsigned int CDataHistoryQuotes::getTimeTo()
 	return m_nTimeTo;
 }
 
-BarType  CDataHistoryQuotes::getBarType()
+EMyBarType  CDataHistoryQuotes::getBarType()
 {
 	return m_nBarType;
 }
-void CDataHistoryQuotes::setBarType( BarType  nBarType )
+void CDataHistoryQuotes::setBarType( EMyBarType  nBarType )
 {
 	if (nBarType != m_nBarType)
 	{

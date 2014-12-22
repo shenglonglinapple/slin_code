@@ -2,6 +2,7 @@
 #define __CLASS_REQ_DATA_HH__
 
 #include <string>
+#include <QtCore/QString>
 #include "MyBar.h"
 
 enum EReqType
@@ -11,6 +12,8 @@ enum EReqType
 	EReqType_SubscribeMarketData,
 	EReqType_UnSubscribeMarketData,
 	EReqType_DownloadHistoryData,
+	EReqType_BUYMARKET,
+	EReqType_SELLMARKET,
 	EReqType_End,
 };
 
@@ -22,9 +25,8 @@ public:
 	CReqData();
 	virtual ~CReqData(void);
 public:
-	void setAutoRequestID();
-	void setRequestID(unsigned int nRequestID);
-	unsigned int getRequestID();
+	void setAutoRequestUUID();
+	QString getRequestUUID();
 public:
 	void setReqType(EReqType nReqType);
 	EReqType getReqType();
@@ -32,14 +34,17 @@ public:
 	void setInstrumentCode(const std::string& strInstrumentCode);
 	std::string getInstrumentCode();
 public:
-	void setMyBarType(BarType nMyBarType);
-	BarType getMyBarType();
+	void setMyBarType(EMyBarType nMyBarType);
+	EMyBarType getMyBarType();
 	void setTimeFrom(const std::string& strTimeFrom);
 	std::string getTimeFrom();
 	void setTimeTo(const std::string& strTimeTo);
 	std::string getTimeTo();
+public:
+	void setVolume(int nVolume);
+	int getVolume();
 private:
-	unsigned int m_nRequestID;
+	QString m_strRequestUUID;
 private:
 	EReqType m_nReqType;
 private:
@@ -48,7 +53,9 @@ private:
 	std::string m_strTimeFrom;
 	std::string m_strTimeTo;
 private:
-	BarType m_nMyBarType;
+	EMyBarType m_nMyBarType;
+private:
+	int m_nVolume;
 };
 
 

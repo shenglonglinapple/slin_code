@@ -14,7 +14,7 @@ CMyBarTypeHeler::~CMyBarTypeHeler()
 }
 
 
-std::string CMyBarTypeHeler::getString_BarType( enum BarType nBarType )
+std::string CMyBarTypeHeler::getString_BarType( enum EMyBarType nBarType )
 {
 	std::string strRes;
 
@@ -67,10 +67,10 @@ std::string CMyBarTypeHeler::getString_BarType( enum BarType nBarType )
 	return strRes;
 }
 
-enum BarType CMyBarTypeHeler::getBarTypeByString(const std::string& strBarType )
+enum EMyBarType CMyBarTypeHeler::getBarTypeByString(const std::string& strBarType )
 {
 	std::string strTemp;
-	enum BarType nBarType = FIVE_SECOND;
+	enum EMyBarType nBarType = FIVE_SECOND;
 
 	strTemp = "FIVE_SECOND";
 	if (strBarType == strTemp)
@@ -186,12 +186,12 @@ CMyBarsPtrHelper::~CMyBarsPtrHelper()
 
 }
 
-BarsPtr CMyBarsPtrHelper::convertValue( const std::list<CHistoryData*>& lstHistoryData )
+pSetMyBarsPtr CMyBarsPtrHelper::convertValue( const std::list<CHistoryData*>& lstHistoryData )
 {
 	CQtTimeHelper timeHelper;
-	Bar MyBarData;
+	CMyBar MyBarData;
 	const CHistoryData* pHistoryData = NULL;
-	BarsPtr pMyBars(new Bars());  
+	pSetMyBarsPtr pMyBars(new setMyBars());  
 
 	std::list<CHistoryData*>::const_iterator constIterLst;
 
@@ -213,5 +213,29 @@ BarsPtr CMyBarsPtrHelper::convertValue( const std::list<CHistoryData*>& lstHisto
 
 	return pMyBars;
 }
+
+//////////////////////////////////////////////////////////////////////////
+
+CMyBar::CMyBar()
+{
+
+}
+
+CMyBar::~CMyBar()
+{
+
+}
+
+CMyBarSummary::CMyBarSummary()
+{
+
+}
+
+CMyBarSummary::~CMyBarSummary()
+{
+
+}
+//////////////////////////////////////////////////////////////////////////
+
 
 

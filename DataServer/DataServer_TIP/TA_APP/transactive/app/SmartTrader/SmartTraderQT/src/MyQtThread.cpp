@@ -100,6 +100,7 @@ void CMyQtThread::terminateAndWait()
 			<<" "<<"m_nThreadID="<<m_nThreadID
 			<<" "<<"begin join";
 
+
 		m_pQThread->quit();
 		while (false == m_pQThread->isFinished())
 		{

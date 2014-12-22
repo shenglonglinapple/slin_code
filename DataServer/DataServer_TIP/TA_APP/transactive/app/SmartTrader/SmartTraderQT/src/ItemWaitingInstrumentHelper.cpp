@@ -44,14 +44,6 @@ void CItemWaitingInstrumentHelper::_ClearData()
 }
 
 
-void CItemWaitingInstrumentHelper::setValue( const Instrument &instrument)
-{
-	CMyInstrument myInstrument;
-	
-	myInstrument.setValue(instrument);
-	setValue(myInstrument);
-}
-
 void CItemWaitingInstrumentHelper::setValue( const CMyInstrument &instrument )
 {
 	_ClearData();

@@ -13,7 +13,7 @@ class CReqData;
 class CDataRealTimeWorker : public CMyQtThread
 {
 	Q_OBJECT
-private:
+public:
 	enum EDataWorkerState
 	{
 		DataWorkerState_Begin,

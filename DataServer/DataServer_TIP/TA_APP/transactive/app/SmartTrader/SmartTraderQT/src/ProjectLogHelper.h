@@ -22,10 +22,7 @@ public:
 		const std::string& strLogInfo, 
 		CMyInstrument* pInstrument);
 
-	void log_MyInstrument_info(
-		const std::string& file, int line, 
-		const std::string& strLogInfo, 
-		Instrument* pInstrument);
+
 public:
 	std::string getStdString(const std::string& strValue);
 	std::string getStdString(const QString& strValue);

@@ -1,7 +1,7 @@
 #include "QtTimeHelper.h"
 
 #include <QtCore/QDateTime>
-
+#include <QtCore/QUuid>
 
 
 
@@ -111,4 +111,13 @@ time_t CQtTimeHelper::strToDateTime_Qt_AmPm(const std::string& strTimeValue)
 	time_local.setTimeSpec(Qt::LocalTime);
 	nTime_local = time_local.toTime_t();
 	return nTime_local;
+}
+
+QString CQtTimeHelper::getUUID()
+{
+	QUuid newUuid = QUuid::createUuid();
+	//std::cout << qPrintable(newUuid.toString()) << std::endl;
+	QString strUUID;
+	strUUID = newUuid.toString();
+	return strUUID;
 }

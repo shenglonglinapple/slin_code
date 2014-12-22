@@ -59,8 +59,6 @@ public:
 private:
 	void _CreateConnect();
 private:
-	COrderData* m_pOrderData ;
-private:
 	QString m_str_OrderSide_Value;
 	QString m_str_OrderType_Value;
 	QString m_str_InstrumentCode_Value;

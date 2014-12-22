@@ -6,7 +6,7 @@
 class CSampleMyQtThread : public CMyQtThread
 {
 	Q_OBJECT
-private:
+public:
 	enum EThreadJobState
 	{
 		JobState_Begin,
@@ -20,6 +20,7 @@ public:
 public:
 	virtual void run();	
 	virtual void terminate();
+	virtual void join();
 	bool  isFinishWork();
 private:
 	void _ThreadJob();

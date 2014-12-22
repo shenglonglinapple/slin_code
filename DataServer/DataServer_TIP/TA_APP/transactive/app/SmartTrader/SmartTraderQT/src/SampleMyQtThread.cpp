@@ -5,6 +5,7 @@
 CSampleMyQtThread::CSampleMyQtThread(void)
 {	
 	m_toTerminate = false;
+	m_WorkerState = WORK_STATE_BEGIN;
 	m_nThreadJobState = JobState_Begin;
 
 }
@@ -17,8 +18,10 @@ CSampleMyQtThread::~CSampleMyQtThread(void)
 
 void CSampleMyQtThread::run()
 {
+	m_WorkerState = WORK_STATE_BEGIN;
 	m_nThreadJobState = JobState_Begin;
 
+	m_WorkerState = WORK_STATE_WORKING;
 
 	while (false == m_toTerminate)
 	{
@@ -27,11 +30,16 @@ void CSampleMyQtThread::run()
 	}
 
 	_ProcessUserTerminate();
+	m_WorkerState = WORK_STATE_END;
 }
 
 void CSampleMyQtThread::terminate()
 {
 	m_toTerminate = true;
+	while (WORK_STATE_END != m_WorkerState)
+	{
+		this->msleep(10);
+	}
 }
 
 
@@ -67,6 +75,14 @@ void CSampleMyQtThread::_ThreadJob()
 		break;
 
 	}//switch
+}
+
+void CSampleMyQtThread::join()
+{
+	while (CSampleMyQtThread::JobState_End != m_nThreadJobState)
+	{
+		this->msleep(10);
+	}
 }
 
 /*

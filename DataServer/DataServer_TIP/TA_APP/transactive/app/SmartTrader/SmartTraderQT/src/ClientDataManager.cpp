@@ -10,7 +10,6 @@
 //
 #include "HistoryDataRequest.h"
 //
-#include "DataTotalInstrument.h"
 #include "DataTotalMyInstrument.h"
 #include "StaticStockManager.h"
 //
@@ -51,7 +50,6 @@ CClientDataManager::CClientDataManager(void)
 	CConfigInfo::getInstance();
 	CStaticStockManager::getInstance();
 	CDataTotalMyInstrument::getInstance();
-	CDataTotalInstrument::getInstance();
 	CDataHistoryQuotesManager::getInstance();
 	CDataUserInstrument::getInstance();
 	CDataWaitingInstrument::getInstance();
@@ -67,7 +65,6 @@ CClientDataManager::~CClientDataManager(void)
 	CDataHistoryQuotesManager::removeInstance();
 	CDataTotalMyInstrument::removeInstance();
 	CStaticStockManager::removeInstance();
-	CDataTotalInstrument::removeInstance();
 	CConfigInfo::removeInstance();
 	_UnInitTraderClient();
 }
@@ -150,7 +147,7 @@ void CClientDataManager::onMarketDataUpdate( const CMyMarketData &marketData )
 	}
 }
 
-void CClientDataManager::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
+void CClientDataManager::onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars )
 {
 	MYLOG4CPP_WARNING<<"CSmartTraderClient::onHistoryDataDownloaded"
 		<<" "<<"std::auto_ptr<CMyBars> CMyBarsPtr  bars->size="<<bars->size();
@@ -160,7 +157,7 @@ void CClientDataManager::onHistoryDataDownloaded( unsigned int requestID, BarsPt
 
 }
 
-void CClientDataManager::onBarDataUpdate(const BarSummary &barData)
+void CClientDataManager::onBarDataUpdate(const CMyBarSummary &barData)
 {
 	MYLOG4CPP_WARNING<<"CClientDataManager::onBarDataUpdate"
 		<<" "<<"barData.instrumentID="<<barData.instrumentID
@@ -174,10 +171,10 @@ void CClientDataManager::onBarDataUpdate(const BarSummary &barData)
 void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest)
 {
 	CMyInstrument* pInstrument = NULL;
-	enum BarType interval;
+	enum EMyBarType interval;
 	unsigned int from;
 	unsigned int to ;
-	unsigned int requestID = 0;
+	QString requestID = 0;
 
 	pInstrument = CDataTotalMyInstrument::getInstance().findInstrumentByID(pHistoryDataRequest->m_nInstruemntID);
 	if (NULL == pInstrument)
@@ -193,7 +190,7 @@ void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistory
 	from = pHistoryDataRequest->m_nTimeFrom;
 	to = pHistoryDataRequest->m_nTimeTo;
 
-	requestID = m_pSmartTraderClient->my_downloadHistoryData(*pInstrument, interval, from, to);
+	requestID = m_pSmartTraderClient->downloadHistoryData(*pInstrument, interval, from, to);
 
 	CDataHistoryQuotesManager::getInstance().addReqest(requestID, pHistoryDataRequest);
 
@@ -204,17 +201,14 @@ void CClientDataManager::addUserInstrument( unsigned int nInstrumentID )
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
 	std::string strInstrumentCode;
-	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
 	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker addUserInstrument"
 		<<" "<<"nInstrumentID="<<nInstrumentID;
 
-	pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	if (NULL == pMyInstrumentRef)
 	{
 		return;
 	}
@@ -224,7 +218,7 @@ void CClientDataManager::addUserInstrument( unsigned int nInstrumentID )
 
 	{
 		//subscribe this instrument
-		MYLOG4CPP_DEBUG<<"subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
+		MYLOG4CPP_DEBUG<<"Client subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
 		m_pSmartTraderClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 	}
 
@@ -249,17 +243,14 @@ void CClientDataManager::removeUserInstrument( unsigned int nInstrumentID )
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
 	std::string strInstrumentCode;
-	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
 	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker removeUserInstrument"
 		<<" "<<"nInstrumentID="<<nInstrumentID;
 
-	pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	if (NULL == pMyInstrumentRef)
 	{
 		return;
 	}
@@ -269,7 +260,7 @@ void CClientDataManager::removeUserInstrument( unsigned int nInstrumentID )
 
 	{
 		//subscribe this instrument
-		MYLOG4CPP_DEBUG<<"unsubscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
+		MYLOG4CPP_DEBUG<<"Client unsubscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
 		m_pSmartTraderClient->unsubscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 	}
 
@@ -284,6 +275,51 @@ void CClientDataManager::removeUserInstrument( unsigned int nInstrumentID )
 		//emit
 		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
 	}
+
+
+}
+
+void CClientDataManager::newOrder( COrderData newOrderData )
+{
+	COrderData::EOrderType nOrderType = COrderData::MARKET;
+	COrderData::ESide nSide = COrderData::BUY;
+	CMyInstrument* pMyInstrumentRef = NULL;
+	QString strReqID = 0;
+	MYLOG4CPP_DEBUG<<"CClientDataManager newOrder"
+		<<" "<<"nInstrumentID="<<newOrderData.m_nInstrumentID;
+
+	pMyInstrumentRef = NULL;
+	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(newOrderData.m_nInstrumentID);
+	if (NULL == pMyInstrumentRef)
+	{
+		return;
+	}
+
+	nOrderType = newOrderData.m_nOrderType;
+	nSide = newOrderData.m_nSide;
+
+	switch (nOrderType)
+	{
+	case COrderData::MARKET:
+		if (COrderData::BUY == nSide)
+		{
+			MYLOG4CPP_DEBUG<<"Client BUY MARKET"
+				<<" "<<"InstrumentCode="<<newOrderData.m_strInstrumentCode.toStdString()
+				<<" "<<"nVolume="<<newOrderData.m_nVolume;
+			strReqID = m_pSmartTraderClient->buyMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
+		}
+		if (COrderData::SELL == nSide)
+		{
+			MYLOG4CPP_DEBUG<<"Client SELL MARKET"
+				<<" "<<"InstrumentCode="<<newOrderData.m_strInstrumentCode.toStdString()
+				<<" "<<"nVolume="<<newOrderData.m_nVolume;
+			strReqID = m_pSmartTraderClient->sellMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
+		}
+		break;
+	default:
+		break;
+	}
+
 
 
 }

@@ -4,6 +4,7 @@
 #include "ProjectCommonData.h"
 
 #include "SignalSlotManager.h"
+#include "ClientDataManager.h"
 #include "OrderData.h"
 #include "NewOrderConfirmWindow.h"
 #include "Log4cppLogger.h"
@@ -205,7 +206,7 @@ void CNewOrderWindow::resetData( COrderData* pData )
 
 	m_pTextEdit_Symbol_Value = pData->m_strInstrumentCode;
 	//m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
-	m_pSpinBox_Volume_Value = pData->m_nQuantity;
+	m_pSpinBox_Volume_Value = pData->m_nVolume;
 	m_pSpinBox_Price_Value = pData->m_fLastPrice;
 
 	(*m_pOrderData) = (*pData);
@@ -227,7 +228,7 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 	m_pOrderData->m_nSide = COrderData::BUY;
 	m_pOrderData->m_nOrderType = m_pOrderData->getEOrderType(strOrderType);
 	m_pOrderData->m_fLastPrice = m_pSpinBox_Price->value();
-	m_pOrderData->m_nQuantity = m_pSpinBox_Volume->value();
+	m_pOrderData->m_nVolume = m_pSpinBox_Volume->value();
 	
 	//
 	m_pNewOrderConfirmWindow->resetData(m_pOrderData);
@@ -248,7 +249,7 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 	m_pOrderData->m_nSide = COrderData::SELL;
 	m_pOrderData->m_nOrderType = m_pOrderData->getEOrderType(strOrderType);
 	m_pOrderData->m_fLastPrice = m_pSpinBox_Price->value();
-	m_pOrderData->m_nQuantity = m_pSpinBox_Volume->value();
+	m_pOrderData->m_nVolume = m_pSpinBox_Volume->value();
 
 	//
 	m_pNewOrderConfirmWindow->resetData(m_pOrderData);
@@ -272,35 +273,28 @@ void CNewOrderWindow::_CreateConnect()
 		SLOT(slotPushButtonSellClicked(bool)));
 
 	QObject::connect(m_pNewOrderConfirmWindow, 
-		SIGNAL(signalOrderCheck(COrderData*)),
+		SIGNAL(signalConfirmOrder(COrderData::EOrderConfirm)),
 		this, 
-		SLOT(slotOrderCheck(COrderData*)));
+		SLOT(slotConfirmOrder(COrderData::EOrderConfirm)));
 
 	
 }
 
-void CNewOrderWindow::slotOrderCheck(COrderData* pUserOrderInfo)
+void CNewOrderWindow::slotConfirmOrder(COrderData::EOrderConfirm nEOrderConfirm)
 {
 	m_pNewOrderConfirmWindow->hide();
-	//emit
-	if (COrderData::OrderConfirm_OK == pUserOrderInfo->m_nOrderConfirm)
-	{
-		MYLOG4CPP_DEBUG<<" "<<"emit"
-			<<" "<<"class:"<<"CCreateNewOrderDialog"
-			<<" "<<"fun:"<<"slotOrderCheck()"
-			<<" "<<"emit"
-			<<" "<<"signalNewOrder(CUserOrderInfo*)"
-			<<" "<<"param:"
-			<<" "<<"pUserOrderInfo=0x"<<pUserOrderInfo
-			<<" "<<"nSide="<<pUserOrderInfo->m_nSide
-			<<" "<<"nOrderType="<<pUserOrderInfo->m_nOrderType
-			<<" "<<"strInstrumentCode="<<pUserOrderInfo->m_strInstrumentCode.toStdString()
-			<<" "<<"fPrice="<<pUserOrderInfo->m_fLastPrice
-			<<" "<<"quantity="<<pUserOrderInfo->m_nQuantity;
 
-		//CSignalSlotManager::getInstance().emit_signalNewOrder(pUserOrderInfo);
+	if (NULL == m_pOrderData)
+	{
+		return;
 	}
-	else if (COrderData::OrderConfirm_Cancel ==  pUserOrderInfo->m_nOrderConfirm)
+
+	//emit
+	if (COrderData::OrderConfirm_OK == nEOrderConfirm)
+	{
+		CClientDataManager::getInstance().newOrder(*m_pOrderData);
+	}
+	else if (COrderData::OrderConfirm_Cancel ==  nEOrderConfirm)
 	{
 		MYLOG4CPP_DEBUG<<" "<<"user Cancel new order";
 	}

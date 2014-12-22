@@ -9,6 +9,7 @@
 CDataRealTimeWorker::CDataRealTimeWorker(void)
 {	
 	m_toTerminate = false;
+	m_WorkerState = WORK_STATE_BEGIN;
 	m_nDataWorkerState = DataWorkerState_Begin;
 
 	m_pMyTradeClientRef = NULL;
@@ -22,20 +23,29 @@ CDataRealTimeWorker::~CDataRealTimeWorker(void)
 
 void CDataRealTimeWorker::run()
 {
+	m_WorkerState = WORK_STATE_BEGIN;
 	m_nDataWorkerState = DataWorkerState_Begin;
-
+	
+	m_WorkerState = WORK_STATE_WORKING;
 	while (false == m_toTerminate)
 	{
 		_ThreadJob();
-		this->my_msleep(500);
+		this->my_msleep(5000);
 	}
 
 	_ProcessUserTerminate();
+	m_WorkerState = WORK_STATE_END;
+
 }
 
 void CDataRealTimeWorker::terminate()
 {
 	m_toTerminate = true;
+
+	while (WORK_STATE_END != m_WorkerState)
+	{
+		this->msleep(10);
+	}
 }
 
 

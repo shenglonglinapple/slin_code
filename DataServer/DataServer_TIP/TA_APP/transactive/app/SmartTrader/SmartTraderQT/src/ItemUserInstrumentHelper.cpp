@@ -49,13 +49,7 @@ void CItemUserInstrumentHelper::_ClearData()
 }
 
 
-void CItemUserInstrumentHelper::setValue( const Instrument &instrument)
-{
-	CMyInstrument myInstrument;
-	
-	myInstrument.setValue(instrument);
-	setValue(myInstrument);
-}
+
 
 void CItemUserInstrumentHelper::setValue( const CMyInstrument &instrument )
 {

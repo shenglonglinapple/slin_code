@@ -12,7 +12,7 @@
 #include <QtCore/QModelIndex>
 
 #include <QtGui/QDialog>
-
+#include "OrderData.h"
 
 QT_BEGIN_NAMESPACE
 class QFormLayout;
@@ -31,7 +31,6 @@ class QDoubleSpinBox;
 class QGridLayout;
 QT_END_NAMESPACE
 
-class COrderData;
 class CNewOrderConfirmWindow;
 
 class CNewOrderWindow : public QDialog
@@ -45,20 +44,7 @@ public:
 signals:
 
 public slots:
-	/*
-	class: COrderInfoWidget
-	signals:
-	void signalOrderCheck(CUserOrderInfo* pUserOrderInfo);
-	fun send signals: slotPushButtonOKClicked() slotPushButtonCancelClicked()
-
-	class: CCreateNewOrderDialog
-	public slots: 
-	void slotOrderCheck(CUserOrderInfo* pUserOrderInfo);
-	*/
-	void slotOrderCheck(COrderData* pUserOrderInfo);
-
-
-
+	void slotConfirmOrder(COrderData::EOrderConfirm nEOrderConfirm);
 private slots:
 	void slotPushButtonBuyClicked(bool checked);
 	void slotPushButtonSellClicked(bool checked);

@@ -3,7 +3,7 @@
 
 
 #include "MyBar.h"
-
+#include <QtCore/QString>
 
 class CHistoryDataRequest
 {
@@ -20,13 +20,13 @@ public:
 	};
 public:
 	enCHistoryRequestType m_nRequestType;
-	enum BarType m_nBarType;
+	enum EMyBarType m_nBarType;
 	bool m_bSubscribe;
 	unsigned short m_nBarCount;
 	unsigned int m_nTimeFrom;
 	unsigned int m_nTimeTo;
 public:
-	unsigned int m_nRequestID;
+	QString m_strRequestID;
 	std::string m_strInstrumentCode;
 	int m_nInstruemntID;
 

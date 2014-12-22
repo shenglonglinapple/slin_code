@@ -135,7 +135,7 @@ public:
 	unsigned int m_nInstrumentID ;
 	QString m_strInstrumentCode;
 	float m_fLastPrice;
-	int m_nQuantity;
+	int m_nVolume;
 public:
 	ESide m_nSide;
 	EOrderType m_nOrderType;

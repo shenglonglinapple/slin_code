@@ -28,7 +28,7 @@ COrderData& COrderData::operator=( const COrderData& cParam )
 	m_nInstrumentID = cParam.m_nInstrumentID;
 	m_strInstrumentCode = cParam.m_strInstrumentCode;
 	m_fLastPrice = cParam.m_fLastPrice;
-	m_nQuantity = cParam.m_nQuantity;
+	m_nVolume = cParam.m_nVolume;
 	m_nSide = cParam.m_nSide;
 	m_nOrderType = cParam.m_nOrderType;
 	m_nOrderConfirm = cParam.m_nOrderConfirm;
@@ -41,7 +41,7 @@ void COrderData::_ClearData()
 	m_nInstrumentID = 0;
 	m_strInstrumentCode.clear();
 	m_fLastPrice = 0;
-	m_nQuantity = 0;
+	m_nVolume = 0;
 	m_nSide = BUY;
 	m_nOrderType = MARKET;
 	m_nOrderConfirm = OrderConfirm_Cancel;
@@ -75,7 +75,7 @@ void COrderData::setDataByItem( CItemUserInstrument* pData )
 	//m_nInstrumentID = pItemUserInstrumentHelper->getInstrumentID();
 	m_strInstrumentCode = pItemUserInstrumentHelper->getInstrumentCode();
 	m_fLastPrice = pItemUserInstrumentHelper->m_fLastTradePrice;
-	m_nQuantity = 1;
+	m_nVolume = 1;
 
 	if (NULL != pItemUserInstrumentHelper)
 	{

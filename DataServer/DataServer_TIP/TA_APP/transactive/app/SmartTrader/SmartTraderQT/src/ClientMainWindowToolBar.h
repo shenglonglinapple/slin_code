@@ -4,7 +4,6 @@
 #include <QtCore/QObject>
 #include <QtGui/QToolBar>
 #include <QtGui/QActionGroup>
-#include "Bar.h"
 
 class CMyBarTypeHeler;
 
@@ -27,12 +26,12 @@ public slots:
 	void slotActionW1Triggered();
 	void slotActionMNTriggered();
 signals:
-	void signalRequestHistoryData( unsigned int nInstrumentID, enum BarType nBarType );
+	void signalRequestHistoryData( unsigned int nInstrumentID, enum EMyBarType nBarType );
 public:
 	void setCurrentInstrumentID(unsigned int nInstrumentID);
 	unsigned int getCurrentInstrumentID();
-	void setHistoryBarType( enum BarType nBarType, const QString& strBarType );
-	enum BarType getHistoryBarType();
+	void setHistoryBarType( enum EMyBarType nBarType, const QString& strBarType );
+	enum EMyBarType getHistoryBarType();
 private:
 	void _CreateActions();
 	void _AddAction();
@@ -55,7 +54,7 @@ private:
 	CMyBarTypeHeler* m_pMyBarTypeHeler;
 private:
 	unsigned int m_nCurrentInstrumentID;
-	enum BarType m_nCurrentBarType;
+	enum EMyBarType m_nCurrentBarType;
 
 }; 
 

@@ -2,7 +2,6 @@
 
 #include "ItemUserInstrument.h"
 #include "ItemUserInstrumentHelper.h"
-#include "DataTotalInstrument.h"
 #include "DataTotalMyInstrument.h"
 //
 #include "Log4cppLogger.h"
@@ -63,21 +62,13 @@ CItemUserInstrument* CDataUserInstrument::getRootItem()
 void CDataUserInstrument::addUserInstrument( unsigned int nInstrumentID )
 {	
 	QMutexLocker lock(&m_mutex_ItemUserInstrument_Root);
-	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	if (NULL == pMyInstrumentRef)
 	{
 		return;
-	}
-
-	if (NULL != pInstrumentRef)
-	{
-		m_pItemUserInstrumentHelper->setValue(*pInstrumentRef);
 	}
 
 	if (NULL != pMyInstrumentRef)
@@ -96,21 +87,13 @@ void CDataUserInstrument::addUserInstrument( unsigned int nInstrumentID )
 void CDataUserInstrument::updateDataUserInstrument( unsigned int nInstrumentID )
 {	
 	QMutexLocker lock(&m_mutex_ItemUserInstrument_Root);
-	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	if (NULL == pMyInstrumentRef)
 	{
 		return;
-	}
-
-	if (NULL != pInstrumentRef)
-	{
-		m_pItemUserInstrumentHelper->setValue(*pInstrumentRef);
 	}
 
 	if (NULL != pMyInstrumentRef)
@@ -129,23 +112,16 @@ void CDataUserInstrument::updateDataUserInstrument( unsigned int nInstrumentID )
 void CDataUserInstrument::removeUserInstrument( unsigned int nInstrumentID )
 {	
 	QMutexLocker lock(&m_mutex_ItemUserInstrument_Root);
-	Instrument* pInstrumentRef = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	pInstrumentRef = NULL;
-	pInstrumentRef = CDataTotalInstrument::getInstance().findInstrumentByID(nInstrumentID);
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(nInstrumentID);
-	if (NULL == pInstrumentRef && NULL == pMyInstrumentRef)
+	if (NULL == pMyInstrumentRef)
 	{
 		return;
 	}
 
-	if (NULL != pInstrumentRef)
-	{
-		m_pItemUserInstrumentHelper->setValue(*pInstrumentRef);
-	}
-
+	
 	if (NULL != pMyInstrumentRef)
 	{
 		m_pItemUserInstrumentHelper->setValue(*pMyInstrumentRef);

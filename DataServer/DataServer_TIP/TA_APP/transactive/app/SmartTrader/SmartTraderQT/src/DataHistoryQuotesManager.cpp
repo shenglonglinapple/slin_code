@@ -43,7 +43,7 @@ CDataHistoryQuotesManager::~CDataHistoryQuotesManager()
 void CDataHistoryQuotesManager::_FreeData_MapRequest()
 {
 	QMutexLocker lock(&m_mutex_MapRequest);	
-	QMap<unsigned int, CHistoryDataRequest*>::iterator iterMap;
+	QMap<QString, CHistoryDataRequest*>::iterator iterMap;
 	CHistoryDataRequest* pData = NULL;
 
 	iterMap = m_MapRequest.begin();
@@ -81,23 +81,23 @@ void CDataHistoryQuotesManager::_FreeData_MapHistoryQuotes()
 
 }
 
-void CDataHistoryQuotesManager::addReqest( unsigned int nReqID, const CHistoryDataRequest* pReqest )
+void CDataHistoryQuotesManager::addReqest( QString strReqID, const CHistoryDataRequest* pReqest )
 {
 	QMutexLocker lock(&m_mutex_MapRequest);	
 
 	CHistoryDataRequest* pNewReq = NULL;
 	pNewReq = new CHistoryDataRequest();
 	*pNewReq = *pReqest;
-	pNewReq->m_nRequestID = nReqID;
+	pNewReq->m_strRequestID = strReqID;
 
-	m_MapRequest.insert(nReqID, pNewReq);
+	m_MapRequest.insert(strReqID, pNewReq);
 	pNewReq = NULL;
 
 }
 
-void CDataHistoryQuotesManager::onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars )
+void CDataHistoryQuotesManager::onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars )
 {
-	enum BarType nBarType;
+	enum EMyBarType nBarType;
 	unsigned int nTimeFrom;
 	unsigned int nTimeTo;	
 	std::string strInstrumentCode;
@@ -107,7 +107,7 @@ void CDataHistoryQuotesManager::onHistoryDataDownloaded( unsigned int requestID,
 
 	{
 		QMutexLocker lock(&m_mutex_MapRequest);	
-		QMap<unsigned int, CHistoryDataRequest*>::iterator iterFind;
+		QMap<QString, CHistoryDataRequest*>::iterator iterFind;
 		CHistoryDataRequest* pReq = NULL;
 
 		iterFind = m_MapRequest.find(requestID);
@@ -151,7 +151,7 @@ void CDataHistoryQuotesManager::onHistoryDataDownloaded( unsigned int requestID,
 
 }
 
-void CDataHistoryQuotesManager::onBarDataUpdate(const BarSummary &barData)
+void CDataHistoryQuotesManager::onBarDataUpdate(const CMyBarSummary &barData)
 {
 	int nInstruemntID;
 	CDataHistoryQuotes* pDataHistoryQuotes = NULL;
@@ -179,13 +179,13 @@ void CDataHistoryQuotesManager::onBarDataUpdate(const BarSummary &barData)
 	}
 }
 
-void CDataHistoryQuotesManager::_RemoveReq( unsigned int requestID )
+void CDataHistoryQuotesManager::_RemoveReq(QString strReqID)
 {
 	QMutexLocker lock(&m_mutex_MapRequest);	
-	QMap<unsigned int, CHistoryDataRequest*>::iterator iterFind;
+	QMap<QString, CHistoryDataRequest*>::iterator iterFind;
 	CHistoryDataRequest* pReq = NULL;
 
-	iterFind = m_MapRequest.find(requestID);
+	iterFind = m_MapRequest.find(strReqID);
 	if (iterFind != m_MapRequest.end())
 	{
 		pReq = iterFind.value();

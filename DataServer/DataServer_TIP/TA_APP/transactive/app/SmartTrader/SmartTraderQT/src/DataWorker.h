@@ -9,7 +9,6 @@
 class CMyTradeClient;
 class CReqData;
 
-
 class CDataWorker : public CMyQtThread
 {
 	Q_OBJECT
@@ -48,6 +47,8 @@ private:
 	void _ProcessReq_SubscribeMarketData();
 	void _ProcessReq_UnSubscribeMarketData();
 	void _ProcessReq_DownloadHistoryData();
+	void _ProcessReq_BuyMarket();
+	void _ProcessReq_SellMarket();
 private:
 	CMyTradeClient* m_pMyTradeClientRef;
 

@@ -12,9 +12,9 @@ public:
 public:
 	std::string m_strInstrumentCode;//KEY
 	unsigned int m_nInstrumentID;//KEY
-	BarType m_nBarType;//KEY
+	EMyBarType m_nBarType;//KEY
 
-	QMap<unsigned int, Bar> m_MapBarData; //bars indexed by interval
+	QMap<unsigned int, CMyBar> m_MapBarData; //bars indexed by interval
 private:
 	void _ResetTimeValue();
 public:
@@ -23,11 +23,11 @@ public:
 public:
 	unsigned int getTimeFrom();
 	unsigned int getTimeTo();
-	void setBarType(BarType nBarType);
-	BarType getBarType();
+	void setBarType(EMyBarType nBarType);
+	EMyBarType getBarType();
 public:
-	void onHistoryDataDownloaded(BarsPtr bars );
-	void onBarDataUpdate( const BarSummary &barData );
+	void onHistoryDataDownloaded(pSetMyBarsPtr bars );
+	void onBarDataUpdate( const CMyBarSummary &barData );
 
 private:
 	unsigned int m_nTimeFrom;

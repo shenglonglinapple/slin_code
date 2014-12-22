@@ -14,6 +14,7 @@
 CDataWorker::CDataWorker(void)
 {	
 	m_toTerminate = false;
+	m_WorkerState = WORK_STATE_BEGIN;
 	m_nReqWorkerState = ReqWokerState_Begin;
 
 	m_pMyTradeClientRef = NULL;
@@ -38,8 +39,10 @@ CDataWorker::~CDataWorker(void)
 
 void CDataWorker::run()
 {
+	m_WorkerState = WORK_STATE_BEGIN;
 	m_nReqWorkerState = ReqWokerState_Begin;
 
+	m_WorkerState = WORK_STATE_WORKING;
 	while (false == m_toTerminate)
 	{
 		_ThreadJob();
@@ -47,18 +50,22 @@ void CDataWorker::run()
 	}
 
 	_ProcessUserTerminate();
+	m_WorkerState = WORK_STATE_END;
 }
 
 void CDataWorker::terminate()
 {
 	m_toTerminate = true;
+	while (WORK_STATE_END != m_WorkerState)
+	{
+		this->msleep(10);
+	}
 }
 
 
 int CDataWorker::_ProcessUserTerminate()
 {
 	int nFunRes = 0;
-	m_toTerminate = true;
 	m_nReqWorkerState = ReqWokerState_End;
 	return nFunRes;
 }
@@ -192,7 +199,12 @@ void CDataWorker::_DoJob_CheckProcessReq()
 		break;
 	case EReqType_DownloadHistoryData:
 		_ProcessReq_DownloadHistoryData();
-		break;		
+		break;
+	case EReqType_BUYMARKET:
+		_ProcessReq_BuyMarket();
+		break;
+	case EReqType_SELLMARKET:
+
 	default:
 		break;
 	}
@@ -289,12 +301,12 @@ void CDataWorker::_ProcessReq_DownloadHistoryData()
 		lstHistoryData);
 
 	CMyBarsPtrHelper myBarsPtrhelper;
-	BarsPtr pMyBars = myBarsPtrhelper.convertValue(lstHistoryData);
+	pSetMyBarsPtr pMyBars = myBarsPtrhelper.convertValue(lstHistoryData);
 
 
 	if (NULL != m_pMyTradeClientRef)
 	{
-		m_pMyTradeClientRef->onHistoryDataDownloaded(m_pCurrentReqData->getRequestID(), pMyBars);
+		m_pMyTradeClientRef->onHistoryDataDownloaded(m_pCurrentReqData->getRequestUUID(), pMyBars);
 	}
 
 	iterLst = lstHistoryData.begin();
@@ -311,6 +323,30 @@ void CDataWorker::_ProcessReq_DownloadHistoryData()
 	lstHistoryData.clear();
 
 
+
+	//who do job who delete
+	if (NULL != m_pCurrentReqData)
+	{
+		delete m_pCurrentReqData;
+		m_pCurrentReqData = NULL;
+	}
+}
+
+void CDataWorker::_ProcessReq_BuyMarket()
+{
+	QMutexLocker lock(&m_mutex_CurrentReqData);
+
+	//who do job who delete
+	if (NULL != m_pCurrentReqData)
+	{
+		delete m_pCurrentReqData;
+		m_pCurrentReqData = NULL;
+	}
+}
+
+void CDataWorker::_ProcessReq_SellMarket()
+{
+	QMutexLocker lock(&m_mutex_CurrentReqData);
 
 	//who do job who delete
 	if (NULL != m_pCurrentReqData)

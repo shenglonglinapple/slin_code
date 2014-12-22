@@ -96,19 +96,19 @@ unsigned int CMyMarketData::getTime() const
 
 int CMyMarketData::getVolume( int type ) const
 {
-	MarketData::VolumeType nVolumeType = (MarketData::VolumeType)type;
+	CMyMarketData::EMyVolumeType nVolumeType = (CMyMarketData::EMyVolumeType)type;
 	switch (nVolumeType)
 	{
-	case MarketData::OPEN_INTEREST:
+	case CMyMarketData::OPEN_INTEREST:
 		return m_nVolume_OPEN_INTEREST;
 		break;
-	case MarketData::OPENING_VOLUME:
+	case CMyMarketData::OPENING_VOLUME:
 		return m_nVolume_OPENING_VOLUME;
 		break;
-	case MarketData::LAST_TRADED_VOLUME:
+	case CMyMarketData::LAST_TRADED_VOLUME:
 		return m_nVolume_LAST_TRADED_VOLUME;
 		break;
-	case MarketData::TOTAL_TRADED_VOLUME:
+	case CMyMarketData::TOTAL_TRADED_VOLUME:
 		return m_nVolume_TOTAL_TRADED_VOLUME;
 		break;
 	}
@@ -128,28 +128,28 @@ int CMyMarketData::getAskVol( int level ) const
 
 float CMyMarketData::getPrice( int type ) const
 {
-	MarketData::PriceType nPriceType = (MarketData::PriceType)type;
+	CMyMarketData::EMyPriceType nPriceType = (CMyMarketData::EMyPriceType)type;
 	switch (nPriceType)
 	{
-	case MarketData::OPENNING_PRICE:
+	case CMyMarketData::OPENNING_PRICE:
 		return m_fPrice_OPENNING_PRICE;
 		break;
-	case MarketData::SESSION_HIGH:
+	case CMyMarketData::SESSION_HIGH:
 		return m_fPrice_SESSION_HIGH;
 		break;
-	case MarketData::SESSION_LOW:
+	case CMyMarketData::SESSION_LOW:
 		return m_fPrice_SESSION_LOW;
 		break;
-	case MarketData::REFERENCE_PRICE:
+	case CMyMarketData::REFERENCE_PRICE:
 		return m_fPrice_REFERENCE_PRICE;
 		break;
-	case MarketData::YESTERDAY_SETTLMENT_PRICE:
+	case CMyMarketData::YESTERDAY_SETTLMENT_PRICE:
 		return m_fPrice_YESTERDAY_SETTLMENT_PRICE;
 		break;
-	case MarketData::LAST_TRADED_PRICE:
+	case CMyMarketData::LAST_TRADED_PRICE:
 		return m_fPrice_LAST_TRADED_PRICE;
 		break;
-	case MarketData::SETTLEMENT_PRICE:
+	case CMyMarketData::SETTLEMENT_PRICE:
 		return m_fPrice_SETTLEMENT_PRICE;
 		break;
 	}
@@ -315,11 +315,4 @@ void CMyMarketData::setValue( const std::string& strData )
 	lastTradeDataTime = lastTradeDate + " " + lastTradeTime;
 	m_nTime = qtTimeHelper.strToDateTime_Qt_AmPm(lastTradeDataTime.toStdString());
 
-}
-
-void CMyMarketData::setValue( const MarketData& marketData )
-{
-	m_nSecurityID = marketData.getSecurityID();
-	m_fPrice_LAST_TRADED_PRICE = marketData.getPrice(MarketData::LAST_TRADED_PRICE);
-	m_nTime = marketData.getTime();
 }

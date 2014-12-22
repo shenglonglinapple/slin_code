@@ -1,6 +1,7 @@
 #include "ReqData.h"
 
 #include <QtCore/QDateTime>
+#include "QtTimeHelper.h"
 
 CReqData::CReqData()
 {
@@ -11,24 +12,16 @@ CReqData::~CReqData( void )
 {
 
 }
-void CReqData::setAutoRequestID()
+void CReqData::setAutoRequestUUID()
 {
-	QDateTime time_local;
-	time_t timeGetTimeValue;
+	CQtTimeHelper timeHelper;
 
-	time_local = QDateTime::currentDateTime();
-
-	timeGetTimeValue = time_local.toTime_t();
-
-	m_nRequestID = timeGetTimeValue;
+	m_strRequestUUID = timeHelper.getUUID();
 }
-void CReqData::setRequestID(unsigned int nRequestID)
+
+QString CReqData::getRequestUUID()
 {
-	m_nRequestID = nRequestID;
-}
-unsigned int CReqData::getRequestID()
-{
-	return m_nRequestID;
+	return m_strRequestUUID;
 }
 void CReqData::setReqType( EReqType nReqType )
 {
@@ -50,11 +43,11 @@ std::string CReqData::getInstrumentCode()
 	return m_strInstrumentCode;
 }
 
-void CReqData::setMyBarType(BarType nMyBarType)
+void CReqData::setMyBarType(EMyBarType nMyBarType)
 {
 	m_nMyBarType = nMyBarType;
 }
-BarType CReqData::getMyBarType()
+EMyBarType CReqData::getMyBarType()
 {
 	return m_nMyBarType;
 }
@@ -78,4 +71,14 @@ void CReqData::setTimeTo( const std::string& strTimeTo )
 std::string CReqData::getTimeTo()
 {
 	return m_strTimeTo;
+}
+
+void CReqData::setVolume( int nVolume )
+{
+	m_nVolume = nVolume;
+}
+
+int CReqData::getVolume()
+{
+	return m_nVolume;
 }

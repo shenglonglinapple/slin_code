@@ -24,17 +24,17 @@ private:
 	virtual ~CDataHistoryQuotesManager(); 
 
 public:
-	void addReqest(unsigned int nReqID, const CHistoryDataRequest* pReqest);
-	void onHistoryDataDownloaded( unsigned int requestID, BarsPtr bars );
-	void onBarDataUpdate(const BarSummary &barData);
+	void addReqest(QString strReqID, const CHistoryDataRequest* pReqest);
+	void onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars );
+	void onBarDataUpdate(const CMyBarSummary &barData);
 
 private:
-	void _RemoveReq( unsigned int requestID );
+	void _RemoveReq( QString strReqID );
 	void _FreeData_MapRequest();
 	void _FreeData_MapHistoryQuotes();
 private:
 	QMutex m_mutex_MapRequest;
-	QMap<unsigned int, CHistoryDataRequest*> m_MapRequest;//ReqID Data
+	QMap<QString, CHistoryDataRequest*> m_MapRequest;//ReqID Data
 
 	QMutex m_mutex_MapHistoryQuotes;
 	QMap<unsigned int, CDataHistoryQuotes*> m_MapHistoryQuotes;//InstrumentID  Data

@@ -163,7 +163,7 @@ void CClientMainWindowToolBar::translateLanguage()
 
 void CClientMainWindowToolBar::slotActionS5Triggered()
 {
-	enum BarType  nBarType = FIVE_SECOND;
+	enum EMyBarType  nBarType = FIVE_SECOND;
 
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
@@ -171,51 +171,51 @@ void CClientMainWindowToolBar::slotActionS5Triggered()
 
 void CClientMainWindowToolBar::slotActionM1Triggered()
 {
-	enum BarType  nBarType = MINUTE;
+	enum EMyBarType  nBarType = MINUTE;
 
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 }
 void CClientMainWindowToolBar::slotActionM5Triggered()
 {
-	enum BarType  nBarType = FIVE_MINUTE;
+	enum EMyBarType  nBarType = FIVE_MINUTE;
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 }
 void CClientMainWindowToolBar::slotActionM15Triggered()
 {
-	enum BarType  nBarType = FIFTEEN_MINUTE;
+	enum EMyBarType  nBarType = FIFTEEN_MINUTE;
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 
 }
 void CClientMainWindowToolBar::slotActionM30Triggered()
 {
-	enum BarType  nBarType = THIRTY_MINUTE;
+	enum EMyBarType  nBarType = THIRTY_MINUTE;
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 }
 void CClientMainWindowToolBar::slotActionH1Triggered()
 {
-	enum BarType  nBarType = ONE_HOUR;
+	enum EMyBarType  nBarType = ONE_HOUR;
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 }
 void CClientMainWindowToolBar::slotActionD1Triggered()
 {
-	enum BarType  nBarType = DAY;
+	enum EMyBarType  nBarType = DAY;
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 }
 void CClientMainWindowToolBar::slotActionW1Triggered()
 {
-	enum BarType  nBarType = WEEK;
+	enum EMyBarType  nBarType = WEEK;
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 }
 void CClientMainWindowToolBar::slotActionMNTriggered()
 {
-	enum BarType  nBarType = MONTH;
+	enum EMyBarType  nBarType = MONTH;
 	QString strBarType = m_pMyBarTypeHeler->getString_BarType(nBarType).c_str();
 	setHistoryBarType(nBarType, strBarType);
 }
@@ -232,7 +232,7 @@ unsigned int CClientMainWindowToolBar::getCurrentInstrumentID()
 	return m_nCurrentInstrumentID;
 }
 
-void CClientMainWindowToolBar::setHistoryBarType( enum BarType nBarType, const QString& strBarType )
+void CClientMainWindowToolBar::setHistoryBarType( enum EMyBarType nBarType, const QString& strBarType )
 {
 	m_nCurrentBarType = nBarType;
 	MYLOG4CPP_DEBUG<<"CMainWindowToolBar setHistoryBarType"
@@ -259,7 +259,7 @@ void CClientMainWindowToolBar::setHistoryBarType( enum BarType nBarType, const Q
 	emit signalRequestHistoryData(m_nCurrentInstrumentID, m_nCurrentBarType);
 }
 
-enum BarType CClientMainWindowToolBar::getHistoryBarType()
+enum EMyBarType CClientMainWindowToolBar::getHistoryBarType()
 {
 	return m_nCurrentBarType;
 }

@@ -9,7 +9,6 @@
 #include <QtCore/QVariant>
 #include <QtCore/QStringList>
 
-#include "Instrument.h"
 #include "MyInstrument.h"
 
 
@@ -22,7 +21,6 @@ public:
 	CItemUserInstrumentHelper& operator=(const CItemUserInstrumentHelper& objCopy);
 
 public:
-	void setValue( const Instrument &instrument);
 	void setValue( const CMyInstrument &instrument);
 
 public:

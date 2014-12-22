@@ -20,7 +20,7 @@
 #pragma comment(lib,"QtSqld4.lib")
 
 
-#pragma comment(lib,"StrategyEngine.lib")
+//#pragma comment(lib,"StrategyEngine.lib")
 //////////////////////////////////////////////////////////////////////////
 
 int main(int argc, char *argv[])
