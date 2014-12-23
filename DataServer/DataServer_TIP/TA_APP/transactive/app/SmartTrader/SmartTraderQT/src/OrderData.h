@@ -141,6 +141,8 @@ public:
 	EOrderType m_nOrderType;
 public:
 	EOrderConfirm m_nOrderConfirm;
+public:
+
 }; 
 
 

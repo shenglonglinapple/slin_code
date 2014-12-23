@@ -1721,6 +1721,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="UI_Order"
+				>
+				<File
+					RelativePath=".\src\ItemUserOrder.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\ItemUserOrder.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\ItemUserOrderHelper.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\ItemUserOrderHelper.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
