@@ -14,58 +14,77 @@
 
 COrderData::COrderData()
 {
-	_ClearData();
+	clearData();
 }
 
 COrderData::~COrderData()
 {
-	_ClearData();
+	clearData();
 }
 
 
 COrderData& COrderData::operator=( const COrderData& cParam )
 {
+	m_strUUID = cParam.m_strUUID;
 	m_nInstrumentID = cParam.m_nInstrumentID;
 	m_strInstrumentCode = cParam.m_strInstrumentCode;
-	m_fLastPrice = cParam.m_fLastPrice;
 	m_nVolume = cParam.m_nVolume;
 	m_nSide = cParam.m_nSide;
 	m_nOrderType = cParam.m_nOrderType;
 	m_nOrderConfirm = cParam.m_nOrderConfirm;
 
+	m_fTransactPrice = cParam.m_fTransactPrice;
+	m_fFees = cParam.m_fFees;
+	m_fCurrentPrice = cParam.m_fCurrentPrice;
+	m_fTotal = cParam.m_fTotal;
+	m_nOrderStatus = cParam.m_nOrderStatus;
+	m_nTransactTime = cParam.m_nTransactTime;
+	m_nCurrentTime = cParam.m_nCurrentTime;
+
+
 	return *this;
 }
 
-void COrderData::_ClearData()
+
+void COrderData::clearData()
 {
+	m_strUUID.clear();
 	m_nInstrumentID = 0;
 	m_strInstrumentCode.clear();
-	m_fLastPrice = 0;
 	m_nVolume = 0;
 	m_nSide = BUY;
 	m_nOrderType = MARKET;
 	m_nOrderConfirm = OrderConfirm_Cancel;
 
+	m_fTransactPrice = 0;
+	m_fFees = 0;
+	m_fCurrentPrice = 0;
+	m_fTotal = 0;
+	m_nOrderStatus = NEW;
+	m_nTransactTime = 0;
+	m_nCurrentTime = 0;
+
 }
 
-void COrderData::setDataByItem( CItemUserInstrument* pData )
+void COrderData::setBaseData( CItemUserInstrument* pData )
 {
 	CItemUserInstrumentHelper* pItemUserInstrumentHelper = NULL;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	_ClearData();
+	clearData();
 	if (NULL == pData)
 	{
 		return;
 	}
-
+	m_strUUID.clear();
+	//m_nInstrumentID
 	m_nInstrumentID = pData->getNodeKey();
 
 	pMyInstrumentRef = NULL;
 	pMyInstrumentRef = CDataTotalMyInstrument::getInstance().findInstrumentByID(m_nInstrumentID);
 
 	if (NULL == pMyInstrumentRef)
-	{
+	{		
 		return;
 	}
 	
@@ -74,7 +93,7 @@ void COrderData::setDataByItem( CItemUserInstrument* pData )
 	
 	//m_nInstrumentID = pItemUserInstrumentHelper->getInstrumentID();
 	m_strInstrumentCode = pItemUserInstrumentHelper->getInstrumentCode();
-	m_fLastPrice = pItemUserInstrumentHelper->m_fLastTradePrice;
+	m_fCurrentPrice = pItemUserInstrumentHelper->m_fLastTradePrice;
 	m_nVolume = 1;
 
 	if (NULL != pItemUserInstrumentHelper)
@@ -83,6 +102,11 @@ void COrderData::setDataByItem( CItemUserInstrument* pData )
 		pItemUserInstrumentHelper = NULL;
 	}
 
+	MYLOG4CPP_DEBUG<<"COrderData::setBaseData"
+		<<" "<<"m_nInstrumentID="<<m_nInstrumentID
+		<<" "<<"m_strInstrumentCode="<<m_strInstrumentCode.toStdString()
+		<<" "<<"m_fCurrentPrice="<<m_fCurrentPrice
+		<<" "<<"m_nVolume="<<m_nVolume;
 }
 
 

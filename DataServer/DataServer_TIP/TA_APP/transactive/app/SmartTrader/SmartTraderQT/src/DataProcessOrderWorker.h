@@ -1,5 +1,5 @@
-#ifndef __CLASS_DATA_REAL_TIME_WORKER__HH__
-#define __CLASS_DATA_REAL_TIME_WORKER__HH__
+#ifndef __CLASS_DATA_PROCESS_ORDER_WORKER__HH__
+#define __CLASS_DATA_PROCESS_ORDER_WORKER__HH__
 
 #include "MyQtThread.h"
 #include <QtCore/QMutex>
@@ -10,7 +10,7 @@ class CMyTradeClient;
 class CReqData;
 
 
-class CDataRealTimeWorker : public CMyQtThread
+class CDataProcessOrderWorker : public CMyQtThread
 {
 	Q_OBJECT
 public:
@@ -18,14 +18,14 @@ public:
 	{
 		DataWorkerState_Begin,
 		
-		DataWorkerState_UpdateStockRealTimeInfo,
+		DataWorkerState_ProcessOrder,
 
 		DataWorkerState_End,
 	};
 
 public:
-	CDataRealTimeWorker(void);
-	~CDataRealTimeWorker(void);
+	CDataProcessOrderWorker(void);
+	~CDataProcessOrderWorker(void);
 
 public:
 	virtual void run();	
@@ -40,12 +40,12 @@ private:
 public:
 	void setDataProcessHandle(const CMyTradeClient* pHandle);
 private:
-	void _DoJob_UpdateStockRealTimeInfo();
+	void _DoJob_ProcessOrder();
 private:
 	CMyTradeClient* m_pMyTradeClientRef;
 };
 
 
-#endif //__CLASS_DATA_WORKER__HH__
+#endif //__CLASS_DATA_PROCESS_ORDER_WORKER__HH__
 
 

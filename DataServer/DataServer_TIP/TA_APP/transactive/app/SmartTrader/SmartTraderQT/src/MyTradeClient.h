@@ -5,8 +5,6 @@
 #include "MyInstrument.h"
 #include "MyMarketData.h"
 
-class CDataWorker;
-class CDataRealTimeWorker;
 
 class CMyTradeClient
 {
@@ -60,9 +58,6 @@ private:
 	bool m_bSynchronous;
 	int m_nLoginRes;
 
-private:
-	CDataWorker* m_pDataWorker;
-	CDataRealTimeWorker* m_pDataRealTimeWorker;
 };
 
 

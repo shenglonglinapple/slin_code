@@ -9,6 +9,9 @@
 #include "RealTimeStockManager.h"
 #include "HistoryStockManager.h"
 #include "DataRealTimeWorker.h"
+#include "DataOrderManager.h"
+
+#include "OrderData.h"
 
 //////////////////////////////////////////////////////////////////////////
 CDataWorker::CDataWorker(void)
@@ -27,13 +30,16 @@ CDataWorker::CDataWorker(void)
 		QMutexLocker lock(&m_mutex_CurrentReqData);
 		m_pCurrentReqData = NULL;
 	}
-	
+	CRealTimeStockManager::getInstance();
+	CDataOrderManager::getInstance();
 }
 
 CDataWorker::~CDataWorker(void)
 {
 	m_pMyTradeClientRef = NULL;
 	_Free_LstReqData();
+	CRealTimeStockManager::removeInstance();
+	CDataOrderManager::removeInstance();
 }
 
 
@@ -106,9 +112,9 @@ void CDataWorker::_ThreadJob()
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CDataWorker::setDataProcessHandle( CMyTradeClient* pHandle )
+void CDataWorker::setDataProcessHandle( const CMyTradeClient* pHandle )
 {
-	m_pMyTradeClientRef = pHandle;
+	m_pMyTradeClientRef = (CMyTradeClient*)pHandle;
 }
 
 void CDataWorker::append_req( CReqData* pReqData )
@@ -335,12 +341,28 @@ void CDataWorker::_ProcessReq_DownloadHistoryData()
 void CDataWorker::_ProcessReq_BuyMarket()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
+	COrderData* pOrderData = NULL;
 
+	pOrderData = new COrderData();
+
+	pOrderData->m_strUUID = m_pCurrentReqData->getRequestUUID();
+	pOrderData->m_strInstrumentCode = m_pCurrentReqData->getInstrumentCode().c_str();
+	pOrderData->m_nSide = COrderData::BUY;
+	pOrderData->m_nOrderType = COrderData::MARKET;
+	pOrderData->m_nVolume = m_pCurrentReqData->getVolume();
+
+	CDataOrderManager::getInstance().addOrder(pOrderData);
+	
 	//who do job who delete
 	if (NULL != m_pCurrentReqData)
 	{
 		delete m_pCurrentReqData;
 		m_pCurrentReqData = NULL;
+	}
+	if (NULL != pOrderData)
+	{
+		delete pOrderData;
+		pOrderData = NULL;
 	}
 }
 

@@ -195,7 +195,7 @@ void CUserInstrumentTableView::slotActionNewOrder()
 	pCurrentItemRef = (CItemUserInstrument*)nCurrentIndex.internalPointer();
 
 	pOrderData = new COrderData();
-	pOrderData->setDataByItem(pCurrentItemRef);
+	pOrderData->setBaseData(pCurrentItemRef);
 
 	m_pNewOrderWindow->resetData(pOrderData);
 

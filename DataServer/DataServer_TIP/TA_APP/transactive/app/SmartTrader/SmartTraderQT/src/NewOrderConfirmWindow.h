@@ -63,7 +63,7 @@ private:
 	QString m_str_OrderType_Value;
 	QString m_str_InstrumentCode_Value;
 	QString m_str_Price_Value;
-	QString m_str_Quantity_Value;
+	QString m_str_Volume_Value;
 	
 private:
 	QGridLayout* m_pGridLayout;

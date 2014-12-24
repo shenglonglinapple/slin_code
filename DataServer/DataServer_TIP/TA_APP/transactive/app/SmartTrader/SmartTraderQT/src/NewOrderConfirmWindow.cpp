@@ -35,13 +35,13 @@ CNewOrderConfirmWindow::CNewOrderConfirmWindow(QWidget *parent)
 	m_str_OrderType_Value.clear();
 	m_str_InstrumentCode_Value.clear();
 	m_str_Price_Value.clear();//
-	m_str_Quantity_Value.clear();//
+	m_str_Volume_Value.clear();//
 
 
 	m_str_OrderSide_Value = "";
 	m_str_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
 	m_str_InstrumentCode_Value = "";
-	m_str_Quantity_Value = "1";
+	m_str_Volume_Value = "1";
 	m_str_Price_Value = "000000000.00000";//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
 	this->setupUi();
@@ -112,7 +112,7 @@ void CNewOrderConfirmWindow::translateLanguage()
 	m_pLabel_OrderType_Value->setText(m_str_OrderType_Value);
 
 	m_pLabel_Volume->setText(QObject::tr("Volume:"));
-	m_pLabel_Volume_Value->setText(m_str_Quantity_Value);
+	m_pLabel_Volume_Value->setText(m_str_Volume_Value);
 
 	m_pLabel_Price->setText(QObject::tr("Price:"));
 	m_pLabel_Price_Value->setText(m_str_Price_Value);
@@ -179,8 +179,8 @@ void CNewOrderConfirmWindow::resetData( COrderData* pOrderData )
 	m_str_OrderSide_Value = pOrderData->getESide(pOrderData->m_nSide);
 	m_str_OrderType_Value = pOrderData->getEOrderType(pOrderData->m_nOrderType);
 	m_str_InstrumentCode_Value = pOrderData->m_strInstrumentCode;
-	m_str_Price_Value = QVariant(pOrderData->m_fLastPrice).toString();
-	m_str_Quantity_Value = QVariant(pOrderData->m_nVolume).toString();
+	m_str_Price_Value = QVariant(pOrderData->m_fCurrentPrice).toString();
+	m_str_Volume_Value = QVariant(pOrderData->m_nVolume).toString();
 
 	this->translateLanguage();
 	//this->show();

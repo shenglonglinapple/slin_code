@@ -1,11 +1,9 @@
 #include "MyTradeClient.h"
 
-#include "DataWorker.h"
-#include "DataRealTimeWorker.h"
-
 #include "ReqData.h"
 #include "StockData.h"
 #include "StaticStockManager.h"
+#include "MyServer.h"
 #include "Log4cppLogger.h"
 
 
@@ -20,37 +18,11 @@ CMyTradeClient::CMyTradeClient( const std::string &username, const std::string &
 	m_strPassword = password;
 	m_bEnableDebug = enableDebug;
 
-
-	m_pDataWorker = NULL;
-	m_pDataWorker = new CDataWorker();
-	m_pDataWorker->setDataProcessHandle(this);
-	m_pDataWorker->start();
-
-	m_pDataRealTimeWorker = NULL;
-	m_pDataRealTimeWorker = new CDataRealTimeWorker();
-	m_pDataRealTimeWorker->setDataProcessHandle(this);
-	m_pDataRealTimeWorker->start();
 }
 
 CMyTradeClient::~CMyTradeClient( void )
 {
-
-
-	if (NULL != m_pDataRealTimeWorker)
-	{
-		m_pDataRealTimeWorker->setDataProcessHandle(NULL);
-		m_pDataRealTimeWorker->terminateAndWait();
-		delete m_pDataRealTimeWorker;
-		m_pDataRealTimeWorker = NULL;
-	}
-
-	if (NULL != m_pDataWorker)
-	{
-		m_pDataWorker->setDataProcessHandle(NULL);
-		m_pDataWorker->terminateAndWait();
-		delete m_pDataWorker;
-		m_pDataWorker = NULL;
-	}
+	
 }
 
 int CMyTradeClient::logon( const std::string &ip, unsigned int port, bool synchronous /*= true*/ )
@@ -63,7 +35,10 @@ int CMyTradeClient::logon( const std::string &ip, unsigned int port, bool synchr
 	CReqData* pReqData = new CReqData();
 	pReqData->setAutoRequestUUID();
 	pReqData->setReqType(EReqType_DownLoadStockID);
-	m_pDataWorker->append_req(pReqData);
+
+	CMyServer::getInstance().send_req(pReqData);
+	pReqData = NULL;
+	
 	return m_nLoginRes;
 }
 
@@ -81,7 +56,9 @@ void CMyTradeClient::subscribeMarketData( const CMyInstrument &instrument )
 	pReqData->setReqType(EReqType_SubscribeMarketData);
 	pReqData->setInstrumentCode(instrument.getInstrumentCode());
 
-	m_pDataWorker->append_req(pReqData);
+	CMyServer::getInstance().send_req(pReqData);
+	pReqData = NULL;
+
 }
 void CMyTradeClient::subscribeMarketData(unsigned int securityID)
 {
@@ -93,7 +70,8 @@ void CMyTradeClient::subscribeMarketData(unsigned int securityID)
 	pReqData->setAutoRequestUUID();
 	pReqData->setReqType(EReqType_SubscribeMarketData);
 	pReqData->setInstrumentCode(pStockData->m_strSymbolUse);
-	m_pDataWorker->append_req(pReqData);
+	CMyServer::getInstance().send_req(pReqData);
+	pReqData = NULL;
 }
 
 void CMyTradeClient::unsubscribeMarketData( unsigned int nInstrumentID )
@@ -110,7 +88,8 @@ void CMyTradeClient::unsubscribeMarketData( unsigned int nInstrumentID )
 		pReqData->setReqType(EReqType_UnSubscribeMarketData);
 
 		pReqData->setInstrumentCode(pStockeData->m_strSymbolUse);
-		m_pDataWorker->append_req(pReqData);
+		CMyServer::getInstance().send_req(pReqData);
+		pReqData = NULL;
 
 	}
 }
@@ -127,8 +106,10 @@ QString CMyTradeClient::downloadHistoryData( const CMyInstrument &instrument, en
 	pReqData->setMyBarType(interval);
 	pReqData->setInstrumentCode(instrument.getInstrumentCode());
 
-	m_pDataWorker->append_req(pReqData);
 	requestID = pReqData->getRequestUUID();
+
+	CMyServer::getInstance().send_req(pReqData);
+	pReqData = NULL;
 
 	return requestID;
 }
@@ -144,8 +125,10 @@ QString CMyTradeClient::buyMarket( const CMyInstrument &instrument, int nVolume 
 	pReqData->setInstrumentCode(instrument.getInstrumentCode());
 	pReqData->setVolume(nVolume);
 
-	m_pDataWorker->append_req(pReqData);
 	requestID = pReqData->getRequestUUID();
+
+	CMyServer::getInstance().send_req(pReqData);
+	pReqData = NULL;
 
 	return requestID;
 
@@ -162,8 +145,11 @@ QString CMyTradeClient::sellMarket( const CMyInstrument &instrument, int nVolume
 	pReqData->setInstrumentCode(instrument.getInstrumentCode());
 	pReqData->setVolume(nVolume);
 
-	m_pDataWorker->append_req(pReqData);
 	requestID = pReqData->getRequestUUID();
+
+	CMyServer::getInstance().send_req(pReqData);
+	pReqData = NULL;
+
 
 	return requestID;
 

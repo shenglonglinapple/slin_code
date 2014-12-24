@@ -1,12 +1,8 @@
-#include "DataRealTimeWorker.h"
+#include "DataProcessOrderWorker.h"
 
 #include "MyTradeClient.h"
-
-#include "RealTimeStockManager.h"
-
-
 //////////////////////////////////////////////////////////////////////////
-CDataRealTimeWorker::CDataRealTimeWorker(void)
+CDataProcessOrderWorker::CDataProcessOrderWorker(void)
 {	
 	m_toTerminate = false;
 	m_WorkerState = WORK_STATE_BEGIN;
@@ -15,13 +11,13 @@ CDataRealTimeWorker::CDataRealTimeWorker(void)
 	m_pMyTradeClientRef = NULL;
 }
 
-CDataRealTimeWorker::~CDataRealTimeWorker(void)
+CDataProcessOrderWorker::~CDataProcessOrderWorker(void)
 {
 	m_pMyTradeClientRef = NULL;
 }
 
 
-void CDataRealTimeWorker::run()
+void CDataProcessOrderWorker::run()
 {
 	m_WorkerState = WORK_STATE_BEGIN;
 	m_nDataWorkerState = DataWorkerState_Begin;
@@ -38,7 +34,7 @@ void CDataRealTimeWorker::run()
 
 }
 
-void CDataRealTimeWorker::terminate()
+void CDataProcessOrderWorker::terminate()
 {
 	m_toTerminate = true;
 
@@ -49,7 +45,7 @@ void CDataRealTimeWorker::terminate()
 }
 
 
-int CDataRealTimeWorker::_ProcessUserTerminate()
+int CDataProcessOrderWorker::_ProcessUserTerminate()
 {
 	int nFunRes = 0;
 	m_toTerminate = true;
@@ -57,7 +53,7 @@ int CDataRealTimeWorker::_ProcessUserTerminate()
 	return nFunRes;
 }
 
-bool CDataRealTimeWorker::isFinishWork()
+bool CDataProcessOrderWorker::isFinishWork()
 {
 	bool bFinishWork = false;
 	if (DataWorkerState_End == m_nDataWorkerState)
@@ -68,15 +64,15 @@ bool CDataRealTimeWorker::isFinishWork()
 
 }
 
-void CDataRealTimeWorker::_ThreadJob()
+void CDataProcessOrderWorker::_ThreadJob()
 {
 	switch (m_nDataWorkerState)
 	{
 	case DataWorkerState_Begin:
-		m_nDataWorkerState = DataWorkerState_UpdateStockRealTimeInfo;
+		m_nDataWorkerState = DataWorkerState_ProcessOrder;
 		break;
-	case DataWorkerState_UpdateStockRealTimeInfo:
-		_DoJob_UpdateStockRealTimeInfo();
+	case DataWorkerState_ProcessOrder:
+		_DoJob_ProcessOrder();
 		break;
 	case DataWorkerState_End:
 		this->my_msleep(100);
@@ -92,34 +88,12 @@ void CDataRealTimeWorker::_ThreadJob()
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CDataRealTimeWorker::setDataProcessHandle( const CMyTradeClient* pHandle )
+void CDataProcessOrderWorker::setDataProcessHandle( const CMyTradeClient* pHandle )
 {
 	m_pMyTradeClientRef = (CMyTradeClient*)pHandle;
 }
 
-void CDataRealTimeWorker::_DoJob_UpdateStockRealTimeInfo()
+void CDataProcessOrderWorker::_DoJob_ProcessOrder()
 {
-	std::list<CMyMarketData*> lstMyMarketData;
-	std::list<CMyMarketData*>::iterator iterLst;
-	CMyMarketData* pMyMarketData = NULL;
-
-	CRealTimeStockManager::getInstance().getRealTimeMarketData(lstMyMarketData);
-
-	iterLst = lstMyMarketData.begin();
-	while (iterLst != lstMyMarketData.end())
-	{
-		pMyMarketData = (*iterLst);
-
-		if (NULL != m_pMyTradeClientRef)
-		{
-			m_pMyTradeClientRef->onMarketDataUpdate(*pMyMarketData);
-		}
-		delete pMyMarketData;
-		pMyMarketData = NULL;
-		(*iterLst) = NULL;
-		iterLst++;
-	}//while
-	lstMyMarketData.clear();
-
-	m_nDataWorkerState = DataWorkerState_UpdateStockRealTimeInfo;
+	
 }

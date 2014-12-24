@@ -19,6 +19,7 @@
 #include "DataHistoryQuotesManager.h"
 #include "SignalSlotManager.h"
 //
+#include "MyServer.h"
 #include "Log4cppLogger.h"
 
 CClientDataManager* CClientDataManager::m_pInstance = 0;
@@ -44,7 +45,9 @@ void CClientDataManager::removeInstance()
 
 CClientDataManager::CClientDataManager(void)
 {	
-	m_pSmartTraderClient = NULL;	
+	m_pSmartTraderClient = NULL;
+	CMyServer::getInstance();
+
 	_InitTraderClient(NULL);
 
 	CConfigInfo::getInstance();
@@ -66,7 +69,9 @@ CClientDataManager::~CClientDataManager(void)
 	CDataTotalMyInstrument::removeInstance();
 	CStaticStockManager::removeInstance();
 	CConfigInfo::removeInstance();
+	CMyServer::removeInstance();
 	_UnInitTraderClient();
+
 }
 
 void CClientDataManager::_InitTraderClient(CClientLoginParam* pClientLoginParam)
@@ -108,6 +113,8 @@ int CClientDataManager::loginToServer(CClientLoginParam* pClientLoginParam )
 
 	if (NULL != m_pSmartTraderClient)
 	{
+		CMyServer::getInstance().setHandle(m_pSmartTraderClient);
+
 		nloginToServerRes = m_pSmartTraderClient->loginToServer();
 	}
 
@@ -298,28 +305,28 @@ void CClientDataManager::newOrder( COrderData newOrderData )
 	nOrderType = newOrderData.m_nOrderType;
 	nSide = newOrderData.m_nSide;
 
+	MYLOG4CPP_DEBUG<<"Client "
+		<<" "<<newOrderData.getESide(nSide).toStdString()
+		<<" "<<newOrderData.getEOrderType(nOrderType).toStdString()
+		<<" "<<"InstrumentCode="<<newOrderData.m_strInstrumentCode.toStdString()
+		<<" "<<"nVolume="<<newOrderData.m_nVolume
+		<<" "<<"m_fTransactPrice="<<newOrderData.m_fTransactPrice;
+
 	switch (nOrderType)
 	{
 	case COrderData::MARKET:
 		if (COrderData::BUY == nSide)
 		{
-			MYLOG4CPP_DEBUG<<"Client BUY MARKET"
-				<<" "<<"InstrumentCode="<<newOrderData.m_strInstrumentCode.toStdString()
-				<<" "<<"nVolume="<<newOrderData.m_nVolume;
 			strReqID = m_pSmartTraderClient->buyMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
 		}
 		if (COrderData::SELL == nSide)
 		{
-			MYLOG4CPP_DEBUG<<"Client SELL MARKET"
-				<<" "<<"InstrumentCode="<<newOrderData.m_strInstrumentCode.toStdString()
-				<<" "<<"nVolume="<<newOrderData.m_nVolume;
 			strReqID = m_pSmartTraderClient->sellMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
 		}
 		break;
 	default:
 		break;
 	}
-
 
 
 }

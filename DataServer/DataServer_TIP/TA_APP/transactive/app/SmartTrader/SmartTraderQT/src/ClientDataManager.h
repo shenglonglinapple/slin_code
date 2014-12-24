@@ -18,7 +18,6 @@ class CSmartTraderClient;
 class CHistoryDataRequest;
 
 
-
 class CClientDataManager : 
 	public QObject,
 	public IProcessRecvData

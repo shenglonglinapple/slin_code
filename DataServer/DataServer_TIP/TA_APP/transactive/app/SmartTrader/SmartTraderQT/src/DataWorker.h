@@ -37,7 +37,7 @@ private:
 	EReqWorkerState  m_nReqWorkerState;
 
 public:
-	void setDataProcessHandle(CMyTradeClient* pHandle);
+	void setDataProcessHandle(const CMyTradeClient* pHandle);
 	void append_req(CReqData* pReqData);
 private:
 	void _Free_LstReqData();

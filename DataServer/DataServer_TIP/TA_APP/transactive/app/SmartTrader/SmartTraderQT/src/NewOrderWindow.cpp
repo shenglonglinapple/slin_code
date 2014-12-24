@@ -203,11 +203,12 @@ void CNewOrderWindow::translateLanguage()
 void CNewOrderWindow::resetData( COrderData* pData )
 {
 	_InitData();
+	m_pOrderData->clearData();
 
 	m_pTextEdit_Symbol_Value = pData->m_strInstrumentCode;
 	//m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
 	m_pSpinBox_Volume_Value = pData->m_nVolume;
-	m_pSpinBox_Price_Value = pData->m_fLastPrice;
+	m_pSpinBox_Price_Value = pData->m_fCurrentPrice;
 
 	(*m_pOrderData) = (*pData);
 
@@ -227,8 +228,10 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 
 	m_pOrderData->m_nSide = COrderData::BUY;
 	m_pOrderData->m_nOrderType = m_pOrderData->getEOrderType(strOrderType);
-	m_pOrderData->m_fLastPrice = m_pSpinBox_Price->value();
+	m_pOrderData->m_nOrderStatus = COrderData::NEW;
+	m_pOrderData->m_fTransactPrice = m_pSpinBox_Price->value();
 	m_pOrderData->m_nVolume = m_pSpinBox_Volume->value();
+	m_pOrderData->m_nTransactTime = 0;
 	
 	//
 	m_pNewOrderConfirmWindow->resetData(m_pOrderData);
@@ -248,7 +251,7 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 
 	m_pOrderData->m_nSide = COrderData::SELL;
 	m_pOrderData->m_nOrderType = m_pOrderData->getEOrderType(strOrderType);
-	m_pOrderData->m_fLastPrice = m_pSpinBox_Price->value();
+	m_pOrderData->m_fCurrentPrice = m_pSpinBox_Price->value();
 	m_pOrderData->m_nVolume = m_pSpinBox_Volume->value();
 
 	//

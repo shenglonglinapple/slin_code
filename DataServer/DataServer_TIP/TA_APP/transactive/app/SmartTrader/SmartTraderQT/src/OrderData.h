@@ -124,17 +124,16 @@ public:
 public: 
 	COrderData& operator=(const COrderData& cParam);
 public:
-	void setDataByItem(CItemUserInstrument* pData);
+	void setBaseData(CItemUserInstrument* pData);
 	QString getESide(COrderData::ESide  nSide);
 	EOrderType getEOrderType(const QString& strEOrderType);
 	QString getEOrderType(COrderData::EOrderType nOrderType);
 	
-private:
-	void _ClearData();
+public:
+	void clearData();
 public:
 	unsigned int m_nInstrumentID ;
 	QString m_strInstrumentCode;
-	float m_fLastPrice;
 	int m_nVolume;
 public:
 	ESide m_nSide;
@@ -142,7 +141,16 @@ public:
 public:
 	EOrderConfirm m_nOrderConfirm;
 public:
-
+	float m_fTransactPrice;
+	float m_fFees;
+	float m_fCurrentPrice;
+	float m_fTotal;
+public:
+	COrderData::EOrderStatus m_nOrderStatus;
+	unsigned int m_nTransactTime;
+	unsigned int m_nCurrentTime;
+public:
+	QString m_strUUID;
 }; 
 
 
