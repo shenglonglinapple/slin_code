@@ -10,19 +10,20 @@ class CMyTradeClient
 {
 public:
 	/// Constructor of TradeClient with user name and the password
-	CMyTradeClient(const std::string &username, const std::string &password, bool enableDebug = false);
+	CMyTradeClient();
 	virtual ~CMyTradeClient(void);
 
 public:
 	/// Logon to the remote server
-    int logon(const std::string &ip, unsigned int port, bool synchronous = true);
+    int logon(const std::string &ip, unsigned int port, bool synchronous,
+		const std::string &username, const std::string &password, bool enableDebug);
 
 	/// Logoff from OMS
     void logoff();
 
 	/// Subscribe real-time market data for specific instrument
 	void subscribeMarketData(const CMyInstrument &instrument);
-	void subscribeMarketData(unsigned int securityID);
+	void subscribeMarketData(unsigned int nInstrumentID);
 
 	/// Unsubscribe the market data
 	void unsubscribeMarketData(unsigned int nInstrumentID);
@@ -49,14 +50,7 @@ public:
 	/// Hook method when receive bar summary update
 	virtual void onBarDataUpdate(const CMyBarSummary &barData) = 0;
 
-private:
-	std::string m_strUserName;
-	std::string m_strPassword;
-	bool m_bEnableDebug;
-	std::string m_strServerIP;
-	int m_nServerPort;
-	bool m_bSynchronous;
-	int m_nLoginRes;
+	
 
 };
 

@@ -1,9 +1,8 @@
 #include "DataRealTimeWorker.h"
 
-#include "MyTradeClient.h"
 
 #include "RealTimeStockManager.h"
-
+#include "ServerComManager.h"
 
 //////////////////////////////////////////////////////////////////////////
 CDataRealTimeWorker::CDataRealTimeWorker(void)
@@ -12,12 +11,10 @@ CDataRealTimeWorker::CDataRealTimeWorker(void)
 	m_WorkerState = WORK_STATE_BEGIN;
 	m_nDataWorkerState = DataWorkerState_Begin;
 
-	m_pMyTradeClientRef = NULL;
 }
 
 CDataRealTimeWorker::~CDataRealTimeWorker(void)
 {
-	m_pMyTradeClientRef = NULL;
 }
 
 
@@ -92,10 +89,6 @@ void CDataRealTimeWorker::_ThreadJob()
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CDataRealTimeWorker::setDataProcessHandle( const CMyTradeClient* pHandle )
-{
-	m_pMyTradeClientRef = (CMyTradeClient*)pHandle;
-}
 
 void CDataRealTimeWorker::_DoJob_UpdateStockRealTimeInfo()
 {
@@ -110,10 +103,8 @@ void CDataRealTimeWorker::_DoJob_UpdateStockRealTimeInfo()
 	{
 		pMyMarketData = (*iterLst);
 
-		if (NULL != m_pMyTradeClientRef)
-		{
-			m_pMyTradeClientRef->onMarketDataUpdate(*pMyMarketData);
-		}
+		CServerComManager::getInstance().onMarketDataUpdate(*pMyMarketData);
+
 		delete pMyMarketData;
 		pMyMarketData = NULL;
 		(*iterLst) = NULL;

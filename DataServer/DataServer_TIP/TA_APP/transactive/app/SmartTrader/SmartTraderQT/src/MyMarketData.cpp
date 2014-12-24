@@ -2,7 +2,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
-
+#include "ProjectCommonData.h"
 #include "QtTimeHelper.h"
 
 CMyMarketData::CMyMarketData()
@@ -312,7 +312,14 @@ void CMyMarketData::setValue( const std::string& strData )
 	m_nSecurityID = symbolID.toUInt();
 	m_fPrice_LAST_TRADED_PRICE = lastTradePriceOnly.toFloat();
 	//"12/10/2014","2:00am",
-	lastTradeDataTime = lastTradeDate + " " + lastTradeTime;
+	if ("N/A" == lastTradeDate || "N/A" == lastTradeTime)
+	{
+		lastTradeDataTime = DEF_VALUE_STRING_UTC_START_DATE_TIME.c_str();
+	}
+	else
+	{
+		lastTradeDataTime = lastTradeDate + " " + lastTradeTime;
+	}
 	m_nTime = qtTimeHelper.strToDateTime_Qt_AmPm(lastTradeDataTime.toStdString());
 
 }

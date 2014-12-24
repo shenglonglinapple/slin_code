@@ -295,7 +295,7 @@ void CNewOrderWindow::slotConfirmOrder(COrderData::EOrderConfirm nEOrderConfirm)
 	//emit
 	if (COrderData::OrderConfirm_OK == nEOrderConfirm)
 	{
-		CClientDataManager::getInstance().newOrder(*m_pOrderData);
+		CClientDataManager::getInstance().req_newOrder(*m_pOrderData);
 	}
 	else if (COrderData::OrderConfirm_Cancel ==  nEOrderConfirm)
 	{

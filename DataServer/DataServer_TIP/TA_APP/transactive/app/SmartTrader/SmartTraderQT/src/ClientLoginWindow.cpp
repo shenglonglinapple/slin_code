@@ -189,7 +189,7 @@ void CClientLoginWindow::slotButtonLoginClicked( bool checked )
 		<<" "<<"m_strPassWord="<<m_pClientLoginParam->m_strPassWord;
 
 
-	nloginToServerRes = CClientDataManager::getInstance().loginToServer(m_pClientLoginParam);
+	nloginToServerRes = CClientDataManager::getInstance().req_login(m_pClientLoginParam);
 
 	if (nloginToServerRes >= 0)
 	{

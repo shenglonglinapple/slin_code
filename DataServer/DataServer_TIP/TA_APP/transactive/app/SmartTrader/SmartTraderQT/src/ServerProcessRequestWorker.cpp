@@ -1,4 +1,4 @@
-#include "DataWorker.h"
+#include "ServerProcessRequestWorker.h"
 #include "ReqData.h"
 #include "MyInstrument.h"
 #include "StockData.h"
@@ -10,17 +10,17 @@
 #include "HistoryStockManager.h"
 #include "DataRealTimeWorker.h"
 #include "DataOrderManager.h"
+#include "ServerComManager.h"
 
 #include "OrderData.h"
 
 //////////////////////////////////////////////////////////////////////////
-CDataWorker::CDataWorker(void)
+CServerProcessRequestWorker::CServerProcessRequestWorker(void)
 {	
 	m_toTerminate = false;
 	m_WorkerState = WORK_STATE_BEGIN;
 	m_nReqWorkerState = ReqWokerState_Begin;
 
-	m_pMyTradeClientRef = NULL;
 
 	{
 		QMutexLocker lock(&m_mutex_LstReqData);
@@ -34,16 +34,15 @@ CDataWorker::CDataWorker(void)
 	CDataOrderManager::getInstance();
 }
 
-CDataWorker::~CDataWorker(void)
+CServerProcessRequestWorker::~CServerProcessRequestWorker(void)
 {
-	m_pMyTradeClientRef = NULL;
 	_Free_LstReqData();
 	CRealTimeStockManager::removeInstance();
 	CDataOrderManager::removeInstance();
 }
 
 
-void CDataWorker::run()
+void CServerProcessRequestWorker::run()
 {
 	m_WorkerState = WORK_STATE_BEGIN;
 	m_nReqWorkerState = ReqWokerState_Begin;
@@ -59,7 +58,7 @@ void CDataWorker::run()
 	m_WorkerState = WORK_STATE_END;
 }
 
-void CDataWorker::terminate()
+void CServerProcessRequestWorker::terminate()
 {
 	m_toTerminate = true;
 	while (WORK_STATE_END != m_WorkerState)
@@ -69,14 +68,14 @@ void CDataWorker::terminate()
 }
 
 
-int CDataWorker::_ProcessUserTerminate()
+int CServerProcessRequestWorker::_ProcessUserTerminate()
 {
 	int nFunRes = 0;
 	m_nReqWorkerState = ReqWokerState_End;
 	return nFunRes;
 }
 
-bool CDataWorker::isFinishWork()
+bool CServerProcessRequestWorker::isFinishWork()
 {
 	bool bFinishWork = false;
 	if (ReqWokerState_End == m_nReqWorkerState)
@@ -87,7 +86,7 @@ bool CDataWorker::isFinishWork()
 
 }
 
-void CDataWorker::_ThreadJob()
+void CServerProcessRequestWorker::_ThreadJob()
 {
 	switch (m_nReqWorkerState)
 	{
@@ -112,18 +111,15 @@ void CDataWorker::_ThreadJob()
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CDataWorker::setDataProcessHandle( const CMyTradeClient* pHandle )
-{
-	m_pMyTradeClientRef = (CMyTradeClient*)pHandle;
-}
 
-void CDataWorker::append_req( CReqData* pReqData )
+
+void CServerProcessRequestWorker::append_req( CReqData* pReqData )
 {
 	QMutexLocker lock(&m_mutex_LstReqData);	
 	m_LstReqData.append(pReqData);
 }
 
-void CDataWorker::_Free_LstReqData()
+void CServerProcessRequestWorker::_Free_LstReqData()
 {
 	{
 		QMutexLocker lock(&m_mutex_CurrentReqData);
@@ -149,7 +145,7 @@ void CDataWorker::_Free_LstReqData()
 	}
 
 }
-CReqData* CDataWorker::_TryGet_ReqData()
+CReqData* CServerProcessRequestWorker::_TryGet_ReqData()
 {
 	CReqData* pReqDataTmp = NULL;
 	QMutexLocker lock(&m_mutex_LstReqData);
@@ -169,7 +165,7 @@ CReqData* CDataWorker::_TryGet_ReqData()
 
 
 
-void CDataWorker::_DoJob_CheckProcessReq()
+void CServerProcessRequestWorker::_DoJob_CheckProcessReq()
 {
 	EReqType nReqType = EReqType_Begin;
 
@@ -219,7 +215,7 @@ void CDataWorker::_DoJob_CheckProcessReq()
 	return;
 }
 
-void CDataWorker::_ProcessReq_DownLoadStockID()
+void CServerProcessRequestWorker::_ProcessReq_DownLoadStockID()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
 
@@ -238,10 +234,8 @@ void CDataWorker::_ProcessReq_DownLoadStockID()
 			if (NULL != pStockData)
 			{
 				myInstrument.setValue(pStockData);
-				if (NULL != m_pMyTradeClientRef)
-				{
-					m_pMyTradeClientRef->onInstrumentDownloaded(myInstrument);
-				}
+				CServerComManager::getInstance().onInstrumentDownloaded(myInstrument);
+
 				delete pStockData;
 				pStockData = NULL;
 			}
@@ -265,7 +259,7 @@ void CDataWorker::_ProcessReq_DownLoadStockID()
 
 }
 
-void CDataWorker::_ProcessReq_SubscribeMarketData()
+void CServerProcessRequestWorker::_ProcessReq_SubscribeMarketData()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
 
@@ -279,7 +273,7 @@ void CDataWorker::_ProcessReq_SubscribeMarketData()
 	}
 }
 
-void CDataWorker::_ProcessReq_UnSubscribeMarketData()
+void CServerProcessRequestWorker::_ProcessReq_UnSubscribeMarketData()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
 
@@ -293,7 +287,7 @@ void CDataWorker::_ProcessReq_UnSubscribeMarketData()
 	}
 }
 
-void CDataWorker::_ProcessReq_DownloadHistoryData()
+void CServerProcessRequestWorker::_ProcessReq_DownloadHistoryData()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
 	CHistoryStockManager::LstHistoryDataT lstHistoryData;
@@ -309,11 +303,7 @@ void CDataWorker::_ProcessReq_DownloadHistoryData()
 	CMyBarsPtrHelper myBarsPtrhelper;
 	pSetMyBarsPtr pMyBars = myBarsPtrhelper.convertValue(lstHistoryData);
 
-
-	if (NULL != m_pMyTradeClientRef)
-	{
-		m_pMyTradeClientRef->onHistoryDataDownloaded(m_pCurrentReqData->getRequestUUID(), pMyBars);
-	}
+	CServerComManager::getInstance().onHistoryDataDownloaded(m_pCurrentReqData->getRequestUUID(), pMyBars);
 
 	iterLst = lstHistoryData.begin();
 	while (iterLst != lstHistoryData.end())
@@ -338,7 +328,7 @@ void CDataWorker::_ProcessReq_DownloadHistoryData()
 	}
 }
 
-void CDataWorker::_ProcessReq_BuyMarket()
+void CServerProcessRequestWorker::_ProcessReq_BuyMarket()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
 	COrderData* pOrderData = NULL;
@@ -366,7 +356,7 @@ void CDataWorker::_ProcessReq_BuyMarket()
 	}
 }
 
-void CDataWorker::_ProcessReq_SellMarket()
+void CServerProcessRequestWorker::_ProcessReq_SellMarket()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
 

@@ -6,7 +6,6 @@
 #include <QtCore/QMutexLocker>
 #include <QtCore/QList>
 
-class CMyTradeClient;
 class CReqData;
 
 
@@ -37,12 +36,8 @@ private:
 private:
 	bool	m_toTerminate;
 	EDataWorkerState m_nDataWorkerState;
-public:
-	void setDataProcessHandle(const CMyTradeClient* pHandle);
 private:
 	void _DoJob_ProcessOrder();
-private:
-	CMyTradeClient* m_pMyTradeClientRef;
 };
 
 

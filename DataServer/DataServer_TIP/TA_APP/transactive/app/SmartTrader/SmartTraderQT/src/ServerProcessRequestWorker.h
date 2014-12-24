@@ -1,5 +1,5 @@
-#ifndef __CLASS_DATA_WORKER__HH__
-#define __CLASS_DATA_WORKER__HH__
+#ifndef __CLASS_SERVER_PROCESS_REQUEST_WORKER__HH__
+#define __CLASS_SERVER_PROCESS_REQUEST_WORKER__HH__
 
 #include "MyQtThread.h"
 #include <QtCore/QMutex>
@@ -9,7 +9,7 @@
 class CMyTradeClient;
 class CReqData;
 
-class CDataWorker : public CMyQtThread
+class CServerProcessRequestWorker : public CMyQtThread
 {
 	Q_OBJECT
 private:
@@ -22,8 +22,8 @@ private:
 	};
 
 public:
-	CDataWorker(void);
-	~CDataWorker(void);
+	CServerProcessRequestWorker(void);
+	~CServerProcessRequestWorker(void);
 
 public:
 	virtual void run();	
@@ -50,7 +50,6 @@ private:
 	void _ProcessReq_BuyMarket();
 	void _ProcessReq_SellMarket();
 private:
-	CMyTradeClient* m_pMyTradeClientRef;
 
 	QMutex m_mutex_LstReqData;
 	QList<CReqData*> m_LstReqData;
@@ -60,6 +59,6 @@ private:
 };
 
 
-#endif //__CLASS_DATA_WORKER__HH__
+#endif //__CLASS_SERVER_PROCESS_REQUEST_WORKER__HH__
 
 

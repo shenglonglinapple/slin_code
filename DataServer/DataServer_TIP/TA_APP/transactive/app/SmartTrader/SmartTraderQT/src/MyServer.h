@@ -4,14 +4,11 @@
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 
-class CDataWorker;
+class CServerProcessRequestWorker;
 class CDataRealTimeWorker;
 class CDataProcessOrderWorker;
 class CMyTradeClient;
-
 class CReqData;
-
-
 
 class CMyServer
 {
@@ -26,11 +23,11 @@ public:
 	CMyServer();
 	virtual ~CMyServer(void);
 public:
-	void send_req(CReqData* pReqData);
+	void recv_req(CReqData* pReqData);
 	void setHandle(const CMyTradeClient* pHandleRef);
 
 private:
-	CDataWorker* m_pDataWorker;
+	CServerProcessRequestWorker* m_pServerProcessRequestWorker;
 	CDataRealTimeWorker* m_pDataRealTimeWorker;
 	CDataProcessOrderWorker* m_pDataProcessOrderWorker;
 };

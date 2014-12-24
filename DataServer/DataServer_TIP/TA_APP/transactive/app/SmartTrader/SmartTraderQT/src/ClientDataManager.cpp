@@ -4,7 +4,7 @@
 #include <QtGui/QMessageBox>
 
 //
-#include "SmartTraderClient.h"
+#include "MyTradeClient.h"
 #include "ClientLoginParam.h"
 #include "ConfigInfo.h"
 //
@@ -45,10 +45,7 @@ void CClientDataManager::removeInstance()
 
 CClientDataManager::CClientDataManager(void)
 {	
-	m_pSmartTraderClient = NULL;
 	CMyServer::getInstance();
-
-	_InitTraderClient(NULL);
 
 	CConfigInfo::getInstance();
 	CStaticStockManager::getInstance();
@@ -70,38 +67,13 @@ CClientDataManager::~CClientDataManager(void)
 	CStaticStockManager::removeInstance();
 	CConfigInfo::removeInstance();
 	CMyServer::removeInstance();
-	_UnInitTraderClient();
 
 }
 
-void CClientDataManager::_InitTraderClient(CClientLoginParam* pClientLoginParam)
-{
-	if (NULL == pClientLoginParam)
-	{
-		return;
-	}
-	if (NULL == m_pSmartTraderClient)
-	{
-		m_pSmartTraderClient = new CSmartTraderClient(*pClientLoginParam);
-		m_pSmartTraderClient->setProcessRecvDataHandle(this);
-	}
-}
-void CClientDataManager::_UnInitTraderClient()
-{
-	if (NULL != m_pSmartTraderClient)
-	{
-		//TODO. debug mode will crash
-		m_pSmartTraderClient->logoff();
-		m_pSmartTraderClient->setProcessRecvDataHandle(NULL);
-
-		delete m_pSmartTraderClient;
-		m_pSmartTraderClient = NULL;
-	}
-}
 
 
 
-int CClientDataManager::loginToServer(CClientLoginParam* pClientLoginParam )
+int CClientDataManager::req_login(CClientLoginParam* pClientLoginParam )
 {
 	int nloginToServerRes = -1;
 
@@ -109,17 +81,23 @@ int CClientDataManager::loginToServer(CClientLoginParam* pClientLoginParam )
 
 	pClientLoginParam->logInfo(__FILE__, __LINE__);
 
-	_InitTraderClient(pClientLoginParam);
 
-	if (NULL != m_pSmartTraderClient)
 	{
-		CMyServer::getInstance().setHandle(m_pSmartTraderClient);
+		CMyServer::getInstance().setHandle(this);
 
-		nloginToServerRes = m_pSmartTraderClient->loginToServer();
+		nloginToServerRes = this->logon(pClientLoginParam->m_strServerIP,
+			pClientLoginParam->m_nServerPort, pClientLoginParam->m_bSynchronous,
+			pClientLoginParam->m_strUserName, pClientLoginParam->m_strPassWord,
+			pClientLoginParam->m_bEnableDebug);
 	}
 
 	return nloginToServerRes;
 }
+void CClientDataManager::req_logoff()
+{
+	this->logoff();
+}
+
 
 void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument )
 {	
@@ -136,7 +114,7 @@ void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument
 
 	if (CConfigInfo::getInstance().checkUserInstrument(instrument.getInstrumentID()))
 	{
-		addUserInstrument(instrument.getInstrumentID());
+		req_subscribe_Instrument(instrument.getInstrumentID());
 	}
 }
 
@@ -175,7 +153,7 @@ void CClientDataManager::onBarDataUpdate(const CMyBarSummary &barData)
 
 }
 
-void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest)
+void CClientDataManager::req_downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest)
 {
 	CMyInstrument* pInstrument = NULL;
 	enum EMyBarType interval;
@@ -197,13 +175,13 @@ void CClientDataManager::downloadHistoryData(const CHistoryDataRequest* pHistory
 	from = pHistoryDataRequest->m_nTimeFrom;
 	to = pHistoryDataRequest->m_nTimeTo;
 
-	requestID = m_pSmartTraderClient->downloadHistoryData(*pInstrument, interval, from, to);
+	requestID = this->downloadHistoryData(*pInstrument, interval, from, to);
 
 	CDataHistoryQuotesManager::getInstance().addReqest(requestID, pHistoryDataRequest);
 
 }
 
-void CClientDataManager::addUserInstrument( unsigned int nInstrumentID )
+void CClientDataManager::req_subscribe_Instrument( unsigned int nInstrumentID )
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -226,7 +204,7 @@ void CClientDataManager::addUserInstrument( unsigned int nInstrumentID )
 	{
 		//subscribe this instrument
 		MYLOG4CPP_DEBUG<<"Client subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
-		m_pSmartTraderClient->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
+		this->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 	}
 
 
@@ -245,7 +223,7 @@ void CClientDataManager::addUserInstrument( unsigned int nInstrumentID )
 }
 
 
-void CClientDataManager::removeUserInstrument( unsigned int nInstrumentID )
+void CClientDataManager::req_unsubscribe_Instrument( unsigned int nInstrumentID )
 {
 	std::string strExchangeName;
 	std::string strUnderlyingCode;
@@ -268,7 +246,7 @@ void CClientDataManager::removeUserInstrument( unsigned int nInstrumentID )
 	{
 		//subscribe this instrument
 		MYLOG4CPP_DEBUG<<"Client unsubscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
-		m_pSmartTraderClient->unsubscribeMarketData(nInstrumentID);//subscribe this Instrument market data
+		this->unsubscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 	}
 
 
@@ -286,7 +264,7 @@ void CClientDataManager::removeUserInstrument( unsigned int nInstrumentID )
 
 }
 
-void CClientDataManager::newOrder( COrderData newOrderData )
+void CClientDataManager::req_newOrder( COrderData newOrderData )
 {
 	COrderData::EOrderType nOrderType = COrderData::MARKET;
 	COrderData::ESide nSide = COrderData::BUY;
@@ -317,11 +295,11 @@ void CClientDataManager::newOrder( COrderData newOrderData )
 	case COrderData::MARKET:
 		if (COrderData::BUY == nSide)
 		{
-			strReqID = m_pSmartTraderClient->buyMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
+			strReqID = this->buyMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
 		}
 		if (COrderData::SELL == nSide)
 		{
-			strReqID = m_pSmartTraderClient->sellMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
+			strReqID = this->sellMarket(*pMyInstrumentRef, newOrderData.m_nVolume);//subscribe this Instrument market data
 		}
 		break;
 	default:

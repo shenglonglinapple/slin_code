@@ -93,6 +93,6 @@ void CWaitingInstrumentTreeView::slotdoubleClicked( const QModelIndex &index )
 	{
 		pModelRef->removeRow(index.row(), index.parent());//use mvc to remove node first
 
-		CClientDataManager::getInstance().addUserInstrument(nInstrumentID);
+		CClientDataManager::getInstance().req_subscribe_Instrument(nInstrumentID);
 	}
 }

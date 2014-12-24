@@ -174,7 +174,7 @@ void CUserInstrumentTableView::slotActionRemoveUserInstrument()
 
 	//treeview line have data
 	pCurrentItem = (CItemUserInstrument*)nCurrentIndex.internalPointer();
-	CClientDataManager::getInstance().removeUserInstrument(pCurrentItem->getNodeKey());
+	CClientDataManager::getInstance().req_unsubscribe_Instrument(pCurrentItem->getNodeKey());
 
 }
 void CUserInstrumentTableView::slotActionNewOrder()

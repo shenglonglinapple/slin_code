@@ -1,6 +1,7 @@
 #include "MyServer.h"
 
-#include "DataWorker.h"
+#include "ServerComManager.h"
+#include "ServerProcessRequestWorker.h"
 #include "DataRealTimeWorker.h"
 #include "DataProcessOrderWorker.h"
 
@@ -29,19 +30,17 @@ void CMyServer::removeInstance()
 }
 CMyServer::CMyServer()
 {
-	m_pDataWorker = NULL;
-	m_pDataWorker = new CDataWorker();
-	m_pDataWorker->setDataProcessHandle(NULL);
-	m_pDataWorker->start();
+	CServerComManager::getInstance();
+	m_pServerProcessRequestWorker = NULL;
+	m_pServerProcessRequestWorker = new CServerProcessRequestWorker();
+	m_pServerProcessRequestWorker->start();
 
 	m_pDataRealTimeWorker = NULL;
 	m_pDataRealTimeWorker = new CDataRealTimeWorker();
-	m_pDataRealTimeWorker->setDataProcessHandle(NULL);
 	m_pDataRealTimeWorker->start();
 
 	m_pDataProcessOrderWorker = NULL;
 	m_pDataProcessOrderWorker = new CDataProcessOrderWorker();
-	m_pDataProcessOrderWorker->setDataProcessHandle(NULL);
 	m_pDataProcessOrderWorker->start();
 }
 
@@ -49,7 +48,6 @@ CMyServer::~CMyServer( void )
 {
 	if (NULL != m_pDataProcessOrderWorker)
 	{
-		m_pDataProcessOrderWorker->setDataProcessHandle(NULL);
 		m_pDataProcessOrderWorker->terminateAndWait();
 		delete m_pDataProcessOrderWorker;
 		m_pDataProcessOrderWorker = NULL;
@@ -57,31 +55,29 @@ CMyServer::~CMyServer( void )
 
 	if (NULL != m_pDataRealTimeWorker)
 	{
-		m_pDataRealTimeWorker->setDataProcessHandle(NULL);
 		m_pDataRealTimeWorker->terminateAndWait();
 		delete m_pDataRealTimeWorker;
 		m_pDataRealTimeWorker = NULL;
 	}
 
-	if (NULL != m_pDataWorker)
+	if (NULL != m_pServerProcessRequestWorker)
 	{
-		m_pDataWorker->setDataProcessHandle(NULL);
-		m_pDataWorker->terminateAndWait();
-		delete m_pDataWorker;
-		m_pDataWorker = NULL;
+		m_pServerProcessRequestWorker->terminateAndWait();
+		delete m_pServerProcessRequestWorker;
+		m_pServerProcessRequestWorker = NULL;
 	}
+	CServerComManager::removeInstance();
+
 }
 
-void CMyServer::send_req( CReqData* pReqData )
+void CMyServer::recv_req( CReqData* pReqData )
 {
-	m_pDataWorker->append_req(pReqData);
+	m_pServerProcessRequestWorker->append_req(pReqData);
 }
 
 void CMyServer::setHandle( const CMyTradeClient* pHandleRef )
 {
-	m_pDataWorker->setDataProcessHandle(pHandleRef);
-	m_pDataRealTimeWorker->setDataProcessHandle(pHandleRef);
-	m_pDataProcessOrderWorker->setDataProcessHandle(pHandleRef);
+	CServerComManager::getInstance().setDataProcessHandle(pHandleRef);
 
 }
 

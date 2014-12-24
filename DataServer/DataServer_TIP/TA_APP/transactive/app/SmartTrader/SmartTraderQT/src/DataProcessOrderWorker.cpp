@@ -1,19 +1,20 @@
 #include "DataProcessOrderWorker.h"
+#include "ServerComManager.h"
+#include "DataOrderManager.h"
 
-#include "MyTradeClient.h"
-//////////////////////////////////////////////////////////////////////////
+#include "Log4cppLogger.h"
+
+
 CDataProcessOrderWorker::CDataProcessOrderWorker(void)
 {	
 	m_toTerminate = false;
 	m_WorkerState = WORK_STATE_BEGIN;
 	m_nDataWorkerState = DataWorkerState_Begin;
 
-	m_pMyTradeClientRef = NULL;
 }
 
 CDataProcessOrderWorker::~CDataProcessOrderWorker(void)
 {
-	m_pMyTradeClientRef = NULL;
 }
 
 
@@ -88,12 +89,10 @@ void CDataProcessOrderWorker::_ThreadJob()
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CDataProcessOrderWorker::setDataProcessHandle( const CMyTradeClient* pHandle )
-{
-	m_pMyTradeClientRef = (CMyTradeClient*)pHandle;
-}
+
 
 void CDataProcessOrderWorker::_DoJob_ProcessOrder()
 {
 	
+	m_nDataWorkerState = DataWorkerState_ProcessOrder;
 }

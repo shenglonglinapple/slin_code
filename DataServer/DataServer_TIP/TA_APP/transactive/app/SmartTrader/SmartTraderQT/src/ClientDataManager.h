@@ -10,17 +10,16 @@
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 
-#include "IProcessRecvData.h"
 #include "OrderData.h"
+#include "MyTradeClient.h"
 
 class CClientLoginParam;
-class CSmartTraderClient;
 class CHistoryDataRequest;
 
 
 class CClientDataManager : 
 	public QObject,
-	public IProcessRecvData
+	public CMyTradeClient
 {
 	Q_OBJECT
 public:
@@ -39,22 +38,19 @@ signals:
 	
 
 public:
-	int loginToServer(CClientLoginParam* pClientLoginParam);
-	void downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest);
+	int req_login(CClientLoginParam* pClientLoginParam);
+	void req_logoff();
+
+	void req_downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest);
+public:
+	void req_subscribe_Instrument( unsigned int nInstrumentID );
+	void req_unsubscribe_Instrument( unsigned int nInstrumentID );
+	void req_newOrder(COrderData newOrderData);
 public:
 	void onInstrumentDownloaded(const CMyInstrument& instrument);//IProcessRecvData
 	void onMarketDataUpdate( const CMyMarketData &marketData );
 	void onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars );
 	void onBarDataUpdate(const CMyBarSummary &barData);
-public:
-	void addUserInstrument( unsigned int nInstrumentID );
-	void removeUserInstrument( unsigned int nInstrumentID );
-	void newOrder(COrderData newOrderData);
-private:
-	void _InitTraderClient(CClientLoginParam* pClientLoginParam);
-	void _UnInitTraderClient();
-private:
-	CSmartTraderClient* m_pSmartTraderClient;
 
 };
 

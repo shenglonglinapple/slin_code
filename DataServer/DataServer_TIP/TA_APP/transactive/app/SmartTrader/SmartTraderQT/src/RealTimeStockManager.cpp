@@ -180,6 +180,7 @@ void CRealTimeStockManager::getRealTimeMarketData( std::list<CMyMarketData*>& ls
 	while (iterMap != m_MapStockDataItemT_RealTime.end())
 	{
 		pData = (iterMap->second);
+		MYLOG4CPP_DEBUG<<"get RealTime MarketData SymbolUse="<<pData->m_strSymbolUse;
 		strData = _GetRealTimeMarketData(pData->m_strSymbolUse);
 		if (false == strData.empty())
 		{
