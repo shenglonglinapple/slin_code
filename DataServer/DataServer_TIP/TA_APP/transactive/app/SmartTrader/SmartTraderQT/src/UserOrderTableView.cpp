@@ -6,7 +6,7 @@
 
 #include "Log4cppLogger.h"
 
-static const int DEFVALUE_INT_Window_Width = 600;
+static const int DEFVALUE_INT_Window_Width = 700;
 static const int DEFVALUE_INT_Window_Height = 300;
 
 
@@ -19,7 +19,7 @@ CUserOrderTableView::CUserOrderTableView( QWidget* parent)
 	//this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setWindowFlags(Qt::WindowMinMaxButtonsHint);
 	this->setWindowFlags(Qt::WindowTitleHint);
-
+	//this->setFrameShape(QFrame::NoFrame); //ÉèÖÃÎÞ±ß¿ò
 	this->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	this->setAlternatingRowColors(true);
 	this->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);

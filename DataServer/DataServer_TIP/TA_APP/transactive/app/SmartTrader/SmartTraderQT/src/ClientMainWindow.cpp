@@ -5,8 +5,8 @@
 #include "ClientMainWindowMdiArea.h"
 
 
-static int DEFVALUE_INT_Window_Width = 500;
-static int DEFVALUE_INT_Window_Height = 500;
+static int DEFVALUE_INT_Window_Width = 800;
+static int DEFVALUE_INT_Window_Height = 600;
 
 static const std::string DEFVALUE_String_CSmartTraderClientMainWindow_Title = "SmartTrader";
 static const  std::string DEF_VALUE_MainWidgetWindowIcon = ":/images/MainWidgetWindowIcon.ico";//任务栏中的图标

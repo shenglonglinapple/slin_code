@@ -11,8 +11,8 @@
 
 #include "Log4cppLogger.h"
 
-static const int DEFVALUE_INT_Window_Width = 300;
-static const int DEFVALUE_INT_Window_Height = 500;
+static const int DEFVALUE_INT_Window_Width = 500;
+static const int DEFVALUE_INT_Window_Height = 300;
 
 static const std::string DEFVALUE_String_ActionAddHotQuotes = "AddQuotes";//"添加合约报价";
 static const std::string DEFVALUE_String_ActionRemoveHotQuotes = "RemoveQuotes";//"从列表中移除此合约报价";
