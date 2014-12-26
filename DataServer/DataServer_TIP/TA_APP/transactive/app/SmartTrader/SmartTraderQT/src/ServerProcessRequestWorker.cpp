@@ -367,6 +367,7 @@ void CServerProcessRequestWorker::_ProcessReq_SellMarket()
 
 	pOrderData->m_strUUID = m_pCurrentReqData->getRequestUUID();
 	pOrderData->m_strInstrumentCode = m_pCurrentReqData->getInstrumentCode().c_str();
+	pOrderData->m_nInstrumentID = pOrderData->m_strInstrumentCode.mid(0, pOrderData->m_strInstrumentCode.indexOf(".")).toUInt();
 	pOrderData->m_nSide = COrderData::SELL;
 	pOrderData->m_nOrderType = COrderData::MARKET;
 	pOrderData->m_nVolume = m_pCurrentReqData->getVolume();

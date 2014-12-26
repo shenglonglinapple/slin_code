@@ -96,7 +96,7 @@ void CDataRealTimeWorker::_DoJob_UpdateStockRealTimeInfo()
 	std::list<CMyMarketData*>::iterator iterLst;
 	CMyMarketData* pMyMarketData = NULL;
 
-	CRealTimeStockManager::getInstance().getRealTimeMarketData(lstMyMarketData);
+	CRealTimeStockManager::getInstance().getRealTimeMarketDataLst(lstMyMarketData);
 
 	iterLst = lstMyMarketData.begin();
 	while (iterLst != lstMyMarketData.end())

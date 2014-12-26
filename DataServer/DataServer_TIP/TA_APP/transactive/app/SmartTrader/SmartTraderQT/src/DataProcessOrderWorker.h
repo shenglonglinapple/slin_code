@@ -42,6 +42,10 @@ private:
 	void _FreeData_ListOrderData(std::list<COrderData*>& lstMyOrderData);
 	void _ProcessOrder(COrderData* pData);
 private:
+	void _ProcessOrder_MARKET_BUY(COrderData* pData);
+	void _ProcessOrder_MARKET_SELL(COrderData* pData);
+	void _ProcessOrder_MARKET(COrderData* pData);
+private:
 	CQtTimeHelper* m_pQtTimeHelper;
 };
 

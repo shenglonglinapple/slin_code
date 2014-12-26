@@ -10,6 +10,7 @@
 
 class CStockData;
 class CMyMarketData;
+class CMyInstrument;
 
 class CRealTimeStockManager
 {
@@ -31,7 +32,9 @@ public:
 	void addRealTimeReq(const CStockData* pStockData);
 	void addRealTimeReq(const std::string& strSymbolUse);
 	void removeRealTimeReq(const std::string& strSymbolUse);
-	void getRealTimeMarketData(std::list<CMyMarketData*>& lstMyMarketData);
+	void getRealTimeMarketDataLst(std::list<CMyMarketData*>& lstMyMarketData);
+	void getRealTimeMarketDataSingle(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData );
+	void getRealTimeMyInstrument(const std::string& strSymbolUse, CMyInstrument** ppMyInstrument);
 private:
 	std::string _GetRealTimeMarketData(const std::string& strSymbolUse);
 

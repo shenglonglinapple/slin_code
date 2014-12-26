@@ -3,6 +3,7 @@
 #include "BaseException.h"
 #include "StockData.h"
 #include "MyMarketData.h"
+#include "MyInstrument.h"
 #include "StaticStockManager.h"
 #include "Log4cppLogger.h"
 #include "YahuoRealTimeReqAck.h"
@@ -167,7 +168,7 @@ std::string CRealTimeStockManager::_GetRealTimeMarketData(const std::string& str
 	return petr4Quotes;
 }
 
-void CRealTimeStockManager::getRealTimeMarketData( std::list<CMyMarketData*>& lstMyMarketData )
+void CRealTimeStockManager::getRealTimeMarketDataLst( std::list<CMyMarketData*>& lstMyMarketData )
 {
 	QMutexLocker lock(&m_mutexMapStockDataItemT_RealTime);	
 
@@ -180,7 +181,7 @@ void CRealTimeStockManager::getRealTimeMarketData( std::list<CMyMarketData*>& ls
 	while (iterMap != m_MapStockDataItemT_RealTime.end())
 	{
 		pData = (iterMap->second);
-		MYLOG4CPP_DEBUG<<"get RealTime MarketData SymbolUse="<<pData->m_strSymbolUse;
+		MYLOG4CPP_DEBUG<<"getRealTimeMarketDataLst SymbolUse="<<pData->m_strSymbolUse;
 		strData = _GetRealTimeMarketData(pData->m_strSymbolUse);
 		if (false == strData.empty())
 		{
@@ -193,6 +194,74 @@ void CRealTimeStockManager::getRealTimeMarketData( std::list<CMyMarketData*>& ls
 
 		iterMap++;
 	}//while
+
+}
+
+
+void CRealTimeStockManager::getRealTimeMarketDataSingle(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData )
+{
+	CMyMarketData* pMyMarketData = NULL;
+	std::string strData;
+
+	if (NULL == ppMyMarketData)
+	{
+		return;
+	}
+
+	if (NULL != *ppMyMarketData)
+	{
+		delete (*ppMyMarketData);
+		(*ppMyMarketData) = NULL;
+	}
+
+	MYLOG4CPP_DEBUG<<"getRealTimeMarketDataSingle SymbolUse="<<strSymbolUse;
+	strData = _GetRealTimeMarketData(strSymbolUse);
+	if (false == strData.empty())
+	{
+		pMyMarketData = new CMyMarketData();
+		pMyMarketData->setValue(strData);
+
+		(*ppMyMarketData) = pMyMarketData;
+		pMyMarketData = NULL;
+	}
+
+
+}
+
+void CRealTimeStockManager::getRealTimeMyInstrument( const std::string& strSymbolUse, CMyInstrument** ppMyInstrument )
+{
+	CMyMarketData* pMyMarketData = NULL;
+	CMyInstrument* pMyInstrument = NULL;
+
+	if (NULL == ppMyInstrument)
+	{
+		return;
+	}
+
+	if (NULL != *ppMyInstrument)
+	{
+		delete (*ppMyInstrument);
+		(*ppMyInstrument) = NULL;
+	}
+
+	getRealTimeMarketDataSingle(strSymbolUse, &pMyMarketData);
+
+
+	if (NULL != pMyMarketData)
+	{
+		pMyInstrument = new CMyInstrument();
+		pMyInstrument->setValue(pMyMarketData);
+
+		(*ppMyInstrument) = pMyInstrument;
+		pMyInstrument = NULL;
+
+	}
+
+	if (NULL != pMyMarketData)
+	{
+		delete (pMyMarketData);
+		(pMyMarketData) = NULL;
+	}
 
 }
 

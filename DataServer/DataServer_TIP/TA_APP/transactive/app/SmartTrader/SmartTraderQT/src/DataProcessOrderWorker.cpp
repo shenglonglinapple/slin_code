@@ -5,6 +5,7 @@
 #include "OrderData.h"
 #include "DataOrderManager.h"
 #include "QtTimeHelper.h"
+#include "RealTimeStockManager.h"
 
 #include "Log4cppLogger.h"
 
@@ -149,23 +150,84 @@ void CDataProcessOrderWorker::_ProcessOrder(COrderData* pData)
 		return;
 	}
 
+	switch (pData->m_nOrderType)
+	{
+	case COrderData::MARKET:
+		_ProcessOrder_MARKET(pData);
+		break;
+	default:
+		break;
+	}//switch
+
+}
+void CDataProcessOrderWorker::_ProcessOrder_MARKET(COrderData* pData)
+{
+	switch (pData->m_nSide)
+	{
+	case COrderData::BUY:
+		_ProcessOrder_MARKET_BUY(pData);
+		break;
+	case COrderData::SELL:
+		_ProcessOrder_MARKET_SELL(pData);
+		break;
+	default:
+		break;
+	}//switch
+}
+void CDataProcessOrderWorker::_ProcessOrder_MARKET_BUY(COrderData* pData)
+{
+	CMyInstrument* pMyInstrument = NULL;
+
+	CRealTimeStockManager::getInstance().getRealTimeMyInstrument(pData->m_strInstrumentCode.toStdString(), &pMyInstrument);
+
 	if (COrderData::NEW == pData->m_nOrderStatus)
 	{
 		pData->m_nOrderStatus = COrderData::FILLED;
 		pData->m_nTransactTime = m_pQtTimeHelper->getTimeNow_Qt();
-		pData->m_fTransactPrice = 1;
+		pData->m_fTransactPrice = pMyInstrument->getLastPrice();
 		pData->m_fFees = (pData->m_fTransactPrice * pData->m_nVolume) * 0.007;
 		pData->m_fCurrentPrice = pData->m_fTransactPrice;
-		return;
 	}
-
-	if (COrderData::FILLED == pData->m_nOrderStatus)
+	else if (COrderData::FILLED == pData->m_nOrderStatus)
 	{
 		pData->m_nOrderStatus = COrderData::FILLED;
 		pData->m_nCurrentTime = m_pQtTimeHelper->getTimeNow_Qt();
-		pData->m_fTransactPrice;
-		pData->m_fCurrentPrice = pData->m_fCurrentPrice + 1;
+		pData->m_fCurrentPrice = pMyInstrument->getLastPrice();
 		pData->m_fTotal = ((pData->m_fCurrentPrice - pData->m_fTransactPrice) * pData->m_nVolume) - pData->m_fFees;
-		return;
+	}
+
+	if (NULL != pMyInstrument)
+	{
+		delete pMyInstrument;
+		pMyInstrument = NULL;
+	}
+}
+void CDataProcessOrderWorker::_ProcessOrder_MARKET_SELL(COrderData* pData)
+{
+	CMyInstrument* pMyInstrument = NULL;
+
+	CRealTimeStockManager::getInstance().getRealTimeMyInstrument(pData->m_strInstrumentCode.toStdString(), &pMyInstrument);
+
+	if (COrderData::NEW == pData->m_nOrderStatus)
+	{
+		pData->m_nOrderStatus = COrderData::FILLED;
+		pData->m_nTransactTime = m_pQtTimeHelper->getTimeNow_Qt();
+		pData->m_fTransactPrice = pMyInstrument->getLastPrice();
+		pData->m_fFees = (pData->m_fTransactPrice * pData->m_nVolume) * 0.007;
+		pData->m_fCurrentPrice = pData->m_fTransactPrice;
+	}
+	else if (COrderData::FILLED == pData->m_nOrderStatus)
+	{
+		pData->m_nOrderStatus = COrderData::FILLED;
+		pData->m_nCurrentTime = m_pQtTimeHelper->getTimeNow_Qt();
+		pData->m_fCurrentPrice = pMyInstrument->getLastPrice();
+		pData->m_fTotal = ((pData->m_fCurrentPrice - pData->m_fTransactPrice) * pData->m_nVolume) - pData->m_fFees;
+	}
+
+
+	if (NULL != pMyInstrument)
+	{
+		delete pMyInstrument;
+		pMyInstrument = NULL;
 	}
 }
