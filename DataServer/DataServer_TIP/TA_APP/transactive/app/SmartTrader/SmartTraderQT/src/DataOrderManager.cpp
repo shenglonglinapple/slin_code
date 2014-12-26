@@ -69,14 +69,14 @@ void CDataOrderManager::removeOrder( const std::string& strOrderUUID )
 	QMutexLocker lock(&m_mutex_MapOrderDataItemT_Order);	
 
 	MapOrderDataItemIterT iterMap;
-	COrderData* pData = NULL;
+	COrderData* pDataRef = NULL;
 
 	iterMap = m_MapOrderDataItemT_Order.find(strOrderUUID);
 	if (iterMap != m_MapOrderDataItemT_Order.end())
 	{
-		pData = (iterMap->second);
-		delete pData;
-		pData = NULL;
+		pDataRef = (iterMap->second);
+		delete pDataRef;
+		pDataRef = NULL;
 		m_MapOrderDataItemT_Order.erase(iterMap);
 	}
 	
@@ -94,24 +94,39 @@ void CDataOrderManager::addOrder( const COrderData* pOrderData )
 
 	pData = NULL;
 }
+void CDataOrderManager::updateOrder(COrderData* pOrderData )
+{
+	QMutexLocker lock(&m_mutex_MapOrderDataItemT_Order);	
 
+	MapOrderDataItemIterT iterMap;
+	COrderData* pDataRef = NULL;
+
+	iterMap = m_MapOrderDataItemT_Order.find(pOrderData->m_strUUID.toStdString());
+	if (iterMap != m_MapOrderDataItemT_Order.end())
+	{
+		pDataRef = (iterMap->second);
+	
+		*pDataRef = *pOrderData;
+	}
+
+}
 
 void CDataOrderManager::getNotifyOrder( std::list<COrderData*>& lstMyOrderData )
 {
 	QMutexLocker lock(&m_mutex_MapOrderDataItemT_Order);	
 
 	MapOrderDataItemIterT iterMap;
-	COrderData* pData = NULL;
+	COrderData* pDataRef = NULL;
 	std::string strData;
 	COrderData* pOrderData = NULL;
 
 	iterMap = m_MapOrderDataItemT_Order.begin();
 	while (iterMap != m_MapOrderDataItemT_Order.end())
 	{
-		pData = (iterMap->second);
+		pDataRef = (iterMap->second);
 
 		pOrderData = new COrderData();
-		*pOrderData = *pData;
+		*pOrderData = *pDataRef;
 
 		lstMyOrderData.push_back(pOrderData);
 		pOrderData = NULL;

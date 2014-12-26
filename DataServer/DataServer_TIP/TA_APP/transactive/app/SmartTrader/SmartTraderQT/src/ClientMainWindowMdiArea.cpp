@@ -1,8 +1,8 @@
 #include "ClientMainWindowMdiArea.h"
 
-
-
 #include "UserInstrumentTableView.h"
+#include "UserOrderTableView.h"
+
 
 
 CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)
@@ -11,6 +11,7 @@ CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)
     //this->resize(200, 300);
 
 	m_pUserInstrumentTableView = NULL;
+	m_pUserOrderTableView = NULL;
 
 	_SetupUi();
 	_TranslateLanguage();
@@ -29,7 +30,10 @@ void CClientMainWindowMdiArea::_SetupUi()
 	this->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
 	m_pUserInstrumentTableView = new CUserInstrumentTableView(this);
+	m_pUserOrderTableView = new CUserOrderTableView(this);
+
 	this->addSubWindow(m_pUserInstrumentTableView);
+	this->addSubWindow(m_pUserOrderTableView);
 
 
 	foreach (QMdiSubWindow *pSubWindow, this->subWindowList()) 

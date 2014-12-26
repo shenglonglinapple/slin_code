@@ -4,6 +4,7 @@
 #include <QtGui/QMdiArea>
 
 class CUserInstrumentTableView;
+class CUserOrderTableView;
 
 class CClientMainWindowMdiArea : public QMdiArea
 {
@@ -17,7 +18,7 @@ private:
 	void _TranslateLanguage();
 private:
 	CUserInstrumentTableView* m_pUserInstrumentTableView;
-
+	CUserOrderTableView* m_pUserOrderTableView;
 };
 
 #endif // __CLASS_CLIENT_MAIN_WINDOW_MDIAREA_HH__

@@ -15,6 +15,7 @@
 //
 #include "DataUserInstrument.h"
 #include "DataWaitingInstrument.h"
+#include "DataUserOrder.h"
 
 #include "DataHistoryQuotesManager.h"
 #include "SignalSlotManager.h"
@@ -52,15 +53,20 @@ CClientDataManager::CClientDataManager(void)
 	CDataTotalMyInstrument::getInstance();
 	CDataHistoryQuotesManager::getInstance();
 	CDataUserInstrument::getInstance();
+	CDataUserOrder::getInstance();
 	CDataWaitingInstrument::getInstance();
 
 	CSignalSlotManager::getInstance().set_Signal_DataChange_UserInstrument(this);
-
+	CSignalSlotManager::getInstance().set_Signal_DataChange_UserOrder(this);
 }
 
 CClientDataManager::~CClientDataManager(void)
-{		
+{	
+	CSignalSlotManager::getInstance().set_Signal_DataChange_UserInstrument(NULL);
+	CSignalSlotManager::getInstance().set_Signal_DataChange_UserOrder(NULL);
+
 	CDataWaitingInstrument::removeInstance();
+	CDataUserOrder::removeInstance();
 	CDataUserInstrument::removeInstance();
 	CDataHistoryQuotesManager::removeInstance();
 	CDataTotalMyInstrument::removeInstance();
@@ -77,7 +83,7 @@ int CClientDataManager::req_login(CClientLoginParam* pClientLoginParam )
 {
 	int nloginToServerRes = -1;
 
-	MYLOG4CPP_DEBUG<<"CClientDataManager loginToServer";
+	MYLOG4CPP_DEBUG<<"CClientDataManager req_login";
 
 	pClientLoginParam->logInfo(__FILE__, __LINE__);
 
@@ -99,60 +105,6 @@ void CClientDataManager::req_logoff()
 }
 
 
-void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument )
-{	
-	if (instrument.getInstrumentID() == 900957)
-	{
-		MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::onInstrumentDownloaded"
-			<<" "<<"getInstrumentID="<<instrument.getInstrumentID();
-	}
-
-
-	CDataTotalMyInstrument::getInstance().onInstrumentDownloaded(instrument);
-	CDataWaitingInstrument::getInstance().addInstrument(instrument.getInstrumentID());
-
-
-	if (CConfigInfo::getInstance().checkUserInstrument(instrument.getInstrumentID()))
-	{
-		req_subscribe_Instrument(instrument.getInstrumentID());
-	}
-}
-
-void CClientDataManager::onMarketDataUpdate( const CMyMarketData &marketData )
-{
-	MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::onInstrumentDownloaded"
-		<<" "<<"getSecurityID="<<marketData.getSecurityID();
-
-	CDataTotalMyInstrument::getInstance().onMarketDataUpdate(marketData);
-	if (CConfigInfo::getInstance().checkUserInstrument(marketData.getSecurityID()))
-	{
-		CDataUserInstrument::getInstance().updateDataUserInstrument(marketData.getSecurityID());
-		//emit
-		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
-	}
-}
-
-void CClientDataManager::onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars )
-{
-	MYLOG4CPP_WARNING<<"CSmartTraderClient::onHistoryDataDownloaded"
-		<<" "<<"std::auto_ptr<CMyBars> CMyBarsPtr  bars->size="<<bars->size();
-
-	//std::auto_ptr<CMyBars> CMyBarsPtr 
-	CDataHistoryQuotesManager::getInstance().onHistoryDataDownloaded(requestID, bars);
-
-}
-
-void CClientDataManager::onBarDataUpdate(const CMyBarSummary &barData)
-{
-	MYLOG4CPP_WARNING<<"CClientDataManager::onBarDataUpdate"
-		<<" "<<"barData.instrumentID="<<barData.instrumentID
-		<<" "<<"barData.bars.size()="<<barData.bars.size();
-
-	//std::auto_ptr<CMyBars> CMyBarsPtr 
-	CDataHistoryQuotesManager::getInstance().onBarDataUpdate(barData);
-
-}
-
 void CClientDataManager::req_downloadHistoryData(const CHistoryDataRequest* pHistoryDataRequest)
 {
 	CMyInstrument* pInstrument = NULL;
@@ -167,7 +119,7 @@ void CClientDataManager::req_downloadHistoryData(const CHistoryDataRequest* pHis
 		return;
 	}
 
-	MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::downloadHistoryData"
+	MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::req_downloadHistoryData"
 		<<" "<<"m_nInstruemntID="<<pHistoryDataRequest->m_nInstruemntID
 		<<" "<<"m_strInstrumentCode="<<pHistoryDataRequest->m_strInstrumentCode;
 
@@ -188,7 +140,7 @@ void CClientDataManager::req_subscribe_Instrument( unsigned int nInstrumentID )
 	std::string strInstrumentCode;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker addUserInstrument"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker req_subscribe_Instrument"
 		<<" "<<"nInstrumentID="<<nInstrumentID;
 
 	pMyInstrumentRef = NULL;
@@ -198,15 +150,9 @@ void CClientDataManager::req_subscribe_Instrument( unsigned int nInstrumentID )
 		return;
 	}
 
+
 	//save to configfile
 	CConfigInfo::getInstance().addInstrument(nInstrumentID);
-
-	{
-		//subscribe this instrument
-		MYLOG4CPP_DEBUG<<"Client subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
-		this->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
-	}
-
 
 	{
 		/*	
@@ -220,6 +166,13 @@ void CClientDataManager::req_subscribe_Instrument( unsigned int nInstrumentID )
 	}
 
 
+
+	{
+		//subscribe this instrument
+		MYLOG4CPP_DEBUG<<"Client subscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
+		this->subscribeMarketData(nInstrumentID);//subscribe this Instrument market data
+	}
+
 }
 
 
@@ -230,7 +183,7 @@ void CClientDataManager::req_unsubscribe_Instrument( unsigned int nInstrumentID 
 	std::string strInstrumentCode;
 	CMyInstrument* pMyInstrumentRef = NULL;
 
-	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker removeUserInstrument"
+	MYLOG4CPP_DEBUG<<"CClientDataManagerWorker req_unsubscribe_Instrument"
 		<<" "<<"nInstrumentID="<<nInstrumentID;
 
 	pMyInstrumentRef = NULL;
@@ -240,15 +193,14 @@ void CClientDataManager::req_unsubscribe_Instrument( unsigned int nInstrumentID 
 		return;
 	}
 
-	//save to configfile
-	CConfigInfo::getInstance().removeInstrument(nInstrumentID);
-
 	{
 		//subscribe this instrument
 		MYLOG4CPP_DEBUG<<"Client unsubscribeMarketData"<<" "<<"InstrumentID="<<nInstrumentID;
 		this->unsubscribeMarketData(nInstrumentID);//subscribe this Instrument market data
 	}
 
+	//save to configfile
+	CConfigInfo::getInstance().removeInstrument(nInstrumentID);
 
 	{
 		/*	
@@ -260,6 +212,10 @@ void CClientDataManager::req_unsubscribe_Instrument( unsigned int nInstrumentID 
 		//emit
 		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
 	}
+
+
+
+
 
 
 }
@@ -287,8 +243,7 @@ void CClientDataManager::req_newOrder( COrderData newOrderData )
 		<<" "<<newOrderData.getESide(nSide).toStdString()
 		<<" "<<newOrderData.getEOrderType(nOrderType).toStdString()
 		<<" "<<"InstrumentCode="<<newOrderData.m_strInstrumentCode.toStdString()
-		<<" "<<"nVolume="<<newOrderData.m_nVolume
-		<<" "<<"m_fTransactPrice="<<newOrderData.m_fTransactPrice;
+		<<" "<<"nVolume="<<newOrderData.m_nVolume;
 
 	switch (nOrderType)
 	{
@@ -306,5 +261,66 @@ void CClientDataManager::req_newOrder( COrderData newOrderData )
 		break;
 	}
 
+
+}
+
+void CClientDataManager::onInstrumentDownloaded( const CMyInstrument& instrument )
+{	
+	if (instrument.getInstrumentID() == 900957)
+	{
+		MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::onInstrumentDownloaded"
+			<<" "<<"getInstrumentID="<<instrument.getInstrumentID();
+	}
+
+
+	CDataTotalMyInstrument::getInstance().onInstrumentDownloaded(instrument);
+	CDataWaitingInstrument::getInstance().addInstrument(instrument.getInstrumentID());
+
+
+	if (CConfigInfo::getInstance().checkUserInstrument(instrument.getInstrumentID()))
+	{
+		req_subscribe_Instrument(instrument.getInstrumentID());
+	}
+}
+
+void CClientDataManager::onMarketDataUpdate( const CMyMarketData &marketData )
+{
+	MYLOG4CPP_DEBUG<<" "<<"CClientDataManager::onMarketDataUpdate"
+		<<" "<<"getSecurityID="<<marketData.getInstrumentID();
+
+	CDataTotalMyInstrument::getInstance().onMarketDataUpdate(marketData);
+	if (CConfigInfo::getInstance().checkUserInstrument(marketData.getInstrumentID()))
+	{
+		CDataUserInstrument::getInstance().updateDataUserInstrument(marketData.getInstrumentID());
+		//emit
+		CSignalSlotManager::getInstance().emit_DataChange_UserInstrument();
+	}
+}
+
+void CClientDataManager::onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars )
+{
+	MYLOG4CPP_WARNING<<"CClientDataManager::onHistoryDataDownloaded"
+		<<" "<<"std::auto_ptr<CMyBars> CMyBarsPtr  bars->size="<<bars->size();
+
+	//std::auto_ptr<CMyBars> CMyBarsPtr 
+	CDataHistoryQuotesManager::getInstance().onHistoryDataDownloaded(requestID, bars);
+
+}
+
+void CClientDataManager::onBarDataUpdate(const CMyBarSummary &barData)
+{
+	MYLOG4CPP_WARNING<<"CClientDataManager::onBarDataUpdate"
+		<<" "<<"barData.instrumentID="<<barData.instrumentID
+		<<" "<<"barData.bars.size()="<<barData.bars.size();
+
+	//std::auto_ptr<CMyBars> CMyBarsPtr 
+	CDataHistoryQuotesManager::getInstance().onBarDataUpdate(barData);
+
+}
+
+void CClientDataManager::onOrderFilled( const COrderData& order )
+{
+	CDataUserOrder::getInstance().addOrUpdate(order);
+	CSignalSlotManager::getInstance().emit_DataChange_UserOrder();
 
 }

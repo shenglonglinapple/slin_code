@@ -125,10 +125,12 @@ public:
 	COrderData& operator=(const COrderData& cParam);
 public:
 	void setBaseData(CItemUserInstrument* pData);
-	QString getESide(COrderData::ESide  nSide);
-	EOrderType getEOrderType(const QString& strEOrderType);
-	QString getEOrderType(COrderData::EOrderType nOrderType);
-	
+	QString getESide(COrderData::ESide  nSide) const;
+	EOrderType getEOrderType(const QString& strEOrderType) const;
+	QString getEOrderType(COrderData::EOrderType nOrderType) const;
+	EOrderStatus getEOrderStatus(const QString& strEOrderStatus) const;
+	QString getEOrderStatus(COrderData::EOrderStatus nOrderStatus) const;
+
 public:
 	void clearData();
 public:

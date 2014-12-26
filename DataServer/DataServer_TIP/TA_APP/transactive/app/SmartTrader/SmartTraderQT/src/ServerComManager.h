@@ -8,6 +8,7 @@
 #include "MyInstrument.h"
 #include "MyMarketData.h"
 #include "MyBar.h"
+#include "OrderData.h"
 
 class CMyTradeClient;
 
@@ -31,6 +32,9 @@ public:
 	void onMarketDataUpdate( const CMyMarketData &marketData );
 	void onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars );
 	void onBarDataUpdate(const CMyBarSummary &barData);
+	void onOrderFilled( const COrderData& order );
+
+public:
 
 private:
 	CMyTradeClient* m_pMyTradeClientRef;

@@ -206,7 +206,8 @@ void CServerProcessRequestWorker::_DoJob_CheckProcessReq()
 		_ProcessReq_BuyMarket();
 		break;
 	case EReqType_SELLMARKET:
-
+		_ProcessReq_SellMarket();
+		break;
 	default:
 		break;
 	}
@@ -337,6 +338,7 @@ void CServerProcessRequestWorker::_ProcessReq_BuyMarket()
 
 	pOrderData->m_strUUID = m_pCurrentReqData->getRequestUUID();
 	pOrderData->m_strInstrumentCode = m_pCurrentReqData->getInstrumentCode().c_str();
+	pOrderData->m_nInstrumentID = pOrderData->m_strInstrumentCode.mid(0, pOrderData->m_strInstrumentCode.indexOf(".")).toUInt();
 	pOrderData->m_nSide = COrderData::BUY;
 	pOrderData->m_nOrderType = COrderData::MARKET;
 	pOrderData->m_nVolume = m_pCurrentReqData->getVolume();
@@ -359,12 +361,28 @@ void CServerProcessRequestWorker::_ProcessReq_BuyMarket()
 void CServerProcessRequestWorker::_ProcessReq_SellMarket()
 {
 	QMutexLocker lock(&m_mutex_CurrentReqData);
+	COrderData* pOrderData = NULL;
+
+	pOrderData = new COrderData();
+
+	pOrderData->m_strUUID = m_pCurrentReqData->getRequestUUID();
+	pOrderData->m_strInstrumentCode = m_pCurrentReqData->getInstrumentCode().c_str();
+	pOrderData->m_nSide = COrderData::SELL;
+	pOrderData->m_nOrderType = COrderData::MARKET;
+	pOrderData->m_nVolume = m_pCurrentReqData->getVolume();
+
+	CDataOrderManager::getInstance().addOrder(pOrderData);
 
 	//who do job who delete
 	if (NULL != m_pCurrentReqData)
 	{
 		delete m_pCurrentReqData;
 		m_pCurrentReqData = NULL;
+	}
+	if (NULL != pOrderData)
+	{
+		delete pOrderData;
+		pOrderData = NULL;
 	}
 }
 

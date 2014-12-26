@@ -29,7 +29,7 @@ private:
 	void _CreateAction();
 	void _CreateConnect();
 private:
-	CItemModelUserInstrument* m_pItemModelUserInstrument;
+	CItemModelUserInstrument* m_pItemModel;
 private:
 	QAction* m_pActionAddUserInstrument;
 	QAction* m_pActionRemoveUserInstrument;

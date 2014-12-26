@@ -27,7 +27,8 @@ CMyMarketData::~CMyMarketData()
 
 CMyMarketData & CMyMarketData::operator=( const CMyMarketData & objcopy)
 {
-	m_nSecurityID = objcopy.m_nSecurityID;
+	m_nInstrumentID = objcopy.m_nInstrumentID;
+	m_strInstrumentCode = objcopy.m_strInstrumentCode;
 	m_nMarketStatus = objcopy.m_nMarketStatus;
 	m_nTime = objcopy.m_nTime;
 	m_nVolume_OPEN_INTEREST = objcopy.m_nVolume_OPEN_INTEREST;
@@ -52,7 +53,8 @@ CMyMarketData & CMyMarketData::operator=( const CMyMarketData & objcopy)
 }
 void CMyMarketData::_Clear()
 {
-	m_nSecurityID = 0;
+	m_nInstrumentID = 0;
+	m_strInstrumentCode.clear();
 	m_nMarketStatus = 0;
 	m_nTime = 0;
 	m_nVolume_OPEN_INTEREST = 0;
@@ -74,14 +76,22 @@ void CMyMarketData::_Clear()
 	m_nChangeBits = 0;
 
 }
-void CMyMarketData::setSecurityID( unsigned int secID )
+void CMyMarketData::setInstrumentID( unsigned int nInstrumentID )
 {
-	m_nSecurityID = secID;
+	m_nInstrumentID = nInstrumentID;
 }
 
-unsigned int CMyMarketData::getSecurityID() const
+unsigned int CMyMarketData::getInstrumentID() const
 {
-	return m_nSecurityID;
+	return m_nInstrumentID;
+}
+void CMyMarketData::setInstrumentCode(const std::string& strInstrumentCode)
+{
+	m_strInstrumentCode = strInstrumentCode;
+}
+std::string CMyMarketData::getInstrumentCode() const
+{
+	return m_strInstrumentCode;
 }
 
 int CMyMarketData::getMarketStatus() const
@@ -287,6 +297,8 @@ void CMyMarketData::setValue( const std::string& strData )
 	name.replace(QChar('"'), QChar(' '));
 
 	symbol = symbol.trimmed();
+	m_strInstrumentCode = symbol.toStdString();
+
 	symbolID = symbol.mid(0, symbol.indexOf("."));
 	symbolID = symbolID.trimmed();
 
@@ -309,7 +321,7 @@ void CMyMarketData::setValue( const std::string& strData )
 	name = name.trimmed();
 
 
-	m_nSecurityID = symbolID.toUInt();
+	m_nInstrumentID = symbolID.toUInt();
 	m_fPrice_LAST_TRADED_PRICE = lastTradePriceOnly.toFloat();
 	//"12/10/2014","2:00am",
 	if ("N/A" == lastTradeDate || "N/A" == lastTradeTime)

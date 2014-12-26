@@ -1,7 +1,7 @@
 #include "ItemUserOrderHelper.h"
 
 #include "QtTimeHelper.h"
-
+#include "OrderData.h"
 #include "Log4cppLogger.h"
 
 static const std::string DEFVALUE_String_ColumnName_InstrumentID = "InstrumentID";
@@ -19,12 +19,19 @@ static const std::string DEFVALUE_String_ColumnName_Total = "Total";
 
 CItemUserOrderHelper::CItemUserOrderHelper()
 {
+	m_pQtTimeHelper = NULL;
+	m_pQtTimeHelper = new CQtTimeHelper();
 	_ClearData();
 }
 
 CItemUserOrderHelper::~CItemUserOrderHelper()
 {
 	_ClearData();
+	if (NULL != m_pQtTimeHelper)
+	{
+		delete m_pQtTimeHelper;
+		m_pQtTimeHelper = NULL;
+	}
 }
 
 
@@ -48,6 +55,7 @@ CItemUserOrderHelper& CItemUserOrderHelper::operator=( const CItemUserOrderHelpe
 	m_nOrderStatus = objCopy.m_nOrderStatus;
 	m_nTransactTime  = objCopy.m_nTransactTime;
 	m_nCurrentTime = objCopy.m_nCurrentTime;
+	m_strOrderUUID = objCopy.m_strOrderUUID;
 
 	return *this;
 }
@@ -72,6 +80,7 @@ void CItemUserOrderHelper::_ClearData()
 	m_nOrderStatus = COrderData::FILLED;
 	m_nTransactTime = 0;
 	m_nCurrentTime = 0;
+	m_strOrderUUID.clear();
 
 }
 
@@ -244,6 +253,29 @@ void CItemUserOrderHelper::getItemNodeData(QList<QVariant>& itemDataTmp)
 
 	return;
 }
+
+void CItemUserOrderHelper::setData( const COrderData& order )
+{
+	m_strOrderUUID = order.m_strUUID;
+	m_Column_InstrumentID = order.m_nInstrumentID;
+	m_Column_InstrumentCode = order.m_strInstrumentCode;
+	m_nSide = order.m_nSide;
+	m_Column_Side = order.getESide(m_nSide);
+	m_orderType = order.m_nOrderType;
+	m_Column_OrderType = order.getEOrderType(m_orderType);
+	m_nOrderStatus = order.m_nOrderStatus;
+	m_Column_OrderStatus = order.getEOrderStatus(m_nOrderStatus);
+	m_nTransactTime = order.m_nTransactTime;
+	m_Column_TransactTime = m_pQtTimeHelper->dateTimeToStr_Qt(m_nTransactTime).c_str();
+	m_Column_TransactPrice = order.m_fTransactPrice;
+	m_Column_Fees = order.m_fFees;
+	m_nCurrentTime = order.m_nCurrentTime;
+	m_Column_CurrentTime = m_pQtTimeHelper->dateTimeToStr_Qt(m_nCurrentTime).c_str();
+	m_Column_CurrentPrice = order.m_fCurrentPrice;
+	m_Column_Total = order.m_fTotal;
+
+}
+
 //QT_END_NAMESPACE
 
 

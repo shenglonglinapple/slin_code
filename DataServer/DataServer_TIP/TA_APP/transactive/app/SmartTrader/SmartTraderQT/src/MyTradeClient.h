@@ -4,7 +4,7 @@
 #include "MyBar.h"
 #include "MyInstrument.h"
 #include "MyMarketData.h"
-
+#include "OrderData.h"
 
 class CMyTradeClient
 {
@@ -50,7 +50,9 @@ public:
 	/// Hook method when receive bar summary update
 	virtual void onBarDataUpdate(const CMyBarSummary &barData) = 0;
 
-	
+	/// Hook method when order filled
+	virtual void onOrderFilled(const COrderData& order) = 0;
+
 
 };
 

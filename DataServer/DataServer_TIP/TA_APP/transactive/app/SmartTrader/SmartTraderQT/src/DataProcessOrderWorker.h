@@ -6,8 +6,8 @@
 #include <QtCore/QMutexLocker>
 #include <QtCore/QList>
 
-class CReqData;
-
+class CQtTimeHelper;
+class COrderData;
 
 class CDataProcessOrderWorker : public CMyQtThread
 {
@@ -38,6 +38,11 @@ private:
 	EDataWorkerState m_nDataWorkerState;
 private:
 	void _DoJob_ProcessOrder();
+private:
+	void _FreeData_ListOrderData(std::list<COrderData*>& lstMyOrderData);
+	void _ProcessOrder(COrderData* pData);
+private:
+	CQtTimeHelper* m_pQtTimeHelper;
 };
 
 

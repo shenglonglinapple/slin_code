@@ -30,6 +30,21 @@ static const std::string DEFVALUE_String_OrderType_STOP = "STOP";
 static const std::string DEFVALUE_String_OrderType_UNKNOWN = "UNKNOWN";
 //////////////////////////////////////////////////////////////////////////
 
+static const std::string DEFVALUE_String_OrderStatus_NEW = "NEW";
+static const std::string DEFVALUE_String_OrderStatus_PARTIALLY_FILLED = "PARTIALLY_FILLED";
+static const std::string DEFVALUE_String_OrderStatus_FILLED = "FILLED";
+static const std::string DEFVALUE_String_OrderStatus_DONE_FOR_DAY = "DONE_FOR_DAY";
+static const std::string DEFVALUE_String_OrderStatus_CANCELED = "CANCELED";
+static const std::string DEFVALUE_String_OrderStatus_REPLACED = "REPLACED";
+static const std::string DEFVALUE_String_OrderStatus_PENDING_CANCEL = "PENDING_CANCEL";
+static const std::string DEFVALUE_String_OrderStatus_STOPPED = "STOPPED";
+static const std::string DEFVALUE_String_OrderStatus_REJECTED = "REJECTED";
+static const std::string DEFVALUE_String_OrderStatus_SUSPENDED = "SUSPENDED";
+static const std::string DEFVALUE_String_OrderStatus_PENDING_NEW = "PENDING_NEW";
+static const std::string DEFVALUE_String_OrderStatus_CALCULATED = "CALCULATED";
+static const std::string DEFVALUE_String_OrderStatus_PENDING_REPLACE = "PENDING_REPLACE";
+//////////////////////////////////////////////////////////////////////////
+
 
 static const int DEFVALUE_Int_OnePage_HistoryBarNumber = 128;//1024
 static const std::string DEFVALUE_String_HistoryBarType = "DAY";

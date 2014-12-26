@@ -230,7 +230,7 @@ void CItemUserOrder::_ResetCurrentNodeData(CItemUserOrderHelper* pDataHelper )
 
 	m_ItemData.clear();
 	pDataHelper->getItemNodeData(m_ItemData);
-	m_nNodeKey = pDataHelper->getInstrumentID();
+	m_strNodeKey = pDataHelper->m_strOrderUUID;
 }
 void CItemUserOrder::findAndResetSubNodeData( CItemUserOrderHelper* pDataHelper )
 {
@@ -244,7 +244,7 @@ void CItemUserOrder::findAndResetSubNodeData( CItemUserOrderHelper* pDataHelper 
 	{
 		pSubNode = NULL;
 		pSubNode = (*iterLst);
-		if (NULL != pSubNode && (pSubNode->getNodeKey() == pDataHelper->getInstrumentID()))
+		if (NULL != pSubNode && (pSubNode->getNodeKey() == pDataHelper->m_strOrderUUID))
 		{
 			pSubNode->_ResetCurrentNodeData(pDataHelper);
 			break;
@@ -275,9 +275,9 @@ CItemUserOrder::EItemType CItemUserOrder::getItemType()
 	return m_nItemType;
 }
 
-unsigned int CItemUserOrder::getNodeKey()
+QString CItemUserOrder::getNodeKey()
 {
-	return m_nNodeKey;
+	return m_strNodeKey;
 }
 
 void CItemUserOrder::removeChildByData( CItemUserOrderHelper* pDataHelper )
@@ -293,13 +293,45 @@ void CItemUserOrder::removeChildByData( CItemUserOrderHelper* pDataHelper )
 	{
 		pSubNode = NULL;
 		pSubNode = (*iterLst);
-		if (NULL != pSubNode && (pSubNode->getNodeKey() == pDataHelper->getInstrumentID()))
+		if (NULL != pSubNode && (pSubNode->getNodeKey() == pDataHelper->m_strOrderUUID))
 		{
 			this->removeChildren(nIndex, 1);
 			break;
 		}
 		iterLst++;
 		nIndex++;
+	}
+}
+
+
+void CItemUserOrder::addOrUpdateSubNode( CItemUserOrderHelper* pDataHelper )
+{
+	bool bFind = false;
+
+	{
+		QList<CItemUserOrder*>::iterator iterLst;
+		CItemUserOrder* pSubNode = NULL;
+
+		QMutexLocker lock(&m_mutex_LstChildItems);
+		iterLst = m_LstChildItems.begin();
+		while (iterLst != m_LstChildItems.end())
+		{
+			pSubNode = NULL;
+			pSubNode = (*iterLst);
+			if (NULL != pSubNode && (pSubNode->getNodeKey() == pDataHelper->m_strOrderUUID))
+			{
+				bFind = true;
+				pSubNode->_ResetCurrentNodeData(pDataHelper);
+				break;
+			}
+			iterLst++;
+		}
+	}
+
+
+	if (false == bFind)
+	{
+		appendChildByData(pDataHelper);
 	}
 }
 

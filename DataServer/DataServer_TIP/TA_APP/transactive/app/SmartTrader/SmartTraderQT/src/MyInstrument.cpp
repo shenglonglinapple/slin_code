@@ -310,7 +310,7 @@ void CMyInstrument::setValue(const CMyMarketData* pMyMarketData)
 	}
 	CQtTimeHelper timerHelper;
 
-	this->m_nInstrumentID = pMyMarketData->getSecurityID();
+	this->m_nInstrumentID = pMyMarketData->getInstrumentID();
 	this->m_timeUpdateTime = pMyMarketData->getTime();
 	this->m_strGetupdateTime = timerHelper.dateTimeToStr_Qt(m_timeUpdateTime);
 

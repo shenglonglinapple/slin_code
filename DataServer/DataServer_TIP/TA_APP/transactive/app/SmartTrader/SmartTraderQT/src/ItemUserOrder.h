@@ -49,7 +49,8 @@ public:
 	void removeChildByData(CItemUserOrderHelper* pDataHelper);
 
 	EItemType getItemType();
-	unsigned int getNodeKey();
+	QString getNodeKey();
+	void addOrUpdateSubNode( CItemUserOrderHelper* pDataHelper );
 private:
 	/*
 	if ItemDataType_ROOT itemData is column Name parentItem is NULL
@@ -66,7 +67,7 @@ private:
 private:
 	CItemUserOrderHelper* m_pDataHelper;
 private:
-	unsigned int m_nNodeKey;
+	QString m_strNodeKey;
 };//CItemUserInstrument
 
 

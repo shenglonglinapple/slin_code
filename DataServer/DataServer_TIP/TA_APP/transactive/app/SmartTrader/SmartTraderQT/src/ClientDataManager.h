@@ -51,6 +51,7 @@ public:
 	void onMarketDataUpdate( const CMyMarketData &marketData );
 	void onHistoryDataDownloaded( QString requestID, pSetMyBarsPtr bars );
 	void onBarDataUpdate(const CMyBarSummary &barData);
+	void onOrderFilled(const COrderData& order);
 
 };
 

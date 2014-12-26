@@ -11,6 +11,8 @@
 
 #include "OrderData.h"
 
+class CQtTimeHelper;
+
 class CItemUserOrderHelper 
 { 
 public: 
@@ -20,7 +22,7 @@ public:
 	CItemUserOrderHelper& operator=(const CItemUserOrderHelper& objCopy);
 
 public:
-
+	void setData(const COrderData& order);
 public:
 	unsigned int getInstrumentID() const;
 	QString getInstrumentCode() const;
@@ -54,7 +56,10 @@ public:
 	COrderData::EOrderStatus m_nOrderStatus;
 	unsigned int m_nTransactTime;
 	unsigned int m_nCurrentTime;
-
+public:
+	QString m_strOrderUUID;
+private:
+	CQtTimeHelper* m_pQtTimeHelper;
 }; 
 
 

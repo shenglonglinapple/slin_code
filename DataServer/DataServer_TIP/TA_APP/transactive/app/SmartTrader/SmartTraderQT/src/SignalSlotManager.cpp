@@ -1,6 +1,7 @@
 #include "SignalSlotManager.h"
 
 #include "UserInstrumentTableView.h"
+#include "UserOrderTableView.h"
 
 #include "Log4cppLogger.h"
 
@@ -29,6 +30,8 @@ CSignalSlotManager::CSignalSlotManager(void)
 {	
 	m_pRefSignal_DataChange_UserInstrument = NULL;
 	m_pRefSlot_DataChange_UserInstrument = NULL;
+	m_pRefSignal_DataChange_UserOrder = NULL;
+	m_pRefSlot_DataChange_UserOrder = NULL;
 }
 
 CSignalSlotManager::~CSignalSlotManager(void)
@@ -67,3 +70,35 @@ void CSignalSlotManager::emit_DataChange_UserInstrument()
 	emit signal_DataChange_UserInstrument();
 }
 
+//////////////////////////////////////////////////////////////////////////
+
+void CSignalSlotManager::set_Signal_DataChange_UserOrder( CClientDataManager* pRefSignal)
+{
+	m_pRefSignal_DataChange_UserOrder = pRefSignal;
+}
+void CSignalSlotManager::set_Slot_DataChange_UserOrder(CUserOrderTableView* pRefSlot )
+{
+	m_pRefSlot_DataChange_UserOrder = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_UserOrder && NULL != m_pRefSlot_DataChange_UserOrder)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_UserOrder()), this, SLOT(slot_DataChange_UserOrder()));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_UserOrder()), this, SLOT(slot_DataChange_UserOrder()));
+	}
+}
+
+void CSignalSlotManager::slot_DataChange_UserOrder()
+{
+	if (NULL != m_pRefSlot_DataChange_UserOrder)
+	{
+		m_pRefSlot_DataChange_UserOrder->slot_DataChange_UserOrder();
+	}
+}
+
+void CSignalSlotManager::emit_DataChange_UserOrder()
+{
+	emit signal_DataChange_UserOrder();
+}

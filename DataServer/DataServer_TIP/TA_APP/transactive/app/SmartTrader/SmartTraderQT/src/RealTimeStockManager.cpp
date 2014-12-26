@@ -195,3 +195,5 @@ void CRealTimeStockManager::getRealTimeMarketData( std::list<CMyMarketData*>& ls
 	}//while
 
 }
+
+

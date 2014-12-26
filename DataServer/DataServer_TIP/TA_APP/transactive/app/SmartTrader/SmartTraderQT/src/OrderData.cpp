@@ -110,7 +110,7 @@ void COrderData::setBaseData( CItemUserInstrument* pData )
 }
 
 
-QString COrderData::getESide(COrderData::ESide  nSide)
+QString COrderData::getESide(COrderData::ESide  nSide) const
 {
 	QString strValue;
 
@@ -131,7 +131,7 @@ QString COrderData::getESide(COrderData::ESide  nSide)
 
 }
 
-COrderData::EOrderType COrderData::getEOrderType( const QString& strOrderType )
+COrderData::EOrderType COrderData::getEOrderType( const QString& strOrderType ) const
 {
 	QString strOrderTypeTmp;
 	QString strCheckTmp;
@@ -199,7 +199,7 @@ COrderData::EOrderType COrderData::getEOrderType( const QString& strOrderType )
 }
 
 
-QString COrderData::getEOrderType(COrderData::EOrderType nOrderType)
+QString COrderData::getEOrderType(COrderData::EOrderType nOrderType) const
 {
 	QString strValue;
 
@@ -237,7 +237,155 @@ QString COrderData::getEOrderType(COrderData::EOrderType nOrderType)
 	return strValue;
 
 }
+QString COrderData::getEOrderStatus(COrderData::EOrderStatus nOrderStatus) const
+{
+	QString strValue;
+
+	switch (nOrderStatus)
+	{
+	case COrderData::NEW:
+		strValue = DEFVALUE_String_OrderStatus_NEW.c_str();
+		break;
+	case COrderData::PARTIALLY_FILLED:
+		strValue = DEFVALUE_String_OrderStatus_PARTIALLY_FILLED.c_str();
+		break;
+	case COrderData::FILLED:
+		strValue = DEFVALUE_String_OrderStatus_FILLED.c_str();
+		break;
+	case COrderData::DONE_FOR_DAY:
+		strValue = DEFVALUE_String_OrderStatus_DONE_FOR_DAY.c_str();
+		break;
+	case COrderData::CANCELED:
+		strValue = DEFVALUE_String_OrderStatus_CANCELED.c_str();
+		break;
+	case COrderData::REPLACED:
+		strValue = DEFVALUE_String_OrderStatus_REPLACED.c_str();
+		break;
+	case COrderData::PENDING_CANCEL:
+		strValue = DEFVALUE_String_OrderStatus_PENDING_CANCEL.c_str();
+		break;
+	case COrderData::STOPPED:
+		strValue = DEFVALUE_String_OrderStatus_STOPPED.c_str();
+		break;
+	case COrderData::REJECTED:
+		strValue = DEFVALUE_String_OrderStatus_REJECTED.c_str();
+		break;
+	case COrderData::SUSPENDED:
+		strValue = DEFVALUE_String_OrderStatus_SUSPENDED.c_str();
+		break;
+	case COrderData::PENDING_NEW:
+		strValue = DEFVALUE_String_OrderStatus_PENDING_NEW.c_str();
+		break;
+	case COrderData::CALCULATED:
+		strValue = DEFVALUE_String_OrderStatus_CALCULATED.c_str();
+		break;
+	case COrderData::PENDING_REPLACE:
+		strValue = DEFVALUE_String_OrderStatus_PENDING_REPLACE.c_str();
+		break;
+	default:
+		strValue = DEFVALUE_String_OrderStatus_NEW.c_str();
+		break;
+	}
+
+	return strValue;
+}
+COrderData::EOrderStatus COrderData::getEOrderStatus(const QString& strEOrderStatus) const
+{
+	QString strOrderTypeTmp;
+	QString strCheckTmp;
+	COrderData::EOrderStatus nOrderStatus = NEW;
+	strOrderTypeTmp = strEOrderStatus;
+	strOrderTypeTmp = strOrderTypeTmp.toUpper();
 
 
+	strCheckTmp = DEFVALUE_String_OrderStatus_NEW.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::NEW;
+		return nOrderStatus;
+	}
 
+	strCheckTmp = DEFVALUE_String_OrderStatus_PARTIALLY_FILLED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::PARTIALLY_FILLED;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_FILLED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::FILLED;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_DONE_FOR_DAY.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::DONE_FOR_DAY;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_CANCELED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::CANCELED;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_REPLACED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::REPLACED;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_PENDING_CANCEL.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::PENDING_CANCEL;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_STOPPED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::STOPPED;
+		return nOrderStatus;
+	}
+	strCheckTmp = DEFVALUE_String_OrderStatus_REJECTED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::REJECTED;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_SUSPENDED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::SUSPENDED;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_PENDING_NEW.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::PENDING_NEW;
+		return nOrderStatus;
+	}
+	strCheckTmp = DEFVALUE_String_OrderStatus_CALCULATED.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::CALCULATED;
+		return nOrderStatus;
+	}
+
+	strCheckTmp = DEFVALUE_String_OrderStatus_PENDING_REPLACE.c_str();
+	if (strCheckTmp == strOrderTypeTmp)
+	{
+		nOrderStatus = COrderData::PENDING_REPLACE;
+		return nOrderStatus;
+	}
+	return nOrderStatus;
+}
 

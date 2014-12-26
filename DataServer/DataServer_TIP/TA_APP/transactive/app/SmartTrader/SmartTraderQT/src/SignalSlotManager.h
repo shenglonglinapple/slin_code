@@ -9,6 +9,7 @@
 
 class CClientDataManager;
 class CUserInstrumentTableView;
+class CUserOrderTableView;
 
 class CSignalSlotManager : public QObject
 {
@@ -37,7 +38,21 @@ public slots:
 	void slot_DataChange_UserInstrument();
 public:
 	void emit_DataChange_UserInstrument();
-	//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+private:
+	CClientDataManager* m_pRefSignal_DataChange_UserOrder;
+	CUserOrderTableView* m_pRefSlot_DataChange_UserOrder;
+public:
+	void set_Signal_DataChange_UserOrder( CClientDataManager* pRefSignal);
+	void set_Slot_DataChange_UserOrder(CUserOrderTableView* pRefSlot);
+signals:
+	void signal_DataChange_UserOrder();
+public slots:
+	void slot_DataChange_UserOrder();
+public:
+	void emit_DataChange_UserOrder();
+//////////////////////////////////////////////////////
 
 };
 

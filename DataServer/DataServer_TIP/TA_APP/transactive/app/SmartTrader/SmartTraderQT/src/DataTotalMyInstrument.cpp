@@ -67,6 +67,15 @@ void CDataTotalMyInstrument::onInstrumentDownloaded( const CMyInstrument& instru
 	{
 		QMutexLocker lock(&m_mutexForMapInstrumentIDData);
 		nGetInstrumentID = instrument.getInstrumentID();
+
+		if (m_MapInstrumentIDData.contains(nGetInstrumentID))
+		{
+			MYLOG4CPP_ERROR<<"CDataTotalMyInstrument"
+				<<" "<<"onInstrumentDownloaded"
+				<<" "<<"already contains nGetInstrumentID="<<nGetInstrumentID
+				<<" "<<"m_MapInstrumentIDData.size="<<m_MapInstrumentIDData.size();
+			return;
+		}
 		pNewInstrument = new CMyInstrument();
 		*pNewInstrument = instrument;
 		m_MapInstrumentIDData.insert(nGetInstrumentID, pNewInstrument);
@@ -95,15 +104,15 @@ void CDataTotalMyInstrument::onMarketDataUpdate( const CMyMarketData &marketData
 	{
 		QMutexLocker lock(&m_mutexForMapInstrumentIDData);
 
-		if (false == m_MapInstrumentIDData.contains(marketData.getSecurityID()))
+		if (false == m_MapInstrumentIDData.contains(marketData.getInstrumentID()))
 		{
-			MYLOG4CPP_ERROR<<"not find getSecurityID="<<marketData.getSecurityID()
+			MYLOG4CPP_ERROR<<"not find getInstrumentID="<<marketData.getInstrumentID()
 				<<" "<<"in m_MapInstrumentIDData"
 				<<" "<<"m_MapInstrumentIDData.size()="<<m_MapInstrumentIDData.size();
 			return;
 		}
 
-		iterFind = m_MapInstrumentIDData.find(marketData.getSecurityID());
+		iterFind = m_MapInstrumentIDData.find(marketData.getInstrumentID());
 		//find ok
 		pInstrumentGet = iterFind.value();
 		pInstrumentGet->setValue(&marketData);

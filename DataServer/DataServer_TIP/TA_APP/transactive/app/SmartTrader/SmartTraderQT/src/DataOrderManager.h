@@ -28,6 +28,7 @@ public:
 	void addOrder(const COrderData* pOrderData);
 	void removeOrder( const std::string& strOrderUUID );
 	void getNotifyOrder(std::list<COrderData*>& lstMyOrderData);
+	void updateOrder(COrderData* pOrderData );
 
 private:
 	void _FreeData_Map();

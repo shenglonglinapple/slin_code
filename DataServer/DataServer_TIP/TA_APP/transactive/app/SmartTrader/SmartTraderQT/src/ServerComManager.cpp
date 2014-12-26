@@ -72,6 +72,14 @@ void CServerComManager::onBarDataUpdate( const CMyBarSummary &barData )
 	}
 }
 
+void CServerComManager::onOrderFilled( const COrderData& order )
+{
+	if (NULL != m_pMyTradeClientRef)
+	{
+		m_pMyTradeClientRef->onOrderFilled(order);
+	}
+}
+
 
 
 

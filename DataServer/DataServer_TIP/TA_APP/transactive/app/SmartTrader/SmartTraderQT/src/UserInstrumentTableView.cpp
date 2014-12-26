@@ -34,10 +34,10 @@ CUserInstrumentTableView::CUserInstrumentTableView( QWidget* parent)
 	this->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
 	this->resizeColumnsToContents();
 
-	m_pItemModelUserInstrument = NULL;
-	m_pItemModelUserInstrument = new CItemModelUserInstrument(this);
-	m_pItemModelUserInstrument->setRootItem(CDataUserInstrument::getInstance().getRootItem());
-	this->setModel(m_pItemModelUserInstrument);
+	m_pItemModel = NULL;
+	m_pItemModel = new CItemModelUserInstrument(this);
+	m_pItemModel->setRootItem(CDataUserInstrument::getInstance().getRootItem());
+	this->setModel(m_pItemModel);
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
 	CSignalSlotManager::getInstance().set_Slot_DataChange_UserInstrument(this);
@@ -97,10 +97,10 @@ CUserInstrumentTableView::~CUserInstrumentTableView()
 		m_pActionNewOrder = NULL;
 	}
 
-	if (NULL != m_pItemModelUserInstrument)
+	if (NULL != m_pItemModel)
 	{
-		delete m_pItemModelUserInstrument;
-		m_pItemModelUserInstrument = NULL;
+		delete m_pItemModel;
+		m_pItemModel = NULL;
 	}
 
 
@@ -138,7 +138,7 @@ void CUserInstrumentTableView::_CreateConnect()
 void CUserInstrumentTableView::slot_DataChange_UserInstrument()
 {
 	MYLOG4CPP_DEBUG<<"CUserInstrumentTableView process slot_DataChange_UserInstrument";
-	m_pItemModelUserInstrument->setRootItem(CDataUserInstrument::getInstance().getRootItem());
+	m_pItemModel->setRootItem(CDataUserInstrument::getInstance().getRootItem());
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
 	this->resizeColumnsToContents();

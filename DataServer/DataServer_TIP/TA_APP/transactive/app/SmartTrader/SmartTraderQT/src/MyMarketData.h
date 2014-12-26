@@ -42,8 +42,13 @@ public:
 	CMyMarketData(const CMyMarketData &);
 	CMyMarketData & operator= (const CMyMarketData &objcopy);
 
-	void setSecurityID(unsigned int secID);
-	unsigned int getSecurityID() const;
+	void setInstrumentID(unsigned int nInstrumentID);
+	unsigned int getInstrumentID() const;
+
+	void setInstrumentCode(const std::string& strInstrumentCode);
+	std::string getInstrumentCode() const;
+
+	
 
 	int getMarketStatus() const;
 	unsigned int getTime() const;
@@ -63,7 +68,7 @@ public:
 private:
 	void _Clear();
 private:
-	unsigned int m_nSecurityID;
+	unsigned int m_nInstrumentID;
 	int m_nMarketStatus;
 	unsigned int m_nTime;
 	int m_nVolume_OPEN_INTEREST;
@@ -83,7 +88,8 @@ private:
 	float m_fAskPx;
 	unsigned int m_nDataBits;
 	unsigned int m_nChangeBits;
-
+private:
+	std::string m_strInstrumentCode;
 };
 
 
