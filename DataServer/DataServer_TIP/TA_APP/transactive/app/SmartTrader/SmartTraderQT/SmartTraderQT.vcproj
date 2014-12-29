@@ -84,7 +84,7 @@
 				OutputFile="$(OutDir)\SmartTraderQT.exe"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
-				AdditionalLibraryDirectories="C:\Qt\4.8.5\lib;..\..\..\..\..\sdk\win32_nd;..\..\..\..\..\build\win32_nd;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\lib\debug\x86&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\build\lib\win32&quot;"
+				AdditionalLibraryDirectories="C:\Qt\4.8.5\lib;..\..\..\..\..\sdk\win32_nd;..\..\..\..\..\build\win32_nd;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\msvc7\log4cppLIB\Debug&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\build\lib\win32&quot;"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile=".\../../../../../bin/win32_nd/SmartTraderQT.pdb"
 				SubSystem="2"
