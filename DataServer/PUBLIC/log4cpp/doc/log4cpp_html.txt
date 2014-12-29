@@ -1,0 +1,36 @@
+http://www.cnphp6.com/archives/37131
+
+
+fix build error:
+
+You need to add to msvc log4cpp project Localtime.cpp from src directory.
+
+
+
+
+
+2.2在VC6中编译Log4cpp
+
+　　进入D:\log4cpp-0.3.5rc3\msvc6文件夹，打开VC6的工作区msvc6.dsw，将当中的project都删除，仅仅保留log4cpp和log4cppDLL两个project。分别编译它们的Debug和Release版本号。
+
+　　在VC6中编译Log4cpp会报错，事实上仅仅有一个错误，即不能在头文件里定义变量，同一时候给变量赋默认值。改动方法例如以下：将头文件Priority.hh中的这一行：
+
+static const int MESSAGE_SIZE = 8;
+
+改为：
+
+staticconst intMESSAGE_SIZE;
+
+并在Priority.cpp中的全部include语句后加上：
+
+constint log4cpp::Priority::MESSAGE_SIZE =8;
+
+　　编译链接成功后会得到log4cppD.dll、log4cppD.lib(Debug版的dll和lib文件)和log4cpp.dll、log4cpp.lib(Release版的dll和lib文件)。新建文件夹D:\log4cpp-0.3.5rc3\lib，将以上四个文件复制到该文件夹下。
+
+　　在VC中加入?设置lib和include路径。
+
+　　将D:\log4cpp-0.3.5rc3\lib添?系统的Path路径中。
+
+　　2.3样例程序
+
+　　本文包括了大量的样例程序，这些程序被组织为多个project，并放入了一个名为WxbLogDsw的VC工作区。全部代码被打包为一个名为WxbLogDsw.rar的压缩文件，解压后可在VC6以上版本号中打开此project并进行编译执行。
