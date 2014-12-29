@@ -11,6 +11,7 @@
 class CStockData;
 class CMyMarketData;
 class CMyInstrument;
+class CQtTimeHelper;
 
 class CRealTimeStockManager
 {
@@ -32,18 +33,31 @@ public:
 	void addRealTimeReq(const CStockData* pStockData);
 	void addRealTimeReq(const std::string& strSymbolUse);
 	void removeRealTimeReq(const std::string& strSymbolUse);
-	void getRealTimeMarketDataLst(std::list<CMyMarketData*>& lstMyMarketData);
-	void getRealTimeMarketDataSingle(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData );
-	void getRealTimeMyInstrument(const std::string& strSymbolUse, CMyInstrument** ppMyInstrument);
+	void getRealTime_MarketDataList(std::list<CMyMarketData*>& lstMyMarketData);
+	void getRealTimeData_MyInstrument(const std::string& strSymbolUse, CMyInstrument** ppMyInstrument);
 private:
-	std::string _GetRealTimeMarketData(const std::string& strSymbolUse);
+	std::string _GetRealTime_Base(const std::string& strSymbolUse);
+	void _GetRealTime_MarketData(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData );
 
 private:
 	void _FreeData_MapStockDataItemT_RealTime();
 	void _FreeData_MapStockDataItemT(MapStockDataItemT& mapStockData);
+public:
+	void historyAddOneDay();
+	void getHistory_MarketDataList( std::list<CMyMarketData*>& lstMyMarketData );
+	void getHistory_MyInstrument( const std::string& strSymbolUse, CMyInstrument** ppMyInstrument );
+
+private:
+	void _GetHistory_MarketData(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData );
 private:
 	QMutex m_mutexMapStockDataItemT_RealTime;
 	MapStockDataItemT m_MapStockDataItemT_RealTime;
+private:
+	unsigned int m_nTimeHistoryFrom;
+	unsigned int m_nTimeHistoryTo;
+	std::string m_strTimeHistoryFrom;
+	std::string m_strTimeHistoryTo;
+	CQtTimeHelper* m_pQtTimeHelper;
 };
 
 

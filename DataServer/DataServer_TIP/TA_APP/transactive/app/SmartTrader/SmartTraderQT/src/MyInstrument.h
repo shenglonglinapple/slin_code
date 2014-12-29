@@ -11,6 +11,7 @@
 
 class CStockData;
 class CMyMarketData;
+class CHistoryData;
 
 class CMyInstrument
 { 
@@ -121,6 +122,8 @@ public:
 	void setDefaultValue();
 	void setValue(const CStockData* pStockData);
 	void setValue(const CMyMarketData* pMyMarketData);
+	void setValue(const CHistoryData* pHistoryData);
+
 private:
 	void _ClearData();
 public:

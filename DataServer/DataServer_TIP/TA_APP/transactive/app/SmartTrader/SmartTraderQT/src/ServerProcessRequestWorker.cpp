@@ -31,6 +31,7 @@ CServerProcessRequestWorker::CServerProcessRequestWorker(void)
 		m_pCurrentReqData = NULL;
 	}
 	CRealTimeStockManager::getInstance();
+	CHistoryStockManager::getInstance();
 	CDataOrderManager::getInstance();
 }
 
@@ -39,6 +40,7 @@ CServerProcessRequestWorker::~CServerProcessRequestWorker(void)
 	_Free_LstReqData();
 	CRealTimeStockManager::removeInstance();
 	CDataOrderManager::removeInstance();
+	CHistoryStockManager::removeInstance();
 }
 
 

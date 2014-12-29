@@ -6,15 +6,15 @@
 
 #include "Log4cppLogger.h"
 
-static const int DEFVALUE_INT_Window_Width = 700;
-static const int DEFVALUE_INT_Window_Height = 300;
+//static const int DEFVALUE_INT_Window_Width = 700;
+//static const int DEFVALUE_INT_Window_Height = 300;
 
 
 
 
 CUserOrderTableView::CUserOrderTableView( QWidget* parent)
 {
-	this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);
+	//this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);//not work in mdi
 
 	//this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setWindowFlags(Qt::WindowMinMaxButtonsHint);

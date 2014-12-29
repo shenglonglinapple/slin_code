@@ -38,6 +38,7 @@ private:
 	EDataWorkerState m_nDataWorkerState;
 private:
 	void _DoJob_UpdateStockRealTimeInfo();
+	void _DoJob_UpdateStockRealTimeInfo_UseHistoryData();
 };
 
 

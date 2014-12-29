@@ -46,7 +46,7 @@ void CSqliteDbOper::setDataBaseValue(const QString& strSqliteDbFileName)
 	m_strSqliteDbPath = CConfigInfo::getInstance().getSQLiteDBPath();
 	m_strSqliteDbFileFullPath = m_strSqliteDbPath + m_strSqliteDbFileName;
 
-
+	_InitDataBase();
 }
 
 void CSqliteDbOper::resetDataBaseValue(const QString& strSqliteDbFileName)
@@ -359,9 +359,10 @@ std::string CSqliteDbOper::_BuildSQL_Select(const std::string& strFrom, const st
 		<<" "<<str_BarData_Column_ADJCLOSE
 		<<" "<<"FROM"
 		<<" "<<str_TABLE_BAR_DATA_1DAY
-		<<" "<<"COLUMN_DATE >="<<strFrom
+		<<" "<<"WHERE"
+		<<" "<<"COLUMN_DATE > "<<"\""<<strFrom<<"\""
 		<<" "<<"AND"
-		<<" "<<"COLUMN_DATE <="<<strTo;
+		<<" "<<"COLUMN_DATE < "<<"\""<<strTo<<"\"";
 
 
 	strSQL = sreaamTmp.str();

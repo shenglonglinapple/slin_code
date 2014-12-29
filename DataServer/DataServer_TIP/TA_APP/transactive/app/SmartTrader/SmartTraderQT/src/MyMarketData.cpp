@@ -4,25 +4,26 @@
 #include <QtCore/QStringList>
 #include "ProjectCommonData.h"
 #include "QtTimeHelper.h"
+#include "HistoryData.h"
 
 CMyMarketData::CMyMarketData()
 {
-	_Clear();
+	_ClearData();
 }
 
 CMyMarketData::CMyMarketData( unsigned int secID )
 {
-	_Clear();
+	_ClearData();
 }	
 
 CMyMarketData::CMyMarketData( const CMyMarketData & )
 {
-	_Clear();
+	_ClearData();
 }
 
 CMyMarketData::~CMyMarketData()
 {
-	_Clear();
+	_ClearData();
 }
 
 CMyMarketData & CMyMarketData::operator=( const CMyMarketData & objcopy)
@@ -51,7 +52,7 @@ CMyMarketData & CMyMarketData::operator=( const CMyMarketData & objcopy)
 
 	return *this;
 }
-void CMyMarketData::_Clear()
+void CMyMarketData::_ClearData()
 {
 	m_nInstrumentID = 0;
 	m_strInstrumentCode.clear();
@@ -87,7 +88,13 @@ unsigned int CMyMarketData::getInstrumentID() const
 }
 void CMyMarketData::setInstrumentCode(const std::string& strInstrumentCode)
 {
+	QString strID;
 	m_strInstrumentCode = strInstrumentCode;
+
+	strID = m_strInstrumentCode.substr(0, m_strInstrumentCode.find(".")).c_str();
+	m_nInstrumentID = strID.toUInt();
+
+	
 }
 std::string CMyMarketData::getInstrumentCode() const
 {
@@ -297,7 +304,7 @@ void CMyMarketData::setValue( const std::string& strData )
 	name.replace(QChar('"'), QChar(' '));
 
 	symbol = symbol.trimmed();
-	m_strInstrumentCode = symbol.toStdString();
+	m_strInstrumentCode = symbol.toStdString();//set m_strInstrumentCode
 
 	symbolID = symbol.mid(0, symbol.indexOf("."));
 	symbolID = symbolID.trimmed();
@@ -334,4 +341,16 @@ void CMyMarketData::setValue( const std::string& strData )
 	}
 	m_nTime = qtTimeHelper.strToDateTime_Qt_AmPm(lastTradeDataTime.toStdString());
 
+}
+
+void CMyMarketData::setValue(const CHistoryData* pHistoryData)
+{
+	CQtTimeHelper qtTimeHelper;
+	if (NULL == pHistoryData)
+	{
+		return;
+	}
+	m_nTime = (unsigned int)qtTimeHelper.strToDateTime_Qt(pHistoryData->m_strDate.toStdString());
+	m_fPrice_LAST_TRADED_PRICE = pHistoryData->m_strClose.toFloat();
+	m_nVolume_LAST_TRADED_VOLUME = pHistoryData->m_strVolume.toInt();
 }

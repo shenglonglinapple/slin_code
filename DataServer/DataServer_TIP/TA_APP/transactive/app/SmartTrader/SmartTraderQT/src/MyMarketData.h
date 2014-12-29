@@ -3,6 +3,7 @@
 
 #include <string>
 
+class CHistoryData;
 
 class CMyMarketData
 {
@@ -65,8 +66,9 @@ public:
 	unsigned int getChangeBits() const;
 public:
 	void setValue(const std::string& strData);
+	void setValue(const CHistoryData* pHistoryData);
 private:
-	void _Clear();
+	void _ClearData();
 private:
 	unsigned int m_nInstrumentID;
 	int m_nMarketStatus;

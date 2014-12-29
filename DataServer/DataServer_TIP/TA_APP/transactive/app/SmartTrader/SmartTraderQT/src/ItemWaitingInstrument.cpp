@@ -295,8 +295,8 @@ void CItemWaitingInstrument::appendChildByData(CItemWaitingInstrumentHelper* pHe
 		pNewNode->setItemType(ItemType_ITEM3_InstrumentCode);
 		pNewNode->resetCurrentNodeData(pHelper);	
 		this->appendChild(&pNewNode);
-		MYLOG4CPP_DEBUG<<"ItemType_ITEM2_UnderlyingCode appendChild"
-			<<" "<<"m_strInstrumentCode="<<pHelper->m_strInstrumentCode.toStdString();
+		/*MYLOG4CPP_DEBUG<<"ItemType_ITEM2_UnderlyingCode appendChild"
+			<<" "<<"m_strInstrumentCode="<<pHelper->m_strInstrumentCode.toStdString();*/
 
 	}
 	pNewNode = NULL;

@@ -66,7 +66,6 @@ void CHistoryStockManager::_FreeData_Map(MapSqliteDbOperItemT& mapStockData)
 	return;
 }
 
-
 void CHistoryStockManager::downloadHistoryData(const std::string& strSymbolUse, const std::string& strFrom, const std::string& strTo, LstHistoryDataT& lstData)
 {
 	CSqliteDbOperHelper* pDataFind = NULL;
@@ -78,6 +77,11 @@ void CHistoryStockManager::downloadHistoryData(const std::string& strSymbolUse, 
 		_AddItem(strSymbolUse);
 	}
 
+	pDataFind = _FindItem(strSymbolUse);
+	if (NULL == pDataFind)
+	{
+		return;
+	}
 	pDataFind->selectData(strSymbolUse, strFrom, strTo, lstData);
 	
 }
@@ -113,4 +117,23 @@ CSqliteDbOperHelper* CHistoryStockManager::_FindItem(const std::string& strSymbo
 	}
 	
 	return pDataFind;
+}
+
+void CHistoryStockManager::freeLstHistoryDataT( LstHistoryDataT& lstData )
+{
+	CHistoryStockManager::LstHistoryDataIterT iterLst;
+	CHistoryData* pHistoryData = NULL;
+
+	iterLst = lstData.begin();
+	while (iterLst != lstData.end())
+	{
+		pHistoryData = (*iterLst);
+
+		delete pHistoryData;
+		pHistoryData = NULL;
+
+		iterLst++;
+	}//while
+
+	lstData.clear();
 }

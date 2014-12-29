@@ -31,6 +31,7 @@ private:
 	virtual ~CHistoryStockManager();
 public:
 	void downloadHistoryData(const std::string& strSymbolUse, const std::string& strFrom, const std::string& strTo, LstHistoryDataT& lstData);
+	void freeLstHistoryDataT(LstHistoryDataT& lstData);
 private:
 	void _FreeData_Map_HistoryStock();
 	void _FreeData_Map(MapSqliteDbOperItemT& mapStockData);

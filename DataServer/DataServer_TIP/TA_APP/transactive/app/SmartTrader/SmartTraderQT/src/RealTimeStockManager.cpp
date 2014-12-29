@@ -1,12 +1,18 @@
 #include "RealTimeStockManager.h"
 
+#include "ProjectCommonData.h"
 #include "BaseException.h"
 #include "StockData.h"
 #include "MyMarketData.h"
 #include "MyInstrument.h"
 #include "StaticStockManager.h"
-#include "Log4cppLogger.h"
+#include "QtTimeHelper.h"
+
 #include "YahuoRealTimeReqAck.h"
+#include "HistoryStockManager.h"
+
+#include "Log4cppLogger.h"
+
 
 
 CRealTimeStockManager* CRealTimeStockManager::m_pInstance = 0;
@@ -31,14 +37,29 @@ void CRealTimeStockManager::removeInstance()
 
 CRealTimeStockManager::CRealTimeStockManager()
 {
+	m_pQtTimeHelper = NULL;
+	m_pQtTimeHelper = new CQtTimeHelper();
+
+	m_strTimeHistoryFrom = "2010-01-01 07:00:00";
+	m_strTimeHistoryTo = "2010-01-02 07:00:00";
+	m_nTimeHistoryFrom = 0;
+	m_nTimeHistoryTo = 0;
+
+	m_nTimeHistoryFrom = (unsigned int)m_pQtTimeHelper->strToDateTime_Qt(m_strTimeHistoryFrom);
+	m_nTimeHistoryTo = (unsigned int)m_pQtTimeHelper->strToDateTime_Qt(m_strTimeHistoryTo);
+
 	_FreeData_MapStockDataItemT_RealTime();
 }
 
 CRealTimeStockManager::~CRealTimeStockManager()
 {	
 	_FreeData_MapStockDataItemT_RealTime();	
+	if (NULL != m_pQtTimeHelper)
+	{
+		delete m_pQtTimeHelper;
+		m_pQtTimeHelper = NULL;
+	}
 }
-
 
 
 
@@ -123,7 +144,7 @@ void CRealTimeStockManager::addRealTimeReq( const std::string& strSymbolUse )
 }
 
 
-std::string CRealTimeStockManager::_GetRealTimeMarketData(const std::string& strSymbolUse)
+std::string CRealTimeStockManager::_GetRealTime_Base(const std::string& strSymbolUse)
 {
 	int nFunRes = 0;
 	std::list<YahuoReqAck::QuoteType> lstQuoteTypes;
@@ -168,37 +189,7 @@ std::string CRealTimeStockManager::_GetRealTimeMarketData(const std::string& str
 	return petr4Quotes;
 }
 
-void CRealTimeStockManager::getRealTimeMarketDataLst( std::list<CMyMarketData*>& lstMyMarketData )
-{
-	QMutexLocker lock(&m_mutexMapStockDataItemT_RealTime);	
-
-	MapStockDataItemIterT iterMap;
-	CStockData* pData = NULL;
-	std::string strData;
-	CMyMarketData* pMyMarketData = NULL;
-
-	iterMap = m_MapStockDataItemT_RealTime.begin();
-	while (iterMap != m_MapStockDataItemT_RealTime.end())
-	{
-		pData = (iterMap->second);
-		MYLOG4CPP_DEBUG<<"getRealTimeMarketDataLst SymbolUse="<<pData->m_strSymbolUse;
-		strData = _GetRealTimeMarketData(pData->m_strSymbolUse);
-		if (false == strData.empty())
-		{
-			pMyMarketData = new CMyMarketData();
-			pMyMarketData->setValue(strData);
-
-			lstMyMarketData.push_back(pMyMarketData);
-			pMyMarketData = NULL;
-		}
-
-		iterMap++;
-	}//while
-
-}
-
-
-void CRealTimeStockManager::getRealTimeMarketDataSingle(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData )
+void CRealTimeStockManager::_GetRealTime_MarketData(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData )
 {
 	CMyMarketData* pMyMarketData = NULL;
 	std::string strData;
@@ -214,11 +205,12 @@ void CRealTimeStockManager::getRealTimeMarketDataSingle(const std::string& strSy
 		(*ppMyMarketData) = NULL;
 	}
 
-	MYLOG4CPP_DEBUG<<"getRealTimeMarketDataSingle SymbolUse="<<strSymbolUse;
-	strData = _GetRealTimeMarketData(strSymbolUse);
+	MYLOG4CPP_DEBUG<<"_GetRealTime_MarketData SymbolUse="<<strSymbolUse;
+	strData = _GetRealTime_Base(strSymbolUse);
 	if (false == strData.empty())
 	{
 		pMyMarketData = new CMyMarketData();
+		pMyMarketData->setInstrumentCode(strSymbolUse);
 		pMyMarketData->setValue(strData);
 
 		(*ppMyMarketData) = pMyMarketData;
@@ -228,7 +220,36 @@ void CRealTimeStockManager::getRealTimeMarketDataSingle(const std::string& strSy
 
 }
 
-void CRealTimeStockManager::getRealTimeMyInstrument( const std::string& strSymbolUse, CMyInstrument** ppMyInstrument )
+void CRealTimeStockManager::getRealTime_MarketDataList( std::list<CMyMarketData*>& lstMyMarketData )
+{
+	QMutexLocker lock(&m_mutexMapStockDataItemT_RealTime);	
+
+	MapStockDataItemIterT iterMap;
+	CStockData* pData = NULL;
+	CMyMarketData* pMyMarketData = NULL;
+
+	iterMap = m_MapStockDataItemT_RealTime.begin();
+	while (iterMap != m_MapStockDataItemT_RealTime.end())
+	{
+		pData = (iterMap->second);
+		MYLOG4CPP_DEBUG<<"getRealTime_MarketDataList SymbolUse="<<pData->m_strSymbolUse;
+		pMyMarketData = NULL;
+		_GetRealTime_MarketData(pData->m_strSymbolUse, &pMyMarketData);
+		if (NULL != pMyMarketData)
+		{
+			lstMyMarketData.push_back(pMyMarketData);
+			pMyMarketData = NULL;
+		}
+
+		iterMap++;
+	}//while
+
+}
+
+
+
+
+void CRealTimeStockManager::getRealTimeData_MyInstrument( const std::string& strSymbolUse, CMyInstrument** ppMyInstrument )
 {
 	CMyMarketData* pMyMarketData = NULL;
 	CMyInstrument* pMyInstrument = NULL;
@@ -244,7 +265,7 @@ void CRealTimeStockManager::getRealTimeMyInstrument( const std::string& strSymbo
 		(*ppMyInstrument) = NULL;
 	}
 
-	getRealTimeMarketDataSingle(strSymbolUse, &pMyMarketData);
+	_GetRealTime_MarketData(strSymbolUse, &pMyMarketData);
 
 
 	if (NULL != pMyMarketData)
@@ -265,4 +286,130 @@ void CRealTimeStockManager::getRealTimeMyInstrument( const std::string& strSymbo
 
 }
 
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+void CRealTimeStockManager::_GetHistory_MarketData(const std::string& strSymbolUse, CMyMarketData** ppMyMarketData )
+{
+	CHistoryStockManager::LstHistoryDataT lstHistoryData;
+	CHistoryStockManager::LstHistoryDataIterT iterLst;
+	CHistoryData* pHistoryData = NULL;
+	CMyMarketData* pMyMarketData = NULL;
+
+	if (NULL == ppMyMarketData)
+	{
+		return;
+	}
+
+	if (NULL != *ppMyMarketData)
+	{
+		delete (*ppMyMarketData);
+		(*ppMyMarketData) = NULL;
+	}
+
+	MYLOG4CPP_DEBUG<<"_GetHistory_MarketData SymbolUse="<<strSymbolUse;
+	CHistoryStockManager::getInstance().downloadHistoryData(strSymbolUse,
+		m_strTimeHistoryFrom, m_strTimeHistoryTo,	lstHistoryData);
+
+	iterLst = lstHistoryData.begin();
+	if (iterLst != lstHistoryData.end())
+	{
+		pHistoryData = (*iterLst);
+
+		pMyMarketData = new CMyMarketData();
+		pMyMarketData->setInstrumentCode(strSymbolUse);
+		pMyMarketData->setValue(pHistoryData);
+
+		(*ppMyMarketData) = pMyMarketData;
+		pMyMarketData = NULL;
+	}//while
+
+	CHistoryStockManager::getInstance().freeLstHistoryDataT(lstHistoryData);
+}
+void CRealTimeStockManager::getHistory_MarketDataList( std::list<CMyMarketData*>& lstMyMarketData )
+{
+	QMutexLocker lock(&m_mutexMapStockDataItemT_RealTime);	
+
+	MapStockDataItemIterT iterMap;
+	CStockData* pData = NULL;
+	CMyMarketData* pMyMarketData = NULL;
+
+	iterMap = m_MapStockDataItemT_RealTime.begin();
+	while (iterMap != m_MapStockDataItemT_RealTime.end())
+	{
+		pData = (iterMap->second);
+		MYLOG4CPP_DEBUG<<"getHistory_MarketDataList SymbolUse="<<pData->m_strSymbolUse;
+		pMyMarketData = NULL;
+		_GetHistory_MarketData(pData->m_strSymbolUse, &pMyMarketData);
+		if (NULL != pMyMarketData)
+		{
+			lstMyMarketData.push_back(pMyMarketData);
+			pMyMarketData = NULL;
+		}
+
+		iterMap++;
+	}//while
+
+	//historyAddOneDay();
+}
+
+void CRealTimeStockManager::historyAddOneDay()
+{
+	m_nTimeHistoryFrom += DEF_INT_ONE_DAY_SECONDS;
+	m_nTimeHistoryTo += DEF_INT_ONE_DAY_SECONDS;
+
+	m_strTimeHistoryFrom = m_pQtTimeHelper->dateTimeToStr_Qt(m_nTimeHistoryFrom);
+	m_strTimeHistoryTo = m_pQtTimeHelper->dateTimeToStr_Qt(m_nTimeHistoryTo);
+
+}
+
+
+void CRealTimeStockManager::getHistory_MyInstrument( const std::string& strSymbolUse, CMyInstrument** ppMyInstrument )
+{
+	CMyMarketData* pMyMarketData = NULL;
+	CMyInstrument* pMyInstrument = NULL;
+
+	if (NULL == ppMyInstrument)
+	{
+		return;
+	}
+
+	if (NULL != *ppMyInstrument)
+	{
+		delete (*ppMyInstrument);
+		(*ppMyInstrument) = NULL;
+	}
+
+	_GetHistory_MarketData(strSymbolUse, &pMyMarketData);
+
+
+	if (NULL != pMyMarketData)
+	{
+		pMyInstrument = new CMyInstrument();
+		pMyInstrument->setValue(pMyMarketData);
+
+		(*ppMyInstrument) = pMyInstrument;
+		pMyInstrument = NULL;
+
+	}
+
+	if (NULL != pMyMarketData)
+	{
+		delete (pMyMarketData);
+		(pMyMarketData) = NULL;
+	}
+
+}
+//////////////////////////////////////////////////////////////////////////
 

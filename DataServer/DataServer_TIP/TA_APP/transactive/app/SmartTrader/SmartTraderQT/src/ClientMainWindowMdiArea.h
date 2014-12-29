@@ -2,6 +2,7 @@
 #define __CLASS_CLIENT_MAIN_WINDOW_MDIAREA_HH__
 
 #include <QtGui/QMdiArea>
+#include <QtGui/QMdiSubWindow>
 
 class CUserInstrumentTableView;
 class CUserTradeWindow;

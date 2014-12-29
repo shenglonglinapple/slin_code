@@ -28,6 +28,7 @@ void CDataRealTimeWorker::run()
 	{
 		_ThreadJob();
 		this->my_msleep(5000);
+
 	}
 
 	_ProcessUserTerminate();
@@ -73,7 +74,8 @@ void CDataRealTimeWorker::_ThreadJob()
 		m_nDataWorkerState = DataWorkerState_UpdateStockRealTimeInfo;
 		break;
 	case DataWorkerState_UpdateStockRealTimeInfo:
-		_DoJob_UpdateStockRealTimeInfo();
+		//_DoJob_UpdateStockRealTimeInfo();
+		_DoJob_UpdateStockRealTimeInfo_UseHistoryData();
 		break;
 	case DataWorkerState_End:
 		this->my_msleep(100);
@@ -82,6 +84,7 @@ void CDataRealTimeWorker::_ThreadJob()
 		this->my_msleep(100);
 		break;
 	}//switch (m_nDataWorkerState)
+	CRealTimeStockManager::getInstance().historyAddOneDay();
 
 }
 
@@ -96,7 +99,7 @@ void CDataRealTimeWorker::_DoJob_UpdateStockRealTimeInfo()
 	std::list<CMyMarketData*>::iterator iterLst;
 	CMyMarketData* pMyMarketData = NULL;
 
-	CRealTimeStockManager::getInstance().getRealTimeMarketDataLst(lstMyMarketData);
+	CRealTimeStockManager::getInstance().getRealTime_MarketDataList(lstMyMarketData);
 
 	iterLst = lstMyMarketData.begin();
 	while (iterLst != lstMyMarketData.end())
@@ -111,6 +114,34 @@ void CDataRealTimeWorker::_DoJob_UpdateStockRealTimeInfo()
 		iterLst++;
 	}//while
 	lstMyMarketData.clear();
+
+	m_nDataWorkerState = DataWorkerState_UpdateStockRealTimeInfo;
+}
+
+
+
+void CDataRealTimeWorker::_DoJob_UpdateStockRealTimeInfo_UseHistoryData()
+{
+	std::list<CMyMarketData*> lstMyMarketData;
+	std::list<CMyMarketData*>::iterator iterLst;
+	CMyMarketData* pMyMarketData = NULL;
+
+	CRealTimeStockManager::getInstance().getHistory_MarketDataList(lstMyMarketData);
+
+	iterLst = lstMyMarketData.begin();
+	while (iterLst != lstMyMarketData.end())
+	{
+		pMyMarketData = (*iterLst);
+
+		CServerComManager::getInstance().onMarketDataUpdate(*pMyMarketData);
+
+		delete pMyMarketData;
+		pMyMarketData = NULL;
+		(*iterLst) = NULL;
+		iterLst++;
+	}//while
+	lstMyMarketData.clear();
+
 
 	m_nDataWorkerState = DataWorkerState_UpdateStockRealTimeInfo;
 }

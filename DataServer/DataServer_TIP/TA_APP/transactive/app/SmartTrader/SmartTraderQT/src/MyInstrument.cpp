@@ -7,6 +7,7 @@
 #include "StockData.h"
 #include "MyMarketData.h"
 
+#include "HistoryData.h"
 #include "QtTimeHelper.h"
 #include "Log4cppLogger.h"
 
@@ -317,6 +318,24 @@ void CMyInstrument::setValue(const CMyMarketData* pMyMarketData)
 	this->m_fLastPrice = pMyMarketData->getPrice(CMyMarketData::LAST_TRADED_PRICE);
 	this->m_nLastVolume = pMyMarketData->getVolume(CMyMarketData::LAST_TRADED_VOLUME);
 }
+
+void CMyInstrument::setValue(const CHistoryData* pHistoryData)
+{
+	CQtTimeHelper qtTimeHelper;
+	if (NULL == pHistoryData)
+	{
+		return;
+	}
+
+	this->m_strGetupdateTime = pHistoryData->m_strDate.toStdString();
+	this->m_timeUpdateTime = (unsigned int)qtTimeHelper.strToDateTime_Qt(this->m_strGetupdateTime);
+	this->m_fLastPrice = pHistoryData->m_strClose.toFloat();
+	this->m_nLastVolume = pHistoryData->m_strVolume.toInt();
+
+}
+
+
+
 template<typename T>
 bool CMyInstrument::uti_isnan(T value)
 {
