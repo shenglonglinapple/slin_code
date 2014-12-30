@@ -15,16 +15,23 @@
 #pragma comment(lib,"QtCored4.lib")
 #pragma comment(lib,"QtGuid4.lib")
 #pragma comment(lib,"QtSqld4.lib")
+#pragma comment(lib,"QtNetworkd4.lib")
 
 
 //#pragma comment(lib,"StrategyEngine.lib")
 //////////////////////////////////////////////////////////////////////////
+
+
+#include "YahooDataLoader.h"
 
 int main(int argc, char *argv[])
 {
 	int nFunRes = 0;
 
     QApplication app(argc, argv);
+
+	CYahooDataLoader* loader = new CYahooDataLoader(NULL);
+	loader->getDataForCompany("", QDate(), QDate());
 
     nFunRes = app.exec();
 
