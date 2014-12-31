@@ -8,9 +8,10 @@
 CYahooDataLoader::CYahooDataLoader(QObject *parent)
 : QObject(parent)
 {
-	manager = new QNetworkAccessManager(this);
+	m_pNetworkAccessManager = NULL;
+	m_pNetworkAccessManager = new QNetworkAccessManager(this);
 
-	connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(printNewData(QNetworkReply*)));
+	connect(m_pNetworkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(printNewData(QNetworkReply*)));
 
 }
 
@@ -26,12 +27,14 @@ void CYahooDataLoader::getDataForCompany(QString companyName, QDate startDate, Q
 {
 	//http://table.finance.yahoo.com/table.csv?s=000001.sz
 	//QString string("http://ichart.finance.yahoo.com/table.csv?s=GOOG&a=00&b=1&c=2014&d=02&e=1&f=2014");
-	QString string = "http://table.finance.yahoo.com/table.csv?s=000001.sz";
+
+	//http://ichart.finance.yahoo.com/table.csv?s=600155.SS&a=00&b=1&c=2014&d=02&e=1&f=2014
+	QString string = "http://ichart.finance.yahoo.com/table.csv?s=600155.SS&a=00&b=1&c=2014&d=02&e=1&f=2014";
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(string));
 
-	manager->get(request);
+	m_pNetworkAccessManager->get(request);
 }
 
 void CYahooDataLoader::printNewData(QNetworkReply* reply) 

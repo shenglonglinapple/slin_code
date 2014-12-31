@@ -14,10 +14,15 @@ class CYahooDataLoader : public QObject
 public:
     CYahooDataLoader(QObject *parent = 0);
 	virtual ~CYahooDataLoader();
-	void getDataForCompany(QString companyName, QDate startDate, QDate endDate);
+signals:
+
+public slots:
 	void printNewData(QNetworkReply* reply);
+
+public:
+	void getDataForCompany(QString companyName, QDate startDate, QDate endDate);
 private:
-	QNetworkAccessManager* manager;
+	QNetworkAccessManager* m_pNetworkAccessManager;
 };
 
 
