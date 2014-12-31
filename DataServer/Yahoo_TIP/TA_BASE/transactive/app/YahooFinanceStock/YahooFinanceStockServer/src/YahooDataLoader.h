@@ -21,6 +21,7 @@ public slots:
 
 public:
 	void getDataForCompany(QString companyName, QDate startDate, QDate endDate);
+	void test();
 private:
 	QNetworkAccessManager* m_pNetworkAccessManager;
 };

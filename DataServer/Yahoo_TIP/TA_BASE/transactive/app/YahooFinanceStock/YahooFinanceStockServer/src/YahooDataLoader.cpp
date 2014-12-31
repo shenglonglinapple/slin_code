@@ -44,3 +44,11 @@ void CYahooDataLoader::printNewData(QNetworkReply* reply)
 	QString string = QString::fromUtf8(bytes);
 
 }
+
+
+void CYahooDataLoader::test()
+{
+	//#include "YahooDataLoader.h"
+	CYahooDataLoader* loader = new CYahooDataLoader(NULL);
+	loader->getDataForCompany("", QDate(), QDate());
+}
