@@ -1,6 +1,6 @@
 #include <iostream>
-//#include <QtCore/QtCore>
 #include <QtGui/QApplication>
+//#include <QtCore/QtCore>
 
 
 ////////////////
@@ -25,38 +25,25 @@
 
 
 
-#include "StockTcpServer.h"
+
 
 #include "BaseException.h"
 #include "ProjectEnvironment.h"
 
-
+#include "StockTcpClientActor.h"
 
 int main(int argc, char *argv[])
 {
 	qint32 nFunRes = 0;
     QApplication app(argc, argv);
 	CProjectEnviroment::getInstance();
-	CStockTcpServer* pServer = NULL;
-	pServer = new CStockTcpServer();
 
-	try
-	{
-		pServer->startListen();
-	}
-	catch (CBaseException& e)
-	{
-		e.logInfo(__FILE__, __LINE__);
-	}
+	CStockTcpClientActor* pClient = NULL;
+	pClient = new CStockTcpClientActor(NULL);
+	pClient->connectToServer("192.168.253.130", 5000);
+
 
     nFunRes = app.exec();
-
-	if (NULL != pServer)
-	{
-		pServer->stopListen();
-		delete pServer;
-		pServer = NULL;
-	}
 	CProjectEnviroment::removeInstance();
 
 	return 0;
