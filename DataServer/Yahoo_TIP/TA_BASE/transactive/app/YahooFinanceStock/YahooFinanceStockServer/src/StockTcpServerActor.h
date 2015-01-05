@@ -6,6 +6,8 @@
 
 #include <QtNetwork/QTcpSocket>
 
+class CMsgManager;
+
 class CStockTcpServerActor : public QObject
 {
     Q_OBJECT
@@ -16,20 +18,17 @@ public:
 
 signals:
 	void signalDeleteMe();
-	void signalProcessRecvBuffer();
 	void signalProcessMessage(QByteArray* pMessage);
 private slots:
 	void slotError(QAbstractSocket::SocketError nSocketError);
 	void slotReadyRead();
 	void slotDisconnected();
-private slots:
-	void slotProcessRecvBuffer();
-	void slotProcessMessage(QByteArray* pMessage);
-
+public slots:
+	void slotWriteMessage(QByteArray* pByteArray);
 public:
-	void writeAck();
 
 private:
+	void _ProcessRecvBuffer();
 	void _GetSocketInfo();
 private:
 	QString m_strlocalAddress;
@@ -44,7 +43,8 @@ private:
 
 	QMutex m_mutex_SocketBuffer;
 	QByteArray* m_pSocketBuffer;
-
+private:
+	CMsgManager* m_pMsgManager;
 };
 
 #endif//__CLASS_STOCK_TCP_SERVER_ACTOR_H__

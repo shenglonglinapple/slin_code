@@ -1,8 +1,12 @@
 #ifndef __CLASS_STOCK_TCP_CLIENT_ACTOR_H__
 #define __CLASS_STOCK_TCP_CLIENT_ACTOR_H__
 
-#include <QtCore/QThread>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
+
 #include <QtNetwork/QTcpSocket>
+
+class CMsgManager;
 
 class CStockTcpClientActor : public QObject
 {
@@ -14,16 +18,24 @@ public:
 
 signals:
 	void signalDeleteMe();
+	void signalProcessMessage(QByteArray* pMessage);
 private slots:
+	void slotConnected();
 	void slotError(QAbstractSocket::SocketError nSocketError);
 	void slotReadyRead();
 	void slotDisconnected();
-	void slotConnected();
+private slots:
+	void _ProcessRecvBuffer();
+public slots:
+	void slotWriteMessage(QByteArray* pByteArray);
 public:
-	void connectToServer(const QString& strServerIP, quint16 nServerPort);
+	void connectToServer( const QString& strServerIP, quint16 nServerPort );
 	void disConnectToServer();
+public:
+	void send_login_req();
+	void send_logout_req();
 
-	void send_req();
+
 private:
 	void _GetSocketInfo();
 private:
@@ -33,10 +45,14 @@ private:
 	QString m_strPeerName;
 	quint16 m_nPeerPort;
 private:
-    qint32 m_nHandle;
+	QMutex m_mutex_SocketW;
+    qint32 m_nSocketHandle;
 	QTcpSocket* m_pSocketHandle;
 
-
+	QMutex m_mutex_SocketBuffer;
+	QByteArray* m_pSocketBuffer;
+private:
+	CMsgManager* m_pMsgManager;
 };
 
 #endif//__CLASS_STOCK_TCP_CLIENT_ACTOR_H__
