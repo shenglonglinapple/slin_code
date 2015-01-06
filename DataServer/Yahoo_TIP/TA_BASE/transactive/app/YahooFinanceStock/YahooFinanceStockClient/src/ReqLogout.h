@@ -15,7 +15,7 @@ private:
 	void _Clear();
 public:
 	static bool checkMsgDataType(qint32 nMessageType, qint32 nDataType);
-	void setValue( QByteArray* pMessage );
+	void setValue(const QByteArray* pMessage );
 	QByteArray* getMessage();
 	void logInfo( const QString& fileName, qint32 lineNumber );
 public:

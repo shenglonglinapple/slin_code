@@ -19,7 +19,12 @@ signals:
 public slots:
 	void slotProcessMessage(QByteArray* pMessage);
 private:
-	CMsgProcesser* m_pServerMsgProcesser;
+	void _ProcessMessage_AckLogin(const QByteArray* pMessage );
+	void _ProcessMessage_AckLogout(const QByteArray* pMessage );
+	void send_logout_req();
+	void send_login_req();
+private:
+	CMsgProcesser* m_pMsgProcesser;
 
 };
 

@@ -19,6 +19,9 @@ signals:
 public slots:
 	void slotProcessMessage(QByteArray* pMessage);
 private:
+	void _ProcessMessage_ReqLogin(const QByteArray* pMessage );
+	void _ProcessMessage_ReqLogout(const QByteArray* pMessage );
+private:
 	CMsgProcesser* m_pServerMsgProcesser;
 
 };

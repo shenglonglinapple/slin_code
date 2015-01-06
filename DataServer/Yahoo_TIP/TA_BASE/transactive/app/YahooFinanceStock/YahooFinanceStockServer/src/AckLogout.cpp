@@ -23,13 +23,13 @@ void CAckLogout::_Clear()
 
 void CAckLogout::logInfo( const QString& fileName, qint32 lineNumber )
 {
-	MYLOG4CPP_ERROR_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
+	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
 		<<" "<<"CAckLogout:"
-		<<" "<<"nMessageType="<<m_nMessageType
-		<<" "<<"m_nDataType="<<m_nDataType
+		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
+		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
-		<<" "<<"m_nLogoutResult="<<m_nLogoutResult;
+		<<" "<<"m_nLogoutResult="<<CTcpComProtocol::getStringValue(m_nLogoutResult);
 }
 
 //static

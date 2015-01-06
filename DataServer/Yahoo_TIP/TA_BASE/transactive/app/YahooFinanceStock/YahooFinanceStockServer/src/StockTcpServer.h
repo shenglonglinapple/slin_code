@@ -3,6 +3,8 @@
 
 #include <QtNetwork/QTcpServer>
 
+class CStockTcpServerActor;
+
 class CStockTcpServer : public QTcpServer
 {
     Q_OBJECT
@@ -10,6 +12,8 @@ class CStockTcpServer : public QTcpServer
 public:
     CStockTcpServer(QObject* parent = 0);
 	virtual ~CStockTcpServer();
+public slots:
+	void slotDeleteConnection(CStockTcpServerActor* pActor);
 public:
 	void startListen();
 	void stopListen();

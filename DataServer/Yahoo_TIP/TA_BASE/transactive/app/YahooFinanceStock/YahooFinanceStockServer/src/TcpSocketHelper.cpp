@@ -10,7 +10,7 @@ CTcpSocketHelper::~CTcpSocketHelper()
 
 }
 
-QString CTcpSocketHelper::getSocketType( QAbstractSocket::SocketType nValue )
+QString CTcpSocketHelper::getStringValue( QAbstractSocket::SocketType nValue )
 {
 	QString strValue;
 	switch (nValue)
@@ -28,7 +28,7 @@ QString CTcpSocketHelper::getSocketType( QAbstractSocket::SocketType nValue )
 	return strValue;
 }
 
-QString CTcpSocketHelper::getNetworkLayerProtocol( QAbstractSocket::NetworkLayerProtocol nValue )
+QString CTcpSocketHelper::getStringValue( QAbstractSocket::NetworkLayerProtocol nValue )
 {
 	QString strValue;
 	switch (nValue)
@@ -46,7 +46,7 @@ QString CTcpSocketHelper::getNetworkLayerProtocol( QAbstractSocket::NetworkLayer
 	return strValue;
 }
 
-QString CTcpSocketHelper::getSocketError( QAbstractSocket::SocketError nValue )
+QString CTcpSocketHelper::getStringValue( QAbstractSocket::SocketError nValue )
 {
 	QString strValue;
 	switch (nValue)
@@ -112,7 +112,7 @@ QString CTcpSocketHelper::getSocketError( QAbstractSocket::SocketError nValue )
 	return strValue;
 }
 
-QString CTcpSocketHelper::getSocketState( QAbstractSocket::SocketState nValue )
+QString CTcpSocketHelper::getStringValue( QAbstractSocket::SocketState nValue )
 {
 	QString strValue;
 	switch (nValue)
@@ -142,7 +142,7 @@ QString CTcpSocketHelper::getSocketState( QAbstractSocket::SocketState nValue )
 	return strValue;
 }
 
-QString CTcpSocketHelper::getSocketOption( QAbstractSocket::SocketOption nValue )
+QString CTcpSocketHelper::getStringValue( QAbstractSocket::SocketOption nValue )
 {
 	QString strValue;
 	switch (nValue)

@@ -23,13 +23,13 @@ void CAckLogin::_Clear()
 
 void CAckLogin::logInfo( const QString& fileName, qint32 lineNumber )
 {
-	MYLOG4CPP_ERROR_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
+	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
 		<<" "<<"CAckLogin:"
-		<<" "<<"nMessageType="<<m_nMessageType
-		<<" "<<"m_nDataType="<<m_nDataType
+		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
+		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
-		<<" "<<"m_nLoginResult="<<m_nLoginResult;
+		<<" "<<"m_nLoginResult="<<CTcpComProtocol::getStringValue(m_nLoginResult);
 }
 //static
 bool CAckLogin::checkMsgDataType( qint32 nMessageType, qint32 nDataType )

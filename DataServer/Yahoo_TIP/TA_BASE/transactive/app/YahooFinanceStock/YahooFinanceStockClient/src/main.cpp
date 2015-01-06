@@ -30,7 +30,7 @@
 #include "BaseException.h"
 #include "ProjectEnvironment.h"
 
-#include "StockTcpClientActor.h"
+#include "ClientManager.h"
 
 int main(int argc, char *argv[])
 {
@@ -38,10 +38,10 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 	CProjectEnviroment::getInstance();
 
-	CStockTcpClientActor* pClient = NULL;
-	pClient = new CStockTcpClientActor(NULL);
-	pClient->connectToServer("192.168.253.130", 5000);
+	CClientManager* pClientManager = NULL;
+	pClientManager = new CClientManager();
 
+	pClientManager->createClient(1);
 
     nFunRes = app.exec();
 	CProjectEnviroment::removeInstance();

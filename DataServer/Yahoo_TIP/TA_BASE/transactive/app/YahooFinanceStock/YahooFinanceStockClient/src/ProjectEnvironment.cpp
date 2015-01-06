@@ -211,6 +211,7 @@ void CProjectEnviroment::_SetFont()
 
 void CProjectEnviroment::qtWaitTime(qint64 milliseconds)
 {
+	//QThread::exec() waits until QThread::exit() called
 	QElapsedTimer timeElapsedTimer;
 	timeElapsedTimer.start();
 	while(timeElapsedTimer.elapsed() < milliseconds)

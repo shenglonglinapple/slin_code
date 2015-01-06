@@ -49,6 +49,9 @@ void CStockTcpServer::incomingConnection(qint32 handle)
 	try
 	{
 		pActor = new CStockTcpServerActor(handle, this);
+		QObject::connect(pActor, SIGNAL(signalDeleteConnection(CStockTcpServerActor*)), 
+			this, SLOT(slotDeleteConnection(CStockTcpServerActor*)), Qt::AutoConnection);
+		pActor->start();
 	}
 	catch (CBaseException& e)
 	{
@@ -60,6 +63,14 @@ void CStockTcpServer::incomingConnection(qint32 handle)
 		}
 	}
 	
-	//CStockTcpServerActor* pActor = new CStockTcpServerActor(handle, this);
-	//QObject::connect(pActor, SIGNAL(signalDeleteMe()), pActor, SLOT(deleteLater()));
+}
+
+void CStockTcpServer::slotDeleteConnection( CStockTcpServerActor* pActor )
+{
+	if (NULL != pActor)
+	{
+		pActor->terminateAndWait();
+		delete pActor;
+		pActor = NULL;
+	}
 }

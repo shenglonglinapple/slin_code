@@ -12,11 +12,11 @@ public:
 	CTcpSocketHelper();
 	virtual ~CTcpSocketHelper();
 public:
-	QString getSocketType(QAbstractSocket::SocketType nValue);
-	QString getNetworkLayerProtocol(QAbstractSocket::NetworkLayerProtocol nValue);
-	QString getSocketError(QAbstractSocket::SocketError nValue);
-	QString getSocketState(QAbstractSocket::SocketState nValue);
-	QString getSocketOption(QAbstractSocket::SocketOption nValue);
+	static QString getStringValue(QAbstractSocket::SocketType nValue);
+	static QString getStringValue(QAbstractSocket::NetworkLayerProtocol nValue);
+	static QString getStringValue(QAbstractSocket::SocketError nValue);
+	static QString getStringValue(QAbstractSocket::SocketState nValue);
+	static QString getStringValue(QAbstractSocket::SocketOption nValue);
 
 
 

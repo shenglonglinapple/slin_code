@@ -39,17 +39,17 @@ bool CReqLogin::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 
 void CReqLogin::logInfo( const QString& fileName, qint32 lineNumber )
 {
-	MYLOG4CPP_ERROR_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
+	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
 		<<" "<<"CReqLogin:"
-		<<" "<<"nMessageType="<<m_nMessageType
-		<<" "<<"m_nDataType="<<m_nDataType
+		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
+		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
 		<<" "<<"m_strUserName="<<m_strUserName
 		<<" "<<"m_strPassword="<<m_strPassword;
 }
 
-void CReqLogin::setValue( QByteArray* pMessage )
+void CReqLogin::setValue(const QByteArray* pMessage )
 {
 	MYLOG4CPP_DEBUG<<"setValue"
 		<<" "<<"param:"<<" "<<"QByteArray* pMessage=0x"<<pMessage;

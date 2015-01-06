@@ -10,62 +10,32 @@
 
 #include "TcpSocketHelper.h"
 #include "MsgManager.h"
+#include "SocketInfo.h"
 
 CStockTcpServerActor::CStockTcpServerActor(qint32 handle, QObject* parent/*=0*/ )
-:QObject(parent)
 {
 	m_nSocketHandle = 0;
+	m_pSocketInfo = NULL;
 	m_pSocketHandle = NULL;
-	m_strlocalAddress.clear();
-	m_nLocalPort = 0;
-	m_strPeerAddress.clear();
-	m_strPeerName.clear();
-	m_nPeerPort = 0;
 	m_pSocketBuffer = NULL;
 	m_pMsgManager = NULL;
 
+	m_toTerminate = false;
+	m_WorkerState = WORK_STATE_BEGIN;
+	m_nThreadJobState = JobState_Begin;
 
-	{
-		QMutexLocker lock(&m_mutex_SocketW);
-		m_nSocketHandle = handle;
-		m_pSocketHandle = new QTcpSocket();
-	}
+	m_nSocketHandle = handle;
 
 	{
 		QMutexLocker lock(&m_mutex_SocketBuffer);	
 		m_pSocketBuffer = new QByteArray();
 	}
-
-	m_pMsgManager = new CMsgManager(this);
-
-	//
-	QObject::connect(m_pSocketHandle, SIGNAL(disconnected()), this, SLOT(slotDisconnected()));
-	QObject::connect(m_pSocketHandle, SIGNAL(readyRead()), this, SLOT(slotReadyRead()));
-	QObject::connect(m_pSocketHandle, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(slotError(QAbstractSocket::SocketError)));
-	//
-	QObject::connect(this, SIGNAL(signalDeleteMe()), this, SLOT(deleteLater()));
-	//
-	QObject::connect(this, SIGNAL(signalProcessMessage(QByteArray*)), m_pMsgManager, SLOT(slotProcessMessage(QByteArray*)));
-	QObject::connect(m_pMsgManager, SIGNAL(signalWriteMessage(QByteArray*)), this, SLOT(slotWriteMessage(QByteArray*)));
-
-
-
-	//
-	if (false == m_pSocketHandle->setSocketDescriptor(m_nSocketHandle))
-	{
-		throw CBaseException(__FILE__, __LINE__, m_pSocketHandle->errorString());
-	}
-	_GetSocketInfo();
 }
 
 CStockTcpServerActor::~CStockTcpServerActor()
 {
-
-	if (NULL != m_pMsgManager)
-	{
-		delete m_pMsgManager;
-		m_pMsgManager = NULL;
-	}
+	
+	//
 	{
 		QMutexLocker lock(&m_mutex_SocketBuffer);	
 		if (NULL != m_pSocketBuffer)
@@ -75,39 +45,7 @@ CStockTcpServerActor::~CStockTcpServerActor()
 		}
 	}
 
-	{
-		QMutexLocker lock(&m_mutex_SocketW);
-		if (NULL != m_pSocketHandle)
-		{
-			//m_pSocketHandle->waitForDisconnected();
-			m_pSocketHandle->close();
-			delete m_pSocketHandle;
-			m_pSocketHandle = NULL;
-		}
-	}
-
 }
-
-void CStockTcpServerActor::_GetSocketInfo()
-{
-	QMutexLocker lock(&m_mutex_SocketW);
-
-	m_strlocalAddress = m_pSocketHandle->localAddress().toString();
-	m_nLocalPort = m_pSocketHandle->localPort();
-	m_strPeerAddress = m_pSocketHandle->peerAddress().toString();
-	m_strPeerName = m_pSocketHandle->peerName();
-	m_nPeerPort = m_pSocketHandle->peerPort();
-
-	MYLOG4CPP_INFO<<"new client"
-		<<" "<<"m_nSocketHandle="<<m_nSocketHandle
-		<<" "<<"m_strlocalAddress="<<m_strlocalAddress
-		<<" "<<"m_nLocalPort="<<m_nLocalPort
-		<<" "<<"m_strPeerAddress="<<m_strPeerAddress
-		<<" "<<"m_strPeerName="<<m_strPeerName
-		<<" "<<"m_nPeerPort="<<m_nPeerPort;
-
-}
-
 
 
 void CStockTcpServerActor::slotError(QAbstractSocket::SocketError nSocketError)
@@ -120,60 +58,69 @@ void CStockTcpServerActor::slotError(QAbstractSocket::SocketError nSocketError)
 
 	QString strSocketError;
 	QString strErrorString;
-	CTcpSocketHelper tcpSocketHelper;
+	QString strSocketState;
 
-	strSocketError = tcpSocketHelper.getSocketError(nSocketError);
+
+	strSocketError = CTcpSocketHelper::getStringValue(nSocketError);
 	strErrorString = m_pSocketHandle->errorString();
+	strSocketState = CTcpSocketHelper::getStringValue(m_pSocketHandle->state());
 
-	MYLOG4CPP_DEBUG<<"strSocketError="<<strSocketError
-		<<" "<<"strErrorString="<<strErrorString;
-}
-
-
-void CStockTcpServerActor::slotReadyRead()
-{
-	MYLOG4CPP_DEBUG<<" "
-		<<" "<<"class:"<<" "<<"CStockTcpServerActor"
-		<<" "<<"slot:"<<" "<<"slotReadyRead";
-
-	QMutexLocker lock(&m_mutex_SocketBuffer);	
-
-	qint64 nBytesAvailable = 0;
-	QByteArray blockTmp;
-
-	nBytesAvailable = m_pSocketHandle->bytesAvailable();
-	blockTmp = m_pSocketHandle->readAll();
-	MYLOG4CPP_DEBUG<<"CStockTcpServerActor::slotReadyRead"
-		<<" "<<"nBytesAvailable="<<nBytesAvailable;
-
-	if (nBytesAvailable > 0)
+	if (QAbstractSocket::SocketTimeoutError == nSocketError)
 	{
-		m_pSocketBuffer->append(blockTmp);
-		MYLOG4CPP_DEBUG<<"CStockTcpServerActor::slotReadyRead"
-			<<" "<<"m_pSocketBuffer->size="<<m_pSocketBuffer->size();
-
+		//do nothing
 	}
-
-	_ProcessRecvBuffer();
-	
+	else 
+	{
+		m_toTerminate = true;
+		MYLOG4CPP_DEBUG<<"m_strID="<<m_pSocketInfo->m_strID
+			<<" "<<"strSocketError="<<strSocketError
+			<<" "<<"strErrorString="<<strErrorString
+			<<" "<<"strSocketState="<<strSocketState
+			<<" "<<"set m_toTerminate="<<m_toTerminate;
+	}
 }
+
+
+
+
+void CStockTcpServerActor::slotDisconnected()
+{
+	MYLOG4CPP_DEBUG<<" "<<"m_strID="<<m_pSocketInfo->m_strID
+		<<" "<<"class:"<<" "<<"CStockTcpServerActor"
+		<<" "<<"slot:"<<" "<<"slotDisconnected"
+		<<" "<<"set m_toTerminate="<<m_toTerminate;
+
+	m_toTerminate = true;
+}
+
 
 void CStockTcpServerActor::slotWriteMessage(QByteArray* pByteArray)
 {
-	MYLOG4CPP_DEBUG<<" "
-		<<" "<<"class:"<<" "<<"CStockTcpServerActor"
-		<<" "<<"slot:"<<" "<<"slotWriteMessage";
-
 	quint32 nMessageLenth = 0;
-	QByteArray* pMessage = NULL;
-	pMessage = new QByteArray();
-	QDataStream writeToMessage(pMessage, QIODevice::WriteOnly);
-	writeToMessage.setVersion(QDataStream::Qt_4_0);
-
+	QByteArray* pMessageLength = NULL;
+	pMessageLength = new QByteArray();
+	QDataStream writeToMessageLength(pMessageLength, QIODevice::WriteOnly);
+	writeToMessageLength.setVersion(QDataStream::Qt_4_0);
 	nMessageLenth = pByteArray->size();
-	writeToMessage<<(quint32)nMessageLenth;
-	pMessage->append(*pByteArray);
+	writeToMessageLength<<(quint32)nMessageLenth;
 
+	QMutexLocker lock(&m_mutex_SocketW);
+	m_pSocketHandle->write(*pMessageLength);
+	m_pSocketHandle->write(*pByteArray);
+	//m_pSocketHandle->waitForBytesWritten();
+
+
+	MYLOG4CPP_DEBUG<<" "<<"m_strID="<<m_pSocketInfo->m_strID
+		<<" "<<"slotWriteMessage"
+		<<" "<<"pMessageLength->size="<<pMessageLength->size()
+		<<" "<<"pByteArray->size="<<pByteArray->size();
+
+
+	if (NULL != pMessageLength)
+	{
+		delete pMessageLength;
+		pMessageLength = NULL;
+	}
 	if (NULL != pByteArray)
 	{
 		delete pByteArray;
@@ -181,46 +128,177 @@ void CStockTcpServerActor::slotWriteMessage(QByteArray* pByteArray)
 	}
 
 
-	QMutexLocker lock(&m_mutex_SocketW);
+}
 
-	m_pSocketHandle->write(*pMessage);
-	m_pSocketHandle->waitForBytesWritten();
-	if (NULL != pMessage)
-	{
-		delete pMessage;
-		pMessage = NULL;
-	}
+void CStockTcpServerActor::slotReadyRead()
+{
+	QMutexLocker lock(&m_mutex_SocketBuffer);	
 
+	qint64 nBytesAvailable = 0;
+	QByteArray blockTmp;
 
+	nBytesAvailable = m_pSocketHandle->bytesAvailable();
+	blockTmp = m_pSocketHandle->readAll();
+	m_pSocketBuffer->append(blockTmp);
+
+	MYLOG4CPP_DEBUG<<" "<<"m_strID="<<m_pSocketInfo->m_strID
+		<<" "<<"slotReadyRead"
+		<<" "<<"nBytesAvailable="<<nBytesAvailable
+		<<" "<<"blockTmp.size="<<blockTmp.size()
+		<<" "<<"m_pSocketBuffer.size="<<m_pSocketBuffer->size();	
 }
 
 
-void CStockTcpServerActor::slotDisconnected()
+void CStockTcpServerActor::run()
 {
-	MYLOG4CPP_DEBUG<<" "
-		<<" "<<"class:"<<" "<<"CStockTcpServerActor"
-		<<" "<<"slot:"<<" "<<"slotDisconnected";
-
-	MYLOG4CPP_INFO<<"client Disconnected"
-		<<" "<<"m_nSocketHandle="<<m_nSocketHandle
-		<<" "<<"m_strlocalAddress="<<m_strlocalAddress
-		<<" "<<"m_nLocalPort="<<m_nLocalPort
-		<<" "<<"m_strPeerAddress="<<m_strPeerAddress
-		<<" "<<"m_strPeerName="<<m_strPeerName
-		<<" "<<"m_nPeerPort="<<m_nPeerPort;
-
 	{
-		MYLOG4CPP_DEBUG<<" "
-			<<" "<<"class:"<<" "<<"CStockTcpServerActor"
-			<<" "<<"fun:"<<" "<<"slotDisconnected"
-			<<" "<<"emit:"<<" "<<"signalDeleteMe";
+		QMutexLocker lock(&m_mutex_SocketW);
+		m_pSocketHandle = new QTcpSocket();
+		m_pSocketInfo = new CSocketInfo();
+	}
+	//
+	QObject::connect(m_pSocketHandle, SIGNAL(disconnected()), this, SLOT(slotDisconnected()), Qt::AutoConnection);
+	//QObject::connect(m_pSocketHandle, SIGNAL(readyRead()), this, SLOT(slotReadyRead()), Qt::BlockingQueuedConnection);//Qt::AutoConnection
+	QObject::connect(m_pSocketHandle, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(slotError(QAbstractSocket::SocketError)), Qt::AutoConnection);
+	//
+	if (false == m_pSocketHandle->setSocketDescriptor(m_nSocketHandle))
+	{
+		throw CBaseException(__FILE__, __LINE__, m_pSocketHandle->errorString());
+	}
+	m_pSocketInfo->setValue(m_pSocketHandle);
+	m_pSocketInfo->logInfo(__FILE__, __LINE__);
+	//
+	m_pMsgManager = new CMsgManager(this);
+	QObject::connect(this, SIGNAL(signalProcessMessage(QByteArray*)), m_pMsgManager, SLOT(slotProcessMessage(QByteArray*)), Qt::AutoConnection);
+	QObject::connect(m_pMsgManager, SIGNAL(signalWriteMessage(QByteArray*)), this, SLOT(slotWriteMessage(QByteArray*)), Qt::AutoConnection);
 
-		emit signalDeleteMe();
+
+
+	m_WorkerState = WORK_STATE_BEGIN;
+	m_nThreadJobState = JobState_Begin;
+
+	m_WorkerState = WORK_STATE_WORKING;
+
+	while (false == m_toTerminate)
+	{
+		_ThreadJob();
+		//this->msleep(100);
+	}
+
+	_ProcessUserTerminate();
+	m_WorkerState = WORK_STATE_END;
+
+	//QThread::exec() waits until QThread::exit() called
+	//exec();
+
+	emit signalDeleteConnection(this);
+}
+
+void CStockTcpServerActor::terminate()
+{
+	m_toTerminate = true;
+	while (WORK_STATE_END != m_WorkerState)
+	{
+		this->msleep(10);
 	}
 }
 
-void CStockTcpServerActor::_ProcessRecvBuffer()
+
+int CStockTcpServerActor::_ProcessUserTerminate()
 {
+	int nFunRes = 0;
+	m_toTerminate = true;
+	m_nThreadJobState = JobState_End;
+
+	//
+	{
+		QMutexLocker lock(&m_mutex_SocketW);
+		if (NULL != m_pSocketHandle)
+		{
+			//m_pSocketHandle->waitForDisconnected();
+			m_pSocketHandle->close();
+			delete m_pSocketHandle;
+			m_pSocketHandle = NULL;
+		}
+	}
+
+	if (NULL != m_pSocketInfo)
+	{
+		delete m_pSocketInfo;
+		m_pSocketInfo = NULL;
+	}
+	if (NULL != m_pMsgManager)
+	{
+		delete m_pMsgManager;
+		m_pMsgManager = NULL;
+	}
+	return nFunRes;
+}
+
+bool CStockTcpServerActor::isFinishWork()
+{
+	bool bFinishWork = false;
+	if (JobState_End == m_nThreadJobState)
+	{
+		bFinishWork = true;
+	}
+	return bFinishWork;
+
+}
+
+void CStockTcpServerActor::_ThreadJob()
+{
+	switch (m_nThreadJobState)
+	{
+	case JobState_Begin:
+		m_nThreadJobState = JobState_TryRecvData;
+		break;
+	case JobState_TryRecvData:
+		_Do_JobState_TryRecvData();
+		break;
+	case JobState_ProcessRecvData:
+		_Do_JobState_ProcessRecvData();
+		break;
+	case JobState_End:
+		break;
+	default:
+		this->msleep(100);
+		break;
+
+	}//switch
+}
+
+void CStockTcpServerActor::join()
+{
+	while (CStockTcpServerActor::JobState_End != m_nThreadJobState)
+	{
+		this->msleep(10);
+	}
+}
+
+void CStockTcpServerActor::_Do_JobState_TryRecvData()
+{
+	bool bWaitForReadyRead = false;
+	
+	bWaitForReadyRead = m_pSocketHandle->waitForReadyRead();//sleep here
+
+	if (bWaitForReadyRead)
+	{
+		slotReadyRead();
+		m_nThreadJobState = JobState_ProcessRecvData;
+	}
+	else
+	{
+		m_nThreadJobState = JobState_TryRecvData;
+	}
+	
+}
+
+
+void CStockTcpServerActor::_Do_JobState_ProcessRecvData()
+{
+	QMutexLocker lock(&m_mutex_SocketBuffer);	
+
 	qint32 nBytesInByteArray = 0;
 	QDataStream readSocketBuffer(*m_pSocketBuffer);
 	readSocketBuffer.setVersion(QDataStream::Qt_4_0);
@@ -233,23 +311,26 @@ void CStockTcpServerActor::_ProcessRecvBuffer()
 	readSocketBuffer.device()->seek(0);
 
 	nBytesInByteArray = m_pSocketBuffer->size();
-	MYLOG4CPP_DEBUG<<"CStockTcpServerActor::_ProcessRecvBuffer"
+	MYLOG4CPP_DEBUG<<" "<<"m_strID="<<m_pSocketInfo->m_strID
+		<<" "<<"_ProcessRecvBuffer"
 		<<" "<<"nBytesInByteArray="<<nBytesInByteArray;
 
 	//check header  4bytes
 	if (nBytesInByteArray < sizeof(qint32))
 	{
+		m_nThreadJobState = JobState_TryRecvData;
 		return;
 	}
 
 	//get message length 4bytes
 	nMessageLength = 0;
 	readSocketBuffer>>nMessageLength;
-	
+
 	//check recv one message
 	nBytesInByteArray -= sizeof(qint32);
 	if (nBytesInByteArray < nMessageLength)
 	{
+		m_nThreadJobState = JobState_TryRecvData;
 		return;
 	}
 
@@ -264,7 +345,8 @@ void CStockTcpServerActor::_ProcessRecvBuffer()
 	}
 	else
 	{
-		MYLOG4CPP_ERROR<<"nReadRawData="<<nReadRawData
+		MYLOG4CPP_ERROR<<" "<<"m_strID="<<m_pSocketInfo->m_strID
+			<<" "<<"nReadRawData="<<nReadRawData
 			<<" "<<"not nMessageLength="<<nMessageLength;
 	}
 
@@ -276,7 +358,7 @@ void CStockTcpServerActor::_ProcessRecvBuffer()
 
 	if (NULL != pMessage)
 	{
-		MYLOG4CPP_DEBUG<<" "
+		MYLOG4CPP_DEBUG<<" "<<"m_strID="<<m_pSocketInfo->m_strID
 			<<" "<<"class:"<<" "<<"CStockTcpServerActor"
 			<<" "<<"fun:"<<" "<<"slotProcessRecvBuffer"
 			<<" "<<"emit:"<<" "<<"signalProcessMessage"
@@ -285,9 +367,27 @@ void CStockTcpServerActor::_ProcessRecvBuffer()
 		pMessage = NULL;
 	}
 
-	_ProcessRecvBuffer();
+	m_nThreadJobState = JobState_ProcessRecvData;
+	//_Do_JobState_ProcessRecvData();
 }
 
+/*
 
+void CTestMyThreadManager::do_test_mythread_2()
+{
+	CSampleMyQtThread* pMyThreadTest = NULL;
+	pMyThreadTest = new CSampleMyQtThread();
+
+	pMyThreadTest->start();
+
+	pMyThreadTest->join();
+	pMyThreadTest->my_msleep(1000* 10);
+
+	pMyThreadTest->terminateAndWait();
+
+	delete pMyThreadTest;
+	pMyThreadTest = NULL;
+}
+*/
 
 

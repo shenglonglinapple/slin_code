@@ -44,6 +44,11 @@ public:
 	virtual ~CTcpComProtocol();
 public:
 	static QString getUUID();
+public:
+	static QString getStringValue(EMsgType nValue);
+	static QString getStringValue( EDataType nValue );
+	static QString getStringValue( EDataTypeLoginResult nValue );
+	static QString getStringValue( EDataTypeLogoutResult nValue );
 
 };
 

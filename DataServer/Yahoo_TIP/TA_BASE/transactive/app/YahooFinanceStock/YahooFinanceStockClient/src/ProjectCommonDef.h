@@ -14,6 +14,7 @@ typedef qint64 qlonglong;
 typedef quint64 qulonglong;
 */
 
+
 #endif  // __DEF__HISTORY_DATA_SERVER_COMMON_DEF_H_
 
 

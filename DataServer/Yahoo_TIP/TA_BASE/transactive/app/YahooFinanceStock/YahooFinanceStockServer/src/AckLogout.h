@@ -18,6 +18,7 @@ public:
 	static bool checkMsgDataType(qint32 nMessageType, qint32 nDataType);
 	void setValue(const QByteArray* pMessage );
 	QByteArray* getMessage();
+	void logInfo( const QString& fileName, qint32 lineNumber );
 public:
 	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::EMsgType
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
