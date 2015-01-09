@@ -3,7 +3,7 @@
 
 #include <QtCore/QObject>
 
-class CStockTcpClientActor;
+class CDistributeTaskWorker;
 
 class CClientManager : public QObject
 {
@@ -12,7 +12,7 @@ public:
     CClientManager(QObject* parent=0);
 	~CClientManager(void);
 public slots:
-	void slotDeleteConnection(CStockTcpClientActor* pActor);
+	void slotDeleteConnection(CDistributeTaskWorker* pActor);
 public:	
 	void createClient(int nCount);
 };

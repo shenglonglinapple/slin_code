@@ -1,5 +1,6 @@
 #include "MyQtThread.h"
 
+#include <QtCore/QString>
 #include "Log4cppLogger.h"
 
 
@@ -29,7 +30,7 @@ void CMyQtThread::runThread()
 	}
 	catch (std::exception& e)
 	{
-		std::string msg( "runThread(): " );
+		QString  msg( "runThread(): " );
 		msg.append( e.what() );
 		MYLOG4CPP_ERROR<<"runThread(): std::exception  msg="<<msg;
 		return;

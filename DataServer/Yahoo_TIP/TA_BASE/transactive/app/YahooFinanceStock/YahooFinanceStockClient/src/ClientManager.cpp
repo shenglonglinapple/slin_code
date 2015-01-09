@@ -1,5 +1,5 @@
 #include "ClientManager.h"
-#include "StockTcpClientActor.h"
+#include "DistributeTaskWorker.h"
 
 CClientManager::CClientManager( QObject* parent )
 {
@@ -13,16 +13,16 @@ CClientManager::~CClientManager( void )
 
 void CClientManager::createClient(int nCount)
 {
-	CStockTcpClientActor* pActor = NULL;
-	pActor = new CStockTcpClientActor(NULL);
-	QObject::connect(pActor, SIGNAL(signalDeleteConnection(CStockTcpClientActor*)), 
-		this, SLOT(slotDeleteConnection(CStockTcpClientActor*)), Qt::AutoConnection);
-
-	pActor->start();
-	//pClient->connectToServer("192.168.253.130", 5000);
+	for (int nIndex = 0; nIndex < nCount; nIndex++)
+	{
+		CDistributeTaskWorker* pActor = NULL;
+		pActor = new CDistributeTaskWorker("UserName","PassWord","127.0.0.1", 5000, NULL);
+		QObject::connect(pActor, SIGNAL(signalDeleteConnection(CDistributeTaskWorker*)), this, SLOT(slotDeleteConnection(CDistributeTaskWorker*)), Qt::AutoConnection);
+		pActor->start();
+	}
 
 }
-void CClientManager::slotDeleteConnection( CStockTcpClientActor* pActor )
+void CClientManager::slotDeleteConnection( CDistributeTaskWorker* pActor )
 {
 	if (NULL != pActor)
 	{

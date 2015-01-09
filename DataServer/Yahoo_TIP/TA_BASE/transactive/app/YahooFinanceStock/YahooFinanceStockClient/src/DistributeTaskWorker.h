@@ -1,5 +1,5 @@
-#ifndef __CLASS_STOCK_TCP_CLIENT_ACTOR_H__
-#define __CLASS_STOCK_TCP_CLIENT_ACTOR_H__
+#ifndef __CLASS_DISTRIBUTE_TASK_WORKER_H__
+#define __CLASS_DISTRIBUTE_TASK_WORKER_H__
 
 #include "MyQtThread.h"
 
@@ -12,6 +12,8 @@ class CDistributeTaskWorker : public CMyQtThread
     Q_OBJECT
 public:
 	CDistributeTaskWorker(
+		const QString& strUserName,
+		const QString& strPassWord,
 		const QString& strServerIP, 
 		quint16 nServerPort, 
 		QObject* parent=0);
@@ -19,9 +21,9 @@ public:
 	~CDistributeTaskWorker();
 signals:
 	void signalConnectToServer();
-private slots:
-	void slotDisconnected();
-	void slotConnected();
+public slots:
+	void slotDisconnected(qint32 nHandle);
+	void slotConnected(qint32 nHandle);
 public:
 	virtual void run();	
 	virtual void terminate();
@@ -31,9 +33,11 @@ signals:
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;
+	QString m_strUserName;
+	QString m_strPassWord;
 
 	CClientComWorker* m_pComWorker;
 	CMessageManager* m_pMessageManager;
 };
 
-#endif//__CLASS_STOCK_TCP_CLIENT_ACTOR_H__
+#endif//__CLASS_DISTRIBUTE_TASK_WORKER_H__
