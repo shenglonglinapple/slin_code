@@ -1,8 +1,9 @@
 #include "YahuoHistoryReqAck.h"
 
-#include <fstream>
+#include <QtCore/QByteArray>
+#include <QtCore/QDataStream>
 #include <sstream>
-//#include "CurlUtil.h"
+
 #include "BaseException.h"
 
 CYahuoHistoryReqAck::CYahuoHistoryReqAck()
@@ -23,9 +24,9 @@ QString CYahuoHistoryReqAck::getRequestUrl(
 	const QString &rangeType) 
 {
 	QString strUrl;
+	std::stringstream byteUrl;
 
-	std::stringstream url;
-	url << "http://ichart.yahoo.com/table.csv?s="
+	byteUrl << "http://ichart.yahoo.com/table.csv?s="
 		<< strSymbolUse.toStdString()
 		<< "&a="
 		<< startMonth - 1
@@ -43,8 +44,10 @@ QString CYahuoHistoryReqAck::getRequestUrl(
 		<< rangeType.toStdString()
 		<< "&ignore=.csv";
 
-	strUrl = url.str().c_str();
+	strUrl = byteUrl.str().c_str();
 	return strUrl;
+
+	
 	//"http://ichart.finance.yahoo.com/table.csv?s=600155.SS&a=00&b=1&c=2014&d=02&e=1&f=2014";
 }//
 

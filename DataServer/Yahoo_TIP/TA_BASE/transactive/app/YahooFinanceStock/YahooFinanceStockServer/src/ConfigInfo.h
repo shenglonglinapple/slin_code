@@ -28,8 +28,6 @@ public:
 	QString getSQLiteDBPath();
 	void setFileDBPath(const QString& strFileDBPath);
 	QString getFileDBPath();
-	void setLastUpdateTime(const QString& strLastUpdateTime);
-	QString getLastUpdateTime();
 public:
 	QStringList getLstUserInstrument();
 	void setLstUserInstrument(const QStringList& lstStringValue);
@@ -49,7 +47,6 @@ private:
 	QString m_strConfigFileName;
 	QString m_strFileDBPath;
 	QString m_strSQLiteDBPath;
-	QString m_strLastUpdateTime;
 	QStringList m_LstUserInstrument;
 };
 //QT_END_NAMESPACE

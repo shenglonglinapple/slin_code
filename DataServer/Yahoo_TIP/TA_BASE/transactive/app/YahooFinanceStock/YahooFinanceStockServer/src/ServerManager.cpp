@@ -3,8 +3,9 @@
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 
+#include "StockDataManager.h"
 #include "TcpServerWorker.h"
-
+#include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 
 CServerManager* CServerManager::m_pInstance = 0;
@@ -33,32 +34,37 @@ CServerManager::CServerManager()
 	QMutexLocker lock(&m_mutex_MapTcpServerWorker);	
 
 	m_MapTcpServerWorker.clear();
+	CStockDataManager::getInstance();
+	CConfigInfo::getInstance();
 }
 
 CServerManager::~CServerManager()
 {
-	QMutexLocker lock(&m_mutex_MapTcpServerWorker);	
 
-	
-	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
-	quint16 nListenPort = 0;
-	CTcpServerWorker* pData = NULL;
-
-	iterMap = m_MapTcpServerWorker.begin();
-
-	while (iterMap != m_MapTcpServerWorker.end())
 	{
-		nListenPort = iterMap.key();
-		pData = iterMap.value();
+		QMutexLocker lock(&m_mutex_MapTcpServerWorker);	
+		QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+		quint16 nListenPort = 0;
+		CTcpServerWorker* pData = NULL;
 
-		pData->terminateAndWait();
-		delete pData;
-		pData = NULL;
+		iterMap = m_MapTcpServerWorker.begin();
 
-		iterMap++;
-	}//while
+		while (iterMap != m_MapTcpServerWorker.end())
+		{
+			nListenPort = iterMap.key();
+			pData = iterMap.value();
 
-	m_MapTcpServerWorker.clear();
+			pData->terminateAndWait();
+			delete pData;
+			pData = NULL;
+
+			iterMap++;
+		}//while
+		m_MapTcpServerWorker.clear();
+	}
+	CStockDataManager::removeInstance();
+	CConfigInfo::removeInstance();
+
 }
 
 void CServerManager::createServer( quint16 nListenPort )

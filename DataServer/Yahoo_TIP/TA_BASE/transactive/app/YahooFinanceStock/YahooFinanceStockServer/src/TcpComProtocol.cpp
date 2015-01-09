@@ -106,8 +106,23 @@ QString CTcpComProtocol::getStringValue( EDataTypeSynYahooResult nValue )
 	QString strValue;
 	switch (nValue)
 	{
-	case DataType_SynYahooResult_OK:
-		strValue = "DataType_SynYahooResult_OK";
+	case DataType_SynYahooResult_SynYahooStart:
+		strValue = "DataType_SynYahooResult_SynYahooStart";
+		break;
+	case DataType_SynYahooResult_SendReqToYahoo:
+		strValue = "DataType_SynYahooResult_SendReqToYahoo";
+		break;
+	case DataType_SynYahooResult_WaitAckFromYahoo:
+		strValue = "DataType_SynYahooResult_WaitAckFromYahoo";
+		break;
+	case DataType_SynYahooResult_RecvAckFromYahoo:
+		strValue = "DataType_SynYahooResult_RecvAckFromYahoo";
+		break;
+	case DataType_SynYahooResult_ProcessAckFromYahoo:
+		strValue = "DataType_SynYahooResult_ProcessAckFromYahoo";
+		break;
+	case DataType_SynYahooResult_SynYahooFinished:
+		strValue = "DataType_SynYahooResult_SynYahooFinished";
 		break;
 	case DataType_SynYahooResult_ERROR:
 		strValue = "DataType_SynYahooResult_ERROR";

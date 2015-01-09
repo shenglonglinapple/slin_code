@@ -18,13 +18,13 @@ void CAckSynYahoo::_Clear()
 	m_nDataType = CTcpComProtocol::DataType_SynYahoo;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
-	m_nResult = CTcpComProtocol::DataType_SynYahooResult_OK;
+	m_nResult = CTcpComProtocol::DataType_SynYahooResult_SendReqToYahoo;
 }
 
 void CAckSynYahoo::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"CAckLogin:"
+		<<" "<<"CAckSynYahoo:"
 		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID

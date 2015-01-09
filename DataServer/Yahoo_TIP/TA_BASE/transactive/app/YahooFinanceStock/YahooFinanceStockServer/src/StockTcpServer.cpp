@@ -5,7 +5,6 @@
 #include "BaseException.h"
 #include "Log4cppLogger.h"
 
-#include "StockTcpServerActor.h"
 
 
 CStockTcpServer::CStockTcpServer(quint16 nListenPort, QObject *parent)

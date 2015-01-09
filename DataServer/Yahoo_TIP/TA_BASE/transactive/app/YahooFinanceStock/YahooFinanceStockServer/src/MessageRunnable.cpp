@@ -16,6 +16,7 @@
 #include "Log4cppLogger.h"
 
 #include "ProjectEnvironment.h"
+#include "YahooDataLoader.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
 {
@@ -108,8 +109,6 @@ void CMessageRunnable::_ProcessMessage_ReqLogin()
 	pReqLogin = new CReqLogin();
 	pReqLogin->setValue(m_pMessage);
 	pReqLogin->logInfo(__FILE__, __LINE__);
-
-	CProjectEnviroment::getInstance().qtWaitTime(1000*3);
 
 	_ProcessReq(pReqLogin);
 
@@ -229,6 +228,7 @@ void CMessageRunnable::_ProcessReq(const CReqLogin* pReq )
 	CAckLogin* pAckLogin = NULL;
 	QByteArray* pByteArray = NULL;
 
+
 	pAckLogin = new CAckLogin();
 
 	pAckLogin->m_nMessageType = CTcpComProtocol::MsgType_Ack;
@@ -282,27 +282,53 @@ void CMessageRunnable::_ProcessReq( const CReqSynYahoo* pReq )
 {
 	CAckSynYahoo* pAck = NULL;
 	QByteArray* pByteArray = NULL;
+	CYahooDataLoader* pYahooDataLoader = NULL;
+	CTcpComProtocol::EDataTypeSynYahooResult nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooStart;
+
+	pYahooDataLoader = new CYahooDataLoader(pReq->m_strSymbolUse);
 
 	pAck = new CAckSynYahoo();
-
 	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
 	pAck->m_nDataType = CTcpComProtocol::DataType_SynYahoo;
-	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAck->m_strReqUUID = pReq->m_strReqUUID;
-	pAck->m_nResult = CTcpComProtocol::DataType_SynYahooResult_OK;
+	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+	pAck->m_nResult = nSynYahooResult;
 	pAck->logInfo(__FILE__, __LINE__);
-
 	pByteArray = pAck->getMessage();
-
 	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
+	pYahooDataLoader->synDataWithYahoo();
 
+	while (1)
+	{
+		CProjectEnviroment::getInstance().qtWaitTime(100);
+		nSynYahooResult = pYahooDataLoader->getState_SynDataWithYahoo();
+		pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+		pAck->m_nResult = nSynYahooResult;
+		pAck->logInfo(__FILE__, __LINE__);
+		pByteArray = pAck->getMessage();
+		pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
+		pByteArray = NULL;
 
+		if (CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished == nSynYahooResult
+			|| CTcpComProtocol::DataType_SynYahooResult_ERROR == nSynYahooResult)
+		{
+			break;//while
+		}
+	}//while
+
+	if (NULL != pYahooDataLoader)
+	{
+		delete pYahooDataLoader;
+		pYahooDataLoader = NULL;
+	}
+	
 	pByteArray = NULL;
 	if (NULL != pAck)
 	{
 		delete pAck;
 		pAck = NULL;
 	}
+
 
 }
 //////////////////////////////////////////////////////////////////////////

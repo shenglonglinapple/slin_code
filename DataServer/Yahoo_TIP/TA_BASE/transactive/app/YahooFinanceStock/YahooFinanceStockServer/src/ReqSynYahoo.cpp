@@ -39,7 +39,7 @@ bool CReqSynYahoo::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 void CReqSynYahoo::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"CReqLogin:"
+		<<" "<<"CReqSynYahoo:"
 		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID

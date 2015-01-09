@@ -7,7 +7,6 @@
 #include "Log4cppLogger.h"
 
 #include "TcpSocketHelper.h"
-#include "MsgManager.h"
 #include "SocketInfo.h"
 
 CServerComWorker::CServerComWorker(qint32 handle, QObject* parent/*=0*/ )

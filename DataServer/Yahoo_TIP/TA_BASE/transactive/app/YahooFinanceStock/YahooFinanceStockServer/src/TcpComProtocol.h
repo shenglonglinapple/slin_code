@@ -44,8 +44,13 @@ public:
 	//4 Bytes
 	enum EDataTypeSynYahooResult
 	{
-		DataType_SynYahooResult_OK  = 0x00000000,
-		DataType_SynYahooResult_ERROR  = 0x00000001,
+		DataType_SynYahooResult_SynYahooStart = 0x00000000,
+		DataType_SynYahooResult_SendReqToYahoo  = 0x00000001,
+		DataType_SynYahooResult_WaitAckFromYahoo  = 0x00000002,
+		DataType_SynYahooResult_RecvAckFromYahoo  = 0x00000003,
+		DataType_SynYahooResult_ProcessAckFromYahoo  = 0x00000004,
+		DataType_SynYahooResult_SynYahooFinished  = 0x00000005,
+		DataType_SynYahooResult_ERROR  = 0x00000006,
 		DataType_SynYahooResult_Unknown  = 0x0FFFFFFF,
 	};
 public:

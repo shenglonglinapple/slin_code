@@ -31,7 +31,6 @@
 #include "ProjectEnvironment.h"
 
 
-
 int main(int argc, char *argv[])
 {
 	qint32 nFunRes = 0;
