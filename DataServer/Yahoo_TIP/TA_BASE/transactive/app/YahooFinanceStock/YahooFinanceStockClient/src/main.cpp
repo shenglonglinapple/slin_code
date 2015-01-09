@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	CClientManager* pClientManager = NULL;
 	pClientManager = new CClientManager();
 
-	pClientManager->createClient(10);
+	pClientManager->createClient(1);
 
     nFunRes = app.exec();
 	CProjectEnviroment::removeInstance();

@@ -46,7 +46,7 @@ QString CBaseException::getString()
 void CBaseException::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_ERROR_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"process Exception"<<" "<<m_strException;
+		<<" "<<"CBaseException:"<<" "<<m_strException;
 }
 
 QString CBaseException::errorCodeAsString(qint32 nErrorCode)

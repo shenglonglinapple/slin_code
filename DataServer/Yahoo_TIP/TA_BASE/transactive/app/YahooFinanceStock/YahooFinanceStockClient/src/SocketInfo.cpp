@@ -55,7 +55,7 @@ void CSocketInfo::logInfo( const QString& fileName, qint32 lineNumber )
 */
 	// " "<<"["<<__FILE__<<":"<<__LINE__<<"]"<<" "
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"SocketInfo:"
+		<<" "<<"CSocketInfo:"
 		<<" "<<"m_strID="<<m_strID;
 }
 

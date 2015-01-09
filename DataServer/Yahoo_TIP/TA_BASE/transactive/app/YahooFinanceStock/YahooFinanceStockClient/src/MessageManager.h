@@ -21,6 +21,7 @@ public:
 	void sendMessage(qint32 handle, QByteArray* pMessage);
 public:
 	void sendReqLogin(qint32 handle,	const QString& strUserName,	const QString& strPassWord);
+	void sendReqSynYahoo( qint32 handle, const QString& strSymbolUse);
 private:
 	QThreadPool* m_pThreadPool;
 };

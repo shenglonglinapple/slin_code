@@ -10,6 +10,7 @@
 
 #include "MessageRunnable.h"
 #include "ReqLogin.h"
+#include "ReqSynYahoo.h"
 #include "Log4cppLogger.h"
 
 
@@ -80,6 +81,29 @@ void CMessageManager::sendReqLogin( qint32 handle, const QString& strUserName, c
 	pReq->m_strACKUUID = "NULL";
 	pReq->m_strUserName = strUserName;
 	pReq->m_strPassword = strPassWord;
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+
+	this->sendMessage(handle, pByteArray);
+
+	pByteArray = NULL;
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
+void CMessageManager::sendReqSynYahoo( qint32 handle, const QString& strSymbolUse)
+{	
+	CReqSynYahoo* pReq = NULL;
+	QByteArray* pByteArray = NULL;
+	pReq = new CReqSynYahoo();
+
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strSymbolUse = strSymbolUse;//"000001.SZ";
 	pReq->logInfo(__FILE__, __LINE__);
 	pByteArray = pReq->getMessage();
 

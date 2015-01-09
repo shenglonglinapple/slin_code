@@ -285,7 +285,7 @@ void CMessageRunnable::_ProcessReq( const CReqSynYahoo* pReq )
 	pAck->m_nDataType = CTcpComProtocol::DataType_SynYahoo;
 	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAck->m_strReqUUID = pReq->m_strReqUUID;
-	pAck->m_nResult = CTcpComProtocol::DataType_SynYahooResult_OK;
+	pAck->m_nResult = CTcpComProtocol::DataType_SynYahooResult_Unknown;
 	pAck->logInfo(__FILE__, __LINE__);
 
 	pByteArray = pAck->getMessage();
@@ -305,7 +305,10 @@ void CMessageRunnable::_ProcessReq( const CReqSynYahoo* pReq )
 void CMessageRunnable::processAck( const CAckLogin* pAck )
 {
 	//TODO.For.Test
-	pMessageManagerRef->sendReqLogin(m_nHanle, "UserName", "PassWord");
+	//pMessageManagerRef->sendReqLogin(m_nHanle, "UserName", "PassWord");
+	pMessageManagerRef->sendReqSynYahoo(m_nHanle, "000001.SZ");
+	
+
 
 	return;
 }

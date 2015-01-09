@@ -16,8 +16,7 @@ static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_filedbpath = "filedbpath";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_filedbpath_defValue = "C:/LSL/LSL_DATA/SaveDataFile/";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath = "sqlitedbpath";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath_defValue = "C:/LSL/LSL_DATA/SaveDataSqliteDB/";
-static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime = "lastupdatetime";
-static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime_defValue = "1970-01-01 08:00:00";
+
 //static const char* DEF_VALUE_STRING_UTC_START_DATE_TIME = "1970-01-01 08:00:00";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument = "userinstrument";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument_defValue = "";//5614,5378
@@ -111,7 +110,7 @@ QString CConfigInfo::getSQLiteDBPath()
 	QString strKey;
 	QString strValue;
 
-	if (m_strFileDBPath.isEmpty())
+	if (m_strSQLiteDBPath.isEmpty())
 	{
 		strGroup = DEF_VALUE_CONFIG_GROUP_config;
 		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath;
@@ -143,50 +142,10 @@ void CConfigInfo::setSQLiteDBPath(const QString& strSQLiteDBPath)
 }
 
 
-QString CConfigInfo::getLastUpdateTime()
-{
-	int nFunRes = 0;
-	QString strGroup;
-	QString strKey;
-	QString strValue;
-
-	if (m_strLastUpdateTime.isEmpty())
-	{
-		strGroup = DEF_VALUE_CONFIG_GROUP_config;
-		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime;
-		strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime_defValue;
-		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
-		if (0 != nFunRes)
-		{
-			strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime_defValue;
-		}
-		m_strLastUpdateTime = strValue;
-	}
-
-	return m_strLastUpdateTime;
-
-}
-void CConfigInfo::setLastUpdateTime( const QString& strLastUpdateTime )
-{
-	QMutexLocker lock(&m_mutexConfigFileHandle);
-	QString strGroup;
-	QString strKey;
-
-	//if (strLastUpdateTime != m_strLastUpdateTime)
-	{
-		strGroup = DEF_VALUE_CONFIG_GROUP_config;
-		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_lastupdatetime;
-		CCfgFileUtil::getInstance().write(m_strConfigFileName, strGroup, strKey, strLastUpdateTime);
-	}
-	m_strLastUpdateTime = strLastUpdateTime;
-}
-
-
 void CConfigInfo::_LoadDataFromCfgFile()
 {
 	getFileDBPath();
 	getSQLiteDBPath();
-	getLastUpdateTime();
 	getLstUserInstrument();
 }
 
@@ -198,8 +157,6 @@ void CConfigInfo::_WriteDataToCfgFile()
 	setFileDBPath(strValue);
 	strValue = m_strSQLiteDBPath;
 	setSQLiteDBPath(strValue);
-	strValue = m_strLastUpdateTime;
-	setLastUpdateTime(strValue);
 	strLstValue = m_LstUserInstrument;
 	setLstUserInstrument(strLstValue);
 
