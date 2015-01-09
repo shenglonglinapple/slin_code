@@ -1,0 +1,8 @@
+﻿<Window x:Class="AnalyselogFileWPF.MenuWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+    Title="MenuWindow" Height="354" Width="372">
+    <Grid>
+        <Button Height="44" Margin="71,59,96,0" Name="buttonAnalyseLogFileWindow" VerticalAlignment="Top" Click="buttonAnalyseLogFileWindow_Click">AnalyseLogFileWindow</Button>
+    </Grid>
+</Window>

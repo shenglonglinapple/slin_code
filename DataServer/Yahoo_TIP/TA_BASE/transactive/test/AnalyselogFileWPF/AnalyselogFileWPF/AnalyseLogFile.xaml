@@ -1,0 +1,29 @@
+﻿<Window x:Class="AnalyselogFileWPF.AnalyseLogFile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="AnalyselogFileWPF" Height="482" Width="800"
+    TabIndex="100" Left="100" Top="100"
+    Loaded="AnalyselogFileWPF_Loaded">
+    <Grid>       
+        
+        <Label          Height="30" Width="80"  Margin="10,10,10,0"                          HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="0"
+                        Name="labelPath"  >Path:</Label>
+        
+        <TextBox        Height="30" Width="600"  Margin="100,10,10,0"
+                        HorizontalAlignment="Left"  VerticalAlignment="Top"  TabIndex="1"
+                        Name="textBoxPath" Text="D://logPath//"/>
+        
+        <Label          Height="30" Width="80"  Margin="10,50,10,0"                          HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="2"
+                        Name="labelFileName" >FileName</Label>
+        
+        <TextBox        IsReadOnly="True"  Height="30" Width="200"  Margin="100,50,10,0"                          HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="3"
+                        Name="textBoxFileName" Text="*.log"/>
+
+        <Label          Height="28" Width="280" Margin="322,50,0,0"
+                        HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="6"
+                        Name="labelLogFileNameeg">eg: (*.log) (SynchEngineLog.28512.2.log)</Label>
+        <Button         Height="30" Width="180"  Margin="12,171,0,0"                          HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="5"
+                        Name="buttonOneThreadOnefile" Click="buttonOneThreadOnefile_Click">OneThreadOnefile</Button>
+    </Grid> 
+
+</Window>
