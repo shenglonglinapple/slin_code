@@ -17,11 +17,11 @@ public:
 signals:
 
 public slots:
-	void printNewData(QNetworkReply* reply);
+	void slotFinished(QNetworkReply* reply);
 
 public:
-	void getDataForCompany(QString companyName, QDate startDate, QDate endDate);
 	void test();
+	void getData(const QString& strUrl);
 private:
 	QNetworkAccessManager* m_pNetworkAccessManager;
 };

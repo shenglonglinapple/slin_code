@@ -34,6 +34,9 @@ QString CTcpComProtocol::getStringValue( EMsgType nValue )
 	case MsgType_Ack:
 		strValue = "MsgType_Ack";
 		break;
+	case MsgType_Notify:
+		strValue = "MsgType_Notify";
+		break;
 	case MsgType_Unknown:
 		strValue = "MsgType_Unknown";
 		break;
@@ -93,6 +96,24 @@ QString CTcpComProtocol::getStringValue( EDataTypeLogoutResult nValue )
 		break;
 	case DataType_LogoutResult_Unknown:
 		strValue = "DataType_LogoutResult_Unknown";
+		break;
+	}
+	return strValue;
+}
+
+QString CTcpComProtocol::getStringValue( EDataTypeSynYahooResult nValue )
+{
+	QString strValue;
+	switch (nValue)
+	{
+	case DataType_SynYahooResult_OK:
+		strValue = "DataType_SynYahooResult_OK";
+		break;
+	case DataType_SynYahooResult_ERROR:
+		strValue = "DataType_SynYahooResult_ERROR";
+		break;
+	case DataType_SynYahooResult_Unknown:
+		strValue = "DataType_SynYahooResult_Unknown";
 		break;
 	}
 	return strValue;

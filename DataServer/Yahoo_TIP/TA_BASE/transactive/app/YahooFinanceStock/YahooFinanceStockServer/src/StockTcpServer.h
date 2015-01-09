@@ -10,18 +10,17 @@ class CStockTcpServer : public QTcpServer
     Q_OBJECT
 
 public:
-    CStockTcpServer(QObject* parent = 0);
-	virtual ~CStockTcpServer();
-public slots:
-	void slotDeleteConnection(CStockTcpServerActor* pActor);
+	CStockTcpServer(quint16 nListenPort, QObject *parent);
+	~CStockTcpServer();
+signals:
+	void signalIncomingConnection(qint32 handle);
 public:
 	void startListen();
 	void stopListen();
-
 protected:
     void incomingConnection(qint32 handle);
-public:
-	quint16 m_nServerPort;
+private:
+	quint16 m_nListenPort;
 };
 
 

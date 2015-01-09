@@ -25,7 +25,7 @@
 
 
 
-#include "StockTcpServer.h"
+#include "ServerManager.h"
 
 #include "BaseException.h"
 #include "ProjectEnvironment.h"
@@ -37,26 +37,15 @@ int main(int argc, char *argv[])
 	qint32 nFunRes = 0;
     QApplication app(argc, argv);
 	CProjectEnviroment::getInstance();
-	CStockTcpServer* pServer = NULL;
-	pServer = new CStockTcpServer();
 
-	try
-	{
-		pServer->startListen();
-	}
-	catch (CBaseException& e)
-	{
-		e.logInfo(__FILE__, __LINE__);
-	}
+	CServerManager::getInstance();
+	CServerManager::getInstance().createServer(5000);
 
     nFunRes = app.exec();
 
-	if (NULL != pServer)
-	{
-		pServer->stopListen();
-		delete pServer;
-		pServer = NULL;
-	}
+	CServerManager::getInstance().destoryServer(5000);
+	CServerManager::removeInstance();
+
 	CProjectEnviroment::removeInstance();
 
 	return 0;

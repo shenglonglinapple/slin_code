@@ -8,10 +8,10 @@
 #include "StockTcpServerActor.h"
 
 
-CStockTcpServer::CStockTcpServer(QObject *parent)
+CStockTcpServer::CStockTcpServer(quint16 nListenPort, QObject *parent)
     : QTcpServer(parent)
 {
-	m_nServerPort = 5000;
+	m_nListenPort = nListenPort;
 }
 
 
@@ -21,9 +21,9 @@ CStockTcpServer::~CStockTcpServer()
 
 void CStockTcpServer::startListen()
 {
-	if (false == this->listen(QHostAddress::Any, m_nServerPort)) 
+	if (false == this->listen(QHostAddress::Any, m_nListenPort)) 
 	{
-		MYLOG4CPP_ERROR<<"Unable to Start Server TCP Listen Port="<<m_nServerPort;
+		MYLOG4CPP_ERROR<<"Unable to Start Server TCP Listen Port="<<m_nListenPort;
 
 		//Unable to start the server
 		throw CBaseException(__FILE__, __LINE__, this->errorString());
@@ -44,33 +44,12 @@ void CStockTcpServer::stopListen()
 
 void CStockTcpServer::incomingConnection(qint32 handle)
 {
-	CStockTcpServerActor* pActor = NULL;
+	MYLOG4CPP_DEBUG<<" "
+		<<" "<<"class:"<<" "<<"CStockTcpServer"
+		<<" "<<"fun:"<<" "<<"incomingConnection"
+		<<" "<<"emit:"<<" "<<"signalIncomingConnection"
+		<<" "<<"param:"<<" "<<"handle="<<handle;
 
-	try
-	{
-		pActor = new CStockTcpServerActor(handle, this);
-		QObject::connect(pActor, SIGNAL(signalDeleteConnection(CStockTcpServerActor*)), 
-			this, SLOT(slotDeleteConnection(CStockTcpServerActor*)), Qt::AutoConnection);
-		pActor->start();
-	}
-	catch (CBaseException& e)
-	{
-		e.logInfo(__FILE__, __LINE__);
-		if (NULL != pActor)
-		{
-			delete pActor;
-			pActor = NULL;
-		}
-	}
-	
+	emit signalIncomingConnection(handle);
 }
 
-void CStockTcpServer::slotDeleteConnection( CStockTcpServerActor* pActor )
-{
-	if (NULL != pActor)
-	{
-		pActor->terminateAndWait();
-		delete pActor;
-		pActor = NULL;
-	}
-}
