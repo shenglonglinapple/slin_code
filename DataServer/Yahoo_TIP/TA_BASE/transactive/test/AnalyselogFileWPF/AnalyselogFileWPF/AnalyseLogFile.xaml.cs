@@ -56,7 +56,7 @@ namespace AnalyselogFileWPF
             this.m_strButtonRunInitText = "OneThreadOneFile";
             this.m_strButtonRunClickText = "Run...";
             this.m_strLogPath = "";//"D:\\Temp\\logPath\\";
-            this.m_strLogFileExtenName = "*.log";
+            this.m_strLogFileExtenName = "*.*";//"*.log";
             this.m_strDstLogPath = "./DstLogPath/";
             this.m_strSysLog = "./DstLogPath/ThreadInfoLog.log";
             this.m_logHandle = null;
@@ -99,11 +99,7 @@ namespace AnalyselogFileWPF
             this.m_strLogPath = this.textBoxPath.Text;
             this.m_strLogFileExtenName = this.textBoxFileName.Text;
 
-            //lsl for test
-            //this.m_strLogPath = "D:\\Temp\\logPath\\";
-            //this.m_strLogFileExtenName = "*.log";//s_mylog2013.2.log
-            
-         
+            //lsl for test         
             this.m_backgroundWorkerAnalystFile.RunWorkerAsync();
 
 		}//buttonRun_Click
@@ -218,12 +214,12 @@ namespace AnalyselogFileWPF
         {
             int nFunRes = 0;
             System.String strLogFullName = "";//D:\\Temp\\logPath\\Sever_log.log.002 Sever_log.log
-			System.String strLogFileName = "";   //s_SynchEngineLog.3004.11.log
-            System.String strLogPidIndexTail = "";//3004.11.log
-            System.String strLogIndexTail = "";//11.log
-            System.String strLogIndex = "";//11
+            System.String strLogFileName = "";   //Sever_log.log.002
+            System.String strLogFileExtern = "";//002
+            int nLogFileExtern = -1;//2
+
             int nLogIndex = -1;//2
-            int nfindSunStr = -1;
+            int nMaxTemp = 10000;
 
             //Sever_log.log      2015-01-21
             //Sever_log.log.001  2015-01-20
@@ -235,61 +231,29 @@ namespace AnalyselogFileWPF
 
                 foreach (FileInfo item in filelist)
                 {
-                    nfindSunStr = -1;
                     strLogFullName = item.FullName;
 					strLogFileName = item.Name;
+                    strLogFileExtern = item.Extension;
 
-                    //D:\\Temp\\logPath\\s_SynchEngineLog.3004.11.log
-					if (strLogFileName.Length > 0)
+                    //D:\\Temp\\logPath\\Sever_log.log.002 Sever_log.log
+                    if (".log" == strLogFileExtern)
                     {
-                        nfindSunStr = -1;
-						nfindSunStr = strLogFileName.IndexOf(".");
+                        nLogFileExtern = nMaxTemp;
+                        nLogIndex = nLogFileExtern;
                     }
-
-                    if (nfindSunStr > 0)
+                    else
                     {
-                        //3004.11.log
-						strLogPidIndexTail = strLogFileName.Substring(nfindSunStr + 1);//去掉后缀名。
-                        nfindSunStr = -1;
+                        strLogFileExtern = strLogFileExtern.Substring(strLogFileExtern.IndexOf(".")+1);
+                        nLogFileExtern = int.Parse(strLogFileExtern);
+                        nLogIndex = nMaxTemp - nLogFileExtern;
                     }
-
-                    //get PID
-                    //3004.11.log
-                     if (strLogPidIndexTail.Length > 0)
-                    {
-                        nfindSunStr = -1;
-                        nfindSunStr = strLogPidIndexTail.IndexOf(".");
-                    }
-                    if (nfindSunStr > 0)
-                    {
-                        //11
-                        strLogIndexTail = strLogPidIndexTail.Substring(nfindSunStr + 1);//remove PID
-                        nfindSunStr = -1;
-                    }
-
                     
-                    //get index
-                    //11.log
-                    if (strLogIndexTail.Length > 0)
-                    {
-                        nfindSunStr = -1;
-                        nfindSunStr = strLogIndexTail.IndexOf(".");
-                    }
-                    if (nfindSunStr > 0)
-                    {
-                        //11
-                        strLogIndex = strLogIndexTail.Substring(0, nfindSunStr);//get index
-                        nfindSunStr = -1;
-                    }
 
                     //add to map
-                    if (strLogIndex.Length > 0)
                     {
-                        //11
-                        //D:\\Temp\\logPath\\s_SynchEngineLog.3004.11.log
-
-                        nfindSunStr = -1;
-                        nLogIndex = int.Parse(strLogIndex);
+                        //002
+                        //10000
+                        //D:\\Temp\\logPath\\Sever_log.log.002 Sever_log.log
                         logIndexFileMap.Add(nLogIndex, strLogFullName);                   
                     }
 
@@ -394,51 +358,6 @@ namespace AnalyselogFileWPF
             return nFunRes;
         }//AnalyseFile
 
-
-
-        /// <summary>
-        /// get file time
-        /// </summary>
-        /// <param name="strLogFileLine"></param>
-        /// <returns></returns>
-        private System.String getFileFirstLineTime(System.String strFileName, System.String strLogFileLine)
-        {
-            System.String strLogFileLineSub = "";
-            System.String strThrdNum = "";
-            int nfindSunStr = -1;
-
-
-            //	01/04/2013 17:09:18:265 [DEBUG] [Thrd: 5476] d:\stecode_pra\3001_tip_new\ta_base\transactive\app\dbsynchnewserver\maqlib\src\oracleconnection.cpp:92: [strDbConnectionStr=Oracle:TRA_OCC:IT271350_5:IT271350_5]
-            if (strLogFileLine.Length > 0)
-            {
-                nfindSunStr = -1;
-                nfindSunStr = strLogFileLine.IndexOf("[Thrd:");
-            }
-            if (nfindSunStr > 0)
-            {
-                //[Thrd: 5476] d:\stecode_pra\3001_tip_new\ta_base\transactive\app\dbsynchnewserver\maqlib\src\oracleconnection.cpp:92: [strDbConnectionStr=Oracle:TRA_OCC:IT271350_5:IT271350_5]
-                strLogFileLineSub = strLogFileLine.Substring(nfindSunStr);
-                nfindSunStr = -1;
-            }
-
-
-            if (strLogFileLineSub.Length > 0)
-            {
-                nfindSunStr = -1;
-                nfindSunStr = strLogFileLineSub.IndexOf("]");
-            }
-            if (nfindSunStr > 0)
-            {
-                //[Thrd: 5476]
-                strThrdNum = strLogFileLineSub.Substring(0, nfindSunStr + 1);
-
-                nfindSunStr = -1;
-            }
-
-            return strThrdNum;
-        }//AnalyseFile
-        
-        
         
         
         /// <summary>

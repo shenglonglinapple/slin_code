@@ -17,11 +17,11 @@
                         Name="labelFileName" >FileName</Label>
         
         <TextBox        IsReadOnly="True"  Height="30" Width="200"  Margin="100,50,10,0"                          HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="3"
-                        Name="textBoxFileName" Text="*.log"/>
+                        Name="textBoxFileName" Text="*.*"/>
 
         <Label          Height="28" Width="280" Margin="322,50,0,0"
                         HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="6"
-                        Name="labelLogFileNameeg">eg: (*.log) (SynchEngineLog.28512.2.log)</Label>
+                        Name="labelLogFileNameeg">eg: (*.*) (Sever_log.log.001 Sever_log.log)</Label>
         <Button         Height="30" Width="180"  Margin="12,171,0,0"                          HorizontalAlignment="Left"  VerticalAlignment="Top" TabIndex="5"
                         Name="buttonOneThreadOnefile" Click="buttonOneThreadOnefile_Click">OneThreadOnefile</Button>
     </Grid> 
