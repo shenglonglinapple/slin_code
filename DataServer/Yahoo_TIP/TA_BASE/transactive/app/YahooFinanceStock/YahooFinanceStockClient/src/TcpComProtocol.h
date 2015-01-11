@@ -22,7 +22,8 @@ public:
 	{
 		DataType_Login  = 0x00000000,
 		DataType_LogOut  = 0x00000001,
-		DataType_SynYahoo  = 0x00000002,
+		DataType_DownLoadStock  = 0x00000002,
+		DataType_SynYahoo  = 0x00000003,
 		DataType_Unknown  = 0x0FFFFFFF,
 	};
 

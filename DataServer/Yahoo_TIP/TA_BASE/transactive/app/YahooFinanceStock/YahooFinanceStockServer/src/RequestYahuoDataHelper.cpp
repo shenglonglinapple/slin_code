@@ -69,6 +69,7 @@ void CRequestYahuoDataHelper::getStartEndTimeValue(
 	m_pQtTimeHelper->getTimeInfo_Qt(nTimeNow, endYear, endMonth, endDay);
 	m_pQtTimeHelper->getTimeInfo_Qt(nTimeLastUpdateDateTime, startYear, startMonth, startDay);
 
+	
 }
 
 

@@ -69,8 +69,7 @@ void CYahooDataLoader::sendRequest(const QString& strUrl)
 
 	m_pNetworkRequest->setUrl(QUrl(strUrl));
 	m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SendReqToYahoo;
-	MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult)
-		<<" "<<"strUrl="<<strUrl;
+	MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult)<<" "<<"strUrl="<<strUrl;
 
 	m_pNetworkAccessManager->get(*m_pNetworkRequest);
 	m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_WaitAckFromYahoo;
@@ -84,13 +83,32 @@ void CYahooDataLoader::slotFinished(QNetworkReply* reply)
 
 	QByteArray bytes = reply->readAll();
 	QString strHistoryData = QString(bytes);
+	
 	MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult);
 		//<<" "<<"strHistoryData="<<strHistoryData;
 
-	CStockDataManager::getInstance().doWork_Save_HistoryData(m_strSymbolUse, strHistoryData);
-
-
-	m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished;
+	//check res
+	if (strHistoryData.isEmpty())
+	{
+		m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished;
+	}
+	else if (strHistoryData.contains("html"))
+	{
+		QString strUrl = m_pNetworkRequest->url().toString();
+		if (strUrl.isEmpty())
+		{
+			m_strRequestUrl = strUrl;
+		}
+		MYLOG4CPP_ERROR<<"Reply contain html, strUrl="<<strUrl;
+		MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult)
+			<<" "<<"strHistoryData="<<strHistoryData;
+		m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished;
+	}
+	else
+	{
+		CStockDataManager::getInstance().doWork_Save_HistoryData(m_strSymbolUse, strHistoryData);
+		m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished;
+	}
 
 }
 
@@ -125,6 +143,9 @@ void CYahooDataLoader::synDataWithYahoo()
 		YahuoReqAck::daily);
 
 	this->sendRequest(strRequestUrl);
+	m_strRequestUrl = strRequestUrl;
+	//MYLOG4CPP_DEBUG<<"m_strRequestUrl="<<m_strRequestUrl;
+
 
 }
 

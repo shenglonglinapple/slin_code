@@ -7,11 +7,12 @@
 class CReqLogin;
 class CReqLogout;
 class CReqSynYahoo;
-
+class CReqDownLoadStock;
 
 class CAckLogin;
 class CAckLogout;
 class CAckSynYahoo;
+class CAckDownLoadStock;
 
 class CMessageManager;
 
@@ -33,21 +34,25 @@ private:
 	void _ProcessMessage_ReqLogin();
 	void _ProcessMessage_ReqLogout();
 	void _ProcessMessage_ReqSynYahoo();
+	void _ProcessMessage_ReqDownLoadStock();
 private:
 	void _ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType);
 	void _ProcessMessage_AckLogin();
 	void _ProcessMessage_AckLogout();
 	void _ProcessMessage_AckSynYahoo();
+	void _ProcessMessage_AckDownLoadStock();
 
 
 public:
 	void _ProcessReq(const CReqLogin* pReq);
 	void _ProcessReq(const CReqLogout* pReq);
 	void _ProcessReq(const CReqSynYahoo* pReq);
+	void _ProcessReq(const CReqDownLoadStock* pReq);
 public:
 	void processAck(const CAckLogin* pAck);
 	void processAck(const CAckLogout* pAck);
 	void processAck(const CAckSynYahoo* pAck);
+	void processAck(const CAckDownLoadStock* pAck);
 
 private:
 	qint32 m_nHanle;

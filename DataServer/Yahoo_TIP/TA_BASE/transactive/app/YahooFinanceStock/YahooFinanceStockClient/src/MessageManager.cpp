@@ -11,6 +11,7 @@
 #include "MessageRunnable.h"
 #include "ReqLogin.h"
 #include "ReqSynYahoo.h"
+#include "ReqDownLoadStock.h"
 #include "Log4cppLogger.h"
 
 
@@ -104,6 +105,28 @@ void CMessageManager::sendReqSynYahoo( qint32 handle, const QString& strSymbolUs
 	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
 	pReq->m_strACKUUID = "NULL";
 	pReq->m_strSymbolUse = strSymbolUse;//"000001.SZ";
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+
+	this->sendMessage(handle, pByteArray);
+
+	pByteArray = NULL;
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
+void CMessageManager::sendReqDownLoadStock(qint32 handle)
+{
+	CReqDownLoadStock* pReq = NULL;
+	QByteArray* pByteArray = NULL;
+	pReq = new CReqDownLoadStock();
+
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
 	pReq->logInfo(__FILE__, __LINE__);
 	pByteArray = pReq->getMessage();
 

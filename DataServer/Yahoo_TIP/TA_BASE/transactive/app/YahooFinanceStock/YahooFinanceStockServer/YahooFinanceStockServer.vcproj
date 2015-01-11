@@ -858,6 +858,14 @@
 			Name="ReqAck"
 			>
 			<File
+				RelativePath=".\src\AckDownLoadStock.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AckDownLoadStock.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AckLogin.cpp"
 				>
 			</File>
@@ -879,6 +887,14 @@
 			</File>
 			<File
 				RelativePath=".\src\AckSynYahoo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqDownLoadStock.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqDownLoadStock.h"
 				>
 			</File>
 			<File

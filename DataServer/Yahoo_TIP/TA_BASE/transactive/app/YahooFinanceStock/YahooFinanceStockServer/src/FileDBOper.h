@@ -22,6 +22,7 @@ public:
 	QString  getSavaDataPath();
 	QString getLastUpdateTime();
 	void getLastUpdateLine(const QString & strFileName, QString& strLineLastDate);
+	void createFile(const QString & strFileName);
 private:
 	QString m_strSaveDataPath;
 	QString m_strSymbolUse;

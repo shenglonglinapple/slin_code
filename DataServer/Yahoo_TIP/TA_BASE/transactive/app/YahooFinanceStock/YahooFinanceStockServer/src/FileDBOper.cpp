@@ -1,12 +1,17 @@
 #include "FileDBOper.h"
 
+#include <iostream>	
+#include <string>
+#include <sstream>
+#include <fstream>
+
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 
 #include "ConfigInfo.h"
-
+#include "Log4cppLogger.h"
 
 static const char* DEF_VALUE_STRING_UTC_START_DATE = "1970-01-01";
 static const char* DEF_VALUE_STRING_UTC_START_TIME = "08:00:00";
@@ -89,17 +94,41 @@ void CFileDBOper::getAllDataFromFile(const QString & strFileName, QStringList& s
 	//1991-01-02,15.63,15.63,15.63,15.63,1053200,0.01
 
 }
+
+void CFileDBOper::createFile(const QString & strFileName)
+{
+	QFile file(strFileName);
+	if (file.exists())
+	{
+		return;
+	}
+	file.open(QIODevice::WriteOnly );
+	file.close();//create file
+	return;
+	
+	/*
+	std::ofstream streamSaveDataFileName;
+	streamSaveDataFileName.open(strFileName.toStdString().c_str(), std::ios::out | std::ios::app);
+	if (streamSaveDataFileName.is_open())
+	{
+		streamSaveDataFileName.close();
+	}
+	*/
+
+}
+
 void CFileDBOper::saveDataToFile(const QString & strFileName, const QStringList& strListHistoryDataTmp)
 {
+	createFile(strFileName);
 
 	QFile file(strFileName);
-	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))//Append QIODevice::WriteOnly 
 	{
+		MYLOG4CPP_ERROR<<"not find file strFileName="<<strFileName;
 		return;
 	}
 
 	QTextStream streamWrite(&file);
-	streamWrite << "The magic number is: " << 49 << "\n";
 
 	foreach (const QString& strLine, strListHistoryDataTmp)
 	{

@@ -6,10 +6,12 @@
 #include "ReqLogin.h"
 #include "ReqLogout.h"
 #include "ReqSynYahoo.h"
+#include "ReqDownLoadStock.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
 #include "AckSynYahoo.h"
+#include "AckDownLoadStock.h"
 
 #include "MessageManager.h"
 
@@ -96,7 +98,10 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqSynYahoo();		
 	}
-	
+	else if (CReqDownLoadStock::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqDownLoadStock();		
+	}
 	
 }
 
@@ -146,6 +151,21 @@ void CMessageRunnable::_ProcessMessage_ReqSynYahoo()
 		pReq = NULL;
 	}
 }
+void CMessageRunnable::_ProcessMessage_ReqDownLoadStock()
+{
+	CReqDownLoadStock* pReq = NULL;
+	pReq = new CReqDownLoadStock();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -163,6 +183,10 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckSynYahoo::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckSynYahoo();
+	}
+	else if (CAckDownLoadStock::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckDownLoadStock();		
 	}
 }
 
@@ -214,6 +238,21 @@ void CMessageRunnable::_ProcessMessage_AckSynYahoo()
 }
 
 
+void CMessageRunnable::_ProcessMessage_AckDownLoadStock()
+{
+	CAckDownLoadStock* pAck = NULL;
+	pAck = new CAckDownLoadStock();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->processAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
 
 
 
@@ -224,6 +263,7 @@ void CMessageRunnable::_ProcessReq(const CReqLogin* pReq )
 {
 	CAckLogin* pAckLogin = NULL;
 	QByteArray* pByteArray = NULL;
+
 
 	pAckLogin = new CAckLogin();
 
@@ -301,14 +341,36 @@ void CMessageRunnable::_ProcessReq( const CReqSynYahoo* pReq )
 	}
 
 }
+
+void CMessageRunnable::_ProcessReq(const CReqDownLoadStock* pReq)
+{
+	CAckDownLoadStock* pAck = NULL;
+	QByteArray* pByteArray = NULL;
+
+	pAck = new CAckDownLoadStock();
+	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
+	pAck->m_nDataType = CTcpComProtocol::DataType_DownLoadStock;
+	pAck->m_strReqUUID = pReq->m_strReqUUID;
+	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+	pAck->logInfo(__FILE__, __LINE__);
+	pByteArray = pAck->getMessage();
+	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
+
+	pByteArray = NULL;
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+
+}
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::processAck( const CAckLogin* pAck )
 {
 	//TODO.For.Test
 	//pMessageManagerRef->sendReqLogin(m_nHanle, "UserName", "PassWord");
-	pMessageManagerRef->sendReqSynYahoo(m_nHanle, "000001.SZ");
-	
-
+	//pMessageManagerRef->sendReqSynYahoo(m_nHanle, "000001.SZ");
+	pMessageManagerRef->sendReqDownLoadStock(m_nHanle);
 
 	return;
 }
@@ -322,3 +384,12 @@ void CMessageRunnable::processAck( const CAckSynYahoo* pAck )
 {
 	return;
 }
+void CMessageRunnable::processAck( const CAckDownLoadStock* pAck )
+{
+	foreach (const QString& strValue, pAck->m_LstStock)
+	{
+		pMessageManagerRef->sendReqSynYahoo(m_nHanle, strValue);
+	}
+	return;
+}
+

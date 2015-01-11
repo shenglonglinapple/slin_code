@@ -97,4 +97,5 @@ void CQtTimeHelper::getTimeInfo_Qt(time_t secsSince1Jan1970UTC,
 	nYear = nYearGet;
 	nMonth = nMonthGet;
 	nDay = nDayGet;
+
 }

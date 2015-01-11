@@ -41,6 +41,8 @@ private:
 private:
 	CYahuoHistoryReqAck* m_pYahuoHistoryReqAck;
 	CRequestYahuoDataHelper* m_pRequestYahuoDataHelper;
+private:
+	QString m_strRequestUrl;
 };
 
 

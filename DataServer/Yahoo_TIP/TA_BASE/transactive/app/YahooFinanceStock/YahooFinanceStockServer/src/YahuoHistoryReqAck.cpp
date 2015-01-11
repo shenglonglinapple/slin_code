@@ -29,13 +29,13 @@ QString CYahuoHistoryReqAck::getRequestUrl(
 	byteUrl << "http://ichart.yahoo.com/table.csv?s="
 		<< strSymbolUse.toStdString()
 		<< "&a="
-		<< startMonth - 1
+		<< startMonth
 		<< "&b="
 		<< startDay
 		<< "&c="
 		<< startYear
 		<< "&d="
-		<< endMonth - 1
+		<< endMonth
 		<< "&e="
 		<< endDay
 		<< "&f="

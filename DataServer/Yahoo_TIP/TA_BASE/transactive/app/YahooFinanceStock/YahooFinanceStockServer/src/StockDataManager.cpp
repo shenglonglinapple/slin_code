@@ -86,8 +86,20 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 			}
 			else
 			{
-				m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
-				pData = NULL;
+				//For Test
+				if (pData->m_strSymbolUse == "000008.SZ")
+				{
+					m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
+					pData = NULL;
+				}
+				else
+				{
+					delete pData;
+					pData = NULL;
+				}
+				//
+				//m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
+				//pData = NULL;
 			}
 
 		}//for
@@ -147,8 +159,6 @@ void CStockDataManager::doWork_getStockSymbolUse(QList<QString>& LstStockSymbolU
 	iterMap = m_MapStockDataItemT_Total.begin();
 	while (iterMap != m_MapStockDataItemT_Total.end())
 	{
-		qSleep(1);
-
 		pData = (iterMap.value());
 
 		LstStockSymbolUse.push_back(pData->m_strSymbolUse);

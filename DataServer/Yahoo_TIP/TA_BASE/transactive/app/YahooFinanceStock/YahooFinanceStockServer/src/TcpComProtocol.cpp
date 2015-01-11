@@ -56,6 +56,12 @@ QString CTcpComProtocol::getStringValue( EDataType nValue )
 	case DataType_LogOut:
 		strValue = "DataType_LogOut";
 		break;
+	case DataType_DownLoadStock:
+		strValue = "DataType_DownLoadStock";
+		break;
+	case DataType_SynYahoo:
+		strValue = "DataType_SynYahoo";
+		break;
 	case DataType_Unknown:
 		strValue = "DataType_Unknown";
 		break;

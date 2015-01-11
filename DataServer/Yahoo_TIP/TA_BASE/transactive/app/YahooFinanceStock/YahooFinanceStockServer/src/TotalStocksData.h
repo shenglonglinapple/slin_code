@@ -652,18 +652,8 @@ static const st_sssz_stocks  s_SSSZ_Stocks[]=
 	/*SymbolExtern*/("")
 },
 {
-	/*Symbol*/("000558.SZ"),
-	/*NamePinYin*/("LYZY"),
-	/*SymbolExtern*/("")
-},
-{
 	/*Symbol*/("000559.SZ"),
 	/*NamePinYin*/("MXQC"),
-	/*SymbolExtern*/("")
-},
-{
-	/*Symbol*/("000561.SZ"),
-	/*NamePinYin*/("FHDZ"),
 	/*SymbolExtern*/("")
 },
 {
