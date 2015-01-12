@@ -49,10 +49,10 @@ public:
 	void _ProcessReq(const CReqSynYahoo* pReq);
 	void _ProcessReq(const CReqDownLoadStock* pReq);
 public:
-	void processAck(const CAckLogin* pAck);
-	void processAck(const CAckLogout* pAck);
-	void processAck(const CAckSynYahoo* pAck);
-	void processAck(const CAckDownLoadStock* pAck);
+	void _ProcessAck(const CAckLogin* pAck);
+	void _ProcessAck(const CAckLogout* pAck);
+	void _ProcessAck(const CAckSynYahoo* pAck);
+	void _ProcessAck(const CAckDownLoadStock* pAck);
 
 private:
 	qint32 m_nHanle;

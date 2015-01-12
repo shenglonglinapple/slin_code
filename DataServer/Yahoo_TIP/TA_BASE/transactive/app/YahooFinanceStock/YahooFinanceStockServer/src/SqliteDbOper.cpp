@@ -29,6 +29,10 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 	m_strSqliteDbPath = CConfigInfo::getInstance().getSQLiteDBPath();
 	m_strSqliteDbFileFullPath = m_strSqliteDbPath + m_strSqliteDbFileName;
 	_InitDataBase();
+	if (true == m_pQSqlDataBase->isValid())
+	{
+		_CreateDBTable();
+	}
 }
 
 CSqliteDbOper::~CSqliteDbOper()
@@ -175,7 +179,6 @@ int CSqliteDbOper::_CommitTransaction()
 
 void CSqliteDbOper::saveData(LstHistoryDataT* pLstData)
 {
-	_CreateDBTable();
 	_StartTransaction();
 	_AddDataArray(pLstData);
 	_CommitTransaction();

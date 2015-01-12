@@ -10,6 +10,9 @@
 #include "MessageManager.h"
 #include "SocketInfo.h"
 
+#include "ClientDataManager.h"
+#include "ClientWorkerManager.h"
+
 #include "Log4cppLogger.h"
 #include "ProjectEnvironment.h"
 
@@ -111,11 +114,23 @@ void CDistributeTaskWorker::slotConnected(qint32 nHandle)
 		<<" "<<"slot:"<<" "<<"slotConnected"
 		<<" "<<"nHandle="<<nHandle;
 
-	//TODO.For.Test
-	//send login req
-	m_pMessageManager->sendReqLogin(nHandle, m_strUserName, m_strPassWord);
+	CClientWorkerManager::getInstance().resetHanleValue(this, nHandle);
+	CClientDataManager::getInstance().connectedToServer(nHandle, m_strServerIP, m_nServerPort, m_strUserName, m_strPassWord);
+
 }
 
 
+void CDistributeTaskWorker::sendMessage(qint32 handle, QByteArray* pMessage)
+{
+	if (NULL != m_pMessageManager)
+	{
+		m_pMessageManager->sendMessage(handle, pMessage);
+	}
+	else
+	{
+		delete pMessage;
+		pMessage = NULL;
+	}
+}
 
 

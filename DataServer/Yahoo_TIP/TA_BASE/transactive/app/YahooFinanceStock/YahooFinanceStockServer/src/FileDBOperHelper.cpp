@@ -44,12 +44,32 @@ CFileDBOperHelper::~CFileDBOperHelper()
 	}
 }
 
+void CFileDBOperHelper::_RemoveEmptyString(QStringList& strList)
+{
+	QStringList::iterator iterLst;
 
+	iterLst = strList.begin();
+	while (iterLst != strList.end())
+	{
+		if ((*iterLst).isEmpty())
+		{
+			//strList.removeAt(0);
+			strList.removeOne((*iterLst));
+			iterLst = strList.begin();
+		}
+		else
+		{
+			iterLst++;
+		}
+	}//while
+}
 
 void CFileDBOperHelper::saveData(const QString & strHistoryData)
 {
 	QString strHistoryDataTmp;
 	QStringList strListHistoryDataTmp;
+	QString strFirstLine;
+	QStringList::iterator iterLst;
 
 	if (strHistoryData.isEmpty())
 	{
@@ -61,8 +81,34 @@ void CFileDBOperHelper::saveData(const QString & strHistoryData)
 	strListHistoryDataTmp.clear();
 	strListHistoryDataTmp = strHistoryDataTmp.split("\n");
 
-	_SaveData(strListHistoryDataTmp);
+	//000002.SZ
+	//Date,Open,High,Low,Close,Volume,Adj Close
+	//2014-12-03,11.00,11.88,11.00,11.20,340833800,11.20
+	//......
+	//1991-01-02,15.63,15.63,15.63,15.63,1053200,0.01
 
+	//check and clean first line
+	iterLst = strListHistoryDataTmp.begin();
+	if (iterLst != strListHistoryDataTmp.end())
+	{
+		strFirstLine.clear();
+		strFirstLine = (*iterLst);
+		if (strFirstLine.contains("Date"))
+		{
+			(*iterLst).clear();// = "";//column name set null
+			//strListHistoryDataTmp.removeAt(0);
+		}
+	}
+	_RemoveEmptyString(strListHistoryDataTmp);
+	if (!strListHistoryDataTmp.isEmpty())
+	{
+		_SaveData(strListHistoryDataTmp);
+	}
+
+	MYLOG4CPP_DEBUG<<"save data to file"
+		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
+		<<" "<<"strHistoryData.size()="<<strHistoryData.size()
+		<<" "<<"strListHistoryDataTmp.size()="<<strListHistoryDataTmp.size();
 
 }
 
@@ -91,9 +137,7 @@ void CFileDBOperHelper::_SaveData(const QStringList& strListHistoryDataTmp)
 	m_pFileDBOper->renameFile(strSaveDataFileName, strSaveDataFileName_Tmp);
 	m_pFileDBOper->saveDataToFile(strSaveDataFileName, strListHistoryDataTmp);
 
-	strLstOldData[0] = "";
-	strLstOldData[0].clear();// = "";//column name set null
-	m_pFileDBOper->saveDataToFile(strSaveDataFileName, strLstOldData);//append to file
+	m_pFileDBOper->saveDataToFile(strSaveDataFileName, strLstOldData);//append old data to file
 
 	m_pFileDBOper->removeFile(strSaveDataFileName_Tmp);
 }

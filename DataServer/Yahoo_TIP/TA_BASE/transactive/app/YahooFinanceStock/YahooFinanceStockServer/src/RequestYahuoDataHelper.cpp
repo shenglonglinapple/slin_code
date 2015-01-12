@@ -63,7 +63,7 @@ void CRequestYahuoDataHelper::getStartEndTimeValue(
 
 	nTimeLastUpdateDateTime = nLastUpdateTime_FileDB;
 
-	nTimeLastUpdateDateTime += DEF_INT_ONE_DAY_SECONDS;
+	nTimeLastUpdateDateTime += DEF_INT_ONE_DAY_SECONDS;//"1970-01-02 08:00:00"
 	nTimeNow = m_pQtTimeHelper->getTimeNow_Qt();
 
 	m_pQtTimeHelper->getTimeInfo_Qt(nTimeNow, endYear, endMonth, endDay);

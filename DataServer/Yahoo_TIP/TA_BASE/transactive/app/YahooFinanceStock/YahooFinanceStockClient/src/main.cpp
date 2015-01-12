@@ -1,7 +1,5 @@
 #include <iostream>
 #include <QtGui/QApplication>
-//#include <QtCore/QtCore>
-
 
 ////////////////
 //_WINDOWS;UNICODE;WIN32;QT_DLL;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT
@@ -25,12 +23,9 @@
 
 
 
-
-
-#include "BaseException.h"
 #include "ProjectEnvironment.h"
+#include "ClientUIManager.h"
 
-#include "ClientManager.h"
 
 int main(int argc, char *argv[])
 {
@@ -38,10 +33,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 	CProjectEnviroment::getInstance();
 
-	CClientManager* pClientManager = NULL;
-	pClientManager = new CClientManager();
+	CClientUIManager clientUIManager;
+	clientUIManager.showCClientMainWindow(true);
 
-	pClientManager->createClient(1);
 
     nFunRes = app.exec();
 	CProjectEnviroment::removeInstance();

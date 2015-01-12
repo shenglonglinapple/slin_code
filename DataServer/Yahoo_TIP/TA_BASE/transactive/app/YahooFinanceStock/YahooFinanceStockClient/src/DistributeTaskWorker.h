@@ -30,6 +30,9 @@ public:
 //////////////////////////////////////////////////////////////////////////
 signals:
 	void signalDeleteConnection(CDistributeTaskWorker* pActor);
+public:
+	void sendMessage(qint32 handle, QByteArray* pMessage);
+
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;

@@ -196,7 +196,7 @@ void CFileDBOper::getLastUpdateLine(const QString & strFileName, QString& strLin
 	getAllDataFromFile(strFileName, strLstData);
 	if (strLstData.size() >= 1)
 	{
-		strLineLastDate = strLstData[1];
+		strLineLastDate = strLstData[0];
 	}
 
 	//000002.SZ

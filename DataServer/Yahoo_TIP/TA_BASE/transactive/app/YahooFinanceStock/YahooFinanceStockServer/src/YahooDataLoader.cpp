@@ -84,8 +84,9 @@ void CYahooDataLoader::slotFinished(QNetworkReply* reply)
 	QByteArray bytes = reply->readAll();
 	QString strHistoryData = QString(bytes);
 	
-	MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult);
-		//<<" "<<"strHistoryData="<<strHistoryData;
+	MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult)
+		<<" "<<"bytes.size()="<<bytes.size()
+		<<" "<<"strHistoryData.size()="<<strHistoryData.size();
 
 	//check res
 	if (strHistoryData.isEmpty())

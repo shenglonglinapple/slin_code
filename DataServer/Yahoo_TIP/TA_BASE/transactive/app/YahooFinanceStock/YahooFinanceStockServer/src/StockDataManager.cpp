@@ -67,40 +67,32 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 
 		for (nIndex = 0; nIndex < nArrSize; nIndex++)
 		{
-			pData = new CStockDataActor();
 			//setValue
 			strSymbol = s_SSSZ_Stocks[nIndex].m_psz_Symbol;
 			strNamePinYin = s_SSSZ_Stocks[nIndex].m_psz_NamePinYin;
 			strSymbolExtern = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
-			pData->setValue(strSymbol, strSymbolExtern);
-
-			MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<pData->m_strSymbolUse;
-
-			iterFind = m_MapStockDataItemT_Total.find(pData->m_strSymbolUse);
-			if (iterFind != m_MapStockDataItemT_Total.end())
+			MYLOG4CPP_DEBUG<<"strSymbol="<<strSymbol<<" "<<"strSymbolExtern="<<strSymbolExtern;
+			
+			if (strSymbol.contains("000008"))//000008.SZ
 			{
-				MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pData->m_strSymbolUse;
-				//find same name
-				delete pData;
-				pData = NULL;
-			}
-			else
-			{
-				//For Test
-				if (pData->m_strSymbolUse == "000008.SZ")
+				pData = new CStockDataActor();
+				pData->setValue(strSymbol, strSymbolExtern);
+
+				iterFind = m_MapStockDataItemT_Total.find(pData->m_strSymbolUse);
+				if (iterFind != m_MapStockDataItemT_Total.end())
 				{
-					m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
+					MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pData->m_strSymbolUse;
+					//find same name
+					delete pData;
 					pData = NULL;
 				}
 				else
 				{
-					delete pData;
+					m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
 					pData = NULL;
 				}
-				//
-				//m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
-				//pData = NULL;
-			}
+			}//if
+
 
 		}//for
 	}

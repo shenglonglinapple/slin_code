@@ -54,6 +54,8 @@ QByteArray* CAckDownLoadStock::getMessage()
 	//QByteArray &append(const char *s, int len);
 	pMessage = new QByteArray();
 
+	m_nStockCount = m_LstStock.size();
+
 	QDataStream writeToByteArray(pMessage, QIODevice::WriteOnly);
 	writeToByteArray.setVersion(QDataStream::Qt_4_0);
 

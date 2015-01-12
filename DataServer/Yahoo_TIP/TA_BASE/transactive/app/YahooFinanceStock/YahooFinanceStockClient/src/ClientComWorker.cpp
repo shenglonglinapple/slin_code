@@ -68,7 +68,9 @@ void CClientComWorker::slotError(QAbstractSocket::SocketError nSocketError)
 		//do nothing
 	}
 	else if (QAbstractSocket::ConnectionRefusedError == nSocketError
-		|| QAbstractSocket::RemoteHostClosedError == nSocketError)
+		|| QAbstractSocket::RemoteHostClosedError == nSocketError
+		|| QAbstractSocket::HostNotFoundError == nSocketError
+		)
 	{
 		MYLOG4CPP_DEBUG<<" "<<"m_strID="<<m_pSocketInfo->m_strID
 			<<" "<<"class:"<<" "<<"CClientComWorker"
@@ -292,6 +294,7 @@ void CClientComWorker::slotConnectToServer()
 		QMutexLocker lock(&m_mutex_SocketW);
 		//Aborts the current connection and resets the socket.
 		m_pSocketHandle->abort();
+		m_nHandle = 0;
 
 		MYLOG4CPP_INFO<<"begin connect to server"
 			<<" "<<"m_strServerIP="<<m_strServerIP

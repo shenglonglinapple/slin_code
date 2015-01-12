@@ -22,20 +22,15 @@ private:
 private:
 	CStockDataManager();
 	virtual ~CStockDataManager();
-public:
-	//yahuo data to  C:\LSL\LSL_DATA\SaveDataFile\000001.SS file
-	void doWork_Save_HistoryData(const QString& strSymbolUse, const QString& strHistoryData); 
-	//C:\LSL\LSL_DATA\SaveDataFile\000001.SS file to C:\LSL\LSL_DATA\SaveDataSqliteDB\000001.SS sqlite db file
-	//void doWork_Local_FileDB_To_SQLiteDB();
-public:
-	void doWork_getStockSymbolUse(QList<QString >& LstStockSymbolUse);
 private:
 	void _FreeData_SSSZ_Stocks();
-	void _LoadData_SSSZ_Stocks();
 
 private:
 	void qSleep(int nMilliseconds);
 	void qWait(int nMilliseconds);
+public:
+	void addStockData(const QList<QString>* LstStock);
+	void getAllStockData(QList<QString>& LstStock);
 private:
 	QMutex m_mutexMapStockDataItemT_Total;
 	QMap<QString,CStockDataActor*> m_MapStockDataItemT_Total;

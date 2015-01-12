@@ -17,6 +17,7 @@ public:
 	void saveData(const QString & strHistoryData);
 private:
 	void _SaveData(const QStringList& strListHistoryDataTmp);
+	void _RemoveEmptyString(QStringList& strList);
 private:
 	CQtTimeHelper* m_pQtTimeHelper;
 	CFileDBOper* m_pFileDBOper;

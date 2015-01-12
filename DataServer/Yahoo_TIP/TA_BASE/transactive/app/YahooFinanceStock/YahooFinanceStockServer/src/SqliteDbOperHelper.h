@@ -29,6 +29,7 @@ public:
 private:
 	void _AnalysisData(QStringList& strLstLines, LstHistoryDataT& lstData);
 	void _FreeData(LstHistoryDataT* pLstData);
+	void _RemoveEmptyString(QStringList& strList);
 private:
 	QMutex m_mutex_SqliteDbOper;
 	CSqliteDbOper* m_pSqliteDbOper;

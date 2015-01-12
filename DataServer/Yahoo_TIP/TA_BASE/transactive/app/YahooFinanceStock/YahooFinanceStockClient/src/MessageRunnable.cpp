@@ -15,6 +15,9 @@
 
 #include "MessageManager.h"
 
+#include "ClientDataManager.h"
+#include "StockDataManager.h"
+
 #include "Log4cppLogger.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
@@ -197,7 +200,7 @@ void CMessageRunnable::_ProcessMessage_AckLogin()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->processAck(pAck);
+	this->_ProcessAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -213,7 +216,7 @@ void CMessageRunnable::_ProcessMessage_AckLogout()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->processAck(pAck);
+	this->_ProcessAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -228,7 +231,7 @@ void CMessageRunnable::_ProcessMessage_AckSynYahoo()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->processAck(pAck);
+	this->_ProcessAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -245,7 +248,7 @@ void CMessageRunnable::_ProcessMessage_AckDownLoadStock()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->processAck(pAck);
+	this->_ProcessAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -271,6 +274,8 @@ void CMessageRunnable::_ProcessReq(const CReqLogin* pReq )
 	pAckLogin->m_nDataType = CTcpComProtocol::DataType_Login;
 	pAckLogin->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAckLogin->m_strReqUUID = pReq->m_strReqUUID;
+	pAckLogin->m_strUserName = pReq->m_strUserName;
+	pAckLogin->m_strPassword = pReq->m_strPassword;
 	pAckLogin->m_nLoginResult = CTcpComProtocol::DataType_LoginResult_OK;
 	pByteArray = pAckLogin->getMessage();
 	pAckLogin->logInfo(__FILE__, __LINE__);
@@ -298,6 +303,8 @@ void CMessageRunnable::_ProcessReq( const CReqLogout* pReq )
 	pAckLogout->m_nDataType = CTcpComProtocol::DataType_LogOut;
 	pAckLogout->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAckLogout->m_strReqUUID = pReq->m_strReqUUID;
+	pAckLogout->m_strUserName = pReq->m_strUserName;
+	pAckLogout->m_strPassword = pReq->m_strPassword;
 	pAckLogout->m_nLogoutResult = CTcpComProtocol::DataType_LogoutResult_OK;
 
 	pByteArray = pAckLogout->getMessage();
@@ -365,31 +372,29 @@ void CMessageRunnable::_ProcessReq(const CReqDownLoadStock* pReq)
 
 }
 //////////////////////////////////////////////////////////////////////////
-void CMessageRunnable::processAck( const CAckLogin* pAck )
+void CMessageRunnable::_ProcessAck( const CAckLogin* pAck )
 {
 	//TODO.For.Test
 	//pMessageManagerRef->sendReqLogin(m_nHanle, "UserName", "PassWord");
 	//pMessageManagerRef->sendReqSynYahoo(m_nHanle, "000001.SZ");
-	pMessageManagerRef->sendReqDownLoadStock(m_nHanle);
-
+	//pMessageManagerRef->sendReqDownLoadStock(m_nHanle);
+	CClientDataManager::getInstance().loginedToServer(m_nHanle, pAck->m_strUserName, pAck->m_strPassword);
 	return;
 }
 
-void CMessageRunnable::processAck( const CAckLogout* pAck )
+void CMessageRunnable::_ProcessAck( const CAckLogout* pAck )
 {
 	return;
 }
 
-void CMessageRunnable::processAck( const CAckSynYahoo* pAck )
+void CMessageRunnable::_ProcessAck( const CAckSynYahoo* pAck )
 {
 	return;
 }
-void CMessageRunnable::processAck( const CAckDownLoadStock* pAck )
+void CMessageRunnable::_ProcessAck( const CAckDownLoadStock* pAck )
 {
-	foreach (const QString& strValue, pAck->m_LstStock)
-	{
-		pMessageManagerRef->sendReqSynYahoo(m_nHanle, strValue);
-	}
+	CStockDataManager::getInstance().addStockData(&(pAck->m_LstStock));
+	CClientDataManager::getInstance().downLoadStockFromServer(m_nHanle);
 	return;
 }
 

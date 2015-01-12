@@ -80,6 +80,26 @@ void CSqliteDbOperHelper::_FreeData(LstHistoryDataT* pLstData)
 	return;
 }
 
+void CSqliteDbOperHelper::_RemoveEmptyString(QStringList& strList)
+{
+	QStringList::iterator iterLst;
+
+	iterLst = strList.begin();
+	while (iterLst != strList.end())
+	{
+		if ((*iterLst).isEmpty())
+		{
+			//strList.removeAt(0);
+			strList.removeOne((*iterLst));
+			iterLst = strList.begin();
+		}
+		else
+		{
+			iterLst++;
+		}
+	}//while
+}
+
 void CSqliteDbOperHelper::saveData(const QString & strHistoryData)
 {
 	if (strHistoryData.isEmpty())
@@ -91,20 +111,37 @@ void CSqliteDbOperHelper::saveData(const QString & strHistoryData)
 	QString strHistoryDataTmp;
 	QStringList strListHistoryDataTmp;
 	LstHistoryDataT lstHistoryData;
+	QStringList::iterator iterLst;
+	QString strFirstLine;
 
 	strHistoryDataTmp = strHistoryData;
 
 	strListHistoryDataTmp.clear();
 	strListHistoryDataTmp = strHistoryDataTmp.split("\n");
 
-	if (strListHistoryDataTmp.size() >= 1)
+	//check and clean first line
+	iterLst = strListHistoryDataTmp.begin();
+	if (iterLst != strListHistoryDataTmp.end())
 	{
-		strListHistoryDataTmp[0] = "";
-		strListHistoryDataTmp[0].clear();// = "";//column name set null
+		strFirstLine.clear();
+		strFirstLine = (*iterLst);
+		if (strFirstLine.contains("Date"))
+		{
+			(*iterLst).clear();// = "";//column name set null
+			//strListHistoryDataTmp.removeAt(0);
+		}
 	}
-	_AnalysisData(strListHistoryDataTmp, lstHistoryData);
+	_RemoveEmptyString(strListHistoryDataTmp);
+	if (!strListHistoryDataTmp.isEmpty())
+	{	
+		_AnalysisData(strListHistoryDataTmp, lstHistoryData);
+		m_pSqliteDbOper->saveData(&lstHistoryData);
+	}
 
-	m_pSqliteDbOper->saveData(&lstHistoryData);
+	MYLOG4CPP_DEBUG<<"save data to SQLite"
+		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
+		<<" "<<"strHistoryData.size()="<<strHistoryData.size()
+		<<" "<<"strListHistoryDataTmp.size()="<<strListHistoryDataTmp.size();
 
 	strListHistoryDataTmp.clear();
 	_FreeData(&lstHistoryData);
