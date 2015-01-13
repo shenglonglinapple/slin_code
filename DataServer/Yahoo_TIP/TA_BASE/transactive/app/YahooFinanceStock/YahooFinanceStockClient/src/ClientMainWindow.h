@@ -20,6 +20,7 @@ QT_END_NAMESPACE
 
 class CClientMainWindowMenuBar;
 class CClientMainWindowToolBar;
+class CClientMainWindowStatusBar;
 class CClientMainWindowMdiArea;
 
 class CClientMainWindow : public QMainWindow
@@ -31,6 +32,8 @@ public:
     ~CClientMainWindow();
 signals:
 	void signal_Exit_ClientMainWindow();
+public slots:
+	void slotShowMessage(QString strMessage);
 public:
 	//QWidget virtual void closeEvent(QCloseEvent *);
 	void closeEvent(QCloseEvent* pEvent);
@@ -39,12 +42,14 @@ private:
 
 	void _CreateMenuBar();
 	void _CreateToolBars();
+	void _CreateStatusBars();
 	void _CreateMdiArea();
 	void _TranslateLanguage();
 private:
 	CClientMainWindowMenuBar* m_pClientMainWindowMenuBar;
 	CClientMainWindowToolBar* m_pClientMainWindowToolBar;
 	CClientMainWindowMdiArea* m_pClientMainWindowMdiArea;
+	CClientMainWindowStatusBar* m_pClientMainWindowStatusBar;
 };
 
 #endif // __CLASS_CLIENT_MAIN_WINDOW_HH__

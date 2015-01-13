@@ -9,6 +9,7 @@
 #include "TcpComProtocol.h"
 
 class CStockDataActor;
+class CStockMinTimeMaxTime;
 
 class CStockDataManager 
 {
@@ -29,6 +30,7 @@ public:
 	//void doWork_Local_FileDB_To_SQLiteDB();
 public:
 	void doWork_getStockSymbolUse(QList<QString >& LstStockSymbolUse);
+	void doWork_getStockMinTimeMaxTime(const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
 private:
 	void _FreeData_SSSZ_Stocks();
 	void _LoadData_SSSZ_Stocks();

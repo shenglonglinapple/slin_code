@@ -30,6 +30,9 @@ public:
 	void saveData(LstHistoryDataT* pLstData);
 public:
 	int selectData(const QString & strFrom, const QString & strTo, LstHistoryDataT& lstData);
+	int selectData_MinTime(QString& strValueGet);
+	int selectData_MaxTime(QString& strValueGet);
+	int selectData_Count(int& nValueGet);
 
 private:
 	void _UnInitDataBase();
@@ -37,10 +40,14 @@ private:
 	int _StartTransaction();
 	int _CommitTransaction();
 	int _CreateDBTable();
-	QString  _BuildSQL_CreateTable();
-	QString  _BuildSQL_Insert();
 	int _AddDataArray(LstHistoryDataT* pLstData);
-	QString  _BuildSQL_Select(const QString & strFrom, const QString & strTo);
+private:
+	QString _BuildSQL_CreateTable();
+	QString _BuildSQL_Insert();
+	QString _BuildSQL_Select(const QString & strFrom, const QString & strTo);
+	QString _BuildSQL_Select_COLUMN_DATE_by_DESC();
+	QString _BuildSQL_Select_COLUMN_DATE_by_ASC();
+	QString _BuildSQL_Select_Count();
 private:
 	QSqlDatabase* m_pQSqlDataBase;
 	QString m_strQTDbType;//"QSQLITE" "QMYSQL"

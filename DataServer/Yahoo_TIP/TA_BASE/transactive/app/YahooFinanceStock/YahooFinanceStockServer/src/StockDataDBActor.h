@@ -10,6 +10,7 @@ class CRequestYahuoDataHelper;
 class CYahuoHistoryReqAck;
 class CFileDBOperHelper;
 class CSqliteDbOperHelper;
+class CStockMinTimeMaxTime;
 
 class CStockDataDBActor : public QObject
 {
@@ -23,6 +24,7 @@ signals:
 public slots:
 public:
 	void saveData(const QString& strHistoryData);
+	void getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
 
 private:
 	QString m_strSymbolUse;

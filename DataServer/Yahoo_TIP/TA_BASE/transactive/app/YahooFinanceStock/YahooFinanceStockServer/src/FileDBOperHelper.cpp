@@ -25,6 +25,7 @@ CFileDBOperHelper::CFileDBOperHelper( const QString& strSymbolUse )
 
 	m_strSymbolUse = strSymbolUse;
 	m_pQtTimeHelper = new CQtTimeHelper();
+	QMutexLocker lock(&m_mutex_FileDBOper);
 	m_pFileDBOper = new CFileDBOper(strSymbolUse);
 
 }
@@ -37,6 +38,7 @@ CFileDBOperHelper::~CFileDBOperHelper()
 		m_pQtTimeHelper = NULL;
 	}
 
+	QMutexLocker lock(&m_mutex_FileDBOper);
 	if (NULL != m_pFileDBOper)
 	{
 		delete m_pFileDBOper;
@@ -116,6 +118,8 @@ void CFileDBOperHelper::saveData(const QString & strHistoryData)
 
 void CFileDBOperHelper::_SaveData(const QStringList& strListHistoryDataTmp)
 {
+	QMutexLocker lock(&m_mutex_FileDBOper);
+
 	QString 			strSaveDataFileName;
 	QString 			strSaveDataFileName_Tmp;
 	QStringList  strLstOldData;

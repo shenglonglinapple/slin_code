@@ -3,6 +3,7 @@
 #include "ClientMainWindowMenuBar.h"
 #include "ClientMainWindowToolBar.h"
 #include "ClientMainWindowMdiArea.h"
+#include "ClientMainWindowStatusBar.h"
 
 #include "Log4cppLogger.h"
 
@@ -20,8 +21,10 @@ CClientMainWindow::CClientMainWindow(QWidget *parent)
 
 	m_pClientMainWindowMenuBar = NULL;
 	m_pClientMainWindowToolBar = NULL;
+	m_pClientMainWindowStatusBar = NULL;
 	m_pClientMainWindowMdiArea = NULL;
 	_SetupUi();
+
 }
 
 CClientMainWindow::~CClientMainWindow()
@@ -49,6 +52,14 @@ void CClientMainWindow::_CreateToolBars()
 	m_pClientMainWindowToolBar = new CClientMainWindowToolBar(this);
 	this->addToolBar(Qt::TopToolBarArea, m_pClientMainWindowToolBar);
 }
+
+void CClientMainWindow::_CreateStatusBars()
+{
+	m_pClientMainWindowStatusBar = new CClientMainWindowStatusBar(this);
+	this->setStatusBar(m_pClientMainWindowStatusBar);
+
+}
+
 void CClientMainWindow::_CreateMdiArea()
 {
 	m_pClientMainWindowMdiArea = new CClientMainWindowMdiArea(this);
@@ -63,11 +74,26 @@ void CClientMainWindow::_SetupUi()
 	_CreateMenuBar();
 	_CreateToolBars();
 	_CreateMdiArea();
+	_CreateStatusBars();
 
 }
 void CClientMainWindow::_TranslateLanguage()
 {
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_CSmartTraderClientMainWindow_Title));
+
+}
+
+void CClientMainWindow::slotShowMessage( QString strMessage )
+{
+	MYLOG4CPP_DEBUG<<"class:"<<"CClientMainWindow"
+		<<" "<<"slot:"<<"slotShowMessage"
+		<<" "<<"param:"<<"strMessage="<<strMessage;
+
+	if (NULL != m_pClientMainWindowStatusBar)
+	{
+		m_pClientMainWindowStatusBar->clearMessage();
+		m_pClientMainWindowStatusBar->showMessage(strMessage);
+	}
 
 }
 

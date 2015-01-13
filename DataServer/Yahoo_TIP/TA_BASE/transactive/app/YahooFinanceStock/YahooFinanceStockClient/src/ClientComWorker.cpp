@@ -9,7 +9,7 @@
 #include "TcpSocketHelper.h"
 #include "SocketInfo.h"
 
-
+#include "SignalSlotManager.h"
 
 CClientComWorker::CClientComWorker(const QString& strServerIP, quint16 nServerPort, QObject* parent/*=0*/ )
 {
@@ -57,11 +57,14 @@ void CClientComWorker::slotError(QAbstractSocket::SocketError nSocketError)
 	QString strErrorString;
 	QString strSocketState;
 
-
+	
 	strSocketError = CTcpSocketHelper::getStringValue(nSocketError);
 	strErrorString = m_pSocketHandle->errorString();
 	strSocketState = CTcpSocketHelper::getStringValue(m_pSocketHandle->state());
 
+	CSignalSlotManager::getInstance().emit_ShownMessage("socket error" + 
+		QString("strSocketError=%1 strID=%2").arg(strSocketError).arg(m_pSocketInfo->m_strID)
+		);
 
 	if (QAbstractSocket::SocketTimeoutError == nSocketError)
 	{
@@ -104,12 +107,16 @@ void CClientComWorker::slotDisconnected()
 		<<" "<<"emit signalDisconnected()"
 		<<" "<<"param:"<<" "<<"m_nHandle="<<m_nHandle;
 
+	CSignalSlotManager::getInstance().emit_ShownMessage("disconnect with server strID="+m_pSocketInfo->m_strID);
+
 	emit signalDisconnected(m_nHandle);
 }
 
 
 void CClientComWorker::slotSendMessage(qint32 handle, QByteArray* pByteArray)
 {
+	CSignalSlotManager::getInstance().emit_ShownMessage("send data to server strID="+m_pSocketInfo->m_strID);
+
 	if (m_nHandle != handle)
 	{
 		return;
@@ -152,6 +159,8 @@ void CClientComWorker::slotSendMessage(qint32 handle, QByteArray* pByteArray)
 
 void CClientComWorker::slotReadyRead()
 {
+	CSignalSlotManager::getInstance().emit_ShownMessage("read data from server strID="+m_pSocketInfo->m_strID);
+
 	qint64 nBytesAvailable = 0;
 	QByteArray* pData = NULL;
 
@@ -248,6 +257,9 @@ void CClientComWorker::slotProcessRecvData(QByteArray* pData)
 			<<" "<<"emit:"<<" "<<"signalProcessMessage"
 			<<" "<<"param:"<<" "<<"m_nHandle="<<m_nHandle
 			<<" "<<"param:"<<" "<<"pMessage=0x"<<pMessage;
+
+		CSignalSlotManager::getInstance().emit_ShownMessage("recv one frame from server strID="+m_pSocketInfo->m_strID);
+
 		emit signalRecvMessage(m_nHandle, pMessage);
 		pMessage = NULL;
 	}
@@ -276,6 +288,7 @@ void CClientComWorker::slotConnected()
 		<<" "<<"emit signalConnected()"
 		<<" "<<"param:"<<" "<<"m_nHandle="<<m_nHandle;
 
+	CSignalSlotManager::getInstance().emit_ShownMessage("connected to server strID="+m_pSocketInfo->m_strID);
 	emit signalConnected(m_nHandle);
 }
 
@@ -296,6 +309,8 @@ void CClientComWorker::slotConnectToServer()
 		m_pSocketHandle->abort();
 		m_nHandle = 0;
 
+		CSignalSlotManager::getInstance().emit_ShownMessage("begin connect to server strID="+m_pSocketInfo->m_strID);
+
 		MYLOG4CPP_INFO<<"begin connect to server"
 			<<" "<<"m_strServerIP="<<m_strServerIP
 			<<" "<<"m_nServerPort="<<m_nServerPort;
@@ -305,6 +320,8 @@ void CClientComWorker::slotConnectToServer()
 		//bConnected = m_pSocketHandle->waitForConnected();
 		//bConnected = m_pSocketHandle->waitForConnected(1000*10);//not sleep here, why?
 		
+		CSignalSlotManager::getInstance().emit_ShownMessage("end connect to server strID="+m_pSocketInfo->m_strID);
+
 		MYLOG4CPP_INFO<<"end connect to server"
 			<<" "<<"m_strServerIP="<<m_strServerIP
 			<<" "<<"m_nServerPort="<<m_nServerPort

@@ -7,25 +7,32 @@
 
 CClientUIManager::CClientUIManager()
 {
+	CSignalSlotManager::getInstance();
+	CClientDataManager::getInstance();
+	//CSignalSlotManager::set_Signal_ShownMessage(CClientDataManager*);
+
 	m_pClientMainWindow = NULL;
 	m_pClientMainWindow = new CClientMainWindow();
+	CSignalSlotManager::getInstance().set_Slot_ShownMessage(m_pClientMainWindow);
 
-	CClientDataManager::getInstance();
-	CSignalSlotManager::getInstance();
 }
 
 
 CClientUIManager::~CClientUIManager()
 {
-	CSignalSlotManager::removeInstance();
-	CClientDataManager::removeInstance();
 
 	if (NULL != m_pClientMainWindow)
 	{
+		//CSignalSlotManager::getInstance().set_Slot_ShownMessage(NULL);
+
 		MYLOG4CPP_DEBUG<<"close CClientMainWindow";
 		delete m_pClientMainWindow;
 		m_pClientMainWindow = NULL;
 	}
+
+	CClientDataManager::removeInstance();
+	CSignalSlotManager::removeInstance();
+
 }
 void CClientUIManager::showCClientMainWindow( bool bShow )
 {

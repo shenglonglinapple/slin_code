@@ -5,6 +5,7 @@
 #include "FileDBOperHelper.h"
 #include "SqliteDbOperHelper.h"
 #include "Log4cppLogger.h"
+#include "StockMinTimeMaxTime.h"
 
 CStockDataDBActor::CStockDataDBActor( const QString& strSymbolUse, QObject *parent /*= 0*/ )
 {
@@ -68,6 +69,35 @@ void CStockDataDBActor::saveData(const QString& strHistoryData)
 		m_pSqliteDbOperHelper->saveData(strHistoryData);
 	}
 	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"saveData to SqliteDb end";
+}
+
+void CStockDataDBActor::getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet )
+{
+	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"getStockMinTimeMaxTime begin";
+	QString strMinTime;
+	QString strMaxTime;
+	int nCount = 0;
+
+	if (NULL != m_pSqliteDbOperHelper)
+	{
+		m_pSqliteDbOperHelper->selectData_MinTime(strMinTime);
+		m_pSqliteDbOperHelper->selectData_MaxTime(strMaxTime);
+		m_pSqliteDbOperHelper->selectData_Count(nCount);
+	}
+	(*ppValueGet) = new CStockMinTimeMaxTime();
+	(*ppValueGet)->m_strSymbolUse = m_strSymbolUse;
+	(*ppValueGet)->m_strMinTime = strMinTime;
+	(*ppValueGet)->m_strMaxTime = strMaxTime;
+	(*ppValueGet)->m_nCount = nCount;
+	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse
+		<<" "<<"getStockMinTimeMaxTime"
+		<<" "<<"strMinTime="<<strMinTime
+		<<" "<<"strMaxTime="<<strMaxTime
+		<<" "<<"nCount"<<nCount
+		<<" "<<"getStockMinTimeMaxTime";
+
+	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"getStockMinTimeMaxTime end";
+
 }
 
 

@@ -7,16 +7,20 @@
 #include "ReqLogout.h"
 #include "ReqSynYahoo.h"
 #include "ReqDownLoadStock.h"
+#include "ReqStockMinTimeMaxTime.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
 #include "AckSynYahoo.h"
 #include "AckDownLoadStock.h"
+#include "AckStockMinTimeMaxTime.h"
 
 #include "MessageManager.h"
 
 #include "ClientDataManager.h"
 #include "StockDataManager.h"
+#include "DataStockMinTimeMaxTime.h"
+#include "StockMinTimeMaxTime.h"
 
 #include "Log4cppLogger.h"
 
@@ -105,6 +109,10 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqDownLoadStock();		
 	}
+	else if (CReqStockMinTimeMaxTime::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqStockMinTimeMaxTime();		
+	}
 	
 }
 
@@ -169,6 +177,21 @@ void CMessageRunnable::_ProcessMessage_ReqDownLoadStock()
 		pReq = NULL;
 	}
 }
+void CMessageRunnable::_ProcessMessage_ReqStockMinTimeMaxTime()
+{
+	CReqStockMinTimeMaxTime* pReq = NULL;
+	pReq = new CReqStockMinTimeMaxTime();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -190,6 +213,10 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckDownLoadStock::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckDownLoadStock();		
+	}
+	else if (CAckStockMinTimeMaxTime::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckStockMinTimeMaxTime();		
 	}
 }
 
@@ -257,6 +284,21 @@ void CMessageRunnable::_ProcessMessage_AckDownLoadStock()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_AckStockMinTimeMaxTime()
+{
+	CAckStockMinTimeMaxTime* pAck = NULL;
+	pAck = new CAckStockMinTimeMaxTime();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->_ProcessAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -371,6 +413,10 @@ void CMessageRunnable::_ProcessReq(const CReqDownLoadStock* pReq)
 	}
 
 }
+
+void CMessageRunnable::_ProcessReq( const CReqStockMinTimeMaxTime* pReq )
+{
+}
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessAck( const CAckLogin* pAck )
 {
@@ -398,3 +444,17 @@ void CMessageRunnable::_ProcessAck( const CAckDownLoadStock* pAck )
 	return;
 }
 
+void CMessageRunnable::_ProcessAck( const CAckStockMinTimeMaxTime* pAck )
+{
+	CStockMinTimeMaxTime* pData = NULL;
+	pData = new CStockMinTimeMaxTime();
+	pData->m_strSymbolUse = pAck->m_strSymbolUse;
+	pData->m_strMinTime = pAck->m_strMinTime;
+	pData->m_strMaxTime = pAck->m_strMaxTime;
+	pData->m_nCount = pAck->m_nCount;
+
+	CDataStockMinTimeMaxTime::getInstance().appendOrUpdate(pData);
+	pData = NULL;
+
+	return;
+}

@@ -54,4 +54,12 @@ void CStockDataActor::saveData( const QString& strHistoryData )
 	}
 }
 
+void CStockDataActor::getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet )
+{
+	if (NULL != m_pStockDataDBActor)
+	{
+		m_pStockDataDBActor->getStockMinTimeMaxTime(strSymbolUse, ppValueGet);
+	}
+}
+
 

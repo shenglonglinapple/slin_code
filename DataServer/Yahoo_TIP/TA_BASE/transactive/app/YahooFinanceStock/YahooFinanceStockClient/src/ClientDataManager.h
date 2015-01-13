@@ -29,7 +29,11 @@ public:
 	void connectedToServer(qint32 nHandle, QString strServerIP, quint16 nServerPort, QString strUserName, QString strPassWord);
 	void loginedToServer(qint32 nHandle, QString strUserName, QString strPassWord);
 	void downLoadStockFromServer(qint32 nHandle);
-
+public:
+	void send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse);
+	void send_req_ReqDownLoadStock(qint32 nHandle);
+	void send_req_CReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
+	void send_req_ReqStockMinTimeMaxTime(qint32 nHandle, const QString& strSymbolUse);
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;

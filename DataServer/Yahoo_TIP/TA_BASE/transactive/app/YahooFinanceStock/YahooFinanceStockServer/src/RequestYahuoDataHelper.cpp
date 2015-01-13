@@ -59,15 +59,15 @@ void CRequestYahuoDataHelper::getStartEndTimeValue(
 
 	strLastUpdateTime_FileDB = m_pFileDBOper->getLastUpdateTime();//"1970-01-01 08:00:00"
 
-	nLastUpdateTime_FileDB = m_pQtTimeHelper->strToDateTime_Qt(strLastUpdateTime_FileDB);
+	nLastUpdateTime_FileDB = m_pQtTimeHelper->getTimeValue(strLastUpdateTime_FileDB);
 
 	nTimeLastUpdateDateTime = nLastUpdateTime_FileDB;
 
 	nTimeLastUpdateDateTime += DEF_INT_ONE_DAY_SECONDS;//"1970-01-02 08:00:00"
-	nTimeNow = m_pQtTimeHelper->getTimeNow_Qt();
+	nTimeNow = m_pQtTimeHelper->getCurrentTime();
 
-	m_pQtTimeHelper->getTimeInfo_Qt(nTimeNow, endYear, endMonth, endDay);
-	m_pQtTimeHelper->getTimeInfo_Qt(nTimeLastUpdateDateTime, startYear, startMonth, startDay);
+	m_pQtTimeHelper->getTimeYearMonthDay(nTimeNow, endYear, endMonth, endDay);
+	m_pQtTimeHelper->getTimeYearMonthDay(nTimeLastUpdateDateTime, startYear, startMonth, startDay);
 
 	
 }

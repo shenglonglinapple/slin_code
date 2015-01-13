@@ -6,6 +6,7 @@
 #include "TcpComProtocol.h"
 
 class CStockDataDBActor;
+class CStockMinTimeMaxTime;
 
 class CStockDataActor : public QObject
 {
@@ -19,6 +20,7 @@ public:
 	void setValue(const QString& strSymbol,	const QString& strSymbolExtern);
 public:
 	void saveData(const QString& strHistoryData);
+	void getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
 
 public:
 	void logInfo( const QString& fileName, qint32 lineNumber );

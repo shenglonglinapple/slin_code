@@ -182,6 +182,24 @@ void CStockDataManager::qWait(int nMilliseconds)
 
 }
 
+void CStockDataManager::doWork_getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet )
+{
+	QMap<QString,CStockDataActor*>::iterator iterMap;
+	CStockDataActor* pData = NULL;
+
+	{
+		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+		iterMap = m_MapStockDataItemT_Total.find(strSymbolUse);
+	}
+
+	if (iterMap != m_MapStockDataItemT_Total.end())
+	{
+		pData = (iterMap.value());
+		pData->getStockMinTimeMaxTime(strSymbolUse, ppValueGet);
+		pData = NULL;
+	}
+}
+
 
 
 

@@ -1,11 +1,7 @@
-#ifndef __CLASS_CLIENT_MAIN_WINDOW_TOOLBAR_HH__
-#define __CLASS_CLIENT_MAIN_WINDOW_TOOLBAR_HH__
+#ifndef __CLASS_CLIENT_MAIN_WINDOW_STATUSBAR_HH__
+#define __CLASS_CLIENT_MAIN_WINDOW_STATUSBAR_HH__
 
-#include <QtCore/QObject>
 #include <QtGui/QToolBar>
-#include <QtGui/QActionGroup>
-
-class CMyBarTypeHeler;
 
 class CClientMainWindowToolBar : public QToolBar 
 { 
@@ -24,7 +20,7 @@ public:
 
 
 
-#endif//__CLASS_CLIENT_MAIN_WINDOW_TOOLBAR_HH__
+#endif//__CLASS_CLIENT_MAIN_WINDOW_STATUSBAR_HH__
 
 
 

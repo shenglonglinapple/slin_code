@@ -26,6 +26,10 @@ public:
 public:
 	int selectData(const QString & strFrom, const QString & strTo, LstHistoryDataT& lstData );
 	QString  getSymbolUse();
+
+	int selectData_MinTime(QString& strValueGet);
+	int selectData_MaxTime(QString& strValueGet);
+	int selectData_Count(int& nValueGet);
 private:
 	void _AnalysisData(QStringList& strLstLines, LstHistoryDataT& lstData);
 	void _FreeData(LstHistoryDataT* pLstData);

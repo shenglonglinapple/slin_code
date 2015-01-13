@@ -154,14 +154,33 @@ int CSqliteDbOperHelper::selectData(
 	LstHistoryDataT& lstData )
 {
 	QMutexLocker lock(&m_mutex_SqliteDbOper);	
-	m_pSqliteDbOper->selectData(strFrom, strTo, lstData);
-
-	return 0;
+	return m_pSqliteDbOper->selectData(strFrom, strTo, lstData);
 }
 
 QString  CSqliteDbOperHelper::getSymbolUse()
 {
 	return m_strSymbolUse;
+}
+
+int CSqliteDbOperHelper::selectData_MinTime( QString& strValueGet )
+{
+	QMutexLocker lock(&m_mutex_SqliteDbOper);	
+	return m_pSqliteDbOper->selectData_MinTime(strValueGet);
+
+}
+
+int CSqliteDbOperHelper::selectData_MaxTime( QString& strValueGet )
+{
+	QMutexLocker lock(&m_mutex_SqliteDbOper);	
+	return m_pSqliteDbOper->selectData_MaxTime(strValueGet);
+
+}
+
+int CSqliteDbOperHelper::selectData_Count( int& nValueGet )
+{
+	QMutexLocker lock(&m_mutex_SqliteDbOper);	
+	return m_pSqliteDbOper->selectData_Count(nValueGet);
+
 }
 
 

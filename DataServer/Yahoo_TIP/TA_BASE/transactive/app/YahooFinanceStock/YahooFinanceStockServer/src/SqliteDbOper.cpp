@@ -4,6 +4,7 @@
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 
+
 #include <QtCore/QFile>
 
 static const char*  str_QtDbType_QSQLITE = "QSQLITE";
@@ -337,6 +338,82 @@ QString  CSqliteDbOper::_BuildSQL_Select(const QString & strFrom, const QString 
 }
 
 
+QString  CSqliteDbOper::_BuildSQL_Select_COLUMN_DATE_by_DESC()
+{	
+	QString  strSQL;	
+	std::stringstream byteSQL;
+
+	/*
+	SELECT 
+	COLUMN_DATE
+	FROM 
+	TABLE_BAR_DATA_1DAY 
+	ORDER BY COLUMN_DATE DESC LIMIT 1
+	*/
+
+
+	byteSQL<<"SELECT"
+		<<" "<<str_BarData_Column_DATE
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_BAR_DATA_1DAY
+		<<" "<<"ORDER BY"
+		<<" "<<str_BarData_Column_DATE
+		<<" "<<"DESC LIMIT 1";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+
+QString  CSqliteDbOper::_BuildSQL_Select_COLUMN_DATE_by_ASC()
+{	
+	QString  strSQL;	
+	std::stringstream byteSQL;
+
+	/*
+	SELECT 
+	COLUMN_DATE
+	FROM 
+	TABLE_BAR_DATA_1DAY 
+	ORDER BY COLUMN_DATE DESC LIMIT 1
+	*/
+
+
+	byteSQL<<"SELECT"
+		<<" "<<str_BarData_Column_DATE
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_BAR_DATA_1DAY
+		<<" "<<"ORDER BY"
+		<<" "<<str_BarData_Column_DATE
+		<<" "<<"ASC LIMIT 1";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+
+QString  CSqliteDbOper::_BuildSQL_Select_Count()
+{	
+	QString  strSQL;	
+	std::stringstream byteSQL;
+
+	/*
+	SELECT 
+	count(*)
+	FROM 
+	TABLE_BAR_DATA_1DAY 
+	*/
+
+
+	byteSQL<<"SELECT"
+		<<" "<<"count(*)"
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_BAR_DATA_1DAY;
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
 int CSqliteDbOper::_CreateDBTable()
 {
 	int nFunRes = 0;
@@ -501,6 +578,133 @@ int CSqliteDbOper::selectData(const QString & strFrom, const QString & strTo, Ls
 	
 		lstData.push_back(pHistoryData);
 		pHistoryData = NULL;
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
+	return nFunRes;
+}
+
+
+int CSqliteDbOper::selectData_MinTime(QString& strValueGet)
+{
+	int nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = _BuildSQL_Select_COLUMN_DATE_by_ASC();
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	strValueGet.clear();
+	if ( pSqlQuery->next() )
+	{
+		nColumnIndex = 0;
+		strValueGet = pSqlQuery->value(nColumnIndex).toString();	
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
+	return nFunRes;
+}
+
+int CSqliteDbOper::selectData_MaxTime(QString& strValueGet)
+{
+	int nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = _BuildSQL_Select_COLUMN_DATE_by_DESC();
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	strValueGet.clear();
+	if ( pSqlQuery->next() )
+	{
+		nColumnIndex = 0;
+		strValueGet = pSqlQuery->value(nColumnIndex).toString();	
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
+	return nFunRes;
+}
+
+int CSqliteDbOper::selectData_Count( int& nValueGet )
+{
+	int nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = _BuildSQL_Select_Count();
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	nValueGet = 0;
+	if ( pSqlQuery->next() )
+	{
+		nColumnIndex = 0;
+		nValueGet = pSqlQuery->value(nColumnIndex).toInt();	
 	}//while
 
 	if (NULL != pSqlQuery)

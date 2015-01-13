@@ -4,6 +4,8 @@
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
 
 class CQtTimeHelper;
 class CFileDBOper;
@@ -20,6 +22,7 @@ private:
 	void _RemoveEmptyString(QStringList& strList);
 private:
 	CQtTimeHelper* m_pQtTimeHelper;
+	QMutex m_mutex_FileDBOper;
 	CFileDBOper* m_pFileDBOper;
 	QString m_strSymbolUse;
 };

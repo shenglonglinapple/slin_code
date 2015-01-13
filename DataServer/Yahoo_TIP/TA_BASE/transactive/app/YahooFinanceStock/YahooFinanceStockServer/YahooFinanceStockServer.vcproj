@@ -409,6 +409,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\StockMinTimeMaxTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockMinTimeMaxTime.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\StockTcpServer.cpp"
 				>
 			</File>
@@ -882,6 +890,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\AckStockMinTimeMaxTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AckStockMinTimeMaxTime.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AckSynYahoo.cpp"
 				>
 			</File>
@@ -933,6 +949,14 @@
 			</File>
 			<File
 				RelativePath=".\src\ReqLogout.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqStockMinTimeMaxTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqStockMinTimeMaxTime.h"
 				>
 			</File>
 			<File
