@@ -10,6 +10,7 @@
 
 class CStockDataActor;
 class CStockMinTimeMaxTime;
+class CHistoryData;
 
 class CStockDataManager 
 {
@@ -31,6 +32,8 @@ public:
 public:
 	void doWork_getStockSymbolUse(QList<QString >& LstStockSymbolUse);
 	void doWork_getStockMinTimeMaxTime(const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
+	void doWork_HistoryData(const QString& strSymbolUse, const QString& strFrom, const QString& strTo, QList<CHistoryData*>& lstData);
+
 private:
 	void _FreeData_SSSZ_Stocks();
 	void _LoadData_SSSZ_Stocks();

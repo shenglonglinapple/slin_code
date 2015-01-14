@@ -100,6 +100,24 @@ void CStockDataDBActor::getStockMinTimeMaxTime( const QString& strSymbolUse, CSt
 
 }
 
+int CStockDataDBActor::selectData( const QString & strFrom, const QString & strTo, QList<CHistoryData*>& lstData )
+{
+	int nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"selectData begin";
+
+	if (NULL != m_pSqliteDbOperHelper)
+	{
+		nFunRes = m_pSqliteDbOperHelper->selectData(strFrom, strTo, lstData);
+	}
+	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse
+		<<" "<<"selectData"
+		<<" "<<"strFrom="<<strFrom
+		<<" "<<"strTo="<<strTo
+		<<" "<<"lstData.size="<<lstData.size();
+	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"selectData end";
+	return nFunRes;
+}
+
 
 
 

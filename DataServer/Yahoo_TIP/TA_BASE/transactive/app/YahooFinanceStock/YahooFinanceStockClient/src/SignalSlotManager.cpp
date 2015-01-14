@@ -2,6 +2,10 @@
 
 #include "ClientDataManager.h"
 #include "ClientMainWindow.h"
+#include "DataStockMinTimeMaxTime.h"
+#include "StockMinTimeMaxTimeTableView.h"
+#include "DataStockHistoryData.h"
+#include "StockHistoryDataTableView.h"
 
 #include "Log4cppLogger.h"
 
@@ -30,6 +34,11 @@ CSignalSlotManager::CSignalSlotManager(void)
 {	
 	m_pRefSignal_ShownMessage = NULL;
 	m_pRefSlot_ShownMessage = NULL;
+	m_pRefSignal_DataChange_StockMinTimeMaxTime = NULL;
+	m_pRefSlot_DataChange_StockMinTimeMaxTime = NULL;
+	m_pRefSignal_DataChange_StockHistoryData = NULL;
+	m_pRefSlot_DataChange_StockHistoryData = NULL;
+	
 }
 
 CSignalSlotManager::~CSignalSlotManager(void)
@@ -68,3 +77,79 @@ void CSignalSlotManager::emit_ShownMessage(QString strMessage)
 {
 	emit signal_ShownMessage(strMessage);
 }
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+void CSignalSlotManager::set_Signal_DataChange_StockMinTimeMaxTime( CDataStockMinTimeMaxTime* pRefSignal )
+{
+	m_pRefSignal_DataChange_StockMinTimeMaxTime = pRefSignal;
+}
+
+void CSignalSlotManager::set_Slot_DataChange_StockMinTimeMaxTime( CStockMinTimeMaxTimeTableView* pRefSlot )
+{
+	m_pRefSlot_DataChange_StockMinTimeMaxTime = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_StockMinTimeMaxTime && NULL != m_pRefSlot_DataChange_StockMinTimeMaxTime)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_StockMinTimeMaxTime()), this, SLOT(slot_DataChange_StockMinTimeMaxTime()));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_StockMinTimeMaxTime()), this, SLOT(slot_DataChange_StockMinTimeMaxTime()));
+	}
+}
+
+void CSignalSlotManager::slot_DataChange_StockMinTimeMaxTime()
+{
+	if (NULL != m_pRefSlot_DataChange_StockMinTimeMaxTime)
+	{
+		m_pRefSlot_DataChange_StockMinTimeMaxTime->slot_DataChange_StockMinTimeMaxTime();
+	}
+}
+
+void CSignalSlotManager::emit_DataChange_StockMinTimeMaxTime()
+{
+	emit signal_DataChange_StockMinTimeMaxTime();
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+void CSignalSlotManager::set_Signal_DataChange_StockHistoryData( CDataStockHistoryData* pRefSignal )
+{
+	m_pRefSignal_DataChange_StockHistoryData = pRefSignal;
+}
+
+void CSignalSlotManager::set_Slot_DataChange_StockHistoryData( CStockHistoryDataTableView* pRefSlot )
+{
+	m_pRefSlot_DataChange_StockHistoryData = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_StockHistoryData && NULL != m_pRefSlot_DataChange_StockHistoryData)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_StockHistoryData()), this, SLOT(slot_DataChange_StockHistoryData()));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_StockHistoryData()), this, SLOT(slot_DataChange_StockHistoryData()));
+	}
+}
+void CSignalSlotManager::slot_DataChange_StockHistoryData()
+{
+	if (NULL != m_pRefSlot_DataChange_StockHistoryData)
+	{
+		m_pRefSlot_DataChange_StockHistoryData->slot_DataChange_StockHistoryData();
+	}
+}
+
+void CSignalSlotManager::emit_DataChange_StockHistoryData()
+{
+	emit signal_DataChange_StockHistoryData();
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+

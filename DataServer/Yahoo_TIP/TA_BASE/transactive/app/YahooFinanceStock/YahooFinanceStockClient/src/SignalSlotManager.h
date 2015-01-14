@@ -9,6 +9,10 @@
 
 class CClientDataManager;
 class CClientMainWindow;
+class CDataStockMinTimeMaxTime;
+class CStockMinTimeMaxTimeTableView;
+class CDataStockHistoryData;
+class CStockHistoryDataTableView;
 
 class CSignalSlotManager : public QObject
 {
@@ -38,7 +42,35 @@ public slots:
 public:
 	void emit_ShownMessage(QString strMessage);
 //////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////
+private:
+	CDataStockMinTimeMaxTime* m_pRefSignal_DataChange_StockMinTimeMaxTime;
+	CStockMinTimeMaxTimeTableView* m_pRefSlot_DataChange_StockMinTimeMaxTime;
+public:
+	void set_Signal_DataChange_StockMinTimeMaxTime( CDataStockMinTimeMaxTime* pRefSignal);
+	void set_Slot_DataChange_StockMinTimeMaxTime(CStockMinTimeMaxTimeTableView* pRefSlot);
+signals:
+	void signal_DataChange_StockMinTimeMaxTime();
+public slots:
+	void slot_DataChange_StockMinTimeMaxTime();
+public:
+	void emit_DataChange_StockMinTimeMaxTime();
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+private:
+	CDataStockHistoryData* m_pRefSignal_DataChange_StockHistoryData;
+	CStockHistoryDataTableView* m_pRefSlot_DataChange_StockHistoryData;
+public:
+	void set_Signal_DataChange_StockHistoryData( CDataStockHistoryData* pRefSignal);
+	void set_Slot_DataChange_StockHistoryData(CStockHistoryDataTableView* pRefSlot);
+signals:
+	void signal_DataChange_StockHistoryData();
+public slots:
+	void slot_DataChange_StockHistoryData();
+public:
+	void emit_DataChange_StockHistoryData();
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
 
 };
 

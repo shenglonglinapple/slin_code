@@ -8,6 +8,8 @@
 
 class CQtTimeHelper;
 class CStockMinTimeMaxTime;
+class CItemStockMinTimeMaxTime;
+class CItemStockMinTimeMaxTimeHelper;
 
 class CDataStockMinTimeMaxTime 
 { 
@@ -23,11 +25,22 @@ private:
 	virtual ~CDataStockMinTimeMaxTime(); 
 public:
 	void appendOrUpdate(CStockMinTimeMaxTime* pData);
+public:
+	CItemStockMinTimeMaxTime* getRootItem();
+
 private:
 	void _FreeData();
+	void addNode(const CStockMinTimeMaxTime* pData );
+	void updateNode(const CStockMinTimeMaxTime* pData );
+	CStockMinTimeMaxTime* findNode(const QString& strSymbolUse);
 private:
 	QMutex m_mutexForMapData;
 	QMap<QString, CStockMinTimeMaxTime*> m_MapData;
+
+	QMutex m_mutexForRoot;
+	CItemStockMinTimeMaxTime* m_pItem_Root;
+	CItemStockMinTimeMaxTimeHelper* m_pItemDataHelper;
+
 private:
 	CQtTimeHelper* m_pQtTimeHelper;
 }; 

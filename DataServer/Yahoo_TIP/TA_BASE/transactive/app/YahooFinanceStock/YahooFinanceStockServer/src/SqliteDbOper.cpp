@@ -328,9 +328,10 @@ QString  CSqliteDbOper::_BuildSQL_Select(const QString & strFrom, const QString 
 		<<" "<<str_BarData_Column_ADJCLOSE
 		<<" "<<"FROM"
 		<<" "<<str_TABLE_BAR_DATA_1DAY
-		<<" "<<"COLUMN_DATE >="<<strFrom.toStdString()
+		<<" "<<"WHERE"
+		<<" "<<"COLUMN_DATE >="<<"\""<<strFrom.toStdString()<<"\""
 		<<" "<<"AND"
-		<<" "<<"COLUMN_DATE <="<<strTo.toStdString();
+		<<" "<<"COLUMN_DATE <="<<"\""<<strTo.toStdString()<<"\"";
 
 
 	strSQL = byteSQL.str().c_str();

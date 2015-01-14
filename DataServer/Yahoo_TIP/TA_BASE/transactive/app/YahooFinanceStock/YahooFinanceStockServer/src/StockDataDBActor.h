@@ -3,6 +3,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QDate>
+#include <QtCore/QList>
 #include "TcpComProtocol.h"
 
 
@@ -11,6 +12,7 @@ class CYahuoHistoryReqAck;
 class CFileDBOperHelper;
 class CSqliteDbOperHelper;
 class CStockMinTimeMaxTime;
+class CHistoryData;
 
 class CStockDataDBActor : public QObject
 {
@@ -25,7 +27,7 @@ public slots:
 public:
 	void saveData(const QString& strHistoryData);
 	void getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
-
+	int selectData(const QString & strFrom, const QString & strTo, QList<CHistoryData*>& lstData );
 private:
 	QString m_strSymbolUse;
 private:

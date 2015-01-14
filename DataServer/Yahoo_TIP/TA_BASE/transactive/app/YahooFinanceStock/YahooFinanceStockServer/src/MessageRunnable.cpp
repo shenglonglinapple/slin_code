@@ -1,6 +1,7 @@
 #include "MessageRunnable.h"
 
 #include <QtCore/QDataStream>
+#include <QtCore/QList>
 
 #include "TcpComProtocol.h"
 #include "ReqLogin.h"
@@ -8,12 +9,14 @@
 #include "ReqSynYahoo.h"
 #include "ReqDownLoadStock.h"
 #include "ReqStockMinTimeMaxTime.h"
+#include "ReqStockHistoryData.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
 #include "AckSynYahoo.h"
 #include "AckDownLoadStock.h"
 #include "AckStockMinTimeMaxTime.h"
+#include "AckStockHistoryData.h"
 
 #include "MessageManager.h"
 
@@ -23,6 +26,7 @@
 #include "YahooDataLoader.h"
 #include "StockDataManager.h"
 #include "StockMinTimeMaxTime.h"
+#include "HistoryData.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
 {
@@ -113,6 +117,10 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqStockMinTimeMaxTime();		
 	}
+	else if (CReqStockHistoryData::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqStockHistoryData();		
+	}
 	
 }
 
@@ -193,6 +201,22 @@ void CMessageRunnable::_ProcessMessage_ReqStockMinTimeMaxTime()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_ReqStockHistoryData()
+{
+	CReqStockHistoryData* pReq = NULL;
+	pReq = new CReqStockHistoryData();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -217,6 +241,10 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckStockMinTimeMaxTime::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckStockMinTimeMaxTime();		
+	}
+	else if (CAckStockHistoryData::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckStockHistoryData();		
 	}
 }
 
@@ -300,6 +328,22 @@ void CMessageRunnable::_ProcessMessage_AckStockMinTimeMaxTime()
 	}
 }
 
+
+void CMessageRunnable::_ProcessMessage_AckStockHistoryData()
+{
+	CAckStockHistoryData* pAck = NULL;
+	pAck = new CAckStockHistoryData();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->_ProcessAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -491,6 +535,36 @@ void CMessageRunnable::_ProcessReq( const CReqStockMinTimeMaxTime* pReq )
 
 }
 
+void CMessageRunnable::_ProcessReq( const CReqStockHistoryData* pReq )
+{
+	CAckStockHistoryData* pAck = NULL;
+	QByteArray* pByteArray = NULL;
+	QList<CHistoryData*> lstData;
+	
+	CStockDataManager::getInstance().doWork_HistoryData(pReq->m_strSymbolUse, pReq->m_strTimeFrom, pReq->m_strTimeTo, lstData);
+
+	pAck = new CAckStockHistoryData();
+	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
+	pAck->m_nDataType = CTcpComProtocol::DataType_HistoryData;
+	pAck->m_strReqUUID = pReq->m_strReqUUID;
+	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+	pAck->m_strSymbolUse = pReq->m_strSymbolUse;
+	pAck->m_nDataCount = lstData.size();
+	pAck->m_LstHistoryData.append(lstData);
+	lstData.clear();
+
+	pAck->logInfo(__FILE__, __LINE__);
+	pByteArray = pAck->getMessage();
+	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
+
+	pByteArray = NULL;
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessAck( const CAckLogin* pAck )
 {
@@ -515,4 +589,9 @@ void CMessageRunnable::_ProcessAck(const CAckDownLoadStock* pAck)
 void CMessageRunnable::_ProcessAck( const CAckStockMinTimeMaxTime* pAck )
 {
 	return;
+}
+
+void CMessageRunnable::_ProcessAck( const CAckStockHistoryData* pAck )
+{
+
 }

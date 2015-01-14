@@ -73,7 +73,8 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 			strSymbolExtern = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
 			MYLOG4CPP_DEBUG<<"strSymbol="<<strSymbol<<" "<<"strSymbolExtern="<<strSymbolExtern;
 			
-			if (strSymbol.contains("000008"))//000008.SZ
+			//if (strSymbol.contains("000008"))//000008.SZ
+			if (strSymbol.contains("8"))//000008.SZ
 			{
 				pData = new CStockDataActor();
 				pData->setValue(strSymbol, strSymbolExtern);
@@ -196,6 +197,25 @@ void CStockDataManager::doWork_getStockMinTimeMaxTime( const QString& strSymbolU
 	{
 		pData = (iterMap.value());
 		pData->getStockMinTimeMaxTime(strSymbolUse, ppValueGet);
+		pData = NULL;
+	}
+}
+
+void CStockDataManager::doWork_HistoryData( const QString& strSymbolUse, const QString& strFrom, const QString& strTo, QList<CHistoryData*>& lstData )
+{
+	QMap<QString,CStockDataActor*>::iterator iterMap;
+	CStockDataActor* pData = NULL;
+
+	{
+		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+		iterMap = m_MapStockDataItemT_Total.find(strSymbolUse);
+	}
+
+	if (iterMap != m_MapStockDataItemT_Total.end())
+	{
+		pData = (iterMap.value());
+		pData->selectData(strFrom, strTo, lstData);
+
 		pData = NULL;
 	}
 }

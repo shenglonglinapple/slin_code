@@ -3,9 +3,12 @@
 #include <QtCore/QStringList>
 #include <QtCore/QByteArray>
 
+#include "ProjectCommonDef.h"
+
 #include "ClientWorkerManager.h"
 #include "StockDataManager.h"
 #include "DataStockMinTimeMaxTime.h"
+#include "DataStockHistoryData.h"
 
 #include "TcpComProtocol.h"
 #include "ReqLogin.h"
@@ -13,15 +16,17 @@
 #include "ReqSynYahoo.h"
 #include "ReqDownLoadStock.h"
 #include "ReqStockMinTimeMaxTime.h"
+#include "ReqStockHistoryData.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
 #include "AckSynYahoo.h"
 #include "AckDownLoadStock.h"
 #include "AckStockMinTimeMaxTime.h"
+#include "AckStockHistoryData.h"
 
 #include "SignalSlotManager.h"
-
+#include "QtTimeHelper.h"
 #include "Log4cppLogger.h"
 
 CClientDataManager* CClientDataManager::m_pInstance = 0;
@@ -47,29 +52,46 @@ void CClientDataManager::removeInstance()
 
 CClientDataManager::CClientDataManager(void)
 {
+	m_strServerIP.clear();
+	m_nServerPort.clear();
+	m_strUserName.clear();
+	m_strPassWord.clear();
+	m_nHandle = 0;
+	m_pQtTimeHelper = NULL;
+	m_pQtTimeHelper = new CQtTimeHelper();
+
 	CClientWorkerManager::getInstance();
 	CStockDataManager::getInstance();
 	CDataStockMinTimeMaxTime::getInstance();
+	CDataStockHistoryData::getInstance();
 
 	CSignalSlotManager::getInstance().set_Signal_ShownMessage(this);
 }
 
 CClientDataManager::~CClientDataManager(void)
 {
+	CDataStockHistoryData::removeInstance();
 	CDataStockMinTimeMaxTime::removeInstance();
 	CStockDataManager::removeInstance();
 	CClientWorkerManager::removeInstance();
 
+	if (NULL != m_pQtTimeHelper)
+	{
+		delete m_pQtTimeHelper;
+		m_pQtTimeHelper = NULL;
+	}
 }
 
 void CClientDataManager::connectedToServer( qint32 nHandle, 
 QString strServerIP, quint16 nServerPort, 
 QString strUserName, QString strPassWord )
 {
+	m_nHandle = nHandle;
 	m_strServerIP = strServerIP;
 	m_nServerPort = nServerPort;
 	m_strUserName = strUserName;
 	m_strPassWord = strPassWord;
+
 	MYLOG4CPP_DEBUG<<"CClientDataManager connectedToServer"
 		<<" "<<"nHandle="<<nHandle
 		<<" "<<"m_strServerIP="<<m_strServerIP
@@ -117,6 +139,7 @@ void CClientDataManager::downLoadStockFromServer( qint32 nHandle )
 	iterLst = lstSymbolUse.begin();
 	while (iterLst != lstSymbolUse.end())
 	{
+		//TODO.forTest
 		//send_req_ReqSynYahoo(nHandle, (*iterLst));
 		send_req_ReqStockMinTimeMaxTime(nHandle, (*iterLst));
 		iterLst++;
@@ -217,6 +240,40 @@ void CClientDataManager::send_req_ReqStockMinTimeMaxTime(qint32 nHandle, const Q
 	pByteArray = pReq->getMessage();
 
 	CClientWorkerManager::getInstance().sendMessage(nHandle, pByteArray);
+
+	pByteArray = NULL;
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+
+}
+
+
+void CClientDataManager::send_req_ReqStockHistoryData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo)
+{
+	CReqStockHistoryData* pReq = NULL;
+	QByteArray* pByteArray = NULL;
+	//quint32 nCurrentTime;
+	//quint32 nFromTime;
+	//nCurrentTime = m_pQtTimeHelper->getCurrentTime();
+	//nFromTime = nCurrentTime - TimeBaseSecond::TIME_BASE_S_1YEAR;
+
+	pReq = new CReqStockHistoryData();
+
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strSymbolUse = strSymbolUse;//"000001.SZ";
+	pReq->m_strTimeFrom = strTimeFrom;
+	pReq->m_strTimeTo = strTimeTo;
+	//pReq->m_strTimeFrom = m_pQtTimeHelper->getStringValue(nFromTime);
+	//pReq->m_strTimeTo = m_pQtTimeHelper->getStringValue(nCurrentTime);
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+
+	CClientWorkerManager::getInstance().sendMessage(m_nHandle, pByteArray);
 
 	pByteArray = NULL;
 

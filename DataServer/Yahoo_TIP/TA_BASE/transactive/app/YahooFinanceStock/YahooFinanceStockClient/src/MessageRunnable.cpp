@@ -1,6 +1,7 @@
 #include "MessageRunnable.h"
 
 #include <QtCore/QDataStream>
+#include <QtCore/QList>
 
 #include "TcpComProtocol.h"
 #include "ReqLogin.h"
@@ -8,12 +9,14 @@
 #include "ReqSynYahoo.h"
 #include "ReqDownLoadStock.h"
 #include "ReqStockMinTimeMaxTime.h"
+#include "ReqStockHistoryData.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
 #include "AckSynYahoo.h"
 #include "AckDownLoadStock.h"
 #include "AckStockMinTimeMaxTime.h"
+#include "AckStockHistoryData.h"
 
 #include "MessageManager.h"
 
@@ -21,6 +24,8 @@
 #include "StockDataManager.h"
 #include "DataStockMinTimeMaxTime.h"
 #include "StockMinTimeMaxTime.h"
+#include "HistoryData.h"
+#include "DataStockHistoryData.h"
 
 #include "Log4cppLogger.h"
 
@@ -113,6 +118,10 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqStockMinTimeMaxTime();		
 	}
+	else if (CReqStockHistoryData::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqStockHistoryData();		
+	}
 	
 }
 
@@ -193,6 +202,22 @@ void CMessageRunnable::_ProcessMessage_ReqStockMinTimeMaxTime()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_ReqStockHistoryData()
+{
+	CReqStockHistoryData* pReq = NULL;
+	pReq = new CReqStockHistoryData();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -217,6 +242,10 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckStockMinTimeMaxTime::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckStockMinTimeMaxTime();		
+	}
+	else if (CAckStockHistoryData::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckStockHistoryData();		
 	}
 }
 
@@ -300,6 +329,22 @@ void CMessageRunnable::_ProcessMessage_AckStockMinTimeMaxTime()
 	}
 }
 
+
+void CMessageRunnable::_ProcessMessage_AckStockHistoryData()
+{
+	CAckStockHistoryData* pAck = NULL;
+	pAck = new CAckStockHistoryData();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->_ProcessAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -417,6 +462,11 @@ void CMessageRunnable::_ProcessReq(const CReqDownLoadStock* pReq)
 void CMessageRunnable::_ProcessReq( const CReqStockMinTimeMaxTime* pReq )
 {
 }
+
+void CMessageRunnable::_ProcessReq( const CReqStockHistoryData* pReq )
+{
+
+}
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessAck( const CAckLogin* pAck )
 {
@@ -458,3 +508,12 @@ void CMessageRunnable::_ProcessAck( const CAckStockMinTimeMaxTime* pAck )
 
 	return;
 }
+
+
+void CMessageRunnable::_ProcessAck( const CAckStockHistoryData* pAck )
+{
+	CDataStockHistoryData::getInstance().setData(pAck->m_strSymbolUse, pAck->m_LstHistoryData);
+
+	return;
+}
+

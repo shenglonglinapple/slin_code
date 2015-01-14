@@ -4,6 +4,9 @@
 #include <QtGui/QMdiArea>
 #include <QtGui/QMdiSubWindow>
 
+class CStockMinTimeMaxTimeTableView;
+class CStockHistoryDataTableView;
+
 class CClientMainWindowMdiArea : public QMdiArea
 {
     Q_OBJECT
@@ -14,6 +17,9 @@ public:
 private:
 	void _SetupUi();
 	void _TranslateLanguage();
+private:
+	CStockMinTimeMaxTimeTableView* m_pStockMinTimeMaxTimeTableView;
+	CStockHistoryDataTableView* m_pStockHistoryDataTableView;
 };
 
 #endif // __CLASS_CLIENT_MAIN_WINDOW_MDIAREA_HH__

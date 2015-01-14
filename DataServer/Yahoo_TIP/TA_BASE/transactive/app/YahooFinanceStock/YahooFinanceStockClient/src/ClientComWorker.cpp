@@ -119,6 +119,13 @@ void CClientComWorker::slotSendMessage(qint32 handle, QByteArray* pByteArray)
 
 	if (m_nHandle != handle)
 	{
+		MYLOG4CPP_ERROR<<"m_nHandle="<<m_nHandle<<" "<<"handle="<<handle;
+		if (NULL != pByteArray)
+		{
+			delete pByteArray;
+			pByteArray = NULL;
+		}
+
 		return;
 	}
 	quint32 nMessageLenth = 0;

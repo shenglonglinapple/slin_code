@@ -3,10 +3,12 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QList>
 #include "TcpComProtocol.h"
 
 class CStockDataDBActor;
 class CStockMinTimeMaxTime;
+class CHistoryData;
 
 class CStockDataActor : public QObject
 {
@@ -21,6 +23,7 @@ public:
 public:
 	void saveData(const QString& strHistoryData);
 	void getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
+	int selectData(const QString & strFrom, const QString & strTo, QList<CHistoryData*>& lstData );
 
 public:
 	void logInfo( const QString& fileName, qint32 lineNumber );

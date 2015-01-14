@@ -62,4 +62,14 @@ void CStockDataActor::getStockMinTimeMaxTime( const QString& strSymbolUse, CStoc
 	}
 }
 
+int CStockDataActor::selectData( const QString & strFrom, const QString & strTo, QList<CHistoryData*>& lstData )
+{
+	int nFunRes = 0;
+	if (NULL != m_pStockDataDBActor)
+	{
+		nFunRes = m_pStockDataDBActor->selectData(strFrom, strTo, lstData);
+	}
+	return nFunRes;
+}
+
 

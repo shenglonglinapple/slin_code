@@ -15,6 +15,24 @@ typedef quint64 qulonglong;
 */
 
 
+
+enum TimeBaseSecond
+{	
+	TIME_BASE_S_1S          = 1,
+	TIME_BASE_S_5S          = 5 * TIME_BASE_S_1S,
+
+	TIME_BASE_S_1MIN		= 60   * TIME_BASE_S_1S,
+	TIME_BASE_S_5MIN		= 5   * TIME_BASE_S_1MIN,
+	TIME_BASE_S_15MIN		= 15   * TIME_BASE_S_1MIN,
+	TIME_BASE_S_30MIN		= 30   * TIME_BASE_S_1MIN,
+
+	TIME_BASE_S_1HOUR		= 60   * TIME_BASE_S_1MIN,
+	TIME_BASE_S_1DAY		= 24   * TIME_BASE_S_1HOUR,
+	TIME_BASE_S_1MON		= 30   * TIME_BASE_S_1DAY,
+	TIME_BASE_S_1YEAR		= 365   * TIME_BASE_S_1DAY,
+
+};
+
 #endif  // __DEF__HISTORY_DATA_SERVER_COMMON_DEF_H_
 
 

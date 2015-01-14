@@ -890,6 +890,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\AckStockHistoryData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AckStockHistoryData.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AckStockMinTimeMaxTime.cpp"
 				>
 			</File>
@@ -949,6 +957,14 @@
 			</File>
 			<File
 				RelativePath=".\src\ReqLogout.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqStockHistoryData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqStockHistoryData.h"
 				>
 			</File>
 			<File

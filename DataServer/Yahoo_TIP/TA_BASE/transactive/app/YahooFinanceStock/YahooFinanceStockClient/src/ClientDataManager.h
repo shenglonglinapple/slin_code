@@ -10,7 +10,7 @@
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 
-
+class CQtTimeHelper;
 class CClientLoginParam;
 
 class CClientDataManager
@@ -34,12 +34,15 @@ public:
 	void send_req_ReqDownLoadStock(qint32 nHandle);
 	void send_req_CReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
 	void send_req_ReqStockMinTimeMaxTime(qint32 nHandle, const QString& strSymbolUse);
+	void send_req_ReqStockHistoryData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo);
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;
 	QString m_strUserName;
 	QString m_strPassWord;
-
+	qint32 m_nHandle;
+private:
+	CQtTimeHelper* m_pQtTimeHelper;
 };
 
 //QT_END_NAMESPACE

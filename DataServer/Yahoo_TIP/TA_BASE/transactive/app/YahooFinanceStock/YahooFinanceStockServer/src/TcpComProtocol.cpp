@@ -65,6 +65,9 @@ QString CTcpComProtocol::getStringValue( EDataType nValue )
 	case DataType_StockMinTimeMaxTime:
 		strValue = "DataType_StockMinTimeMaxTime";
 		break;
+	case DataType_HistoryData:
+		strValue = "DataType_HistoryData";
+		break;
 	case DataType_Unknown:
 		strValue = "DataType_Unknown";
 		break;

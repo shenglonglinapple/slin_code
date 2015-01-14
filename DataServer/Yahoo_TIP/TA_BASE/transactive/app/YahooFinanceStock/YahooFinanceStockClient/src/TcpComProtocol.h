@@ -25,6 +25,7 @@ public:
 		DataType_DownLoadStock  = 0x00000002,
 		DataType_SynYahoo  = 0x00000003,
 		DataType_StockMinTimeMaxTime  = 0x00000004,
+		DataType_HistoryData  = 0x00000005,
 		DataType_Unknown  = 0x0FFFFFFF,
 	};
 
