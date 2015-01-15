@@ -10,6 +10,8 @@
 #include "ReqDownLoadStock.h"
 #include "ReqStockMinTimeMaxTime.h"
 #include "ReqStockHistoryData.h"
+#include "ReqCreateUser.h"
+#include "ReqBuy.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -17,6 +19,8 @@
 #include "AckDownLoadStock.h"
 #include "AckStockMinTimeMaxTime.h"
 #include "AckStockHistoryData.h"
+#include "AckCreateUser.h"
+#include "AckBuy.h"
 
 #include "MessageManager.h"
 
@@ -25,8 +29,13 @@
 #include "ProjectEnvironment.h"
 #include "YahooDataLoader.h"
 #include "StockDataManager.h"
+#include "ServerManager.h"
 #include "StockMinTimeMaxTime.h"
 #include "HistoryData.h"
+#include "WorkTime.h"
+#include "UserInfo.h"
+#include "UserTradeInfo.h"
+#include "ConfigInfo.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
 {
@@ -57,11 +66,15 @@ void CMessageRunnable::setHanle( CMessageManager* pHanleRef )
 
 void CMessageRunnable::run()
 {
+	CWorkTimeNoLock workTime(0);
+	workTime.workBegin();
 	MYLOG4CPP_DEBUG<<"CMessageRunnable::run() begin";
 
 	_ProcessMessage();
 
-	MYLOG4CPP_DEBUG<<"CMessageRunnable::run() end";
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CMessageRunnable::run() end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
+
 }
 
 void CMessageRunnable::_ProcessMessage()
@@ -120,6 +133,14 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	else if (CReqStockHistoryData::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_ReqStockHistoryData();		
+	}
+	else if (CReqCreateUser::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqCreateUser();		
+	}
+	else if (CReqBuy::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqBuy();		
 	}
 	
 }
@@ -217,6 +238,38 @@ void CMessageRunnable::_ProcessMessage_ReqStockHistoryData()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_ReqCreateUser()
+{
+	CReqCreateUser* pReq = NULL;
+	pReq = new CReqCreateUser();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
+
+void CMessageRunnable::_ProcessMessage_ReqBuy()
+{
+	CReqBuy* pReq = NULL;
+	pReq = new CReqBuy();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -245,6 +298,14 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckStockHistoryData::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckStockHistoryData();		
+	}
+	else if (CAckCreateUser::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckCreateUser();		
+	}
+	else if (CAckBuy::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckBuy();
 	}
 }
 
@@ -345,6 +406,38 @@ void CMessageRunnable::_ProcessMessage_AckStockHistoryData()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_AckCreateUser()
+{
+	CAckCreateUser* pAck = NULL;
+	pAck = new CAckCreateUser();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->_ProcessAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageRunnable::_ProcessMessage_AckBuy()
+{
+	CAckBuy* pAck = NULL;
+	pAck = new CAckBuy();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->_ProcessAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
@@ -352,20 +445,48 @@ void CMessageRunnable::_ProcessReq(const CReqLogin* pReq )
 {
 	CAckLogin* pAckLogin = NULL;
 	QByteArray* pByteArray = NULL;
-
+	CUserInfo* pGetUserInfo = NULL;
+	quint16 nListenPort = 0;
+	qint32 nFunRes = 0;
+	CTcpComProtocol::EDataTypeLoginResult nLoginResult = CTcpComProtocol::DataType_LoginResult_OK;
+	nListenPort = CConfigInfo::getInstance().getServerPort();
+	nFunRes = CServerManager::getInstance().getUserInfo(nListenPort, pReq->m_strUserName, pReq->m_strPassword, &pGetUserInfo);
+	if (NULL == pGetUserInfo)
+	{
+		pGetUserInfo = new CUserInfo();
+		pGetUserInfo->m_strUSERNAME = pReq->m_strUserName;
+		pGetUserInfo->m_strPASSWORD = pReq->m_strPassword;
+		pGetUserInfo->resetUseID();
+		nFunRes = CServerManager::getInstance().createUserInfo(nListenPort, pGetUserInfo);
+	}
+	
+	{
+		pGetUserInfo->resetLoginTime();
+		pGetUserInfo->m_nLOGINCOUNT++;
+		pGetUserInfo->m_nSTATE = CUserInfo::UserState_ONLINE;
+		nFunRes = CServerManager::getInstance().updateUserInfo(nListenPort, pGetUserInfo);
+	}
 
 	pAckLogin = new CAckLogin();
-
 	pAckLogin->m_nMessageType = CTcpComProtocol::MsgType_Ack;
 	pAckLogin->m_nDataType = CTcpComProtocol::DataType_Login;
 	pAckLogin->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAckLogin->m_strReqUUID = pReq->m_strReqUUID;
-	pAckLogin->m_strUserName = pReq->m_strUserName;
-	pAckLogin->m_strPassword = pReq->m_strPassword;
-	pAckLogin->m_nLoginResult = CTcpComProtocol::DataType_LoginResult_OK;
+	pAckLogin->m_strUserName = pGetUserInfo->m_strUSERNAME;
+	pAckLogin->m_strPassword = pGetUserInfo->m_strPASSWORD;
+	pAckLogin->m_strLastLoginTime = pGetUserInfo->m_strLASTLOGINTIME;
+	pAckLogin->m_nLoginCount = pGetUserInfo->m_nLOGINCOUNT;
+	pAckLogin->m_nState = pGetUserInfo->m_nSTATE;
+	pAckLogin->m_nLoginResult = nLoginResult;
+
+	if (NULL != pGetUserInfo)
+	{
+		delete pGetUserInfo;
+		pGetUserInfo = NULL;
+	}
+
 	pByteArray = pAckLogin->getMessage();
 	pAckLogin->logInfo(__FILE__, __LINE__);
-
 	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
 
 
@@ -565,6 +686,124 @@ void CMessageRunnable::_ProcessReq( const CReqStockHistoryData* pReq )
 	}
 }
 
+void CMessageRunnable::_ProcessReq( const CReqCreateUser* pReq )
+{
+	CAckCreateUser* pAck = NULL;
+	QByteArray* pByteArray = NULL;
+	CUserInfo* pGetUserInfo = NULL;
+	quint16 nListenPort = 0;
+	qint32 nFunRes = 0;
+	nListenPort = CConfigInfo::getInstance().getServerPort();
+	nFunRes = CServerManager::getInstance().getUserInfo(nListenPort, pReq->m_strUserName, pReq->m_strPassword, &pGetUserInfo);
+	if (NULL == pGetUserInfo)
+	{
+		pGetUserInfo = new CUserInfo();
+		pGetUserInfo->m_strUSERNAME = pReq->m_strUserName;
+		pGetUserInfo->m_strPASSWORD = pReq->m_strPassword;
+		pGetUserInfo->resetUseID();
+		nFunRes = CServerManager::getInstance().createUserInfo(nListenPort, pGetUserInfo);
+		pGetUserInfo->resetLoginTime();
+		pGetUserInfo->m_nLOGINCOUNT = 0;
+		pGetUserInfo->m_nSTATE = CUserInfo::UserState_OFFLINE;
+		nFunRes = CServerManager::getInstance().updateUserInfo(nListenPort, pGetUserInfo);
+	}
+
+	pAck = new CAckCreateUser();
+	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
+	pAck->m_nDataType = CTcpComProtocol::DataType_CreateUser;
+	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+	pAck->m_strReqUUID = pReq->m_strReqUUID;
+	pAck->m_strUserName = pGetUserInfo->m_strUSERNAME;
+	pAck->m_strPassword = pGetUserInfo->m_strPASSWORD;
+
+	if (NULL != pGetUserInfo)
+	{
+		delete pGetUserInfo;
+		pGetUserInfo = NULL;
+	}
+
+	pByteArray = pAck->getMessage();
+	pAck->logInfo(__FILE__, __LINE__);
+	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
+
+
+	pByteArray = NULL;
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageRunnable::_ProcessReq( const CReqBuy* pReq )
+{
+	CAckBuy* pAck = NULL;
+	QByteArray* pByteArray = NULL;
+	CUserInfo* pGetUserInfo = NULL;
+	quint16 nListenPort = 0;
+	qint32 nFunRes = 0;
+	CUserTradeInfo* pUserTradeInfo = NULL;
+
+	nListenPort = CConfigInfo::getInstance().getServerPort();
+	nFunRes = CServerManager::getInstance().getUserInfo(nListenPort, pReq->m_strUserName, pReq->m_strPassword, &pGetUserInfo);
+	
+	pAck = new CAckBuy();
+	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
+	pAck->m_nDataType = CTcpComProtocol::DataType_Buy;
+	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+	pAck->m_strReqUUID = pReq->m_strReqUUID;
+	pAck->m_strUserName = pReq->m_strUserName;
+	pAck->m_strPassword = pReq->m_strPassword;
+	if (NULL == pGetUserInfo)
+	{
+	}
+	else
+	{
+		pUserTradeInfo = new CUserTradeInfo();
+		pUserTradeInfo->m_strUseID = pGetUserInfo->m_strUSEID;
+		pUserTradeInfo->m_strTradeTime = pReq->m_strTradeTime;
+		pUserTradeInfo->m_nTradeType = CTcpComProtocol::DataType_Buy;
+		pUserTradeInfo->m_strSymbolUse = pReq->m_strSymbolUse;
+		pUserTradeInfo->m_fTradePrice = pReq->m_strTradePrice.toDouble();
+		pUserTradeInfo->m_nTradeVolume = pReq->m_strTradeVolume.toInt();
+		pUserTradeInfo->m_fTradeFees = 0.07;
+		pUserTradeInfo->setOtherValue();
+		CServerManager::getInstance().createUserTradeInfo(nListenPort, pUserTradeInfo);
+
+		pAck->m_strSymbolUse = pUserTradeInfo->m_strSymbolUse;
+		pAck->m_strSymbolUse = pUserTradeInfo->m_strTradeTime;
+		pAck->m_strTradePrice = QString("%1").arg(pUserTradeInfo->m_fTradePrice);
+		pAck->m_strTradeVolume = QString("%1").arg(pUserTradeInfo->m_nTradeVolume);
+		pAck->m_strFees = QString("%1").arg(pUserTradeInfo->m_fTradeFees);
+		pAck->m_strTradeAmount = QString("%1").arg(pUserTradeInfo->m_fTradeAmount);
+		pAck->m_strTotalTradeFee = QString("%1").arg(pUserTradeInfo->m_fTotalTradeFee);
+		pAck->m_strTotalTradeAmount = QString("%1").arg(pUserTradeInfo->m_fTotalTradeAmount);
+	}
+
+	if (NULL != pUserTradeInfo)
+	{
+		delete pUserTradeInfo;
+		pUserTradeInfo = NULL;
+	}
+
+	if (NULL != pGetUserInfo)
+	{
+		delete pGetUserInfo;
+		pGetUserInfo = NULL;
+	}
+
+	pByteArray = pAck->getMessage();
+	pAck->logInfo(__FILE__, __LINE__);
+	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
+
+	pByteArray = NULL;
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessAck( const CAckLogin* pAck )
 {
@@ -592,6 +831,16 @@ void CMessageRunnable::_ProcessAck( const CAckStockMinTimeMaxTime* pAck )
 }
 
 void CMessageRunnable::_ProcessAck( const CAckStockHistoryData* pAck )
+{
+
+}
+
+void CMessageRunnable::_ProcessAck( const CAckCreateUser* pAck )
+{
+
+}
+
+void CMessageRunnable::_ProcessAck( const CAckBuy* pAck )
 {
 
 }

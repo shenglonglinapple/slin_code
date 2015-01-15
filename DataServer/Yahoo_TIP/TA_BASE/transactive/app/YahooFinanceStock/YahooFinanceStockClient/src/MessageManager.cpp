@@ -24,7 +24,7 @@ CMessageManager::CMessageManager( QObject* parent /*= 0*/ )
 
 	//How many threads I want at any given time
 	//If there are more connections, they will be queued until a threads is closed
-	m_pThreadPool->setMaxThreadCount(2);
+	m_pThreadPool->setMaxThreadCount(20);
 }
 
 CMessageManager::~CMessageManager()

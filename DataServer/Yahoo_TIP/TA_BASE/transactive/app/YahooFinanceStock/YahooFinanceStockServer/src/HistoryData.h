@@ -21,6 +21,8 @@ public:
 	2014-11-14,9.27,9.27,9.27,9.27,000,9.27
 	*/
 	void resetValue(const QString& strLine);
+	void resetDateValue();
+
 private:
 	void _Init();
 public:
@@ -31,6 +33,8 @@ public:
 	QString m_strClose;
 	QString m_strVolume;
 	QString m_strAdjClose;
+public:
+	quint32 m_nDate;
 };
 
 

@@ -10,6 +10,8 @@ class CReqSynYahoo;
 class CReqDownLoadStock;
 class CReqStockMinTimeMaxTime;
 class CReqStockHistoryData;
+class CReqCreateUser;
+class CReqBuy;
 
 class CAckLogin;
 class CAckLogout;
@@ -17,6 +19,8 @@ class CAckSynYahoo;
 class CAckDownLoadStock;
 class CAckStockMinTimeMaxTime;
 class CAckStockHistoryData;
+class CAckCreateUser;
+class CAckBuy;
 
 class CMessageManager;
 
@@ -41,6 +45,8 @@ private:
 	void _ProcessMessage_ReqDownLoadStock();
 	void _ProcessMessage_ReqStockMinTimeMaxTime();
 	void _ProcessMessage_ReqStockHistoryData();
+	void _ProcessMessage_ReqCreateUser();
+	void _ProcessMessage_ReqBuy();
 private:
 	void _ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType);
 	void _ProcessMessage_AckLogin();
@@ -49,6 +55,9 @@ private:
 	void _ProcessMessage_AckDownLoadStock();
 	void _ProcessMessage_AckStockMinTimeMaxTime();
 	void _ProcessMessage_AckStockHistoryData();
+	void _ProcessMessage_AckCreateUser();
+	void _ProcessMessage_AckBuy();
+
 public:
 	void _ProcessReq(const CReqLogin* pReq);
 	void _ProcessReq(const CReqLogout* pReq);
@@ -56,6 +65,8 @@ public:
 	void _ProcessReq(const CReqDownLoadStock* pReq);
 	void _ProcessReq(const CReqStockMinTimeMaxTime* pReq);
 	void _ProcessReq(const CReqStockHistoryData* pReq);
+	void _ProcessReq(const CReqCreateUser* pReq);
+	void _ProcessReq(const CReqBuy* pReq);
 
 public:
 	void _ProcessAck(const CAckLogin* pAck);
@@ -64,6 +75,8 @@ public:
 	void _ProcessAck(const CAckDownLoadStock* pAck);
 	void _ProcessAck(const CAckStockMinTimeMaxTime* pAck);
 	void _ProcessAck(const CAckStockHistoryData* pAck);
+	void _ProcessAck(const CAckCreateUser* pAck);
+	void _ProcessAck(const CAckBuy* pAck);
 
 private:
 	qint32 m_nHanle;

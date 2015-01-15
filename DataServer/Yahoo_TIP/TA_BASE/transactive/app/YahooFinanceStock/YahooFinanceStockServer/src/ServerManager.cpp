@@ -6,6 +6,8 @@
 #include "StockDataManager.h"
 #include "TcpServerWorker.h"
 #include "ConfigInfo.h"
+#include "UserInfo.h"
+#include "UserTradeInfo.h"
 #include "Log4cppLogger.h"
 
 CServerManager* CServerManager::m_pInstance = 0;
@@ -67,8 +69,10 @@ CServerManager::~CServerManager()
 
 }
 
-void CServerManager::createServer( quint16 nListenPort )
+void CServerManager::createServer()
 {
+	quint16 nListenPort = 0;
+	nListenPort = CConfigInfo::getInstance().getServerPort();
 	MYLOG4CPP_DEBUG<<"createServer nListenPort="<<nListenPort;
 
 	QMutexLocker lock(&m_mutex_MapTcpServerWorker);	
@@ -79,8 +83,10 @@ void CServerManager::createServer( quint16 nListenPort )
 	pData = NULL;
 
 }
-void CServerManager::destoryServer( quint16 nListenPort )
+void CServerManager::destoryServer()
 {
+	quint16 nListenPort = 0;
+	nListenPort = CConfigInfo::getInstance().getServerPort();
 	MYLOG4CPP_DEBUG<<"destoryServer nListenPort="<<nListenPort;
 
 	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
@@ -102,4 +108,107 @@ void CServerManager::destoryServer( quint16 nListenPort )
 	}//while
 
 	
+}
+
+
+qint32 CServerManager::getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData)
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager getUserInfo nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pData = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pData = iterMap.value();
+		nFunRes = pData->getUserInfo(nListenPort, strUSERNAME, strPASSWORD, ppData);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
+}
+
+
+qint32 CServerManager::updateUserInfo(quint16 nListenPort, const CUserInfo* pData)
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager updateUserInfo nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pWorker = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pWorker = iterMap.value();
+		nFunRes = pWorker->updateUserInfo(nListenPort, pData);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
+}
+
+
+qint32 CServerManager::createUserInfo(quint16 nListenPort, const CUserInfo* pData)
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager insertUserInfo nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pWorker = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pWorker = iterMap.value();
+		nFunRes = pWorker->createUserInfo(nListenPort, pData);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
+}
+
+qint32 CServerManager::createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager createUserTradeInfo nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pWorker = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pWorker = iterMap.value();
+		nFunRes = pWorker->createUserTradeInfo(nListenPort, pData);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
 }

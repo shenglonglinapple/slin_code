@@ -11,6 +11,8 @@
 
 
 class CTcpServerWorker;
+class CUserInfo;
+class CUserTradeInfo;
 
 class CServerManager
 {
@@ -26,8 +28,14 @@ private:
 	CServerManager();
 	~CServerManager();
 public:
-	void createServer(quint16 nListenPort);
-	void destoryServer( quint16 nListenPort );
+	void createServer();
+	void destoryServer();
+public:
+	qint32 getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
+	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
+	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
+	qint32 createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
+
 private:
 	QMutex m_mutex_MapTcpServerWorker;
 	QMap<quint16, CTcpServerWorker*> m_MapTcpServerWorker;

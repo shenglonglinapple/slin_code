@@ -34,7 +34,7 @@ private:
 	void _ReSetRoot();
 private:
 	QMutex m_mutexForMapData;
-	QMap<qint32, CHistoryData*> m_MapData;
+	QMap<quint32, CHistoryData*> m_MapData;
 	QString m_strSymbolUse;
 private:
 	QMutex m_mutexForRoot;

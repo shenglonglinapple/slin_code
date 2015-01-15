@@ -21,6 +21,17 @@ static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath_defValue = "C
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument = "userinstrument";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument_defValue = "";//5614,5378
 
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_username = "username";
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_username_defValue = "username";
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_password = "password";
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_password_defValue = "password";
+
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_serverip = "serverip";
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_serverip_defValue = "127.0.0.1";
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_serverport = "serverport";
+static const quint16  DEF_VALUE_CONFIG_GROUP_config_KEY_serverport_defValue = 5000;
+
+
 
 CConfigInfo* CConfigInfo::m_pInstance = 0;
 QMutex CConfigInfo::m_mutexInstance;
@@ -52,6 +63,11 @@ CConfigInfo::CConfigInfo()
 	m_strFileDBPath.clear();
 	m_strSQLiteDBPath.clear();
 	m_LstUserInstrument.clear();
+	m_strServerIP.clear();
+	m_nServerPort = 0;
+	m_strUserName.clear();
+	m_strPassWord.clear();
+
 
 	CCfgFileUtil::getInstance();
 
@@ -147,6 +163,10 @@ void CConfigInfo::_LoadDataFromCfgFile()
 	getFileDBPath();
 	getSQLiteDBPath();
 	getLstUserInstrument();
+	getUserName();
+	getPassWord();
+	getServerIP();
+	getServerPort();
 }
 
 void CConfigInfo::_WriteDataToCfgFile()
@@ -276,3 +296,97 @@ bool CConfigInfo::checkUserInstrument( unsigned int nInstrumentID )
 	strUserInstruemt = QString("%1").arg(nInstrumentID);
 	return checkUserInstrument(strUserInstruemt);
 }
+
+QString CConfigInfo::getUserName()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (m_strUserName.isEmpty())
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_username;
+		strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_username_defValue;
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_username_defValue;
+		}
+		m_strUserName = strValue;
+	}
+
+	return m_strUserName;
+}
+
+QString CConfigInfo::getPassWord()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (m_strPassWord.isEmpty())
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_password;
+		strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_password_defValue;
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_password_defValue;
+		}
+		m_strPassWord = strValue;
+	}
+
+	return m_strPassWord;
+}
+
+QString CConfigInfo::getServerIP()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (m_strServerIP.isEmpty())
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_serverip;
+		strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_serverip_defValue;
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = DEF_VALUE_CONFIG_GROUP_config_KEY_serverip_defValue;
+		}
+		m_strServerIP = strValue;
+	}
+
+	return m_strServerIP;
+}
+
+qint16 CConfigInfo::getServerPort()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (0 == m_nServerPort)
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_serverport;
+		strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_serverport_defValue);
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_serverport_defValue);
+		}
+		m_nServerPort = strValue.toUShort();
+	}
+
+	return m_nServerPort;
+}
+
+

@@ -16,6 +16,7 @@
 #include <QtCore/QList>
 
 class CHistoryData;
+class CSqliteDbOperBuildSQL;
 
 class CSqliteDbOper
 {
@@ -24,7 +25,7 @@ public:
 	typedef QList<CHistoryData*>::iterator	LstHistoryDataIterT;
 
 public:
-	CSqliteDbOper(const QString& strSqliteDbFileName);
+	CSqliteDbOper(const QString& strSqliteDbFileName);//strSymbolUse
 	virtual ~CSqliteDbOper();
 public:
 	void saveData(LstHistoryDataT* pLstData);
@@ -42,13 +43,6 @@ private:
 	int _CreateDBTable();
 	int _AddDataArray(LstHistoryDataT* pLstData);
 private:
-	QString _BuildSQL_CreateTable();
-	QString _BuildSQL_Insert();
-	QString _BuildSQL_Select(const QString & strFrom, const QString & strTo);
-	QString _BuildSQL_Select_COLUMN_DATE_by_DESC();
-	QString _BuildSQL_Select_COLUMN_DATE_by_ASC();
-	QString _BuildSQL_Select_Count();
-private:
 	QSqlDatabase* m_pQSqlDataBase;
 	QString m_strQTDbType;//"QSQLITE" "QMYSQL"
 	QString m_strSqliteDbFileName;
@@ -56,7 +50,8 @@ private:
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
 	
-
+private:
+	CSqliteDbOperBuildSQL* m_pSqliteDbOperBuildSQL;
 };
 
 

@@ -37,6 +37,11 @@ public:
 	void addInstrument(unsigned int nInstrumentID);
 	bool checkUserInstrument(const QString& strInstrumentID);
 	bool checkUserInstrument(unsigned int nInstrumentID);
+public:
+	QString getUserName();
+	QString getPassWord();
+	QString getServerIP();
+	qint16 getServerPort();
 
 private:
 	void _LoadDataFromCfgFile();
@@ -48,6 +53,11 @@ private:
 	QString m_strFileDBPath;
 	QString m_strSQLiteDBPath;
 	QStringList m_LstUserInstrument;
+	QString m_strServerIP;
+	quint16 m_nServerPort;
+	QString m_strUserName;
+	QString m_strPassWord;
+
 };
 //QT_END_NAMESPACE
 #endif  // __CLASS_CONFIGINFO__HH__

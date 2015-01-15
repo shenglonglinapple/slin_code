@@ -68,7 +68,16 @@ QString CTcpComProtocol::getStringValue( EDataType nValue )
 	case DataType_HistoryData:
 		strValue = "DataType_HistoryData";
 		break;
+	case DataType_CreateUser:
+		strValue = "DataType_CreateUser";
+		break;
+	case DataType_Buy:
+		strValue = "DataType_Buy";
+		break;
 	case DataType_Unknown:
+		strValue = "DataType_Unknown";
+		break;
+	default:
 		strValue = "DataType_Unknown";
 		break;
 	}

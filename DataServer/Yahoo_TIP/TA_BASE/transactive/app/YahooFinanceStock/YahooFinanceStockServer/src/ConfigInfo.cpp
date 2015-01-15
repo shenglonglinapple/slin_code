@@ -17,10 +17,19 @@ static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_filedbpath_defValue = "C:/
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath = "sqlitedbpath";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath_defValue = "C:/LSL/LSL_DATA/SaveDataSqliteDB/";
 
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_serverdbpath = "serverdbpath";
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_serverdbpath_defValue = "C:/LSL/LSL_DATA/ServerDB/";
+
 //static const char* DEF_VALUE_STRING_UTC_START_DATE_TIME = "1970-01-01 08:00:00";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument = "userinstrument";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument_defValue = "";//5614,5378
 
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_minstockindex = "minstockindex";
+static const qint32  DEF_VALUE_CONFIG_GROUP_config_KEY_minstockindex_defValue = 0;
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_maxstockindex = "maxstockindex";
+static const qint32  DEF_VALUE_CONFIG_GROUP_config_KEY_maxstockindex_defValue = 2296;
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_serverport = "serverport";
+static const quint16  DEF_VALUE_CONFIG_GROUP_config_KEY_serverport_defValue = 5000;
 
 CConfigInfo* CConfigInfo::m_pInstance = 0;
 QMutex CConfigInfo::m_mutexInstance;
@@ -51,7 +60,11 @@ CConfigInfo::CConfigInfo()
 	m_strConfigFileName.clear();
 	m_strFileDBPath.clear();
 	m_strSQLiteDBPath.clear();
+	m_strServerDBPath.clear();
 	m_LstUserInstrument.clear();
+	m_nMinStockIndex = -1;
+	m_nMaxStockIndex = -1;
+	m_nServerPort = 0;
 
 	CCfgFileUtil::getInstance();
 
@@ -147,6 +160,10 @@ void CConfigInfo::_LoadDataFromCfgFile()
 	getFileDBPath();
 	getSQLiteDBPath();
 	getLstUserInstrument();
+	getMinStockIndex();
+	getMaxStockIndex();
+	getServerPort();
+	getServerDBPath();
 }
 
 void CConfigInfo::_WriteDataToCfgFile()
@@ -275,4 +292,96 @@ bool CConfigInfo::checkUserInstrument( unsigned int nInstrumentID )
 	QString strUserInstruemt;
 	strUserInstruemt = QString("%1").arg(nInstrumentID);
 	return checkUserInstrument(strUserInstruemt);
+}
+
+qint32 CConfigInfo::getMinStockIndex()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (-1 == m_nMinStockIndex)
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_minstockindex;
+		strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_minstockindex_defValue);
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_minstockindex_defValue);
+		}
+		m_nMinStockIndex = strValue.toInt();
+	}
+
+	return m_nMinStockIndex;
+}
+
+qint32 CConfigInfo::getMaxStockIndex()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (-1 == m_nMaxStockIndex)
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_maxstockindex;
+		strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_maxstockindex_defValue);
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_maxstockindex_defValue);
+		}
+		m_nMaxStockIndex = strValue.toInt();
+	}
+
+	return m_nMaxStockIndex;
+}
+
+quint16 CConfigInfo::getServerPort()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (0 == m_nServerPort)
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_serverport;
+		strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_serverport_defValue);
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_serverport_defValue);
+		}
+		m_nServerPort = strValue.toUShort();
+	}
+
+	return m_nServerPort;
+}
+
+QString CConfigInfo::getServerDBPath()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (m_strServerDBPath.isEmpty())
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_serverdbpath;
+		strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_serverdbpath_defValue);
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_serverdbpath_defValue);
+		}
+		m_strServerDBPath = strValue;
+	}
+
+	return m_strServerDBPath;
 }

@@ -27,12 +27,12 @@ public:
 	void appendOrUpdate(CStockMinTimeMaxTime* pData);
 public:
 	CItemStockMinTimeMaxTime* getRootItem();
+	CStockMinTimeMaxTime* findNode(const QString& strSymbolUse);
 
 private:
 	void _FreeData();
 	void addNode(const CStockMinTimeMaxTime* pData );
 	void updateNode(const CStockMinTimeMaxTime* pData );
-	CStockMinTimeMaxTime* findNode(const QString& strSymbolUse);
 private:
 	QMutex m_mutexForMapData;
 	QMap<QString, CStockMinTimeMaxTime*> m_MapData;

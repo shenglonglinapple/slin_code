@@ -26,6 +26,18 @@ time_t CQtTimeHelper::getCurrentTime()
 	return timeGetTimeValue;
 }
 
+QString CQtTimeHelper::getCurrentTimeStr()
+{
+	QString strCurrentTime;
+	QDateTime time_local;
+	time_local.setTimeSpec(Qt::LocalTime);
+	time_local = QDateTime::currentDateTime();
+
+	strCurrentTime = time_local.toString("yyyy-MM-dd hh:mm:ss");
+	return strCurrentTime;
+}
+
+
 QString  CQtTimeHelper::getStringValue(time_t secsSince1Jan1970UTC)
 {
 	//QDateTime	fromTime_t ( uint seconds )

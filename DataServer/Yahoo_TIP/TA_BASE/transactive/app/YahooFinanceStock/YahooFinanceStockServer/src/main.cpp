@@ -38,11 +38,11 @@ int main(int argc, char *argv[])
 	CProjectEnviroment::getInstance();
 
 	CServerManager::getInstance();
-	CServerManager::getInstance().createServer(5000);
+	CServerManager::getInstance().createServer();
 
     nFunRes = app.exec();
 
-	CServerManager::getInstance().destoryServer(5000);
+	CServerManager::getInstance().destoryServer();
 	CServerManager::removeInstance();
 
 	CProjectEnviroment::removeInstance();

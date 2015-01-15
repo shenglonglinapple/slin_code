@@ -1,5 +1,7 @@
 #include "StockMinTimeMaxTimeTableView.h"
 
+#include "ProjectQTInclude.h"
+
 #include "DataStockMinTimeMaxTime.h"
 #include "ItemModelStockMinTimeMaxTime.h"
 #include "ItemStockMinTimeMaxTime.h"
@@ -75,7 +77,7 @@ void CStockMinTimeMaxTimeTableView::_CreateConnect()
 void CStockMinTimeMaxTimeTableView::slot_DataChange_StockMinTimeMaxTime()
 {
 
-	MYLOG4CPP_DEBUG<<"CStockMinTimeMaxTimeTableView process slot_DataChange";
+	MYLOG4CPP_DEBUG<<"CStockMinTimeMaxTimeTableView process slot_DataChange_StockMinTimeMaxTime";
 	m_pItemModel->setRootItem(CDataStockMinTimeMaxTime::getInstance().getRootItem());
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
@@ -87,9 +89,9 @@ void CStockMinTimeMaxTimeTableView::contextMenuEvent( QContextMenuEvent* pEvent 
 {
 	MYLOG4CPP_DEBUG<<"CStockMinTimeMaxTimeTableView contextMenuEvent";
 	QModelIndex nCurrentIndex;
+	nCurrentIndex = this->currentIndex();
 	if (false == nCurrentIndex.isValid())
 	{
-		//treeview line no data
 		return;
 	}
 	//set menu pos

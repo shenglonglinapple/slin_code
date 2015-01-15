@@ -29,6 +29,9 @@ public:
 	void setFileDBPath(const QString& strFileDBPath);
 	QString getFileDBPath();
 public:
+	QString getServerDBPath();
+
+public:
 	QStringList getLstUserInstrument();
 	void setLstUserInstrument(const QStringList& lstStringValue);
 	void removeInstrument(const QString& strInstrumentID);
@@ -37,7 +40,10 @@ public:
 	void addInstrument(unsigned int nInstrumentID);
 	bool checkUserInstrument(const QString& strInstrumentID);
 	bool checkUserInstrument(unsigned int nInstrumentID);
-
+public:
+	qint32 getMinStockIndex();
+	qint32 getMaxStockIndex();
+	quint16 getServerPort();
 private:
 	void _LoadDataFromCfgFile();
 	void _WriteDataToCfgFile();
@@ -48,6 +54,11 @@ private:
 	QString m_strFileDBPath;
 	QString m_strSQLiteDBPath;
 	QStringList m_LstUserInstrument;
+	qint32 m_nMinStockIndex;
+	qint32 m_nMaxStockIndex;
+	quint16 m_nServerPort;
+private:
+	QString m_strServerDBPath;
 };
 //QT_END_NAMESPACE
 #endif  // __CLASS_CONFIGINFO__HH__

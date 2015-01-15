@@ -11,6 +11,8 @@ public:
 	virtual ~CQtTimeHelper();
 public:
 	time_t   getCurrentTime();
+	QString   getCurrentTimeStr();
+
 	QString  getStringValue(time_t secsSince1Jan1970UTC);
 	time_t   getTimeValue(const QString & strTimeValue);
 

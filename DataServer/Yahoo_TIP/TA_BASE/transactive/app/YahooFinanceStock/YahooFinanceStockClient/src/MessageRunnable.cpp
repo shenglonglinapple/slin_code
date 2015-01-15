@@ -10,6 +10,8 @@
 #include "ReqDownLoadStock.h"
 #include "ReqStockMinTimeMaxTime.h"
 #include "ReqStockHistoryData.h"
+#include "ReqCreateUser.h"
+#include "ReqBuy.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -17,6 +19,8 @@
 #include "AckDownLoadStock.h"
 #include "AckStockMinTimeMaxTime.h"
 #include "AckStockHistoryData.h"
+#include "AckCreateUser.h"
+#include "AckBuy.h"
 
 #include "MessageManager.h"
 
@@ -26,7 +30,7 @@
 #include "StockMinTimeMaxTime.h"
 #include "HistoryData.h"
 #include "DataStockHistoryData.h"
-
+#include "WorkTime.h"
 #include "Log4cppLogger.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
@@ -58,11 +62,14 @@ void CMessageRunnable::setHanle( CMessageManager* pHanleRef )
 
 void CMessageRunnable::run()
 {
+	CWorkTimeNoLock workTime(0);
+	workTime.workBegin();
 	MYLOG4CPP_DEBUG<<"CMessageRunnable::run() begin";
 
 	_ProcessMessage();
 
-	MYLOG4CPP_DEBUG<<"CMessageRunnable::run() end";
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CMessageRunnable::run() end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
 }
 
 void CMessageRunnable::_ProcessMessage()
@@ -121,6 +128,14 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	else if (CReqStockHistoryData::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_ReqStockHistoryData();		
+	}
+	else if (CReqCreateUser::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqCreateUser();		
+	}
+	else if (CReqBuy::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqBuy();		
 	}
 	
 }
@@ -218,6 +233,38 @@ void CMessageRunnable::_ProcessMessage_ReqStockHistoryData()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_ReqCreateUser()
+{
+	CReqCreateUser* pReq = NULL;
+	pReq = new CReqCreateUser();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
+
+void CMessageRunnable::_ProcessMessage_ReqBuy()
+{
+	CReqBuy* pReq = NULL;
+	pReq = new CReqBuy();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	_ProcessReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -246,6 +293,14 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckStockHistoryData::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckStockHistoryData();		
+	}
+	else if (CAckCreateUser::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckCreateUser();		
+	}
+	else if (CAckBuy::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckBuy();
 	}
 }
 
@@ -334,6 +389,38 @@ void CMessageRunnable::_ProcessMessage_AckStockHistoryData()
 {
 	CAckStockHistoryData* pAck = NULL;
 	pAck = new CAckStockHistoryData();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->_ProcessAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageRunnable::_ProcessMessage_AckCreateUser()
+{
+	CAckCreateUser* pAck = NULL;
+	pAck = new CAckCreateUser();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	this->_ProcessAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageRunnable::_ProcessMessage_AckBuy()
+{
+	CAckBuy* pAck = NULL;
+	pAck = new CAckBuy();
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
@@ -467,6 +554,17 @@ void CMessageRunnable::_ProcessReq( const CReqStockHistoryData* pReq )
 {
 
 }
+
+void CMessageRunnable::_ProcessReq( const CReqCreateUser* pReq )
+{
+
+}
+
+void CMessageRunnable::_ProcessReq( const CReqBuy* pReq )
+{
+
+}
+
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessAck( const CAckLogin* pAck )
 {
@@ -515,5 +613,15 @@ void CMessageRunnable::_ProcessAck( const CAckStockHistoryData* pAck )
 	CDataStockHistoryData::getInstance().setData(pAck->m_strSymbolUse, pAck->m_LstHistoryData);
 
 	return;
+}
+
+void CMessageRunnable::_ProcessAck( const CAckCreateUser* pAck )
+{
+
+}
+
+void CMessageRunnable::_ProcessAck( const CAckBuy* pAck )
+{
+
 }
 

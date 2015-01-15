@@ -1,26 +1,20 @@
 #include "SqliteDbOper.h"
+
+#include <QtCore/QFile>
+
 #include <sstream>
 #include "HistoryData.h"
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
-
-
-#include <QtCore/QFile>
+#include "SqliteDbOperBuildSQL.h"
+#include "UserInfo.h"
 
 static const char*  str_QtDbType_QSQLITE = "QSQLITE";
 static const char*  str_QtDbType_QMYSQL = "QMYSQL";
 
-static const char*  str_TABLE_BAR_DATA_1DAY = "TABLE_BAR_DATA_1DAY";
-
-static const char*  str_BarData_Column_DATE = "COLUMN_DATE";
-static const char*  str_BarData_Column_OPEN = "COLUMN_OPEN";
-static const char*  str_BarData_Column_HIGH = "COLUMN_HIGH";
-static const char*  str_BarData_Column_LOW = "COLUMN_LOW";
-static const char*  str_BarData_Column_CLOSE = "COLUMN_CLOSE";
-static const char*  str_BarData_Column_VOLUME = "COLUMN_VOLUME";
-static const char*  str_BarData_Column_ADJCLOSE = "COLUMN_ADJCLOSE";
 
 
+//strSymbolUse
 CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 {
 	m_pQSqlDataBase = NULL;
@@ -29,6 +23,8 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 	m_strSqliteDbKEY = m_strSqliteDbFileName;
 	m_strSqliteDbPath = CConfigInfo::getInstance().getSQLiteDBPath();
 	m_strSqliteDbFileFullPath = m_strSqliteDbPath + m_strSqliteDbFileName;
+	m_pSqliteDbOperBuildSQL = NULL;
+	m_pSqliteDbOperBuildSQL = new CSqliteDbOperBuildSQL();
 	_InitDataBase();
 	if (true == m_pQSqlDataBase->isValid())
 	{
@@ -39,6 +35,11 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 CSqliteDbOper::~CSqliteDbOper()
 {
 	_UnInitDataBase();
+	if (NULL != m_pSqliteDbOperBuildSQL)
+	{
+		delete m_pSqliteDbOperBuildSQL;
+		m_pSqliteDbOperBuildSQL = NULL;
+	}
 }
 
 
@@ -186,235 +187,6 @@ void CSqliteDbOper::saveData(LstHistoryDataT* pLstData)
 }
 
 
-QString  CSqliteDbOper::_BuildSQL_CreateTable()
-{
-	QString  strSQL;
-	QString  strTableName;
-	std::stringstream byteSQL;
-
-	strTableName = str_TABLE_BAR_DATA_1DAY;
-
-	/*
-	enumSqliteDb
-	CREATE TABLE IF NOT EXISTS TABLE_BAR_DATA_1DAY
-	(
-	//InstrumentID INTEGER NOT NULL, 
-	COLUMN_DATE TIMESTAMP NOT NULL, 
-	COLUMN_OPEN decimal(25,10) NOT NULL,
-	COLUMN_HIGH decimal(25,10) NOT NULL,
-	COLUMN_LOW decimal(25,10) NOT NULL,	
-	COLUMN_CLOSE decimal(25,10) NOT NULL,
-	COLUMN_VOLUME NUMBER,
-	COLUMN_ADJCLOSE decimal(25,10) NOT NULL,
-	PRIMARY KEY (COLUMN_DATE)
-	)
-	*/
-
-	{
-		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<strTableName.toStdString()
-			<<" "<<"("
-			//<<" "<<str_BarData_Column_InstrumentID<<" "<<"INTEGER NOT NULL"<<","
-			<<" "<<str_BarData_Column_DATE<<" "<<"TIMESTAMP NOT NULL"<<","
-			<<" "<<str_BarData_Column_OPEN<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_CLOSE<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_HIGH<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_LOW<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_BarData_Column_VOLUME<<" "<<"INTEGER NOT NULL"<<","
-			<<" "<<str_BarData_Column_ADJCLOSE<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<"PRIMARY KEY ("<<str_BarData_Column_DATE<<")"
-			//<<" "<<"PRIMARY KEY ("<<str_BarData_Column_InstrumentID<<", "<<str_BarData_Column_Timestamp<<")"
-			<<" "<<")";
-	}
-	
-	strSQL = byteSQL.str().c_str();
-
-	return strSQL;
-}
-
-
-QString  CSqliteDbOper::_BuildSQL_Insert()
-{	
-	QString  strSQL;
-	std::stringstream byteSQL;
-
-
-	/*
-	INSERT INTO TABLE_BAR_DATA_1DAY
-	(
-	COLUMN_DATE, 
-	COLUMN_OPEN, 
-	COLUMN_HIGH, 
-	COLUMN_LOW, 
-	COLUMN_CLOSE, 
-	COLUMN_VOLUME, 
-	COLUMN_ADJCLOSE
-	) 
-	VALUES 
-	(
-	:COLUMN_DATE_VOLUE,
-	:COLUMN_OPEN_VOLUE,
-	:COLUMN_HIGH_VOLUE,
-	:COLUMN_LOW_VOLUE,
-	:COLUMN_CLOSE_VOLUE,
-	:COLUMN_VOLUME_VOLUE,
-	:COLUMN_ADJCLOSE_VOLUE 
-	);
-	*/
-
-
-	byteSQL<<"INSERT INTO "<<str_TABLE_BAR_DATA_1DAY
-		<<" "<<"("
-		<<" "<<str_BarData_Column_DATE<<","
-		<<" "<<str_BarData_Column_OPEN<<","
-		<<" "<<str_BarData_Column_HIGH<<","
-		<<" "<<str_BarData_Column_LOW<<","
-		<<" "<<str_BarData_Column_CLOSE<<","
-		<<" "<<str_BarData_Column_VOLUME<<","
-		<<" "<<str_BarData_Column_ADJCLOSE
-		<<" "<<")"
-		<<" "<<"VALUES"
-		<<" "<<"("
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"
-		<<" "<<")";
-
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
-
-
-QString  CSqliteDbOper::_BuildSQL_Select(const QString & strFrom, const QString & strTo)
-{	
-	QString  strSQL;	
-	std::stringstream byteSQL;
-
-	/*
-	SELECT 
-	COLUMN_DATE, 
-	COLUMN_OPEN, 
-	COLUMN_HIGH, 
-	COLUMN_LOW, 
-	COLUMN_CLOSE, 
-	COLUMN_VOLUME, 
-	COLUMN_ADJCLOSE  
-	FROM 
-	TABLE_BAR_DATA_1DAY 
-	WHERE 
-	COLUMN_DATE > "2014-12-04 07:00:00"
-	AND
-	COLUMN_DATE > "2014-12-14 07:00:00";
-
-	QSqlQuery query( "select name from customer" );
-	while ( query.next() ) {
-	QString name = query.value(0).toString();
-	doSomething( name );
-	}
-	*/
-
-
-	byteSQL<<"SELECT"
-		<<" "<<str_BarData_Column_DATE<<","
-		<<" "<<str_BarData_Column_OPEN<<","
-		<<" "<<str_BarData_Column_HIGH<<","
-		<<" "<<str_BarData_Column_LOW<<","
-		<<" "<<str_BarData_Column_CLOSE<<","
-		<<" "<<str_BarData_Column_VOLUME<<","
-		<<" "<<str_BarData_Column_ADJCLOSE
-		<<" "<<"FROM"
-		<<" "<<str_TABLE_BAR_DATA_1DAY
-		<<" "<<"WHERE"
-		<<" "<<"COLUMN_DATE >="<<"\""<<strFrom.toStdString()<<"\""
-		<<" "<<"AND"
-		<<" "<<"COLUMN_DATE <="<<"\""<<strTo.toStdString()<<"\"";
-
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
-
-
-QString  CSqliteDbOper::_BuildSQL_Select_COLUMN_DATE_by_DESC()
-{	
-	QString  strSQL;	
-	std::stringstream byteSQL;
-
-	/*
-	SELECT 
-	COLUMN_DATE
-	FROM 
-	TABLE_BAR_DATA_1DAY 
-	ORDER BY COLUMN_DATE DESC LIMIT 1
-	*/
-
-
-	byteSQL<<"SELECT"
-		<<" "<<str_BarData_Column_DATE
-		<<" "<<"FROM"
-		<<" "<<str_TABLE_BAR_DATA_1DAY
-		<<" "<<"ORDER BY"
-		<<" "<<str_BarData_Column_DATE
-		<<" "<<"DESC LIMIT 1";
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
-
-
-QString  CSqliteDbOper::_BuildSQL_Select_COLUMN_DATE_by_ASC()
-{	
-	QString  strSQL;	
-	std::stringstream byteSQL;
-
-	/*
-	SELECT 
-	COLUMN_DATE
-	FROM 
-	TABLE_BAR_DATA_1DAY 
-	ORDER BY COLUMN_DATE DESC LIMIT 1
-	*/
-
-
-	byteSQL<<"SELECT"
-		<<" "<<str_BarData_Column_DATE
-		<<" "<<"FROM"
-		<<" "<<str_TABLE_BAR_DATA_1DAY
-		<<" "<<"ORDER BY"
-		<<" "<<str_BarData_Column_DATE
-		<<" "<<"ASC LIMIT 1";
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
-
-
-QString  CSqliteDbOper::_BuildSQL_Select_Count()
-{	
-	QString  strSQL;	
-	std::stringstream byteSQL;
-
-	/*
-	SELECT 
-	count(*)
-	FROM 
-	TABLE_BAR_DATA_1DAY 
-	*/
-
-
-	byteSQL<<"SELECT"
-		<<" "<<"count(*)"
-		<<" "<<"FROM"
-		<<" "<<str_TABLE_BAR_DATA_1DAY;
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
-
 int CSqliteDbOper::_CreateDBTable()
 {
 	int nFunRes = 0;
@@ -424,7 +196,7 @@ int CSqliteDbOper::_CreateDBTable()
 	QSqlQuery* pSqlQuery = NULL;
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = _BuildSQL_CreateTable();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_BAR_DATA_1DAY();
 
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL;
@@ -451,7 +223,6 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 {
 	int nFunRes = 0;
 	bool bExecRes = false;
-	QString  strDBTableName;
 	QString  strSQL;
 	LstHistoryDataIterT iterLst;
 	CHistoryData* pDataTmp = NULL;
@@ -473,8 +244,7 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 
 	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
 
-	strDBTableName = str_TABLE_BAR_DATA_1DAY;
-	strSQL = _BuildSQL_Insert();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_BAR_DATA_1DAY();
 
 	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL
@@ -537,7 +307,7 @@ int CSqliteDbOper::selectData(const QString & strFrom, const QString & strTo, Ls
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = _BuildSQL_Select(strFrom, strTo);
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_BAR_DATA_1DAY(strFrom, strTo);
 
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL;
@@ -601,7 +371,7 @@ int CSqliteDbOper::selectData_MinTime(QString& strValueGet)
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = _BuildSQL_Select_COLUMN_DATE_by_ASC();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY();
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL;
 	bExecRes = pSqlQuery->exec(strSQL);
@@ -643,7 +413,7 @@ int CSqliteDbOper::selectData_MaxTime(QString& strValueGet)
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = _BuildSQL_Select_COLUMN_DATE_by_DESC();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_DESC_TABLE_BAR_DATA_1DAY();
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL;
 	bExecRes = pSqlQuery->exec(strSQL);
@@ -685,7 +455,7 @@ int CSqliteDbOper::selectData_Count( int& nValueGet )
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = _BuildSQL_Select_Count();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_DataCount_TABLE_BAR_DATA_1DAY();
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL;
 	bExecRes = pSqlQuery->exec(strSQL);

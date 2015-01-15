@@ -6,7 +6,7 @@
 #include "BaseException.h"
 #include "TotalStocksData.h"
 #include "StockDataActor.h"
-
+#include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 
 
@@ -57,15 +57,26 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 	QString  strNamePinYin;
 	QString  strSymbolExtern;
 	QMap<QString,CStockDataActor*>::iterator iterFind;
+	qint32 nMinStockIndex = 0;
+	qint32 nMaxStockIndex = 0;
 
+	nMinStockIndex = CConfigInfo::getInstance().getMinStockIndex();
+	nMaxStockIndex = CConfigInfo::getInstance().getMaxStockIndex();
 
 	nArrSize = sizeof(s_SSSZ_Stocks) / sizeof (*s_SSSZ_Stocks);
-	MYLOG4CPP_INFO<<"s_SSSZ_Stocks ArrSize="<<nArrSize;
+	if (nMaxStockIndex > nArrSize)
+	{
+		nMaxStockIndex = nArrSize;
+	}
+	MYLOG4CPP_INFO<<"s_SSSZ_Stocks ArrSize="<<nArrSize
+		<<" "<<"nMinStockIndex="<<nMinStockIndex
+		<<" "<<"nMaxStockIndex="<<nMaxStockIndex;
+
 
 	{
 		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
 
-		for (nIndex = 0; nIndex < nArrSize; nIndex++)
+		for (nIndex = nMinStockIndex; nIndex < nMaxStockIndex; nIndex++)
 		{
 			//setValue
 			strSymbol = s_SSSZ_Stocks[nIndex].m_psz_Symbol;
@@ -74,7 +85,7 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 			MYLOG4CPP_DEBUG<<"strSymbol="<<strSymbol<<" "<<"strSymbolExtern="<<strSymbolExtern;
 			
 			//if (strSymbol.contains("000008"))//000008.SZ
-			if (strSymbol.contains("8"))//000008.SZ
+			//if (strSymbol.contains("8"))//000008.SZ
 			{
 				pData = new CStockDataActor();
 				pData->setValue(strSymbol, strSymbolExtern);

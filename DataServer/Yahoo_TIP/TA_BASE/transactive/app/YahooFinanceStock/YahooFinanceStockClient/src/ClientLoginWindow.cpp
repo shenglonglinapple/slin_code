@@ -7,7 +7,7 @@
 #include "PwdLineEdit.h"
 
 #include "ClientWorkerManager.h"
-
+#include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 
 
@@ -52,11 +52,10 @@ CClientLoginWindow::CClientLoginWindow(QWidget *parent)
 	m_pComboBox_UserName_Value.clear();
 	m_pLineEdit_Password_Value.clear();
 
-	CClientLoginParam loginParam;
-	m_strUserName = loginParam.m_strUserName;
-	m_strPassWord = loginParam.m_strPassWord;
-	m_strServerIP = loginParam.m_strServerIP;
-	m_nServerPort = loginParam.m_nServerPort;
+	m_strUserName = CConfigInfo::getInstance().getUserName();
+	m_strPassWord = CConfigInfo::getInstance().getPassWord();
+	m_strServerIP = CConfigInfo::getInstance().getServerIP();
+	m_nServerPort = CConfigInfo::getInstance().getServerPort();
 
 	m_pLoginSettingWindow = new CLoginSettingWindow(this);
 

@@ -1,4 +1,5 @@
 #include "HistoryData.h"
+#include "QtTimeHelper.h"
 
 static const char* DEF_VALUE_STRING_UTC_START_TIME = "08:00:00";
 
@@ -22,6 +23,7 @@ CHistoryData& CHistoryData::operator=( const CHistoryData& objectCopy )
 	m_strClose = objectCopy.m_strClose;
 	m_strVolume = objectCopy.m_strVolume;
 	m_strAdjClose = objectCopy.m_strAdjClose;
+	m_nDate = objectCopy.m_nDate;
 	
 	return *this;
 }
@@ -57,8 +59,10 @@ void CHistoryData::resetValue(const QString& strLine)
 		m_strVolume = strLstData[nIndex];
 		nIndex++;
 		m_strAdjClose = strLstData[nIndex];
+
 	}
 
+	resetDateValue();
 }
 
 void CHistoryData::_Init()
@@ -72,6 +76,13 @@ void CHistoryData::_Init()
 	m_strVolume.clear();
 	
 	m_strAdjClose.clear();
-
+	m_nDate = 0;
 }
-
+void CHistoryData::resetDateValue()
+{
+	CQtTimeHelper timeHelper;
+	if (!m_strDate.isEmpty())
+	{
+		m_nDate = timeHelper.getTimeValue(m_strDate);
+	}
+}

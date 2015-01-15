@@ -6,7 +6,7 @@
 #include "Log4cppLogger.h"
 #include "QtTimeHelper.h"
 #include "HistoryData.h"
-
+#include "WorkTime.h"
 #include "ItemStockHistoryData.h"
 #include "ItemStockHistoryDataHelper.h"
 
@@ -82,7 +82,7 @@ CDataStockHistoryData::~CDataStockHistoryData()
 void CDataStockHistoryData::_FreeData()
 {
 	CHistoryData* pData = NULL;
-	QMap<qint32, CHistoryData*>::iterator  iterMap;
+	QMap<quint32, CHistoryData*>::iterator  iterMap;
 
 	{
 		//check in total list
@@ -111,7 +111,6 @@ void CDataStockHistoryData::_FreeData()
 		m_pItem_Root = new CItemStockHistoryData();
 	}
 
-
 }//
 
 
@@ -126,13 +125,22 @@ CItemStockHistoryData* CDataStockHistoryData::getRootItem()
 void CDataStockHistoryData::setData( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
 	QList<CHistoryData*>::const_iterator iterLst = lstData.begin();
-	QMap<qint32, CHistoryData*>::iterator  iterMap;
-	qint32 nKeyTmp = 0;
+	QMap<quint32, CHistoryData*>::iterator  iterMap;
+	quint32 nKeyTmp = 0;
 	CHistoryData* pData = NULL;
 	const CHistoryData* pDataGet = NULL;
 
+	CWorkTimeNoLock workTime(0);
+	workTime.workBegin();
+	MYLOG4CPP_DEBUG<<"CDataStockHistoryData::_FreeData begin";
 	_FreeData();
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CDataStockHistoryData::_FreeData end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
+
 	m_strSymbolUse = strSymbolUse;
+
+	workTime.workBegin();
+	MYLOG4CPP_DEBUG<<"CDataStockHistoryData::setData begin";
 
 	{
 		QMutexLocker lockMap(&m_mutexForMapData);
@@ -142,7 +150,8 @@ void CDataStockHistoryData::setData( const QString& strSymbolUse, const QList<CH
 		{
 			pDataGet = (*iterLst);
 			iterMap = m_MapData.begin();
-			nKeyTmp = m_pQtTimeHelper->getTimeValue(pDataGet->m_strDate);
+			nKeyTmp = pDataGet->m_nDate;
+			//nKeyTmp = m_pQtTimeHelper->getTimeValue(pDataGet->m_strDate);
 			iterMap = m_MapData.find(nKeyTmp);
 			if (iterMap != m_MapData.end())
 			{
@@ -160,8 +169,14 @@ void CDataStockHistoryData::setData( const QString& strSymbolUse, const QList<CH
 		}//while
 
 	}//lock
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CDataStockHistoryData::setData end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
 
+	MYLOG4CPP_DEBUG<<"CDataStockHistoryData::_ReSetRoot begin";
+	workTime.workBegin();
 	_ReSetRoot();
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CDataStockHistoryData::_ReSetRoot end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
 }
 
 
@@ -169,20 +184,18 @@ void CDataStockHistoryData::setData( const QString& strSymbolUse, const QList<CH
 void CDataStockHistoryData::_ReSetRoot()
 {
 	CHistoryData* pData = NULL;
-	QMap<qint32, CHistoryData*>::iterator  iterMap;
+	QMap<quint32, CHistoryData*>::iterator  iterMap;
 
 	{
-		QMutexLocker lock(&m_mutexForRoot);	
+		QMutexLocker lockRoot(&m_mutexForRoot);	
 		if (NULL != m_pItem_Root)
 		{
 			delete m_pItem_Root;
 			m_pItem_Root = NULL;
 		}
 		m_pItem_Root = new CItemStockHistoryData();
-	}
 
-	{
-		QMutexLocker lock(&m_mutexForMapData);
+		QMutexLocker lockMap(&m_mutexForMapData);
 		iterMap = m_MapData.begin();
 		while (iterMap != m_MapData.end())
 		{

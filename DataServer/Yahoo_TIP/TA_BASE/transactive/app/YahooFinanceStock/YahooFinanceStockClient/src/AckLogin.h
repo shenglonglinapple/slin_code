@@ -27,6 +27,9 @@ public:
 
 	QString m_strUserName;//65
 	QString m_strPassword;//65
+	QString m_strLastLoginTime;
+	qint32 m_nLoginCount;
+	qint32 m_nState;
 
 	CTcpComProtocol::EDataTypeLoginResult m_nLoginResult;
 };

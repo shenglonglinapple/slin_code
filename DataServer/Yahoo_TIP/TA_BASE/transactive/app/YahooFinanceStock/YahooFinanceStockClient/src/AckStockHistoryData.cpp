@@ -3,6 +3,7 @@
 #include "Log4cppLogger.h"
 
 #include "HistoryData.h"
+#include "WorkTime.h"
 
 CAckStockHistoryData::CAckStockHistoryData( void )
 {
@@ -63,6 +64,9 @@ void CAckStockHistoryData::freeData()
 }
 QByteArray* CAckStockHistoryData::getMessage()
 {
+	CWorkTimeNoLock workTime(0);
+	workTime.workBegin();
+	MYLOG4CPP_DEBUG<<"CAckStockHistoryData::getMessage begin";
 	QByteArray* pMessage = NULL;
 	//QByteArray &append(const char *s, int len);
 	pMessage = new QByteArray();
@@ -92,12 +96,18 @@ QByteArray* CAckStockHistoryData::getMessage()
 	}
 
 	freeData();
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CAckStockHistoryData::getMessage end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
 
 	return pMessage;	
 }
 
 void CAckStockHistoryData::setValue(const QByteArray* pMessage )
 {
+	CWorkTimeNoLock workTime(0);
+	workTime.workBegin();
+	MYLOG4CPP_DEBUG<<"CAckStockHistoryData::setValue begin";
+
 	MYLOG4CPP_DEBUG<<"setValue"
 		<<" "<<"param:"<<" "<<"QByteArray* pMessage=0x"<<pMessage;
 	qint32 nMessageType = 0;//CTcpComProtocol::MsgType_Req
@@ -127,12 +137,18 @@ void CAckStockHistoryData::setValue(const QByteArray* pMessage )
 		readMessageBuffer>>pData->m_strVolume;
 		readMessageBuffer>>pData->m_strAdjClose;
 
+		pData->resetDateValue();
+
 		m_LstHistoryData.push_back(pData);
 		pData = NULL;
 	}
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);
 	m_nDataType = (CTcpComProtocol::EDataType)(nDataType);
+
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CAckStockHistoryData::setValue end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
+
 }
 
 

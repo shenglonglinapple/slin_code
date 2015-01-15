@@ -51,7 +51,7 @@ CStockHistoryDataTableView::~CStockHistoryDataTableView()
 void CStockHistoryDataTableView::slot_DataChange_StockHistoryData()
 {
 
-	MYLOG4CPP_DEBUG<<"CStockHistoryDataTableView process slot_DataChange";
+	MYLOG4CPP_DEBUG<<"CStockHistoryDataTableView process slot_DataChange_StockHistoryData";
 	m_pItemModel->setRootItem(CDataStockHistoryData::getInstance().getRootItem());
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);

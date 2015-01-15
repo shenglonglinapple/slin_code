@@ -27,6 +27,7 @@
 
 #include "SignalSlotManager.h"
 #include "QtTimeHelper.h"
+#include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 
 CClientDataManager* CClientDataManager::m_pInstance = 0;
@@ -53,13 +54,14 @@ void CClientDataManager::removeInstance()
 CClientDataManager::CClientDataManager(void)
 {
 	m_strServerIP.clear();
-	m_nServerPort.clear();
+	m_nServerPort = 0;
 	m_strUserName.clear();
 	m_strPassWord.clear();
 	m_nHandle = 0;
 	m_pQtTimeHelper = NULL;
 	m_pQtTimeHelper = new CQtTimeHelper();
 
+	CConfigInfo::getInstance();
 	CClientWorkerManager::getInstance();
 	CStockDataManager::getInstance();
 	CDataStockMinTimeMaxTime::getInstance();
@@ -74,6 +76,7 @@ CClientDataManager::~CClientDataManager(void)
 	CDataStockMinTimeMaxTime::removeInstance();
 	CStockDataManager::removeInstance();
 	CClientWorkerManager::removeInstance();
+	CConfigInfo::removeInstance();
 
 	if (NULL != m_pQtTimeHelper)
 	{

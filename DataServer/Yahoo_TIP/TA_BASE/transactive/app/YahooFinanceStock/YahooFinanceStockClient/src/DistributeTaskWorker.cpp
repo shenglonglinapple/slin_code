@@ -43,7 +43,7 @@ CDistributeTaskWorker::~CDistributeTaskWorker()
 
 void CDistributeTaskWorker::run()
 {
-	MYLOG4CPP_DEBUG<<"CDistributeTaskWorker::run()";
+	MYLOG4CPP_DEBUG<<"CDistributeTaskWorker::run() begin";
 
 	m_pComWorker = new CClientComWorker(m_strServerIP, m_nServerPort, this);
 	QObject::connect(m_pComWorker, SIGNAL(signalDisconnected(qint32)), this, SLOT(slotDisconnected(qint32)), Qt::AutoConnection);
@@ -62,7 +62,9 @@ void CDistributeTaskWorker::run()
 	m_WorkerState = WORK_STATE_WORKING;
 
 	//QThread::exec() waits until QThread::exit() called
+	MYLOG4CPP_DEBUG<<"CDistributeTaskWorker::run() exec begin";
 	exec();
+	MYLOG4CPP_DEBUG<<"CDistributeTaskWorker::run() exec end";
 
 	if (NULL != m_pMessageManager)
 	{
@@ -80,12 +82,15 @@ void CDistributeTaskWorker::run()
 
 
 	m_WorkerState = WORK_STATE_END;
+	MYLOG4CPP_DEBUG<<"CDistributeTaskWorker::run() end";
 
 }
 
 void CDistributeTaskWorker::terminate()
 {
-	return;
+	MYLOG4CPP_DEBUG<<"CDistributeTaskWorker::terminate() begin";
+
+	MYLOG4CPP_DEBUG<<"CDistributeTaskWorker::terminate() end";
 }
 
 

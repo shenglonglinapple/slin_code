@@ -943,10 +943,34 @@
 				RelativePath=".\src\TcpSocketHelper.h"
 				>
 			</File>
+			<File
+				RelativePath=".\src\WorkTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\WorkTime.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="ReqAck"
 			>
+			<File
+				RelativePath=".\src\AckBuy.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AckBuy.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AckCreateUser.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AckCreateUser.h"
+				>
+			</File>
 			<File
 				RelativePath=".\src\AckDownLoadStock.cpp"
 				>
@@ -993,6 +1017,22 @@
 			</File>
 			<File
 				RelativePath=".\src\AckSynYahoo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqBuy.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqBuy.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqCreateUser.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqCreateUser.h"
 				>
 			</File>
 			<File
