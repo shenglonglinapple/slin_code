@@ -6,6 +6,7 @@
 class CStockTcpServer;
 class CServerComManager;
 class CMessageManager;
+class QByteArray;
 
 class CServerDistributeTaskWorker : public CMyQtThread
 {
@@ -20,6 +21,8 @@ signals:
 
 public slots:
 	void slotIncomingConnection( qint32 handle );
+public:
+	void sendMessage( qint32 handle, QByteArray* pMessage );
 
 private:
 	CServerComManager* m_pServerComManager;

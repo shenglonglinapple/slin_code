@@ -1,5 +1,5 @@
-#ifndef __CLASS_ITEM_STOCK_MIN_TIME_MAX_TIME_HH__
-#define __CLASS_ITEM_STOCK_MIN_TIME_MAX_TIME_HH__
+#ifndef __CLASS_ITEM_USER_TRADE_HH__
+#define __CLASS_ITEM_USER_TRADE_HH__
 
 
 #include <QtCore/QObject>
@@ -14,9 +14,9 @@
 //QT_BEGIN_NAMESPACE
 //QT_END_NAMESPACE
 
-class CItemStockMinTimeMaxTimeHelper;
+class CItemUserTradeHelper;
 
-class CItemStockMinTimeMaxTime
+class CItemUserTrade
 {
 public:
 	enum EItemType
@@ -26,30 +26,30 @@ public:
 	};
 public:
 	/*init item ROOT*/
-	CItemStockMinTimeMaxTime();
+	CItemUserTrade();
 	/*init item ITEM*/
-	CItemStockMinTimeMaxTime(QList<QVariant>& ItemData, CItemStockMinTimeMaxTime *parent);
-	~CItemStockMinTimeMaxTime();
+	CItemUserTrade(QList<QVariant>& ItemData, CItemUserTrade *parent);
+	~CItemUserTrade();
 
-	void appendChild(CItemStockMinTimeMaxTime** ppItem);
-	CItemStockMinTimeMaxTime *child(int number);
+	void appendChild(CItemUserTrade** ppItem);
+	CItemUserTrade *child(int number);
 	int childCount() const;
 	int columnCount() const;
 	QVariant data(int column) const;
 	bool insertChildren(int position, int count, int columns);
 	bool insertColumns(int position, int columns);
-	CItemStockMinTimeMaxTime *parent();
+	CItemUserTrade *parent();
 	bool removeChildren(int position, int count);
 	bool removeColumns(int position, int columns);
 	int childNumber() const;
 	bool setData(int column, const QVariant &value);
 ///////////////////
 private:
-	void _ResetCurrentNodeData(CItemStockMinTimeMaxTimeHelper* pItemDataHelper );
+	void _ResetCurrentNodeData(CItemUserTradeHelper* pItemDataHelper );
 public:
-	void findAndResetSubNodeData(CItemStockMinTimeMaxTimeHelper* pItemDataHelper );
-	void appendChildByData(CItemStockMinTimeMaxTimeHelper* pItemDataHelper);
-	void removeChildByData(CItemStockMinTimeMaxTimeHelper* pItemDataHelper);
+	void findAndResetSubNodeData(CItemUserTradeHelper* pItemDataHelper );
+	void appendChildByData(CItemUserTradeHelper* pItemDataHelper);
+	void removeChildByData(CItemUserTradeHelper* pItemDataHelper);
 
 	EItemType getItemType();
 	QString getNodeKey();
@@ -60,20 +60,20 @@ private:
 	*/	
 	QMutex m_mutex_ItemData;
 	QList<QVariant> m_ItemData;
-	CItemStockMinTimeMaxTime* m_pParentItem;
+	CItemUserTrade* m_pParentItem;
 	EItemType m_nItemType;
 private:
 	//	QMutexLocker lock(&m_mutex_LstChildItems);	
 	QMutex m_mutex_LstChildItems;
-	QList<CItemStockMinTimeMaxTime*> m_LstChildItems;
+	QList<CItemUserTrade*> m_LstChildItems;
 private:
-	CItemStockMinTimeMaxTimeHelper* m_pItemUserInstrumentHelper;
+	CItemUserTradeHelper* m_pItemHelper;
 private:
-	QString m_strNodeKey;
+	QString m_strNodeKey;//TradeUUID
 };//
 
 
-#endif//__CLASS_ITEM_STOCK_MIN_TIME_MAX_TIME_HH__
+#endif//__CLASS_ITEM_USER_TRADE_HH__
 
 
 

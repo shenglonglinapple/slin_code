@@ -13,6 +13,7 @@
 class CTcpServerWorker;
 class CUserInfo;
 class CUserTradeInfo;
+class QByteArray;
 
 class CServerManager
 {
@@ -35,6 +36,8 @@ public:
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
+public:
+	void sendMessage(quint16 nListenPort, qint32 handle, QByteArray* pMessage);
 
 private:
 	QMutex m_mutex_MapTcpServerWorker;

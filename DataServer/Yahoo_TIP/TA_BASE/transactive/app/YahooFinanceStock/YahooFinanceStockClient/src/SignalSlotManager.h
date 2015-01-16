@@ -13,6 +13,8 @@ class CDataStockMinTimeMaxTime;
 class CStockMinTimeMaxTimeTableView;
 class CDataStockHistoryData;
 class CStockHistoryDataTableView;
+class CDataUserTrade;
+class CUserTradeTableView;
 
 class CSignalSlotManager : public QObject
 {
@@ -37,7 +39,7 @@ public:
 	void set_Slot_ShownMessage(CClientMainWindow* pRefSlot);
 signals:
 	void signal_ShownMessage(QString strMessage);
-public slots:
+private slots:
 	void slot_ShownMessage(QString strMessage);
 public:
 	void emit_ShownMessage(QString strMessage);
@@ -51,7 +53,7 @@ public:
 	void set_Slot_DataChange_StockMinTimeMaxTime(CStockMinTimeMaxTimeTableView* pRefSlot);
 signals:
 	void signal_DataChange_StockMinTimeMaxTime();
-public slots:
+private slots:
 	void slot_DataChange_StockMinTimeMaxTime();
 public:
 	void emit_DataChange_StockMinTimeMaxTime();
@@ -65,11 +67,24 @@ public:
 	void set_Slot_DataChange_StockHistoryData(CStockHistoryDataTableView* pRefSlot);
 signals:
 	void signal_DataChange_StockHistoryData();
-public slots:
+private slots:
 	void slot_DataChange_StockHistoryData();
 public:
 	void emit_DataChange_StockHistoryData();
 //////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+private:
+	CDataUserTrade* m_pRefSignal_DataChange_UserTrade;
+	CUserTradeTableView* m_pRefSlot_DataChange_UserTrade;
+public:
+	void set_Signal_DataChange_UserTrade( CDataUserTrade* pRefSignal);
+	void set_Slot_DataChange_UserTrade(CUserTradeTableView* pRefSlot);
+signals:
+	void signal_DataChange_UserTrade();
+private slots:
+	void slot_DataChange_UserTrade();
+public:
+	void emit_DataChange_UserTrade();
 //////////////////////////////////////////////////////
 
 };

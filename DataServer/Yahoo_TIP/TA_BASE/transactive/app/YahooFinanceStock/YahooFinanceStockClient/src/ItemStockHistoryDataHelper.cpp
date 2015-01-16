@@ -52,11 +52,11 @@ void CItemStockHistoryDataHelper::_ClearData()
 	m_strVolume.clear();
 	m_strAdjClose.clear();
 }
-void CItemStockHistoryDataHelper::setValue(const QString& strSymbolUse, const CHistoryData* pData)
+void CItemStockHistoryDataHelper::setValue(const CHistoryData* pData)
 {
 	_ClearData();
 
-	m_strSymbolUse = strSymbolUse;
+	m_strSymbolUse = pData->m_strSymbolUse;
 	m_strDate = pData->m_strDate;
 	m_strOpen = pData->m_strOpen;
 	m_strHigh = pData->m_strHigh;

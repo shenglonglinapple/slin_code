@@ -1,23 +1,20 @@
-#ifndef __CLASS_ITEM_MODEL_STOCK_MIN_TIME_MAX_TIME_HH__
-#define __CLASS_ITEM_MODEL_STOCK_MIN_TIME_MAX_TIME_HH__
-
-
-
+#ifndef __CLASS_ITEM_MODEL_USER_TRADE_HH__
+#define __CLASS_ITEM_MODEL_USER_TRADE_HH__
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
 
-class CItemStockMinTimeMaxTime;
+class CItemUserTrade;
 
 
-class CItemModelStockMinTimeMaxTime : public QAbstractItemModel
+class CItemModelUserTrade : public QAbstractItemModel
 {
     Q_OBJECT
 
 public:
-    CItemModelStockMinTimeMaxTime(QObject* parent = 0);
-    ~CItemModelStockMinTimeMaxTime();
+    CItemModelUserTrade(QObject* parent = 0);
+    ~CItemModelUserTrade();
 public:
     QVariant data(const QModelIndex &index, int role) const;
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
@@ -28,13 +25,13 @@ public:
 	Qt::ItemFlags flags(const QModelIndex &index) const;
 
 public:
-	void setRootItem(CItemStockMinTimeMaxTime* rootItem);
+	void setRootItem(CItemUserTrade* rootItem);
 private:
-	CItemStockMinTimeMaxTime* _GetItem( const QModelIndex& index ) const;
+	CItemUserTrade* _GetItem( const QModelIndex& index ) const;
 private:
-    CItemStockMinTimeMaxTime* m_pRootItemRef;
+    CItemUserTrade* m_pRootItemRef;
 };
 
 
 
-#endif//__CLASS_ITEM_MODEL_STOCK_MIN_TIME_MAX_TIME_HH__
+#endif//__CLASS_ITEM_MODEL_USER_TRADE_HH__

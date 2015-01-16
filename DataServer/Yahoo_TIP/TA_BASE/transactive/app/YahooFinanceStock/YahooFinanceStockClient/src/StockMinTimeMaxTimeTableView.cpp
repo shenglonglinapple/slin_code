@@ -1,14 +1,13 @@
 #include "StockMinTimeMaxTimeTableView.h"
 
+#include <QtSql/QSqlTableModel>
+
 #include "ProjectQTInclude.h"
 
-#include "DataStockMinTimeMaxTime.h"
-#include "ItemModelStockMinTimeMaxTime.h"
-#include "ItemStockMinTimeMaxTime.h"
 #include "SignalSlotManager.h"
 #include "ClientDataManager.h"
-#include "DataStockMinTimeMaxTime.h"
-#include "StockMinTimeMaxTime.h"
+#include "ClientDBManager.h"
+
 
 #include "Log4cppLogger.h"
 
@@ -16,6 +15,13 @@ static int DEFVALUE_INT_Window_Width = 600;
 static int DEFVALUE_INT_Window_Height = 500;
 
 static const char* DEFVALUE_String_ActionReqHistoryData = "ReqHistoryData";
+
+
+static const char*  str_TABLE_MINTIME_MAXTIME = "TABLE_MINTIME_MAXTIME";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE = "SymbolUse";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME = "MinTime";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME = "MaxTime";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT = "Count";
 
 
 CStockMinTimeMaxTimeTableView::CStockMinTimeMaxTimeTableView( QWidget* parent)
@@ -32,9 +38,12 @@ CStockMinTimeMaxTimeTableView::CStockMinTimeMaxTimeTableView( QWidget* parent)
 	this->resizeColumnsToContents();
 
 	m_pItemModel = NULL;
-	m_pItemModel = new CItemModelStockMinTimeMaxTime(this);
-	m_pItemModel->setRootItem(CDataStockMinTimeMaxTime::getInstance().getRootItem());
-	this->setModel(m_pItemModel);
+	m_pItemModel = new QSqlTableModel(this, *(CClientDBManager::getInstance().getDB()));
+	m_pItemModel->setTable(str_TABLE_MINTIME_MAXTIME);
+	m_pItemModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+	m_pItemModel->select();
+
+	this->setModel((QAbstractItemModel *)m_pItemModel);
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
 	CSignalSlotManager::getInstance().set_Slot_DataChange_StockMinTimeMaxTime(this);
@@ -78,7 +87,11 @@ void CStockMinTimeMaxTimeTableView::slot_DataChange_StockMinTimeMaxTime()
 {
 
 	MYLOG4CPP_DEBUG<<"CStockMinTimeMaxTimeTableView process slot_DataChange_StockMinTimeMaxTime";
-	m_pItemModel->setRootItem(CDataStockMinTimeMaxTime::getInstance().getRootItem());
+
+	if (NULL != m_pItemModel)
+	{
+		m_pItemModel->select();
+	}
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
 	this->resizeColumnsToContents();
@@ -103,21 +116,31 @@ void CStockMinTimeMaxTimeTableView::contextMenuEvent( QContextMenuEvent* pEvent 
 void CStockMinTimeMaxTimeTableView::slotActionReqHistoryData()
 {
 	QModelIndex nCurrentIndex;
-	CItemStockMinTimeMaxTime* pCurrentItem = NULL;
-	CStockMinTimeMaxTime* pDataRef = NULL;
+	QString strSymbolUse;
+	QString strTimeFrom;
+	QString strTimeTo;
+	int curRow = 0;
+	int nColumnIndex = 0;
+
 	nCurrentIndex = this->currentIndex();
 	if (false == nCurrentIndex.isValid())
 	{
 		return;
 	}
-	pCurrentItem = (CItemStockMinTimeMaxTime*)nCurrentIndex.internalPointer();
-	MYLOG4CPP_DEBUG<<"CStockMinTimeMaxTimeTableView::slotActionReqHistoryData"
-		<<" "<<"getNodeKey="<<pCurrentItem->getNodeKey();
+	QItemSelectionModel *selections = this->selectionModel(); //返回当前的选择模式  
+	QModelIndexList selecteds = selections->selectedIndexes(); //返回所有选定的模型项目索引列表  
+	foreach (QModelIndex index, selecteds)  
+	{  
+		curRow = index.row(); //删除所有被选中的行  
+		QSqlRecord record = m_pItemModel->record(curRow); 
+		strSymbolUse = record.value(str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE).toString();
+		strTimeFrom = record.value(str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME).toString();
+		strTimeTo = record.value(str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME).toString();
+	}  
+	MYLOG4CPP_DEBUG<<"CStockMinTimeMaxTimeTableView::slotActionReqHistoryData"<<" "<<"getNodeKey="<<strSymbolUse;
 
-	pDataRef = CDataStockMinTimeMaxTime::getInstance().findNode(pCurrentItem->getNodeKey());
-	if (NULL != pDataRef)
+	if (!strSymbolUse.isEmpty())
 	{
-		CClientDataManager::getInstance().send_req_ReqStockHistoryData(
-			pDataRef->m_strSymbolUse, pDataRef->m_strMinTime, pDataRef->m_strMaxTime);
+		CClientDataManager::getInstance().send_req_ReqStockHistoryData(strSymbolUse, strTimeFrom, strTimeTo);
 	}
 }

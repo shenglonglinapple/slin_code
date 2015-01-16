@@ -212,3 +212,26 @@ qint32 CServerManager::createUserTradeInfo( quint16 nListenPort, const CUserTrad
 
 	return nFunRes;
 }
+
+void CServerManager::sendMessage( quint16 nListenPort, qint32 handle, QByteArray* pMessage )
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager sendMessage nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pWorker = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pWorker = iterMap.value();
+		pWorker->sendMessage(handle, pMessage);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+}

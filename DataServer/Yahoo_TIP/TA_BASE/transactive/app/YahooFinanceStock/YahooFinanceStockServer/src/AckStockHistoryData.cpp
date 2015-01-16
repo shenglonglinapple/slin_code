@@ -128,7 +128,7 @@ void CAckStockHistoryData::setValue(const QByteArray* pMessage )
 	{
 		CHistoryData* pData = NULL;
 		pData = new CHistoryData();
-
+		pData->m_strSymbolUse = m_strSymbolUse;
 		readMessageBuffer>>pData->m_strDate;
 		readMessageBuffer>>pData->m_strOpen;
 		readMessageBuffer>>pData->m_strHigh;

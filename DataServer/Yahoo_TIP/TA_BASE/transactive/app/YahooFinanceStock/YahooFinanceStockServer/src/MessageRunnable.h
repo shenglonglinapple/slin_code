@@ -4,26 +4,7 @@
 #include <QtCore/QRunnable>
 #include <QtCore/QBitArray>
 
-class CReqLogin;
-class CReqLogout;
-class CReqSynYahoo;
-class CReqDownLoadStock;
-class CReqStockMinTimeMaxTime;
-class CReqStockHistoryData;
-class CReqCreateUser;
-class CReqBuy;
-
-class CAckLogin;
-class CAckLogout;
-class CAckSynYahoo;
-class CAckDownLoadStock;
-class CAckStockMinTimeMaxTime;
-class CAckStockHistoryData;
-class CAckCreateUser;
-class CAckBuy;
-
-class CMessageManager;
-
+class CMessageProcesser;
 
 class CMessageRunnable : public QRunnable
 {
@@ -33,8 +14,6 @@ public:
 protected:
 	//This is not a thread. This is a task executed on a thread, in a threadpool
 	void run(); 
-public:
-	void setHanle(CMessageManager* pHanleRef);
 private:
 	void _ProcessMessage();
 private:
@@ -57,31 +36,10 @@ private:
 	void _ProcessMessage_AckStockHistoryData();
 	void _ProcessMessage_AckCreateUser();
 	void _ProcessMessage_AckBuy();
-
-public:
-	void _ProcessReq(const CReqLogin* pReq);
-	void _ProcessReq(const CReqLogout* pReq);
-	void _ProcessReq(const CReqSynYahoo* pReq);
-	void _ProcessReq(const CReqDownLoadStock* pReq);
-	void _ProcessReq(const CReqStockMinTimeMaxTime* pReq);
-	void _ProcessReq(const CReqStockHistoryData* pReq);
-	void _ProcessReq(const CReqCreateUser* pReq);
-	void _ProcessReq(const CReqBuy* pReq);
-
-public:
-	void _ProcessAck(const CAckLogin* pAck);
-	void _ProcessAck(const CAckLogout* pAck);
-	void _ProcessAck(const CAckSynYahoo* pAck);
-	void _ProcessAck(const CAckDownLoadStock* pAck);
-	void _ProcessAck(const CAckStockMinTimeMaxTime* pAck);
-	void _ProcessAck(const CAckStockHistoryData* pAck);
-	void _ProcessAck(const CAckCreateUser* pAck);
-	void _ProcessAck(const CAckBuy* pAck);
-
 private:
 	qint32 m_nHanle;
 	QByteArray* m_pMessage; 
-	CMessageManager* pMessageManagerRef;
+	CMessageProcesser* m_pMessageProcesser;
 };
 
 #endif//__CLASS_MESSAGE_RUNNABLE_H__

@@ -11,13 +11,24 @@ static const char*  str_QtDbType_QMYSQL = "QMYSQL";
 /////
 static const char*  str_TABLE_BAR_DATA_1DAY = "TABLE_BAR_DATA_1DAY";
 //
-static const char*  str_TABLE_BAR_DATA_Column_DATE = "COLUMN_DATE";
-static const char*  str_TABLE_BAR_DATA_Column_OPEN = "COLUMN_OPEN";
-static const char*  str_TABLE_BAR_DATA_Column_HIGH = "COLUMN_HIGH";
-static const char*  str_TABLE_BAR_DATA_Column_LOW = "COLUMN_LOW";
-static const char*  str_TABLE_BAR_DATA_Column_CLOSE = "COLUMN_CLOSE";
-static const char*  str_TABLE_BAR_DATA_Column_VOLUME = "COLUMN_VOLUME";
-static const char*  str_TABLE_BAR_DATA_Column_ADJCLOSE = "COLUMN_ADJCLOSE";
+static const char*  str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE = "SymbolUse";
+static const char*  str_TABLE_BAR_DATA_Column_DATE = "Date";
+static const char*  str_TABLE_BAR_DATA_Column_OPEN = "Open";
+static const char*  str_TABLE_BAR_DATA_Column_HIGH = "High";
+static const char*  str_TABLE_BAR_DATA_Column_LOW = "Low";
+static const char*  str_TABLE_BAR_DATA_Column_CLOSE = "Close";
+static const char*  str_TABLE_BAR_DATA_Column_VOLUME = "Volume";
+static const char*  str_TABLE_BAR_DATA_Column_ADJCLOSE = "AdjClose";
+
+/////
+static const char*  str_TABLE_MINTIME_MAXTIME = "TABLE_MINTIME_MAXTIME";
+//
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE = "SymbolUse";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME = "MinTime";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME = "MaxTime";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT = "Count";
+
+
 /////
 static const char*  str_TABLE_USER_INFO = "TABLE_USER_INFO";
 //
@@ -30,22 +41,18 @@ static const char*  str_TABLE_USER_INFO_COLUMN_STATE = "COLUMN_STATE";
 /////
 static const char*  str_TABLE_USER_TRADE_INFO = "TABLE_USER_TRADE_INFO";
 //
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_USEID = "COLUMN_USEID";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_UUID = "COLUMN_TRADE_UUID";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TIME = "COLUMN_TRADE_TIME";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TYPE = "COLUMN_TRADE_TYPE";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_SYMBOLUSE = "COLUMN_SYMBOLUSE";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_PRICE = "COLUMN_TRADE_PRICE";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_VOLUME = "COLUMN_TRADE_VOLUME";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT = "COLUMN_TRADE_AMOUNT";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES = "COLUMN_TRADE_FEES";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE = "COLUMN_TOTAL_TRADE_FEE";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT = "COLUMN_TOTAL_TRADE_AMOUNT";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_USEID = "UseID";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_UUID = "TradeUUID";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TIME = "TradeTime";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TYPE = "TradeType";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_SYMBOLUSE = "SymbolUse";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_PRICE = "TradePrice";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_VOLUME = "TradeVolume";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT = "TradeAmount";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES = "TradeFees";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE = "TotalTradeFee";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT = "TotalTradeAmount";
 /////
-
-
-
-
 
 CSqliteDbOperBuildSQL::CSqliteDbOperBuildSQL()
 {
@@ -57,6 +64,31 @@ CSqliteDbOperBuildSQL::~CSqliteDbOperBuildSQL()
 }
 
 //////////////////////////////////////////////////////////////////////////
+
+QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_BAR_DATA_1DAY()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	/*
+	enumSqliteDb
+	DELETE FROM TABLE_BAR_DATA_1DAY	
+	*/
+
+	{
+		byteSQL<<"DELETE FROM"<<" "<<str_TABLE_BAR_DATA_1DAY;
+	}
+	
+	strSQL = byteSQL.str().c_str();
+
+	return strSQL;
+}
+QString CSqliteDbOperBuildSQL::getTableName_TABLE_BAR_DATA_1DAY()
+{
+	QString  strTableName;
+	strTableName = str_TABLE_BAR_DATA_1DAY;
+	return strTableName;
+}
+
 QString  CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_BAR_DATA_1DAY()
 {
 	QString  strSQL;
@@ -69,7 +101,7 @@ QString  CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_BAR_DATA_1DAY()
 	enumSqliteDb
 	CREATE TABLE IF NOT EXISTS TABLE_BAR_DATA_1DAY
 	(
-	//InstrumentID INTEGER NOT NULL, 
+	COLUMN_SYMBOLUSE TEXT NOT NULL, 
 	COLUMN_DATE TIMESTAMP NOT NULL, 
 	COLUMN_OPEN decimal(25,10) NOT NULL,
 	COLUMN_HIGH decimal(25,10) NOT NULL,
@@ -84,7 +116,7 @@ QString  CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_BAR_DATA_1DAY()
 	{
 		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<strTableName.toStdString()
 			<<" "<<"("
-			//<<" "<<str_BarData_Column_InstrumentID<<" "<<"INTEGER NOT NULL"<<","
+			<<" "<<str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE<<" "<<"TEXT NOT NULL"<<","
 			<<" "<<str_TABLE_BAR_DATA_Column_DATE<<" "<<"TIMESTAMP NOT NULL"<<","
 			<<" "<<str_TABLE_BAR_DATA_Column_OPEN<<" "<<"decimal(25,10) NOT NULL"<<","
 			<<" "<<str_TABLE_BAR_DATA_Column_CLOSE<<" "<<"decimal(25,10) NOT NULL"<<","
@@ -112,6 +144,7 @@ QString  CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_BAR_DATA_1DAY()
 	/*
 	INSERT INTO TABLE_BAR_DATA_1DAY
 	(
+	COLUMN_SYMBOLUSE,
 	COLUMN_DATE, 
 	COLUMN_OPEN, 
 	COLUMN_HIGH, 
@@ -122,6 +155,7 @@ QString  CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_BAR_DATA_1DAY()
 	) 
 	VALUES 
 	(
+	:COLUMN_SYMBOLUSE,
 	:COLUMN_DATE_VOLUE,
 	:COLUMN_OPEN_VOLUE,
 	:COLUMN_HIGH_VOLUE,
@@ -135,6 +169,7 @@ QString  CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_BAR_DATA_1DAY()
 
 	byteSQL<<"INSERT INTO "<<str_TABLE_BAR_DATA_1DAY
 		<<" "<<"("
+		<<" "<<str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE<<","
 		<<" "<<str_TABLE_BAR_DATA_Column_DATE<<","
 		<<" "<<str_TABLE_BAR_DATA_Column_OPEN<<","
 		<<" "<<str_TABLE_BAR_DATA_Column_HIGH<<","
@@ -151,9 +186,9 @@ QString  CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_BAR_DATA_1DAY()
 		<<" "<<"?"<<","
 		<<" "<<"?"<<","
 		<<" "<<"?"<<","
+		<<" "<<"?"<<","
 		<<" "<<"?"
 		<<" "<<")";
-
 
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
@@ -191,6 +226,7 @@ QString  CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_BAR_DATA_1DAY(const QStrin
 
 
 	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE<<","
 		<<" "<<str_TABLE_BAR_DATA_Column_DATE<<","
 		<<" "<<str_TABLE_BAR_DATA_Column_OPEN<<","
 		<<" "<<str_TABLE_BAR_DATA_Column_HIGH<<","
@@ -564,3 +600,180 @@ QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_TRADE_INFO()
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
 }
+
+QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_USER_TRADE_INFO()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	/*
+	enumSqliteDb
+	DELETE FROM TABLE_USER_TRADE_INFO	
+	*/
+
+	{
+		byteSQL<<"DELETE FROM"<<" "<<str_TABLE_USER_TRADE_INFO;
+	}
+	
+	strSQL = byteSQL.str().c_str();
+
+	return strSQL;
+}
+
+
+QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_MINTIME_MAXTIME()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	/*
+	enumSqliteDb
+	CREATE TABLE IF NOT EXISTS TABLE_MINTIME_MAXTIME
+	(
+	COLUMN_SYMBOLUSE TEXT NOT NULL, 
+	COLUMN_MINTIME TIMESTAMP NOT NULL, 
+	COLUMN_MAXTIME TIMESTAMP NOT NULL,
+	COLUMN_COUNT INTEGER,
+	PRIMARY KEY (COLUMN_SYMBOLUSE)
+	)
+	*/
+
+	{
+		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<str_TABLE_MINTIME_MAXTIME
+			<<" "<<"("
+			<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE<<" "<<"TEXT NOT NULL"<<","
+			<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME<<" "<<"TIMESTAMP NOT NULL"<<","
+			<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME<<" "<<"TIMESTAMP NOT NULL"<<","
+			<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT<<" "<<"INTEGER NOT NULL"<<","
+			<<" "<<"PRIMARY KEY ("<<str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE<<")"
+			<<" "<<")";
+	}
+	
+	strSQL = byteSQL.str().c_str();
+
+	return strSQL;
+}
+
+
+QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_MINTIME_MAXTIME()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	/////
+	/*
+	INSERT INTO TABLE_MINTIME_MAXTIME
+	(
+	COLUMN_SYMBOLUSE,
+	COLUMN_MINTIME,
+	COLUMN_MAXTIME, 
+	COLUMN_COUNT
+	) 
+	VALUES 
+	(
+	:COLUMN_SYMBOLUSE,
+	:COLUMN_MINTIME,
+	:COLUMN_MAXTIME,
+	:COLUMN_COUNT
+	);
+	*/
+	byteSQL<<"INSERT INTO "<<str_TABLE_MINTIME_MAXTIME
+		<<" "<<"("
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT
+		<<" "<<")"
+		<<" "<<"VALUES"
+		<<" "<<"("
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"
+		<<" "<<")";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_MINTIME_MAXTIME()
+{
+QString  strSQL;
+	std::stringstream byteSQL;
+	/*
+	enumSqliteDb
+	DELETE FROM TABLE_MINTIME_MAXTIME	
+	*/
+
+	{
+		byteSQL<<"DELETE FROM"<<" "<<str_TABLE_MINTIME_MAXTIME;
+	}
+	
+	strSQL = byteSQL.str().c_str();
+
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_UPDATE_TABLE_MINTIME_MAXTIME( 
+	const QString & strSymbolUse, const QString& strMinTime, const QString& strMaxTime, qint32 nCount )
+{
+	QString  strSQL;	
+	std::stringstream byteSQL;
+
+	/*
+	UPDATE TABLE_MINTIME_MAXTIME SET
+	COLUMN_SYMBOLUSE = "000001.SS", 
+	COLUMN_MINTIME = "000",
+	COLUMN_MAXTIME = "000",
+	COLUMN_COUNT = 10
+	WHERE 
+	COLUMN_SYMBOLUSE = "USERNAME";
+	*/
+	byteSQL<<"UPDATE"
+		<<" "<<str_TABLE_MINTIME_MAXTIME
+		<<" "<<"SET"
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\""<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME<<"="<<"\""<<strMinTime.toStdString()<<"\""<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME<<"="<<"\""<<strMaxTime.toStdString()<<"\""<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT<<"="<<nCount		
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\"";
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_MINTIME_MAXTIME( const QString & strSymbolUse )
+{
+	QString  strSQL;	
+	std::stringstream byteSQL;
+	static const char*  str_TABLE_MINTIME_MAXTIME = "TABLE_MINTIME_MAXTIME";
+	//
+	static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE = "SymbolUse";
+	static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME = "MinTime";
+	static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME = "MaxTime";
+	static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT = "Count";
+	/*
+	SELECT 
+	COLUMN_SYMBOLUSE, 
+	COLUMN_MINTIME, 
+	COLUMN_MAXTIME, 
+	COLUMN_COUNT
+	FROM 
+	TABLE_MINTIME_MAXTIME 
+	WHERE 
+	COLUMN_SYMBOLUSE="00001.SZ";
+	}
+	*/
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME<<","
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_MINTIME_MAXTIME
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\"";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+

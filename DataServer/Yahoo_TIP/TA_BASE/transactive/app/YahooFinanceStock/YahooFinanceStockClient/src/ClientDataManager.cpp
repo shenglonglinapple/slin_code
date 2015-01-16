@@ -5,10 +5,12 @@
 
 #include "ProjectCommonDef.h"
 
+#include "ClientDBManager.h"
 #include "ClientWorkerManager.h"
 #include "StockDataManager.h"
 #include "DataStockMinTimeMaxTime.h"
 #include "DataStockHistoryData.h"
+#include "DataUserTrade.h"
 
 #include "TcpComProtocol.h"
 #include "ReqLogin.h"
@@ -66,6 +68,8 @@ CClientDataManager::CClientDataManager(void)
 	CStockDataManager::getInstance();
 	CDataStockMinTimeMaxTime::getInstance();
 	CDataStockHistoryData::getInstance();
+	CDataUserTrade::getInstance();
+	CClientDBManager::getInstance();
 
 	CSignalSlotManager::getInstance().set_Signal_ShownMessage(this);
 }
@@ -77,6 +81,8 @@ CClientDataManager::~CClientDataManager(void)
 	CStockDataManager::removeInstance();
 	CClientWorkerManager::removeInstance();
 	CConfigInfo::removeInstance();
+	CDataUserTrade::removeInstance();
+	CClientDBManager::removeInstance();
 
 	if (NULL != m_pQtTimeHelper)
 	{
@@ -118,11 +124,11 @@ void CClientDataManager::loginedToServer( qint32 nHandle, QString strUserName, Q
 		<<" "<<"m_strUserName="<<m_strUserName
 		<<" "<<"m_strPassWord="<<m_strPassWord;
 
-	CSignalSlotManager::getInstance().emit_ShownMessage("logined To Server "+
-		QString("nHandle=%1 strUserName=%2 strPassWord=%3").arg(nHandle).arg(strUserName).arg(strPassWord)
-		);
-	send_req_ReqDownLoadStock(nHandle);
+	QString strShowMsg = "logined To Server ";
+	strShowMsg=strShowMsg + QString("nHandle=%1 strUserName=%2 strPassWord=%3").arg(nHandle).arg(strUserName).arg(strPassWord);
 
+	CSignalSlotManager::getInstance().emit_ShownMessage(strShowMsg);
+	send_req_ReqDownLoadStock(nHandle);
 }
 
 void CClientDataManager::downLoadStockFromServer( qint32 nHandle )

@@ -40,8 +40,11 @@ private:
 	void _InitDataBase();
 	int _StartTransaction();
 	int _CommitTransaction();
-	int _CreateDBTable();
+	qint32 _ExecModify(const QString& strSQL);
+private:
 	int _AddDataArray(LstHistoryDataT* pLstData);
+	int _CreateDBTable();
+
 private:
 	QSqlDatabase* m_pQSqlDataBase;
 	QString m_strQTDbType;//"QSQLITE" "QMYSQL"

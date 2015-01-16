@@ -14,13 +14,13 @@ CItemStockHistoryData::CItemStockHistoryData()
 	m_ItemData.clear();
 	m_LstChildItems.clear();
 	m_nItemType = ItemType_ROOT;
-	m_pItemUserInstrumentHelper = NULL;
+	m_pItemHelper = NULL;
 
 	//set value
 	m_pParentItem = NULL;
 	m_nItemType = ItemType_ROOT;
-	m_pItemUserInstrumentHelper = new CItemStockHistoryDataHelper();
-	m_pItemUserInstrumentHelper->getLstClumnName(dataTreeItem);
+	m_pItemHelper = new CItemStockHistoryDataHelper();
+	m_pItemHelper->getLstClumnName(dataTreeItem);
 	m_ItemData = dataTreeItem;
 
 }
@@ -34,14 +34,14 @@ CItemStockHistoryData::CItemStockHistoryData(QList<QVariant>& ItemData, CItemSto
 	m_ItemData.clear();
 	m_LstChildItems.clear();
 	m_nItemType = ItemType_ITEM;
-	m_pItemUserInstrumentHelper = NULL;
+	m_pItemHelper = NULL;
 
 
 	//set value
 	m_pParentItem = parent;
 	m_ItemData = ItemData;
 	m_nItemType = ItemType_ITEM;
-	m_pItemUserInstrumentHelper = new CItemStockHistoryDataHelper();
+	m_pItemHelper = new CItemStockHistoryDataHelper();
 
 }
 
@@ -70,10 +70,10 @@ CItemStockHistoryData::~CItemStockHistoryData()
 
     //qDeleteAll(childItems);
 
-	if (NULL != m_pItemUserInstrumentHelper)
+	if (NULL != m_pItemHelper)
 	{
-		delete m_pItemUserInstrumentHelper;
-		m_pItemUserInstrumentHelper = NULL;
+		delete m_pItemHelper;
+		m_pItemHelper = NULL;
 	}
 }
 

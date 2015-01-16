@@ -3,7 +3,7 @@
 
 #include <QtGui/QTableView>
 
-class CItemModelStockHistoryData;
+class QSqlTableModel;
 
 class CStockHistoryDataTableView : public QTableView
 { 
@@ -15,7 +15,7 @@ signals:
 public slots:
 	void slot_DataChange_StockHistoryData();
 private:
-	CItemModelStockHistoryData* m_pItemModel;
+	QSqlTableModel* m_pItemModel;
 }; 
 
 

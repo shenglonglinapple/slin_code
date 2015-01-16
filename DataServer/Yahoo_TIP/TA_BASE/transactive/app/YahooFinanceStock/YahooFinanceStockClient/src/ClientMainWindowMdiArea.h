@@ -6,6 +6,7 @@
 
 class CStockMinTimeMaxTimeTableView;
 class CStockHistoryDataTableView;
+class CUserTradeTableView;
 
 class CClientMainWindowMdiArea : public QMdiArea
 {
@@ -20,6 +21,7 @@ private:
 private:
 	CStockMinTimeMaxTimeTableView* m_pStockMinTimeMaxTimeTableView;
 	CStockHistoryDataTableView* m_pStockHistoryDataTableView;
+	CUserTradeTableView* m_pUserTradeTableView;
 };
 
 #endif // __CLASS_CLIENT_MAIN_WINDOW_MDIAREA_HH__

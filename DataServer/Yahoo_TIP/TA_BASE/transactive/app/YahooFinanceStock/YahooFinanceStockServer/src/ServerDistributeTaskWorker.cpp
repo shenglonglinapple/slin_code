@@ -81,3 +81,18 @@ void CServerDistributeTaskWorker::slotIncomingConnection( qint32 handle )
 		MYLOG4CPP_ERROR<<"m_pServerComManager is NULL! CServerDistributeTaskWorker is not runing ";
 	}
 }
+
+void CServerDistributeTaskWorker::sendMessage( qint32 handle, QByteArray* pMessage )
+{
+	if (NULL != m_pMessageManager)
+	{
+		m_pMessageManager->sendMessage(handle, pMessage);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"m_pMessageManager is NULL! CServerDistributeTaskWorker is not runing ";
+		delete pMessage;
+		pMessage = NULL;
+	}
+	
+}

@@ -1,5 +1,7 @@
 #include "AckBuy.h"
 #include <QtCore/QDataStream>
+#include "ReqBuy.h"
+#include "UserTradeInfo.h"
 #include "Log4cppLogger.h"
 
 CAckBuy::CAckBuy( void )
@@ -21,6 +23,8 @@ void CAckBuy::_Clear()
 	m_strUserName.clear();
 	m_strPassword.clear();
 
+	m_strUseID.clear();
+	m_strTradeUUID.clear();
 	m_strSymbolUse.clear();
 	m_strTradeTime.clear();
 	m_strTradePrice.clear();
@@ -42,6 +46,8 @@ void CAckBuy::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
 		<<" "<<"m_strUserName="<<m_strUserName
 		<<" "<<"m_strPassword="<<m_strPassword
+		<<" "<<"m_strUseID="<<m_strUseID
+		<<" "<<"m_strTradeUUID="<<m_strTradeUUID
 		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_strTradeTime="<<m_strTradeTime
 		<<" "<<"m_strTradePrice="<<m_strTradePrice
@@ -84,6 +90,8 @@ QByteArray* CAckBuy::getMessage()
 	writeToByteArray<<(m_strACKUUID);
 	writeToByteArray<<(m_strUserName);
 	writeToByteArray<<(m_strPassword);
+	writeToByteArray<<(m_strUseID);
+	writeToByteArray<<(m_strTradeUUID);
 	writeToByteArray<<(m_strSymbolUse);
 	writeToByteArray<<(m_strTradeTime);
 	writeToByteArray<<(m_strTradePrice);
@@ -113,6 +121,8 @@ void CAckBuy::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>m_strACKUUID;
 	readMessageBuffer>>m_strUserName;
 	readMessageBuffer>>m_strPassword;
+	readMessageBuffer>>m_strUseID;
+	readMessageBuffer>>m_strTradeUUID;
 	readMessageBuffer>>m_strSymbolUse;
 	readMessageBuffer>>m_strTradeTime;
 	readMessageBuffer>>m_strTradePrice;
@@ -124,5 +134,32 @@ void CAckBuy::setValue(const QByteArray* pMessage )
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);
 	m_nDataType = (CTcpComProtocol::EDataType)(nDataType);
+
+}
+
+void CAckBuy::setValue(const CReqBuy* pReq, const CUserTradeInfo* pUserTradeInfo)
+{
+	_Clear();
+
+	//this->m_nMessageType = CTcpComProtocol::MsgType_Ack;
+	//this->m_nDataType = CTcpComProtocol::DataType_Buy;
+	this->m_strACKUUID = CTcpComProtocol::getUUID();
+	this->m_strReqUUID = pReq->m_strReqUUID;
+	this->m_strUserName = pReq->m_strUserName;
+	this->m_strPassword = pReq->m_strPassword;
+	
+	if (NULL != pUserTradeInfo)
+	{
+		this->m_strUseID = pUserTradeInfo->m_strUseID;
+		this->m_strTradeUUID = pUserTradeInfo->m_strTradeUUID;
+		this->m_strSymbolUse = pUserTradeInfo->m_strSymbolUse;
+		this->m_strTradeTime = pUserTradeInfo->m_strTradeTime;
+		this->m_strTradePrice = QString("%1").arg(pUserTradeInfo->m_fTradePrice);
+		this->m_strTradeVolume = QString("%1").arg(pUserTradeInfo->m_nTradeVolume);
+		this->m_strFees = QString("%1").arg(pUserTradeInfo->m_fTradeFees);
+		this->m_strTradeAmount = QString("%1").arg(pUserTradeInfo->m_fTradeAmount);
+		this->m_strTotalTradeFee = QString("%1").arg(pUserTradeInfo->m_fTotalTradeFee);
+		this->m_strTotalTradeAmount = QString("%1").arg(pUserTradeInfo->m_fTotalTradeAmount);
+	}
 
 }

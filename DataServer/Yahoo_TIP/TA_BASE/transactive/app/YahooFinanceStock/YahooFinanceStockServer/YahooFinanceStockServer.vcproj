@@ -251,6 +251,36 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\src\MessageProcesser.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MessageProcesser.h"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description=""
+						CommandLine=""
+						AdditionalDependencies=""
+						Outputs=""
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description=""
+						CommandLine=""
+						AdditionalDependencies=""
+						Outputs=""
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\src\MessageRunnable.cpp"
 				>
 			</File>
@@ -1235,7 +1265,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Data&apos;"
+			Name="Data"
 			>
 			<File
 				RelativePath=".\src\HistoryData.cpp"

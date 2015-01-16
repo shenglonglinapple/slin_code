@@ -133,3 +133,12 @@ qint32 CTcpServerWorker::createUserTradeInfo( quint16 nListenPort, const CUserTr
 	nFunRes = m_pServerDbOper->insertUserTradeInfo(nListenPort, pData);
 	return nFunRes;
 }
+
+void CTcpServerWorker::sendMessage( qint32 handle, QByteArray* pMessage )
+{
+	if (NULL == m_pServerDistributeTaskWorker)
+	{
+		return;
+	}
+	m_pServerDistributeTaskWorker->sendMessage(handle, pMessage);
+}

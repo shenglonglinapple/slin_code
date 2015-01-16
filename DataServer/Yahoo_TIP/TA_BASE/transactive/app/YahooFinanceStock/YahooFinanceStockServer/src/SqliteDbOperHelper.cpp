@@ -40,6 +40,7 @@ void CSqliteDbOperHelper::_AnalysisData(QStringList& strLstLines, LstHistoryData
 		if (false == strLine.isEmpty())
 		{
 			pHistoryData = new CHistoryData();
+			pHistoryData->m_strSymbolUse = m_strSymbolUse;
 			pHistoryData->resetValue(strLine);
 
 			lstData.push_back(pHistoryData);

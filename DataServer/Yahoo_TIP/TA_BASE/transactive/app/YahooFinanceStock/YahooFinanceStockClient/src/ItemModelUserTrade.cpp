@@ -1,4 +1,5 @@
-#include "ItemModelStockHistoryData.h"
+#include "ItemModelUserTrade.h"
+
 
 //qt sys
 #include <QtCore/QChar>
@@ -11,30 +12,36 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QModelIndex>
 
-#include "ItemStockHistoryData.h"
+#include "ItemUserTrade.h"
 
 
-CItemModelStockHistoryData::CItemModelStockHistoryData(QObject *parent)
+
+//QT_BEGIN_NAMESPACE
+////QT_END_NAMESPACE
+
+
+
+CItemModelUserTrade::CItemModelUserTrade(QObject *parent)
     : QAbstractItemModel(parent)
 {
 	m_pRootItemRef = NULL;
 }
 
 
-CItemModelStockHistoryData::~CItemModelStockHistoryData()
+CItemModelUserTrade::~CItemModelUserTrade()
 {
 	m_pRootItemRef = NULL;
 }
 
 
 
-int CItemModelStockHistoryData::columnCount(const QModelIndex &parent) const
+int CItemModelUserTrade::columnCount(const QModelIndex &parent) const
 {
 	int nColumnCount = 0;
 
     if (parent.isValid())
 	{
-        nColumnCount = static_cast<CItemStockHistoryData*>(parent.internalPointer())->columnCount();
+        nColumnCount = static_cast<CItemUserTrade*>(parent.internalPointer())->columnCount();
 	}
     else
 	{
@@ -46,9 +53,9 @@ int CItemModelStockHistoryData::columnCount(const QModelIndex &parent) const
 
 
 
-QVariant CItemModelStockHistoryData::data(const QModelIndex &index, int role) const
+QVariant CItemModelUserTrade::data(const QModelIndex &index, int role) const
 {
-	CItemStockHistoryData* item = NULL;
+	CItemUserTrade* item = NULL;
 
     if (!index.isValid())
 	{
@@ -60,18 +67,18 @@ QVariant CItemModelStockHistoryData::data(const QModelIndex &index, int role) co
         return QVariant();
 	}
 
-    item = static_cast<CItemStockHistoryData*>(index.internalPointer());
+    item = static_cast<CItemUserTrade*>(index.internalPointer());
 
     return item->data(index.column());
 }
 
 
 
-Qt::ItemFlags CItemModelStockHistoryData::flags(const QModelIndex &index) const
+Qt::ItemFlags CItemModelUserTrade::flags(const QModelIndex &index) const
 {
 	Qt::ItemFlags nFlagsTreeItem;
-	CItemStockHistoryData* pTreeItem = NULL;
-	CItemStockHistoryData::EItemType nDataType = CItemStockHistoryData::ItemType_ITEM;
+	CItemUserTrade* pTreeItem = NULL;
+	CItemUserTrade::EItemType nDataType = CItemUserTrade::ItemType_ITEM;
 
     if (!index.isValid())
 	{
@@ -81,7 +88,7 @@ Qt::ItemFlags CItemModelStockHistoryData::flags(const QModelIndex &index) const
 
     //return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 
-	pTreeItem = static_cast<CItemStockHistoryData*>(index.internalPointer());
+	pTreeItem = static_cast<CItemUserTrade*>(index.internalPointer());
 
 	if (NULL == pTreeItem)
 	{
@@ -90,7 +97,7 @@ Qt::ItemFlags CItemModelStockHistoryData::flags(const QModelIndex &index) const
 	}
 
 	nDataType = pTreeItem->getItemType();
-	if (CItemStockHistoryData::ItemType_ITEM == nDataType)
+	if (CItemUserTrade::ItemType_ITEM == nDataType)
 	{
 		//nFlagsTreeItem = Qt::ItemIsEditable;
 		//nFlagsTreeItem = Qt::ItemIsEnabled | Qt::ItemIsSelectable |  Qt::ItemIsEditable;
@@ -104,7 +111,7 @@ Qt::ItemFlags CItemModelStockHistoryData::flags(const QModelIndex &index) const
 
 
 
-QVariant CItemModelStockHistoryData::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant CItemModelUserTrade::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
 	{
@@ -118,10 +125,10 @@ QVariant CItemModelStockHistoryData::headerData(int section, Qt::Orientation ori
 
 
 
-QModelIndex CItemModelStockHistoryData::index(int row, int column, const QModelIndex &parent) const
+QModelIndex CItemModelUserTrade::index(int row, int column, const QModelIndex &parent) const
 {
-	CItemStockHistoryData* parentItem = NULL;
-	CItemStockHistoryData* childItem = NULL;
+	CItemUserTrade* parentItem = NULL;
+	CItemUserTrade* childItem = NULL;
 
     if (!hasIndex(row, column, parent))
 	{
@@ -134,7 +141,7 @@ QModelIndex CItemModelStockHistoryData::index(int row, int column, const QModelI
 	}
     else
 	{
-        parentItem = static_cast<CItemStockHistoryData*>(parent.internalPointer());
+        parentItem = static_cast<CItemUserTrade*>(parent.internalPointer());
 	}
 
     childItem = parentItem->child(row);
@@ -152,17 +159,17 @@ QModelIndex CItemModelStockHistoryData::index(int row, int column, const QModelI
 
 
 
-QModelIndex CItemModelStockHistoryData::parent(const QModelIndex &index) const
+QModelIndex CItemModelUserTrade::parent(const QModelIndex &index) const
 {
-	CItemStockHistoryData* childItem = NULL;
-	CItemStockHistoryData* parentItem = NULL;
+	CItemUserTrade* childItem = NULL;
+	CItemUserTrade* parentItem = NULL;
 
     if (!index.isValid())
 	{
         return QModelIndex();
 	}
 
-    childItem = static_cast<CItemStockHistoryData*>(index.internalPointer());
+    childItem = static_cast<CItemUserTrade*>(index.internalPointer());
     parentItem = childItem->parent();
 
     if (parentItem == m_pRootItemRef)
@@ -175,9 +182,9 @@ QModelIndex CItemModelStockHistoryData::parent(const QModelIndex &index) const
 
 
 
-int CItemModelStockHistoryData::rowCount(const QModelIndex &parent) const
+int CItemModelUserTrade::rowCount(const QModelIndex &parent) const
 {
-    CItemStockHistoryData* parentItem = NULL;
+    CItemUserTrade* parentItem = NULL;
     if (parent.column() > 0)
 	{
         return 0;
@@ -189,26 +196,26 @@ int CItemModelStockHistoryData::rowCount(const QModelIndex &parent) const
 	}
     else
 	{
-        parentItem = static_cast<CItemStockHistoryData*>(parent.internalPointer());
+        parentItem = static_cast<CItemUserTrade*>(parent.internalPointer());
 	}
 
     return parentItem->childCount();
 }
 
-void CItemModelStockHistoryData::setRootItem( CItemStockHistoryData* rootItem )
+void CItemModelUserTrade::setRootItem( CItemUserTrade* rootItem )
 {
 	m_pRootItemRef = rootItem;
 	reset();
 }
 
 
-CItemStockHistoryData* CItemModelStockHistoryData::_GetItem( const QModelIndex& index ) const
+CItemUserTrade* CItemModelUserTrade::_GetItem( const QModelIndex& index ) const
 {
-	CItemStockHistoryData *item = NULL;
+	CItemUserTrade *item = NULL;
 
 	if (index.isValid()) 
 	{
-		item = static_cast<CItemStockHistoryData*>(index.internalPointer());
+		item = static_cast<CItemUserTrade*>(index.internalPointer());
 		if (NULL != item) 
 		{
 			return item;

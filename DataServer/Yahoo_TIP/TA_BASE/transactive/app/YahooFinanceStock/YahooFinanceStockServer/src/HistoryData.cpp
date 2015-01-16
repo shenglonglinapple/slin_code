@@ -16,6 +16,7 @@ CHistoryData::~CHistoryData()
 
 CHistoryData& CHistoryData::operator=( const CHistoryData& objectCopy )
 {
+	m_strSymbolUse = objectCopy.m_strSymbolUse;
 	m_strDate = objectCopy.m_strDate;
 	m_strOpen = objectCopy.m_strOpen;
 	m_strHigh = objectCopy.m_strHigh;
@@ -67,6 +68,7 @@ void CHistoryData::resetValue(const QString& strLine)
 
 void CHistoryData::_Init()
 {
+	m_strSymbolUse.clear();
 	m_strDate.clear();
 	m_strOpen.clear();
 	m_strHigh.clear();

@@ -29,6 +29,9 @@ public:
 	void setFileDBPath(const QString& strFileDBPath);
 	QString getFileDBPath();
 public:
+	QString getClientDBPath();
+
+public:
 	QStringList getLstUserInstrument();
 	void setLstUserInstrument(const QStringList& lstStringValue);
 	void removeInstrument(const QString& strInstrumentID);
@@ -57,6 +60,8 @@ private:
 	quint16 m_nServerPort;
 	QString m_strUserName;
 	QString m_strPassWord;
+private:
+	QString m_strClientDBPath;
 
 };
 //QT_END_NAMESPACE

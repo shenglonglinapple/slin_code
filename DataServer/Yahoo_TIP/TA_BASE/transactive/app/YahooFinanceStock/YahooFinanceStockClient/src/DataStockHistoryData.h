@@ -3,14 +3,11 @@
 
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
-#include <QtCore/QMap>
 #include <QtCore/QString>
 
 
 class CQtTimeHelper;
 class CHistoryData;
-class CItemStockHistoryData;
-class CItemStockHistoryDataHelper;
 
 class CDataStockHistoryData 
 { 
@@ -26,21 +23,8 @@ private:
 	virtual ~CDataStockHistoryData(); 
 public:
 	void setData(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
-public:
-	CItemStockHistoryData* getRootItem();
-
 private:
-	void _FreeData();
-	void _ReSetRoot();
-private:
-	QMutex m_mutexForMapData;
-	QMap<quint32, CHistoryData*> m_MapData;
 	QString m_strSymbolUse;
-private:
-	QMutex m_mutexForRoot;
-	CItemStockHistoryData* m_pItem_Root;
-	CItemStockHistoryDataHelper* m_pItemDataHelper;
-
 private:
 	CQtTimeHelper* m_pQtTimeHelper;
 }; 

@@ -67,7 +67,7 @@ private:
 	QMutex m_mutex_LstChildItems;
 	QList<CItemStockHistoryData*> m_LstChildItems;
 private:
-	CItemStockHistoryDataHelper* m_pItemUserInstrumentHelper;
+	CItemStockHistoryDataHelper* m_pItemHelper;
 private:
 	QString m_strNodeKey;
 };//

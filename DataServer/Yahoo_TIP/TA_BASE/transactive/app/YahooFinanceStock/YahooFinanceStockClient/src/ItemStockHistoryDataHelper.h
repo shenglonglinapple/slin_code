@@ -18,8 +18,7 @@ public:
 	CItemStockHistoryDataHelper& operator=(const CItemStockHistoryDataHelper& objCopy);
 
 public:
-	void setValue(const QString& strSymbolUse, const CHistoryData* pData);
-
+	void setValue(const CHistoryData* pData);
 public:
 	void logInfo(const QString& file, qint32 line, const QString& strLog);
 public:

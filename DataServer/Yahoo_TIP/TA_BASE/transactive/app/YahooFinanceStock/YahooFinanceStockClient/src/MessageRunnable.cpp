@@ -3,6 +3,10 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QList>
 
+#include "MessageProcesser.h"
+#include "WorkTime.h"
+#include "Log4cppLogger.h"
+
 #include "TcpComProtocol.h"
 #include "ReqLogin.h"
 #include "ReqLogout.h"
@@ -22,25 +26,16 @@
 #include "AckCreateUser.h"
 #include "AckBuy.h"
 
-#include "MessageManager.h"
-
-#include "ClientDataManager.h"
-#include "StockDataManager.h"
-#include "DataStockMinTimeMaxTime.h"
-#include "StockMinTimeMaxTime.h"
-#include "HistoryData.h"
-#include "DataStockHistoryData.h"
-#include "WorkTime.h"
-#include "Log4cppLogger.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
 {
 	m_nHanle = 0;
 	m_pMessage = NULL;
-	pMessageManagerRef = NULL;
+	m_pMessageProcesser = NULL;
 
 	m_nHanle = nHanle;
 	m_pMessage = pMessage;
+	m_pMessageProcesser = new CMessageProcesser(m_nHanle);
 }
 
 CMessageRunnable::~CMessageRunnable()
@@ -50,14 +45,14 @@ CMessageRunnable::~CMessageRunnable()
 		delete m_pMessage;
 		m_pMessage = NULL;
 	}
-	pMessageManagerRef = NULL;
+
+	if (NULL != m_pMessageProcesser)
+	{
+		delete m_pMessageProcesser;
+		m_pMessageProcesser = NULL;
+	}
 }
 
-
-void CMessageRunnable::setHanle( CMessageManager* pHanleRef )
-{
-	pMessageManagerRef = pHanleRef;
-}
 
 
 void CMessageRunnable::run()
@@ -70,6 +65,7 @@ void CMessageRunnable::run()
 
 	workTime.workEnd();
 	MYLOG4CPP_DEBUG<<"CMessageRunnable::run() end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
+
 }
 
 void CMessageRunnable::_ProcessMessage()
@@ -142,32 +138,32 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 
 void CMessageRunnable::_ProcessMessage_ReqLogin()
 {
-	CReqLogin* pReqLogin = NULL;
-	pReqLogin = new CReqLogin();
-	pReqLogin->setValue(m_pMessage);
-	pReqLogin->logInfo(__FILE__, __LINE__);
+	CReqLogin* pReq = NULL;
+	pReq = new CReqLogin();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReqLogin);
+	m_pMessageProcesser->processReq(pReq);
 
-	if (NULL != pReqLogin)
+	if (NULL != pReq)
 	{
-		delete pReqLogin;
-		pReqLogin = NULL;
+		delete pReq;
+		pReq = NULL;
 	}
 }
 void CMessageRunnable::_ProcessMessage_ReqLogout()
 {
-	CReqLogout* pReqLogout = NULL;
-	pReqLogout = new CReqLogout();
-	pReqLogout->setValue(m_pMessage);
-	pReqLogout->logInfo(__FILE__, __LINE__);
+	CReqLogout* pReq = NULL;
+	pReq = new CReqLogout();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReqLogout);
+	m_pMessageProcesser->processReq(pReq);
 
-	if (NULL != pReqLogout)
+	if (NULL != pReq)
 	{
-		delete pReqLogout;
-		pReqLogout = NULL;
+		delete pReq;
+		pReq = NULL;
 	}
 
 }
@@ -178,7 +174,7 @@ void CMessageRunnable::_ProcessMessage_ReqSynYahoo()
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReq);
+	m_pMessageProcesser->processReq(pReq);
 
 	if (NULL != pReq)
 	{
@@ -193,7 +189,7 @@ void CMessageRunnable::_ProcessMessage_ReqDownLoadStock()
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReq);
+	m_pMessageProcesser->processReq(pReq);
 
 	if (NULL != pReq)
 	{
@@ -208,7 +204,7 @@ void CMessageRunnable::_ProcessMessage_ReqStockMinTimeMaxTime()
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReq);
+	m_pMessageProcesser->processReq(pReq);
 
 	if (NULL != pReq)
 	{
@@ -224,7 +220,7 @@ void CMessageRunnable::_ProcessMessage_ReqStockHistoryData()
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReq);
+	m_pMessageProcesser->processReq(pReq);
 
 	if (NULL != pReq)
 	{
@@ -240,7 +236,7 @@ void CMessageRunnable::_ProcessMessage_ReqCreateUser()
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReq);
+	m_pMessageProcesser->processReq(pReq);
 
 	if (NULL != pReq)
 	{
@@ -257,7 +253,7 @@ void CMessageRunnable::_ProcessMessage_ReqBuy()
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
-	_ProcessReq(pReq);
+	m_pMessageProcesser->processReq(pReq);
 
 	if (NULL != pReq)
 	{
@@ -311,7 +307,7 @@ void CMessageRunnable::_ProcessMessage_AckLogin()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -327,7 +323,7 @@ void CMessageRunnable::_ProcessMessage_AckLogout()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -342,7 +338,7 @@ void CMessageRunnable::_ProcessMessage_AckSynYahoo()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -359,7 +355,7 @@ void CMessageRunnable::_ProcessMessage_AckDownLoadStock()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -375,7 +371,7 @@ void CMessageRunnable::_ProcessMessage_AckStockMinTimeMaxTime()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -392,7 +388,7 @@ void CMessageRunnable::_ProcessMessage_AckStockHistoryData()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -408,7 +404,7 @@ void CMessageRunnable::_ProcessMessage_AckCreateUser()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
@@ -424,204 +420,12 @@ void CMessageRunnable::_ProcessMessage_AckBuy()
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 
-	this->_ProcessAck(pAck);
+	m_pMessageProcesser->processAck(pAck);
 
 	if (NULL != pAck)
 	{
 		delete pAck;
 		pAck = NULL;
 	}
-}
-
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-
-void CMessageRunnable::_ProcessReq(const CReqLogin* pReq )
-{
-	CAckLogin* pAckLogin = NULL;
-	QByteArray* pByteArray = NULL;
-
-
-	pAckLogin = new CAckLogin();
-
-	pAckLogin->m_nMessageType = CTcpComProtocol::MsgType_Ack;
-	pAckLogin->m_nDataType = CTcpComProtocol::DataType_Login;
-	pAckLogin->m_strACKUUID = CTcpComProtocol::getUUID();
-	pAckLogin->m_strReqUUID = pReq->m_strReqUUID;
-	pAckLogin->m_strUserName = pReq->m_strUserName;
-	pAckLogin->m_strPassword = pReq->m_strPassword;
-	pAckLogin->m_nLoginResult = CTcpComProtocol::DataType_LoginResult_OK;
-	pByteArray = pAckLogin->getMessage();
-	pAckLogin->logInfo(__FILE__, __LINE__);
-
-	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
-
-
-	pByteArray = NULL;
-	if (NULL != pAckLogin)
-	{
-		delete pAckLogin;
-		pAckLogin = NULL;
-	}
-	
-}
-
-void CMessageRunnable::_ProcessReq( const CReqLogout* pReq )
-{
-	CAckLogout* pAckLogout = NULL;
-	QByteArray* pByteArray = NULL;
-
-	pAckLogout = new CAckLogout();
-
-	pAckLogout->m_nMessageType = CTcpComProtocol::MsgType_Ack;
-	pAckLogout->m_nDataType = CTcpComProtocol::DataType_LogOut;
-	pAckLogout->m_strACKUUID = CTcpComProtocol::getUUID();
-	pAckLogout->m_strReqUUID = pReq->m_strReqUUID;
-	pAckLogout->m_strUserName = pReq->m_strUserName;
-	pAckLogout->m_strPassword = pReq->m_strPassword;
-	pAckLogout->m_nLogoutResult = CTcpComProtocol::DataType_LogoutResult_OK;
-
-	pByteArray = pAckLogout->getMessage();
-	pAckLogout->logInfo(__FILE__, __LINE__);
-
-	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
-
-
-	pByteArray = NULL;
-	if (NULL != pAckLogout)
-	{
-		delete pAckLogout;
-		pAckLogout = NULL;
-	}
-}
-
-void CMessageRunnable::_ProcessReq( const CReqSynYahoo* pReq )
-{
-	CAckSynYahoo* pAck = NULL;
-	QByteArray* pByteArray = NULL;
-
-	pAck = new CAckSynYahoo();
-
-	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
-	pAck->m_nDataType = CTcpComProtocol::DataType_SynYahoo;
-	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
-	pAck->m_strReqUUID = pReq->m_strReqUUID;
-	pAck->m_nResult = CTcpComProtocol::DataType_SynYahooResult_Unknown;
-	pAck->logInfo(__FILE__, __LINE__);
-
-	pByteArray = pAck->getMessage();
-	
-	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
-
-
-	pByteArray = NULL;
-	if (NULL != pAck)
-	{
-		delete pAck;
-		pAck = NULL;
-	}
-
-}
-
-void CMessageRunnable::_ProcessReq(const CReqDownLoadStock* pReq)
-{
-	CAckDownLoadStock* pAck = NULL;
-	QByteArray* pByteArray = NULL;
-
-	pAck = new CAckDownLoadStock();
-	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
-	pAck->m_nDataType = CTcpComProtocol::DataType_DownLoadStock;
-	pAck->m_strReqUUID = pReq->m_strReqUUID;
-	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
-	pAck->logInfo(__FILE__, __LINE__);
-	pByteArray = pAck->getMessage();
-	pMessageManagerRef->sendMessage(m_nHanle, pByteArray);
-
-	pByteArray = NULL;
-	if (NULL != pAck)
-	{
-		delete pAck;
-		pAck = NULL;
-	}
-
-}
-
-void CMessageRunnable::_ProcessReq( const CReqStockMinTimeMaxTime* pReq )
-{
-}
-
-void CMessageRunnable::_ProcessReq( const CReqStockHistoryData* pReq )
-{
-
-}
-
-void CMessageRunnable::_ProcessReq( const CReqCreateUser* pReq )
-{
-
-}
-
-void CMessageRunnable::_ProcessReq( const CReqBuy* pReq )
-{
-
-}
-
-//////////////////////////////////////////////////////////////////////////
-void CMessageRunnable::_ProcessAck( const CAckLogin* pAck )
-{
-	//TODO.For.Test
-	//pMessageManagerRef->sendReqLogin(m_nHanle, "UserName", "PassWord");
-	//pMessageManagerRef->sendReqSynYahoo(m_nHanle, "000001.SZ");
-	//pMessageManagerRef->sendReqDownLoadStock(m_nHanle);
-	CClientDataManager::getInstance().loginedToServer(m_nHanle, pAck->m_strUserName, pAck->m_strPassword);
-	return;
-}
-
-void CMessageRunnable::_ProcessAck( const CAckLogout* pAck )
-{
-	return;
-}
-
-void CMessageRunnable::_ProcessAck( const CAckSynYahoo* pAck )
-{
-	return;
-}
-void CMessageRunnable::_ProcessAck( const CAckDownLoadStock* pAck )
-{
-	CStockDataManager::getInstance().addStockData(&(pAck->m_LstStock));
-	CClientDataManager::getInstance().downLoadStockFromServer(m_nHanle);
-	return;
-}
-
-void CMessageRunnable::_ProcessAck( const CAckStockMinTimeMaxTime* pAck )
-{
-	CStockMinTimeMaxTime* pData = NULL;
-	pData = new CStockMinTimeMaxTime();
-	pData->m_strSymbolUse = pAck->m_strSymbolUse;
-	pData->m_strMinTime = pAck->m_strMinTime;
-	pData->m_strMaxTime = pAck->m_strMaxTime;
-	pData->m_nCount = pAck->m_nCount;
-
-	CDataStockMinTimeMaxTime::getInstance().appendOrUpdate(pData);
-	pData = NULL;
-
-	return;
-}
-
-
-void CMessageRunnable::_ProcessAck( const CAckStockHistoryData* pAck )
-{
-	CDataStockHistoryData::getInstance().setData(pAck->m_strSymbolUse, pAck->m_LstHistoryData);
-
-	return;
-}
-
-void CMessageRunnable::_ProcessAck( const CAckCreateUser* pAck )
-{
-
-}
-
-void CMessageRunnable::_ProcessAck( const CAckBuy* pAck )
-{
-
 }
 

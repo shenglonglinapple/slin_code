@@ -189,33 +189,12 @@ void CSqliteDbOper::saveData(LstHistoryDataT* pLstData)
 
 int CSqliteDbOper::_CreateDBTable()
 {
-	int nFunRes = 0;
-	bool bExecRes = true;
+	qint32 nFunRes = 0;
 	QString  strSQL;
-
-	QSqlQuery* pSqlQuery = NULL;
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-
 	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_BAR_DATA_1DAY();
-
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
-	bExecRes = pSqlQuery->exec(strSQL);
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-	}
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
-	}
-
+	nFunRes = _ExecModify(strSQL);
 	return nFunRes;
+
 }
 
 
@@ -484,5 +463,32 @@ int CSqliteDbOper::selectData_Count( int& nValueGet )
 		pSqlQuery = NULL;
 	}
 
+	return nFunRes;
+}
+
+qint32 CSqliteDbOper::_ExecModify(const QString& strSQL)
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = true;
+
+	QSqlQuery* pSqlQuery = NULL;
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+	}
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
 	return nFunRes;
 }

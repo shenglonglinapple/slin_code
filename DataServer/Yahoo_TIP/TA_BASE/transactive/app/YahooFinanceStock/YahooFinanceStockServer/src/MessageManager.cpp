@@ -47,7 +47,6 @@ void CMessageManager::slotRecvMessage( qint32 handle, QByteArray* pMessage )
 
 	CMessageRunnable* pMessageRunnable = NULL;
 	pMessageRunnable = new CMessageRunnable(handle, pMessage);
-	pMessageRunnable->setHanle(this);
 	//Delete that object when you're done (instead of using signals and slots)
 	pMessageRunnable->setAutoDelete(true);
 

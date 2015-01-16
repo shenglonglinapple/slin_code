@@ -3,7 +3,7 @@
 
 #include <QtGui/QTableView>
 
-class CItemModelStockMinTimeMaxTime;
+class QSqlTableModel;
 
 class CStockMinTimeMaxTimeTableView : public QTableView
 { 
@@ -23,7 +23,7 @@ private:
 	void _CreateAction();
 	void _CreateConnect();
 private:
-	CItemModelStockMinTimeMaxTime* m_pItemModel;
+	QSqlTableModel* m_pItemModel;
 private:
 	QAction* m_pActionReqHistoryData;
 

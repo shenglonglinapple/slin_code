@@ -17,6 +17,9 @@ static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_filedbpath_defValue = "C:/
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath = "sqlitedbpath";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_sqlitedbpath_defValue = "C:/LSL/LSL_DATA/SaveDataSqliteDB/";
 
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_clientdbpath = "clientdbpath";
+static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_clientdbpath_defValue = "C:/LSL/LSL_DATA/ClientDB/";
+
 //static const char* DEF_VALUE_STRING_UTC_START_DATE_TIME = "1970-01-01 08:00:00";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument = "userinstrument";
 static const char*  DEF_VALUE_CONFIG_GROUP_config_KEY_userinstrument_defValue = "";//5614,5378
@@ -67,6 +70,7 @@ CConfigInfo::CConfigInfo()
 	m_nServerPort = 0;
 	m_strUserName.clear();
 	m_strPassWord.clear();
+	m_strClientDBPath.clear();
 
 
 	CCfgFileUtil::getInstance();
@@ -167,6 +171,7 @@ void CConfigInfo::_LoadDataFromCfgFile()
 	getPassWord();
 	getServerIP();
 	getServerPort();
+	getClientDBPath();
 }
 
 void CConfigInfo::_WriteDataToCfgFile()
@@ -389,4 +394,26 @@ qint16 CConfigInfo::getServerPort()
 	return m_nServerPort;
 }
 
+QString CConfigInfo::getClientDBPath()
+{
+	int nFunRes = 0;
+	QString strGroup;
+	QString strKey;
+	QString strValue;
+
+	if (m_strClientDBPath.isEmpty())
+	{
+		strGroup = DEF_VALUE_CONFIG_GROUP_config;
+		strKey = DEF_VALUE_CONFIG_GROUP_config_KEY_clientdbpath;
+		strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_clientdbpath_defValue);
+		nFunRes = CCfgFileUtil::getInstance().read(m_strConfigFileName, strGroup, strKey, strValue);
+		if (0 != nFunRes)
+		{
+			strValue = QString("%1").arg(DEF_VALUE_CONFIG_GROUP_config_KEY_clientdbpath_defValue);
+		}
+		m_strClientDBPath = strValue;
+	}
+
+	return m_strClientDBPath;
+}
 

@@ -26,6 +26,7 @@ public:
 private:
 	void _Init();
 public:
+	QString m_strSymbolUse;
 	QString m_strDate;
 	QString m_strOpen;
 	QString m_strHigh;

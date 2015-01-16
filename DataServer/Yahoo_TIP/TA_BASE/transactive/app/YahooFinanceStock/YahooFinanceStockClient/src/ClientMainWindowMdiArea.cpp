@@ -2,6 +2,7 @@
 
 #include "StockMinTimeMaxTimeTableView.h"
 #include "StockHistoryDataTableView.h"
+#include "UserTradeTableView.h"
 
 #include "Log4cppLogger.h"
 
@@ -11,6 +12,8 @@ static const int DEFVALUE_INT_Window_Height_StockMinTimeMaxTimeTableView = 300;
 static const int DEFVALUE_INT_Window_Width_StockHistoryDataTableView = 400;
 static const int DEFVALUE_INT_Window_Height_StockHistoryDataTableView = 300;
 
+static const int DEFVALUE_INT_Window_Width_UserTradeTableView = 400;
+static const int DEFVALUE_INT_Window_Height_UserTradeTableView = 200;
 
 CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)
     : QMdiArea(parent)
@@ -18,6 +21,7 @@ CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)
     //this->resize(200, 300);
 	m_pStockMinTimeMaxTimeTableView = NULL;
 	m_pStockHistoryDataTableView = NULL;
+	m_pUserTradeTableView = NULL;
 
 	_SetupUi();
 	_TranslateLanguage();
@@ -38,9 +42,11 @@ void CClientMainWindowMdiArea::_SetupUi()
 
 	m_pStockMinTimeMaxTimeTableView = new CStockMinTimeMaxTimeTableView(this);
 	m_pStockHistoryDataTableView = new CStockHistoryDataTableView(this);
+	m_pUserTradeTableView = new CUserTradeTableView(this);
 
 	this->addSubWindow(m_pStockMinTimeMaxTimeTableView);
 	this->addSubWindow(m_pStockHistoryDataTableView);
+	this->addSubWindow(m_pUserTradeTableView);
 
 	nIndex = 0;
 	foreach (QMdiSubWindow *pSubWindow, this->subWindowList()) 
@@ -59,6 +65,13 @@ void CClientMainWindowMdiArea::_SetupUi()
 			this->activeSubWindow()->move(DEFVALUE_INT_Window_Width_StockMinTimeMaxTimeTableView, 0);
 			this->activeSubWindow()->resize(DEFVALUE_INT_Window_Width_StockHistoryDataTableView, 
 				DEFVALUE_INT_Window_Height_StockHistoryDataTableView);
+		}
+		else if (2 == nIndex)
+		{
+			this->setActiveSubWindow(pSubWindow);
+			this->activeSubWindow()->move(0, DEFVALUE_INT_Window_Height_StockMinTimeMaxTimeTableView + 10);
+			this->activeSubWindow()->resize(DEFVALUE_INT_Window_Width_UserTradeTableView, 
+				DEFVALUE_INT_Window_Height_UserTradeTableView);
 		}
 		nIndex++;
 	}//foreach

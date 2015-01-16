@@ -1,11 +1,11 @@
-#include "ItemStockMinTimeMaxTime.h"
+#include "ItemUserTrade.h"
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
-#include "ItemStockMinTimeMaxTimeHelper.h"
+#include "ItemUserTradeHelper.h"
 
 #include "Log4cppLogger.h"
 
-CItemStockMinTimeMaxTime::CItemStockMinTimeMaxTime()
+CItemUserTrade::CItemUserTrade()
 {
 	QList<QVariant> dataTreeItem;
 
@@ -14,49 +14,49 @@ CItemStockMinTimeMaxTime::CItemStockMinTimeMaxTime()
 	m_ItemData.clear();
 	m_LstChildItems.clear();
 	m_nItemType = ItemType_ROOT;
-	m_pItemUserInstrumentHelper = NULL;
+	m_pItemHelper = NULL;
 
 	//set value
 	m_pParentItem = NULL;
 	m_nItemType = ItemType_ROOT;
-	m_pItemUserInstrumentHelper = new CItemStockMinTimeMaxTimeHelper();
-	m_pItemUserInstrumentHelper->getLstClumnName(dataTreeItem);
+	m_pItemHelper = new CItemUserTradeHelper();
+	m_pItemHelper->getLstClumnName(dataTreeItem);
 	m_ItemData = dataTreeItem;
 
 }
 
 
 
-CItemStockMinTimeMaxTime::CItemStockMinTimeMaxTime(QList<QVariant>& ItemData, CItemStockMinTimeMaxTime *parent)
+CItemUserTrade::CItemUserTrade(QList<QVariant>& ItemData, CItemUserTrade *parent)
 {
 	//clear
 	m_pParentItem = NULL;
 	m_ItemData.clear();
 	m_LstChildItems.clear();
 	m_nItemType = ItemType_ITEM;
-	m_pItemUserInstrumentHelper = NULL;
+	m_pItemHelper = NULL;
 
 
 	//set value
 	m_pParentItem = parent;
 	m_ItemData = ItemData;
 	m_nItemType = ItemType_ITEM;
-	m_pItemUserInstrumentHelper = new CItemStockMinTimeMaxTimeHelper();
+	m_pItemHelper = new CItemUserTradeHelper();
 
 }
 
 
 
 
-CItemStockMinTimeMaxTime::~CItemStockMinTimeMaxTime()
+CItemUserTrade::~CItemUserTrade()
 {
 	QMutexLocker lock(&m_mutex_LstChildItems);
 
 	m_pParentItem = NULL;
 	m_ItemData.clear();
 
-	CItemStockMinTimeMaxTime* pItemTmp = NULL;
-	QList<CItemStockMinTimeMaxTime*>::iterator iterList;
+	CItemUserTrade* pItemTmp = NULL;
+	QList<CItemUserTrade*>::iterator iterList;
 	iterList = m_LstChildItems.begin();
 	while (iterList != m_LstChildItems.end())
 	{
@@ -70,48 +70,48 @@ CItemStockMinTimeMaxTime::~CItemStockMinTimeMaxTime()
 
     //qDeleteAll(childItems);
 
-	if (NULL != m_pItemUserInstrumentHelper)
+	if (NULL != m_pItemHelper)
 	{
-		delete m_pItemUserInstrumentHelper;
-		m_pItemUserInstrumentHelper = NULL;
+		delete m_pItemHelper;
+		m_pItemHelper = NULL;
 	}
 }
 
 
 
-CItemStockMinTimeMaxTime *CItemStockMinTimeMaxTime::child(int number)
+CItemUserTrade *CItemUserTrade::child(int number)
 {
     return m_LstChildItems.value(number);
 }
 
-int CItemStockMinTimeMaxTime::childCount() const
+int CItemUserTrade::childCount() const
 {
     return m_LstChildItems.count();
 }
 
-int CItemStockMinTimeMaxTime::childNumber() const
+int CItemUserTrade::childNumber() const
 {
     if (m_pParentItem)
-        return m_pParentItem->m_LstChildItems.indexOf(const_cast<CItemStockMinTimeMaxTime*>(this));
+        return m_pParentItem->m_LstChildItems.indexOf(const_cast<CItemUserTrade*>(this));
 
     return 0;
 }
 
-int CItemStockMinTimeMaxTime::columnCount() const
+int CItemUserTrade::columnCount() const
 {
 	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
 
     return m_ItemData.count();
 }
 
-QVariant CItemStockMinTimeMaxTime::data(int column) const
+QVariant CItemUserTrade::data(int column) const
 {
 	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
 
     return m_ItemData.value(column);
 }
 
-bool CItemStockMinTimeMaxTime::insertChildren(int position, int count, int columns)
+bool CItemUserTrade::insertChildren(int position, int count, int columns)
 {
     if (position < 0 || position > m_LstChildItems.size())
         return false;
@@ -120,15 +120,15 @@ bool CItemStockMinTimeMaxTime::insertChildren(int position, int count, int colum
 	{
         QList<QVariant> data;
 		data.reserve(columns);
-		CItemStockMinTimeMaxTime *item = NULL;
-        item = new CItemStockMinTimeMaxTime(data, this);
+		CItemUserTrade *item = NULL;
+        item = new CItemUserTrade(data, this);
         m_LstChildItems.insert(position, item);
     }
 
     return true;
 }
 
-bool CItemStockMinTimeMaxTime::insertColumns(int position, int columns)
+bool CItemUserTrade::insertColumns(int position, int columns)
 {
 	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
 
@@ -140,7 +140,7 @@ bool CItemStockMinTimeMaxTime::insertColumns(int position, int columns)
         m_ItemData.insert(position, QVariant());
 	}
 
-    foreach (CItemStockMinTimeMaxTime *child, m_LstChildItems)
+    foreach (CItemUserTrade *child, m_LstChildItems)
 	{
         child->insertColumns(position, columns);
 	}
@@ -148,12 +148,12 @@ bool CItemStockMinTimeMaxTime::insertColumns(int position, int columns)
     return true;
 }
 
-CItemStockMinTimeMaxTime *CItemStockMinTimeMaxTime::parent()
+CItemUserTrade *CItemUserTrade::parent()
 {
     return m_pParentItem;
 }
 
-bool CItemStockMinTimeMaxTime::removeChildren(int position, int count)
+bool CItemUserTrade::removeChildren(int position, int count)
 {
     if (position < 0 || position + count > m_LstChildItems.size())
         return false;
@@ -165,7 +165,7 @@ bool CItemStockMinTimeMaxTime::removeChildren(int position, int count)
 }
 
 
-bool CItemStockMinTimeMaxTime::removeColumns(int position, int columns)
+bool CItemUserTrade::removeColumns(int position, int columns)
 {
 	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
 
@@ -185,14 +185,14 @@ bool CItemStockMinTimeMaxTime::removeColumns(int position, int columns)
 		m_ItemData.erase(iterList);
 	}
 
-    foreach (CItemStockMinTimeMaxTime *child, m_LstChildItems)
+    foreach (CItemUserTrade *child, m_LstChildItems)
         child->removeColumns(position, columns);
 
     return true;
 }
 
 
-bool CItemStockMinTimeMaxTime::setData(int column, const QVariant &value)
+bool CItemUserTrade::setData(int column, const QVariant &value)
 {
 	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
 	
@@ -203,9 +203,9 @@ bool CItemStockMinTimeMaxTime::setData(int column, const QVariant &value)
     return true;
 }
 
-void CItemStockMinTimeMaxTime::appendChild( CItemStockMinTimeMaxTime** ppItem )
+void CItemUserTrade::appendChild( CItemUserTrade** ppItem )
 {
-	CItemStockMinTimeMaxTime* pItem = NULL;
+	CItemUserTrade* pItem = NULL;
 	if (NULL == ppItem || NULL == *ppItem)
 	{
 		return;
@@ -215,20 +215,20 @@ void CItemStockMinTimeMaxTime::appendChild( CItemStockMinTimeMaxTime** ppItem )
 }
 
 //////////////////////////////////////////////////////////////////////////
-void CItemStockMinTimeMaxTime::_ResetCurrentNodeData(CItemStockMinTimeMaxTimeHelper* pItemUserInstrumentHelper )
+void CItemUserTrade::_ResetCurrentNodeData(CItemUserTradeHelper* pItemDataHelper )
 {
 	QMutexLocker lock((QMutex*)&m_mutex_ItemData);
 
 	m_ItemData.clear();
-	pItemUserInstrumentHelper->getItemNodeData(m_ItemData);
-	m_strNodeKey = pItemUserInstrumentHelper->m_strSymbolUse;
+	pItemDataHelper->getItemNodeData(m_ItemData);
+	m_strNodeKey = pItemDataHelper->m_strSymbolUse;
 }
-void CItemStockMinTimeMaxTime::findAndResetSubNodeData( CItemStockMinTimeMaxTimeHelper* pItemDataHelper )
+void CItemUserTrade::findAndResetSubNodeData( CItemUserTradeHelper* pItemDataHelper )
 {
 	QMutexLocker lock(&m_mutex_LstChildItems);
 
-	QList<CItemStockMinTimeMaxTime*>::iterator iterLst;
-	CItemStockMinTimeMaxTime* pSubNode = NULL;
+	QList<CItemUserTrade*>::iterator iterLst;
+	CItemUserTrade* pSubNode = NULL;
 
 	iterLst = m_LstChildItems.begin();
 	while (iterLst != m_LstChildItems.end())
@@ -245,15 +245,15 @@ void CItemStockMinTimeMaxTime::findAndResetSubNodeData( CItemStockMinTimeMaxTime
 
 }
 
-void CItemStockMinTimeMaxTime::appendChildByData(CItemStockMinTimeMaxTimeHelper* pItemDataHelper)
+void CItemUserTrade::appendChildByData(CItemUserTradeHelper* pItemDataHelper)
 {
 	QMutexLocker lock(&m_mutex_LstChildItems);
 
-	CItemStockMinTimeMaxTime* pNewNode = NULL;
-	CItemStockMinTimeMaxTime* pParentNode = this;
+	CItemUserTrade* pNewNode = NULL;
+	CItemUserTrade* pParentNode = this;
 	QList<QVariant> ItemDataNULL;
 
-	pNewNode = new CItemStockMinTimeMaxTime(ItemDataNULL, pParentNode);
+	pNewNode = new CItemUserTrade(ItemDataNULL, pParentNode);
 	pNewNode->_ResetCurrentNodeData(pItemDataHelper);
 
 	pParentNode->appendChild(&pNewNode);
@@ -261,22 +261,22 @@ void CItemStockMinTimeMaxTime::appendChildByData(CItemStockMinTimeMaxTimeHelper*
 	pParentNode = NULL;
 }
 
-CItemStockMinTimeMaxTime::EItemType CItemStockMinTimeMaxTime::getItemType()
+CItemUserTrade::EItemType CItemUserTrade::getItemType()
 {
 	return m_nItemType;
 }
 
-QString CItemStockMinTimeMaxTime::getNodeKey()
+QString CItemUserTrade::getNodeKey()
 {
 	return m_strNodeKey;
 }
 
-void CItemStockMinTimeMaxTime::removeChildByData( CItemStockMinTimeMaxTimeHelper* pItemDataHelper )
+void CItemUserTrade::removeChildByData( CItemUserTradeHelper* pItemDataHelper )
 {
 	QMutexLocker lock(&m_mutex_LstChildItems);
 
-	QList<CItemStockMinTimeMaxTime*>::iterator iterLst;
-	CItemStockMinTimeMaxTime* pSubNode = NULL;
+	QList<CItemUserTrade*>::iterator iterLst;
+	CItemUserTrade* pSubNode = NULL;
 	int nIndex = 0;
 
 	iterLst = m_LstChildItems.begin();

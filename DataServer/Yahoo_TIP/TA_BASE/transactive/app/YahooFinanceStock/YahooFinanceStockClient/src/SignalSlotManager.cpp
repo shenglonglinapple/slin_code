@@ -6,6 +6,8 @@
 #include "StockMinTimeMaxTimeTableView.h"
 #include "DataStockHistoryData.h"
 #include "StockHistoryDataTableView.h"
+#include "DataUserTrade.h"
+#include "UserTradeTableView.h"
 
 #include "Log4cppLogger.h"
 
@@ -148,8 +150,41 @@ void CSignalSlotManager::emit_DataChange_StockHistoryData()
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+void CSignalSlotManager::set_Signal_DataChange_UserTrade( CDataUserTrade* pRefSignal )
+{
+	m_pRefSignal_DataChange_UserTrade = pRefSignal;
+}
+
+void CSignalSlotManager::set_Slot_DataChange_UserTrade( CUserTradeTableView* pRefSlot )
+{
+	m_pRefSlot_DataChange_UserTrade = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_UserTrade && NULL != m_pRefSlot_DataChange_UserTrade)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_UserTrade()), this, SLOT(slot_DataChange_UserTrade()));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_UserTrade()), this, SLOT(slot_DataChange_UserTrade()));
+	}
+}
+
+void CSignalSlotManager::slot_DataChange_UserTrade()
+{
+	if (NULL != m_pRefSlot_DataChange_UserTrade)
+	{
+		m_pRefSlot_DataChange_UserTrade->slot_DataChange_UserTrade();
+	}
+}
+
+void CSignalSlotManager::emit_DataChange_UserTrade()
+{
+	emit signal_DataChange_UserTrade();
+}
 
 
-
+//////////////////////////////////////////////////////////////////////////
 
 

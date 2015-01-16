@@ -9,6 +9,8 @@ class CServerDbOper;
 class CUserInfo;
 class CUserTradeInfo;
 
+class QByteArray;
+
 class CTcpServerWorker : public CMyQtThread
 {
     Q_OBJECT
@@ -21,6 +23,10 @@ public:
 signals:
 
 private slots:
+public:
+	void sendMessage(qint32 handle, QByteArray* pMessage);
+
+
 public:
 	qint32 getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);

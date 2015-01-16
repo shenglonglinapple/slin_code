@@ -6,6 +6,8 @@
 
 #include "TcpComProtocol.h"
 
+class CReqBuy;
+class CUserTradeInfo;
 
 class CAckBuy
 {
@@ -20,6 +22,8 @@ public:
 	QByteArray* getMessage();
 	void logInfo( const QString& fileName, qint32 lineNumber );
 public:
+	void setValue(const CReqBuy* pReq, const CUserTradeInfo* pUserTradeInfo);
+public:
 	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::EMsgType
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
 	QString m_strReqUUID;//37
@@ -27,6 +31,9 @@ public:
 
 	QString m_strUserName;
 	QString m_strPassword;
+
+	QString m_strUseID;
+	QString m_strTradeUUID;//37
 
 	QString m_strSymbolUse;
 	QString m_strTradeTime;
