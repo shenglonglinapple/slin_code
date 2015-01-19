@@ -3,7 +3,7 @@
 #include "ProjectQTInclude.h"
 #include "ProjectCommonData.h"
 #include "UserTradeInfo.h"
-
+#include "TcpComProtocol.h"
 #include "Log4cppLogger.h"
 
 

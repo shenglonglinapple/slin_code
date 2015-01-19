@@ -293,7 +293,7 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 
 void CNewOrderWindow::slotCalendarWidgetClicked( const QDate & date )
 {
-	m_pDateTimeEdit->setDate(date)
+	m_pDateTimeEdit->setDate(date);
 }
 
 
