@@ -186,7 +186,7 @@ int CServerDbOper::_CreateDBTable_TABLE_USER_INFO()
 
 }
 
-qint32 CServerDbOper::getUserInfo(
+qint32 CServerDbOper::selectUserInfo(
 	quint16 nListenPort,const QString& strUSERNAME, 
 	const QString& strPASSWORD, CUserInfo** ppData)
 {

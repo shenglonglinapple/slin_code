@@ -507,18 +507,6 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_ItemModelUserTrade.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_LoginSettingWindow.cpp"
 					>
 					<FileConfiguration
@@ -544,6 +532,30 @@
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_MyQtThread.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_NewOrderConfirmWindow.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Debug\moc_NewOrderWindow.cpp"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
@@ -729,18 +741,6 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Release\moc_ItemModelUserTrade.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\GeneratedFiles\Release\moc_LoginSettingWindow.cpp"
 					>
 					<FileConfiguration
@@ -766,6 +766,30 @@
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_MyQtThread.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_NewOrderConfirmWindow.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\GeneratedFiles\Release\moc_NewOrderWindow.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -847,22 +871,6 @@
 			</File>
 			<File
 				RelativePath=".\src\BaseException.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\CfgFileUtil.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\CfgFileUtil.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ConfigInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ConfigInfo.h"
 				>
 			</File>
 			<File
@@ -1093,8 +1101,32 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="SynYahoo"
+			Name="ClientData"
 			>
+			<File
+				RelativePath=".\src\ClientDataManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ClientDataManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ClientDBManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ClientDBManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ClientLoginParam.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ClientLoginParam.h"
+				>
+			</File>
 			<File
 				RelativePath=".\src\StockDataActor.cpp"
 				>
@@ -1126,47 +1158,19 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\src\StockMinTimeMaxTime.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StockMinTimeMaxTime.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="ClientData"
-			>
-			<File
-				RelativePath=".\src\ClientDataManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ClientDataManager.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ClientDBManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ClientDBManager.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ClientLoginParam.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ClientLoginParam.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\StockDataManager.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\StockDataManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockMinTimeMaxTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StockMinTimeMaxTime.h"
 				>
 			</File>
 			<File
@@ -1482,14 +1486,6 @@
 					Name="UI_StockMinTimeMaxTime"
 					>
 					<File
-						RelativePath=".\src\DataStockMinTimeMaxTime.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\DataStockMinTimeMaxTime.h"
-						>
-					</File>
-					<File
 						RelativePath=".\src\StockMinTimeMaxTimeTableView.cpp"
 						>
 					</File>
@@ -1523,14 +1519,6 @@
 				<Filter
 					Name="UI_StockHistoryData"
 					>
-					<File
-						RelativePath=".\src\DataStockHistoryData.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\DataStockHistoryData.h"
-						>
-					</File>
 					<File
 						RelativePath=".\src\StockHistoryDataTableView.cpp"
 						>
@@ -1566,60 +1554,6 @@
 					Name="UI_UserTrade"
 					>
 					<File
-						RelativePath=".\src\DataUserTrade.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\DataUserTrade.h"
-						>
-					</File>
-					<File
-						RelativePath=".\src\ItemModelUserTrade.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\ItemModelUserTrade.h"
-						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCustomBuildTool"
-								Description="Moc&apos;ing ItemModelUserTrade.h..."
-								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
-								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCustomBuildTool"
-								Description="Moc&apos;ing ItemModelUserTrade.h..."
-								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
-								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-							/>
-						</FileConfiguration>
-					</File>
-					<File
-						RelativePath=".\src\ItemUserTrade.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\ItemUserTrade.h"
-						>
-					</File>
-					<File
-						RelativePath=".\src\ItemUserTradeHelper.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\src\ItemUserTradeHelper.h"
-						>
-					</File>
-					<File
 						RelativePath=".\src\UserTradeTableView.cpp"
 						>
 					</File>
@@ -1650,6 +1584,70 @@
 						</FileConfiguration>
 					</File>
 				</Filter>
+				<Filter
+					Name="UI_NewOrder"
+					>
+					<File
+						RelativePath=".\src\NewOrderConfirmWindow.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\src\NewOrderConfirmWindow.h"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing NewOrderConfirmWindow.h..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing NewOrderConfirmWindow.h..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath=".\src\NewOrderWindow.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\src\NewOrderWindow.h"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing NewOrderWindow.h..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing NewOrderWindow.h..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -1669,6 +1667,26 @@
 			</File>
 			<File
 				RelativePath=".\src\SqliteDbOperBuildSQL.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="cfg"
+			>
+			<File
+				RelativePath=".\src\CfgFileUtil.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\CfgFileUtil.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigInfo.h"
 				>
 			</File>
 		</Filter>

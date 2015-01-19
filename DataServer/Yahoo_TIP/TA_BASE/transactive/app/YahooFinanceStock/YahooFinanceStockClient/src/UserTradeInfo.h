@@ -14,8 +14,8 @@ public:
 	virtual ~CUserTradeInfo();
 public:
 	CUserTradeInfo& operator=(const CUserTradeInfo& objectCopy);
-private:
-	void _Init();
+public:
+	void clear();
 public:
 	void setValue(const QString& strUseID, const CReqBuy* pReq );
 

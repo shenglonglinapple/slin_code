@@ -3,6 +3,8 @@
 #include <QtCore/QFile>
 
 #include <sstream>
+#include "ProjectCommonData.h"
+
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 #include "SqliteDbOperBuildSQL.h"
@@ -10,9 +12,6 @@
 #include "UserTradeInfo.h"
 #include "HistoryData.h"
 #include "StockMinTimeMaxTime.h"
-
-static const char*  str_QtDbType_QSQLITE = "QSQLITE";
-static const char*  str_QtDbType_QMYSQL = "QMYSQL";
 
 //5001.db
 CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
@@ -31,8 +30,10 @@ CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
 	{
 		_CreateDBTable_TABLE_USER_INFO();
 		_CreateDBTable_TABLE_USER_TRADE_INFO();
+		truncateTableUserTradeInfo();
 		_CreateDBTable_TABLE_BAR_DATA_1DAY();
 		_CreateDBTable_TABLE_MINTIME_MAXTIME();
+		truncateSymbolMinMaxTime();
 	}
 }
 
@@ -199,7 +200,7 @@ qint32 CClientDbOper::_CreateDBTable_TABLE_USER_INFO()
 	return nFunRes;
 }
 
-qint32 CClientDbOper::getUserInfo(
+qint32 CClientDbOper::selectUserInfo(
 	quint16 nListenPort,const QString& strUSERNAME, 
 	const QString& strPASSWORD, CUserInfo** ppData)
 {
@@ -451,7 +452,68 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 }
 
 
-void CClientDbOper::setDataHistoryDataLst( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
+qint32 CClientDbOper::selectDataHistory_ASC_PRICE( const QString& strSymbolUse, CHistoryData** ppData )
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+	CHistoryData* pSelectData = NULL;
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY_PRICE(strSymbolUse);
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	if ( pSqlQuery->next() )
+	{
+		pSelectData = new CHistoryData();
+		nColumnIndex = 0;
+		pSelectData->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
+		//pSelectData->m_strSymbolUse = pSqlQuery->value(str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE).toString();
+		nColumnIndex++;
+		pSelectData->m_strDate = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strOpen = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strHigh = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strLow = pSqlQuery->value(nColumnIndex).toInt();
+		nColumnIndex++;
+		pSelectData->m_strClose = pSqlQuery->value(nColumnIndex).toInt();
+		nColumnIndex++;
+		pSelectData->m_strVolume = pSqlQuery->value(nColumnIndex).toInt();
+		nColumnIndex++;
+		pSelectData->m_strAdjClose = pSqlQuery->value(nColumnIndex).toInt();
+
+
+		(*ppData) = pSelectData;
+		pSelectData = NULL;
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
+	return nFunRes;
+}
+
+void CClientDbOper::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
 	_StartTransaction();
 	truncateTableHistoryData();

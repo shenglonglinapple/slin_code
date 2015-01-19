@@ -15,6 +15,7 @@ public:
 	QString buildSQL_Select_DESC_TABLE_BAR_DATA_1DAY();
 	QString buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY();
 	QString buildSQL_Select_DataCount_TABLE_BAR_DATA_1DAY();
+	QString buildSQL_Truncate_TABLE_BAR_DATA_1DAY();
 public:
 	QString buildSQL_CreateTable_TABLE_USER_INFO();
 	QString buildSQL_BatchInsert_TABLE_USER_INFO();
@@ -24,7 +25,7 @@ public:
 public:
 	QString buildSQL_CreateTable_TABLE_USER_TRADE_INFO();
 	QString buildSQL_BatchInsert_TABLE_USER_TRADE_INFO();
-
+	QString buildSQL_Truncate_TABLE_USER_TRADE_INFO();
 
 };
 

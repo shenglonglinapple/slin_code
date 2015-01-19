@@ -25,7 +25,7 @@ public:
 	CServerDbOper(const QString& strSqliteDbFileName);
 	virtual ~CServerDbOper();
 public:
-	qint32 getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
+	qint32 selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 insertUserInfo(quint16 nListenPort, const CUserInfo* pData);
 public:

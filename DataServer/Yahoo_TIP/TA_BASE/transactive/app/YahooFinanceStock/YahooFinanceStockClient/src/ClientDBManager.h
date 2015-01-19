@@ -16,6 +16,7 @@ class CClientDbOper;
 class CHistoryData;
 class QSqlDatabase;
 class CStockMinTimeMaxTime;
+class CUserTradeInfo;
 
 class CClientDBManager
 {
@@ -30,14 +31,16 @@ private:
 	CClientDBManager(void);
 	~CClientDBManager(void);
 public:
-	void setDataHistoryDataLst(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
+	void resetDataHistory(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
+public:
 	qint32 insertSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
 	qint32 updateSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
 	qint32 selectSymbolMinMaxTime(const QString& strSymbolUse, CStockMinTimeMaxTime** ppData);
+public:
+	qint32 insertUserTradeInfo(const CUserTradeInfo* pData);
 
 public:	
 	QSqlDatabase* getDB();
-
 private:
 	CUserInfo* m_pUserInfo;
 	CClientDbOper* m_pClientDbOper;

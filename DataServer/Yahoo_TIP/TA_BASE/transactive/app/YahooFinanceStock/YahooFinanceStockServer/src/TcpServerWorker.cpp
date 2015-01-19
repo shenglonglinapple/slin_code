@@ -96,7 +96,7 @@ qint32 CTcpServerWorker::getUserInfo(quint16 nListenPort,const QString & strUSER
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->getUserInfo(nListenPort, strUSERNAME, strPASSWORD, ppData);
+	nFunRes = m_pServerDbOper->selectUserInfo(nListenPort, strUSERNAME, strPASSWORD, ppData);
 	return nFunRes;
 }
 qint32 CTcpServerWorker::updateUserInfo(quint16 nListenPort, const CUserInfo* pData)

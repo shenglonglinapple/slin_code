@@ -12,6 +12,9 @@
 
 class CQtTimeHelper;
 class CClientLoginParam;
+class CHistoryData;
+class CStockMinTimeMaxTime;
+class CUserTradeInfo;
 
 class CClientDataManager
 {
@@ -29,6 +32,11 @@ public:
 	void connectedToServer(qint32 nHandle, QString strServerIP, quint16 nServerPort, QString strUserName, QString strPassWord);
 	void loginedToServer(qint32 nHandle, QString strUserName, QString strPassWord);
 	void downLoadStockFromServer(qint32 nHandle);
+public:
+	void resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
+	void resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData );
+	void resetDataUserTradeInfo(const CUserTradeInfo* pData);
+
 public:
 	void send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse);
 	void send_req_ReqDownLoadStock(qint32 nHandle);

@@ -1,10 +1,9 @@
 #include "UserTradeTableView.h"
 
+#include <QtSql/QSqlTableModel>
 #include "ProjectQTInclude.h"
-
-#include "DataUserTrade.h"
-#include "ItemModelUserTrade.h"
-#include "ItemUserTrade.h"
+#include "ProjectCommonData.h"
+#include "ClientDBManager.h"
 #include "SignalSlotManager.h"
 
 #include "Log4cppLogger.h"
@@ -28,8 +27,11 @@ CUserTradeTableView::CUserTradeTableView( QWidget* parent)
 	this->resizeColumnsToContents();
 
 	m_pItemModel = NULL;
-	m_pItemModel = new CItemModelUserTrade(this);
-	m_pItemModel->setRootItem(CDataUserTrade::getInstance().getRootItem());
+	m_pItemModel = new QSqlTableModel(this, *(CClientDBManager::getInstance().getDB()));
+	m_pItemModel->setTable(str_TABLE_USER_TRADE_INFO);
+	m_pItemModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+	m_pItemModel->select();
+
 	this->setModel(m_pItemModel);
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
@@ -64,10 +66,12 @@ void CUserTradeTableView::_CreateConnect()
 void CUserTradeTableView::slot_DataChange_UserTrade()
 {
 	MYLOG4CPP_DEBUG<<"CUserTradeTableView process slot_DataChange_UserTrade";
-	m_pItemModel->setRootItem(CDataUserTrade::getInstance().getRootItem());
+	if (NULL != m_pItemModel)
+	{
+		m_pItemModel->select();
+	}
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
 	this->resizeColumnsToContents();
-
 }
 

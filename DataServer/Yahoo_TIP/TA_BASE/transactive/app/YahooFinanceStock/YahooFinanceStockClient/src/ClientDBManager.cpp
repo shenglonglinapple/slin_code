@@ -6,8 +6,10 @@
 #include "ProjectCommonDef.h"
 
 #include "QtTimeHelper.h"
+#include "WorkTime.h"
 #include "ConfigInfo.h"
 #include "UserInfo.h"
+#include "UserTradeInfo.h"
 #include "ClientDbOper.h"
 
 #include "Log4cppLogger.h"
@@ -67,12 +69,18 @@ CClientDBManager::~CClientDBManager(void)
 
 
 
-void CClientDBManager::setDataHistoryDataLst( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
+void CClientDBManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
+	CWorkTimeNoLock workTime(0);
+	workTime.workBegin();
+	MYLOG4CPP_DEBUG<<"CClientDBManager::resetDataHistory() begin";
+
 	if (NULL != m_pClientDbOper)
 	{
-		m_pClientDbOper->setDataHistoryDataLst(strSymbolUse, lstData);
+		m_pClientDbOper->resetDataHistory(strSymbolUse, lstData);
 	}
+	workTime.workEnd();
+	MYLOG4CPP_DEBUG<<"CClientDBManager::resetDataHistory() end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
 }
 
 QSqlDatabase* CClientDBManager::getDB()
@@ -115,4 +123,12 @@ qint32 CClientDBManager::selectSymbolMinMaxTime( const QString& strSymbolUse, CS
 	return nFunRes;
 }
 
-
+qint32 CClientDBManager::insertUserTradeInfo(const CUserTradeInfo* pData)
+{
+	qint32 nFunRes = 0;
+	if (NULL != m_pClientDbOper)
+	{
+		nFunRes = m_pClientDbOper->insertUserTradeInfo(pData);
+	}
+	return nFunRes;
+}

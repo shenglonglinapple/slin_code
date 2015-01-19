@@ -1,58 +1,9 @@
 #include "SqliteDbOperBuildSQL.h"
 #include <sstream>
+#include "ProjectCommonData.h"
 #include "Log4cppLogger.h"
 
-static const char*  str_QtDbType_QSQLITE = "QSQLITE";
-static const char*  str_QtDbType_QMYSQL = "QMYSQL";
 
-//truncate a table in SQLite
-//DELETE FROM someTable
-
-/////
-static const char*  str_TABLE_BAR_DATA_1DAY = "TABLE_BAR_DATA_1DAY";
-//
-static const char*  str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE = "SymbolUse";
-static const char*  str_TABLE_BAR_DATA_Column_DATE = "Date";
-static const char*  str_TABLE_BAR_DATA_Column_OPEN = "Open";
-static const char*  str_TABLE_BAR_DATA_Column_HIGH = "High";
-static const char*  str_TABLE_BAR_DATA_Column_LOW = "Low";
-static const char*  str_TABLE_BAR_DATA_Column_CLOSE = "Close";
-static const char*  str_TABLE_BAR_DATA_Column_VOLUME = "Volume";
-static const char*  str_TABLE_BAR_DATA_Column_ADJCLOSE = "AdjClose";
-
-/////
-static const char*  str_TABLE_MINTIME_MAXTIME = "TABLE_MINTIME_MAXTIME";
-//
-static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE = "SymbolUse";
-static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME = "MinTime";
-static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME = "MaxTime";
-static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT = "Count";
-
-
-/////
-static const char*  str_TABLE_USER_INFO = "TABLE_USER_INFO";
-//
-static const char*  str_TABLE_USER_INFO_COLUMN_USEID = "COLUMN_USEID";
-static const char*  str_TABLE_USER_INFO_COLUMN_USERNAME = "COLUMN_USERNAME";
-static const char*  str_TABLE_USER_INFO_COLUMN_PASSWORD = "COLUMN_PASSWORD";
-static const char*  str_TABLE_USER_INFO_COLUMN_LASTLOGINTIME = "COLUMN_LASTLOGINTIME";
-static const char*  str_TABLE_USER_INFO_COLUMN_LOGINCOUNT = "COLUMN_LOGINCOUNT";
-static const char*  str_TABLE_USER_INFO_COLUMN_STATE = "COLUMN_STATE";
-/////
-static const char*  str_TABLE_USER_TRADE_INFO = "TABLE_USER_TRADE_INFO";
-//
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_USEID = "UseID";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_UUID = "TradeUUID";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TIME = "TradeTime";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TYPE = "TradeType";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_SYMBOLUSE = "SymbolUse";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_PRICE = "TradePrice";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_VOLUME = "TradeVolume";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT = "TradeAmount";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES = "TradeFees";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE = "TotalTradeFee";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT = "TotalTradeAmount";
-/////
 
 CSqliteDbOperBuildSQL::CSqliteDbOperBuildSQL()
 {
@@ -297,6 +248,33 @@ QString  CSqliteDbOperBuildSQL::buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY()
 		<<" "<<str_TABLE_BAR_DATA_1DAY
 		<<" "<<"ORDER BY"
 		<<" "<<str_TABLE_BAR_DATA_Column_DATE
+		<<" "<<"ASC LIMIT 1";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+
+QString  CSqliteDbOperBuildSQL::buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY_PRICE(const QString& strSymbolUse)
+{	
+	QString  strSQL;	
+	std::stringstream byteSQL;
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_DATE<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_OPEN<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_HIGH<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_LOW<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_CLOSE<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_VOLUME<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_ADJCLOSE
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_BAR_DATA_1DAY
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\""
+		<<" "<<"ORDER BY"
+		<<" "<<str_TABLE_BAR_DATA_Column_CLOSE
 		<<" "<<"ASC LIMIT 1";
 
 	strSQL = byteSQL.str().c_str();

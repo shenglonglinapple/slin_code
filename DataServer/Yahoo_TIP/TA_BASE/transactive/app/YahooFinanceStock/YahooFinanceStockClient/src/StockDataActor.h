@@ -5,7 +5,6 @@
 #include <QtCore/QString>
 #include "TcpComProtocol.h"
 
-class CStockDataDBActor;
 
 class CStockDataActor : public QObject
 {

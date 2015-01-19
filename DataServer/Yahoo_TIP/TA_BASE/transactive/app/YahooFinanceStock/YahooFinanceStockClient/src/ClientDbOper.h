@@ -27,7 +27,8 @@ public:
 	CClientDbOper(const QString& strSqliteDbFileName);
 	virtual ~CClientDbOper();
 public:
-	void setDataHistoryDataLst(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
+	void resetDataHistory(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
+	qint32 selectDataHistory_ASC_PRICE(const QString& strSymbolUse, CHistoryData** ppData);
 	void truncateTableHistoryData();
 public:
 	qint32 insertSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
@@ -36,7 +37,7 @@ public:
 	void truncateSymbolMinMaxTime();
 
 public:
-	qint32 getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
+	qint32 selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 insertUserInfo(quint16 nListenPort, const CUserInfo* pData);
 public:

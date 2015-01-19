@@ -12,7 +12,7 @@ static const int DEFVALUE_INT_Window_Height_StockMinTimeMaxTimeTableView = 300;
 static const int DEFVALUE_INT_Window_Width_StockHistoryDataTableView = 400;
 static const int DEFVALUE_INT_Window_Height_StockHistoryDataTableView = 300;
 
-static const int DEFVALUE_INT_Window_Width_UserTradeTableView = 400;
+static const int DEFVALUE_INT_Window_Width_UserTradeTableView = 800;
 static const int DEFVALUE_INT_Window_Height_UserTradeTableView = 200;
 
 CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)

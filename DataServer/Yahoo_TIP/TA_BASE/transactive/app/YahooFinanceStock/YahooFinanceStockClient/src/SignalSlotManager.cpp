@@ -2,11 +2,8 @@
 
 #include "ClientDataManager.h"
 #include "ClientMainWindow.h"
-#include "DataStockMinTimeMaxTime.h"
 #include "StockMinTimeMaxTimeTableView.h"
-#include "DataStockHistoryData.h"
 #include "StockHistoryDataTableView.h"
-#include "DataUserTrade.h"
 #include "UserTradeTableView.h"
 
 #include "Log4cppLogger.h"
@@ -81,7 +78,7 @@ void CSignalSlotManager::emit_ShownMessage(QString strMessage)
 }
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::set_Signal_DataChange_StockMinTimeMaxTime( CDataStockMinTimeMaxTime* pRefSignal )
+void CSignalSlotManager::set_Signal_DataChange_StockMinTimeMaxTime( CClientDataManager* pRefSignal )
 {
 	m_pRefSignal_DataChange_StockMinTimeMaxTime = pRefSignal;
 }
@@ -116,7 +113,7 @@ void CSignalSlotManager::emit_DataChange_StockMinTimeMaxTime()
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::set_Signal_DataChange_StockHistoryData( CDataStockHistoryData* pRefSignal )
+void CSignalSlotManager::set_Signal_DataChange_StockHistoryData( CClientDataManager* pRefSignal )
 {
 	m_pRefSignal_DataChange_StockHistoryData = pRefSignal;
 }
@@ -152,7 +149,7 @@ void CSignalSlotManager::emit_DataChange_StockHistoryData()
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-void CSignalSlotManager::set_Signal_DataChange_UserTrade( CDataUserTrade* pRefSignal )
+void CSignalSlotManager::set_Signal_DataChange_UserTrade( CClientDataManager* pRefSignal )
 {
 	m_pRefSignal_DataChange_UserTrade = pRefSignal;
 }

@@ -7,7 +7,7 @@
 
 #include "Log4cppLogger.h"
 
-static int DEFVALUE_INT_Window_Width = 800;
+static int DEFVALUE_INT_Window_Width = 1000;
 static int DEFVALUE_INT_Window_Height = 700;
 
 static const char* DEFVALUE_String_CSmartTraderClientMainWindow_Title = "SmartTrader";

@@ -3,7 +3,7 @@
 
 #include <QtGui/QTableView>
 
-class CItemModelUserTrade;
+class QSqlTableModel;
 
 class CUserTradeTableView : public QTableView
 { 
@@ -18,7 +18,7 @@ private:
 	void _CreateAction();
 	void _CreateConnect();
 private:
-	CItemModelUserTrade* m_pItemModel;
+	QSqlTableModel* m_pItemModel;
 
 }; 
 

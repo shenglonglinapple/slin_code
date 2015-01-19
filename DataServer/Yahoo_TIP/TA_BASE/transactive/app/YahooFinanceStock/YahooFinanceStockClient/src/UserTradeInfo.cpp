@@ -6,7 +6,7 @@
 
 CUserTradeInfo::CUserTradeInfo()
 {
-	_Init();
+	clear();
 }
 
 CUserTradeInfo::~CUserTradeInfo()
@@ -32,7 +32,7 @@ CUserTradeInfo& CUserTradeInfo::operator=( const CUserTradeInfo& objectCopy )
 }
 
 
-void CUserTradeInfo::_Init()
+void CUserTradeInfo::clear()
 {
 	m_strUseID.clear();
 	m_strTradeTime.clear();
@@ -51,7 +51,7 @@ void CUserTradeInfo::_Init()
 
 void CUserTradeInfo::setValue(const QString& strUseID, const CReqBuy* pReq )
 {
-	_Init();
+	clear();
 	m_strUseID = strUseID;
 
 	this->m_strTradeUUID = CTcpComProtocol::getUUID();
@@ -70,7 +70,7 @@ void CUserTradeInfo::setValue(const QString& strUseID, const CReqBuy* pReq )
 
 void CUserTradeInfo::setValue( const CAckBuy* pAck )
 {
-	_Init();
+	clear();
 	m_strUseID = pAck->m_strUseID;
 	m_strTradeUUID = pAck->m_strTradeUUID;
 	m_strTradeTime = pAck->m_strTradeTime;

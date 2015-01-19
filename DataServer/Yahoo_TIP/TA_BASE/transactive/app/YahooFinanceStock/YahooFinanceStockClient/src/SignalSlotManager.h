@@ -9,11 +9,8 @@
 
 class CClientDataManager;
 class CClientMainWindow;
-class CDataStockMinTimeMaxTime;
 class CStockMinTimeMaxTimeTableView;
-class CDataStockHistoryData;
 class CStockHistoryDataTableView;
-class CDataUserTrade;
 class CUserTradeTableView;
 
 class CSignalSlotManager : public QObject
@@ -46,10 +43,10 @@ public:
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 private:
-	CDataStockMinTimeMaxTime* m_pRefSignal_DataChange_StockMinTimeMaxTime;
+	CClientDataManager* m_pRefSignal_DataChange_StockMinTimeMaxTime;
 	CStockMinTimeMaxTimeTableView* m_pRefSlot_DataChange_StockMinTimeMaxTime;
 public:
-	void set_Signal_DataChange_StockMinTimeMaxTime( CDataStockMinTimeMaxTime* pRefSignal);
+	void set_Signal_DataChange_StockMinTimeMaxTime( CClientDataManager* pRefSignal);
 	void set_Slot_DataChange_StockMinTimeMaxTime(CStockMinTimeMaxTimeTableView* pRefSlot);
 signals:
 	void signal_DataChange_StockMinTimeMaxTime();
@@ -60,10 +57,10 @@ public:
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 private:
-	CDataStockHistoryData* m_pRefSignal_DataChange_StockHistoryData;
+	CClientDataManager* m_pRefSignal_DataChange_StockHistoryData;
 	CStockHistoryDataTableView* m_pRefSlot_DataChange_StockHistoryData;
 public:
-	void set_Signal_DataChange_StockHistoryData( CDataStockHistoryData* pRefSignal);
+	void set_Signal_DataChange_StockHistoryData( CClientDataManager* pRefSignal);
 	void set_Slot_DataChange_StockHistoryData(CStockHistoryDataTableView* pRefSlot);
 signals:
 	void signal_DataChange_StockHistoryData();
@@ -74,10 +71,10 @@ public:
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 private:
-	CDataUserTrade* m_pRefSignal_DataChange_UserTrade;
+	CClientDataManager* m_pRefSignal_DataChange_UserTrade;
 	CUserTradeTableView* m_pRefSlot_DataChange_UserTrade;
 public:
-	void set_Signal_DataChange_UserTrade( CDataUserTrade* pRefSignal);
+	void set_Signal_DataChange_UserTrade( CClientDataManager* pRefSignal);
 	void set_Slot_DataChange_UserTrade(CUserTradeTableView* pRefSlot);
 signals:
 	void signal_DataChange_UserTrade();

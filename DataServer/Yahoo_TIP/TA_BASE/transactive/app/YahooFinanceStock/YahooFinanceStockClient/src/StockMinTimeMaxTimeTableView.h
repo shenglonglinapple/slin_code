@@ -4,6 +4,7 @@
 #include <QtGui/QTableView>
 
 class QSqlTableModel;
+class CNewOrderWindow;
 
 class CStockMinTimeMaxTimeTableView : public QTableView
 { 
@@ -14,18 +15,24 @@ public:
 signals:
 private slots:
 	void slotActionReqHistoryData();
+	void slotActionNewOrder();
+
 public slots:
 	void slot_DataChange_StockMinTimeMaxTime();
 protected:
 	//overwite QWight fun
 	void contextMenuEvent(QContextMenuEvent* pEvent);
 private:
+	void _SetupUI();//_SetupUi
 	void _CreateAction();
 	void _CreateConnect();
 private:
 	QSqlTableModel* m_pItemModel;
 private:
 	QAction* m_pActionReqHistoryData;
+	QAction* m_pActionNewOrder;
+private:
+	CNewOrderWindow* m_pNewOrderWindow;
 
 }; 
 

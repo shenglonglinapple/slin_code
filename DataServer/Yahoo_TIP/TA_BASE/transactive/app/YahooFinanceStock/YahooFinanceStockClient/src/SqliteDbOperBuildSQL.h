@@ -17,6 +17,7 @@ public:
 	QString buildSQL_Select_DataCount_TABLE_BAR_DATA_1DAY();
 	QString buildSQL_Truncate_TABLE_BAR_DATA_1DAY();
 	QString getTableName_TABLE_BAR_DATA_1DAY();
+	QString buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY_PRICE(const QString& strSymbolUse);
 public:
 	QString buildSQL_CreateTable_TABLE_MINTIME_MAXTIME();
 	QString buildSQL_BatchInsert_TABLE_MINTIME_MAXTIME();
@@ -34,7 +35,7 @@ public:
 	QString buildSQL_CreateTable_TABLE_USER_TRADE_INFO();
 	QString buildSQL_BatchInsert_TABLE_USER_TRADE_INFO();
 	QString buildSQL_Truncate_TABLE_USER_TRADE_INFO();
-
+	
 };
 
 

@@ -1,8 +1,7 @@
 #include "StockHistoryDataTableView.h"
 
 #include <QtSql/QSqlTableModel>
-
-#include "DataStockHistoryData.h"
+#include "ProjectCommonData.h"
 #include "SignalSlotManager.h"
 #include "ClientDBManager.h"
 #include "Log4cppLogger.h"
@@ -10,7 +9,6 @@
 static int DEFVALUE_INT_Window_Width = 600;
 static int DEFVALUE_INT_Window_Height = 500;
 
-static const char*  str_TABLE_BAR_DATA_1DAY = "TABLE_BAR_DATA_1DAY";
 
 
 CStockHistoryDataTableView::CStockHistoryDataTableView( QWidget* parent)

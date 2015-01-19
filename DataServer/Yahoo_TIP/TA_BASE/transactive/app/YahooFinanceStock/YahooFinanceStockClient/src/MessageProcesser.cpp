@@ -26,11 +26,8 @@
 #include "ClientDataManager.h"
 #include "StockDataManager.h"
 #include "ClientDBManager.h"
-#include "DataStockMinTimeMaxTime.h"
 #include "StockMinTimeMaxTime.h"
 #include "HistoryData.h"
-#include "DataStockHistoryData.h"
-#include "DataUserTrade.h"
 #include "WorkTime.h"
 #include "UserTradeInfo.h"
 
@@ -128,7 +125,7 @@ void CMessageProcesser::processAck( const CAckStockMinTimeMaxTime* pAck )
 	pData->m_strMaxTime = pAck->m_strMaxTime;
 	pData->m_nCount = pAck->m_nCount;
 
-	CDataStockMinTimeMaxTime::getInstance().appendOrUpdate(pData);
+	CClientDataManager::getInstance().resetDataSymbolMinMaxTime(pData);
 	if (NULL != pData)
 	{
 		delete pData;
@@ -140,8 +137,8 @@ void CMessageProcesser::processAck( const CAckStockMinTimeMaxTime* pAck )
 
 
 void CMessageProcesser::processAck( const CAckStockHistoryData* pAck )
-{
-	CDataStockHistoryData::getInstance().setData(pAck->m_strSymbolUse, pAck->m_LstHistoryData);
+{	
+	CClientDataManager::getInstance().resetDataHistory(pAck->m_strSymbolUse, pAck->m_LstHistoryData);
 	return;
 }
 
@@ -155,7 +152,7 @@ void CMessageProcesser::processAck( const CAckBuy* pAck )
 	CUserTradeInfo* pUserTradeInfo = NULL;
 	pUserTradeInfo = new CUserTradeInfo();
 	pUserTradeInfo->setValue(pAck);
-	CDataUserTrade::getInstance().appendOrUpdate(pUserTradeInfo);
+	CClientDataManager::getInstance().resetDataUserTradeInfo(pUserTradeInfo);
 	pUserTradeInfo = NULL;
 }
 

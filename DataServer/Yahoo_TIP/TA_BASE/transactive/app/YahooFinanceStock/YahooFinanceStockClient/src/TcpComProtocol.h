@@ -28,6 +28,7 @@ public:
 		DataType_HistoryData  = 0x00000005,
 		DataType_CreateUser  = 0x00000006,
 		DataType_Buy  = 0x00000007,
+		DataType_Sell  = 0x00000008,
 		DataType_Unknown  = 0x0FFFFFFF,
 	};
 

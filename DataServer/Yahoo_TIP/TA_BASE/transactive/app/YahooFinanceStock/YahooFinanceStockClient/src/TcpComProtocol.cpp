@@ -74,6 +74,9 @@ QString CTcpComProtocol::getStringValue( EDataType nValue )
 	case DataType_Buy:
 		strValue = "DataType_Buy";
 		break;
+	case DataType_Sell:
+		strValue = "DataType_Sell";
+		break;
 	case DataType_Unknown:
 		strValue = "DataType_Unknown";
 		break;

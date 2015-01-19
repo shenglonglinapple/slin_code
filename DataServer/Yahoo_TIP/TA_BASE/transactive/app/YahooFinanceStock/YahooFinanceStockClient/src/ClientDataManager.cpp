@@ -8,9 +8,8 @@
 #include "ClientDBManager.h"
 #include "ClientWorkerManager.h"
 #include "StockDataManager.h"
-#include "DataStockMinTimeMaxTime.h"
-#include "DataStockHistoryData.h"
-#include "DataUserTrade.h"
+#include "StockMinTimeMaxTime.h"
+#include "UserTradeInfo.h"
 
 #include "TcpComProtocol.h"
 #include "ReqLogin.h"
@@ -66,22 +65,21 @@ CClientDataManager::CClientDataManager(void)
 	CConfigInfo::getInstance();
 	CClientWorkerManager::getInstance();
 	CStockDataManager::getInstance();
-	CDataStockMinTimeMaxTime::getInstance();
-	CDataStockHistoryData::getInstance();
-	CDataUserTrade::getInstance();
 	CClientDBManager::getInstance();
 
 	CSignalSlotManager::getInstance().set_Signal_ShownMessage(this);
+	CSignalSlotManager::getInstance().set_Signal_DataChange_StockHistoryData(this);
+	CSignalSlotManager::getInstance().set_Signal_DataChange_StockMinTimeMaxTime(this);
+	CSignalSlotManager::getInstance().set_Signal_DataChange_UserTrade(this);
+
+
 }
 
 CClientDataManager::~CClientDataManager(void)
 {
-	CDataStockHistoryData::removeInstance();
-	CDataStockMinTimeMaxTime::removeInstance();
 	CStockDataManager::removeInstance();
 	CClientWorkerManager::removeInstance();
 	CConfigInfo::removeInstance();
-	CDataUserTrade::removeInstance();
 	CClientDBManager::removeInstance();
 
 	if (NULL != m_pQtTimeHelper)
@@ -292,4 +290,42 @@ void CClientDataManager::send_req_ReqStockHistoryData(const QString& strSymbolUs
 		pReq = NULL;
 	}
 
+}
+
+
+
+
+void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
+{
+	CClientDBManager::getInstance().resetDataHistory(strSymbolUse, lstData);
+	CSignalSlotManager::getInstance().emit_DataChange_StockHistoryData();
+}
+
+
+void CClientDataManager::resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData )
+{
+	CStockMinTimeMaxTime* pFind = NULL;
+
+	CClientDBManager::getInstance().selectSymbolMinMaxTime(pData->m_strSymbolUse, &pFind);
+
+	if (NULL == pFind)
+	{
+		CClientDBManager::getInstance().insertSymbolMinMaxTime(pData);
+	}
+	else
+	{
+		CClientDBManager::getInstance().updateSymbolMinMaxTime(pData);
+
+		delete pFind;
+		pFind = NULL;
+	}
+
+	CSignalSlotManager::getInstance().emit_DataChange_StockMinTimeMaxTime();
+}
+
+
+void CClientDataManager::resetDataUserTradeInfo(const CUserTradeInfo* pData)
+{
+	CClientDBManager::getInstance().insertUserTradeInfo(pData);
+	CSignalSlotManager::getInstance().emit_DataChange_UserTrade();
 }
