@@ -253,6 +253,30 @@ QString  CSqliteDbOperBuildSQL::buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY()
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
 }
+QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_BAR_DATA_1DAY_PRICE( const QString& strSymbolUse, const QString& strDataTime )
+{
+	QString  strSQL;	
+	std::stringstream byteSQL;
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_DATE<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_OPEN<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_HIGH<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_LOW<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_CLOSE<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_VOLUME<<","
+		<<" "<<str_TABLE_BAR_DATA_Column_ADJCLOSE
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_BAR_DATA_1DAY
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\""
+		<<" "<<"AND"
+		<<" "<<str_TABLE_BAR_DATA_Column_DATE<<"="<<"\""<<strDataTime.toStdString()<<"\"";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
 
 
 QString  CSqliteDbOperBuildSQL::buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY_PRICE(const QString& strSymbolUse)
@@ -753,5 +777,6 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_MINTIME_MAXTIME( const QStr
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
 }
+
 
 

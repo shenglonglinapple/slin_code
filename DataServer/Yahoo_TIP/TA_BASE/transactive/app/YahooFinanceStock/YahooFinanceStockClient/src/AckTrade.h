@@ -1,19 +1,19 @@
-#ifndef __CLASS_ACK_BUY_H__
-#define __CLASS_ACK_BUY_H__
+#ifndef __CLASS_ACK_TRADE_H__
+#define __CLASS_ACK_TRADE_H__
 
 #include <QtCore/QObject>
 #include <Qtcore/QByteArray>
 
 #include "TcpComProtocol.h"
 
-class CReqBuy;
+class CReqTrade;
 class CUserTradeInfo;
 
-class CAckBuy
+class CAckTrade
 {
 public:
-    CAckBuy(void);
-	~CAckBuy(void);
+    CAckTrade(void);
+	~CAckTrade(void);
 private:
 	void _Clear();
 public:
@@ -22,7 +22,7 @@ public:
 	QByteArray* getMessage();
 	void logInfo( const QString& fileName, qint32 lineNumber );
 public:
-	void setValue(const CReqBuy* pReq, const CUserTradeInfo* pUserTradeInfo);
+	void setValue(const CReqTrade* pReq, const CUserTradeInfo* pUserTradeInfo);
 public:
 	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::EMsgType
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
@@ -31,6 +31,8 @@ public:
 
 	QString m_strUserName;
 	QString m_strPassword;
+
+	CTcpComProtocol::ETradeType m_nTradeType;
 
 	QString m_strUseID;
 	QString m_strTradeUUID;//37
@@ -46,4 +48,4 @@ public:
 
 };
 
-#endif//__CLASS_ACK_BUY_H__
+#endif//__CLASS_ACK_TRADE_H__

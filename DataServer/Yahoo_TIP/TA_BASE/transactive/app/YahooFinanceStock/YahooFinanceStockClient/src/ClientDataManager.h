@@ -43,6 +43,8 @@ public:
 	void send_req_CReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
 	void send_req_ReqStockMinTimeMaxTime(qint32 nHandle, const QString& strSymbolUse);
 	void send_req_ReqStockHistoryData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo);
+	void send_req_NewOrder(const CUserTradeInfo* pData);
+
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;

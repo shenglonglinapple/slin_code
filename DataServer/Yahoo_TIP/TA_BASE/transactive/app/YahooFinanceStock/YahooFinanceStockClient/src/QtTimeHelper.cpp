@@ -84,6 +84,18 @@ QString CQtTimeHelper::getStringValue( const QDateTime& nDataTime )
 	return strTime_local;
 }
 
+QString CQtTimeHelper::getStringValue( const QDate& nData )
+{
+	QString   strTime_local;
+	QDate time_local = nData;
+
+	strTime_local = time_local.toString(DEFVALUE_String_Data_Format);
+	strTime_local += " ";
+	strTime_local += DEF_VALUE_STRING_UTC_START_TIME;
+	return strTime_local;
+
+}
+
 
 QDateTime CQtTimeHelper::getDateTimeValue( const QString & strTimeValue )
 {

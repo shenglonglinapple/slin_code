@@ -50,6 +50,7 @@ private slots:
 	void slotPushButtonBuyClicked(bool checked);
 	void slotPushButtonSellClicked(bool checked);
 	void slotCalendarWidgetClicked (const QDate & date);
+	void slotDateChanged ( const QDate & date );
 public:
 	void _SetupUi();
 	void _TranslateLanguage();
@@ -64,12 +65,7 @@ private:
 	QString m_pTextEdit_Symbol_Value;
 	QString m_pComboBox_OrderType_Value;
 	int m_pSpinBox_Volume_Value;
-	float m_pSpinBox_Price_Value;
-
-private:
-	//QPushButton* m_pPushButtonBuy;
-	//QPushButton* m_pPushButtonSell;
-
+	double m_pSpinBox_Price_Value;
 private:
 	QGridLayout* m_pGridLayout;
 
@@ -90,7 +86,7 @@ private:
 
 	QLabel* m_pLabel_DateTime;
 	QDateTimeEdit* m_pDateTimeEdit;
-	QCalendarWidget* m_pCalendarWidget;
+	//QCalendarWidget* m_pCalendarWidget;
 public:
 	CNewOrderConfirmWindow* m_pNewOrderConfirmWindow;
 	CUserTradeInfo* m_pUserTradeInfo;

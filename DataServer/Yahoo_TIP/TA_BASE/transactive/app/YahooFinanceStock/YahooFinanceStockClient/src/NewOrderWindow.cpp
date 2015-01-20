@@ -8,10 +8,13 @@
 
 #include "SignalSlotManager.h"
 #include "ClientDataManager.h"
+#include "ClientDBManager.h"
 #include "UserTradeInfo.h"
+#include "HistoryData.h"
 #include "NewOrderConfirmWindow.h"
 #include "TcpComProtocol.h"
 #include "QtTimeHelper.h"
+
 #include "Log4cppLogger.h"
 
 //QT_BEGIN_NAMESPACE
@@ -41,7 +44,7 @@ CNewOrderWindow::CNewOrderWindow(QWidget *parent)
 	m_pNewOrderConfirmWindow = NULL;
 	m_pUserTradeInfo = NULL;
 	m_pDateTimeEdit = NULL;
-	m_pCalendarWidget = NULL;
+	//m_pCalendarWidget = NULL;
 	m_pQtTimeHelper = NULL;
 
 	m_pTextEdit_Symbol_Value.clear();
@@ -87,20 +90,6 @@ void CNewOrderWindow::_InitData()
 
 void CNewOrderWindow::_SetupUi()
 {
-	int nSpacing = 10;
-	int nMargin = 10;
-	int nFromRow = 0;
-	int nFromColumn = 0;
-	int nRowSpan = 0;
-	int nColumnSpan = 0;
-	Qt::Alignment nAlignment;
-
-	QSize qSizeLeftAreaOne(100, 20);
-	QSize qSizeRightAreaOne(200, 20);	
-	QSize qSizeCheckBoxOpenClose(80, 20);
-	QSize qSizeButtonBuy(200, 20);
-	QSize qSizeButtonSell(80, 20);
-
 	m_pNewOrderConfirmWindow = new CNewOrderConfirmWindow(this);
 	m_pNewOrderConfirmWindow->hide();
 
@@ -144,14 +133,14 @@ void CNewOrderWindow::_SetupUi()
 	m_pDateTimeEdit = new QDateTimeEdit(this);
 	m_pDateTimeEdit->setMinimumDate(QDate::currentDate().addDays(-365));
 	m_pDateTimeEdit->setMaximumDate(QDate::currentDate().addDays(365));
-	m_pDateTimeEdit->setDisplayFormat(DEFVALUE_String_DataTime_Format);
-	m_pDateTimeEdit->setDateTime(QDateTime::currentDateTime());
+	m_pDateTimeEdit->setDisplayFormat(DEFVALUE_String_Data_Format);
+	m_pDateTimeEdit->setDate(QDate::currentDate());
 
-	m_pCalendarWidget = new QCalendarWidget(this);
-	m_pCalendarWidget->setGridVisible(true);
-	m_pCalendarWidget->setMinimumDate(QDate::currentDate().addDays(-365));
-	m_pCalendarWidget->setMaximumDate(QDate::currentDate().addDays(365));
-	m_pCalendarWidget->setSelectedDate(QDate::currentDate());
+// 	m_pCalendarWidget = new QCalendarWidget(this);
+// 	m_pCalendarWidget->setGridVisible(true);
+// 	m_pCalendarWidget->setMinimumDate(QDate::currentDate().addDays(-365));
+// 	m_pCalendarWidget->setMaximumDate(QDate::currentDate().addDays(365));
+// 	m_pCalendarWidget->setSelectedDate(QDate::currentDate());
 
 
 	int nRowIndex = 0;
@@ -174,7 +163,7 @@ void CNewOrderWindow::_SetupUi()
 	m_pGridLayout->addWidget(m_pLabel_DateTime, nRowIndex, 0, 1, 1);
 	m_pGridLayout->addWidget(m_pDateTimeEdit, nRowIndex, 1, 1, 2);
 	nRowIndex++;
-	m_pGridLayout->addWidget(m_pCalendarWidget, nRowIndex, 0, 3, 3);
+	//m_pGridLayout->addWidget(m_pCalendarWidget, nRowIndex, 0, 2, 2);
 
 	this->setLayout(m_pGridLayout);
 
@@ -186,14 +175,19 @@ void CNewOrderWindow::_SetupUi()
 
 void CNewOrderWindow::_TranslateLanguage()
 {
-	int nIndex = 0;
-
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_WindowTitle.c_str()));
+
 	m_pLabel_Symbol->setText(DEFVALUE_String_Label_Symbol_Text.c_str());
 	m_pLineEdit_Symbol->setText(m_pTextEdit_Symbol_Value);
-	nIndex = 0;
 
-	m_pComboBox_OrderType->insertItem(nIndex++, DEFVALUE_String_OrderType_MARKET.c_str());
+	if (m_pComboBox_OrderType->count() <= 0)
+	{
+		m_pComboBox_OrderType->insertItem(0, DEFVALUE_String_OrderType_MARKET.c_str());
+	}
+	else
+	{
+		m_pComboBox_OrderType->setItemText(0, DEFVALUE_String_OrderType_MARKET.c_str());
+	}
 
 	m_pLabel_OrderType->setText(DEFVALUE_String_Label_OrderType_Text.c_str());
 
@@ -208,9 +202,6 @@ void CNewOrderWindow::_TranslateLanguage()
 
 	m_pPushButtonBuy->setText("Buy");
 	m_pPushButtonSell->setText("Sell");
-
-
-
 
 }
 
@@ -230,14 +221,14 @@ void CNewOrderWindow::resetData(const QString& strSymbolUse, const QString& strT
 	m_pSpinBox_Volume_Value = 1;
 	//m_pSpinBox_Price_Value;
 
-	m_pDateTimeEdit->setMinimumDateTime(dateTimeFrom);
-	m_pDateTimeEdit->setMaximumDateTime(dateTimeTo);
-	m_pDateTimeEdit->setDisplayFormat(DEFVALUE_String_DataTime_Format);
-	m_pDateTimeEdit->setDateTime(dateTimeTo);//QDateTime::currentDateTime()
+	m_pDateTimeEdit->setMinimumDate(dateTimeFrom.date());
+	m_pDateTimeEdit->setMaximumDate(dateTimeTo.date());
+	m_pDateTimeEdit->setDisplayFormat(DEFVALUE_String_Data_Format);
+	m_pDateTimeEdit->setDate(dateTimeTo.date());//QDateTime::currentDateTime()
 
-	m_pCalendarWidget->setMinimumDate(dateTimeFrom.date());
-	m_pCalendarWidget->setMaximumDate(dateTimeTo.date());
-	m_pCalendarWidget->setSelectedDate(dateTimeTo.date());//QDate::currentDate()
+// 	m_pCalendarWidget->setMinimumDate(dateTimeFrom.date());
+// 	m_pCalendarWidget->setMaximumDate(dateTimeTo.date());
+// 	m_pCalendarWidget->setSelectedDate(dateTimeTo.date());//QDate::currentDate()
 
 	this->_TranslateLanguage();
 }
@@ -247,15 +238,15 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 {
 	int nCurrentIndex = 0;
 	QString strOrderType;
-	QDateTime nTradeDateTime;
+	QDate nTradeDate;
 
 	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
 	m_pUserTradeInfo->m_strUseID.clear();
-	m_pUserTradeInfo->m_strTradeUUID = CTcpComProtocol::getUUID();
+	m_pUserTradeInfo->m_strTradeUUID = "NULL";
 	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
-	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::DataType_Buy;
+	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Buy;
 	m_pUserTradeInfo->m_fTradePrice = m_pSpinBox_Price->value();
 	m_pUserTradeInfo->m_fTradeAmount = m_pSpinBox_Volume->value();
 	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume_Value;
@@ -263,8 +254,8 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;
 	m_pUserTradeInfo->m_fTotalTradeFee = m_pUserTradeInfo->m_fTradeAmount * m_pUserTradeInfo->m_fTradeFees;
 	m_pUserTradeInfo->m_fTotalTradeAmount = m_pUserTradeInfo->m_fTradeAmount + m_pUserTradeInfo->m_fTotalTradeFee;
-	nTradeDateTime = m_pDateTimeEdit->dateTime();
-	m_pUserTradeInfo->m_strTradeTime = m_pQtTimeHelper->getStringValue(nTradeDateTime);
+	nTradeDate = m_pDateTimeEdit->date();
+	m_pUserTradeInfo->m_strTradeTime = m_pQtTimeHelper->getStringValue(nTradeDate);
 
 	//
 	m_pNewOrderConfirmWindow->resetData(m_pUserTradeInfo);
@@ -277,10 +268,24 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 {
 	int nCurrentIndex = 0;
 	QString strOrderType;
+	QDate nTradeDate;
 
 	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
+	m_pUserTradeInfo->m_strUseID.clear();
+	m_pUserTradeInfo->m_strTradeUUID = "NULL";
+	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
+	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Sell;
+	m_pUserTradeInfo->m_fTradePrice = m_pSpinBox_Price->value();
+	m_pUserTradeInfo->m_fTradeAmount = m_pSpinBox_Volume->value();
+	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume_Value;
+	m_pUserTradeInfo->m_fTradeFees = 0.07;
+	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;
+	m_pUserTradeInfo->m_fTotalTradeFee = m_pUserTradeInfo->m_fTradeAmount * m_pUserTradeInfo->m_fTradeFees;
+	m_pUserTradeInfo->m_fTotalTradeAmount = m_pUserTradeInfo->m_fTradeAmount + m_pUserTradeInfo->m_fTotalTradeFee;
+	nTradeDate = m_pDateTimeEdit->date();
+	m_pUserTradeInfo->m_strTradeTime = m_pQtTimeHelper->getStringValue(nTradeDate);
 
 	//
 	m_pNewOrderConfirmWindow->resetData(m_pUserTradeInfo);
@@ -296,10 +301,33 @@ void CNewOrderWindow::slotCalendarWidgetClicked( const QDate & date )
 	m_pDateTimeEdit->setDate(date);
 }
 
+void CNewOrderWindow::slotDateChanged ( const QDate & date )
+{
+	QDate nDateTmp;
+	QString strDataTimeTmp;
+	CHistoryData* pHistoryData = NULL;
+	nDateTmp = date;
+	strDataTimeTmp = m_pQtTimeHelper->getStringValue(nDateTmp);
+	CClientDBManager::getInstance().selectDataHistory_DataTime(m_pTextEdit_Symbol_Value, strDataTimeTmp, &pHistoryData);
+
+	if (NULL != pHistoryData)
+	{
+		m_pSpinBox_Price_Value = QVariant(pHistoryData->m_strClose).toDouble();
+		_TranslateLanguage();
+	}
+
+	if (NULL != pHistoryData)
+	{
+		delete pHistoryData;
+		pHistoryData = NULL;
+	}
+
+}
 
 void CNewOrderWindow::_CreateConnect()
 {	
-	QObject::connect(m_pCalendarWidget, SIGNAL(clicked(const QDate &)), this, SLOT(slotCalendarWidgetClicked(const QDate &)));
+	//QObject::connect(m_pCalendarWidget, SIGNAL(clicked(const QDate &)), this, SLOT(slotCalendarWidgetClicked(const QDate &)));
+	QObject::connect(m_pDateTimeEdit, SIGNAL(dateChanged(const QDate &)), this, SLOT(slotDateChanged(const QDate &)));
 
 	QObject::connect(m_pPushButtonBuy, SIGNAL(clicked(bool)), this, SLOT(slotPushButtonBuyClicked(bool)));
 
@@ -322,7 +350,7 @@ void CNewOrderWindow::slotConfirmOrder(qint32 nEOrderConfirm)
 	//emit
 	if (0 == nEOrderConfirm)
 	{
-		//CClientDataManager::getInstance().re.req_newOrder(*m_pOrderData);
+		CClientDataManager::getInstance().send_req_NewOrder(m_pUserTradeInfo);
 	}
 	else// if (-1 ==  nEOrderConfirm)
 	{

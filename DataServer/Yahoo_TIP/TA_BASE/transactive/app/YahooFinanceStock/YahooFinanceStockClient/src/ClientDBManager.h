@@ -32,6 +32,9 @@ private:
 	~CClientDBManager(void);
 public:
 	void resetDataHistory(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
+	qint32 selectDataHistory_ASC_PRICE(const QString& strSymbolUse, CHistoryData** ppData);
+	qint32 selectDataHistory_DataTime(const QString& strSymbolUse,const QString& strDateTime, CHistoryData** ppData);
+
 public:
 	qint32 insertSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
 	qint32 updateSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
@@ -43,6 +46,7 @@ public:
 	QSqlDatabase* getDB();
 private:
 	CUserInfo* m_pUserInfo;
+	QMutex m_mutex_ClientDbOper;
 	CClientDbOper* m_pClientDbOper;
 
 private:

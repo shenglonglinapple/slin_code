@@ -29,6 +29,7 @@ public:
 public:
 	void resetDataHistory(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
 	qint32 selectDataHistory_ASC_PRICE(const QString& strSymbolUse, CHistoryData** ppData);
+	qint32 selectDataHistory_DataTime(const QString& strSymbolUse,const QString& strDateTime, CHistoryData** ppData);
 	void truncateTableHistoryData();
 public:
 	qint32 insertSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);

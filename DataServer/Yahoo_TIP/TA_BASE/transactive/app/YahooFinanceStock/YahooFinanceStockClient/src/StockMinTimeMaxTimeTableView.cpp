@@ -37,6 +37,7 @@ CStockMinTimeMaxTimeTableView::CStockMinTimeMaxTimeTableView( QWidget* parent)
 	m_pItemModel = new QSqlTableModel(this, *(CClientDBManager::getInstance().getDB()));
 	m_pItemModel->setTable(str_TABLE_MINTIME_MAXTIME);
 	m_pItemModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+	m_pItemModel->setSort(0, Qt::AscendingOrder);
 	m_pItemModel->select();
 
 	this->setModel((QAbstractItemModel *)m_pItemModel);
@@ -104,6 +105,7 @@ void CStockMinTimeMaxTimeTableView::slot_DataChange_StockMinTimeMaxTime()
 
 	if (NULL != m_pItemModel)
 	{
+		m_pItemModel->setSort(0, Qt::AscendingOrder);
 		m_pItemModel->select();
 	}
 	QModelIndex inValidIndex;
@@ -189,6 +191,9 @@ void CStockMinTimeMaxTimeTableView::slotActionNewOrder()
 
 	if (!strSymbolUse.isEmpty())
 	{
+		//get history data from server
+		CClientDataManager::getInstance().send_req_ReqStockHistoryData(strSymbolUse, strTimeFrom, strTimeTo);
+
 		m_pNewOrderWindow->resetData(strSymbolUse, strTimeFrom, strTimeTo);
 		m_pNewOrderWindow->move(QCursor::pos());
 		m_pNewOrderWindow->show();

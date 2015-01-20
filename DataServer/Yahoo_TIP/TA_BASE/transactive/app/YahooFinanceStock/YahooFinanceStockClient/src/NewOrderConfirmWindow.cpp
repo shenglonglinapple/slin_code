@@ -181,7 +181,7 @@ void CNewOrderConfirmWindow::_CreateConnect()
 void CNewOrderConfirmWindow::resetData( const CUserTradeInfo* pInfo)
 {
 	m_str_SymbolUse_Value = pInfo->m_strSymbolUse;
-	m_str_OrderSide_Value = CTcpComProtocol::getStringValue(CTcpComProtocol::EDataType(pInfo->m_nTradeType));
+	m_str_OrderSide_Value = CTcpComProtocol::getStringValue(pInfo->m_nTradeType);
 	m_str_Price_Value = QVariant(pInfo->m_fTradePrice).toString();
 	m_str_Volume_Value = QVariant(pInfo->m_nTradeVolume).toString();
 	m_str_TradeDataTime_Value = pInfo->m_strTradeTime;

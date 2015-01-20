@@ -413,7 +413,7 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 		lst_COLUMN_USEID << pData->m_strUseID;
 		lst_COLUMN_TRADE_UUID << pData->m_strTradeUUID;
 		lst_COLUMN_TRADE_TIME << pData->m_strTradeTime;
-		lst_COLUMN_TRADE_TYPE << pData->m_nTradeType;
+		lst_COLUMN_TRADE_TYPE << (qint32)pData->m_nTradeType;
 		lst_COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
 		lst_COLUMN_TRADE_PRICE << pData->m_fTradePrice;
 		lst_COLUMN_TRADE_VOLUME << pData->m_nTradeVolume;
@@ -491,13 +491,73 @@ qint32 CClientDbOper::selectDataHistory_ASC_PRICE( const QString& strSymbolUse, 
 		nColumnIndex++;
 		pSelectData->m_strHigh = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pSelectData->m_strLow = pSqlQuery->value(nColumnIndex).toInt();
+		pSelectData->m_strLow = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pSelectData->m_strClose = pSqlQuery->value(nColumnIndex).toInt();
+		pSelectData->m_strClose = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pSelectData->m_strVolume = pSqlQuery->value(nColumnIndex).toInt();
+		pSelectData->m_strVolume = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pSelectData->m_strAdjClose = pSqlQuery->value(nColumnIndex).toInt();
+		pSelectData->m_strAdjClose = pSqlQuery->value(nColumnIndex).toString();
+
+
+		(*ppData) = pSelectData;
+		pSelectData = NULL;
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
+	return nFunRes;
+}
+qint32 CClientDbOper::selectDataHistory_DataTime( const QString& strSymbolUse,const QString& strDateTime, CHistoryData** ppData )
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+	CHistoryData* pSelectData = NULL;
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_BAR_DATA_1DAY_PRICE(strSymbolUse, strDateTime);
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	if ( pSqlQuery->next() )
+	{
+		pSelectData = new CHistoryData();
+		nColumnIndex = 0;
+		pSelectData->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
+		//pSelectData->m_strSymbolUse = pSqlQuery->value(str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE).toString();
+		nColumnIndex++;
+		pSelectData->m_strDate = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strOpen = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strHigh = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strLow = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strClose = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strVolume = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pSelectData->m_strAdjClose = pSqlQuery->value(nColumnIndex).toString();
 
 
 		(*ppData) = pSelectData;
@@ -771,3 +831,4 @@ qint32 CClientDbOper::_ExecModify(const QString& strSQL)
 	}
 	return nFunRes;
 }
+

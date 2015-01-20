@@ -71,11 +71,8 @@ QString CTcpComProtocol::getStringValue( EDataType nValue )
 	case DataType_CreateUser:
 		strValue = "DataType_CreateUser";
 		break;
-	case DataType_Buy:
-		strValue = "DataType_Buy";
-		break;
-	case DataType_Sell:
-		strValue = "DataType_Sell";
+	case DataType_Trade:
+		strValue = "DataType_Trade";
 		break;
 	case DataType_Unknown:
 		strValue = "DataType_Unknown";
@@ -153,6 +150,24 @@ QString CTcpComProtocol::getStringValue( EDataTypeSynYahooResult nValue )
 		break;
 	case DataType_SynYahooResult_Unknown:
 		strValue = "DataType_SynYahooResult_Unknown";
+		break;
+	}
+	return strValue;
+}
+
+QString CTcpComProtocol::getStringValue( ETradeType nValue )
+{
+	QString strValue;
+	switch (nValue)
+	{
+	case ETradeType_Buy:
+		strValue = "ETradeType_Buy";
+		break;
+	case ETradeType_Sell:
+		strValue = "ETradeType_Sell";
+		break;
+	case ETradeType_Unknown:
+		strValue = "ETradeType_Unknown";
 		break;
 	}
 	return strValue;

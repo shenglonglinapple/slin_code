@@ -28,6 +28,7 @@ CStockHistoryDataTableView::CStockHistoryDataTableView( QWidget* parent)
 	m_pItemModel = new QSqlTableModel(this, *(CClientDBManager::getInstance().getDB()));
 	m_pItemModel->setTable(str_TABLE_BAR_DATA_1DAY);
 	m_pItemModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+	m_pItemModel->setSort(1, Qt::AscendingOrder);
 	m_pItemModel->select();
 	
 	this->setModel((QAbstractItemModel *)m_pItemModel);
@@ -58,6 +59,7 @@ void CStockHistoryDataTableView::slot_DataChange_StockHistoryData()
 
 	if (NULL != m_pItemModel)
 	{
+		m_pItemModel->setSort(1, Qt::AscendingOrder);
 		m_pItemModel->select();
 	}
 

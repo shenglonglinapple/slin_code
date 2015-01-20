@@ -11,7 +11,7 @@ class CReqDownLoadStock;
 class CReqStockMinTimeMaxTime;
 class CReqStockHistoryData;
 class CReqCreateUser;
-class CReqBuy;
+class CReqTrade;
 
 class CAckLogin;
 class CAckLogout;
@@ -20,7 +20,7 @@ class CAckDownLoadStock;
 class CAckStockMinTimeMaxTime;
 class CAckStockHistoryData;
 class CAckCreateUser;
-class CAckBuy;
+class CAckTrade;
 
 
 
@@ -37,7 +37,7 @@ public:
 	void processReq(const CReqStockMinTimeMaxTime* pReq);
 	void processReq(const CReqStockHistoryData* pReq);
 	void processReq(const CReqCreateUser* pReq);
-	void processReq(const CReqBuy* pReq);
+	void processReq(const CReqTrade* pReq);
 
 public:
 	void processAck(const CAckLogin* pAck);
@@ -47,7 +47,7 @@ public:
 	void processAck(const CAckStockMinTimeMaxTime* pAck);
 	void processAck(const CAckStockHistoryData* pAck);
 	void processAck(const CAckCreateUser* pAck);
-	void processAck(const CAckBuy* pAck);
+	void processAck(const CAckTrade* pAck);
 
 private:
 	qint32 m_nHanle;

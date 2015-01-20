@@ -8,6 +8,8 @@
 
 
 static const char* DEFVALUE_String_DataTime_Format = "yyyy-MM-dd hh:mm:ss";
+static const char* DEFVALUE_String_Data_Format = "yyyy-MM-dd";
+static const char* DEF_VALUE_STRING_UTC_START_TIME = "08:00:00";
 
 //[client begin]
 static const char* DEFVALUE_String_UserName = "UserNameValue";

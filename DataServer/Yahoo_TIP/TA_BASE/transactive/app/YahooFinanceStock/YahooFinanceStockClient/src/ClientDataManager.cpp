@@ -18,6 +18,7 @@
 #include "ReqDownLoadStock.h"
 #include "ReqStockMinTimeMaxTime.h"
 #include "ReqStockHistoryData.h"
+#include "ReqTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -292,7 +293,27 @@ void CClientDataManager::send_req_ReqStockHistoryData(const QString& strSymbolUs
 
 }
 
+void CClientDataManager::send_req_NewOrder( const CUserTradeInfo* pData )
+{
+	QByteArray* pByteArray = NULL;
+	CReqTrade* pReq = NULL;
+	pReq = new CReqTrade();
+	pReq->setValue(pData);
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strUserName = m_strUserName;
+	pReq->m_strPassword = m_strPassWord;
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+	CClientWorkerManager::getInstance().sendMessage(m_nHandle, pByteArray);
+	pByteArray = NULL;
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
 
+}
 
 
 void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
@@ -329,3 +350,5 @@ void CClientDataManager::resetDataUserTradeInfo(const CUserTradeInfo* pData)
 	CClientDBManager::getInstance().insertUserTradeInfo(pData);
 	CSignalSlotManager::getInstance().emit_DataChange_UserTrade();
 }
+
+

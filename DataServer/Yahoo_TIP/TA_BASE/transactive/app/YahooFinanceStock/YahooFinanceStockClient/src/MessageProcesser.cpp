@@ -11,7 +11,7 @@
 #include "ReqStockMinTimeMaxTime.h"
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
-#include "ReqBuy.h"
+#include "ReqTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -20,8 +20,7 @@
 #include "AckStockMinTimeMaxTime.h"
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
-#include "AckBuy.h"
-
+#include "AckTrade.h"
 
 #include "ClientDataManager.h"
 #include "StockDataManager.h"
@@ -83,7 +82,7 @@ void CMessageProcesser::processReq( const CReqCreateUser* pReq )
 	return;
 }
 
-void CMessageProcesser::processReq( const CReqBuy* pReq )
+void CMessageProcesser::processReq( const CReqTrade* pReq )
 {
 	return;
 }
@@ -147,7 +146,7 @@ void CMessageProcesser::processAck( const CAckCreateUser* pAck )
 
 }
 
-void CMessageProcesser::processAck( const CAckBuy* pAck )
+void CMessageProcesser::processAck( const CAckTrade* pAck )
 {
 	CUserTradeInfo* pUserTradeInfo = NULL;
 	pUserTradeInfo = new CUserTradeInfo();

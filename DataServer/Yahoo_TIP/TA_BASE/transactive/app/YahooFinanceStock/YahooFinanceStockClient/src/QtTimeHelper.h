@@ -14,6 +14,8 @@ public:
 	time_t   getCurrentTime();
 	QString   getCurrentTimeStr();
 
+	QString  getStringValue(const QDate& nData);
+
 	QString  getStringValue(const QDateTime& nDataTime);
 
 	QString  getStringValue(time_t secsSince1Jan1970UTC);
