@@ -113,6 +113,7 @@ void CNewOrderWindow::_SetupUi()
 	//m_pLabel_Volume->setMinimumSize(qSizeLeftAreaOne);
 
 	m_pSpinBox_Volume = new QSpinBox(this);
+	m_pSpinBox_Volume->setRange(0, 10000000);
 	//m_pSpinBox_Volume->setMinimumSize(qSizeRightAreaOne);
 
 	//eg: Price: 0.00
@@ -120,6 +121,7 @@ void CNewOrderWindow::_SetupUi()
 	//m_pLabel_Price->setMinimumSize(qSizeLeftAreaOne);
 
 	m_pSpinBox_Price = new QDoubleSpinBox(this);
+	m_pSpinBox_Price->setRange(0, 100000000);
 	//m_pSpinBox_Price->setMinimumSize(qSizeRightAreaOne);
 
 	//Buy  Sell
@@ -193,6 +195,7 @@ void CNewOrderWindow::_TranslateLanguage()
 
 	m_pLabel_Volume->setText(QObject::tr("Volume:"));
 	m_pSpinBox_Volume->setValue(m_pSpinBox_Volume_Value);
+	m_pSpinBox_Volume->setRange(0, 10000000);
 
 	m_pLabel_Price->setText(QObject::tr("Price:"));
 	m_pSpinBox_Price->setValue(m_pSpinBox_Price_Value);
@@ -248,8 +251,8 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
 	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Buy;
 	m_pUserTradeInfo->m_fTradePrice = m_pSpinBox_Price->value();
-	m_pUserTradeInfo->m_fTradeAmount = m_pSpinBox_Volume->value();
-	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume_Value;
+	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume->value();
+	m_pUserTradeInfo->m_fTradeAmount = 0;
 	m_pUserTradeInfo->m_fTradeFees = 0.07;
 	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;
 	m_pUserTradeInfo->m_fTotalTradeFee = m_pUserTradeInfo->m_fTradeAmount * m_pUserTradeInfo->m_fTradeFees;
@@ -278,7 +281,8 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
 	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Sell;
 	m_pUserTradeInfo->m_fTradePrice = m_pSpinBox_Price->value();
-	m_pUserTradeInfo->m_fTradeAmount = m_pSpinBox_Volume->value();
+	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume->value();
+	m_pUserTradeInfo->m_fTradeAmount = 0;
 	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume_Value;
 	m_pUserTradeInfo->m_fTradeFees = 0.07;
 	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;

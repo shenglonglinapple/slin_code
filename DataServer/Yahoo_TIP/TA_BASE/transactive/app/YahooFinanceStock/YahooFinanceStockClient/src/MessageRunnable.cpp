@@ -130,7 +130,7 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	}
 	else if (CReqTrade::checkMsgDataType(nMessageType, nDataType))
 	{
-		_ProcessMessage_ReqBuy();		
+		_ProcessMessage_ReqTrade();		
 	}
 	
 }
@@ -245,7 +245,7 @@ void CMessageRunnable::_ProcessMessage_ReqCreateUser()
 }
 
 
-void CMessageRunnable::_ProcessMessage_ReqBuy()
+void CMessageRunnable::_ProcessMessage_ReqTrade()
 {
 	CReqTrade* pReq = NULL;
 	pReq = new CReqTrade();
@@ -295,7 +295,7 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	}
 	else if (CAckTrade::checkMsgDataType(nMessageType, nDataType))
 	{
-		_ProcessMessage_AckBuy();
+		_ProcessMessage_AckTrade();
 	}
 }
 
@@ -412,7 +412,7 @@ void CMessageRunnable::_ProcessMessage_AckCreateUser()
 	}
 }
 
-void CMessageRunnable::_ProcessMessage_AckBuy()
+void CMessageRunnable::_ProcessMessage_AckTrade()
 {
 	CAckTrade* pAck = NULL;
 	pAck = new CAckTrade();

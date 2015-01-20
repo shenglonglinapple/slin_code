@@ -24,6 +24,8 @@ CNewOrderConfirmWindow::CNewOrderConfirmWindow(QWidget *parent)
 {
 	m_pLabel_SymbolUse = NULL;
 	m_pLabel_SymbolUse_Value = NULL;
+	m_pLabel_TradeType = NULL;
+	m_pLabel_TradeType_Value = NULL;
 	m_pLabel_Volume = NULL;
 	m_pLabel_Volume_Value = NULL;
 	m_pLabel_Price = NULL;
@@ -34,13 +36,13 @@ CNewOrderConfirmWindow::CNewOrderConfirmWindow(QWidget *parent)
 	m_pLabel_TradeDataTime = NULL;
 	m_pLabel_TradeDataTime_Value = NULL;
 
-	m_str_OrderSide_Value.clear();
+	m_str_TradeType_Value.clear();
 	m_str_SymbolUse_Value.clear();
 	m_str_Price_Value.clear();//
 	m_str_Volume_Value.clear();//
 	m_str_TradeDataTime_Value.clear();
 
-	m_str_OrderSide_Value = "";
+	m_str_TradeType_Value = "";
 	m_str_SymbolUse_Value = "";
 	m_str_Volume_Value = "1";
 	m_str_Price_Value = "000000000.00000";//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
@@ -66,6 +68,8 @@ void CNewOrderConfirmWindow::_SetupUi()
 	m_pLabel_SymbolUse = new QLabel(this);
 	m_pLabel_SymbolUse_Value = new QLabel(this);
 
+	m_pLabel_TradeType = new QLabel(this);
+	m_pLabel_TradeType_Value = new QLabel(this);
 	//Volume: 1
 	m_pLabel_Volume = new QLabel(this);
 	m_pLabel_Volume_Value = new QLabel(this);
@@ -86,6 +90,9 @@ void CNewOrderConfirmWindow::_SetupUi()
 	int nRowIndex = 0;
 	m_pGridLayout->addWidget(m_pLabel_SymbolUse, nRowIndex, 0, 1, 1);
 	m_pGridLayout->addWidget(m_pLabel_SymbolUse_Value, nRowIndex, 1, 1, 2);
+	nRowIndex++;
+	m_pGridLayout->addWidget(m_pLabel_TradeType, nRowIndex, 0, 1, 1);
+	m_pGridLayout->addWidget(m_pLabel_TradeType_Value, nRowIndex, 1, 1, 2);
 	nRowIndex++;
 	m_pGridLayout->addWidget(m_pLabel_Volume, nRowIndex, 0, 1, 1);
 	m_pGridLayout->addWidget(m_pLabel_Volume_Value, nRowIndex, 1, 1, 2);
@@ -113,6 +120,9 @@ void CNewOrderConfirmWindow::_TranslateLanguage()
 
 	m_pLabel_SymbolUse->setText(QObject::tr(DEFVALUE_String_Label_SymbolUse_Text.c_str()));
 	m_pLabel_SymbolUse_Value->setText(m_str_SymbolUse_Value);
+
+	m_pLabel_TradeType->setText(QObject::tr("TradeType:"));
+	m_pLabel_TradeType_Value->setText(m_str_TradeType_Value);
 
 	m_pLabel_Volume->setText(QObject::tr("Volume:"));
 	m_pLabel_Volume_Value->setText(m_str_Volume_Value);
@@ -181,7 +191,7 @@ void CNewOrderConfirmWindow::_CreateConnect()
 void CNewOrderConfirmWindow::resetData( const CUserTradeInfo* pInfo)
 {
 	m_str_SymbolUse_Value = pInfo->m_strSymbolUse;
-	m_str_OrderSide_Value = CTcpComProtocol::getStringValue(pInfo->m_nTradeType);
+	m_str_TradeType_Value = CTcpComProtocol::getStringValue(pInfo->m_nTradeType);
 	m_str_Price_Value = QVariant(pInfo->m_fTradePrice).toString();
 	m_str_Volume_Value = QVariant(pInfo->m_nTradeVolume).toString();
 	m_str_TradeDataTime_Value = pInfo->m_strTradeTime;

@@ -345,7 +345,7 @@ void CClientDataManager::resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* p
 }
 
 
-void CClientDataManager::resetDataUserTradeInfo(const CUserTradeInfo* pData)
+void CClientDataManager::insertUserTradeInfo(const CUserTradeInfo* pData)
 {
 	CClientDBManager::getInstance().insertUserTradeInfo(pData);
 	CSignalSlotManager::getInstance().emit_DataChange_UserTrade();

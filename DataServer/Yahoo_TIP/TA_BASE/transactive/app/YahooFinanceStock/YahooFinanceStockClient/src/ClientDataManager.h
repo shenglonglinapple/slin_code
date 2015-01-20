@@ -35,7 +35,7 @@ public:
 public:
 	void resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
 	void resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData );
-	void resetDataUserTradeInfo(const CUserTradeInfo* pData);
+	void insertUserTradeInfo(const CUserTradeInfo* pData);
 
 public:
 	void send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse);

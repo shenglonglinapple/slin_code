@@ -58,7 +58,7 @@ private:
 	void _CreateConnect();
 private:
 	QString m_str_SymbolUse_Value;
-	QString m_str_OrderSide_Value;
+	QString m_str_TradeType_Value;
 	QString m_str_Price_Value;
 	QString m_str_Volume_Value;
 	QString m_str_TradeDataTime_Value;
@@ -68,6 +68,9 @@ private:
 
 	QLabel* m_pLabel_SymbolUse;
 	QLabel* m_pLabel_SymbolUse_Value;
+
+	QLabel* m_pLabel_TradeType;
+	QLabel* m_pLabel_TradeType_Value;
 
 	QLabel* m_pLabel_Volume;
 	QLabel* m_pLabel_Volume_Value;
