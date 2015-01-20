@@ -73,6 +73,42 @@ QString  CQtTimeHelper::getStringValue(time_t secsSince1Jan1970UTC)
 
 	return strTime_local_Res;
 }
+
+QString CQtTimeHelper::getStringValue( const QDateTime& nDataTime )
+{
+	QString   strTime_local;
+	QDateTime time_local = nDataTime;
+	time_local.setTimeSpec(Qt::LocalTime);
+
+	strTime_local = time_local.toString(DEFVALUE_String_DataTime_Format);
+	return strTime_local;
+}
+
+QString CQtTimeHelper::getStringValue( const QDate& nData )
+{
+	QString   strTime_local;
+	QDate time_local = nData;
+
+	strTime_local = time_local.toString(DEFVALUE_String_Data_Format);
+	strTime_local += " ";
+	strTime_local += DEF_VALUE_STRING_UTC_START_TIME;
+	return strTime_local;
+
+}
+
+
+QDateTime CQtTimeHelper::getDateTimeValue( const QString & strTimeValue )
+{
+	QDateTime time_local;
+	QString   strTime_local;
+
+	strTime_local = strTimeValue;
+	time_local.setTimeSpec(Qt::LocalTime);
+	time_local = QDateTime::fromString(strTime_local, DEFVALUE_String_DataTime_Format);
+	//
+	return time_local;
+}
+
 time_t CQtTimeHelper::getTimeValue(const QString & strTimeValue)
 {
 	QString   strTime_local;

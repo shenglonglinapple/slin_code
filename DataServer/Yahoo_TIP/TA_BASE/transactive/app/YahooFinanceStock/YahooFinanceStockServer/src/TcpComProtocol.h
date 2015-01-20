@@ -27,8 +27,16 @@ public:
 		DataType_StockMinTimeMaxTime  = 0x00000004,
 		DataType_HistoryData  = 0x00000005,
 		DataType_CreateUser  = 0x00000006,
-		DataType_Buy  = 0x00000007,
+		DataType_Trade  = 0x00000007,
 		DataType_Unknown  = 0x0FFFFFFF,
+	};
+
+	enum ETradeType
+	{
+		ETradeType_Buy  = 0x00,
+		ETradeType_Sell  = 0x01,
+
+		ETradeType_Unknown  = 0x0FFFFFFF,
 	};
 
 	//4 Bytes
@@ -69,7 +77,9 @@ public:
 	static QString getStringValue( EDataTypeLoginResult nValue );
 	static QString getStringValue( EDataTypeLogoutResult nValue );
 	static QString getStringValue( EDataTypeSynYahooResult nValue );
+	static QString getStringValue( ETradeType nValue );
 
+	
 };
 
 

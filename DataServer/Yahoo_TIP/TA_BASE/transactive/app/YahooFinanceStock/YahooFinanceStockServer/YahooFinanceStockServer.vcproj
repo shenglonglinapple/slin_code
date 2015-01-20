@@ -904,14 +904,6 @@
 			Name="ReqAck"
 			>
 			<File
-				RelativePath=".\src\AckBuy.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckBuy.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\AckCreateUser.cpp"
 				>
 			</File>
@@ -968,11 +960,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\ReqBuy.cpp"
+				RelativePath=".\src\AckTrade.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ReqBuy.h"
+				RelativePath=".\src\AckTrade.h"
 				>
 			</File>
 			<File
@@ -1051,6 +1043,14 @@
 			</File>
 			<File
 				RelativePath=".\src\ReqSynYahoo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqTrade.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqTrade.h"
 				>
 			</File>
 			<File

@@ -11,7 +11,8 @@
 #include "ReqStockMinTimeMaxTime.h"
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
-#include "ReqBuy.h"
+#include "ReqTrade.h"
+
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -20,7 +21,7 @@
 #include "AckStockMinTimeMaxTime.h"
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
-#include "AckBuy.h"
+#include "AckTrade.h"
 
 
 #include "Log4cppLogger.h"
@@ -341,9 +342,9 @@ void CMessageProcesser::processReq( const CReqCreateUser* pReq )
 	}
 }
 
-void CMessageProcesser::processReq( const CReqBuy* pReq )
+void CMessageProcesser::processReq( const CReqTrade* pReq )
 {
-	CAckBuy* pAck = NULL;
+	CAckTrade* pAck = NULL;
 	QByteArray* pByteArray = NULL;
 	CUserInfo* pGetUserInfo = NULL;
 	quint16 nListenPort = 0;
@@ -353,7 +354,7 @@ void CMessageProcesser::processReq( const CReqBuy* pReq )
 	nListenPort = CConfigInfo::getInstance().getServerPort();
 	nFunRes = CServerManager::getInstance().getUserInfo(nListenPort, pReq->m_strUserName, pReq->m_strPassword, &pGetUserInfo);
 	
-	pAck = new CAckBuy();
+	pAck = new CAckTrade();
 	if (NULL == pGetUserInfo)
 	{
 		pAck->setValue(pReq, NULL);
@@ -424,7 +425,7 @@ void CMessageProcesser::processAck( const CAckCreateUser* pAck )
 
 }
 
-void CMessageProcesser::processAck( const CAckBuy* pAck )
+void CMessageProcesser::processAck( const CAckTrade* pAck )
 {
 
 }

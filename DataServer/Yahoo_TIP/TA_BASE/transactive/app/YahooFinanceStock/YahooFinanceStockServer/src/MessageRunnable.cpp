@@ -15,7 +15,8 @@
 #include "ReqStockMinTimeMaxTime.h"
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
-#include "ReqBuy.h"
+#include "ReqTrade.h"
+
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -24,7 +25,7 @@
 #include "AckStockMinTimeMaxTime.h"
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
-#include "AckBuy.h"
+#include "AckTrade.h"
 
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
@@ -129,9 +130,9 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqCreateUser();		
 	}
-	else if (CReqBuy::checkMsgDataType(nMessageType, nDataType))
+	else if (CReqTrade::checkMsgDataType(nMessageType, nDataType))
 	{
-		_ProcessMessage_ReqBuy();		
+		_ProcessMessage_ReqTrade();		
 	}
 	
 }
@@ -246,10 +247,10 @@ void CMessageRunnable::_ProcessMessage_ReqCreateUser()
 }
 
 
-void CMessageRunnable::_ProcessMessage_ReqBuy()
+void CMessageRunnable::_ProcessMessage_ReqTrade()
 {
-	CReqBuy* pReq = NULL;
-	pReq = new CReqBuy();
+	CReqTrade* pReq = NULL;
+	pReq = new CReqTrade();
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
@@ -294,9 +295,9 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_AckCreateUser();		
 	}
-	else if (CAckBuy::checkMsgDataType(nMessageType, nDataType))
+	else if (CAckTrade::checkMsgDataType(nMessageType, nDataType))
 	{
-		_ProcessMessage_AckBuy();
+		_ProcessMessage_AckTrade();
 	}
 }
 
@@ -413,10 +414,10 @@ void CMessageRunnable::_ProcessMessage_AckCreateUser()
 	}
 }
 
-void CMessageRunnable::_ProcessMessage_AckBuy()
+void CMessageRunnable::_ProcessMessage_AckTrade()
 {
-	CAckBuy* pAck = NULL;
-	pAck = new CAckBuy();
+	CAckTrade* pAck = NULL;
+	pAck = new CAckTrade();
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 

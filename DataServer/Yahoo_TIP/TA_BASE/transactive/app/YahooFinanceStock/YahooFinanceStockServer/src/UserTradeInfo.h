@@ -3,9 +3,10 @@
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
+#include "TcpComProtocol.h"
 
-class CReqBuy;
-class CAckBuy;
+class CReqTrade;
+class CAckTrade;
 
 class CUserTradeInfo
 {
@@ -14,19 +15,19 @@ public:
 	virtual ~CUserTradeInfo();
 public:
 	CUserTradeInfo& operator=(const CUserTradeInfo& objectCopy);
-private:
-	void _Init();
 public:
-	void setValue(const QString& strUseID, const CReqBuy* pReq );
+	void clear();
+public:
+	void setValue(const QString& strUseID, const CReqTrade* pReq );
 
 public:
-	void setValue(const CAckBuy* pAck);
+	void setValue(const CAckTrade* pAck);
 
 public:
 	QString m_strUseID;
 	QString m_strTradeUUID;
 	QString m_strTradeTime;
-	qint32 m_nTradeType;
+	CTcpComProtocol::ETradeType m_nTradeType;
 	QString m_strSymbolUse;
 	double m_fTradePrice;
 	qint32 m_nTradeVolume;

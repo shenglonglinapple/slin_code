@@ -382,7 +382,7 @@ qint32 CServerDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 		lst_COLUMN_USEID << pData->m_strUseID;
 		lst_COLUMN_TRADE_UUID << pData->m_strTradeUUID;
 		lst_COLUMN_TRADE_TIME << pData->m_strTradeTime;
-		lst_COLUMN_TRADE_TYPE << pData->m_nTradeType;
+		lst_COLUMN_TRADE_TYPE << (qint32)pData->m_nTradeType;
 		lst_COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
 		lst_COLUMN_TRADE_PRICE << pData->m_fTradePrice;
 		lst_COLUMN_TRADE_VOLUME << pData->m_nTradeVolume;

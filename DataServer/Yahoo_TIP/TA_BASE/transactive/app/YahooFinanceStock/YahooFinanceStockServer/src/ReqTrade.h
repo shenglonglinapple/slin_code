@@ -1,16 +1,18 @@
-#ifndef __CLASS_REQ_BUY_H__
-#define __CLASS_REQ_BUY_H__
+#ifndef __CLASS_REQ_TRADE_H__
+#define __CLASS_REQ_TRADE_H__
 
 #include <QtCore/QObject>
 #include <Qtcore/QByteArray>
 
 #include "TcpComProtocol.h"
 
-class CReqBuy
+class CUserTradeInfo;
+
+class CReqTrade
 {
 public:
-    CReqBuy(void);
-	~CReqBuy(void);
+    CReqTrade(void);
+	~CReqTrade(void);
 private:
 	void _Clear();
 public:
@@ -18,6 +20,8 @@ public:
 	void setValue(const QByteArray* pMessage );
 	QByteArray* getMessage();
 	void logInfo( const QString& fileName, qint32 lineNumber );
+public:
+	void setValue(const CUserTradeInfo* pData);
 public:
 	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::MsgType_Req
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
@@ -27,6 +31,7 @@ public:
 	QString m_strUserName;
 	QString m_strPassword;
 
+	CTcpComProtocol::ETradeType m_nTradeType;
 	QString m_strSymbolUse;
 	QString m_strTradeTime;
 	QString m_strTradePrice;
@@ -34,4 +39,4 @@ public:
 
 };
 
-#endif//__CLASS_REQ_BUY_H__
+#endif//__CLASS_REQ_TRADE_H__

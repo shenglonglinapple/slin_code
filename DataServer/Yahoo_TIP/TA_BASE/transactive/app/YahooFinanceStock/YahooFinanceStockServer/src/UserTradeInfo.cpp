@@ -1,12 +1,12 @@
 #include "UserTradeInfo.h"
 #include "QtTimeHelper.h"
 #include "TcpComProtocol.h"
-#include "ReqBuy.h"
-#include "AckBuy.h"
+#include "ReqTrade.h"
+#include "AckTrade.h"
 
 CUserTradeInfo::CUserTradeInfo()
 {
-	_Init();
+	clear();
 }
 
 CUserTradeInfo::~CUserTradeInfo()
@@ -32,12 +32,12 @@ CUserTradeInfo& CUserTradeInfo::operator=( const CUserTradeInfo& objectCopy )
 }
 
 
-void CUserTradeInfo::_Init()
+void CUserTradeInfo::clear()
 {
 	m_strUseID.clear();
 	m_strTradeTime.clear();
 	m_strTradeUUID.clear();
-	m_nTradeType = -1;
+	m_nTradeType = CTcpComProtocol::ETradeType_Buy;
 	m_strSymbolUse.clear();
 	m_fTradePrice = 0;
 	m_nTradeVolume = 0;
@@ -49,14 +49,14 @@ void CUserTradeInfo::_Init()
 }
 
 
-void CUserTradeInfo::setValue(const QString& strUseID, const CReqBuy* pReq )
+void CUserTradeInfo::setValue(const QString& strUseID, const CReqTrade* pReq )
 {
-	_Init();
+	clear();
 	m_strUseID = strUseID;
 
 	this->m_strTradeUUID = CTcpComProtocol::getUUID();
 	this->m_strTradeTime = pReq->m_strTradeTime;
-	this->m_nTradeType = (qint32)pReq->m_nDataType;//CTcpComProtocol::DataType_Buy;
+	this->m_nTradeType = pReq->m_nTradeType;
 	this->m_strSymbolUse = pReq->m_strSymbolUse;
 	this->m_fTradePrice = pReq->m_strTradePrice.toDouble();
 	this->m_nTradeVolume = pReq->m_strTradeVolume.toInt();
@@ -68,13 +68,13 @@ void CUserTradeInfo::setValue(const QString& strUseID, const CReqBuy* pReq )
 }
 
 
-void CUserTradeInfo::setValue( const CAckBuy* pAck )
+void CUserTradeInfo::setValue( const CAckTrade* pAck )
 {
-	_Init();
+	clear();
 	m_strUseID = pAck->m_strUseID;
 	m_strTradeUUID = pAck->m_strTradeUUID;
 	m_strTradeTime = pAck->m_strTradeTime;
-	m_nTradeType = (qint32)pAck->m_nDataType;
+	m_nTradeType = pAck->m_nTradeType;
 	m_strSymbolUse = pAck->m_strSymbolUse;
 	m_fTradePrice = pAck->m_strTradePrice.toDouble();
 	m_nTradeVolume = pAck->m_strTradeVolume.toInt();
