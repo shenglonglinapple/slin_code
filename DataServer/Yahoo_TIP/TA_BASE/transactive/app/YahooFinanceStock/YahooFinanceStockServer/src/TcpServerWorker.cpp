@@ -134,6 +134,18 @@ qint32 CTcpServerWorker::createUserTradeInfo( quint16 nListenPort, const CUserTr
 	return nFunRes;
 }
 
+qint32 CTcpServerWorker::createUserHold( quint16 nListenPort, const CUserHold* pData )
+{
+	qint32 nFunRes = 0;
+	if (NULL == m_pServerDbOper)
+	{
+		nFunRes = -1;
+		return nFunRes;
+	}
+	nFunRes = m_pServerDbOper->insertUserHold(nListenPort, pData);
+	return nFunRes;
+}
+
 void CTcpServerWorker::sendMessage( qint32 handle, QByteArray* pMessage )
 {
 	if (NULL == m_pServerDistributeTaskWorker)

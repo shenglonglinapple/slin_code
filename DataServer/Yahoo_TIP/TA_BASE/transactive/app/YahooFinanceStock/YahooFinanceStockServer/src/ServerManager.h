@@ -14,6 +14,7 @@ class CTcpServerWorker;
 class CUserInfo;
 class CUserTradeInfo;
 class QByteArray;
+class CUserHold;
 
 class CServerManager
 {
@@ -36,6 +37,7 @@ public:
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
+	qint32 createUserHold( quint16 nListenPort, const CUserHold* pData );
 public:
 	void sendMessage(quint16 nListenPort, qint32 handle, QByteArray* pMessage);
 

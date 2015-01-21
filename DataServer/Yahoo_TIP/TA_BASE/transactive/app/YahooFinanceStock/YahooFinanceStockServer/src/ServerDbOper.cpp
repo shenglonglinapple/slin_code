@@ -8,6 +8,7 @@
 #include "SqliteDbOperBuildSQL.h"
 #include "UserInfo.h"
 #include "UserTradeInfo.h"
+#include "UserHold.h"
 
 static const char*  str_QtDbType_QSQLITE = "QSQLITE";
 static const char*  str_QtDbType_QMYSQL = "QMYSQL";
@@ -28,6 +29,8 @@ CServerDbOper::CServerDbOper( const QString& strSqliteDbFileName )
 	{
 		_CreateDBTable_TABLE_USER_INFO();
 		_CreateDBTable_TABLE_USER_TRADE_INFO();
+		_CreateDBTable_TABLE_USER_HOLD();
+		_Truncate_TABLE_USER_HOLD();
 	}
 }
 
@@ -176,7 +179,7 @@ int CServerDbOper::_CommitTransaction()
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-int CServerDbOper::_CreateDBTable_TABLE_USER_INFO()
+qint32 CServerDbOper::_CreateDBTable_TABLE_USER_INFO()
 {
 	qint32 nFunRes = 0;
 	QString  strSQL;
@@ -264,6 +267,15 @@ qint32 CServerDbOper::insertUserInfo(quint16 nListenPort, const CUserInfo* pData
 }
 
 
+qint32 CServerDbOper::insertUserHold( quint16 nListenPort, const CUserHold* pData )
+{
+	qint32 nFunRes = 0;
+	_StartTransaction();
+	nFunRes = _AddUserHold(pData);
+	_CommitTransaction();
+	return nFunRes;
+}
+
 qint32 CServerDbOper::_AddUserInfo(const CUserInfo* pData)
 {
 	qint32 nFunRes = 0;
@@ -326,7 +338,7 @@ qint32 CServerDbOper::_AddUserInfo(const CUserInfo* pData)
 	return nFunRes;
 }
 
-int CServerDbOper::_CreateDBTable_TABLE_USER_TRADE_INFO()
+qint32 CServerDbOper::_CreateDBTable_TABLE_USER_TRADE_INFO()
 {
 	qint32 nFunRes = 0;
 	QString  strSQL;
@@ -443,6 +455,112 @@ qint32 CServerDbOper::_ExecModify(const QString& strSQL)
 	{
 		delete pSqlQuery;
 		pSqlQuery = NULL;
+	}
+	return nFunRes;
+}
+
+qint32 CServerDbOper::_CreateDBTable_TABLE_USER_HOLD()
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_HOLD();
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
+
+qint32 CServerDbOper::_Truncate_TABLE_USER_HOLD()
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Truncate_TABLE_USER_HOLD();
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
+
+qint32 CServerDbOper::_AddUserHold( const CUserHold* pData )
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = false;
+	QString  strSQL;
+
+	QVariantList COLUMN_USEID;
+	QVariantList COLUMN_SYMBOLUSE;
+	QVariantList COLUMN_BUY_TIME;
+
+	
+	QVariantList COLUMN_BUY_PRICE;
+	QVariantList COLUMN_BUY_VOLUME;
+	QVariantList COLUMN_BUY_FEES;
+
+	QVariantList COLUMN_BUY_AMOUNT;
+	QVariantList COLUMN_CURRENT_TIME;
+	QVariantList COLUMN_CURRENT_PRICE;
+
+	QVariantList COLUMN_CURRENT_FEES;
+	QVariantList COLUMN_CURRENT_AMOUNT;
+	QVariantList COLUMN_PROFIT_LOSS;
+
+	QVariantList COLUMN_PROFIT_LOSS_PERSENTAGE;
+
+	QSqlQuery* pQSqlQueryForInseert = NULL;
+
+	if (NULL == pData)
+	{
+		nFunRes = 0;
+		return nFunRes;
+	}
+
+	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_USER_HOLD();
+
+	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+	pQSqlQueryForInseert->prepare(strSQL);
+
+	{
+		COLUMN_USEID << pData->m_strUseID;
+		COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
+		COLUMN_BUY_TIME << pData->m_strBuyTime;
+
+		COLUMN_BUY_PRICE << pData->m_fBuyPrice;
+		COLUMN_BUY_VOLUME << pData->m_nBuyVolume;
+		COLUMN_BUY_FEES << pData->m_fBuyFees;
+
+		COLUMN_BUY_AMOUNT << pData->m_fBuyAmount;
+		COLUMN_CURRENT_TIME << pData->m_strCurrentTime;
+		COLUMN_CURRENT_PRICE << pData->m_fCurrentPrice;
+
+		COLUMN_CURRENT_FEES << pData->m_fCurrentFees;
+		COLUMN_CURRENT_AMOUNT << pData->m_fCurrentAmount;
+		COLUMN_PROFIT_LOSS << pData->m_fProfitLoss;
+
+		COLUMN_PROFIT_LOSS_PERSENTAGE << pData->m_fProfitLossPersentage;
+	}
+
+	//pQSqlQueryForInseert->addBindValue(lstInstrumentID);
+	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
+	pQSqlQueryForInseert->addBindValue(COLUMN_SYMBOLUSE);
+	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_TIME);
+
+	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_PRICE);
+	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_VOLUME);
+	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_FEES);
+
+
+
+	bExecRes = pQSqlQueryForInseert->execBatch();
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<strSQL
+			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
+	}
+
+	if (NULL != pQSqlQueryForInseert)
+	{
+		delete pQSqlQueryForInseert;
+		pQSqlQueryForInseert = NULL;
 	}
 	return nFunRes;
 }

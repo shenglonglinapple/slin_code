@@ -18,6 +18,7 @@
 class CSqliteDbOperBuildSQL;
 class CUserInfo;
 class CUserTradeInfo;
+class CUserHold;
 
 class CServerDbOper
 {
@@ -30,7 +31,10 @@ public:
 	qint32 insertUserInfo(quint16 nListenPort, const CUserInfo* pData);
 public:
 	qint32 insertUserTradeInfo(quint16 nListenPort, const CUserTradeInfo* pData);
+	qint32 insertUserHold(quint16 nListenPort, const CUserHold* pData);
 
+	
+public:
 private:
 	void _UnInitDataBase();
 	void _InitDataBase();
@@ -39,10 +43,14 @@ private:
 	qint32 _ExecModify(const QString& strSQL);
 
 private:
-	int _CreateDBTable_TABLE_USER_INFO();
+	qint32 _CreateDBTable_TABLE_USER_INFO();
 	qint32 _AddUserInfo(const CUserInfo* pData);
-	int _CreateDBTable_TABLE_USER_TRADE_INFO();
+	qint32 _CreateDBTable_TABLE_USER_TRADE_INFO();
 	qint32 _AddUserTradeInfo(const CUserTradeInfo* pData);
+	qint32 _CreateDBTable_TABLE_USER_HOLD();
+	qint32 _Truncate_TABLE_USER_HOLD();
+	qint32 _AddUserHold(const CUserHold* pData);
+
 private:
 	QSqlDatabase* m_pQSqlDataBase;
 	QString m_strQTDbType;//"QSQLITE" "QMYSQL"

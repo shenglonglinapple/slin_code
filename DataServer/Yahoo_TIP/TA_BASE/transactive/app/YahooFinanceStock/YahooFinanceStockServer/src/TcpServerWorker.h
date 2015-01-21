@@ -8,6 +8,7 @@ class CServerDistributeTaskWorker;
 class CServerDbOper;
 class CUserInfo;
 class CUserTradeInfo;
+class CUserHold;
 
 class QByteArray;
 
@@ -32,6 +33,7 @@ public:
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
+	qint32 createUserHold( quint16 nListenPort, const CUserHold* pData );
 
 private:
 	quint16 m_nListenPort;

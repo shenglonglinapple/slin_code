@@ -1276,6 +1276,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\UserHold.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\UserHold.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\UserInfo.cpp"
 				>
 			</File>

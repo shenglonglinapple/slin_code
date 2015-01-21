@@ -350,6 +350,7 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 	quint16 nListenPort = 0;
 	qint32 nFunRes = 0;
 	CUserTradeInfo* pUserTradeInfo = NULL;
+	CUserHold* pUserHold = NULL;
 
 	nListenPort = CConfigInfo::getInstance().getServerPort();
 	nFunRes = CServerManager::getInstance().getUserInfo(nListenPort, pReq->m_strUserName, pReq->m_strPassword, &pGetUserInfo);
@@ -364,11 +365,24 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 		pUserTradeInfo = new CUserTradeInfo();
 		pUserTradeInfo->setValue(pGetUserInfo->m_strUSEID, pReq);
 		CServerManager::getInstance().createUserTradeInfo(nListenPort, pUserTradeInfo);
+		if (CTcpComProtocol::ETradeType_Buy == pUserTradeInfo->m_nTradeType)
+		{
+			pUserHold = new CUserHold();
+			pUserHold->setValue(pUserTradeInfo);
+			CServerManager::getInstance().createUserTradeInfo(nListenPort, pUserTradeInfo);
+
+		}
+
 		pAck->setValue(pReq, pUserTradeInfo);
 		if (NULL != pUserTradeInfo)
 		{
 			delete pUserTradeInfo;
 			pUserTradeInfo = NULL;
+		}
+		if (NULL != pUserHold)
+		{
+			delete pUserHold;
+			pUserHold = NULL;
 		}
 	}
 	if (NULL != pGetUserInfo)

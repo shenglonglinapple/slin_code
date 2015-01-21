@@ -561,3 +561,128 @@ QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_USER_TRADE_INFO()
 
 	return strSQL;
 }
+
+QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_HOLD()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	{
+		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<str_TABLE_USER_HOLD
+			<<" "<<"("
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<" "<<"TEXT NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<" "<<"TEXT NOT NULL"<<","			
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_TIME<<" "<<"TIMESTAMP NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_PRICE<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_VOLUME<<" "<<"INTEGER NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_FEES<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","	
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_TIME<<" "<<"TIMESTAMP NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_PRICE<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_FEES<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS_PERSENTAGE<<" "<<"decimal(25,10) NOT NULL"
+			<<" "<<")";
+	}
+	
+	strSQL = byteSQL.str().c_str();
+
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_USER_HOLD()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	{
+		byteSQL<<"DELETE FROM"<<" "<<str_TABLE_USER_HOLD;
+	}
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_HOLD()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	byteSQL<<"INSERT INTO "<<str_TABLE_USER_HOLD
+		<<" "<<"("
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_TIME<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_PRICE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_VOLUME<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_FEES<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_AMOUNT<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_TIME<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_PRICE<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_FEES<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_AMOUNT<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS_PERSENTAGE
+		<<" "<<")"
+		<<" "<<"VALUES"
+		<<" "<<"("
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"
+		<<" "<<")";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_HOLD( const QString& strUserID )
+{
+	QString  strSQL;	
+	std::stringstream byteSQL;
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_TIME<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_PRICE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_VOLUME<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_FEES<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_AMOUNT<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_TIME<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_PRICE<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_FEES<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_AMOUNT<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS_PERSENTAGE
+
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_USER_HOLD
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\""
+		<<" "<<"ORDER BY"
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_TIME
+		<<" "<<"ASC";//ASC min->max   DESC max->min
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
