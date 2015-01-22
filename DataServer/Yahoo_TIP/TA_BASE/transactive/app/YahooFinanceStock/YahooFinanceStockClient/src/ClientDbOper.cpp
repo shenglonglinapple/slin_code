@@ -32,6 +32,7 @@ CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
 		_CreateDBTable_TABLE_USER_TRADE_INFO();
 		truncateTableUserTradeInfo();
 		_CreateDBTable_TABLE_BAR_DATA_1DAY();
+		truncateTableHistoryData();
 		_CreateDBTable_TABLE_MINTIME_MAXTIME();
 		truncateSymbolMinMaxTime();
 	}

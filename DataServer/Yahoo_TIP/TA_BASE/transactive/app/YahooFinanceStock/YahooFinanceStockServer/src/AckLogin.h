@@ -25,6 +25,7 @@ public:
 	QString m_strReqUUID;//37
 	QString m_strACKUUID;//37
 
+	QString m_strUserID;//65
 	QString m_strUserName;//65
 	QString m_strPassword;//65
 	QString m_strLastLoginTime;

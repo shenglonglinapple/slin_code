@@ -988,6 +988,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\AckDownLoadTrade.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AckDownLoadTrade.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AckLogin.cpp"
 				>
 			</File>
@@ -1049,6 +1057,14 @@
 			</File>
 			<File
 				RelativePath=".\src\ReqDownLoadStock.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqDownLoadTrade.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ReqDownLoadTrade.h"
 				>
 			</File>
 			<File
@@ -1171,6 +1187,14 @@
 			</File>
 			<File
 				RelativePath=".\src\StockMinTimeMaxTime.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\UserHold.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\UserHold.h"
 				>
 			</File>
 			<File

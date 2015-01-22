@@ -1,34 +1,32 @@
-#include "ReqTrade.h"
+#include "ReqDownLoadTrade.h"
 #include <QtCore/QDataStream>
 #include <QtCore/QVariant>
 #include "UserTradeInfo.h"
 #include "Log4cppLogger.h"
 
-CReqTrade::CReqTrade( void )
+CReqDownLoadTrade::CReqDownLoadTrade( void )
 {
 	_Clear();
 }
 
-CReqTrade::~CReqTrade( void )
+CReqDownLoadTrade::~CReqDownLoadTrade( void )
 {
 	_Clear();
 }
 
-void CReqTrade::_Clear()
+void CReqDownLoadTrade::_Clear()
 {
 	m_nMessageType = CTcpComProtocol::MsgType_Req;
-	m_nDataType = CTcpComProtocol::DataType_Trade;
+	m_nDataType = CTcpComProtocol::DataType_DownLoadTrade;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
 	m_strUserID.clear();
 	m_nTradeType = CTcpComProtocol::ETradeType_Buy;
 	m_strSymbolUse.clear();
-	m_strTradeTime.clear();
-	m_strTradePrice.clear();
-	m_strTradeVolume.clear();
+
 }
 //static
-bool CReqTrade::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
+bool CReqDownLoadTrade::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 {
 	bool bFunRes = false;
 
@@ -36,14 +34,14 @@ bool CReqTrade::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 	CTcpComProtocol::EDataType nDataTypeTmp = (CTcpComProtocol::EDataType)(nDataType);
 
 	if (CTcpComProtocol::MsgType_Req == nMsgTypeTmp
-		&& CTcpComProtocol::DataType_Trade == nDataTypeTmp)
+		&& CTcpComProtocol::DataType_DownLoadTrade == nDataTypeTmp)
 	{
 		bFunRes = true;
 	}
 	return bFunRes;
 }
 
-void CReqTrade::logInfo( const QString& fileName, qint32 lineNumber )
+void CReqDownLoadTrade::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
 		<<" "<<"CReqBuy:"
@@ -53,13 +51,10 @@ void CReqTrade::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
 		<<" "<<"m_strUserID="<<m_strUserID
 		<<" "<<"m_nTradeType="<<CTcpComProtocol::getStringValue(m_nTradeType)
-		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
-		<<" "<<"m_strTradeTime="<<m_strTradeTime
-		<<" "<<"m_strTradePrice="<<m_strTradePrice
-		<<" "<<"m_strTradeVolume="<<m_strTradeVolume;
+		<<" "<<"m_strSymbolUse="<<m_strSymbolUse;
 }
 
-void CReqTrade::setValue(const QByteArray* pMessage )
+void CReqDownLoadTrade::setValue(const QByteArray* pMessage )
 {
 	MYLOG4CPP_DEBUG<<"setValue"
 		<<" "<<"param:"<<" "<<"QByteArray* pMessage=0x"<<pMessage;
@@ -77,9 +72,7 @@ void CReqTrade::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>m_strUserID;
 	readMessageBuffer>>nTradeType;
 	readMessageBuffer>>m_strSymbolUse;
-	readMessageBuffer>>m_strTradeTime;
-	readMessageBuffer>>m_strTradePrice;
-	readMessageBuffer>>m_strTradeVolume;
+
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);
 	m_nDataType = (CTcpComProtocol::EDataType)(nDataType);
@@ -89,7 +82,7 @@ void CReqTrade::setValue(const QByteArray* pMessage )
 
 
 
-QByteArray* CReqTrade::getMessage()
+QByteArray* CReqDownLoadTrade::getMessage()
 {
 	QByteArray* pMessage = NULL;
 
@@ -106,19 +99,14 @@ QByteArray* CReqTrade::getMessage()
 	writeToByteArray<<(m_strUserID);
 	writeToByteArray<<(qint32)(m_nTradeType);
 	writeToByteArray<<(m_strSymbolUse);
-	writeToByteArray<<(m_strTradeTime);
-	writeToByteArray<<(m_strTradePrice);
-	writeToByteArray<<(m_strTradeVolume);
 
 	return pMessage;
 }
 
 
-void CReqTrade::setValue( const CUserTradeInfo* pData )
+void CReqDownLoadTrade::setValue( const CUserTradeInfo* pData )
 {
+	m_strUserID = pData->m_strUseID;
 	m_nTradeType = pData->m_nTradeType;
 	m_strSymbolUse = pData->m_strSymbolUse;
-	m_strTradeTime = pData->m_strTradeTime;
-	m_strTradePrice = QVariant(pData->m_fTradePrice).toString();
-	m_strTradeVolume = QVariant(pData->m_nTradeVolume).toString();
 }

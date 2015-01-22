@@ -20,10 +20,8 @@ void CAckTrade::_Clear()
 	m_nDataType = CTcpComProtocol::DataType_Trade;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
-	m_strUserName.clear();
-	m_strPassword.clear();
+	m_strUserID.clear();
 	m_nTradeType = CTcpComProtocol::ETradeType_Buy;
-	m_strUseID.clear();
 	m_strTradeUUID.clear();
 	m_strSymbolUse.clear();
 	m_strTradeTime.clear();
@@ -44,10 +42,8 @@ void CAckTrade::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
-		<<" "<<"m_strUserName="<<m_strUserName
-		<<" "<<"m_strPassword="<<m_strPassword
+		<<" "<<"m_strUserID="<<m_strUserID
 		<<" "<<"m_nTradeType="<<CTcpComProtocol::getStringValue(m_nTradeType)
-		<<" "<<"m_strUseID="<<m_strUseID
 		<<" "<<"m_strTradeUUID="<<m_strTradeUUID
 		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_strTradeTime="<<m_strTradeTime
@@ -85,14 +81,12 @@ QByteArray* CAckTrade::getMessage()
 	QDataStream writeToByteArray(pMessage, QIODevice::WriteOnly);
 	writeToByteArray.setVersion(QDataStream::Qt_4_0);
 
-	writeToByteArray<<(quint32)(m_nMessageType);
-	writeToByteArray<<(quint32)(m_nDataType);
+	writeToByteArray<<(qint32)(m_nMessageType);
+	writeToByteArray<<(qint32)(m_nDataType);
 	writeToByteArray<<(m_strReqUUID);
 	writeToByteArray<<(m_strACKUUID);
-	writeToByteArray<<(m_strUserName);
-	writeToByteArray<<(m_strPassword);
+	writeToByteArray<<(m_strUserID);
 	writeToByteArray<<(quint32)(m_nTradeType);
-	writeToByteArray<<(m_strUseID);
 	writeToByteArray<<(m_strTradeUUID);
 	writeToByteArray<<(m_strSymbolUse);
 	writeToByteArray<<(m_strTradeTime);
@@ -123,10 +117,8 @@ void CAckTrade::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>nDataType;
 	readMessageBuffer>>m_strReqUUID;
 	readMessageBuffer>>m_strACKUUID;
-	readMessageBuffer>>m_strUserName;
-	readMessageBuffer>>m_strPassword;
+	readMessageBuffer>>m_strUserID;
 	readMessageBuffer>>nTradeType;
-	readMessageBuffer>>m_strUseID;
 	readMessageBuffer>>m_strTradeUUID;
 	readMessageBuffer>>m_strSymbolUse;
 	readMessageBuffer>>m_strTradeTime;
@@ -151,14 +143,12 @@ void CAckTrade::setValue(const CReqTrade* pReq, const CUserTradeInfo* pUserTrade
 	//this->m_nDataType = CTcpComProtocol::DataType_Trade;
 	this->m_strACKUUID = CTcpComProtocol::getUUID();
 	this->m_strReqUUID = pReq->m_strReqUUID;
-	this->m_strUserName = pReq->m_strUserName;
-	this->m_strPassword = pReq->m_strPassword;
 	
 	if (NULL != pUserTradeInfo)
 	{
 		this->m_nTradeType = pReq->m_nTradeType;
 
-		this->m_strUseID = pUserTradeInfo->m_strUseID;
+		this->m_strUserID = pUserTradeInfo->m_strUseID;
 		this->m_strTradeUUID = pUserTradeInfo->m_strTradeUUID;
 		this->m_strSymbolUse = pUserTradeInfo->m_strSymbolUse;
 		this->m_strTradeTime = pUserTradeInfo->m_strTradeTime;

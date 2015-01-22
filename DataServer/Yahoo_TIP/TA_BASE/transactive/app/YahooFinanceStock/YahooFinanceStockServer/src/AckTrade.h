@@ -29,19 +29,15 @@ public:
 	QString m_strReqUUID;//37
 	QString m_strACKUUID;//37
 
-	QString m_strUserName;
-	QString m_strPassword;
-
+	QString m_strUserID;
 	CTcpComProtocol::ETradeType m_nTradeType;
-
-	QString m_strUseID;
 	QString m_strTradeUUID;//37
 
 	QString m_strSymbolUse;
 	QString m_strTradeTime;
 	QString m_strTradePrice;
 	QString m_strTradeVolume;
-	QString m_strFees;//0.07
+	QString m_strFees;//0.007
 	QString m_strTradeAmount;
 	QString m_strTotalTradeFee;//m_strTradeAmount*m_strFees
 	QString m_strTotalTradeAmount;

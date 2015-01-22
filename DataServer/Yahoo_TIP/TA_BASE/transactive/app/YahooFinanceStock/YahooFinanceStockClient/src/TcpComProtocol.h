@@ -20,14 +20,15 @@ public:
 	//4 Bytes
 	enum EDataType
 	{
-		DataType_Login  = 0x00000000,
-		DataType_LogOut  = 0x00000001,
-		DataType_DownLoadStock  = 0x00000002,
-		DataType_SynYahoo  = 0x00000003,
-		DataType_StockMinTimeMaxTime  = 0x00000004,
-		DataType_HistoryData  = 0x00000005,
-		DataType_CreateUser  = 0x00000006,
-		DataType_Trade  = 0x00000007,
+		DataType_Login  = 0x00,
+		DataType_LogOut  = 0x01,
+		DataType_DownLoadStock  = 0x02,
+		DataType_SynYahoo  = 0x03,
+		DataType_StockMinTimeMaxTime  = 0x04,
+		DataType_HistoryData  = 0x05,
+		DataType_CreateUser  = 0x06,
+		DataType_Trade  = 0x07,
+		DataType_DownLoadTrade  = 0x08,
 		DataType_Unknown  = 0x0FFFFFFF,
 	};
 
@@ -42,28 +43,28 @@ public:
 	//4 Bytes
 	enum EDataTypeLoginResult
 	{
-		DataType_LoginResult_OK  = 0x00000000,
-		DataType_LoginResult_ERROR  = 0x00000001,
+		DataType_LoginResult_OK  = 0x00,
+		DataType_LoginResult_ERROR  = 0x01,
 		DataType_LoginResult_Unknown  = 0x0FFFFFFF,
 	};
 
 	//4 Bytes
 	enum EDataTypeLogoutResult
 	{
-		DataType_LogoutResult_OK  = 0x00000000,
-		DataType_LogoutResult_ERROR  = 0x00000001,
+		DataType_LogoutResult_OK  = 0x00,
+		DataType_LogoutResult_ERROR  = 0x01,
 		DataType_LogoutResult_Unknown  = 0x0FFFFFFF,
 	};
 	//4 Bytes
 	enum EDataTypeSynYahooResult
 	{
-		DataType_SynYahooResult_SynYahooStart = 0x00000000,
-		DataType_SynYahooResult_SendReqToYahoo  = 0x00000001,
-		DataType_SynYahooResult_WaitAckFromYahoo  = 0x00000002,
-		DataType_SynYahooResult_RecvAckFromYahoo  = 0x00000003,
-		DataType_SynYahooResult_ProcessAckFromYahoo  = 0x00000004,
-		DataType_SynYahooResult_SynYahooFinished  = 0x00000005,
-		DataType_SynYahooResult_ERROR  = 0x00000006,
+		DataType_SynYahooResult_SynYahooStart = 0x00,
+		DataType_SynYahooResult_SendReqToYahoo  = 0x001,
+		DataType_SynYahooResult_WaitAckFromYahoo  = 0x02,
+		DataType_SynYahooResult_RecvAckFromYahoo  = 0x03,
+		DataType_SynYahooResult_ProcessAckFromYahoo  = 0x04,
+		DataType_SynYahooResult_SynYahooFinished  = 0x05,
+		DataType_SynYahooResult_ERROR  = 0x06,
 		DataType_SynYahooResult_Unknown  = 0x0FFFFFFF,
 	};
 public:

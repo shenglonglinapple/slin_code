@@ -55,6 +55,7 @@ static const char*  str_TABLE_USER_HOLD = "TABLE_USER_HOLD";
 //
 static const char*  str_TABLE_USER_HOLD_COLUMN_USEID = "COLUMN_USEID";
 static const char*  str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE = "COLUMN_SYMBOLUSE";
+static const char*  str_TABLE_USER_HOLD_COLUMN_BUY_UUID = "COLUMN_BUY_UUID";
 static const char*  str_TABLE_USER_HOLD_COLUMN_BUY_TIME = "COLUMN_BUY_TIME";
 static const char*  str_TABLE_USER_HOLD_COLUMN_BUY_PRICE = "COLUMN_BUY_PRICE";
 static const char*  str_TABLE_USER_HOLD_COLUMN_BUY_VOLUME = "COLUMN_BUY_VOLUME";

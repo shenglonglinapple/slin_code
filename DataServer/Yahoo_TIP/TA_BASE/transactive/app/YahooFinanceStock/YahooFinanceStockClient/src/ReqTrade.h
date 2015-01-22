@@ -28,8 +28,7 @@ public:
 	QString m_strReqUUID;//37
 	QString m_strACKUUID;//37
 
-	QString m_strUserName;
-	QString m_strPassword;
+	QString m_strUserID;
 
 	CTcpComProtocol::ETradeType m_nTradeType;
 	QString m_strSymbolUse;

@@ -1,17 +1,18 @@
-#ifndef __CLASS_ACK_LOGIN_H__
-#define __CLASS_ACK_LOGIN_H__
+#ifndef __CLASS_REQ_DOWNLOAD_TRADE_H__
+#define __CLASS_REQ_DOWNLOAD_TRADE_H__
 
 #include <QtCore/QObject>
 #include <Qtcore/QByteArray>
 
 #include "TcpComProtocol.h"
 
+class CUserTradeInfo;
 
-class CAckLogin
+class CReqDownLoadTrade
 {
 public:
-    CAckLogin(void);
-	~CAckLogin(void);
+    CReqDownLoadTrade(void);
+	~CReqDownLoadTrade(void);
 private:
 	void _Clear();
 public:
@@ -20,19 +21,19 @@ public:
 	QByteArray* getMessage();
 	void logInfo( const QString& fileName, qint32 lineNumber );
 public:
-	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::EMsgType
+	void setValue(const CUserTradeInfo* pData);
+public:
+	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::MsgType_Req
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
 	QString m_strReqUUID;//37
 	QString m_strACKUUID;//37
 
-	QString m_strUserID;//65
-	QString m_strUserName;//65
-	QString m_strPassword;//65
-	QString m_strLastLoginTime;
-	qint32 m_nLoginCount;
-	qint32 m_nState;
+	QString m_strUserID;
 
-	CTcpComProtocol::EDataTypeLoginResult m_nLoginResult;
+	CTcpComProtocol::ETradeType m_nTradeType;
+	QString m_strSymbolUse;
+
+
 };
 
-#endif//__CLASS_ACK_LOGIN_H__
+#endif//__CLASS_REQ_DOWNLOAD_TRADE_H__

@@ -32,9 +32,10 @@ public:
 public:
 	qint32 insertUserTradeInfo(quint16 nListenPort, const CUserTradeInfo* pData);
 	qint32 insertUserHold(quint16 nListenPort, const CUserHold* pData);
+public:
+	void select_UserHold(const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData );
 
 	
-public:
 private:
 	void _UnInitDataBase();
 	void _InitDataBase();

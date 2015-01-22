@@ -20,8 +20,7 @@ void CReqTrade::_Clear()
 	m_nDataType = CTcpComProtocol::DataType_Trade;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
-	m_strUserName.clear();
-	m_strPassword.clear();
+	m_strUserID.clear();
 	m_nTradeType = CTcpComProtocol::ETradeType_Buy;
 	m_strSymbolUse.clear();
 	m_strTradeTime.clear();
@@ -52,8 +51,7 @@ void CReqTrade::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
-		<<" "<<"m_strUserName="<<m_strUserName
-		<<" "<<"m_strPassword="<<m_strPassword
+		<<" "<<"m_strUserID="<<m_strUserID
 		<<" "<<"m_nTradeType="<<CTcpComProtocol::getStringValue(m_nTradeType)
 		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_strTradeTime="<<m_strTradeTime
@@ -76,8 +74,7 @@ void CReqTrade::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>nDataType;
 	readMessageBuffer>>m_strReqUUID;
 	readMessageBuffer>>m_strACKUUID;
-	readMessageBuffer>>m_strUserName;
-	readMessageBuffer>>m_strPassword;
+	readMessageBuffer>>m_strUserID;
 	readMessageBuffer>>nTradeType;
 	readMessageBuffer>>m_strSymbolUse;
 	readMessageBuffer>>m_strTradeTime;
@@ -102,13 +99,12 @@ QByteArray* CReqTrade::getMessage()
 	QDataStream writeToByteArray(pMessage, QIODevice::WriteOnly);
 	writeToByteArray.setVersion(QDataStream::Qt_4_0);
 
-	writeToByteArray<<(quint32)(m_nMessageType);
-	writeToByteArray<<(quint32)(m_nDataType);
+	writeToByteArray<<(qint32)(m_nMessageType);
+	writeToByteArray<<(qint32)(m_nDataType);
 	writeToByteArray<<(m_strReqUUID);
 	writeToByteArray<<(m_strACKUUID);
-	writeToByteArray<<(m_strUserName);
-	writeToByteArray<<(m_strPassword);
-	writeToByteArray<<(quint32)(m_nTradeType);
+	writeToByteArray<<(m_strUserID);
+	writeToByteArray<<(qint32)(m_nTradeType);
 	writeToByteArray<<(m_strSymbolUse);
 	writeToByteArray<<(m_strTradeTime);
 	writeToByteArray<<(m_strTradePrice);

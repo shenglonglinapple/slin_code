@@ -57,6 +57,7 @@ CClientDataManager::CClientDataManager(void)
 {
 	m_strServerIP.clear();
 	m_nServerPort = 0;
+	m_strUserID.clear();
 	m_strUserName.clear();
 	m_strPassWord.clear();
 	m_nHandle = 0;
@@ -114,17 +115,20 @@ QString strUserName, QString strPassWord )
 	send_req_CReqLogin(nHandle, m_strUserName, m_strPassWord);
 }
 
-void CClientDataManager::loginedToServer( qint32 nHandle, QString strUserName, QString strPassWord )
+void CClientDataManager::loginedToServer(qint32 nHandle, const QString& strUserID)
 {
+	m_strUserID = strUserID;
 	MYLOG4CPP_DEBUG<<"CClientDataManager loginedToServer"
 		<<" "<<"nHandle="<<nHandle
 		<<" "<<"m_strServerIP="<<m_strServerIP
 		<<" "<<"m_nServerPort="<<m_nServerPort
+		<<" "<<"m_strUserID="<<m_strUserID
 		<<" "<<"m_strUserName="<<m_strUserName
 		<<" "<<"m_strPassWord="<<m_strPassWord;
 
 	QString strShowMsg = "logined To Server ";
-	strShowMsg=strShowMsg + QString("nHandle=%1 strUserName=%2 strPassWord=%3").arg(nHandle).arg(strUserName).arg(strPassWord);
+	strShowMsg=strShowMsg + QString("nHandle=%1 strUserName=%2 strPassWord=%3 strUserID=%4")
+		.arg(nHandle).arg(m_strUserName).arg(m_strPassWord).arg(m_strUserID);
 
 	CSignalSlotManager::getInstance().emit_ShownMessage(strShowMsg);
 	send_req_ReqDownLoadStock(nHandle);
@@ -301,8 +305,7 @@ void CClientDataManager::send_req_NewOrder( const CUserTradeInfo* pData )
 	pReq->setValue(pData);
 	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
 	pReq->m_strACKUUID = "NULL";
-	pReq->m_strUserName = m_strUserName;
-	pReq->m_strPassword = m_strPassWord;
+	pReq->m_strUserID = m_strUserID;//set User ID
 	pReq->logInfo(__FILE__, __LINE__);
 	pByteArray = pReq->getMessage();
 	CClientWorkerManager::getInstance().sendMessage(m_nHandle, pByteArray);

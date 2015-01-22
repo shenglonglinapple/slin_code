@@ -16,7 +16,7 @@
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
-
+#include "ReqDownLoadTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -26,7 +26,7 @@
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
 #include "AckTrade.h"
-
+#include "AckDownLoadTrade.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
 {
@@ -133,6 +133,10 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	else if (CReqTrade::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_ReqTrade();		
+	}
+	else if (CReqDownLoadTrade::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqDownLoadTrade();
 	}
 	
 }
@@ -263,6 +267,22 @@ void CMessageRunnable::_ProcessMessage_ReqTrade()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_ReqDownLoadTrade()
+{
+	CReqDownLoadTrade* pReq = NULL;
+	pReq = new CReqDownLoadTrade();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	m_pMessageProcesser->processReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType )
@@ -298,6 +318,10 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckTrade::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckTrade();
+	}
+	else if (CAckDownLoadTrade::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckDownLoadTrade();
 	}
 }
 
@@ -418,6 +442,22 @@ void CMessageRunnable::_ProcessMessage_AckTrade()
 {
 	CAckTrade* pAck = NULL;
 	pAck = new CAckTrade();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	m_pMessageProcesser->processAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageRunnable::_ProcessMessage_AckDownLoadTrade()
+{
+	CAckDownLoadTrade* pAck = NULL;
+	pAck = new CAckDownLoadTrade();
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 

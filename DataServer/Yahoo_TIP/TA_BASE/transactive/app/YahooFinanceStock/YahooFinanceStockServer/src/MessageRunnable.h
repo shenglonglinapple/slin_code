@@ -26,6 +26,7 @@ private:
 	void _ProcessMessage_ReqStockHistoryData();
 	void _ProcessMessage_ReqCreateUser();
 	void _ProcessMessage_ReqTrade();
+	void _ProcessMessage_ReqDownLoadTrade();
 private:
 	void _ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType);
 	void _ProcessMessage_AckLogin();
@@ -36,6 +37,8 @@ private:
 	void _ProcessMessage_AckStockHistoryData();
 	void _ProcessMessage_AckCreateUser();
 	void _ProcessMessage_AckTrade();
+	void _ProcessMessage_AckDownLoadTrade();
+
 private:
 	qint32 m_nHanle;
 	QByteArray* m_pMessage; 

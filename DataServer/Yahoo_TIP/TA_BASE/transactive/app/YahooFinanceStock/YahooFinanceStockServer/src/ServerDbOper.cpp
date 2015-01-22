@@ -485,6 +485,7 @@ qint32 CServerDbOper::_AddUserHold( const CUserHold* pData )
 
 	QVariantList COLUMN_USEID;
 	QVariantList COLUMN_SYMBOLUSE;
+	QVariantList COLUMN_BUY_UUID;
 	QVariantList COLUMN_BUY_TIME;
 
 	
@@ -521,6 +522,7 @@ qint32 CServerDbOper::_AddUserHold( const CUserHold* pData )
 	{
 		COLUMN_USEID << pData->m_strUseID;
 		COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
+		COLUMN_BUY_UUID << pData->m_strBuyUUID;
 		COLUMN_BUY_TIME << pData->m_strBuyTime;
 
 		COLUMN_BUY_PRICE << pData->m_fBuyPrice;
@@ -541,13 +543,22 @@ qint32 CServerDbOper::_AddUserHold( const CUserHold* pData )
 	//pQSqlQueryForInseert->addBindValue(lstInstrumentID);
 	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
 	pQSqlQueryForInseert->addBindValue(COLUMN_SYMBOLUSE);
+	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_UUID);
 	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_TIME);
 
 	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_PRICE);
 	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_VOLUME);
 	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_FEES);
 
+	pQSqlQueryForInseert->addBindValue(COLUMN_BUY_AMOUNT);
+	pQSqlQueryForInseert->addBindValue(COLUMN_CURRENT_TIME);
+	pQSqlQueryForInseert->addBindValue(COLUMN_CURRENT_PRICE);
 
+	pQSqlQueryForInseert->addBindValue(COLUMN_CURRENT_FEES);
+	pQSqlQueryForInseert->addBindValue(COLUMN_CURRENT_AMOUNT);
+	pQSqlQueryForInseert->addBindValue(COLUMN_PROFIT_LOSS);
+
+	pQSqlQueryForInseert->addBindValue(COLUMN_PROFIT_LOSS_PERSENTAGE);
 
 	bExecRes = pQSqlQueryForInseert->execBatch();
 	if (!bExecRes)
@@ -563,4 +574,77 @@ qint32 CServerDbOper::_AddUserHold( const CUserHold* pData )
 		pQSqlQueryForInseert = NULL;
 	}
 	return nFunRes;
+}
+
+void CServerDbOper::select_UserHold( const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData )
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_HOLD(strUserID, strSymbolUse);
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	while ( pSqlQuery->next() )
+	{
+		CUserHold* pData = NULL;
+		pData = new CUserHold();
+		nColumnIndex = 0;
+		pData->m_strUseID = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_strBuyUUID = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_strBuyTime = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_fBuyPrice = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_nBuyVolume = pSqlQuery->value(nColumnIndex).toInt();
+		nColumnIndex++;
+		pData->m_fBuyFees = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_fBuyAmount = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_strCurrentTime = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_fCurrentPrice = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_fCurrentFees = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_fCurrentAmount = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_fProfitLoss = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_fProfitLossPersentage = pSqlQuery->value(nColumnIndex).toDouble();
+		
+		lstData.push_back(pData);
+		pData = NULL;
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
+	return nFunRes;
+
+	
 }

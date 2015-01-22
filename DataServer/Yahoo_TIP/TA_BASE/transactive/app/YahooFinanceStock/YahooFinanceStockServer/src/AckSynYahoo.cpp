@@ -56,11 +56,11 @@ QByteArray* CAckSynYahoo::getMessage()
 	QDataStream writeToByteArray(pMessage, QIODevice::WriteOnly);
 	writeToByteArray.setVersion(QDataStream::Qt_4_0);
 
-	writeToByteArray<<(quint32)(m_nMessageType);
-	writeToByteArray<<(quint32)(m_nDataType);
+	writeToByteArray<<(qint32)(m_nMessageType);
+	writeToByteArray<<(qint32)(m_nDataType);
 	writeToByteArray<<(m_strReqUUID);
 	writeToByteArray<<(m_strACKUUID);
-	writeToByteArray<<(quint32)(m_nResult);
+	writeToByteArray<<(qint32)(m_nResult);
 
 	return pMessage;	
 }

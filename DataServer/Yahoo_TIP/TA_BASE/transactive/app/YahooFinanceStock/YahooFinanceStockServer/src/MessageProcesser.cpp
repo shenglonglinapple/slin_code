@@ -12,7 +12,7 @@
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
-
+#include "ReqDownLoadTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -22,7 +22,7 @@
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
 #include "AckTrade.h"
-
+#include "AckDownLoadTrade.h"
 
 #include "Log4cppLogger.h"
 
@@ -35,6 +35,7 @@
 #include "WorkTime.h"
 #include "UserInfo.h"
 #include "UserTradeInfo.h"
+#include "UserHold.h"
 #include "ConfigInfo.h"
 
 
@@ -82,6 +83,7 @@ void CMessageProcesser::processReq(const CReqLogin* pReq )
 	pAckLogin->m_nDataType = CTcpComProtocol::DataType_Login;
 	pAckLogin->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAckLogin->m_strReqUUID = pReq->m_strReqUUID;
+	pAckLogin->m_strUserID = pGetUserInfo->m_strUSEID;
 	pAckLogin->m_strUserName = pGetUserInfo->m_strUSERNAME;
 	pAckLogin->m_strPassword = pGetUserInfo->m_strPASSWORD;
 	pAckLogin->m_strLastLoginTime = pGetUserInfo->m_strLASTLOGINTIME;
@@ -346,32 +348,34 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 {
 	CAckTrade* pAck = NULL;
 	QByteArray* pByteArray = NULL;
-	CUserInfo* pGetUserInfo = NULL;
 	quint16 nListenPort = 0;
 	qint32 nFunRes = 0;
 	CUserTradeInfo* pUserTradeInfo = NULL;
 	CUserHold* pUserHold = NULL;
 
 	nListenPort = CConfigInfo::getInstance().getServerPort();
-	nFunRes = CServerManager::getInstance().getUserInfo(nListenPort, pReq->m_strUserName, pReq->m_strPassword, &pGetUserInfo);
 	
 	pAck = new CAckTrade();
-	if (NULL == pGetUserInfo)
+	if (pReq->m_strUserID.isEmpty())
 	{
 		pAck->setValue(pReq, NULL);
 	}
 	else
 	{
 		pUserTradeInfo = new CUserTradeInfo();
-		pUserTradeInfo->setValue(pGetUserInfo->m_strUSEID, pReq);
+		pUserTradeInfo->setValue(pReq->m_strUserID, pReq);
 		CServerManager::getInstance().createUserTradeInfo(nListenPort, pUserTradeInfo);
 		if (CTcpComProtocol::ETradeType_Buy == pUserTradeInfo->m_nTradeType)
 		{
 			pUserHold = new CUserHold();
 			pUserHold->setValue(pUserTradeInfo);
-			CServerManager::getInstance().createUserTradeInfo(nListenPort, pUserTradeInfo);
-
-		}
+			CServerManager::getInstance().createUserHold(nListenPort, pUserHold);
+			if (NULL != pUserHold)
+			{
+				delete pUserHold;
+				pUserHold = NULL;
+			}
+		}//CTcpComProtocol::ETradeType_Buy
 
 		pAck->setValue(pReq, pUserTradeInfo);
 		if (NULL != pUserTradeInfo)
@@ -379,20 +383,41 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 			delete pUserTradeInfo;
 			pUserTradeInfo = NULL;
 		}
-		if (NULL != pUserHold)
-		{
-			delete pUserHold;
-			pUserHold = NULL;
-		}
-	}
-	if (NULL != pGetUserInfo)
-	{
-		delete pGetUserInfo;
-		pGetUserInfo = NULL;
 	}
 
 	pByteArray = pAck->getMessage();
 	pAck->logInfo(__FILE__, __LINE__);
+	CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);
+
+	pByteArray = NULL;
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageProcesser::processReq( const CReqDownLoadTrade* pReq )
+{
+	CAckDownLoadTrade* pAck = NULL;
+	QByteArray* pByteArray = NULL;
+	QList<CUserHold*> lstData;
+
+	CStockDataManager::getInstance().doWork_HistoryData(
+		pReq->m_strSymbolUse, pReq->m_strTimeFrom, pReq->m_strTimeTo, lstData);
+
+	pAck = new CAckStockHistoryData();
+	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
+	pAck->m_nDataType = CTcpComProtocol::DataType_HistoryData;
+	pAck->m_strReqUUID = pReq->m_strReqUUID;
+	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+	pAck->m_strSymbolUse = pReq->m_strSymbolUse;
+	pAck->m_nDataCount = lstData.size();
+	pAck->m_LstHistoryData.append(lstData);
+	lstData.clear();
+
+	pAck->logInfo(__FILE__, __LINE__);
+	pByteArray = pAck->getMessage();
 	CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);
 
 	pByteArray = NULL;
@@ -440,6 +465,11 @@ void CMessageProcesser::processAck( const CAckCreateUser* pAck )
 }
 
 void CMessageProcesser::processAck( const CAckTrade* pAck )
+{
+
+}
+
+void CMessageProcesser::processAck( const CAckDownLoadTrade* pAck )
 {
 
 }

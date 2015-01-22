@@ -12,6 +12,7 @@
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
+#include "ReqDownLoadTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -21,6 +22,7 @@
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
 #include "AckTrade.h"
+#include "AckDownLoadTrade.h"
 
 #include "ClientDataManager.h"
 #include "StockDataManager.h"
@@ -87,6 +89,10 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 	return;
 }
 
+void CMessageProcesser::processReq( const CReqDownLoadTrade* pReq )
+{
+
+}
 //////////////////////////////////////////////////////////////////////////
 void CMessageProcesser::processAck( const CAckLogin* pAck )
 {
@@ -95,7 +101,7 @@ void CMessageProcesser::processAck( const CAckLogin* pAck )
 	//pMessageManagerRef->sendReqSynYahoo(m_nHanle, "000001.SZ");
 	//pMessageManagerRef->sendReqDownLoadStock(m_nHanle);
 	//CClientDBManager::getInstance().opendb(pAck->m_strUserName, pAck->m_strPassword);
-	CClientDataManager::getInstance().loginedToServer(m_nHanle, pAck->m_strUserName, pAck->m_strPassword);
+	CClientDataManager::getInstance().loginedToServer(m_nHanle, pAck->m_strUserID);
 	return;
 }
 
@@ -155,3 +161,7 @@ void CMessageProcesser::processAck( const CAckTrade* pAck )
 	pUserTradeInfo = NULL;
 }
 
+void CMessageProcesser::processAck( const CAckDownLoadTrade* pAck )
+{
+
+}

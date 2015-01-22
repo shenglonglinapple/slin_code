@@ -60,7 +60,7 @@ void CUserTradeInfo::setValue(const QString& strUseID, const CReqTrade* pReq )
 	this->m_strSymbolUse = pReq->m_strSymbolUse;
 	this->m_fTradePrice = pReq->m_strTradePrice.toDouble();
 	this->m_nTradeVolume = pReq->m_strTradeVolume.toInt();
-	this->m_fTradeFees = 0.07;
+	this->m_fTradeFees = 0.007;
 
 	m_fTradeAmount = m_fTradePrice*m_nTradeVolume;
 	m_fTotalTradeFee = m_fTradeAmount*m_fTradeFees;
@@ -71,7 +71,7 @@ void CUserTradeInfo::setValue(const QString& strUseID, const CReqTrade* pReq )
 void CUserTradeInfo::setValue( const CAckTrade* pAck )
 {
 	clear();
-	m_strUseID = pAck->m_strUseID;
+	m_strUseID = pAck->m_strUserID;
 	m_strTradeUUID = pAck->m_strTradeUUID;
 	m_strTradeTime = pAck->m_strTradeTime;
 	m_nTradeType = pAck->m_nTradeType;

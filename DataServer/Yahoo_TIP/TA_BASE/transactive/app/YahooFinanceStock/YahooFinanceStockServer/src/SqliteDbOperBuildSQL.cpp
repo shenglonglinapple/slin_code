@@ -571,7 +571,8 @@ QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_HOLD()
 		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<str_TABLE_USER_HOLD
 			<<" "<<"("
 			<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<" "<<"TEXT NOT NULL"<<","
-			<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<" "<<"TEXT NOT NULL"<<","			
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<" "<<"TEXT NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_UUID<<" "<<"TEXT NOT NULL"<<","
 			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_TIME<<" "<<"TIMESTAMP NOT NULL"<<","
 			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_PRICE<<" "<<"decimal(25,10) NOT NULL"<<","
 			<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_VOLUME<<" "<<"INTEGER NOT NULL"<<","
@@ -611,6 +612,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_HOLD()
 		<<" "<<"("
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<","
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_UUID<<","
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_TIME<<","
 
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_PRICE<<","
@@ -629,6 +631,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_HOLD()
 		<<" "<<")"
 		<<" "<<"VALUES"
 		<<" "<<"("
+		<<" "<<"?"<<","
 		<<" "<<"?"<<","
 		<<" "<<"?"<<","
 		<<" "<<"?"<<","
@@ -659,6 +662,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_HOLD( const QString& s
 	byteSQL<<"SELECT"
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<","
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_UUID<<","
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_TIME<<","
 
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_PRICE<<","
@@ -679,6 +683,56 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_HOLD( const QString& s
 		<<" "<<str_TABLE_USER_HOLD
 		<<" "<<"WHERE"
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\""
+		<<" "<<"ORDER BY"
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_TIME
+		<<" "<<"ASC";//ASC min->max   DESC max->min
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_HOLD( const QString& strUserID, const QString& strSymbolUse )
+{
+	QString  strSQL;
+	std::stringstream byteSQL_Where;
+	std::stringstream byteSQL;
+
+	if (false == strSymbolUse.isEmpty())
+	{
+		byteSQL_Where<<" "<<"WHERE"
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\""
+			<<" "<<"AND"
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\""
+	}
+	else
+	{
+		byteSQL_Where<<" "<<"WHERE"
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\"";
+	}
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_UUID<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_TIME<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_PRICE<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_VOLUME<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_FEES<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_BUY_AMOUNT<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_TIME<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_PRICE<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_FEES<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_AMOUNT<<","
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS<<","
+
+		<<" "<<str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS_PERSENTAGE
+
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_USER_HOLD
+		<<" "<<byteSQL_Where.str().c_str()
 		<<" "<<"ORDER BY"
 		<<" "<<str_TABLE_USER_HOLD_COLUMN_CURRENT_TIME
 		<<" "<<"ASC";//ASC min->max   DESC max->min

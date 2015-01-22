@@ -18,6 +18,7 @@ void CAckLogin::_Clear()
 	m_nDataType = CTcpComProtocol::DataType_Login;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
+	m_strUserID.clear();
 	m_strUserName.clear();
 	m_strPassword.clear();
 	m_strLastLoginTime.clear();
@@ -33,7 +34,8 @@ void CAckLogin::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
-		<<" "<<"m_strACKUUID="<<m_strACKUUID
+		<<" "<<"m_strACKUUID="<<m_strACKUUID		
+		<<" "<<"m_strUserID="<<m_strUserID
 		<<" "<<"m_strUserName="<<m_strUserName
 		<<" "<<"m_strPassword="<<m_strPassword
 		<<" "<<"m_strLastLoginTime="<<m_strLastLoginTime
@@ -66,16 +68,17 @@ QByteArray* CAckLogin::getMessage()
 	QDataStream writeToByteArray(pMessage, QIODevice::WriteOnly);
 	writeToByteArray.setVersion(QDataStream::Qt_4_0);
 
-	writeToByteArray<<(quint32)(m_nMessageType);
-	writeToByteArray<<(quint32)(m_nDataType);
+	writeToByteArray<<(qint32)(m_nMessageType);
+	writeToByteArray<<(qint32)(m_nDataType);
 	writeToByteArray<<(m_strReqUUID);
 	writeToByteArray<<(m_strACKUUID);
+	writeToByteArray<<(m_strUserID);
 	writeToByteArray<<(m_strUserName);
 	writeToByteArray<<(m_strPassword);
 	writeToByteArray<<(m_strLastLoginTime);
 	writeToByteArray<<(m_nLoginCount);
 	writeToByteArray<<(m_nState);
-	writeToByteArray<<(quint32)(m_nLoginResult);
+	writeToByteArray<<(qint32)(m_nLoginResult);
 
 	return pMessage;	
 }
@@ -94,6 +97,7 @@ void CAckLogin::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>nDataType;
 	readMessageBuffer>>m_strReqUUID;
 	readMessageBuffer>>m_strACKUUID;
+	readMessageBuffer>>m_strUserID;
 	readMessageBuffer>>m_strUserName;
 	readMessageBuffer>>m_strPassword;
 	readMessageBuffer>>m_strLastLoginTime;

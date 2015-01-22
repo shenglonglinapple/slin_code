@@ -30,7 +30,7 @@ private:
 	~CClientDataManager(void);
 public:
 	void connectedToServer(qint32 nHandle, QString strServerIP, quint16 nServerPort, QString strUserName, QString strPassWord);
-	void loginedToServer(qint32 nHandle, QString strUserName, QString strPassWord);
+	void loginedToServer(qint32 nHandle, const QString& strUserID);
 	void downLoadStockFromServer(qint32 nHandle);
 public:
 	void resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
@@ -48,6 +48,7 @@ public:
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;
+	QString m_strUserID;
 	QString m_strUserName;
 	QString m_strPassWord;
 	qint32 m_nHandle;

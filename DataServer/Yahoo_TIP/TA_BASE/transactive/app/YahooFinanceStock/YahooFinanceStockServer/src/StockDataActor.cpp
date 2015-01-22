@@ -73,3 +73,4 @@ int CStockDataActor::selectData( const QString & strFrom, const QString & strTo,
 }
 
 
+
