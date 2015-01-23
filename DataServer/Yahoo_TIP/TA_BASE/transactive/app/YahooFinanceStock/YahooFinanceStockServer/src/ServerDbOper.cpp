@@ -391,7 +391,7 @@ qint32 CServerDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 	pQSqlQueryForInseert->prepare(strSQL);
 
 	{
-		lst_COLUMN_USEID << pData->m_strUseID;
+		lst_COLUMN_USEID << pData->m_strUserID;
 		lst_COLUMN_TRADE_UUID << pData->m_strTradeUUID;
 		lst_COLUMN_TRADE_TIME << pData->m_strTradeTime;
 		lst_COLUMN_TRADE_TYPE << (qint32)pData->m_nTradeType;
@@ -520,7 +520,7 @@ qint32 CServerDbOper::_AddUserHold( const CUserHold* pData )
 	pQSqlQueryForInseert->prepare(strSQL);
 
 	{
-		COLUMN_USEID << pData->m_strUseID;
+		COLUMN_USEID << pData->m_strUserID;
 		COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
 		COLUMN_BUY_UUID << pData->m_strBuyUUID;
 		COLUMN_BUY_TIME << pData->m_strBuyTime;
@@ -576,7 +576,7 @@ qint32 CServerDbOper::_AddUserHold( const CUserHold* pData )
 	return nFunRes;
 }
 
-void CServerDbOper::select_UserHold( const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData )
+qint32 CServerDbOper::select_UserHold( const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = true;
@@ -606,7 +606,7 @@ void CServerDbOper::select_UserHold( const QString& strUserID, const QString& st
 		CUserHold* pData = NULL;
 		pData = new CUserHold();
 		nColumnIndex = 0;
-		pData->m_strUseID = pSqlQuery->value(nColumnIndex).toString();
+		pData->m_strUserID = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
 		pData->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
@@ -647,4 +647,73 @@ void CServerDbOper::select_UserHold( const QString& strUserID, const QString& st
 	return nFunRes;
 
 	
+}
+
+qint32 CServerDbOper::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID )
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQL;
+	QSqlQuery* pSqlQuery = NULL;
+	int nColumnIndex = 0;
+
+	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_TRADE_INFO(strUserID);
+	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
+	bExecRes = pSqlQuery->exec(strSQL);
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
+			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+
+		delete pSqlQuery;
+		pSqlQuery = NULL;		
+		return nFunRes;
+	}
+
+	while ( pSqlQuery->next() )
+	{
+		CUserTradeInfo* pData = NULL;
+		pData = new CUserTradeInfo();
+
+		nColumnIndex = 0;
+		pData->m_strUserID = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_strTradeUUID = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_strTradeTime = pSqlQuery->value(nColumnIndex).toString();
+
+		nColumnIndex++;
+		pData->m_nTradeType = (CTcpComProtocol::ETradeType)(pSqlQuery->value(nColumnIndex).toInt());
+		nColumnIndex++;
+		pData->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
+		pData->m_fTradePrice = pSqlQuery->value(nColumnIndex).toDouble();
+
+		nColumnIndex++;
+		pData->m_nTradeVolume = pSqlQuery->value(nColumnIndex).toInt();
+		nColumnIndex++;
+		pData->m_fTradeAmount = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_fTradeFees = pSqlQuery->value(nColumnIndex).toDouble();
+
+		nColumnIndex++;
+		pData->m_fTotalTradeFee = pSqlQuery->value(nColumnIndex).toDouble();
+		nColumnIndex++;
+		pData->m_fTotalTradeAmount = pSqlQuery->value(nColumnIndex).toDouble();
+
+		lstData.push_back(pData);
+		pData = NULL;
+	}//while
+
+	if (NULL != pSqlQuery)
+	{
+		delete pSqlQuery;
+		pSqlQuery = NULL;
+	}
+
+	return nFunRes;
 }

@@ -411,7 +411,7 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 	pQSqlQueryForInseert->prepare(strSQL);
 
 	{
-		lst_COLUMN_USEID << pData->m_strUseID;
+		lst_COLUMN_USEID << pData->m_strUserID;
 		lst_COLUMN_TRADE_UUID << pData->m_strTradeUUID;
 		lst_COLUMN_TRADE_TIME << pData->m_strTradeTime;
 		lst_COLUMN_TRADE_TYPE << (qint32)pData->m_nTradeType;

@@ -17,6 +17,7 @@
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
 #include "ReqDownLoadTrade.h"
+#include "ReqHistoryTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -27,6 +28,10 @@
 #include "AckCreateUser.h"
 #include "AckTrade.h"
 #include "AckDownLoadTrade.h"
+#include "AckHistoryTrade.h"
+
+
+
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
 {
@@ -282,7 +287,21 @@ void CMessageRunnable::_ProcessMessage_ReqDownLoadTrade()
 		pReq = NULL;
 	}
 }
+void CMessageRunnable::_ProcessMessage_ReqHistoryTrade()
+{
+	CReqHistoryTrade* pReq = NULL;
+	pReq = new CReqHistoryTrade();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
 
+	m_pMessageProcesser->processReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType )
@@ -469,4 +488,18 @@ void CMessageRunnable::_ProcessMessage_AckDownLoadTrade()
 		pAck = NULL;
 	}
 }
+void CMessageRunnable::_ProcessMessage_AckHistoryTrade()
+{
+	CAckHistoryTrade* pAck = NULL;
+	pAck = new CAckHistoryTrade();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
 
+	m_pMessageProcesser->processAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}

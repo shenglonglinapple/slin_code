@@ -8,6 +8,7 @@
 #include <QtCore/QMutexLocker>
 
 #include <QtCore/QMap>
+#include <QtCore/QList>
 
 
 class CTcpServerWorker;
@@ -33,11 +34,15 @@ public:
 	void createServer();
 	void destoryServer();
 public:
-	qint32 getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
+	qint32 selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
 	qint32 createUserHold( quint16 nListenPort, const CUserHold* pData );
+public:
+	qint32 selectUserTradeInfo(quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID);
+
+
 public:
 	void sendMessage(quint16 nListenPort, qint32 handle, QByteArray* pMessage);
 

@@ -3,6 +3,8 @@
 
 #include "MyQtThread.h"
 
+#include <QtCore/QList>
+
 class CStockTcpServer;
 class CServerDistributeTaskWorker;
 class CServerDbOper;
@@ -29,12 +31,13 @@ public:
 
 
 public:
-	qint32 getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
+	qint32 selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
 	qint32 createUserHold( quint16 nListenPort, const CUserHold* pData );
-
+public:
+	qint32 selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID);
 private:
 	quint16 m_nListenPort;
 	CStockTcpServer* m_pStockTcpServer;

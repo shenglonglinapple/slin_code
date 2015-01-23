@@ -246,7 +246,7 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
-	m_pUserTradeInfo->m_strUseID.clear();
+	m_pUserTradeInfo->m_strUserID.clear();
 	m_pUserTradeInfo->m_strTradeUUID = "NULL";
 	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
 	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Buy;
@@ -276,7 +276,7 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
-	m_pUserTradeInfo->m_strUseID.clear();
+	m_pUserTradeInfo->m_strUserID.clear();
 	m_pUserTradeInfo->m_strTradeUUID = "NULL";
 	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
 	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Sell;

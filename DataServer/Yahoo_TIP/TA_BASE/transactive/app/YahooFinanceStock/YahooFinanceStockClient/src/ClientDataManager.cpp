@@ -19,6 +19,7 @@
 #include "ReqStockMinTimeMaxTime.h"
 #include "ReqStockHistoryData.h"
 #include "ReqTrade.h"
+#include "ReqHistoryTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -112,7 +113,7 @@ QString strUserName, QString strPassWord )
 		QString("nHandle=%1 strServerIP=%2 nServerPort=%3").arg(nHandle).arg(strServerIP).arg(nServerPort)
 		);
 
-	send_req_CReqLogin(nHandle, m_strUserName, m_strPassWord);
+	send_req_ReqLogin(nHandle, m_strUserName, m_strPassWord);
 }
 
 void CClientDataManager::loginedToServer(qint32 nHandle, const QString& strUserID)
@@ -136,6 +137,7 @@ void CClientDataManager::loginedToServer(qint32 nHandle, const QString& strUserI
 
 void CClientDataManager::downLoadStockFromServer( qint32 nHandle )
 {
+	QString strSymbolUse;
 	MYLOG4CPP_DEBUG<<"CClientDataManager downLoadStockFromServer"
 		<<" "<<"nHandle="<<nHandle;
 
@@ -151,12 +153,15 @@ void CClientDataManager::downLoadStockFromServer( qint32 nHandle )
 	iterLst = lstSymbolUse.begin();
 	while (iterLst != lstSymbolUse.end())
 	{
+		strSymbolUse = (*iterLst);
 		//TODO.forTest
-		//send_req_ReqSynYahoo(nHandle, (*iterLst));
-		send_req_ReqStockMinTimeMaxTime(nHandle, (*iterLst));
+		//send_req_ReqSynYahoo(nHandle, strSymbolUse);
+		send_req_ReqStockMinTimeMaxTime(nHandle, strSymbolUse);
 		iterLst++;
 	}//while
 
+	//TODO.forTest
+	send_req_ReqHistoryTrade(strSymbolUse, CTcpComProtocol::ETradeType_Buy);
 
 
 }
@@ -212,7 +217,7 @@ void CClientDataManager::send_req_ReqDownLoadStock(qint32 nHandle)
 }
 
 
-void CClientDataManager::send_req_CReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord)
+void CClientDataManager::send_req_ReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord)
 {
 	CReqLogin* pReq = NULL;
 	QByteArray* pByteArray = NULL;
@@ -317,8 +322,27 @@ void CClientDataManager::send_req_NewOrder( const CUserTradeInfo* pData )
 	}
 
 }
-
-
+void CClientDataManager::send_req_ReqHistoryTrade( const QString& strSymbolUse, CTcpComProtocol::ETradeType nTradeType )
+{
+	QByteArray* pByteArray = NULL;
+	CReqHistoryTrade* pReq = NULL;
+	pReq = new CReqHistoryTrade();
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strUserID = m_strUserID;//set User ID
+	pReq->m_nTradeType = (CTcpComProtocol::ETradeType)nTradeType;
+	pReq->m_strSymbolUse = strSymbolUse;
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+	CClientWorkerManager::getInstance().sendMessage(m_nHandle, pByteArray);
+	pByteArray = NULL;
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+//////////////////////////////////////////////////////////////////////////
 void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
 	CClientDBManager::getInstance().resetDataHistory(strSymbolUse, lstData);
@@ -353,5 +377,7 @@ void CClientDataManager::insertUserTradeInfo(const CUserTradeInfo* pData)
 	CClientDBManager::getInstance().insertUserTradeInfo(pData);
 	CSignalSlotManager::getInstance().emit_DataChange_UserTrade();
 }
+
+
 
 

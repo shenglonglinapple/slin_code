@@ -88,7 +88,7 @@ void CTcpServerWorker::terminate()
 }
 
 
-qint32 CTcpServerWorker::getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData)
+qint32 CTcpServerWorker::selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData)
 {
 	qint32 nFunRes = 0;
 	if (NULL == m_pServerDbOper)
@@ -153,4 +153,17 @@ void CTcpServerWorker::sendMessage( qint32 handle, QByteArray* pMessage )
 		return;
 	}
 	m_pServerDistributeTaskWorker->sendMessage(handle, pMessage);
+}
+
+qint32 CTcpServerWorker::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID)
+{
+	qint32 nFunRes = 0;
+	if (NULL == m_pServerDbOper)
+	{
+		nFunRes = -1;
+		return nFunRes;
+	}
+	nFunRes = m_pServerDbOper->selectUserTradeInfo(nListenPort, lstData, strUserID);
+	
+	return nFunRes;
 }

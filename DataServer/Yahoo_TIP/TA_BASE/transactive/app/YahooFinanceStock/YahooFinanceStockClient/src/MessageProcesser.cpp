@@ -13,6 +13,7 @@
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
 #include "ReqDownLoadTrade.h"
+#include "ReqHistoryTrade.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -23,6 +24,7 @@
 #include "AckCreateUser.h"
 #include "AckTrade.h"
 #include "AckDownLoadTrade.h"
+#include "AckHistoryTrade.h"
 
 #include "ClientDataManager.h"
 #include "StockDataManager.h"
@@ -90,6 +92,10 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 }
 
 void CMessageProcesser::processReq( const CReqDownLoadTrade* pReq )
+{
+
+}
+void CMessageProcesser::processReq( const CReqHistoryTrade* pReq )
 {
 
 }
@@ -163,5 +169,22 @@ void CMessageProcesser::processAck( const CAckTrade* pAck )
 
 void CMessageProcesser::processAck( const CAckDownLoadTrade* pAck )
 {
+
+}
+
+void CMessageProcesser::processAck( const CAckHistoryTrade* pAck )
+{
+	QList<CUserTradeInfo*>::const_iterator iterLst;
+	const CUserTradeInfo* pData = NULL;
+
+	iterLst = pAck->m_LstData.constBegin();
+	while (iterLst != pAck->m_LstData.constEnd())
+	{
+		pData = NULL;
+		pData = (*iterLst);
+		CClientDataManager::getInstance().insertUserTradeInfo(pData);
+
+		iterLst++;
+	}//while
 
 }

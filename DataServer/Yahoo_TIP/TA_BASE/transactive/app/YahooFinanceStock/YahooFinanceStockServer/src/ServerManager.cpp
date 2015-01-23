@@ -111,7 +111,7 @@ void CServerManager::destoryServer()
 }
 
 
-qint32 CServerManager::getUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData)
+qint32 CServerManager::selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData)
 {
 	qint32 nFunRes = 0;
 	MYLOG4CPP_DEBUG<<"CServerManager getUserInfo nListenPort="<<nListenPort;
@@ -126,7 +126,7 @@ qint32 CServerManager::getUserInfo(quint16 nListenPort,const QString & strUSERNA
 	{
 		//nListenPort = iterMap.key();
 		pData = iterMap.value();
-		nFunRes = pData->getUserInfo(nListenPort, strUSERNAME, strPASSWORD, ppData);
+		nFunRes = pData->selectUserInfo(nListenPort, strUSERNAME, strPASSWORD, ppData);
 	}//if
 	else
 	{
@@ -259,4 +259,30 @@ void CServerManager::sendMessage( quint16 nListenPort, qint32 handle, QByteArray
 		nFunRes = -1;
 	}
 
+}
+
+
+qint32 CServerManager::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID)
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager selectUserTradeInfo nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pData = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pData = iterMap.value();
+		nFunRes = pData->selectUserTradeInfo(nListenPort, lstData, strUserID);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
 }

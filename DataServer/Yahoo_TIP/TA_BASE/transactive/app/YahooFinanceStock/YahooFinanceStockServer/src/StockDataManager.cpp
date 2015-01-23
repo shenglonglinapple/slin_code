@@ -232,23 +232,6 @@ void CStockDataManager::doWork_HistoryData( const QString& strSymbolUse, const Q
 }
 
 
-void CStockDataManager::doWork_DownLoadTrade( const QString& strUserID, qint32 nTradeType, const QString& strSymbolUse, QList<CUserHold*>& lstData )
-{
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
-
-	{
-		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-		iterMap = m_MapStockDataItemT_Total.find(strSymbolUse);
-	}
-
-	if (iterMap != m_MapStockDataItemT_Total.end())
-	{
-		pData = (iterMap.value());
-		pData->selectData(strUserID, nTradeType, strSymbolUse, lstData);
-		pData = NULL;
-	}
-}
 
 
 

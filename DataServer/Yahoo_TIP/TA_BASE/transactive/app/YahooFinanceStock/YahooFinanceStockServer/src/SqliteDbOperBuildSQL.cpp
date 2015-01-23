@@ -562,6 +562,37 @@ QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_USER_TRADE_INFO()
 	return strSQL;
 }
 
+QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_TRADE_INFO( const QString & strUserID )
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_UUID<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TIME<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TYPE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_PRICE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_VOLUME<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_USER_TRADE_INFO
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\""
+		<<" "<<"ORDER BY"
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TIME
+		<<" "<<"ASC";//ASC min->max   DESC max->min
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
+
+//////////////////////////////////////////////////////////////////////////
 QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_HOLD()
 {
 	QString  strSQL;
@@ -702,7 +733,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_HOLD( const QString& s
 		byteSQL_Where<<" "<<"WHERE"
 			<<" "<<str_TABLE_USER_HOLD_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\""
 			<<" "<<"AND"
-			<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\""
+			<<" "<<str_TABLE_USER_HOLD_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\"";
 	}
 	else
 	{
@@ -740,3 +771,8 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_HOLD( const QString& s
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
 }
+
+//////////////////////////////////////////////////////////////////////////
+
+
+

@@ -47,7 +47,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\Qt\4.8.5\;C:\Qt\4.8.5\include;C:\Qt\4.8.5\include\QtCore;C:\Qt\4.8.5\include\QtGui;C:\Qt\4.8.5\mkspecs\default;C:\Qt\4.8.5\include\ActiveQt;debug;.\GeneratedFiles;.;.\;.\src;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;"
+				AdditionalIncludeDirectories="C:\Qt\4.8.5\;C:\Qt\4.8.5\include;debug;.\GeneratedFiles;.;.\;.\src;..\cscommon;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src;&quot;..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot;;&quot;..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;"
 				PreprocessorDefinitions="_WINDOWS;UNICODE;WIN32;QT_DLL;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT"
 				GeneratePreprocessedFile="0"
 				MinimalRebuild="true"
@@ -229,7 +229,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing ClientComWorker.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -267,7 +267,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing DistributeTaskWorker.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -283,14 +283,6 @@
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\src\HistoryData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\HistoryData.h"
-				>
 			</File>
 			<File
 				RelativePath=".\src\main.cpp"
@@ -309,7 +301,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing MessageManager.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -340,14 +332,6 @@
 			</File>
 			<File
 				RelativePath=".\src\MessageRunnable.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SocketInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SocketInfo.h"
 				>
 			</File>
 		</Filter>
@@ -863,30 +847,126 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="common"
+			Name="cscommon"
 			>
 			<File
-				RelativePath=".\src\BaseException.cpp"
+				RelativePath="..\cscommon\AckCreateUser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\BaseException.h"
+				RelativePath="..\cscommon\AckCreateUser.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\Log4cppLogger.cpp"
+				RelativePath="..\cscommon\AckDownLoadStock.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\Log4cppLogger.h"
+				RelativePath="..\cscommon\AckDownLoadStock.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\MyQtThread.cpp"
+				RelativePath="..\cscommon\AckDownLoadTrade.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\MyQtThread.h"
+				RelativePath="..\cscommon\AckDownLoadTrade.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckHistoryTrade.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckHistoryTrade.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckLogin.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckLogin.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckLogout.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckLogout.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckStockHistoryData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckStockHistoryData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckStockMinTimeMaxTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckStockMinTimeMaxTime.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckSynYahoo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckSynYahoo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckTrade.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckTrade.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\BaseException.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\BaseException.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\CfgFileUtil.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\CfgFileUtil.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\HistoryData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\HistoryData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\Log4cppLogger.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\Log4cppLogger.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\MyQtThread.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\MyQtThread.h"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -894,7 +974,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing MyQtThread.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -912,212 +992,176 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\src\ProjectCommonData.h"
+				RelativePath="..\cscommon\ProjectEnvironment.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ProjectCommonDef.h"
+				RelativePath="..\cscommon\ProjectEnvironment.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ProjectEnvironment.cpp"
+				RelativePath="..\cscommon\ProjectQTInclude.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ProjectEnvironment.h"
+				RelativePath="..\cscommon\ProjectSysInclude.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ProjectQTInclude.h"
+				RelativePath="..\cscommon\QtTimeHelper.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ProjectSysInclude.h"
+				RelativePath="..\cscommon\QtTimeHelper.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\QtTimeHelper.cpp"
+				RelativePath="..\cscommon\ReqCreateUser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\QtTimeHelper.h"
+				RelativePath="..\cscommon\ReqCreateUser.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TcpComProtocol.cpp"
+				RelativePath="..\cscommon\ReqDownLoadStock.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TcpComProtocol.h"
+				RelativePath="..\cscommon\ReqDownLoadStock.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TcpSocketHelper.cpp"
+				RelativePath="..\cscommon\ReqDownLoadTrade.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\TcpSocketHelper.h"
+				RelativePath="..\cscommon\ReqDownLoadTrade.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\WorkTime.cpp"
+				RelativePath="..\cscommon\ReqHistoryTrade.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\WorkTime.h"
+				RelativePath="..\cscommon\ReqHistoryTrade.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqLogin.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqLogin.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqLogout.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqLogout.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqStockHistoryData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqStockHistoryData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqStockMinTimeMaxTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqStockMinTimeMaxTime.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqSynYahoo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqSynYahoo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqTrade.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqTrade.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SocketInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SocketInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\StockMinTimeMaxTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\StockMinTimeMaxTime.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\TcpComProtocol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\TcpComProtocol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\TcpSocketHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\TcpSocketHelper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\UserHold.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\UserHold.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\UserInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\UserInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\UserTradeInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\UserTradeInfo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\WorkTime.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\WorkTime.h"
 				>
 			</File>
 		</Filter>
 		<Filter
-			Name="ReqAck"
-			>
-			<File
-				RelativePath=".\src\AckCreateUser.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckCreateUser.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckDownLoadStock.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckDownLoadStock.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckDownLoadTrade.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckDownLoadTrade.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckLogin.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckLogin.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckLogout.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckLogout.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckStockHistoryData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckStockHistoryData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckStockMinTimeMaxTime.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckStockMinTimeMaxTime.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckSynYahoo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckSynYahoo.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckTrade.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AckTrade.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqCreateUser.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqCreateUser.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqDownLoadStock.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqDownLoadStock.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqDownLoadTrade.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqDownLoadTrade.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqLogin.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqLogin.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqLogout.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqLogout.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqStockHistoryData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqStockHistoryData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqStockMinTimeMaxTime.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqStockMinTimeMaxTime.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqSynYahoo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqSynYahoo.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqTrade.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ReqTrade.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="ClientData"
+			Name="DataManager"
 			>
 			<File
 				RelativePath=".\src\ClientDataManager.cpp"
@@ -1156,7 +1200,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing StockDataActor.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -1181,38 +1225,6 @@
 				RelativePath=".\src\StockDataManager.h"
 				>
 			</File>
-			<File
-				RelativePath=".\src\StockMinTimeMaxTime.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StockMinTimeMaxTime.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\UserHold.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\UserHold.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\UserInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\UserInfo.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\UserTradeInfo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\UserTradeInfo.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="ClientUI"
@@ -1233,7 +1245,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ClientMainWindow.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1263,7 +1275,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ClientMainWindowMdiArea.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1293,7 +1305,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ClientMainWindowMenuBar.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1323,7 +1335,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ClientMainWindowStatusBar.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1353,7 +1365,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ClientMainWindowToolBar.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1383,7 +1395,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ClientUIManager.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1413,7 +1425,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing SignalSlotManager.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1447,7 +1459,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing ClientLoginWindow.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1477,7 +1489,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing LoginSettingWindow.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1522,7 +1534,7 @@
 							<Tool
 								Name="VCCustomBuildTool"
 								Description="Moc&apos;ing StockMinTimeMaxTimeTableView.h..."
-								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 							/>
@@ -1556,7 +1568,7 @@
 							<Tool
 								Name="VCCustomBuildTool"
 								Description="Moc&apos;ing StockHistoryDataTableView.h..."
-								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 							/>
@@ -1590,7 +1602,7 @@
 							<Tool
 								Name="VCCustomBuildTool"
 								Description="Moc&apos;ing UserTradeTableView.h..."
-								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 							/>
@@ -1624,7 +1636,7 @@
 							<Tool
 								Name="VCCustomBuildTool"
 								Description="Moc&apos;ing NewOrderConfirmWindow.h..."
-								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 							/>
@@ -1654,7 +1666,7 @@
 							<Tool
 								Name="VCCustomBuildTool"
 								Description="Moc&apos;ing NewOrderWindow.h..."
-								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-IC:\Qt\4.8.5\include\QtCore&quot; &quot;-IC:\Qt\4.8.5\include\QtGui&quot; &quot;-IC:\Qt\4.8.5\mkspecs\default&quot; &quot;-IC:\Qt\4.8.5\include\ActiveQt&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS  &quot;-IC:\Qt\4.8.5&quot; &quot;-IC:\Qt\4.8.5\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
 								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 								Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 							/>
@@ -1697,14 +1709,6 @@
 		<Filter
 			Name="cfg"
 			>
-			<File
-				RelativePath=".\src\CfgFileUtil.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\CfgFileUtil.h"
-				>
-			</File>
 			<File
 				RelativePath=".\src\ConfigInfo.cpp"
 				>
