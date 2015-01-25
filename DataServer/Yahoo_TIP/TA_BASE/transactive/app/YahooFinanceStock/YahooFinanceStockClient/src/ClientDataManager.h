@@ -32,9 +32,9 @@ private:
 	CClientDataManager(void);
 	~CClientDataManager(void);
 public:
-	void connectedToServer(qint32 nHandle, QString strServerIP, quint16 nServerPort, QString strUserName, QString strPassWord);
-	void loginedToServer(qint32 nHandle, const QString& strUserID);
-	void downLoadStockFromServer(qint32 nHandle);
+	void connectToServer_OK(qint32 nHandle, QString strServerIP, quint16 nServerPort, QString strUserName, QString strPassWord);
+	void loginToServer_OK(qint32 nHandle, const QString& strUserID);
+	void send_req_downLoadStockBaseIinfo(qint32 nHandle);
 public:
 	void resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
 	void resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData );

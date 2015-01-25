@@ -92,7 +92,7 @@ CClientDataManager::~CClientDataManager(void)
 	}
 }
 
-void CClientDataManager::connectedToServer( qint32 nHandle, 
+void CClientDataManager::connectToServer_OK( qint32 nHandle, 
 QString strServerIP, quint16 nServerPort, 
 QString strUserName, QString strPassWord )
 {
@@ -110,13 +110,13 @@ QString strUserName, QString strPassWord )
 		<<" "<<"m_strPassWord="<<m_strPassWord;
 	
 	CSignalSlotManager::getInstance().emit_ShownMessage("connected To Server "+
-		QString("nHandle=%1 strServerIP=%2 nServerPort=%3").arg(nHandle).arg(strServerIP).arg(nServerPort)
-		);
+		QString("nHandle=%1 strServerIP=%2 nServerPort=%3")
+		.arg(nHandle).arg(strServerIP).arg(nServerPort));
 
 	send_req_ReqLogin(nHandle, m_strUserName, m_strPassWord);
 }
 
-void CClientDataManager::loginedToServer(qint32 nHandle, const QString& strUserID)
+void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUserID)
 {
 	m_strUserID = strUserID;
 	MYLOG4CPP_DEBUG<<"CClientDataManager loginedToServer"
@@ -135,15 +135,14 @@ void CClientDataManager::loginedToServer(qint32 nHandle, const QString& strUserI
 	send_req_ReqDownLoadStock(nHandle);
 }
 
-void CClientDataManager::downLoadStockFromServer( qint32 nHandle )
+void CClientDataManager::send_req_downLoadStockBaseIinfo( qint32 nHandle )
 {
 	QString strSymbolUse;
-	MYLOG4CPP_DEBUG<<"CClientDataManager downLoadStockFromServer"
+	MYLOG4CPP_DEBUG<<"CClientDataManager send_req_downLoadStockBaseIinfo"
 		<<" "<<"nHandle="<<nHandle;
 
 	CSignalSlotManager::getInstance().emit_ShownMessage("downLoad Stock From Server "+
-		QString("nHandle=%1").arg(nHandle)
-		);
+		QString("nHandle=%1").arg(nHandle));
 
 	QList<QString> lstSymbolUse;
 	QList<QString>::iterator iterLst;

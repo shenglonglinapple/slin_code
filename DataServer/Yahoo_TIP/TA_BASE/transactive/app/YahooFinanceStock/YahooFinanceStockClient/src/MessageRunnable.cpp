@@ -143,6 +143,10 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqDownLoadTrade();
 	}
+	else if (CReqHistoryTrade::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqHistoryTrade();
+	}
 	
 }
 
@@ -341,6 +345,10 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckDownLoadTrade::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckDownLoadTrade();
+	}
+	else if (CAckHistoryTrade::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckHistoryTrade();
 	}
 }
 

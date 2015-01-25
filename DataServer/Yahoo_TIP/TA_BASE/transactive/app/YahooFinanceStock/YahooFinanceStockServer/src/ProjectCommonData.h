@@ -68,6 +68,10 @@ static const char*  str_TABLE_USER_HOLD_COLUMN_CURRENT_AMOUNT = "COLUMN_CURRENT_
 static const char*  str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS = "COLUMN_PROFIT_LOSS";//Floating profit and loss
 static const char*  str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS_PERSENTAGE = "COLUMN_PROFIT_LOSS_PERSENTAGE";//Floating profit and loss Percentage
 /////
+static const char*  str_TABLE_USER_AMOUNT = "TABLE_USER_AMOUNT";
+//
+static const char*  str_TABLE_USER_AMOUNT_COLUMN_USEID = "COLUMN_USEID";
+/////
 //[DB end]
 
 
