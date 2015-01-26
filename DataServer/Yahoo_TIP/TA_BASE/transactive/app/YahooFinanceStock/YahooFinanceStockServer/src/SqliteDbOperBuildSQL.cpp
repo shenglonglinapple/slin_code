@@ -389,9 +389,9 @@ QString  CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_INFO(const QString & 
 		<<" "<<"FROM"
 		<<" "<<str_TABLE_USER_INFO
 		<<" "<<"WHERE"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<">="<<"\""<<strUSERNAME.toStdString()<<"\""
+		<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<"="<<"\""<<strUSERNAME.toStdString()<<"\""
 		<<" "<<"AND"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<"<="<<"\""<<strPASSWORD.toStdString()<<"\"";
+		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<"="<<"\""<<strPASSWORD.toStdString()<<"\"";
 
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
@@ -421,7 +421,7 @@ QString  CSqliteDbOperBuildSQL::buildSQL_UPDATE_TABLE_USER_INFO(
 		<<" "<<"WHERE"
 		<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<"="<<"\""<<strUSERNAME.toStdString()<<"\""
 		<<" "<<"AND"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<"="<<"\""<<strUSERNAME.toStdString()<<"\"";
+		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<"="<<"\""<<strPASSWORD.toStdString()<<"\"";
 
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
@@ -772,7 +772,100 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_HOLD( const QString& s
 	return strSQL;	
 }
 
+
+
 //////////////////////////////////////////////////////////////////////////
+QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_AMOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	{
+		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<str_TABLE_USER_AMOUNT
+			<<" "<<"("
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USEID<<" "<<"TEXT NOT NULL"<<","
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_INIT_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USE_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_LEFT_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_UPDATE_TIME<<" "<<"TIMESTAMP NOT NULL"
+			<<" "<<")";
+	}
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_USER_AMOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	{
+		byteSQL<<"DELETE FROM"<<" "<<str_TABLE_USER_AMOUNT;
+	}	
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_AMOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	byteSQL<<"INSERT INTO "<<str_TABLE_USER_AMOUNT
+		<<" "<<"("
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_INIT_AMOUNT<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USE_AMOUNT<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_LEFT_AMOUNT<<","
+
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_AMOUNT<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_UPDATE_TIME
+		<<" "<<")"
+		<<" "<<"VALUES"
+		<<" "<<"("
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"
+
+		<<" "<<")";
 
 
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_AMOUNT( const QString& strUserID )
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_INIT_AMOUNT<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USE_AMOUNT<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_LEFT_AMOUNT<<","
+
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_AMOUNT<<","
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_UPDATE_TIME
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_USER_AMOUNT
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\""
+		<<" "<<"ORDER BY"
+		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_UPDATE_TIME
+		<<" "<<"ASC";//ASC min->max   DESC max->min
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
 

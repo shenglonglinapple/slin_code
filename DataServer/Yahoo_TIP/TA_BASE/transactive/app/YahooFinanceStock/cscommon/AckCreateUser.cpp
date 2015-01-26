@@ -15,7 +15,7 @@ CAckCreateUser::~CAckCreateUser( void )
 void CAckCreateUser::_Clear()
 {
 	m_nMessageType = CTcpComProtocol::MsgType_Ack;
-	m_nDataType = CTcpComProtocol::DataType_Login;
+	m_nDataType = CTcpComProtocol::DataType_CreateUser;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
 	m_strUserName.clear();
@@ -25,7 +25,7 @@ void CAckCreateUser::_Clear()
 void CAckCreateUser::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"CAckLogin:"
+		<<" "<<"CAckCreateUser:"
 		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID

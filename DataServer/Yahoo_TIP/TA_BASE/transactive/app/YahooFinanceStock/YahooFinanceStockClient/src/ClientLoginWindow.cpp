@@ -6,6 +6,7 @@
 #include "LoginSettingWindow.h"
 #include "PwdLineEdit.h"
 
+#include "ClientDataManager.h"
 #include "ClientWorkerManager.h"
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
@@ -194,7 +195,7 @@ void CClientLoginWindow::slotButtonLoginClicked( bool checked )
 	loginParam.setValue(m_strUserName, m_strPassWord, m_strServerIP, m_nServerPort);
 	loginParam.logInfo(__FILE__, __LINE__);
 	CClientWorkerManager::getInstance().createClient(&loginParam);
-
+	CClientDataManager::getInstance().setValue(m_strServerIP, m_nServerPort, m_strUserName, m_strPassWord);
 	this->setVisible(false);
 	this->close();
 	

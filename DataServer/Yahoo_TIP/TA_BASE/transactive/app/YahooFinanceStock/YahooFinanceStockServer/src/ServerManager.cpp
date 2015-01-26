@@ -7,6 +7,7 @@
 #include "TcpServerWorker.h"
 #include "ConfigInfo.h"
 #include "UserInfo.h"
+#include "UserAmount.h"
 #include "UserTradeInfo.h"
 #include "Log4cppLogger.h"
 
@@ -278,6 +279,31 @@ qint32 CServerManager::selectUserTradeInfo( quint16 nListenPort, QList<CUserTrad
 		//nListenPort = iterMap.key();
 		pData = iterMap.value();
 		nFunRes = pData->selectUserTradeInfo(nListenPort, lstData, strUserID);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
+}
+
+qint32 CServerManager::createUserAmount( quint16 nListenPort, const CUserAmount* pData )
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager insertUserInfo nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pWorker = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pWorker = iterMap.value();
+		nFunRes = pWorker->createUserAmount(nListenPort, pData);
 	}//if
 	else
 	{

@@ -233,17 +233,17 @@ qint32 CClientDbOper::selectUserInfo(
 	{
 		pUserInfo = new CUserInfo();
 		nColumnIndex = 0;
-		pUserInfo->m_strUSEID = pSqlQuery->value(nColumnIndex).toString();
+		pUserInfo->m_strUserID = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pUserInfo->m_strUSERNAME = pSqlQuery->value(nColumnIndex).toString();
+		pUserInfo->m_strUserName = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pUserInfo->m_strPASSWORD = pSqlQuery->value(nColumnIndex).toString();
+		pUserInfo->m_strPassWord = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pUserInfo->m_strLASTLOGINTIME = pSqlQuery->value(nColumnIndex).toString();
+		pUserInfo->m_strLastLoginTime = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pUserInfo->m_nLOGINCOUNT = pSqlQuery->value(nColumnIndex).toInt();
+		pUserInfo->m_nLoginCount = pSqlQuery->value(nColumnIndex).toInt();
 		nColumnIndex++;
-		pUserInfo->m_nSTATE = pSqlQuery->value(nColumnIndex).toInt();
+		pUserInfo->m_nState = pSqlQuery->value(nColumnIndex).toInt();
 
 		(*ppData) = pUserInfo;
 		pUserInfo = NULL;
@@ -262,9 +262,9 @@ qint32 CClientDbOper::updateUserInfo(quint16 nListenPort, const CUserInfo* pData
 	qint32 nFunRes = 0;
 	QString  strSQL;
 	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_UPDATE_TABLE_USER_INFO(
-		pData->m_strUSERNAME, pData->m_strPASSWORD, 
-		pData->m_strLASTLOGINTIME, pData->m_nLOGINCOUNT,
-		pData->m_nSTATE);
+		pData->m_strUserName, pData->m_strPassWord, 
+		pData->m_strLastLoginTime, pData->m_nLoginCount,
+		pData->m_nState);
 	nFunRes = _ExecModify(strSQL);
 	return nFunRes;
 }
@@ -308,12 +308,12 @@ qint32 CClientDbOper::_AddUserInfo(const CUserInfo* pData)
 	pQSqlQueryForInseert->prepare(strSQL);
 
 	{
-		lst_COLUMN_USEID << pData->m_strUSEID;
-		lst_COLUMN_USERNAME << pData->m_strUSERNAME;
-		lst_COLUMN_PASSWORD << pData->m_strPASSWORD;
-		lst_COLUMN_LASTLOGINTIME << pData->m_strLASTLOGINTIME;
-		lst_COLUMN_LOGINCOUNT << pData->m_nLOGINCOUNT;
-		lst_COLUMN_STATE << pData->m_nSTATE;
+		lst_COLUMN_USEID << pData->m_strUserID;
+		lst_COLUMN_USERNAME << pData->m_strUserName;
+		lst_COLUMN_PASSWORD << pData->m_strPassWord;
+		lst_COLUMN_LASTLOGINTIME << pData->m_strLastLoginTime;
+		lst_COLUMN_LOGINCOUNT << pData->m_nLoginCount;
+		lst_COLUMN_STATE << pData->m_nState;
 	}
 
 	//pQSqlQueryForInseert->addBindValue(lstInstrumentID);

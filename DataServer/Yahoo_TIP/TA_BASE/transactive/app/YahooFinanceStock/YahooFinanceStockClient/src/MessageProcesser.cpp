@@ -107,7 +107,7 @@ void CMessageProcesser::processAck( const CAckLogin* pAck )
 	//pMessageManagerRef->sendReqSynYahoo(m_nHanle, "000001.SZ");
 	//pMessageManagerRef->sendReqDownLoadStock(m_nHanle);
 	//CClientDBManager::getInstance().opendb(pAck->m_strUserName, pAck->m_strPassword);
-	CClientDataManager::getInstance().loginedToServer(m_nHanle, pAck->m_strUserID);
+	CClientDataManager::getInstance().loginToServer_OK(m_nHanle, pAck->m_strUserID);
 	return;
 }
 
@@ -123,7 +123,7 @@ void CMessageProcesser::processAck( const CAckSynYahoo* pAck )
 void CMessageProcesser::processAck( const CAckDownLoadStock* pAck )
 {
 	CStockDataManager::getInstance().addStockData(&(pAck->m_LstStock));
-	CClientDataManager::getInstance().downLoadStockFromServer(m_nHanle);
+	CClientDataManager::getInstance().dowork_downLoadStockBaseIinfo(m_nHanle);
 	return;
 }
 
@@ -155,7 +155,7 @@ void CMessageProcesser::processAck( const CAckStockHistoryData* pAck )
 
 void CMessageProcesser::processAck( const CAckCreateUser* pAck )
 {
-
+	CClientDataManager::getInstance().createUser_OK(m_nHanle, pAck->m_strUserName, pAck->m_strPassword);
 }
 
 void CMessageProcesser::processAck( const CAckTrade* pAck )

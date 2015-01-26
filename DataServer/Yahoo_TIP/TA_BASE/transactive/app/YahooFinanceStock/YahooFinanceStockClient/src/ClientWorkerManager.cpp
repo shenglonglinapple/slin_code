@@ -46,8 +46,6 @@ void CClientWorkerManager::createClient( const CClientLoginParam* pParam )
 	qint32 nHandle = 0;
 	nHandle = pParam->m_nHandle;
 	pActor = new CDistributeTaskWorker(
-		pParam->m_strUserName,
-		pParam->m_strPassWord,
 		pParam->m_strServerIP,
 		pParam->m_nServerPort);
 	pActor->start();

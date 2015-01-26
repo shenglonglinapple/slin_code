@@ -12,6 +12,8 @@
 #include "UserTradeInfo.h"
 
 #include "TcpComProtocol.h"
+
+#include "ReqCreateUser.h"
 #include "ReqLogin.h"
 #include "ReqLogout.h"
 #include "ReqSynYahoo.h"
@@ -21,6 +23,7 @@
 #include "ReqTrade.h"
 #include "ReqHistoryTrade.h"
 
+#include "AckCreateUser.h"
 #include "AckLogin.h"
 #include "AckLogout.h"
 #include "AckSynYahoo.h"
@@ -92,26 +95,47 @@ CClientDataManager::~CClientDataManager(void)
 	}
 }
 
-void CClientDataManager::connectToServer_OK( qint32 nHandle, 
-QString strServerIP, quint16 nServerPort, 
-QString strUserName, QString strPassWord )
+void CClientDataManager::setValue(const QString& strServerIP, quint16 nServerPort, const QString& strUserName, const QString& strPassWord)
 {
-	m_nHandle = nHandle;
 	m_strServerIP = strServerIP;
 	m_nServerPort = nServerPort;
 	m_strUserName = strUserName;
 	m_strPassWord = strPassWord;
 
-	MYLOG4CPP_DEBUG<<"CClientDataManager connectedToServer"
-		<<" "<<"nHandle="<<nHandle
+
+	MYLOG4CPP_DEBUG<<"CClientDataManager setValue"
 		<<" "<<"m_strServerIP="<<m_strServerIP
 		<<" "<<"m_nServerPort="<<m_nServerPort
 		<<" "<<"m_strUserName="<<m_strUserName
 		<<" "<<"m_strPassWord="<<m_strPassWord;
+}
+
+void CClientDataManager::connectToServer_OK( qint32 nHandle, const QString& strServerIP, quint16 nServerPort)
+{
+	m_nHandle = nHandle;
+
+	MYLOG4CPP_DEBUG<<"CClientDataManager connectToServer_OK"
+		<<" "<<"nHandle="<<nHandle
+		<<" "<<"m_strServerIP="<<m_strServerIP
+		<<" "<<"m_nServerPort="<<m_nServerPort;
 	
-	CSignalSlotManager::getInstance().emit_ShownMessage("connected To Server "+
+	CSignalSlotManager::getInstance().emit_ShownMessage("connectToServer_OK"+
 		QString("nHandle=%1 strServerIP=%2 nServerPort=%3")
 		.arg(nHandle).arg(strServerIP).arg(nServerPort));
+
+	send_req_ReqCreateUser(nHandle, m_strUserName, m_strPassWord);
+}
+
+void CClientDataManager::createUser_OK( qint32 nHandle, const QString& strUserName, const QString& strPassWord )
+{
+	MYLOG4CPP_DEBUG<<"CClientDataManager createUser_OK"
+		<<" "<<"nHandle="<<nHandle
+		<<" "<<"m_strServerIP="<<m_strServerIP
+		<<" "<<"m_nServerPort="<<m_nServerPort;
+
+	CSignalSlotManager::getInstance().emit_ShownMessage("createUser_OK in Server "+
+		QString("nHandle=%1 strServerIP=%2 nServerPort=%3")
+		.arg(nHandle).arg(m_strServerIP).arg(m_nServerPort));
 
 	send_req_ReqLogin(nHandle, m_strUserName, m_strPassWord);
 }
@@ -127,7 +151,7 @@ void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUser
 		<<" "<<"m_strUserName="<<m_strUserName
 		<<" "<<"m_strPassWord="<<m_strPassWord;
 
-	QString strShowMsg = "logined To Server ";
+	QString strShowMsg = "loginToServer_OK";
 	strShowMsg=strShowMsg + QString("nHandle=%1 strUserName=%2 strPassWord=%3 strUserID=%4")
 		.arg(nHandle).arg(m_strUserName).arg(m_strPassWord).arg(m_strUserID);
 
@@ -135,10 +159,10 @@ void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUser
 	send_req_ReqDownLoadStock(nHandle);
 }
 
-void CClientDataManager::send_req_downLoadStockBaseIinfo( qint32 nHandle )
+void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
 {
 	QString strSymbolUse;
-	MYLOG4CPP_DEBUG<<"CClientDataManager send_req_downLoadStockBaseIinfo"
+	MYLOG4CPP_DEBUG<<"CClientDataManager dowork_downLoadStockBaseIinfo"
 		<<" "<<"nHandle="<<nHandle;
 
 	CSignalSlotManager::getInstance().emit_ShownMessage("downLoad Stock From Server "+
@@ -214,7 +238,29 @@ void CClientDataManager::send_req_ReqDownLoadStock(qint32 nHandle)
 	}
 
 }
+void CClientDataManager::send_req_ReqCreateUser( qint32 nHandle, const QString& strUserName, const QString& strPassWord )
+{
+	CReqCreateUser* pReq = NULL;
+	QByteArray* pByteArray = NULL;
+	pReq = new CReqCreateUser();
 
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strUserName = m_strUserName;
+	pReq->m_strPassword = m_strPassWord;
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+
+	CClientWorkerManager::getInstance().sendMessage(nHandle, pByteArray);
+
+	pByteArray = NULL;
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
 
 void CClientDataManager::send_req_ReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord)
 {
@@ -376,6 +422,8 @@ void CClientDataManager::insertUserTradeInfo(const CUserTradeInfo* pData)
 	CClientDBManager::getInstance().insertUserTradeInfo(pData);
 	CSignalSlotManager::getInstance().emit_DataChange_UserTrade();
 }
+
+
 
 
 

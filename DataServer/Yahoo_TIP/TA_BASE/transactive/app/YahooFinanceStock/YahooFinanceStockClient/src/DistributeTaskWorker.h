@@ -12,8 +12,6 @@ class CDistributeTaskWorker : public CMyQtThread
     Q_OBJECT
 public:
 	CDistributeTaskWorker(
-		const QString& strUserName,
-		const QString& strPassWord,
 		const QString& strServerIP, 
 		quint16 nServerPort, 
 		QObject* parent=0);
@@ -36,8 +34,6 @@ public:
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;
-	QString m_strUserName;
-	QString m_strPassWord;
 
 	CClientComWorker* m_pComWorker;
 	CMessageManager* m_pMessageManager;

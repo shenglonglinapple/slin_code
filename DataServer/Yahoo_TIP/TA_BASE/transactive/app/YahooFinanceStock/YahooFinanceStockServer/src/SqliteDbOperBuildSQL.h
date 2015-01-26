@@ -34,6 +34,11 @@ public:
 	QString buildSQL_BatchInsert_TABLE_USER_HOLD();
 	QString buildSQL_Select_TABLE_USER_HOLD(const QString& strUserID);
 	QString buildSQL_Select_TABLE_USER_HOLD( const QString& strUserID, const QString& strSymbolUse );
+public:
+	QString buildSQL_CreateTable_TABLE_USER_AMOUNT();
+	QString buildSQL_Truncate_TABLE_USER_AMOUNT();
+	QString buildSQL_BatchInsert_TABLE_USER_AMOUNT();
+	QString buildSQL_Select_TABLE_USER_AMOUNT(const QString& strUserID);
 
 
 };

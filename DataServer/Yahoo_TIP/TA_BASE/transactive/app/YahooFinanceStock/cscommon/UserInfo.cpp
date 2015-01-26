@@ -15,12 +15,12 @@ CUserInfo::~CUserInfo()
 
 CUserInfo& CUserInfo::operator=( const CUserInfo& objectCopy )
 {
-	m_strUSEID = objectCopy.m_strUSEID;
-	m_strUSERNAME = objectCopy.m_strUSERNAME;
-	m_strPASSWORD = objectCopy.m_strPASSWORD;
-	m_strLASTLOGINTIME = objectCopy.m_strLASTLOGINTIME;
-	m_nLOGINCOUNT = objectCopy.m_nLOGINCOUNT;
-	m_nSTATE = objectCopy.m_nSTATE;
+	m_strUserID = objectCopy.m_strUserID;
+	m_strUserName = objectCopy.m_strUserName;
+	m_strPassWord = objectCopy.m_strPassWord;
+	m_strLastLoginTime = objectCopy.m_strLastLoginTime;
+	m_nLoginCount = objectCopy.m_nLoginCount;
+	m_nState = objectCopy.m_nState;
 	
 	return *this;
 }
@@ -28,30 +28,30 @@ CUserInfo& CUserInfo::operator=( const CUserInfo& objectCopy )
 
 void CUserInfo::_Init()
 {
-	m_strUSEID.clear();
-	m_strUSERNAME.clear();
-	m_strPASSWORD.clear();
+	m_strUserID.clear();
+	m_strUserName.clear();
+	m_strPassWord.clear();
 	
-	m_strLASTLOGINTIME.clear();
+	m_strLastLoginTime.clear();
 
-	m_nLOGINCOUNT = 0;
-	m_nSTATE = 0;
+	m_nLoginCount = 0;
+	m_nState = 0;
 }
 
 
 void CUserInfo::setUseID( const QString& strUserName, const QString& strPassWord )
 {
-	m_strUSERNAME = strUserName;
-	m_strPASSWORD = strPassWord;
-	m_strUSEID = QString("%1_%2").arg(m_strUSERNAME).arg(m_strPASSWORD);
+	m_strUserName = strUserName;
+	m_strPassWord = strPassWord;
+	m_strUserID = QString("%1_%2").arg(m_strUserName).arg(m_strPassWord);
 	resetLoginTime();
-	m_nLOGINCOUNT = 0;
-	m_nSTATE = UserState_OFFLINE;//
+	m_nLoginCount = 0;
+	m_nState = UserState_OFFLINE;//
 }
 
 void CUserInfo::resetLoginTime()
 {
 	CQtTimeHelper timehelper;
-	m_strLASTLOGINTIME = timehelper.getCurrentTimeStr();
+	m_strLastLoginTime = timehelper.getCurrentTimeStr();
 }
 

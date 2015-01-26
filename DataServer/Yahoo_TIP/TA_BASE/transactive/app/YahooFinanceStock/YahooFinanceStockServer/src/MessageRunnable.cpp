@@ -106,8 +106,11 @@ void CMessageRunnable::_ProcessMessage()
 
 void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType )
 {
-
-	if (CReqLogin::checkMsgDataType(nMessageType, nDataType))
+	if (CReqCreateUser::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqCreateUser();		
+	}
+	else if (CReqLogin::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_ReqLogin();
 	}	
@@ -130,10 +133,6 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	else if (CReqStockHistoryData::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_ReqStockHistoryData();		
-	}
-	else if (CReqCreateUser::checkMsgDataType(nMessageType, nDataType))
-	{
-		_ProcessMessage_ReqCreateUser();		
 	}
 	else if (CReqTrade::checkMsgDataType(nMessageType, nDataType))
 	{
@@ -309,7 +308,11 @@ void CMessageRunnable::_ProcessMessage_ReqHistoryTrade()
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType )
 {
-	if (CAckLogin::checkMsgDataType(nMessageType, nDataType))
+	if (CAckCreateUser::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckCreateUser();		
+	}
+	else if (CAckLogin::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckLogin();
 	}	
@@ -332,10 +335,6 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckStockHistoryData::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckStockHistoryData();		
-	}
-	else if (CAckCreateUser::checkMsgDataType(nMessageType, nDataType))
-	{
-		_ProcessMessage_AckCreateUser();		
 	}
 	else if (CAckTrade::checkMsgDataType(nMessageType, nDataType))
 	{

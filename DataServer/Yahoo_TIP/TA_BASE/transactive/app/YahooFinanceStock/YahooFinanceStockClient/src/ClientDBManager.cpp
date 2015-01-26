@@ -46,7 +46,7 @@ CClientDBManager::CClientDBManager(void)
 	QMutexLocker lock(&m_mutex_ClientDbOper);
 	m_pClientDbOper = NULL;
 	m_pUserInfo->setUseID(CConfigInfo::getInstance().getUserName(), CConfigInfo::getInstance().getPassWord());
-	m_pClientDbOper = new CClientDbOper(m_pUserInfo->m_strUSEID);
+	m_pClientDbOper = new CClientDbOper(m_pUserInfo->m_strUserID);
 }
 
 CClientDBManager::~CClientDBManager(void)

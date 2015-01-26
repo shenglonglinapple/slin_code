@@ -17,15 +17,10 @@
 #include "ProjectEnvironment.h"
 
 CDistributeTaskWorker::CDistributeTaskWorker(
-	const QString& strUserName,
-	const QString& strPassWord,
 	const QString& strServerIP, 
 	quint16 nServerPort, 
 	QObject* parent/*=0*/ )
 {
-	m_strUserName = strUserName;
-	m_strPassWord = strPassWord;
-
 	m_strServerIP = strServerIP;
 	m_nServerPort = nServerPort;
 
@@ -120,7 +115,7 @@ void CDistributeTaskWorker::slotConnected(qint32 nHandle)
 		<<" "<<"nHandle="<<nHandle;
 
 	CClientWorkerManager::getInstance().resetHanleValue(this, nHandle);
-	CClientDataManager::getInstance().connectedToServer(nHandle, m_strServerIP, m_nServerPort, m_strUserName, m_strPassWord);
+	CClientDataManager::getInstance().connectToServer_OK(nHandle, m_strServerIP, m_nServerPort);
 
 }
 

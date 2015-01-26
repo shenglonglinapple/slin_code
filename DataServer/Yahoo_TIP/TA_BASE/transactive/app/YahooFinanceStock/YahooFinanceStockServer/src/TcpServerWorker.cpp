@@ -122,6 +122,17 @@ qint32 CTcpServerWorker::createUserInfo(quint16 nListenPort, const CUserInfo* pD
 	return nFunRes;
 }
 
+qint32 CTcpServerWorker::createUserAmount( quint16 nListenPort, const CUserAmount* pData )
+{
+	qint32 nFunRes = 0;
+	if (NULL == m_pServerDbOper)
+	{
+		nFunRes = -1;
+		return nFunRes;
+	}
+	nFunRes = m_pServerDbOper->insertUserAmount(nListenPort, pData);
+	return nFunRes;
+}
 qint32 CTcpServerWorker::createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
 {
 	qint32 nFunRes = 0;
@@ -167,3 +178,4 @@ qint32 CTcpServerWorker::selectUserTradeInfo( quint16 nListenPort, QList<CUserTr
 	
 	return nFunRes;
 }
+

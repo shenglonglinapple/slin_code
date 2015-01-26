@@ -19,6 +19,7 @@ class CSqliteDbOperBuildSQL;
 class CUserInfo;
 class CUserTradeInfo;
 class CUserHold;
+class CUserAmount;
 
 class CServerDbOper
 {
@@ -36,6 +37,8 @@ public:
 	qint32 select_UserHold(const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData );
 public:
 	qint32 selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID);
+public:
+	qint32 insertUserAmount(quint16 nListenPort, const CUserAmount* pData);
 
 	
 private:
@@ -53,6 +56,9 @@ private:
 	qint32 _CreateDBTable_TABLE_USER_HOLD();
 	qint32 _Truncate_TABLE_USER_HOLD();
 	qint32 _AddUserHold(const CUserHold* pData);
+	qint32 _CreateDBTable_TABLE_USER_AMOUNT();
+	qint32 _AddUserAmount(const CUserAmount* pData);
+	qint32 _Truncate_TABLE_USER_AMOUNT();
 
 private:
 	QSqlDatabase* m_pQSqlDataBase;

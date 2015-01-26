@@ -23,12 +23,12 @@ public:
 	void setUseID(const QString& strUserName, const QString& strPassWord);
 	void resetLoginTime();
 public:
-	QString m_strUSEID;
-	QString m_strUSERNAME;
-	QString m_strPASSWORD;
-	QString m_strLASTLOGINTIME;
-	qint32 m_nLOGINCOUNT;
-	qint32 m_nSTATE;
+	QString m_strUserID;
+	QString m_strUserName;
+	QString m_strPassWord;
+	QString m_strLastLoginTime;
+	qint32 m_nLoginCount;
+	qint32 m_nState;
 };
 
 

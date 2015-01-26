@@ -38,6 +38,7 @@
 #include "UserInfo.h"
 #include "UserTradeInfo.h"
 #include "UserHold.h"
+#include "UserAmount.h"
 #include "ConfigInfo.h"
 
 
@@ -63,34 +64,36 @@ void CMessageProcesser::processReq(const CReqLogin* pReq )
 	CUserInfo* pGetUserInfo = NULL;
 	quint16 nListenPort = 0;
 	qint32 nFunRes = 0;
+	pAckLogin = new CAckLogin();
+
 	CTcpComProtocol::EDataTypeLoginResult nLoginResult = CTcpComProtocol::DataType_LoginResult_OK;
 	nListenPort = CConfigInfo::getInstance().getServerPort();
 	nFunRes = CServerManager::getInstance().selectUserInfo(nListenPort, pReq->m_strUserName, pReq->m_strPassword, &pGetUserInfo);
 	if (NULL == pGetUserInfo)
 	{
-		pGetUserInfo = new CUserInfo();
-		pGetUserInfo->setUseID(pReq->m_strUserName, pReq->m_strPassword);
-		nFunRes = CServerManager::getInstance().createUserInfo(nListenPort, pGetUserInfo);
+		nLoginResult = CTcpComProtocol::DataType_LoginResult_ERROR;
 	}
-	
+	else
 	{
+		nLoginResult = CTcpComProtocol::DataType_LoginResult_OK;
+
 		pGetUserInfo->resetLoginTime();
-		pGetUserInfo->m_nLOGINCOUNT++;
-		pGetUserInfo->m_nSTATE = CUserInfo::UserState_ONLINE;
+		pGetUserInfo->m_nLoginCount++;
+		pGetUserInfo->m_nState = CUserInfo::UserState_ONLINE;
 		nFunRes = CServerManager::getInstance().updateUserInfo(nListenPort, pGetUserInfo);
+
+		pAckLogin->m_strUserID = pGetUserInfo->m_strUserID;
+		pAckLogin->m_strUserName = pGetUserInfo->m_strUserName;
+		pAckLogin->m_strPassword = pGetUserInfo->m_strPassWord;
+		pAckLogin->m_strLastLoginTime = pGetUserInfo->m_strLastLoginTime;
+		pAckLogin->m_nLoginCount = pGetUserInfo->m_nLoginCount;
+		pAckLogin->m_nState = pGetUserInfo->m_nState;
 	}
 
-	pAckLogin = new CAckLogin();
 	pAckLogin->m_nMessageType = CTcpComProtocol::MsgType_Ack;
 	pAckLogin->m_nDataType = CTcpComProtocol::DataType_Login;
 	pAckLogin->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAckLogin->m_strReqUUID = pReq->m_strReqUUID;
-	pAckLogin->m_strUserID = pGetUserInfo->m_strUSEID;
-	pAckLogin->m_strUserName = pGetUserInfo->m_strUSERNAME;
-	pAckLogin->m_strPassword = pGetUserInfo->m_strPASSWORD;
-	pAckLogin->m_strLastLoginTime = pGetUserInfo->m_strLASTLOGINTIME;
-	pAckLogin->m_nLoginCount = pGetUserInfo->m_nLOGINCOUNT;
-	pAckLogin->m_nState = pGetUserInfo->m_nSTATE;
 	pAckLogin->m_nLoginResult = nLoginResult;
 
 	if (NULL != pGetUserInfo)
@@ -304,6 +307,7 @@ void CMessageProcesser::processReq( const CReqCreateUser* pReq )
 	CAckCreateUser* pAck = NULL;
 	QByteArray* pByteArray = NULL;
 	CUserInfo* pGetUserInfo = NULL;
+	CUserAmount* pUserAmount = NULL;
 	quint16 nListenPort = 0;
 	qint32 nFunRes = 0;
 	nListenPort = CConfigInfo::getInstance().getServerPort();
@@ -314,18 +318,29 @@ void CMessageProcesser::processReq( const CReqCreateUser* pReq )
 		pGetUserInfo->setUseID(pReq->m_strUserName, pReq->m_strPassword);
 		nFunRes = CServerManager::getInstance().createUserInfo(nListenPort, pGetUserInfo);
 		pGetUserInfo->resetLoginTime();
-		pGetUserInfo->m_nLOGINCOUNT = 0;
-		pGetUserInfo->m_nSTATE = CUserInfo::UserState_OFFLINE;
+		pGetUserInfo->m_nLoginCount = 0;
+		pGetUserInfo->m_nState = (qint32)CUserInfo::UserState_OFFLINE;
 		nFunRes = CServerManager::getInstance().updateUserInfo(nListenPort, pGetUserInfo);
-	}
+
+		{
+			pUserAmount = new CUserAmount();
+			pUserAmount->m_strUserID = pGetUserInfo->m_strUserID;
+			nFunRes = CServerManager::getInstance().createUserAmount(nListenPort, pUserAmount);
+			if (NULL != pUserAmount)
+			{
+				delete pUserAmount;
+				pUserAmount = NULL;
+			}
+		}
+	}//if
 
 	pAck = new CAckCreateUser();
 	pAck->m_nMessageType = CTcpComProtocol::MsgType_Ack;
 	pAck->m_nDataType = CTcpComProtocol::DataType_CreateUser;
 	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
 	pAck->m_strReqUUID = pReq->m_strReqUUID;
-	pAck->m_strUserName = pGetUserInfo->m_strUSERNAME;
-	pAck->m_strPassword = pGetUserInfo->m_strPASSWORD;
+	pAck->m_strUserName = pGetUserInfo->m_strUserName;
+	pAck->m_strPassword = pGetUserInfo->m_strPassWord;
 
 	if (NULL != pGetUserInfo)
 	{
