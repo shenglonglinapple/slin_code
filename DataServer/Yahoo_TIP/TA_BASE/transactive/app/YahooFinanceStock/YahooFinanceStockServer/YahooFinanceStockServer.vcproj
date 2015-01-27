@@ -806,6 +806,14 @@
 			Name="cscommon"
 			>
 			<File
+				RelativePath="..\cscommon\AckAmount.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckAmount.h"
+				>
+			</File>
+			<File
 				RelativePath="..\cscommon\AckCreateUser.cpp"
 				>
 			</File>
@@ -969,6 +977,14 @@
 			</File>
 			<File
 				RelativePath="..\cscommon\QtTimeHelper.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqAmount.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqAmount.h"
 				>
 			</File>
 			<File

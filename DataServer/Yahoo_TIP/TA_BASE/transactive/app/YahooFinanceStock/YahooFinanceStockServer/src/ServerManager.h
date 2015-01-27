@@ -39,15 +39,14 @@ public:
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserAmount(quint16 nListenPort, const CUserAmount* pData);
-	qint32 createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
 	qint32 createUserHold( quint16 nListenPort, const CUserHold* pData );
 public:
-	qint32 selectUserTradeInfo(quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID);
-
+	qint32 selectUserTradeInfo(quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse);
+public:
+	qint32 processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
 
 public:
 	void sendMessage(quint16 nListenPort, qint32 handle, QByteArray* pMessage);
-
 private:
 	QMutex m_mutex_MapTcpServerWorker;
 	QMap<quint16, CTcpServerWorker*> m_MapTcpServerWorker;

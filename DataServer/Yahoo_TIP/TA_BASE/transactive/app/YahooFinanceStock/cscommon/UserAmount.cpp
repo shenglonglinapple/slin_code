@@ -19,7 +19,6 @@ CUserAmount& CUserAmount::operator=( const CUserAmount& objectCopy )
 {
 	m_strUserID = objectCopy.m_strUserID;
 	m_fInitAmount = objectCopy.m_fInitAmount;
-	m_fUseAmount = objectCopy.m_fUseAmount;
 	m_fLeftAmount = objectCopy.m_fLeftAmount;
 	m_fFloatingProfitLoss = objectCopy.m_fFloatingProfitLoss;
 
@@ -35,8 +34,7 @@ void CUserAmount::_Init()
 {
 	m_strUserID.clear();
 	m_fInitAmount = DEF_VALUE_INT_INIT_AMOUNT;
-	m_fUseAmount = 0;
-	m_fLeftAmount = 0;
+	m_fLeftAmount = m_fInitAmount;
 
 	m_fFloatingProfitLoss = 0;
 	m_fFloatingProfitLossPersentage = 0;

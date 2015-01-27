@@ -18,7 +18,6 @@ public:
 public:
 	QString m_strUserID;
 	double m_fInitAmount;
-	double m_fUseAmount;
 	double m_fLeftAmount;
 	double m_fFloatingProfitLoss;
 	double m_fFloatingProfitLossPersentage;

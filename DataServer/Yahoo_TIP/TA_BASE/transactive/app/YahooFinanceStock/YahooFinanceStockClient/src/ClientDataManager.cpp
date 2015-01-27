@@ -180,11 +180,12 @@ void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
 		//TODO.forTest
 		//send_req_ReqSynYahoo(nHandle, strSymbolUse);
 		send_req_ReqStockMinTimeMaxTime(nHandle, strSymbolUse);
+		//TODO.forTest
+		send_req_ReqHistoryTrade(strSymbolUse, CTcpComProtocol::ETradeType_Buy);
+
 		iterLst++;
 	}//while
 
-	//TODO.forTest
-	send_req_ReqHistoryTrade(strSymbolUse, CTcpComProtocol::ETradeType_Buy);
 
 
 }

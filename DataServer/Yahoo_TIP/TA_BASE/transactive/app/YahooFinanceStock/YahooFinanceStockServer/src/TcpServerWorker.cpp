@@ -12,6 +12,7 @@
 #include "UserInfo.h"
 #include "UserTradeInfo.h"
 #include "Log4cppLogger.h"
+#include "UserAmount.h"
 
 CTcpServerWorker::CTcpServerWorker( quint16 nListenPort, QObject* parent/*=0*/ )
 {
@@ -133,7 +134,7 @@ qint32 CTcpServerWorker::createUserAmount( quint16 nListenPort, const CUserAmoun
 	nFunRes = m_pServerDbOper->insertUserAmount(nListenPort, pData);
 	return nFunRes;
 }
-qint32 CTcpServerWorker::createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
+qint32 CTcpServerWorker::_CreateUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
 {
 	qint32 nFunRes = 0;
 	if (NULL == m_pServerDbOper)
@@ -143,6 +144,45 @@ qint32 CTcpServerWorker::createUserTradeInfo( quint16 nListenPort, const CUserTr
 	}
 	nFunRes = m_pServerDbOper->insertUserTradeInfo(nListenPort, pData);
 	return nFunRes;
+}
+
+qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
+{
+	CUserAmount* pUserAmount = NULL;
+	if (NULL == m_pServerDbOper)
+	{
+		nFunRes = -1;
+		return nFunRes;
+	}
+	if (NULL == pData || pData->m_strUserID.isEmpty())
+	{
+		nFunRes = -1;
+		return nFunRes;
+	}
+	nFunRes = m_pServerDbOper->selectUserAmount(nListenPort, pData->m_strUserID, &pUserAmount);
+	if (NULL == pUserAmount)
+	{
+		MYLOG4CPP_ERROR<<"error:select User Amount m_strUserID="<<m_strUserID;
+		nFunRes = -1;
+		return nFunRes;
+	}
+
+	//
+	if (CTcpComProtocol::ETradeType_Buy == pData->m_nTradeType)
+	{
+		//check
+		if (pUserAmount->m_fLeftAmount >= pData->m_fTotalTradeAmount)
+		{
+			//check ok do trade
+			pUserAmount->m_fLeftAmount = pUserAmount->m_fLeftAmount - pUserAmount->m_fUseAmount;
+			_CreateUserTradeInfo(nListenPort, pData);
+		}		
+	}
+	else //if (CTcpComProtocol::ETradeType_Sell == pData->m_nTradeType)
+	{
+		pUserAmount->m_fLeftAmount = pUserAmount->m_fLeftAmount + pData->m_fTotalTradeAmount;
+		_CreateUserTradeInfo(nListenPort, pData);
+	}
 }
 
 qint32 CTcpServerWorker::createUserHold( quint16 nListenPort, const CUserHold* pData )
@@ -166,7 +206,9 @@ void CTcpServerWorker::sendMessage( qint32 handle, QByteArray* pMessage )
 	m_pServerDistributeTaskWorker->sendMessage(handle, pMessage);
 }
 
-qint32 CTcpServerWorker::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID)
+
+
+qint32 CTcpServerWorker::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse )
 {
 	qint32 nFunRes = 0;
 	if (NULL == m_pServerDbOper)
@@ -174,8 +216,8 @@ qint32 CTcpServerWorker::selectUserTradeInfo( quint16 nListenPort, QList<CUserTr
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->selectUserTradeInfo(nListenPort, lstData, strUserID);
-	
+	nFunRes = m_pServerDbOper->selectUserTradeInfo(nListenPort, lstData, strUserID,strSymbolUse);
+
 	return nFunRes;
 }
 

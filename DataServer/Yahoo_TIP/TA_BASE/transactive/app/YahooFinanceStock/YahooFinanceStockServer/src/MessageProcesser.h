@@ -14,6 +14,7 @@ class CReqCreateUser;
 class CReqTrade;
 class CReqDownLoadTrade;
 class CReqHistoryTrade;
+class CReqAmount;
 
 class CAckLogin;
 class CAckLogout;
@@ -25,6 +26,7 @@ class CAckCreateUser;
 class CAckTrade;
 class CAckDownLoadTrade;
 class CAckHistoryTrade;
+class CAckAmount;
 
 class CMessageProcesser
 {
@@ -42,6 +44,7 @@ public:
 	void processReq(const CReqTrade* pReq);
 	void processReq(const CReqDownLoadTrade* pReq);
 	void processReq(const CReqHistoryTrade* pReq);
+	void processReq(const CReqAmount* pReq);
 
 public:
 	void processAck(const CAckLogin* pAck);
@@ -54,6 +57,7 @@ public:
 	void processAck(const CAckTrade* pAck);
 	void processAck(const CAckDownLoadTrade* pAck);
 	void processAck(const CAckHistoryTrade* pAck);
+	void processAck(const CAckAmount* pAck);
 
 private:
 	qint32 m_nHanle;

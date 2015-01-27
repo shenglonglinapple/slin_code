@@ -591,6 +591,37 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_TRADE_INFO( const QStr
 	return strSQL;	
 }
 
+QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_TRADE_INFO( const QString & strUserID, const QString & strSymbolUse )
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	byteSQL<<"SELECT"
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_UUID<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TIME<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TYPE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_PRICE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_VOLUME<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE<<","
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT
+		<<" "<<"FROM"
+		<<" "<<str_TABLE_USER_TRADE_INFO
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USEID<<"="<<"\""<<strUserID.toStdString()<<"\""
+		<<" "<<"AND"
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_SYMBOLUSE<<"="<<"\""<<strSymbolUse.toStdString()<<"\""
+		<<" "<<"ORDER BY"
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_TIME
+		<<" "<<"ASC";//ASC min->max   DESC max->min
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;	
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_HOLD()
@@ -784,7 +815,6 @@ QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_AMOUNT()
 			<<" "<<"("
 			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USEID<<" "<<"TEXT NOT NULL"<<","
 			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_INIT_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USE_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
 			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_LEFT_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
 			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<" "<<"decimal(25,10) NOT NULL"<<","
 			<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<" "<<"decimal(25,10) NOT NULL"<<","
@@ -816,7 +846,6 @@ QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_AMOUNT()
 		<<" "<<"("
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USEID<<","
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_INIT_AMOUNT<<","
-		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USE_AMOUNT<<","
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_LEFT_AMOUNT<<","
 
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<","
@@ -826,7 +855,6 @@ QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_AMOUNT()
 		<<" "<<")"
 		<<" "<<"VALUES"
 		<<" "<<"("
-		<<" "<<"?"<<","
 		<<" "<<"?"<<","
 		<<" "<<"?"<<","
 		<<" "<<"?"<<","
@@ -851,9 +879,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_AMOUNT( const QString&
 	byteSQL<<"SELECT"
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USEID<<","
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_INIT_AMOUNT<<","
-		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_USE_AMOUNT<<","
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_LEFT_AMOUNT<<","
-
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<","
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<","
 		<<" "<<str_TABLE_USER_AMOUNT_COLUMN_FLOATINT_AMOUNT<<","

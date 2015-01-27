@@ -651,7 +651,7 @@ qint32 CServerDbOper::select_UserHold( const QString& strUserID, const QString& 
 	
 }
 
-qint32 CServerDbOper::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID )
+qint32 CServerDbOper::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = true;
@@ -661,7 +661,7 @@ qint32 CServerDbOper::selectUserTradeInfo( quint16 nListenPort, QList<CUserTrade
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_TRADE_INFO(strUserID);
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_TRADE_INFO(strUserID, strSymbolUse);
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
 	bExecRes = pSqlQuery->exec(strSQL);
 	if (!bExecRes)
@@ -720,6 +720,8 @@ qint32 CServerDbOper::selectUserTradeInfo( quint16 nListenPort, QList<CUserTrade
 	return nFunRes;
 }
 
+
+
 qint32 CServerDbOper::_CreateDBTable_TABLE_USER_AMOUNT()
 {
 	qint32 nFunRes = 0;
@@ -755,9 +757,7 @@ qint32 CServerDbOper::_AddUserAmount( const CUserAmount* pData )
 
 	QVariantList COLUMN_USEID;
 	QVariantList COLUMN_INIT_AMOUNT;
-	QVariantList COLUMN_USE_AMOUNT;
 	QVariantList COLUMN_LEFT_AMOUNT;
-
 	QVariantList COLUMN_FLOATINT_PROFIT_LOSS;
 	QVariantList COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE;
 	QVariantList COLUMN_FLOATINT_AMOUNT;
@@ -783,9 +783,7 @@ qint32 CServerDbOper::_AddUserAmount( const CUserAmount* pData )
 	{
 		COLUMN_USEID << pData->m_strUserID;
 		COLUMN_INIT_AMOUNT << pData->m_fInitAmount;
-		COLUMN_USE_AMOUNT << pData->m_fUseAmount;
 		COLUMN_LEFT_AMOUNT << pData->m_fLeftAmount;
-
 		COLUMN_FLOATINT_PROFIT_LOSS << pData->m_fFloatingProfitLoss;
 		COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE << pData->m_fFloatingProfitLossPersentage;
 		COLUMN_FLOATINT_AMOUNT << pData->m_fFloatingAmount;
@@ -795,9 +793,7 @@ qint32 CServerDbOper::_AddUserAmount( const CUserAmount* pData )
 	//pQSqlQueryForInseert->addBindValue(lstInstrumentID);
 	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
 	pQSqlQueryForInseert->addBindValue(COLUMN_INIT_AMOUNT);
-	pQSqlQueryForInseert->addBindValue(COLUMN_USE_AMOUNT);
 	pQSqlQueryForInseert->addBindValue(COLUMN_LEFT_AMOUNT);
-
 	pQSqlQueryForInseert->addBindValue(COLUMN_FLOATINT_PROFIT_LOSS);
 	pQSqlQueryForInseert->addBindValue(COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE);
 	pQSqlQueryForInseert->addBindValue(COLUMN_FLOATINT_AMOUNT);
@@ -816,5 +812,13 @@ qint32 CServerDbOper::_AddUserAmount( const CUserAmount* pData )
 		delete pQSqlQueryForInseert;
 		pQSqlQueryForInseert = NULL;
 	}
+	return nFunRes;
+}
+
+
+qint32 CServerDbOper::selectUserAmount( quint16 nListenPort, const QString& strUserID, CUserAmount** ppData )
+{
+	qint32 nFunRes = 0;
+
 	return nFunRes;
 }

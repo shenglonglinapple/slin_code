@@ -36,9 +36,10 @@ public:
 public:
 	qint32 select_UserHold(const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData );
 public:
-	qint32 selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID);
+	qint32 selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse );
 public:
 	qint32 insertUserAmount(quint16 nListenPort, const CUserAmount* pData);
+	qint32 selectUserAmount(quint16 nListenPort, const QString& strUserID, CUserAmount** ppData);
 
 	
 private:

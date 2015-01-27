@@ -27,6 +27,7 @@ public:
 	QString buildSQL_BatchInsert_TABLE_USER_TRADE_INFO();
 	QString buildSQL_Truncate_TABLE_USER_TRADE_INFO();
 	QString buildSQL_Select_TABLE_USER_TRADE_INFO(const QString & strUserID);
+	QString buildSQL_Select_TABLE_USER_TRADE_INFO(const QString & strUserID, const QString & strSymbolUse);
 
 public:
 	QString buildSQL_CreateTable_TABLE_USER_HOLD();

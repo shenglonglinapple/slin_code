@@ -18,6 +18,7 @@
 #include "ReqTrade.h"
 #include "ReqDownLoadTrade.h"
 #include "ReqHistoryTrade.h"
+#include "ReqAmount.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -29,6 +30,7 @@
 #include "AckTrade.h"
 #include "AckDownLoadTrade.h"
 #include "AckHistoryTrade.h"
+#include "AckAmount.h"
 
 
 
@@ -145,7 +147,12 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	else if (CReqHistoryTrade::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_ReqHistoryTrade();
+	}	
+	else if (CReqAmount::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqAmount();
 	}
+
 }
 
 void CMessageRunnable::_ProcessMessage_ReqLogin()
@@ -304,6 +311,23 @@ void CMessageRunnable::_ProcessMessage_ReqHistoryTrade()
 		pReq = NULL;
 	}
 }
+
+void CMessageRunnable::_ProcessMessage_ReqAmount()
+{
+	CReqAmount* pReq = NULL;
+	pReq = new CReqAmount();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	m_pMessageProcesser->processReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType )
@@ -347,6 +371,10 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckHistoryTrade::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckHistoryTrade();
+	}
+	else if (CAckAmount::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckAmount();
 	}
 }
 
@@ -498,6 +526,22 @@ void CMessageRunnable::_ProcessMessage_AckHistoryTrade()
 {
 	CAckHistoryTrade* pAck = NULL;
 	pAck = new CAckHistoryTrade();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	m_pMessageProcesser->processAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageRunnable::_ProcessMessage_AckAmount()
+{
+	CAckAmount* pAck = NULL;
+	pAck = new CAckAmount();
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 

@@ -189,10 +189,10 @@ qint32 CServerManager::createUserInfo(quint16 nListenPort, const CUserInfo* pDat
 	return nFunRes;
 }
 
-qint32 CServerManager::createUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
+qint32 CServerManager::processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
 {
 	qint32 nFunRes = 0;
-	MYLOG4CPP_DEBUG<<"CServerManager createUserTradeInfo nListenPort="<<nListenPort;
+	MYLOG4CPP_DEBUG<<"CServerManager processUserTradeInfo nListenPort="<<nListenPort;
 
 	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
 	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
@@ -204,7 +204,7 @@ qint32 CServerManager::createUserTradeInfo( quint16 nListenPort, const CUserTrad
 	{
 		//nListenPort = iterMap.key();
 		pWorker = iterMap.value();
-		nFunRes = pWorker->createUserTradeInfo(nListenPort, pData);
+		nFunRes = pWorker->processUserTradeInfo(nListenPort, pData);
 	}//if
 	else
 	{
@@ -213,6 +213,7 @@ qint32 CServerManager::createUserTradeInfo( quint16 nListenPort, const CUserTrad
 
 	return nFunRes;
 }
+
 
 qint32 CServerManager::createUserHold( quint16 nListenPort, const CUserHold* pData )
 {
@@ -263,7 +264,8 @@ void CServerManager::sendMessage( quint16 nListenPort, qint32 handle, QByteArray
 }
 
 
-qint32 CServerManager::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID)
+
+qint32 CServerManager::selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse )
 {
 	qint32 nFunRes = 0;
 	MYLOG4CPP_DEBUG<<"CServerManager selectUserTradeInfo nListenPort="<<nListenPort;
@@ -278,7 +280,7 @@ qint32 CServerManager::selectUserTradeInfo( quint16 nListenPort, QList<CUserTrad
 	{
 		//nListenPort = iterMap.key();
 		pData = iterMap.value();
-		nFunRes = pData->selectUserTradeInfo(nListenPort, lstData, strUserID);
+		nFunRes = pData->selectUserTradeInfo(nListenPort, lstData, strUserID, strSymbolUse);
 	}//if
 	else
 	{
