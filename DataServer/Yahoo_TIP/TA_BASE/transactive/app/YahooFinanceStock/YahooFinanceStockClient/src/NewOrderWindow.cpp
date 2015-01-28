@@ -283,7 +283,6 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 	m_pUserTradeInfo->m_fTradePrice = m_pSpinBox_Price->value();
 	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume->value();
 	m_pUserTradeInfo->m_fTradeAmount = 0;
-	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume_Value;
 	m_pUserTradeInfo->m_fTradeFees = 0.007;
 	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;
 	m_pUserTradeInfo->m_fTotalTradeFee = m_pUserTradeInfo->m_fTradeAmount * m_pUserTradeInfo->m_fTradeFees;

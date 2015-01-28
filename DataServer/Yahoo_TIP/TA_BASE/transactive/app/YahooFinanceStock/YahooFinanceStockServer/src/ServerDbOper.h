@@ -20,6 +20,7 @@ class CUserInfo;
 class CUserTradeInfo;
 class CUserHold;
 class CUserAmount;
+class CUserHoldAmount;
 
 class CServerDbOper
 {
@@ -40,13 +41,21 @@ public:
 public:
 	qint32 insertUserAmount(quint16 nListenPort, const CUserAmount* pData);
 	qint32 selectUserAmount(quint16 nListenPort, const QString& strUserID, CUserAmount** ppData);
+	qint32 updateUserAmount(quint16 nListenPort, CUserAmount* pData);
+public:
+	qint32 selectUserHoldAmount(const QString& strUserID,const QString& strSymobolUse, CUserHoldAmount** ppData);
+	qint32 selectUserHoldAmount(const QString& strUserID, QList<CUserHoldAmount*>& LstData);
+	qint32 insertUserHoldAmount(CUserHoldAmount* pData);
+	qint32 updateUserHoldAmount(CUserHoldAmount* pData);
+
+public:
+	int startTransaction();
+	int commitTransaction();
 
 	
 private:
 	void _UnInitDataBase();
 	void _InitDataBase();
-	int _StartTransaction();
-	int _CommitTransaction();
 	qint32 _ExecModify(const QString& strSQL);
 
 private:
@@ -60,6 +69,9 @@ private:
 	qint32 _CreateDBTable_TABLE_USER_AMOUNT();
 	qint32 _AddUserAmount(const CUserAmount* pData);
 	qint32 _Truncate_TABLE_USER_AMOUNT();
+	qint32 _CreateDBTable_TABLE_USER_HOLD_AMOUNT();
+	qint32 _Truncate_TABLE_USER_HOLD_AMOUNT();
+	qint32 _AddUserHoldAmount(const CUserHoldAmount* pData);
 
 private:
 	QSqlDatabase* m_pQSqlDataBase;

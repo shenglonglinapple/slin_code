@@ -1124,6 +1124,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\cscommon\UserHoldAmount.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\UserHoldAmount.h"
+				>
+			</File>
+			<File
 				RelativePath="..\cscommon\UserInfo.cpp"
 				>
 			</File>

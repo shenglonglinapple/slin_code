@@ -12,6 +12,7 @@ class CUserInfo;
 class CUserTradeInfo;
 class CUserHold;
 class CUserAmount;
+class CUserHoldAmount;
 
 class QByteArray;
 
@@ -38,9 +39,7 @@ public:
 public:
 	qint32 selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse );
 	qint32 processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
-private:
-	qint32 _CreateUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
-
+	double getUserHoldAmount(const QString& strUserID, const QString& strTime);
 private:
 	quint16 m_nListenPort;
 	CStockTcpServer* m_pStockTcpServer;

@@ -381,10 +381,12 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 	{
 		pUserTradeInfo = new CUserTradeInfo();
 		pUserTradeInfo->setValue(pReq->m_strUserID, pReq);
-		CServerManager::getInstance().processUserTradeInfo(nListenPort, pUserTradeInfo);
-		
+		nFunRes = CServerManager::getInstance().processUserTradeInfo(nListenPort, pUserTradeInfo);
+		if (0 == nFunRes)
+		{
+			pAck->setValue(pReq, pUserTradeInfo);
+		}
 		//set ack
-		pAck->setValue(pReq, pUserTradeInfo);
 		if (NULL != pUserTradeInfo)
 		{
 			delete pUserTradeInfo;
