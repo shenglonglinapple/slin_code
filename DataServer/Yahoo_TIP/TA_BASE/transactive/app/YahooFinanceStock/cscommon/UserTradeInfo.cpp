@@ -64,7 +64,16 @@ void CUserTradeInfo::setValue(const QString& strUserID, const CReqTrade* pReq )
 
 	m_fTradeAmount = m_fTradePrice*m_nTradeVolume;
 	m_fTotalTradeFee = m_fTradeAmount*m_fTradeFees;
-	m_fTotalTradeAmount = m_fTradeAmount + m_fTotalTradeFee;
+
+	if (CTcpComProtocol::ETradeType_Buy == pReq->m_nTradeType)
+	{
+		m_fTotalTradeAmount = m_fTradeAmount + m_fTotalTradeFee;
+	}
+	else
+	{
+		//sell
+		m_fTotalTradeAmount = m_fTradeAmount - m_fTotalTradeFee;
+	}
 }
 
 

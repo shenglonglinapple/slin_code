@@ -20,6 +20,7 @@ class CUserInfo;
 class CUserTradeInfo;
 class CHistoryData;
 class CStockMinTimeMaxTime;
+class CUserAccount;
 
 class CClientDbOper
 {
@@ -36,14 +37,12 @@ public:
 	qint32 updateSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
 	qint32 selectSymbolMinMaxTime(const QString& strSymbolUse, CStockMinTimeMaxTime** ppData);
 	void truncateSymbolMinMaxTime();
-
-public:
-	qint32 selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
-	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
-	qint32 insertUserInfo(quint16 nListenPort, const CUserInfo* pData);
 public:
 	qint32 insertUserTradeInfo(const CUserTradeInfo* pData);
 	void truncateTableUserTradeInfo();
+public:
+	qint32 resetUserAccount( const CUserAccount* pData );
+	qint32 insertUserAccount(const CUserAccount* pData );
 
 public:
 	QSqlDatabase* getDB();
@@ -55,14 +54,16 @@ private:
 	qint32 _ExecModify(const QString& strSQL);
 
 private:
-	qint32 _CreateDBTable_TABLE_USER_INFO();
-	qint32 _AddUserInfo(const CUserInfo* pData);
 	qint32 _CreateDBTable_TABLE_USER_TRADE_INFO();
 	qint32 _AddUserTradeInfo(const CUserTradeInfo* pData);
 	qint32 _CreateDBTable_TABLE_BAR_DATA_1DAY();
 	qint32 _AddHistoryDataLst(const QList<CHistoryData*>& lstData);
 	qint32 _CreateDBTable_TABLE_MINTIME_MAXTIME();
 	qint32 _AddSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
+	qint32 _CreateDBTable_TABLE_USER_ACCOUNT();
+	qint32 _Truncate_TABLE_USER_ACCOUNT();
+	qint32 _AddUserAccount( const CUserAccount* pData );
+
 private:
 	QSqlDatabase* m_pQSqlDataBase;
 	QString m_strQTDbType;//"QSQLITE" "QMYSQL"

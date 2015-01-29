@@ -12,6 +12,7 @@ class CClientMainWindow;
 class CStockMinTimeMaxTimeTableView;
 class CStockHistoryDataTableView;
 class CUserTradeTableView;
+class CUserAccountWidget;
 
 class CSignalSlotManager : public QObject
 {
@@ -83,6 +84,19 @@ private slots:
 public:
 	void emit_DataChange_UserTrade();
 //////////////////////////////////////////////////////
+private:
+	CClientDataManager* m_pRefSignal_DataChange_UserAccount;
+	CUserAccountWidget* m_pRefSlot_DataChange_UserAccount;
+public:
+	void set_Signal_DataChange_UserAccount( CClientDataManager* pRefSignal);
+	void set_Slot_DataChange_UserAccount(CUserAccountWidget* pRefSlot);
+signals:
+	void signal_DataChange_UserAccount();
+private slots:
+	void slot_DataChange_UserAccount();
+public:
+	void emit_DataChange_UserAccount();
+	//////////////////////////////////////////////////////
 
 };
 

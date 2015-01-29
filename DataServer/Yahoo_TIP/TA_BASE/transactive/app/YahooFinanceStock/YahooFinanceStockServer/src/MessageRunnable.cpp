@@ -16,9 +16,8 @@
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
-#include "ReqDownLoadTrade.h"
 #include "ReqHistoryTrade.h"
-#include "ReqAmount.h"
+#include "ReqAccount.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -28,9 +27,8 @@
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
 #include "AckTrade.h"
-#include "AckDownLoadTrade.h"
 #include "AckHistoryTrade.h"
-#include "AckAmount.h"
+#include "AckAccount.h"
 
 
 
@@ -140,17 +138,13 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqTrade();		
 	}
-	else if (CReqDownLoadTrade::checkMsgDataType(nMessageType, nDataType))
-	{
-		_ProcessMessage_ReqDownLoadTrade();
-	}
 	else if (CReqHistoryTrade::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_ReqHistoryTrade();
 	}	
-	else if (CReqAmount::checkMsgDataType(nMessageType, nDataType))
+	else if (CReqAccount::checkMsgDataType(nMessageType, nDataType))
 	{
-		_ProcessMessage_ReqAmount();
+		_ProcessMessage_ReqAccount();
 	}
 
 }
@@ -281,21 +275,6 @@ void CMessageRunnable::_ProcessMessage_ReqTrade()
 	}
 }
 
-void CMessageRunnable::_ProcessMessage_ReqDownLoadTrade()
-{
-	CReqDownLoadTrade* pReq = NULL;
-	pReq = new CReqDownLoadTrade();
-	pReq->setValue(m_pMessage);
-	pReq->logInfo(__FILE__, __LINE__);
-
-	m_pMessageProcesser->processReq(pReq);
-
-	if (NULL != pReq)
-	{
-		delete pReq;
-		pReq = NULL;
-	}
-}
 void CMessageRunnable::_ProcessMessage_ReqHistoryTrade()
 {
 	CReqHistoryTrade* pReq = NULL;
@@ -312,10 +291,10 @@ void CMessageRunnable::_ProcessMessage_ReqHistoryTrade()
 	}
 }
 
-void CMessageRunnable::_ProcessMessage_ReqAmount()
+void CMessageRunnable::_ProcessMessage_ReqAccount()
 {
-	CReqAmount* pReq = NULL;
-	pReq = new CReqAmount();
+	CReqAccount* pReq = NULL;
+	pReq = new CReqAccount();
 	pReq->setValue(m_pMessage);
 	pReq->logInfo(__FILE__, __LINE__);
 
@@ -364,17 +343,13 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_AckTrade();
 	}
-	else if (CAckDownLoadTrade::checkMsgDataType(nMessageType, nDataType))
-	{
-		_ProcessMessage_AckDownLoadTrade();
-	}
 	else if (CAckHistoryTrade::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckHistoryTrade();
 	}
-	else if (CAckAmount::checkMsgDataType(nMessageType, nDataType))
+	else if (CAckAccount::checkMsgDataType(nMessageType, nDataType))
 	{
-		_ProcessMessage_AckAmount();
+		_ProcessMessage_AckAccount();
 	}
 }
 
@@ -507,21 +482,6 @@ void CMessageRunnable::_ProcessMessage_AckTrade()
 	}
 }
 
-void CMessageRunnable::_ProcessMessage_AckDownLoadTrade()
-{
-	CAckDownLoadTrade* pAck = NULL;
-	pAck = new CAckDownLoadTrade();
-	pAck->setValue(m_pMessage);
-	pAck->logInfo(__FILE__, __LINE__);
-
-	m_pMessageProcesser->processAck(pAck);
-
-	if (NULL != pAck)
-	{
-		delete pAck;
-		pAck = NULL;
-	}
-}
 void CMessageRunnable::_ProcessMessage_AckHistoryTrade()
 {
 	CAckHistoryTrade* pAck = NULL;
@@ -538,10 +498,10 @@ void CMessageRunnable::_ProcessMessage_AckHistoryTrade()
 	}
 }
 
-void CMessageRunnable::_ProcessMessage_AckAmount()
+void CMessageRunnable::_ProcessMessage_AckAccount()
 {
-	CAckAmount* pAck = NULL;
-	pAck = new CAckAmount();
+	CAckAccount* pAck = NULL;
+	pAck = new CAckAccount();
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 

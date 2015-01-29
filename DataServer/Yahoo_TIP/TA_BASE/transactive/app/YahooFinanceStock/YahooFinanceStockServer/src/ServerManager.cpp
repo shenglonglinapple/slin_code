@@ -7,7 +7,7 @@
 #include "TcpServerWorker.h"
 #include "ConfigInfo.h"
 #include "UserInfo.h"
-#include "UserAmount.h"
+#include "UserAccount.h"
 #include "UserTradeInfo.h"
 #include "Log4cppLogger.h"
 
@@ -215,31 +215,6 @@ qint32 CServerManager::processUserTradeInfo( quint16 nListenPort, const CUserTra
 }
 
 
-qint32 CServerManager::createUserHold( quint16 nListenPort, const CUserHold* pData )
-{
-	qint32 nFunRes = 0;
-	MYLOG4CPP_DEBUG<<"CServerManager createUserHold nListenPort="<<nListenPort;
-
-	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
-	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
-	CTcpServerWorker* pWorker = NULL;
-
-	iterMap = m_MapTcpServerWorker.find(nListenPort);
-
-	if (iterMap != m_MapTcpServerWorker.end())
-	{
-		//nListenPort = iterMap.key();
-		pWorker = iterMap.value();
-		nFunRes = pWorker->createUserHold(nListenPort, pData);
-	}//if
-	else
-	{
-		nFunRes = -1;
-	}
-
-	return nFunRes;
-}
-
 void CServerManager::sendMessage( quint16 nListenPort, qint32 handle, QByteArray* pMessage )
 {
 	qint32 nFunRes = 0;
@@ -290,10 +265,10 @@ qint32 CServerManager::selectUserTradeInfo( quint16 nListenPort, QList<CUserTrad
 	return nFunRes;
 }
 
-qint32 CServerManager::createUserAmount( quint16 nListenPort, const CUserAmount* pData )
+qint32 CServerManager::createUserAmount( quint16 nListenPort, const CUserAccount* pData )
 {
 	qint32 nFunRes = 0;
-	MYLOG4CPP_DEBUG<<"CServerManager insertUserInfo nListenPort="<<nListenPort;
+	MYLOG4CPP_DEBUG<<"CServerManager createUserAmount nListenPort="<<nListenPort;
 
 	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
 	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
@@ -306,6 +281,31 @@ qint32 CServerManager::createUserAmount( quint16 nListenPort, const CUserAmount*
 		//nListenPort = iterMap.key();
 		pWorker = iterMap.value();
 		nFunRes = pWorker->createUserAmount(nListenPort, pData);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
+}
+
+qint32 CServerManager::processUserAccount( quint16 nListenPort, const QString& strUserID, const QString& strTime, CUserAccount** ppData)
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager processUserAccount nListenPort="<<nListenPort;
+
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pWorker = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pWorker = iterMap.value();
+		nFunRes = pWorker->processUserAccount(nListenPort, strUserID, strTime, ppData);
 	}//if
 	else
 	{

@@ -16,7 +16,7 @@ class CUserInfo;
 class CUserTradeInfo;
 class QByteArray;
 class CUserHold;
-class CUserAmount;
+class CUserAccount;
 
 class CServerManager
 {
@@ -38,12 +38,12 @@ public:
 	qint32 selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
 	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
 	qint32 createUserInfo(quint16 nListenPort, const CUserInfo* pData);
-	qint32 createUserAmount(quint16 nListenPort, const CUserAmount* pData);
-	qint32 createUserHold( quint16 nListenPort, const CUserHold* pData );
+	qint32 createUserAmount(quint16 nListenPort, const CUserAccount* pData);
 public:
 	qint32 selectUserTradeInfo(quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse);
 public:
 	qint32 processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
+	qint32 processUserAccount(quint16 nListenPort, const QString& strUserID, const QString& strTime, CUserAccount** ppData);
 
 public:
 	void sendMessage(quint16 nListenPort, qint32 handle, QByteArray* pMessage);

@@ -22,6 +22,7 @@
 #include "ReqStockHistoryData.h"
 #include "ReqTrade.h"
 #include "ReqHistoryTrade.h"
+#include "ReqAccount.h"
 
 #include "AckCreateUser.h"
 #include "AckLogin.h"
@@ -30,10 +31,12 @@
 #include "AckDownLoadStock.h"
 #include "AckStockMinTimeMaxTime.h"
 #include "AckStockHistoryData.h"
+#include "AckAccount.h"
 
 #include "SignalSlotManager.h"
 #include "QtTimeHelper.h"
 #include "ConfigInfo.h"
+#include "UserAccount.h"
 #include "Log4cppLogger.h"
 
 CClientDataManager* CClientDataManager::m_pInstance = 0;
@@ -77,7 +80,7 @@ CClientDataManager::CClientDataManager(void)
 	CSignalSlotManager::getInstance().set_Signal_DataChange_StockHistoryData(this);
 	CSignalSlotManager::getInstance().set_Signal_DataChange_StockMinTimeMaxTime(this);
 	CSignalSlotManager::getInstance().set_Signal_DataChange_UserTrade(this);
-
+	CSignalSlotManager::getInstance().set_Signal_DataChange_UserAccount(this);
 
 }
 
@@ -142,6 +145,8 @@ void CClientDataManager::createUser_OK( qint32 nHandle, const QString& strUserNa
 
 void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUserID)
 {
+	CUserAccount* pUserAmount = NULL;
+
 	m_strUserID = strUserID;
 	MYLOG4CPP_DEBUG<<"CClientDataManager loginedToServer"
 		<<" "<<"nHandle="<<nHandle
@@ -157,6 +162,17 @@ void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUser
 
 	CSignalSlotManager::getInstance().emit_ShownMessage(strShowMsg);
 	send_req_ReqDownLoadStock(nHandle);
+
+	//first insert 
+	pUserAmount = new CUserAccount();
+	pUserAmount->m_strUserID = strUserID;
+	CClientDBManager::getInstance().insertUserAmount(pUserAmount);
+	if (NULL != pUserAmount)
+	{
+		delete pUserAmount;
+		pUserAmount = NULL;
+	}
+
 }
 
 void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
@@ -186,7 +202,7 @@ void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
 		iterLst++;
 	}//while
 
-
+	send_req_ReqUserAccount("");//first load account info
 
 }
 
@@ -388,6 +404,26 @@ void CClientDataManager::send_req_ReqHistoryTrade( const QString& strSymbolUse, 
 		pReq = NULL;
 	}
 }
+
+void CClientDataManager::send_req_ReqUserAccount(const QString& strTime)
+{
+	QByteArray* pByteArray = NULL;
+	CReqAccount* pReq = NULL;
+	pReq = new CReqAccount();
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strUserID = m_strUserID;//set User ID
+	pReq->m_strTime = strTime;
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+	CClientWorkerManager::getInstance().sendMessage(m_nHandle, pByteArray);
+	pByteArray = NULL;
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
 //////////////////////////////////////////////////////////////////////////
 void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
@@ -422,6 +458,14 @@ void CClientDataManager::insertUserTradeInfo(const CUserTradeInfo* pData)
 {
 	CClientDBManager::getInstance().insertUserTradeInfo(pData);
 	CSignalSlotManager::getInstance().emit_DataChange_UserTrade();
+	send_req_ReqUserAccount("");
+}
+
+void CClientDataManager::resetUserAccount( const CUserAccount* pData )
+{
+	CClientDBManager::getInstance().resetUserAccount(pData);
+	CSignalSlotManager::getInstance().emit_DataChange_UserAccount();
+
 }
 
 

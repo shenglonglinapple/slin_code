@@ -12,8 +12,8 @@
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
-#include "ReqDownLoadTrade.h"
 #include "ReqHistoryTrade.h"
+#include "ReqAccount.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -23,8 +23,8 @@
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
 #include "AckTrade.h"
-#include "AckDownLoadTrade.h"
 #include "AckHistoryTrade.h"
+#include "AckAccount.h"
 
 #include "Log4cppLogger.h"
 
@@ -38,7 +38,7 @@
 #include "UserInfo.h"
 #include "UserTradeInfo.h"
 #include "UserHold.h"
-#include "UserAmount.h"
+#include "UserAccount.h"
 #include "ConfigInfo.h"
 
 
@@ -307,7 +307,7 @@ void CMessageProcesser::processReq( const CReqCreateUser* pReq )
 	CAckCreateUser* pAck = NULL;
 	QByteArray* pByteArray = NULL;
 	CUserInfo* pGetUserInfo = NULL;
-	CUserAmount* pUserAmount = NULL;
+	CUserAccount* pUserAmount = NULL;
 	quint16 nListenPort = 0;
 	qint32 nFunRes = 0;
 	nListenPort = CConfigInfo::getInstance().getServerPort();
@@ -323,7 +323,7 @@ void CMessageProcesser::processReq( const CReqCreateUser* pReq )
 		nFunRes = CServerManager::getInstance().updateUserInfo(nListenPort, pGetUserInfo);
 
 		{
-			pUserAmount = new CUserAmount();
+			pUserAmount = new CUserAccount();
 			pUserAmount->m_strUserID = pGetUserInfo->m_strUserID;
 			nFunRes = CServerManager::getInstance().createUserAmount(nListenPort, pUserAmount);
 			if (NULL != pUserAmount)
@@ -369,30 +369,21 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 	qint32 nFunRes = 0;
 	CUserTradeInfo* pUserTradeInfo = NULL;
 	CUserHold* pUserHold = NULL;
-
 	nListenPort = CConfigInfo::getInstance().getServerPort();
-	
 	pAck = new CAckTrade();
-	if (pReq->m_strUserID.isEmpty())
+	pUserTradeInfo = new CUserTradeInfo();
+	pUserTradeInfo->setValue(pReq->m_strUserID, pReq);
+	nFunRes = CServerManager::getInstance().processUserTradeInfo(nListenPort, pUserTradeInfo);
+	if (0 == nFunRes)
 	{
-		pAck->setValue(pReq, NULL);
+		pAck->setValue(pReq, pUserTradeInfo);
 	}
-	else
+	//set ack
+	if (NULL != pUserTradeInfo)
 	{
-		pUserTradeInfo = new CUserTradeInfo();
-		pUserTradeInfo->setValue(pReq->m_strUserID, pReq);
-		nFunRes = CServerManager::getInstance().processUserTradeInfo(nListenPort, pUserTradeInfo);
-		if (0 == nFunRes)
-		{
-			pAck->setValue(pReq, pUserTradeInfo);
-		}
-		//set ack
-		if (NULL != pUserTradeInfo)
-		{
-			delete pUserTradeInfo;
-			pUserTradeInfo = NULL;
-		}
-	}//else
+		delete pUserTradeInfo;
+		pUserTradeInfo = NULL;
+	}
 
 	pByteArray = pAck->getMessage();
 	pAck->logInfo(__FILE__, __LINE__);
@@ -406,10 +397,7 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 	}
 }
 
-void CMessageProcesser::processReq( const CReqDownLoadTrade* pReq )
-{
-	
-}
+
 
 void CMessageProcesser::processReq( const CReqHistoryTrade* pReq )
 {
@@ -446,9 +434,26 @@ void CMessageProcesser::processReq( const CReqHistoryTrade* pReq )
 	}
 }
 
-void CMessageProcesser::processReq( const CReqAmount* pReq )
+void CMessageProcesser::processReq( const CReqAccount* pReq )
 {
-
+	CAckAccount* pAck = NULL;
+	CUserAccount* pUserAmount = NULL;
+	QByteArray* pByteArray = NULL;
+	quint16 nListenPort = 0;
+	qint32 nFunRes = 0;
+	nListenPort = CConfigInfo::getInstance().getServerPort();
+	pAck = new CAckAccount();
+	nFunRes = CServerManager::getInstance().processUserAccount(nListenPort, pReq->m_strUserID, pReq->m_strTime, &pUserAmount);
+	pAck->setValue(pUserAmount);
+	pByteArray = pAck->getMessage();
+	pAck->logInfo(__FILE__, __LINE__);
+	CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);
+	pByteArray = NULL;
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -492,17 +497,14 @@ void CMessageProcesser::processAck( const CAckTrade* pAck )
 
 }
 
-void CMessageProcesser::processAck( const CAckDownLoadTrade* pAck )
-{
 
-}
 
 void CMessageProcesser::processAck( const CAckHistoryTrade* pAck )
 {
 
 }
 
-void CMessageProcesser::processAck( const CAckAmount* pAck )
+void CMessageProcesser::processAck( const CAckAccount* pAck )
 {
 
 }

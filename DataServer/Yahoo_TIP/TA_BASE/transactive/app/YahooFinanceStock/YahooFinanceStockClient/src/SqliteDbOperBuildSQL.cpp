@@ -2,7 +2,7 @@
 #include <sstream>
 #include "ProjectCommonData.h"
 #include "Log4cppLogger.h"
-
+#include "UserAccount.h"
 
 
 CSqliteDbOperBuildSQL::CSqliteDbOperBuildSQL()
@@ -327,164 +327,6 @@ QString  CSqliteDbOperBuildSQL::buildSQL_Select_DataCount_TABLE_BAR_DATA_1DAY()
 	strSQL = byteSQL.str().c_str();
 	return strSQL;	
 }
-//////////////////////////////////////////////////////////////////////////
-
-
-
-
-QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_INFO()
-{
-	QString  strSQL;
-	QString  strTableName;
-	std::stringstream byteSQL;
-
-	strTableName = str_TABLE_USER_INFO;
-
-	/*
-	CREATE TABLE IF NOT EXISTS TABLE_USER_INFO
-	(
-	COLUMN_USEID TEXT NOT NULL,
-	COLUMN_USERNAME TEXT NOT NULL,
-	COLUMN_PASSWORD TEXT NOT NULL,
-	COLUMN_LASTLOGINTIME TIMESTAMP NOT NULL,
-	COLUMN_LOGINCOUNT INTEGER NOT NULL,
-	COLUMN_STATE INTEGER NOT NULL,
-	PRIMARY KEY (COLUMN_USEID)
-	);
-	*/
-
-	{
-		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<strTableName.toStdString()
-			<<" "<<"("
-			<<" "<<str_TABLE_USER_INFO_COLUMN_USEID<<" "<<"TEXT NOT NULL"<<","
-			<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<" "<<"TEXT NOT NULL"<<","
-			<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<" "<<"TEXT NOT NULL"<<","
-			<<" "<<str_TABLE_USER_INFO_COLUMN_LASTLOGINTIME<<" "<<"TIMESTAMP NOT NULL"<<","
-			<<" "<<str_TABLE_USER_INFO_COLUMN_LOGINCOUNT<<" "<<"INTEGER NOT NULL"<<","	
-			<<" "<<str_TABLE_USER_INFO_COLUMN_STATE<<" "<<"INTEGER NOT NULL"<<","
-			<<" "<<"PRIMARY KEY ("<<str_TABLE_USER_INFO_COLUMN_USEID<<")"
-			<<" "<<")";
-	}
-	
-	strSQL = byteSQL.str().c_str();
-
-	return strSQL;
-}
-
-
-QString  CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_INFO()
-{	
-	QString  strSQL;
-	std::stringstream byteSQL;
-	/*
-	INSERT INTO TABLE_USER_INFO
-	(
-	COLUMN_USEID, 
-	COLUMN_USERNAME, 
-	COLUMN_PASSWORD, 
-	COLUMN_LASTLOGINTIME, 
-	COLUMN_LOGINCOUNT
-	COLUMN_STATE
-	) 
-	VALUES 
-	(
-	:COLUMN_USEID,
-	:COLUMN_USERNAME,
-	:COLUMN_PASSWORD,
-	:COLUMN_LASTLOGINTIME,
-	:COLUMN_LOGINCOUNT
-	);
-	*/
-	byteSQL<<"INSERT INTO "<<str_TABLE_USER_INFO
-		<<" "<<"("
-		<<" "<<str_TABLE_USER_INFO_COLUMN_USEID<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_LASTLOGINTIME<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_LOGINCOUNT<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_STATE		
-		<<" "<<")"
-		<<" "<<"VALUES"
-		<<" "<<"("
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"<<","
-		<<" "<<"?"
-		<<" "<<")";
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
-
-
-QString  CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_INFO(const QString & strUSERNAME, const QString& strPASSWORD)
-{	
-	QString  strSQL;	
-	std::stringstream byteSQL;
-	/*
-	SELECT 
-	COLUMN_USEID, 
-	COLUMN_USERNAME, 
-	COLUMN_PASSWORD, 
-	COLUMN_LASTLOGINTIME, 
-	COLUMN_LOGINCOUNT
-	COLUMN_STATE
-	FROM 
-	TABLE_USER_INFO 
-	WHERE 
-	COLUMN_USERNAME = "USERNAME"
-	AND
-	COLUMN_PASSWORD = "PASSWORD";
-	*/
-	byteSQL<<"SELECT"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_USEID<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_LASTLOGINTIME<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_LOGINCOUNT<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_STATE		
-		<<" "<<"FROM"
-		<<" "<<str_TABLE_USER_INFO
-		<<" "<<"WHERE"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<">="<<"\""<<strUSERNAME.toStdString()<<"\""
-		<<" "<<"AND"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<"<="<<"\""<<strPASSWORD.toStdString()<<"\"";
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
-
-QString  CSqliteDbOperBuildSQL::buildSQL_UPDATE_TABLE_USER_INFO(
-	const QString & strUSERNAME, const QString& strPASSWORD,
-	const QString& strLASTLOGINTIME, qint32 nLOGINCOUNT, qint32 nSTATE)
-{	
-	QString  strSQL;	
-	std::stringstream byteSQL;
-	/*
-	UPDATE TABLE_USER_INFO SET
-	COLUMN_LASTLOGINTIME = "2012-02-02 01:02:03", 
-	COLUMN_LOGINCOUNT = 12
-	WHERE 
-	COLUMN_USERNAME = "USERNAME"
-	AND
-	COLUMN_PASSWORD = "PASSWORD";
-	*/
-	byteSQL<<"UPDATE"
-		<<" "<<str_TABLE_USER_INFO
-		<<" "<<"SET"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_LASTLOGINTIME<<"="<<"\""<<strLASTLOGINTIME.toStdString()<<"\""<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_LOGINCOUNT<<"="<<nLOGINCOUNT<<","
-		<<" "<<str_TABLE_USER_INFO_COLUMN_STATE<<"="<<nSTATE		
-		<<" "<<"WHERE"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_USERNAME<<"="<<"\""<<strUSERNAME.toStdString()<<"\""
-		<<" "<<"AND"
-		<<" "<<str_TABLE_USER_INFO_COLUMN_PASSWORD<<"="<<"\""<<strUSERNAME.toStdString()<<"\"";
-
-	strSQL = byteSQL.str().c_str();
-	return strSQL;	
-}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -778,5 +620,90 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_MINTIME_MAXTIME( const QStr
 	return strSQL;	
 }
 
+//////////////////////////////////////////////////////////////////////////
+QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_ACCOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	{
+		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<str_TABLE_USER_ACCOUNT
+			<<" "<<"("
+			<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_USEID<<" "<<"TEXT NOT NULL"<<","
+			<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_INIT_ACCOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_LEFT_ACCOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_HOLD_ACCOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_UPDATE_TIME<<" "<<"TIMESTAMP NOT NULL"
+			<<" "<<")";
+	}
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_USER_ACCOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	{
+		byteSQL<<"DELETE FROM"<<" "<<str_TABLE_USER_ACCOUNT;
+	}	
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_ACCOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	byteSQL<<"INSERT INTO "<<str_TABLE_USER_ACCOUNT
+		<<" "<<"("
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_USEID<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_INIT_ACCOUNT<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_LEFT_ACCOUNT<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_HOLD_ACCOUNT<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_UPDATE_TIME
+		<<" "<<")"
+		<<" "<<"VALUES"
+		<<" "<<"("
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"
+		<<" "<<")";
+
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+
+QString CSqliteDbOperBuildSQL::buildSQL_Update_TABLE_USER_ACCOUNT( const CUserAccount* pData )
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	byteSQL<<"UPDATE"
+		<<" "<<str_TABLE_USER_ACCOUNT
+		<<" "<<"SET"
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_INIT_ACCOUNT<<"="<<pData->m_fInitAmount<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_LEFT_ACCOUNT<<"="<<pData->m_fLeftAmount<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_HOLD_ACCOUNT<<"="<<pData->m_fHoldAmount<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<"="<<pData->m_fFloatingProfitLoss<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<"="<<pData->m_fFloatingProfitLossPersentage<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_UPDATE_TIME<<"="<<"\""<<pData->m_strUpdateTime.toStdString()<<"\""
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_USEID<<"="<<"\""<<pData->m_strUserID.toStdString()<<"\"";
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
 
 

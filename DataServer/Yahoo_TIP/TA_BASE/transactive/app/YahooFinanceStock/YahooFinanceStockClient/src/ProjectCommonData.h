@@ -48,15 +48,7 @@ static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME = "MaxTime";
 static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT = "Count";
 
 
-/////
-static const char*  str_TABLE_USER_INFO = "TABLE_USER_INFO";
-//
-static const char*  str_TABLE_USER_INFO_COLUMN_USEID = "COLUMN_USEID";
-static const char*  str_TABLE_USER_INFO_COLUMN_USERNAME = "COLUMN_USERNAME";
-static const char*  str_TABLE_USER_INFO_COLUMN_PASSWORD = "COLUMN_PASSWORD";
-static const char*  str_TABLE_USER_INFO_COLUMN_LASTLOGINTIME = "COLUMN_LASTLOGINTIME";
-static const char*  str_TABLE_USER_INFO_COLUMN_LOGINCOUNT = "COLUMN_LOGINCOUNT";
-static const char*  str_TABLE_USER_INFO_COLUMN_STATE = "COLUMN_STATE";
+
 /////
 static const char*  str_TABLE_USER_TRADE_INFO = "TABLE_USER_TRADE_INFO";
 //
@@ -71,7 +63,19 @@ static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT = "TradeAmount
 static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES = "TradeFees";
 static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE = "TotalTradeFee";
 static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT = "TotalTradeAmount";
+
 /////
+static const char*  str_TABLE_USER_ACCOUNT = "TABLE_USER_ACCOUNT";
+//
+static const char*  str_TABLE_USER_ACCOUNT_COLUMN_USEID = "UseID";
+static const char*  str_TABLE_USER_ACCOUNT_COLUMN_INIT_ACCOUNT = "InitAccount";
+static const char*  str_TABLE_USER_ACCOUNT_COLUMN_LEFT_ACCOUNT = "LeftAccount";
+static const char*  str_TABLE_USER_ACCOUNT_COLUMN_HOLD_ACCOUNT = "HoldAccount";
+static const char*  str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS = "FloatingProfitAndLoss";//Floating profit and loss
+static const char*  str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE = "FloatingProfitAndLossPersentage";//Floating profit and loss PERSENTAGE
+static const char*  str_TABLE_USER_ACCOUNT_COLUMN_UPDATE_TIME = "Time";
+/////
+
 //[DB end]
 
 #endif  // __DEF__HISTORY_DATA_SERVER_COMMON_DATA_H_

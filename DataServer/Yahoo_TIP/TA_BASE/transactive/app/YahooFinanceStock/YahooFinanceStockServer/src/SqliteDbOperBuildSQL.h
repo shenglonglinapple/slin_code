@@ -3,7 +3,7 @@
 
 #include <QtCore/QString>
 
-class CUserAmount;
+class CUserAccount;
 class CUserHoldAmount;
 
 class CSqliteDbOperBuildSQL
@@ -33,17 +33,11 @@ public:
 	QString buildSQL_Select_TABLE_USER_TRADE_INFO(const QString & strUserID, const QString & strSymbolUse);
 
 public:
-	QString buildSQL_CreateTable_TABLE_USER_HOLD();
-	QString buildSQL_Truncate_TABLE_USER_HOLD();
-	QString buildSQL_BatchInsert_TABLE_USER_HOLD();
-	QString buildSQL_Select_TABLE_USER_HOLD(const QString& strUserID);
-	QString buildSQL_Select_TABLE_USER_HOLD( const QString& strUserID, const QString& strSymbolUse );
-public:
-	QString buildSQL_CreateTable_TABLE_USER_AMOUNT();
-	QString buildSQL_Truncate_TABLE_USER_AMOUNT();
-	QString buildSQL_BatchInsert_TABLE_USER_AMOUNT();
-	QString buildSQL_Select_TABLE_USER_AMOUNT(const QString& strUserID);
-	QString buildSQL_Update_TABLE_USER_AMOUNT(const CUserAmount* pData);
+	QString buildSQL_CreateTable_TABLE_USER_ACCOUNT();
+	QString buildSQL_Truncate_TABLE_USER_ACCOUNT();
+	QString buildSQL_BatchInsert_TABLE_USER_ACCOUNT();
+	QString buildSQL_Select_TABLE_USER_ACCOUNT(const QString& strUserID);
+	QString buildSQL_Update_TABLE_USER_ACCOUNT(const CUserAccount* pData);
 public:
 	QString buildSQL_CreateTable_TABLE_USER_HOLD_AMOUNT();
 	QString buildSQL_Truncate_TABLE_USER_HOLD_AMOUNT();
@@ -52,6 +46,15 @@ public:
 	QString buildSQL_Select_TABLE_USER_HOLD_AMOUNT(const QString& strUserID, const QString& strSymbolUse);
 	QString buildSQL_Update_TABLE_USER_HOLD_AMOUNT(const CUserHoldAmount* pData);
 
+
+	//////////////////////////////////////////////////////////////////////////
+public:
+	QString buildSQL_CreateTable_TABLE_USER_HOLD();
+	QString buildSQL_Truncate_TABLE_USER_HOLD();
+	QString buildSQL_BatchInsert_TABLE_USER_HOLD();
+	QString buildSQL_Select_TABLE_USER_HOLD(const QString& strUserID);
+	QString buildSQL_Select_TABLE_USER_HOLD( const QString& strUserID, const QString& strSymbolUse );
+	//////////////////////////////////////////////////////////////////////////
 };
 
 

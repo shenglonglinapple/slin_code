@@ -1,18 +1,16 @@
-#ifndef __CLASS_REQ_DOWNLOAD_TRADE_H__
-#define __CLASS_REQ_DOWNLOAD_TRADE_H__
+#ifndef __CLASS_REQ_ACCOUNT_H__
+#define __CLASS_REQ_ACCOUNT_H__
 
 #include <QtCore/QObject>
 #include <Qtcore/QByteArray>
 
 #include "TcpComProtocol.h"
 
-class CUserTradeInfo;
-
-class CReqDownLoadTrade
+class CReqAccount
 {
 public:
-    CReqDownLoadTrade(void);
-	~CReqDownLoadTrade(void);
+    CReqAccount(void);
+	~CReqAccount(void);
 private:
 	void _Clear();
 public:
@@ -21,19 +19,13 @@ public:
 	QByteArray* getMessage();
 	void logInfo( const QString& fileName, qint32 lineNumber );
 public:
-	void setValue(const CUserTradeInfo* pData);
-public:
 	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::MsgType_Req
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
 	QString m_strReqUUID;//37
 	QString m_strACKUUID;//37
 
 	QString m_strUserID;
-
-	CTcpComProtocol::ETradeType m_nTradeType;
-	QString m_strSymbolUse;
-
-
+	QString m_strTime;
 };
 
-#endif//__CLASS_REQ_DOWNLOAD_TRADE_H__
+#endif//__CLASS_REQ_ACCOUNT_H__

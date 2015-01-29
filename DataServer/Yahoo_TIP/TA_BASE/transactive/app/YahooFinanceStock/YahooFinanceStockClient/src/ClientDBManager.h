@@ -17,6 +17,7 @@ class CHistoryData;
 class QSqlDatabase;
 class CStockMinTimeMaxTime;
 class CUserTradeInfo;
+class CUserAccount;
 
 class CClientDBManager
 {
@@ -41,6 +42,8 @@ public:
 	qint32 selectSymbolMinMaxTime(const QString& strSymbolUse, CStockMinTimeMaxTime** ppData);
 public:
 	qint32 insertUserTradeInfo(const CUserTradeInfo* pData);
+	qint32 resetUserAccount( const CUserAccount* pData );
+	qint32 insertUserAmount(const CUserAccount* pData );
 
 public:	
 	QSqlDatabase* getDB();

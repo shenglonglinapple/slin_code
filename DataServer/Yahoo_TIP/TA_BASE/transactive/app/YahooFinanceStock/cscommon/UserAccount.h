@@ -1,5 +1,5 @@
-#ifndef __CLASS_USER_AMOUNT_H__
-#define __CLASS_USER_AMOUNT_H__
+#ifndef __CLASS_USER_ACCOUNT_H__
+#define __CLASS_USER_ACCOUNT_H__
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -7,20 +7,23 @@
 
 class CUserTradeInfo;
 class CUserHoldAmount;
+class CAckAccount;
 
-class CUserAmount
+class CUserAccount
 {
 public:
-	CUserAmount();
-	virtual ~CUserAmount();
+	CUserAccount();
+	virtual ~CUserAccount();
 public:
-	CUserAmount& operator=(const CUserAmount& objectCopy);
+	CUserAccount& operator=(const CUserAccount& objectCopy);
 private:
 	void _Init();
 public:
 	void resetUpdateTime();
 	void updateLeftAmount( double fLeftAmount, const QString& strTime );
 	void updateHoldAmount(double fHoldAmount, const QString& strTime);
+public:
+	void setValue(const CAckAccount* pData);
 public:
 	QString m_strUserID;
 	double m_fInitAmount;
@@ -32,4 +35,4 @@ public:
 };
 
 
-#endif //__CLASS_USER_AMOUNT_H__
+#endif //__CLASS_USER_ACCOUNT_H__

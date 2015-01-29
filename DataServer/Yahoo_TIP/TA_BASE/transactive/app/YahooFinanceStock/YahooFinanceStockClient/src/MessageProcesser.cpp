@@ -12,8 +12,8 @@
 #include "ReqStockHistoryData.h"
 #include "ReqCreateUser.h"
 #include "ReqTrade.h"
-#include "ReqDownLoadTrade.h"
 #include "ReqHistoryTrade.h"
+#include "ReqAccount.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -23,8 +23,8 @@
 #include "AckStockHistoryData.h"
 #include "AckCreateUser.h"
 #include "AckTrade.h"
-#include "AckDownLoadTrade.h"
 #include "AckHistoryTrade.h"
+#include "AckAccount.h"
 
 #include "ClientDataManager.h"
 #include "StockDataManager.h"
@@ -33,6 +33,7 @@
 #include "HistoryData.h"
 #include "WorkTime.h"
 #include "UserTradeInfo.h"
+#include "UserAccount.h"
 
 #include "Log4cppLogger.h"
 
@@ -91,14 +92,16 @@ void CMessageProcesser::processReq( const CReqTrade* pReq )
 	return;
 }
 
-void CMessageProcesser::processReq( const CReqDownLoadTrade* pReq )
-{
-
-}
 void CMessageProcesser::processReq( const CReqHistoryTrade* pReq )
 {
 
 }
+
+void CMessageProcesser::processReq( const CReqAccount* pReq )
+{
+
+}
+
 //////////////////////////////////////////////////////////////////////////
 void CMessageProcesser::processAck( const CAckLogin* pAck )
 {
@@ -167,11 +170,6 @@ void CMessageProcesser::processAck( const CAckTrade* pAck )
 	pUserTradeInfo = NULL;
 }
 
-void CMessageProcesser::processAck( const CAckDownLoadTrade* pAck )
-{
-
-}
-
 void CMessageProcesser::processAck( const CAckHistoryTrade* pAck )
 {
 	QList<CUserTradeInfo*>::const_iterator iterLst;
@@ -187,4 +185,19 @@ void CMessageProcesser::processAck( const CAckHistoryTrade* pAck )
 		iterLst++;
 	}//while
 
+}
+
+void CMessageProcesser::processAck( const CAckAccount* pAck )
+{
+	CUserAccount* pUserAmount = NULL;
+	pUserAmount = new CUserAccount();
+	pUserAmount->setValue(pAck);
+	CClientDataManager::getInstance().resetUserAccount(pUserAmount);
+
+	if (NULL != pUserAmount)
+	{
+		delete pUserAmount;
+		pUserAmount = NULL;
+	}
+	
 }

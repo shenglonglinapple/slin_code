@@ -1,27 +1,28 @@
-#include "ReqAmount.h"
+#include "ReqAccount.h"
 #include <QtCore/QDataStream>
 #include "Log4cppLogger.h"
 
-CReqAmount::CReqAmount( void )
+CReqAccount::CReqAccount( void )
 {
 	_Clear();
 }
 
-CReqAmount::~CReqAmount( void )
+CReqAccount::~CReqAccount( void )
 {
 	_Clear();
 }
 
-void CReqAmount::_Clear()
+void CReqAccount::_Clear()
 {
 	m_nMessageType = CTcpComProtocol::MsgType_Req;
-	m_nDataType = CTcpComProtocol::DataType_Amount;
+	m_nDataType = CTcpComProtocol::DataType_Account;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
 	m_strUserID.clear();
+	m_strTime.clear();
 }
 //static
-bool CReqAmount::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
+bool CReqAccount::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 {
 	bool bFunRes = false;
 
@@ -29,14 +30,14 @@ bool CReqAmount::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 	CTcpComProtocol::EDataType nDataTypeTmp = (CTcpComProtocol::EDataType)(nDataType);
 
 	if (CTcpComProtocol::MsgType_Req == nMsgTypeTmp
-		&& CTcpComProtocol::DataType_Amount == nDataTypeTmp)
+		&& CTcpComProtocol::DataType_Account == nDataTypeTmp)
 	{
 		bFunRes = true;
 	}
 	return bFunRes;
 }
 
-void CReqAmount::logInfo( const QString& fileName, qint32 lineNumber )
+void CReqAccount::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
 		<<" "<<"CReqAmount:"
@@ -47,7 +48,7 @@ void CReqAmount::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_strUserID="<<m_strUserID;
 }
 
-void CReqAmount::setValue(const QByteArray* pMessage )
+void CReqAccount::setValue(const QByteArray* pMessage )
 {
 	MYLOG4CPP_DEBUG<<"setValue"
 		<<" "<<"param:"<<" "<<"QByteArray* pMessage=0x"<<pMessage;
@@ -61,13 +62,14 @@ void CReqAmount::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>m_strReqUUID;
 	readMessageBuffer>>m_strACKUUID;
 	readMessageBuffer>>m_strUserID;
+	readMessageBuffer>>m_strTime;
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);
 	m_nDataType = (CTcpComProtocol::EDataType)(nDataType);
 
 }
 
-QByteArray* CReqAmount::getMessage()
+QByteArray* CReqAccount::getMessage()
 {
 	QByteArray* pMessage = NULL;
 
@@ -82,6 +84,7 @@ QByteArray* CReqAmount::getMessage()
 	writeToByteArray<<(m_strReqUUID);
 	writeToByteArray<<(m_strACKUUID);
 	writeToByteArray<<(m_strUserID);
+	writeToByteArray<<(m_strTime);
 
 	return pMessage;
 }

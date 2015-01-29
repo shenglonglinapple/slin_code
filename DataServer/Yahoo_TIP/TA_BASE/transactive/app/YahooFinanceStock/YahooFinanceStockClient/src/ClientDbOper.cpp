@@ -12,6 +12,7 @@
 #include "UserTradeInfo.h"
 #include "HistoryData.h"
 #include "StockMinTimeMaxTime.h"
+#include "UserAccount.h"
 
 //5001.db
 CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
@@ -28,13 +29,14 @@ CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
 	_InitDataBase();
 	if (true == m_pQSqlDataBase->isValid())
 	{
-		_CreateDBTable_TABLE_USER_INFO();
 		_CreateDBTable_TABLE_USER_TRADE_INFO();
 		truncateTableUserTradeInfo();
 		_CreateDBTable_TABLE_BAR_DATA_1DAY();
 		truncateTableHistoryData();
 		_CreateDBTable_TABLE_MINTIME_MAXTIME();
 		truncateSymbolMinMaxTime();
+		_CreateDBTable_TABLE_USER_ACCOUNT();
+		_Truncate_TABLE_USER_ACCOUNT();
 	}
 }
 
@@ -192,163 +194,6 @@ int CClientDbOper::_CommitTransaction()
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-qint32 CClientDbOper::_CreateDBTable_TABLE_USER_INFO()
-{
-	qint32 nFunRes = 0;
-	QString  strSQL;
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_INFO();
-	nFunRes = _ExecModify(strSQL);
-	return nFunRes;
-}
-
-qint32 CClientDbOper::selectUserInfo(
-	quint16 nListenPort,const QString& strUSERNAME, 
-	const QString& strPASSWORD, CUserInfo** ppData)
-{
-	qint32 nFunRes = 0;
-	bool bExecRes = true;
-	QString  strSQL;
-	QSqlQuery* pSqlQuery = NULL;
-	int nColumnIndex = 0;
-	CUserInfo* pUserInfo = NULL;
-
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_INFO(strUSERNAME, strPASSWORD);
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
-	bExecRes = pSqlQuery->exec(strSQL);
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-
-		delete pSqlQuery;
-		pSqlQuery = NULL;		
-		return nFunRes;
-	}
-
-	if ( pSqlQuery->next() )
-	{
-		pUserInfo = new CUserInfo();
-		nColumnIndex = 0;
-		pUserInfo->m_strUserID = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pUserInfo->m_strUserName = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pUserInfo->m_strPassWord = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pUserInfo->m_strLastLoginTime = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pUserInfo->m_nLoginCount = pSqlQuery->value(nColumnIndex).toInt();
-		nColumnIndex++;
-		pUserInfo->m_nState = pSqlQuery->value(nColumnIndex).toInt();
-
-		(*ppData) = pUserInfo;
-		pUserInfo = NULL;
-	}//while
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
-	}
-
-	return nFunRes;
-}
-qint32 CClientDbOper::updateUserInfo(quint16 nListenPort, const CUserInfo* pData)
-{
-	qint32 nFunRes = 0;
-	QString  strSQL;
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_UPDATE_TABLE_USER_INFO(
-		pData->m_strUserName, pData->m_strPassWord, 
-		pData->m_strLastLoginTime, pData->m_nLoginCount,
-		pData->m_nState);
-	nFunRes = _ExecModify(strSQL);
-	return nFunRes;
-}
-qint32 CClientDbOper::insertUserInfo(quint16 nListenPort, const CUserInfo* pData)
-{
-	qint32 nFunRes = 0;
-	_StartTransaction();
-	nFunRes = _AddUserInfo(pData);
-	_CommitTransaction();
-	return nFunRes;
-}
-
-
-qint32 CClientDbOper::_AddUserInfo(const CUserInfo* pData)
-{
-	qint32 nFunRes = 0;
-	bool bExecRes = false;
-	QString  strSQL;
-
-	QVariantList lst_COLUMN_USEID;
-	QVariantList lst_COLUMN_USERNAME;
-	QVariantList lst_COLUMN_PASSWORD;
-	QVariantList lst_COLUMN_LASTLOGINTIME;
-	QVariantList lst_COLUMN_LOGINCOUNT;
-	QVariantList lst_COLUMN_STATE;
-
-	QSqlQuery* pQSqlQueryForInseert = NULL;
-
-	if (NULL == pData)
-	{
-		nFunRes = 0;
-		return nFunRes;
-	}
-
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
-
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_USER_INFO();
-
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
-	pQSqlQueryForInseert->prepare(strSQL);
-
-	{
-		lst_COLUMN_USEID << pData->m_strUserID;
-		lst_COLUMN_USERNAME << pData->m_strUserName;
-		lst_COLUMN_PASSWORD << pData->m_strPassWord;
-		lst_COLUMN_LASTLOGINTIME << pData->m_strLastLoginTime;
-		lst_COLUMN_LOGINCOUNT << pData->m_nLoginCount;
-		lst_COLUMN_STATE << pData->m_nState;
-	}
-
-	//pQSqlQueryForInseert->addBindValue(lstInstrumentID);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_USEID);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_USERNAME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_PASSWORD);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_LASTLOGINTIME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_LOGINCOUNT);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_STATE);
-
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<strSQL
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
-
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
-	return nFunRes;
-}
-
-qint32 CClientDbOper::_CreateDBTable_TABLE_USER_TRADE_INFO()
-{
-	qint32 nFunRes = 0;
-	QString  strSQL;
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_TRADE_INFO();
-	nFunRes = _ExecModify(strSQL);
-	return nFunRes;
-}
-
 qint32 CClientDbOper::_CreateDBTable_TABLE_MINTIME_MAXTIME()
 {
 	qint32 nFunRes = 0;
@@ -791,7 +636,15 @@ qint32 CClientDbOper::selectSymbolMinMaxTime( const QString& strSymbolUse, CStoc
 
 	return nFunRes;
 }
-
+//////////////////////////////////////////////////////////////////////////
+qint32 CClientDbOper::_CreateDBTable_TABLE_USER_TRADE_INFO()
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_TRADE_INFO();
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
 void CClientDbOper::truncateTableUserTradeInfo()
 {
 	QString  strSQL;
@@ -832,4 +685,107 @@ qint32 CClientDbOper::_ExecModify(const QString& strSQL)
 	}
 	return nFunRes;
 }
+//////////////////////////////////////////////////////////////////////////
+qint32 CClientDbOper::_CreateDBTable_TABLE_USER_ACCOUNT()
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_ACCOUNT();
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
+
+qint32 CClientDbOper::_Truncate_TABLE_USER_ACCOUNT()
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Truncate_TABLE_USER_ACCOUNT();
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
+
+qint32 CClientDbOper::resetUserAccount( const CUserAccount* pData )
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Update_TABLE_USER_ACCOUNT(pData);
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
+
+qint32 CClientDbOper::insertUserAccount(const CUserAccount* pData )
+{
+	qint32 nFunRes = 0;
+	_StartTransaction();
+	nFunRes = _AddUserAccount(pData);
+	_CommitTransaction();
+	return nFunRes;
+}
+qint32 CClientDbOper::_AddUserAccount( const CUserAccount* pData )
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = false;
+	QString  strSQL;
+
+	QVariantList COLUMN_USEID;
+	QVariantList COLUMN_INIT_AMOUNT;
+	QVariantList COLUMN_LEFT_AMOUNT;
+	QVariantList COLUMN_HOLD_AMOUNT;
+	QVariantList COLUMN_FLOATINT_PROFIT_LOSS;
+	QVariantList COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE;
+	QVariantList COLUMN_UPDATE_TIME;
+
+
+	QSqlQuery* pQSqlQueryForInseert = NULL;
+
+	if (NULL == pData)
+	{
+		nFunRes = 0;
+		return nFunRes;
+	}
+
+	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_USER_ACCOUNT();
+
+	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+	pQSqlQueryForInseert->prepare(strSQL);
+
+	{
+		COLUMN_USEID << pData->m_strUserID;
+		COLUMN_INIT_AMOUNT << pData->m_fInitAmount;
+		COLUMN_LEFT_AMOUNT << pData->m_fLeftAmount;
+		COLUMN_HOLD_AMOUNT << pData->m_fHoldAmount;
+		COLUMN_FLOATINT_PROFIT_LOSS << pData->m_fFloatingProfitLoss;
+		COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE << pData->m_fFloatingProfitLossPersentage;
+		COLUMN_UPDATE_TIME << pData->m_strUpdateTime;
+	}
+	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
+	pQSqlQueryForInseert->addBindValue(COLUMN_INIT_AMOUNT);
+	pQSqlQueryForInseert->addBindValue(COLUMN_LEFT_AMOUNT);
+	pQSqlQueryForInseert->addBindValue(COLUMN_HOLD_AMOUNT);
+	pQSqlQueryForInseert->addBindValue(COLUMN_FLOATINT_PROFIT_LOSS);
+	pQSqlQueryForInseert->addBindValue(COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE);
+	pQSqlQueryForInseert->addBindValue(COLUMN_UPDATE_TIME);
+
+	bExecRes = pQSqlQueryForInseert->execBatch();
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<strSQL
+			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
+	}
+
+	if (NULL != pQSqlQueryForInseert)
+	{
+		delete pQSqlQueryForInseert;
+		pQSqlQueryForInseert = NULL;
+	}
+	return nFunRes;
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////
 

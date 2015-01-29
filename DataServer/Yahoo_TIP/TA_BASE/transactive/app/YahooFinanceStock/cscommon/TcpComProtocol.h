@@ -28,9 +28,8 @@ public:
 		DataType_HistoryData  = 0x05,
 		DataType_CreateUser  = 0x06,
 		DataType_Trade  = 0x07,
-		DataType_DownLoadTrade  = 0x08,
 		DataType_HistoryTrade  = 0x09,
-		DataType_Amount  = 0x0A,
+		DataType_Account  = 0x0A,
 		DataType_Unknown  = 0x0FFFFFFF,
 	};
 

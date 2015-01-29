@@ -11,7 +11,7 @@
 #include "UserInfo.h"
 #include "UserTradeInfo.h"
 #include "ClientDbOper.h"
-
+#include "UserAccount.h"
 #include "Log4cppLogger.h"
 
 CClientDBManager* CClientDBManager::m_pInstance = 0;
@@ -167,6 +167,29 @@ qint32 CClientDBManager::selectDataHistory_DataTime( const QString& strSymbolUse
 	if (NULL != m_pClientDbOper)
 	{
 		nFunRes = m_pClientDbOper->selectDataHistory_DataTime(strSymbolUse, strDateTime, ppData);
+	}
+	return nFunRes;
+}
+
+qint32 CClientDBManager::resetUserAccount( const CUserAccount* pData )
+{
+	QMutexLocker lock(&m_mutex_ClientDbOper);
+
+	qint32 nFunRes = 0;
+	if (NULL != m_pClientDbOper)
+	{
+		nFunRes = m_pClientDbOper->resetUserAccount(pData);
+	}
+	return nFunRes;
+}
+qint32 CClientDBManager::insertUserAmount(const CUserAccount* pData )
+{
+	QMutexLocker lock(&m_mutex_ClientDbOper);
+
+	qint32 nFunRes = 0;
+	if (NULL != m_pClientDbOper)
+	{
+		nFunRes = m_pClientDbOper->insertUserAccount(pData);
 	}
 	return nFunRes;
 }

@@ -12,7 +12,7 @@
 #include "UserInfo.h"
 #include "UserTradeInfo.h"
 #include "Log4cppLogger.h"
-#include "UserAmount.h"
+#include "UserAccount.h"
 #include "UserHoldAmount.h"
 #include "HistoryData.h"
 #include "StockDataManager.h"
@@ -100,7 +100,7 @@ qint32 CTcpServerWorker::selectUserInfo(quint16 nListenPort,const QString & strU
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->selectUserInfo(nListenPort, strUSERNAME, strPASSWORD, ppData);
+	nFunRes = m_pServerDbOper->selectUserInfo(strUSERNAME, strPASSWORD, ppData);
 	return nFunRes;
 }
 qint32 CTcpServerWorker::updateUserInfo(quint16 nListenPort, const CUserInfo* pData)
@@ -111,7 +111,7 @@ qint32 CTcpServerWorker::updateUserInfo(quint16 nListenPort, const CUserInfo* pD
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->updateUserInfo(nListenPort, pData);
+	nFunRes = m_pServerDbOper->updateUserInfo(pData);
 	return nFunRes;
 }
 qint32 CTcpServerWorker::createUserInfo(quint16 nListenPort, const CUserInfo* pData)
@@ -122,11 +122,11 @@ qint32 CTcpServerWorker::createUserInfo(quint16 nListenPort, const CUserInfo* pD
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->insertUserInfo(nListenPort, pData);
+	nFunRes = m_pServerDbOper->insertUserInfo(pData);
 	return nFunRes;
 }
 
-qint32 CTcpServerWorker::createUserAmount( quint16 nListenPort, const CUserAmount* pData )
+qint32 CTcpServerWorker::createUserAmount( quint16 nListenPort, const CUserAccount* pData )
 {
 	qint32 nFunRes = 0;
 	if (NULL == m_pServerDbOper)
@@ -134,7 +134,7 @@ qint32 CTcpServerWorker::createUserAmount( quint16 nListenPort, const CUserAmoun
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->insertUserAmount(nListenPort, pData);
+	nFunRes = m_pServerDbOper->insertUserAccount(pData);
 	return nFunRes;
 }
 double CTcpServerWorker::getUserHoldAmount(const QString& strUserID, const QString& strTime)
@@ -148,7 +148,7 @@ double CTcpServerWorker::getUserHoldAmount(const QString& strUserID, const QStri
 	CHistoryData* pHistoryData = NULL;
 	CUserHoldAmount* pUserHoldAmount_current_symbol = NULL;
 	double fHoldAmount = 0;
-	CUserAmount* pUserAmount = NULL;	
+	CUserAccount* pUserAmount = NULL;	
 
 
 	m_pServerDbOper->selectUserHoldAmount(strUserID, LstData);
@@ -158,7 +158,7 @@ double CTcpServerWorker::getUserHoldAmount(const QString& strUserID, const QStri
 		pUserHoldAmount_current_symbol = (*iterLst);
 		CStockDataManager::getInstance().doWork_HistoryData(
 			pUserHoldAmount_current_symbol->m_strSymbolUse,
-			strTime, strTime, iterlstHis);
+			strTime, strTime, lstHisData);
 
 		iterlstHis = lstHisData.begin();
 		if (iterlstHis != lstHisData.end())
@@ -191,11 +191,13 @@ double CTcpServerWorker::getUserHoldAmount(const QString& strUserID, const QStri
 		iterLst++;
 	}
 	LstData.clear();
+
+	return fHoldAmount;
 }
 qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
 {
 	qint32 nFunRes = 0;
-	CUserAmount* pUserAmount = NULL;
+	CUserAccount* pUserAmount = NULL;
 	CUserHoldAmount* pUserHoldAmount_check = NULL;
 	CUserHoldAmount* pUserHoldAmount_current_symbol = NULL;
 	CUserHoldAmount* pUserHoldAmount_user = NULL;
@@ -212,7 +214,7 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->selectUserAmount(nListenPort, pData->m_strUserID, &pUserAmount);
+	nFunRes = m_pServerDbOper->selectUserAccount(pData->m_strUserID, &pUserAmount);
 	if (NULL == pUserAmount)
 	{
 		MYLOG4CPP_ERROR<<"error:select User Amount m_strUserID="<<pData->m_strUserID;
@@ -269,13 +271,14 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 
 	//do
 	m_pServerDbOper->startTransaction();
-	nFunRes = m_pServerDbOper->insertUserTradeInfo(nListenPort, pData);//trade
+	nFunRes = m_pServerDbOper->insertUserTradeInfo(pData);//trade
 	pUserHoldAmount_current_symbol->updateValue(pData);//hold
 	nFunRes = m_pServerDbOper->updateUserHoldAmount(pUserHoldAmount_current_symbol);//hold
+
 	fHoldAmount = getUserHoldAmount(pData->m_strUserID, pData->m_strTradeTime);//hold total
 	pUserAmount->updateLeftAmount(fLeftAmount, pData->m_strTradeTime);//
 	pUserAmount->updateHoldAmount(fHoldAmount, pData->m_strTradeTime);
-	nFunRes = m_pServerDbOper->updateUserAmount(nListenPort, pUserAmount);
+	nFunRes = m_pServerDbOper->updateUserAccount(pUserAmount);
 	m_pServerDbOper->commitTransaction();
 
 	if (NULL == pUserAmount)
@@ -289,18 +292,6 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 		pUserHoldAmount_current_symbol = NULL;
 	}
 
-	return nFunRes;
-}
-
-qint32 CTcpServerWorker::createUserHold( quint16 nListenPort, const CUserHold* pData )
-{
-	qint32 nFunRes = 0;
-	if (NULL == m_pServerDbOper)
-	{
-		nFunRes = -1;
-		return nFunRes;
-	}
-	nFunRes = m_pServerDbOper->insertUserHold(nListenPort, pData);
 	return nFunRes;
 }
 
@@ -323,8 +314,60 @@ qint32 CTcpServerWorker::selectUserTradeInfo( quint16 nListenPort, QList<CUserTr
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->selectUserTradeInfo(nListenPort, lstData, strUserID,strSymbolUse);
+	nFunRes = m_pServerDbOper->selectUserTradeInfo(lstData, strUserID,strSymbolUse);
 
+	return nFunRes;
+}
+
+qint32 CTcpServerWorker::processUserAccount( quint16 nListenPort, const QString& strUserID, 
+										   const QString& strTime, CUserAccount** ppData )
+{
+	qint32 nFunRes = 0;
+	CUserAccount* pUserAmount = NULL;
+	double fLeftAmount = 0;
+	double fHoldAmount = 0;
+
+	if (NULL == m_pServerDbOper)
+	{
+		nFunRes = -1;
+		return nFunRes;
+	}
+	if (strUserID.isEmpty())
+	{
+		nFunRes = -1;
+		return nFunRes;
+	}
+	nFunRes = m_pServerDbOper->selectUserAccount(strUserID, &pUserAmount);
+	if (NULL == pUserAmount)
+	{
+		MYLOG4CPP_ERROR<<"error:select User Amount m_strUserID="<<strUserID;
+		nFunRes = -1;
+		return nFunRes;
+	}
+
+
+	//do
+	if (strTime.isEmpty())
+	{	
+		(*ppData) = pUserAmount;
+		pUserAmount = NULL;
+		return nFunRes;
+	}
+
+	m_pServerDbOper->startTransaction();
+	fHoldAmount = getUserHoldAmount(strUserID, strTime);
+	pUserAmount->updateHoldAmount(fHoldAmount, strTime);
+	nFunRes = m_pServerDbOper->updateUserAccount(pUserAmount);
+	m_pServerDbOper->commitTransaction();
+	if (NULL == pUserAmount)
+	{
+		delete pUserAmount;
+		pUserAmount = NULL;
+	}
+
+	nFunRes = m_pServerDbOper->selectUserAccount(strUserID, &pUserAmount);
+	(*ppData) = pUserAmount;
+	pUserAmount = NULL;
 	return nFunRes;
 }
 

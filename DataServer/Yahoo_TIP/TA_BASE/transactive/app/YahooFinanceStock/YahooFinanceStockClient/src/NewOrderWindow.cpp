@@ -19,7 +19,7 @@
 
 //QT_BEGIN_NAMESPACE
 static const int DEFVALUE_INT_Window_Width = 400;
-static const int DEFVALUE_INT_Window_Height = 500;
+static const int DEFVALUE_INT_Window_Height = 400;
 
 static const std::string DEFVALUE_String_Window_WindowTitle = "New Order";
 static const std::string DEFVALUE_String_Label_Symbol_Text = "Symbol:";
@@ -286,7 +286,7 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 	m_pUserTradeInfo->m_fTradeFees = 0.007;
 	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;
 	m_pUserTradeInfo->m_fTotalTradeFee = m_pUserTradeInfo->m_fTradeAmount * m_pUserTradeInfo->m_fTradeFees;
-	m_pUserTradeInfo->m_fTotalTradeAmount = m_pUserTradeInfo->m_fTradeAmount + m_pUserTradeInfo->m_fTotalTradeFee;
+	m_pUserTradeInfo->m_fTotalTradeAmount = m_pUserTradeInfo->m_fTradeAmount - m_pUserTradeInfo->m_fTotalTradeFee;
 	nTradeDate = m_pDateTimeEdit->date();
 	m_pUserTradeInfo->m_strTradeTime = m_pQtTimeHelper->getStringValue(nTradeDate);
 

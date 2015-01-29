@@ -5,6 +5,7 @@
 #include "StockMinTimeMaxTimeTableView.h"
 #include "StockHistoryDataTableView.h"
 #include "UserTradeTableView.h"
+#include "UserAccountWidget.h"
 
 #include "Log4cppLogger.h"
 
@@ -37,6 +38,10 @@ CSignalSlotManager::CSignalSlotManager(void)
 	m_pRefSlot_DataChange_StockMinTimeMaxTime = NULL;
 	m_pRefSignal_DataChange_StockHistoryData = NULL;
 	m_pRefSlot_DataChange_StockHistoryData = NULL;
+	m_pRefSignal_DataChange_UserTrade = NULL;
+	m_pRefSlot_DataChange_UserTrade = NULL;
+	m_pRefSignal_DataChange_UserAccount = NULL;
+	m_pRefSlot_DataChange_UserAccount = NULL;
 	
 }
 
@@ -183,5 +188,33 @@ void CSignalSlotManager::emit_DataChange_UserTrade()
 
 
 //////////////////////////////////////////////////////////////////////////
+void CSignalSlotManager::set_Signal_DataChange_UserAccount( CClientDataManager* pRefSignal)
+{
+	m_pRefSignal_DataChange_UserAccount = pRefSignal;
+}
+void CSignalSlotManager::set_Slot_DataChange_UserAccount(CUserAccountWidget* pRefSlot)
+{
+	m_pRefSlot_DataChange_UserAccount = pRefSlot;
 
+	if (NULL != m_pRefSignal_DataChange_UserAccount && NULL != m_pRefSlot_DataChange_UserAccount)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_UserAccount()), this, SLOT(slot_DataChange_UserAccount()));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_UserAccount()), this, SLOT(slot_DataChange_UserAccount()));
+	}
+}
 
+void CSignalSlotManager::slot_DataChange_UserAccount()
+{
+	if (NULL != m_pRefSlot_DataChange_UserAccount)
+	{
+		m_pRefSlot_DataChange_UserAccount->slot_DataChange_UserAccount();
+	}
+}
+
+void CSignalSlotManager::emit_DataChange_UserAccount()
+{
+	emit signal_DataChange_UserAccount();
+}

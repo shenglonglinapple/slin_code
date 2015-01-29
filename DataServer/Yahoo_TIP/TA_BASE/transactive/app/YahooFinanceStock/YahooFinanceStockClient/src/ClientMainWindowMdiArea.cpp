@@ -3,6 +3,7 @@
 #include "StockMinTimeMaxTimeTableView.h"
 #include "StockHistoryDataTableView.h"
 #include "UserTradeTableView.h"
+#include "UserAccountWidget.h"
 
 #include "Log4cppLogger.h"
 
@@ -15,6 +16,9 @@ static const int DEFVALUE_INT_Window_Height_StockHistoryDataTableView = 300;
 static const int DEFVALUE_INT_Window_Width_UserTradeTableView = 800;
 static const int DEFVALUE_INT_Window_Height_UserTradeTableView = 200;
 
+static const int DEFVALUE_INT_Window_Width_CUserAccountWidget = 800;
+static const int DEFVALUE_INT_Window_Height_CUserAccountWidget = 200;
+
 CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)
     : QMdiArea(parent)
 {
@@ -22,6 +26,7 @@ CClientMainWindowMdiArea::CClientMainWindowMdiArea(QWidget *parent)
 	m_pStockMinTimeMaxTimeTableView = NULL;
 	m_pStockHistoryDataTableView = NULL;
 	m_pUserTradeTableView = NULL;
+	m_pUserAccountWidget = NULL;
 
 	_SetupUi();
 	_TranslateLanguage();
@@ -43,10 +48,12 @@ void CClientMainWindowMdiArea::_SetupUi()
 	m_pStockMinTimeMaxTimeTableView = new CStockMinTimeMaxTimeTableView(this);
 	m_pStockHistoryDataTableView = new CStockHistoryDataTableView(this);
 	m_pUserTradeTableView = new CUserTradeTableView(this);
+	m_pUserAccountWidget = new CUserAccountWidget(this);
 
 	this->addSubWindow(m_pStockMinTimeMaxTimeTableView);
 	this->addSubWindow(m_pStockHistoryDataTableView);
 	this->addSubWindow(m_pUserTradeTableView);
+	this->addSubWindow(m_pUserAccountWidget);
 
 	nIndex = 0;
 	foreach (QMdiSubWindow *pSubWindow, this->subWindowList()) 
@@ -72,6 +79,13 @@ void CClientMainWindowMdiArea::_SetupUi()
 			this->activeSubWindow()->move(0, DEFVALUE_INT_Window_Height_StockMinTimeMaxTimeTableView + 10);
 			this->activeSubWindow()->resize(DEFVALUE_INT_Window_Width_UserTradeTableView, 
 				DEFVALUE_INT_Window_Height_UserTradeTableView);
+		}
+		else if (3 == nIndex)
+		{
+			this->setActiveSubWindow(pSubWindow);
+			this->activeSubWindow()->move(0, DEFVALUE_INT_Window_Height_StockMinTimeMaxTimeTableView + DEFVALUE_INT_Window_Height_UserTradeTableView + 10);
+			this->activeSubWindow()->resize(DEFVALUE_INT_Window_Width_CUserAccountWidget, 
+				DEFVALUE_INT_Window_Height_CUserAccountWidget);
 		}
 		nIndex++;
 	}//foreach

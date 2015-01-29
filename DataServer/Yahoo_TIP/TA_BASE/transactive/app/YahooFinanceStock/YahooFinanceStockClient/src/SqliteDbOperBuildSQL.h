@@ -3,6 +3,7 @@
 
 #include <QtCore/QString>
 
+class CUserAccount;
 class CSqliteDbOperBuildSQL
 {
 public:
@@ -25,18 +26,15 @@ public:
 	QString buildSQL_Truncate_TABLE_MINTIME_MAXTIME();
 	QString buildSQL_UPDATE_TABLE_MINTIME_MAXTIME( const QString & strSymbolUse, const QString& strMinTime, const QString& strMaxTime, qint32 nCount);
 	QString buildSQL_Select_TABLE_MINTIME_MAXTIME(const QString & strSymbolUse);
-
-public:
-	QString buildSQL_CreateTable_TABLE_USER_INFO();
-	QString buildSQL_BatchInsert_TABLE_USER_INFO();
-	QString buildSQL_Select_TABLE_USER_INFO(const QString & strUSERNAME, const QString& strPASSWORD);
-	QString buildSQL_UPDATE_TABLE_USER_INFO( const QString & strUSERNAME, const QString& strPASSWORD, const QString& strLASTLOGINTIME, qint32 nLOGINCOUNT, qint32 nSTATE);
-
 public:
 	QString buildSQL_CreateTable_TABLE_USER_TRADE_INFO();
 	QString buildSQL_BatchInsert_TABLE_USER_TRADE_INFO();
 	QString buildSQL_Truncate_TABLE_USER_TRADE_INFO();
-	
+public:
+	QString buildSQL_CreateTable_TABLE_USER_ACCOUNT();
+	QString buildSQL_Truncate_TABLE_USER_ACCOUNT();
+	QString buildSQL_Update_TABLE_USER_ACCOUNT( const CUserAccount* pData );
+	QString buildSQL_BatchInsert_TABLE_USER_ACCOUNT();
 };
 
 

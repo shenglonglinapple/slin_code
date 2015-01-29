@@ -19,7 +19,7 @@ class CSqliteDbOperBuildSQL;
 class CUserInfo;
 class CUserTradeInfo;
 class CUserHold;
-class CUserAmount;
+class CUserAccount;
 class CUserHoldAmount;
 
 class CServerDbOper
@@ -28,20 +28,16 @@ public:
 	CServerDbOper(const QString& strSqliteDbFileName);
 	virtual ~CServerDbOper();
 public:
-	qint32 selectUserInfo(quint16 nListenPort,const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
-	qint32 updateUserInfo(quint16 nListenPort, const CUserInfo* pData);
-	qint32 insertUserInfo(quint16 nListenPort, const CUserInfo* pData);
+	qint32 selectUserInfo(const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
+	qint32 updateUserInfo(const CUserInfo* pData);
+	qint32 insertUserInfo(const CUserInfo* pData);
 public:
-	qint32 insertUserTradeInfo(quint16 nListenPort, const CUserTradeInfo* pData);
-	qint32 insertUserHold(quint16 nListenPort, const CUserHold* pData);
+	qint32 insertUserTradeInfo(const CUserTradeInfo* pData);
+	qint32 selectUserTradeInfo(QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse );
 public:
-	qint32 select_UserHold(const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData );
-public:
-	qint32 selectUserTradeInfo( quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse );
-public:
-	qint32 insertUserAmount(quint16 nListenPort, const CUserAmount* pData);
-	qint32 selectUserAmount(quint16 nListenPort, const QString& strUserID, CUserAmount** ppData);
-	qint32 updateUserAmount(quint16 nListenPort, CUserAmount* pData);
+	qint32 insertUserAccount(const CUserAccount* pData);
+	qint32 selectUserAccount(const QString& strUserID, CUserAccount** ppData);
+	qint32 updateUserAccount(CUserAccount* pData);
 public:
 	qint32 selectUserHoldAmount(const QString& strUserID,const QString& strSymobolUse, CUserHoldAmount** ppData);
 	qint32 selectUserHoldAmount(const QString& strUserID, QList<CUserHoldAmount*>& LstData);
@@ -52,7 +48,14 @@ public:
 	int startTransaction();
 	int commitTransaction();
 
-	
+//////////////////////////////////////////////////////////////////////////
+private:
+	qint32 _CreateDBTable_TABLE_USER_HOLD();
+	qint32 insertUserHold(const CUserHold* pData);
+	qint32 select_UserHold(const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData );
+	qint32 _Truncate_TABLE_USER_HOLD();
+	qint32 _AddUserHold(const CUserHold* pData);
+//////////////////////////////////////////////////////////////////////////
 private:
 	void _UnInitDataBase();
 	void _InitDataBase();
@@ -63,12 +66,9 @@ private:
 	qint32 _AddUserInfo(const CUserInfo* pData);
 	qint32 _CreateDBTable_TABLE_USER_TRADE_INFO();
 	qint32 _AddUserTradeInfo(const CUserTradeInfo* pData);
-	qint32 _CreateDBTable_TABLE_USER_HOLD();
-	qint32 _Truncate_TABLE_USER_HOLD();
-	qint32 _AddUserHold(const CUserHold* pData);
-	qint32 _CreateDBTable_TABLE_USER_AMOUNT();
-	qint32 _AddUserAmount(const CUserAmount* pData);
-	qint32 _Truncate_TABLE_USER_AMOUNT();
+	qint32 _CreateDBTable_TABLE_USER_ACCOUNT();
+	qint32 _AddUserAccount(const CUserAccount* pData);
+	qint32 _Truncate_TABLE_USER_ACCOUNT();
 	qint32 _CreateDBTable_TABLE_USER_HOLD_AMOUNT();
 	qint32 _Truncate_TABLE_USER_HOLD_AMOUNT();
 	qint32 _AddUserHoldAmount(const CUserHoldAmount* pData);

@@ -1,21 +1,22 @@
-#include "UserAmount.h"
+#include "UserAccount.h"
 #include "QtTimeHelper.h"
 #include "UserTradeInfo.h"
+#include "AckAccount.h"
 
 static const int DEF_VALUE_INT_INIT_AMOUNT = 10000*1000;
 
 
-CUserAmount::CUserAmount()
+CUserAccount::CUserAccount()
 {
 	_Init();
 }
 
-CUserAmount::~CUserAmount()
+CUserAccount::~CUserAccount()
 {
 	
 }
 
-CUserAmount& CUserAmount::operator=( const CUserAmount& objectCopy )
+CUserAccount& CUserAccount::operator=( const CUserAccount& objectCopy )
 {
 	m_strUserID = objectCopy.m_strUserID;
 	m_fInitAmount = objectCopy.m_fInitAmount;
@@ -30,7 +31,7 @@ CUserAmount& CUserAmount::operator=( const CUserAmount& objectCopy )
 }
 
 
-void CUserAmount::_Init()
+void CUserAccount::_Init()
 {
 	m_strUserID.clear();
 	m_fInitAmount = DEF_VALUE_INT_INIT_AMOUNT;
@@ -43,13 +44,13 @@ void CUserAmount::_Init()
 	resetUpdateTime();
 }
 
-void CUserAmount::resetUpdateTime()
+void CUserAccount::resetUpdateTime()
 {
 	CQtTimeHelper timehelper;
 	m_strUpdateTime = timehelper.getCurrentTimeStr();
 }
 
-void CUserAmount::updateLeftAmount( double fLeftAmount, const QString& strTime )
+void CUserAccount::updateLeftAmount( double fLeftAmount, const QString& strTime )
 {
 	m_fLeftAmount = fLeftAmount;
 	m_fFloatingProfitLoss = m_fLeftAmount + m_fHoldAmount - m_fInitAmount;
@@ -59,10 +60,26 @@ void CUserAmount::updateLeftAmount( double fLeftAmount, const QString& strTime )
 
 
 
-void CUserAmount::updateHoldAmount( double fHoldAmount, const QString& strTime )
+void CUserAccount::updateHoldAmount( double fHoldAmount, const QString& strTime )
 {
 	m_fHoldAmount = fHoldAmount;
 	m_fFloatingProfitLoss = m_fLeftAmount + m_fHoldAmount - m_fInitAmount;
 	m_fFloatingProfitLossPersentage = m_fFloatingProfitLoss/m_fInitAmount;
 	m_strUpdateTime = strTime;
+}
+
+void CUserAccount::setValue( const CAckAccount* pData )
+{
+	if (NULL == pData)
+	{
+		return;
+	}
+	m_strUserID = pData->m_strUserID;
+	m_fInitAmount = pData->m_fInitAmount;
+	m_fLeftAmount = pData->m_fLeftAmount;
+	m_fHoldAmount = pData->m_fHoldAmount;
+	m_fFloatingProfitLoss = pData->m_fFloatingProfitLoss;
+	m_fFloatingProfitLossPersentage = pData->m_fFloatingProfitLossPersentage;
+	m_strUpdateTime = pData->m_strUpdateTime;
+
 }

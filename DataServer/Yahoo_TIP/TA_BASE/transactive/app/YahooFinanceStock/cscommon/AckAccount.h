@@ -1,40 +1,42 @@
-#ifndef __CLASS_ACK_DOWNLOAD_TRADE_H__
-#define __CLASS_ACK_DOWNLOAD_TRADE_H__
+#ifndef __CLASS_ACK_ACCOUNT_H__
+#define __CLASS_ACK_ACCOUNT_H__
 
 #include <QtCore/QObject>
 #include <Qtcore/QByteArray>
-#include <Qtcore/QList>
 
 #include "TcpComProtocol.h"
 
-class CUserHold;
+class CUserAccount;
 
-class CAckDownLoadTrade
+class CAckAccount
 {
 public:
-    CAckDownLoadTrade(void);
-	~CAckDownLoadTrade(void);
+    CAckAccount(void);
+	~CAckAccount(void);
 private:
 	void _Clear();
-	void _ClearLst();
-
 public:
 	static bool checkMsgDataType(qint32 nMessageType, qint32 nDataType);
 	void setValue(const QByteArray* pMessage );
 	QByteArray* getMessage();
 	void logInfo( const QString& fileName, qint32 lineNumber );
 public:
+	void setValue(const CUserAccount* pData);
+public:
 	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::EMsgType
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
 	QString m_strReqUUID;//37
 	QString m_strACKUUID;//37
 
-	QString m_strUserID;
-	CTcpComProtocol::ETradeType m_nTradeType;
-	QString m_strSymbolUse;
+	QString m_strUserID;//65
+	double m_fInitAmount;
+	double m_fLeftAmount;
+	double m_fHoldAmount;
+	double m_fFloatingProfitLoss;
+	double m_fFloatingProfitLossPersentage;
+	QString m_strUpdateTime;
 
-	qint32 m_nLstDataCount;
-	QList<CUserHold*> m_LstData;
+	
 };
 
-#endif//__CLASS_ACK_DOWNLOAD_TRADE_H__
+#endif//__CLASS_ACK_ACCOUNT_H__
