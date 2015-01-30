@@ -1,5 +1,6 @@
 #include "NewOrderWindow.h"
 
+#include <QtGui/QtGui>
 #include <QtGui/QCalendarWidget>
 #include <QtGui/QDateTimeEdit>
 
@@ -83,7 +84,7 @@ void CNewOrderWindow::_InitData()
 {
 	m_pTextEdit_Symbol_Value = "";
 	m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
-	m_pSpinBox_Volume_Value = 1;
+	m_pSpinBox_Volume_Value = 100;
 	m_pSpinBox_Price_Value = 000000000.00000f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
 }
@@ -221,7 +222,7 @@ void CNewOrderWindow::resetData(const QString& strSymbolUse, const QString& strT
 	m_pUserTradeInfo->clear();
 
 	m_pTextEdit_Symbol_Value = strSymbolUse;
-	m_pSpinBox_Volume_Value = 1;
+	m_pSpinBox_Volume_Value = 100;
 	//m_pSpinBox_Price_Value;
 
 	m_pDateTimeEdit->setMinimumDate(dateTimeFrom.date());
@@ -242,23 +243,21 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 	int nCurrentIndex = 0;
 	QString strOrderType;
 	QDate nTradeDate;
+	QString strTime;;
+	QString strSymbolUse;
+	double fbuyPrice = 0;
+	qint32 nBuyVolume = 0;
 
 	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
-	m_pUserTradeInfo->m_strUserID.clear();
-	m_pUserTradeInfo->m_strTradeUUID = "NULL";
-	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
-	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Buy;
-	m_pUserTradeInfo->m_fTradePrice = m_pSpinBox_Price->value();
-	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume->value();
-	m_pUserTradeInfo->m_fTradeAmount = 0;
-	m_pUserTradeInfo->m_fTradeFees = 0.007;
-	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;
-	m_pUserTradeInfo->m_fTotalTradeFee = m_pUserTradeInfo->m_fTradeAmount * m_pUserTradeInfo->m_fTradeFees;
-	m_pUserTradeInfo->m_fTotalTradeAmount = m_pUserTradeInfo->m_fTradeAmount + m_pUserTradeInfo->m_fTotalTradeFee;
 	nTradeDate = m_pDateTimeEdit->date();
-	m_pUserTradeInfo->m_strTradeTime = m_pQtTimeHelper->getStringValue(nTradeDate);
+	strTime = m_pQtTimeHelper->getStringValue(nTradeDate);
+	strSymbolUse = m_pTextEdit_Symbol_Value;
+	fbuyPrice = m_pSpinBox_Price->value();
+	nBuyVolume = m_pSpinBox_Volume->value();
+
+	m_pUserTradeInfo->setValue_Buy(strTime, strSymbolUse, fbuyPrice, nBuyVolume);
 
 	//
 	m_pNewOrderConfirmWindow->resetData(m_pUserTradeInfo);
@@ -272,23 +271,21 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 	int nCurrentIndex = 0;
 	QString strOrderType;
 	QDate nTradeDate;
+	QString strTime;;
+	QString strSymbolUse;
+	double fbuyPrice = 0;
+	qint32 nBuyVolume = 0;
 
 	nCurrentIndex = m_pComboBox_OrderType->currentIndex();
 	strOrderType = m_pComboBox_OrderType->itemText(nCurrentIndex);
 
-	m_pUserTradeInfo->m_strUserID.clear();
-	m_pUserTradeInfo->m_strTradeUUID = "NULL";
-	m_pUserTradeInfo->m_strSymbolUse = m_pTextEdit_Symbol_Value;
-	m_pUserTradeInfo->m_nTradeType = CTcpComProtocol::ETradeType_Sell;
-	m_pUserTradeInfo->m_fTradePrice = m_pSpinBox_Price->value();
-	m_pUserTradeInfo->m_nTradeVolume = m_pSpinBox_Volume->value();
-	m_pUserTradeInfo->m_fTradeAmount = 0;
-	m_pUserTradeInfo->m_fTradeFees = 0.007;
-	m_pUserTradeInfo->m_fTradeAmount = m_pUserTradeInfo->m_fTradePrice * m_pUserTradeInfo->m_nTradeVolume;
-	m_pUserTradeInfo->m_fTotalTradeFee = m_pUserTradeInfo->m_fTradeAmount * m_pUserTradeInfo->m_fTradeFees;
-	m_pUserTradeInfo->m_fTotalTradeAmount = m_pUserTradeInfo->m_fTradeAmount - m_pUserTradeInfo->m_fTotalTradeFee;
 	nTradeDate = m_pDateTimeEdit->date();
-	m_pUserTradeInfo->m_strTradeTime = m_pQtTimeHelper->getStringValue(nTradeDate);
+	strTime = m_pQtTimeHelper->getStringValue(nTradeDate);
+	strSymbolUse = m_pTextEdit_Symbol_Value;
+	fbuyPrice = m_pSpinBox_Price->value();
+	nBuyVolume = m_pSpinBox_Volume->value();
+
+	m_pUserTradeInfo->setValue_Sell(strTime, strSymbolUse, fbuyPrice, nBuyVolume);
 
 	//
 	m_pNewOrderConfirmWindow->resetData(m_pUserTradeInfo);
@@ -317,6 +314,14 @@ void CNewOrderWindow::slotDateChanged ( const QDate & date )
 	{
 		m_pSpinBox_Price_Value = QVariant(pHistoryData->m_strClose).toDouble();
 		_TranslateLanguage();
+	}
+	else
+	{
+		QString strMesg = QString("SymboluSe=%1,time=%2 not have price info")
+			.arg(m_pTextEdit_Symbol_Value).arg(strDataTimeTmp);
+		QMessageBox msgBox;
+		msgBox.setText(strMesg);
+		msgBox.exec();
 	}
 
 	if (NULL != pHistoryData)

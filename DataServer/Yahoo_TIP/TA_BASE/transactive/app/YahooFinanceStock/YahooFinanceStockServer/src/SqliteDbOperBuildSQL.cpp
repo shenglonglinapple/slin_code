@@ -466,7 +466,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_TRADE_INFO()
 			<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT<<" "<<"decimal(25,10) NOT NULL"<<","
 			<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES<<" "<<"decimal(25,10) NOT NULL"<<","
 			<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE<<" "<<"decimal(25,10) NOT NULL"<<","
-			<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT<<" "<<"decimal(25,10) NOT NULL"
+			<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USE_ACCOUNT<<" "<<"decimal(25,10) NOT NULL"
 			<<" "<<")";
 	}
 	
@@ -523,7 +523,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_TRADE_INFO()
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT<<","
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES<<","
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE<<","
-		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USE_ACCOUNT
 		<<" "<<")"
 		<<" "<<"VALUES"
 		<<" "<<"("
@@ -578,7 +578,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_TRADE_INFO( const QStr
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT<<","
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES<<","
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE<<","
-		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USE_ACCOUNT
 		<<" "<<"FROM"
 		<<" "<<str_TABLE_USER_TRADE_INFO
 		<<" "<<"WHERE"
@@ -607,7 +607,7 @@ QString CSqliteDbOperBuildSQL::buildSQL_Select_TABLE_USER_TRADE_INFO( const QStr
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT<<","
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES<<","
 		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE<<","
-		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT
+		<<" "<<str_TABLE_USER_TRADE_INFO_COLUMN_USE_ACCOUNT
 		<<" "<<"FROM"
 		<<" "<<str_TABLE_USER_TRADE_INFO
 		<<" "<<"WHERE"
@@ -718,9 +718,9 @@ QString CSqliteDbOperBuildSQL::buildSQL_Update_TABLE_USER_ACCOUNT( const CUserAc
 	byteSQL<<"UPDATE"
 		<<" "<<str_TABLE_USER_ACCOUNT
 		<<" "<<"SET"
-		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_INIT_ACCOUNT<<"="<<pData->m_fInitAmount<<","
-		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_LEFT_ACCOUNT<<"="<<pData->m_fLeftAmount<<","
-		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_HOLD_ACCOUNT<<"="<<pData->m_fHoldAmount<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_INIT_ACCOUNT<<"="<<pData->m_fInitAccount<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_LEFT_ACCOUNT<<"="<<pData->m_fLeftAccount<<","
+		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_HOLD_ACCOUNT<<"="<<pData->m_fHoldAccount<<","
 		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS<<"="<<pData->m_fFloatingProfitLoss<<","
 		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE<<"="<<pData->m_fFloatingProfitLossPersentage<<","
 		<<" "<<str_TABLE_USER_ACCOUNT_COLUMN_UPDATE_TIME<<"="<<"\""<<pData->m_strUpdateTime.toStdString()<<"\""

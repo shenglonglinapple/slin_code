@@ -62,7 +62,7 @@ static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_VOLUME = "TradeVolume
 static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_AMOUNT = "TradeAmount";
 static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TRADE_FEES = "TradeFees";
 static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_FEE = "TotalTradeFee";
-static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_TOTAL_TRADE_AMOUNT = "TotalTradeAmount";
+static const char*  str_TABLE_USER_TRADE_INFO_COLUMN_USE_ACCOUNT = "UseAccount";
 
 /////
 static const char*  str_TABLE_USER_ACCOUNT = "TABLE_USER_ACCOUNT";

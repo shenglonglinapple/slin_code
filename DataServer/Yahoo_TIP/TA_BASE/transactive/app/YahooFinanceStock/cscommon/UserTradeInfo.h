@@ -23,6 +23,10 @@ public:
 public:
 	void setValue(const CAckTrade* pAck);
 public:
+	void setValue_Buy(const QString& strTime, const QString& strSymbolUse, double fPrice, qint32 nVolume);
+	void setValue_Sell( const QString& strTime, const QString& strSymbolUse, double fPrice, qint32 nVolume);
+
+public:
 	QString m_strUserID;
 	QString m_strTradeUUID;
 	QString m_strTradeTime;
@@ -36,7 +40,7 @@ public:
 	double m_fTradeFees;
 
 	double m_fTotalTradeFee;
-	double m_fTotalTradeAmount;
+	double m_fUseAccount;
 
 };
 

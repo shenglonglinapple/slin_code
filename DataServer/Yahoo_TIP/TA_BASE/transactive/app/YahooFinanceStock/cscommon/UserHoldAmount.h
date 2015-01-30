@@ -17,7 +17,7 @@ private:
 	void _Init();
 public:
 	void setValue_FirstBuy(const CUserTradeInfo* pData);
-	void updateValue(const CUserTradeInfo* pData);
+	void updateHoldAmountValue(const CUserTradeInfo* pData);
 	void updatePrice(double fNewPrice, const QString& strTime);
 public:
 	QString m_strUserID;

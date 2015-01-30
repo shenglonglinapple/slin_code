@@ -237,7 +237,7 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 	QVariantList lst_COLUMN_TRADE_AMOUNT;
 	QVariantList lst_COLUMN_TRADE_FEES;
 	QVariantList lst_COLUMN_TOTAL_TRADE_FEE;
-	QVariantList lst_COLUMN_TOTAL_TRADE_AMOUNT;
+	QVariantList lst_COLUMN_USE_ACCOUNT;
 
 	QSqlQuery* pQSqlQueryForInseert = NULL;
 
@@ -266,7 +266,7 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 		lst_COLUMN_TRADE_AMOUNT << pData->m_fTradeAmount;
 		lst_COLUMN_TRADE_FEES << pData->m_fTradeFees;
 		lst_COLUMN_TOTAL_TRADE_FEE << pData->m_fTotalTradeFee;
-		lst_COLUMN_TOTAL_TRADE_AMOUNT << pData->m_fTotalTradeAmount;
+		lst_COLUMN_USE_ACCOUNT << pData->m_fUseAccount;
 	}
 
 	pQSqlQueryForInseert->addBindValue(lst_COLUMN_USEID);
@@ -279,7 +279,7 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_AMOUNT);
 	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_FEES);
 	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TOTAL_TRADE_FEE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TOTAL_TRADE_AMOUNT);
+	pQSqlQueryForInseert->addBindValue(lst_COLUMN_USE_ACCOUNT);
 	
 	bExecRes = pQSqlQueryForInseert->execBatch();
 	if (!bExecRes)
@@ -754,9 +754,9 @@ qint32 CClientDbOper::_AddUserAccount( const CUserAccount* pData )
 
 	{
 		COLUMN_USEID << pData->m_strUserID;
-		COLUMN_INIT_AMOUNT << pData->m_fInitAmount;
-		COLUMN_LEFT_AMOUNT << pData->m_fLeftAmount;
-		COLUMN_HOLD_AMOUNT << pData->m_fHoldAmount;
+		COLUMN_INIT_AMOUNT << pData->m_fInitAccount;
+		COLUMN_LEFT_AMOUNT << pData->m_fLeftAccount;
+		COLUMN_HOLD_AMOUNT << pData->m_fHoldAccount;
 		COLUMN_FLOATINT_PROFIT_LOSS << pData->m_fFloatingProfitLoss;
 		COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE << pData->m_fFloatingProfitLossPersentage;
 		COLUMN_UPDATE_TIME << pData->m_strUpdateTime;

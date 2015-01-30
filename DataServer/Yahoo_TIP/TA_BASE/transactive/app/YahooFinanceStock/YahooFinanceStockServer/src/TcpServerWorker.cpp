@@ -167,7 +167,13 @@ double CTcpServerWorker::getUserHoldAmount(const QString& strUserID, const QStri
 			pUserHoldAmount_current_symbol->updatePrice(pHistoryData->m_strClose.toDouble(), strTime);
 			m_pServerDbOper->updateUserHoldAmount(pUserHoldAmount_current_symbol);
 			fHoldAmount += pUserHoldAmount_current_symbol->m_fAmount;
-		}//while
+		}
+		else
+		{
+			pUserHoldAmount_current_symbol->updatePrice(pUserHoldAmount_current_symbol->m_fPrice, strTime);
+			m_pServerDbOper->updateUserHoldAmount(pUserHoldAmount_current_symbol);
+			fHoldAmount += pUserHoldAmount_current_symbol->m_fAmount;
+		}
 
 		iterlstHis = lstHisData.begin();
 		while (iterlstHis != lstHisData.end())
@@ -197,12 +203,12 @@ double CTcpServerWorker::getUserHoldAmount(const QString& strUserID, const QStri
 qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData )
 {
 	qint32 nFunRes = 0;
-	CUserAccount* pUserAmount = NULL;
 	CUserHoldAmount* pUserHoldAmount_check = NULL;
 	CUserHoldAmount* pUserHoldAmount_current_symbol = NULL;
 	CUserHoldAmount* pUserHoldAmount_user = NULL;
-	double fLeftAmount = 0;
-	double fHoldAmount = 0;
+	CUserAccount* pUserAccount = NULL;
+	double fLeftAccount = 0;
+	double fHoldAccount = 0;
 
 	if (NULL == m_pServerDbOper)
 	{
@@ -214,25 +220,25 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 		nFunRes = -1;
 		return nFunRes;
 	}
-	nFunRes = m_pServerDbOper->selectUserAccount(pData->m_strUserID, &pUserAmount);
-	if (NULL == pUserAmount)
+	nFunRes = m_pServerDbOper->selectUserAccount(pData->m_strUserID, &pUserAccount);
+	if (NULL == pUserAccount)
 	{
 		MYLOG4CPP_ERROR<<"error:select User Amount m_strUserID="<<pData->m_strUserID;
 		nFunRes = -1;
 		return nFunRes;
 	}
-	fLeftAmount = pUserAmount->m_fLeftAmount;
+	fLeftAccount = pUserAccount->m_fLeftAccount;
 
 	nFunRes = m_pServerDbOper->selectUserHoldAmount(pData->m_strUserID,pData->m_strSymbolUse, &pUserHoldAmount_check);
 	//
 	if (CTcpComProtocol::ETradeType_Buy == pData->m_nTradeType)
 	{
-		if (pUserAmount->m_fLeftAmount < pData->m_fTotalTradeAmount)
+		if (fLeftAccount < pData->m_fUseAccount)
 		{
 			MYLOG4CPP_ERROR<<"error: money is not enough m_strUserID="<<pData->m_strUserID
-				<<" "<<"m_fLeftAmount="<<pUserAmount->m_fLeftAmount
+				<<" "<<"fLeftAccount="<<fLeftAccount
 				<<" "<<"<"
-				<<" "<<"m_fTotalTradeAmount="<<pData->m_fTotalTradeAmount;
+				<<" "<<"m_fUseAccount="<<pData->m_fUseAccount;
 			nFunRes = -1;
 			return nFunRes;
 		}
@@ -245,7 +251,7 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 			delete pUserHoldAmount_check;
 			pUserHoldAmount_check = NULL;			
 		}
-		fLeftAmount = fLeftAmount - pData->m_fTotalTradeAmount;
+		fLeftAccount -= pData->m_fUseAccount;
 	}
 	else
 	{
@@ -256,11 +262,11 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 			nFunRes = -1;
 			return nFunRes;
 		}
-		fLeftAmount = fLeftAmount + pData->m_fTotalTradeAmount;
+		fLeftAccount += pData->m_fUseAccount;
 	}
 
 	//select again
-	nFunRes = m_pServerDbOper->selectUserHoldAmount(pData->m_strUserID,pData->m_strSymbolUse, &pUserHoldAmount_current_symbol);
+	nFunRes = m_pServerDbOper->selectUserHoldAmount(pData->m_strUserID, pData->m_strSymbolUse, &pUserHoldAmount_current_symbol);
 	if (NULL == pUserHoldAmount_current_symbol)
 	{
 		MYLOG4CPP_ERROR<<"error: not find User Hold Amount m_strUserID="<<pData->m_strUserID
@@ -272,19 +278,19 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 	//do
 	m_pServerDbOper->startTransaction();
 	nFunRes = m_pServerDbOper->insertUserTradeInfo(pData);//trade
-	pUserHoldAmount_current_symbol->updateValue(pData);//hold
+	pUserHoldAmount_current_symbol->updateHoldAmountValue(pData);//hold
 	nFunRes = m_pServerDbOper->updateUserHoldAmount(pUserHoldAmount_current_symbol);//hold
 
-	fHoldAmount = getUserHoldAmount(pData->m_strUserID, pData->m_strTradeTime);//hold total
-	pUserAmount->updateLeftAmount(fLeftAmount, pData->m_strTradeTime);//
-	pUserAmount->updateHoldAmount(fHoldAmount, pData->m_strTradeTime);
-	nFunRes = m_pServerDbOper->updateUserAccount(pUserAmount);
+	fHoldAccount = getUserHoldAmount(pData->m_strUserID, pData->m_strTradeTime);//hold total
+	pUserAccount->updateLeftAccount(fLeftAccount, pData->m_strTradeTime);//
+	pUserAccount->updateHoldAccount(fHoldAccount, pData->m_strTradeTime);
+	nFunRes = m_pServerDbOper->updateUserAccount(pUserAccount);
 	m_pServerDbOper->commitTransaction();
 
-	if (NULL == pUserAmount)
+	if (NULL == pUserAccount)
 	{
-		delete pUserAmount;
-		pUserAmount = NULL;
+		delete pUserAccount;
+		pUserAccount = NULL;
 	}
 	if (NULL != pUserHoldAmount_current_symbol)
 	{
@@ -356,7 +362,7 @@ qint32 CTcpServerWorker::processUserAccount( quint16 nListenPort, const QString&
 
 	m_pServerDbOper->startTransaction();
 	fHoldAmount = getUserHoldAmount(strUserID, strTime);
-	pUserAmount->updateHoldAmount(fHoldAmount, strTime);
+	pUserAmount->updateHoldAccount(fHoldAmount, strTime);
 	nFunRes = m_pServerDbOper->updateUserAccount(pUserAmount);
 	m_pServerDbOper->commitTransaction();
 	if (NULL == pUserAmount)

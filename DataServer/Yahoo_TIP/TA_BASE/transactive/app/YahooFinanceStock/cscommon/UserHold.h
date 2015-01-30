@@ -27,12 +27,12 @@ public:
 	QString m_strBuyTime;
 	double m_fBuyPrice;
 	qint32 m_nBuyVolume;
-	double m_fBuyFees;//0.007
+	double m_fBuyFees;
 	double m_fBuyAmount;//(m_fBuyPrice*m_nBuyVolume)(1+m_fBuyFees)
 
 	QString m_strCurrentTime;
 	double m_fCurrentPrice;
-	double m_fCurrentFees;//0.007
+	double m_fCurrentFees;
 	double m_fCurrentAmount;//(m_fCurrentPrice*m_nBuyVolume)(1-m_fCurrentFees)
 
 	double m_fProfitLoss;//m_fCurrentAmount-m_fBuyAmount

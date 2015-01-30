@@ -4,6 +4,8 @@
 #include "ReqTrade.h"
 #include "AckTrade.h"
 
+static const double  DEF_VALUE_DOUBLE_TRADE_FEES = 0.007;
+
 CUserTradeInfo::CUserTradeInfo()
 {
 	clear();
@@ -26,7 +28,7 @@ CUserTradeInfo& CUserTradeInfo::operator=( const CUserTradeInfo& objectCopy )
 	m_fTradeAmount = objectCopy.m_fTradeAmount;
 	m_fTradeFees = objectCopy.m_fTradeFees;
 	m_fTotalTradeFee = objectCopy.m_fTotalTradeFee;
-	m_fTotalTradeAmount = objectCopy.m_fTotalTradeAmount;
+	m_fUseAccount = objectCopy.m_fUseAccount;
 		
 	return *this;
 }
@@ -44,7 +46,7 @@ void CUserTradeInfo::clear()
 	m_fTradeAmount = 0;
 	m_fTradeFees = 0;
 	m_fTotalTradeFee = 0;
-	m_fTotalTradeAmount = 0;
+	m_fUseAccount = 0;
 
 }
 
@@ -58,21 +60,20 @@ void CUserTradeInfo::setValue(const QString& strUserID, const CReqTrade* pReq )
 	this->m_strTradeTime = pReq->m_strTradeTime;
 	this->m_nTradeType = pReq->m_nTradeType;
 	this->m_strSymbolUse = pReq->m_strSymbolUse;
-	this->m_fTradePrice = pReq->m_strTradePrice.toDouble();
-	this->m_nTradeVolume = pReq->m_strTradeVolume.toInt();
-	this->m_fTradeFees = 0.007;
+	this->m_fTradePrice = pReq->m_fTradePrice;
+	this->m_nTradeVolume = pReq->m_nTradeVolume;
+	this->m_fTradeFees = DEF_VALUE_DOUBLE_TRADE_FEES;
 
-	m_fTradeAmount = m_fTradePrice*m_nTradeVolume;
-	m_fTotalTradeFee = m_fTradeAmount*m_fTradeFees;
+	m_fTradeAmount = m_fTradePrice * m_nTradeVolume;
+	m_fTotalTradeFee = m_fTradeAmount * m_fTradeFees;
 
 	if (CTcpComProtocol::ETradeType_Buy == pReq->m_nTradeType)
 	{
-		m_fTotalTradeAmount = m_fTradeAmount + m_fTotalTradeFee;
+		m_fUseAccount = m_fTradeAmount + m_fTotalTradeFee;//buy=A+B
 	}
 	else
-	{
-		//sell
-		m_fTotalTradeAmount = m_fTradeAmount - m_fTotalTradeFee;
+	{		
+		m_fUseAccount = m_fTradeAmount - m_fTotalTradeFee;//sell=A-B
 	}
 }
 
@@ -85,14 +86,48 @@ void CUserTradeInfo::setValue( const CAckTrade* pAck )
 	m_strTradeTime = pAck->m_strTradeTime;
 	m_nTradeType = pAck->m_nTradeType;
 	m_strSymbolUse = pAck->m_strSymbolUse;
-	m_fTradePrice = pAck->m_strTradePrice.toDouble();
-	m_nTradeVolume = pAck->m_strTradeVolume.toInt();
-	m_fTradeAmount = pAck->m_strTradeAmount.toDouble();
-	m_fTradeFees = pAck->m_strFees.toDouble();
-	m_fTotalTradeFee = pAck->m_strTotalTradeFee.toDouble();
-	m_fTotalTradeAmount = pAck->m_strTotalTradeAmount.toDouble();
+	m_fTradePrice = pAck->m_fTradePrice;//.toDouble();
+	m_nTradeVolume = pAck->m_nTradeVolume;//.toInt();
+	m_fTradeAmount = pAck->m_fTradeAmount;//.toDouble();
+	m_fTradeFees = pAck->m_fFees;//.toDouble();
+	m_fTotalTradeFee = pAck->m_fTotalTradeFee;//.toDouble();
+	m_fUseAccount = pAck->m_fUserAccount;//.toDouble();
 
 }
+
+void CUserTradeInfo::setValue_Buy( const QString& strTime, const QString& strSymbolUse, double fPrice, qint32 nVolume )
+{
+	clear();
+
+	m_strTradeTime = strTime;
+	m_strSymbolUse = strSymbolUse;
+	m_nTradeType = CTcpComProtocol::ETradeType_Buy;
+	m_fTradePrice = fPrice;
+	m_nTradeVolume = nVolume;
+	m_fTradeFees = DEF_VALUE_DOUBLE_TRADE_FEES;
+	m_fTradeAmount = m_fTradePrice * m_nTradeVolume;
+	m_fTotalTradeFee = m_fTradeAmount * m_fTradeFees;
+	m_fUseAccount = m_fTradeAmount + m_fTotalTradeFee;//buy=A+B
+
+}
+
+
+void CUserTradeInfo::setValue_Sell( const QString& strTime, const QString& strSymbolUse, double fPrice, qint32 nVolume )
+{
+	clear();
+
+	m_strTradeTime = strTime;
+	m_strSymbolUse = strSymbolUse;
+	m_nTradeType = CTcpComProtocol::ETradeType_Sell;
+	m_fTradePrice = fPrice;
+	m_nTradeVolume = nVolume;
+	m_fTradeFees = DEF_VALUE_DOUBLE_TRADE_FEES;
+	m_fTradeAmount = m_fTradePrice * m_nTradeVolume;
+	m_fTotalTradeFee = m_fTradeAmount * m_fTradeFees;
+	m_fUseAccount = m_fTradeAmount - m_fTotalTradeFee;//sell=A-B
+
+}
+
 
 
 

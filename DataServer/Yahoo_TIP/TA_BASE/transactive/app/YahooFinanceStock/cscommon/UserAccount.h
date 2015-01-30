@@ -20,15 +20,15 @@ private:
 	void _Init();
 public:
 	void resetUpdateTime();
-	void updateLeftAmount( double fLeftAmount, const QString& strTime );
-	void updateHoldAmount(double fHoldAmount, const QString& strTime);
+	void updateLeftAccount( double fLeftAmount, const QString& strTime );
+	void updateHoldAccount(double fHoldAmount, const QString& strTime);
 public:
 	void setValue(const CAckAccount* pData);
 public:
 	QString m_strUserID;
-	double m_fInitAmount;
-	double m_fLeftAmount;
-	double m_fHoldAmount;
+	double m_fInitAccount;
+	double m_fLeftAccount;
+	double m_fHoldAccount;
 	double m_fFloatingProfitLoss;
 	double m_fFloatingProfitLossPersentage;
 	QString m_strUpdateTime;

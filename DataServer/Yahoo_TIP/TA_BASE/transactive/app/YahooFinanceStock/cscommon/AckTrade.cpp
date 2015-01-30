@@ -25,19 +25,19 @@ void CAckTrade::_Clear()
 	m_strTradeUUID.clear();
 	m_strSymbolUse.clear();
 	m_strTradeTime.clear();
-	m_strTradePrice.clear();
-	m_strTradeVolume.clear();
-	m_strFees.clear();
-	m_strTradeAmount.clear();
-	m_strTotalTradeFee.clear();
-	m_strTotalTradeAmount.clear();
+	m_fTradePrice = 0;
+	m_nTradeVolume = 0;
+	m_fFees = 0;
+	m_fTradeAmount = 0;
+	m_fTotalTradeFee = 0;
+	m_fUserAccount = 0;
 
 }
 
 void CAckTrade::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"CAckBuy:"
+		<<" "<<"CAckTrade:"
 		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
@@ -47,12 +47,12 @@ void CAckTrade::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_strTradeUUID="<<m_strTradeUUID
 		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_strTradeTime="<<m_strTradeTime
-		<<" "<<"m_strTradePrice="<<m_strTradePrice
-		<<" "<<"m_strTradeVolume="<<m_strTradeVolume
-		<<" "<<"m_strFees="<<m_strFees
-		<<" "<<"m_strTradeAmount="<<m_strTradeAmount
-		<<" "<<"m_strTotalTradeFee="<<m_strTotalTradeFee
-		<<" "<<"m_strTotalTradeAmount="<<m_strTotalTradeAmount;
+		<<" "<<"m_fTradePrice="<<m_fTradePrice
+		<<" "<<"m_nTradeVolume="<<m_nTradeVolume
+		<<" "<<"m_fFees="<<m_fFees
+		<<" "<<"m_fTradeAmount="<<m_fTradeAmount
+		<<" "<<"m_fTotalTradeFee="<<m_fTotalTradeFee
+		<<" "<<"m_fUserAccount="<<m_fUserAccount;
 	
 
 }
@@ -90,12 +90,12 @@ QByteArray* CAckTrade::getMessage()
 	writeToByteArray<<(m_strTradeUUID);
 	writeToByteArray<<(m_strSymbolUse);
 	writeToByteArray<<(m_strTradeTime);
-	writeToByteArray<<(m_strTradePrice);
-	writeToByteArray<<(m_strTradeVolume);
-	writeToByteArray<<(m_strFees);
-	writeToByteArray<<(m_strTradeAmount);
-	writeToByteArray<<(m_strTotalTradeFee);
-	writeToByteArray<<(m_strTotalTradeAmount);
+	writeToByteArray<<(m_fTradePrice);
+	writeToByteArray<<(m_nTradeVolume);
+	writeToByteArray<<(m_fFees);
+	writeToByteArray<<(m_fTradeAmount);
+	writeToByteArray<<(m_fTotalTradeFee);
+	writeToByteArray<<(m_fUserAccount);
 	
 
 	return pMessage;	
@@ -122,12 +122,12 @@ void CAckTrade::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>m_strTradeUUID;
 	readMessageBuffer>>m_strSymbolUse;
 	readMessageBuffer>>m_strTradeTime;
-	readMessageBuffer>>m_strTradePrice;
-	readMessageBuffer>>m_strTradeVolume;
-	readMessageBuffer>>m_strFees;
-	readMessageBuffer>>m_strTradeAmount;
-	readMessageBuffer>>m_strTotalTradeFee;
-	readMessageBuffer>>m_strTotalTradeAmount;
+	readMessageBuffer>>m_fTradePrice;
+	readMessageBuffer>>m_nTradeVolume;
+	readMessageBuffer>>m_fFees;
+	readMessageBuffer>>m_fTradeAmount;
+	readMessageBuffer>>m_fTotalTradeFee;
+	readMessageBuffer>>m_fUserAccount;
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);
 	m_nDataType = (CTcpComProtocol::EDataType)(nDataType);
@@ -152,12 +152,15 @@ void CAckTrade::setValue(const CReqTrade* pReq, const CUserTradeInfo* pUserTrade
 		this->m_strTradeUUID = pUserTradeInfo->m_strTradeUUID;
 		this->m_strSymbolUse = pUserTradeInfo->m_strSymbolUse;
 		this->m_strTradeTime = pUserTradeInfo->m_strTradeTime;
-		this->m_strTradePrice = QString("%1").arg(pUserTradeInfo->m_fTradePrice);
-		this->m_strTradeVolume = QString("%1").arg(pUserTradeInfo->m_nTradeVolume);
-		this->m_strFees = QString("%1").arg(pUserTradeInfo->m_fTradeFees);
-		this->m_strTradeAmount = QString("%1").arg(pUserTradeInfo->m_fTradeAmount);
-		this->m_strTotalTradeFee = QString("%1").arg(pUserTradeInfo->m_fTotalTradeFee);
-		this->m_strTotalTradeAmount = QString("%1").arg(pUserTradeInfo->m_fTotalTradeAmount);
+		this->m_fTradePrice = pUserTradeInfo->m_fTradePrice;
+		this->m_nTradeVolume = pUserTradeInfo->m_nTradeVolume;
+		this->m_fFees = pUserTradeInfo->m_fTradeFees;
+		this->m_fTradeAmount = pUserTradeInfo->m_fTradeAmount;
+		this->m_fTotalTradeFee = pUserTradeInfo->m_fTotalTradeFee;
+		this->m_fUserAccount = pUserTradeInfo->m_fUseAccount;
+
+// 		this->m_fTradePrice = QString("%1").arg(pUserTradeInfo->m_fTradePrice);
+
 	}
 
 }

@@ -35,12 +35,12 @@ public:
 
 	QString m_strSymbolUse;
 	QString m_strTradeTime;
-	QString m_strTradePrice;
-	QString m_strTradeVolume;
-	QString m_strFees;//0.007
-	QString m_strTradeAmount;
-	QString m_strTotalTradeFee;//m_strTradeAmount*m_strFees
-	QString m_strTotalTradeAmount;
+	double m_fTradePrice;
+	qint32 m_nTradeVolume;
+	double m_fFees;
+	double m_fTradeAmount;
+	double m_fTotalTradeFee;//m_strTradeAmount*m_strFees
+	double m_fUserAccount;
 
 };
 

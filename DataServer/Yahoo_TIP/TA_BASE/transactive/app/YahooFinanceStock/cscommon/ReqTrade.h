@@ -33,8 +33,8 @@ public:
 	CTcpComProtocol::ETradeType m_nTradeType;
 	QString m_strSymbolUse;
 	QString m_strTradeTime;
-	QString m_strTradePrice;
-	QString m_strTradeVolume;
+	double m_fTradePrice;
+	qint32 m_nTradeVolume;
 
 };
 

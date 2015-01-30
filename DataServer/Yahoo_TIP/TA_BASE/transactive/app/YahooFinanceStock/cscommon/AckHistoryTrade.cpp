@@ -110,7 +110,7 @@ QByteArray* CAckHistoryTrade::getMessage()
 		writeToByteArray<<(pData->m_fTradeFees);
 
 		writeToByteArray<<(pData->m_fTotalTradeFee);
-		writeToByteArray<<(pData->m_fTotalTradeAmount);
+		writeToByteArray<<(pData->m_fUseAccount);
 
 		iterLst++;
 	}//while
@@ -160,7 +160,7 @@ void CAckHistoryTrade::setValue(const QByteArray* pMessage )
 		readMessageBuffer>>(pData->m_fTradeFees);
 
 		readMessageBuffer>>(pData->m_fTotalTradeFee);
-		readMessageBuffer>>(pData->m_fTotalTradeAmount);
+		readMessageBuffer>>(pData->m_fUseAccount);
 		
 		m_LstData.push_back(pData);
 		pData = NULL;

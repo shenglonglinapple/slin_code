@@ -118,9 +118,9 @@ void CAckAccount::setValue( const CUserAccount* pData )
 		return;
 	}
 	m_strUserID = pData->m_strUserID;
-	m_fInitAmount = pData->m_fInitAmount;
-	m_fLeftAmount = pData->m_fLeftAmount;
-	m_fHoldAmount = pData->m_fHoldAmount;
+	m_fInitAmount = pData->m_fInitAccount;
+	m_fLeftAmount = pData->m_fLeftAccount;
+	m_fHoldAmount = pData->m_fHoldAccount;
 	m_fFloatingProfitLoss = pData->m_fFloatingProfitLoss;
 	m_fFloatingProfitLossPersentage = pData->m_fFloatingProfitLossPersentage;
 	m_strUpdateTime = pData->m_strUpdateTime;

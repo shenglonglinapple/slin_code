@@ -21,11 +21,11 @@ void CReqTrade::_Clear()
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
 	m_strUserID.clear();
-	m_nTradeType = CTcpComProtocol::ETradeType_Buy;
+	m_nTradeType = CTcpComProtocol::ETradeType_Unknown;
 	m_strSymbolUse.clear();
 	m_strTradeTime.clear();
-	m_strTradePrice.clear();
-	m_strTradeVolume.clear();
+	m_fTradePrice = 0;
+	m_nTradeVolume = 0;
 }
 //static
 bool CReqTrade::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
@@ -46,7 +46,7 @@ bool CReqTrade::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 void CReqTrade::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"CReqBuy:"
+		<<" "<<"CReqTrade:"
 		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
@@ -55,8 +55,8 @@ void CReqTrade::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_nTradeType="<<CTcpComProtocol::getStringValue(m_nTradeType)
 		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_strTradeTime="<<m_strTradeTime
-		<<" "<<"m_strTradePrice="<<m_strTradePrice
-		<<" "<<"m_strTradeVolume="<<m_strTradeVolume;
+		<<" "<<"m_fTradePrice="<<m_fTradePrice
+		<<" "<<"m_nTradeVolume="<<m_nTradeVolume;
 }
 
 void CReqTrade::setValue(const QByteArray* pMessage )
@@ -78,8 +78,8 @@ void CReqTrade::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>nTradeType;
 	readMessageBuffer>>m_strSymbolUse;
 	readMessageBuffer>>m_strTradeTime;
-	readMessageBuffer>>m_strTradePrice;
-	readMessageBuffer>>m_strTradeVolume;
+	readMessageBuffer>>m_fTradePrice;
+	readMessageBuffer>>m_nTradeVolume;
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);
 	m_nDataType = (CTcpComProtocol::EDataType)(nDataType);
@@ -107,8 +107,8 @@ QByteArray* CReqTrade::getMessage()
 	writeToByteArray<<(qint32)(m_nTradeType);
 	writeToByteArray<<(m_strSymbolUse);
 	writeToByteArray<<(m_strTradeTime);
-	writeToByteArray<<(m_strTradePrice);
-	writeToByteArray<<(m_strTradeVolume);
+	writeToByteArray<<(m_fTradePrice);
+	writeToByteArray<<(m_nTradeVolume);
 
 	return pMessage;
 }
@@ -119,6 +119,8 @@ void CReqTrade::setValue( const CUserTradeInfo* pData )
 	m_nTradeType = pData->m_nTradeType;
 	m_strSymbolUse = pData->m_strSymbolUse;
 	m_strTradeTime = pData->m_strTradeTime;
-	m_strTradePrice = QVariant(pData->m_fTradePrice).toString();
-	m_strTradeVolume = QVariant(pData->m_nTradeVolume).toString();
+	m_fTradePrice = pData->m_fTradePrice;
+	m_nTradeVolume = pData->m_nTradeVolume;
+	//m_fTradePrice = QVariant(pData->m_fTradePrice).toString();
+	//m_nTradeVolume = QVariant(pData->m_nTradeVolume).toString();
 }
