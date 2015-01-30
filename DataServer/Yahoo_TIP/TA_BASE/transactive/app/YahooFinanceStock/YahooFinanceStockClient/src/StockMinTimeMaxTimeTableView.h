@@ -5,6 +5,7 @@
 
 class QSqlTableModel;
 class CNewOrderWindow;
+class CHistoryData;
 
 class CStockMinTimeMaxTimeTableView : public QTableView
 { 
@@ -19,6 +20,8 @@ private slots:
 
 public slots:
 	void slot_DataChange_StockMinTimeMaxTime();
+	void slot_DataChange_NewOrderData( CHistoryData* pData );
+
 protected:
 	//overwite QWight fun
 	void contextMenuEvent(QContextMenuEvent* pEvent);

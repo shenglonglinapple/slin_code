@@ -13,6 +13,7 @@ class CStockMinTimeMaxTimeTableView;
 class CStockHistoryDataTableView;
 class CUserTradeTableView;
 class CUserAccountWidget;
+class CHistoryData;
 
 class CSignalSlotManager : public QObject
 {
@@ -49,12 +50,16 @@ private:
 public:
 	void set_Signal_DataChange_StockMinTimeMaxTime( CClientDataManager* pRefSignal);
 	void set_Slot_DataChange_StockMinTimeMaxTime(CStockMinTimeMaxTimeTableView* pRefSlot);
+	void set_Slot_DataChange_NewOrderData(CStockMinTimeMaxTimeTableView* pRefSlot);
 signals:
 	void signal_DataChange_StockMinTimeMaxTime();
+	void signal_DataChange_NewOrderData(CHistoryData* pData);
 private slots:
 	void slot_DataChange_StockMinTimeMaxTime();
+	void slot_DataChange_NewOrderData(CHistoryData* pData);
 public:
 	void emit_DataChange_StockMinTimeMaxTime();
+	void emit_DataChange_NewOrderData(CHistoryData* pData);
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 private:

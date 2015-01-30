@@ -58,14 +58,11 @@ public:
 
 public:
 	void resetData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo);
+	void resetPrice(const QString& strDate, const QString& strSymbolUse, double fPrice);
+
 private:
 	void _CreateConnect();
 	void _InitData();
-private:
-	QString m_pTextEdit_Symbol_Value;
-	QString m_pComboBox_OrderType_Value;
-	int m_pSpinBox_Volume_Value;
-	double m_pSpinBox_Price_Value;
 private:
 	QGridLayout* m_pGridLayout;
 
@@ -91,6 +88,12 @@ public:
 	CNewOrderConfirmWindow* m_pNewOrderConfirmWindow;
 	CUserTradeInfo* m_pUserTradeInfo;
 	CQtTimeHelper* m_pQtTimeHelper;
+private:
+	QString m_strSymbolUse;
+	QString m_strData;
+	QString m_strOrderType;
+	qint32 m_nVolume;
+	double m_fPrice;
 };
 
 //QT_END_NAMESPACE

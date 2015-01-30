@@ -48,10 +48,10 @@ CNewOrderWindow::CNewOrderWindow(QWidget *parent)
 	//m_pCalendarWidget = NULL;
 	m_pQtTimeHelper = NULL;
 
-	m_pTextEdit_Symbol_Value.clear();
-	m_pComboBox_OrderType_Value.clear();
-	m_pSpinBox_Volume_Value = 0;
-	m_pSpinBox_Price_Value = 0;
+	m_strSymbolUse.clear();
+	m_strOrderType.clear();
+	m_nVolume = 0;
+	m_fPrice = 0;
 
 	m_pQtTimeHelper = new CQtTimeHelper();
 
@@ -82,10 +82,10 @@ CNewOrderWindow::~CNewOrderWindow()
 
 void CNewOrderWindow::_InitData()
 {
-	m_pTextEdit_Symbol_Value = "";
-	m_pComboBox_OrderType_Value = DEFVALUE_String_OrderType_MARKET.c_str();
-	m_pSpinBox_Volume_Value = 100;
-	m_pSpinBox_Price_Value = 000000000.00000f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
+	m_strSymbolUse = "";
+	m_strOrderType = DEFVALUE_String_OrderType_MARKET.c_str();
+	m_nVolume = 100;
+	m_fPrice = 000000000.00000f;//(long double 99.9L)(double 99.9)//printf("%.7g\n", m_pSpinBox_Price_Value); 
 
 }
 
@@ -181,7 +181,7 @@ void CNewOrderWindow::_TranslateLanguage()
 	this->setWindowTitle(QObject::tr(DEFVALUE_String_Window_WindowTitle.c_str()));
 
 	m_pLabel_Symbol->setText(DEFVALUE_String_Label_Symbol_Text.c_str());
-	m_pLineEdit_Symbol->setText(m_pTextEdit_Symbol_Value);
+	m_pLineEdit_Symbol->setText(m_strSymbolUse);
 
 	if (m_pComboBox_OrderType->count() <= 0)
 	{
@@ -195,11 +195,11 @@ void CNewOrderWindow::_TranslateLanguage()
 	m_pLabel_OrderType->setText(DEFVALUE_String_Label_OrderType_Text.c_str());
 
 	m_pLabel_Volume->setText(QObject::tr("Volume:"));
-	m_pSpinBox_Volume->setValue(m_pSpinBox_Volume_Value);
+	m_pSpinBox_Volume->setValue(m_nVolume);
 	m_pSpinBox_Volume->setRange(0, 10000000);
 
 	m_pLabel_Price->setText(QObject::tr("Price:"));
-	m_pSpinBox_Price->setValue(m_pSpinBox_Price_Value);
+	m_pSpinBox_Price->setValue(m_fPrice);
 	m_pSpinBox_Price->setRange(0, 100000000);
 
 	m_pLabel_DateTime->setText(QObject::tr("DataTime:"));
@@ -221,8 +221,8 @@ void CNewOrderWindow::resetData(const QString& strSymbolUse, const QString& strT
 
 	m_pUserTradeInfo->clear();
 
-	m_pTextEdit_Symbol_Value = strSymbolUse;
-	m_pSpinBox_Volume_Value = 100;
+	m_strSymbolUse = strSymbolUse;
+	m_nVolume = 100;
 	//m_pSpinBox_Price_Value;
 
 	m_pDateTimeEdit->setMinimumDate(dateTimeFrom.date());
@@ -235,6 +235,28 @@ void CNewOrderWindow::resetData(const QString& strSymbolUse, const QString& strT
 // 	m_pCalendarWidget->setSelectedDate(dateTimeTo.date());//QDate::currentDate()
 
 	this->_TranslateLanguage();
+}
+
+void CNewOrderWindow::resetPrice( const QString& strDate, const QString& strSymbolUse, double fPrice )
+{
+	if (m_strData == strDate)
+	{
+		m_fPrice = fPrice;
+		m_pSpinBox_Price->setValue(m_fPrice);
+		QString strMesg = QString("get fPrice=%1\n strSymbolUse=%2\n strData=%3\n").arg(m_fPrice).arg(m_strSymbolUse).arg(m_strData);
+		QMessageBox msgBox;
+		msgBox.setText(strMesg);
+		msgBox.exec();
+	}
+	else
+	{
+		m_fPrice = fPrice;
+		m_pSpinBox_Price->setValue(m_fPrice);
+		QString strMesg = QString("not fPrice for strSymbolUse=%1\n strData=%2\n").arg(m_strSymbolUse).arg(m_strData);
+		QMessageBox msgBox;
+		msgBox.setText(strMesg);
+		msgBox.exec();
+	}
 }
 
 
@@ -253,7 +275,7 @@ void CNewOrderWindow::slotPushButtonBuyClicked( bool checked )
 
 	nTradeDate = m_pDateTimeEdit->date();
 	strTime = m_pQtTimeHelper->getStringValue(nTradeDate);
-	strSymbolUse = m_pTextEdit_Symbol_Value;
+	strSymbolUse = m_strSymbolUse;
 	fbuyPrice = m_pSpinBox_Price->value();
 	nBuyVolume = m_pSpinBox_Volume->value();
 
@@ -281,7 +303,7 @@ void CNewOrderWindow::slotPushButtonSellClicked( bool checked )
 
 	nTradeDate = m_pDateTimeEdit->date();
 	strTime = m_pQtTimeHelper->getStringValue(nTradeDate);
-	strSymbolUse = m_pTextEdit_Symbol_Value;
+	strSymbolUse = m_strSymbolUse;
 	fbuyPrice = m_pSpinBox_Price->value();
 	nBuyVolume = m_pSpinBox_Volume->value();
 
@@ -304,31 +326,10 @@ void CNewOrderWindow::slotCalendarWidgetClicked( const QDate & date )
 void CNewOrderWindow::slotDateChanged ( const QDate & date )
 {
 	QDate nDateTmp;
-	QString strDataTimeTmp;
-	CHistoryData* pHistoryData = NULL;
 	nDateTmp = date;
-	strDataTimeTmp = m_pQtTimeHelper->getStringValue(nDateTmp);
-	CClientDBManager::getInstance().selectDataHistory_DataTime(m_pTextEdit_Symbol_Value, strDataTimeTmp, &pHistoryData);
-
-	if (NULL != pHistoryData)
-	{
-		m_pSpinBox_Price_Value = QVariant(pHistoryData->m_strClose).toDouble();
-		_TranslateLanguage();
-	}
-	else
-	{
-		QString strMesg = QString("SymboluSe=%1,time=%2 not have price info")
-			.arg(m_pTextEdit_Symbol_Value).arg(strDataTimeTmp);
-		QMessageBox msgBox;
-		msgBox.setText(strMesg);
-		msgBox.exec();
-	}
-
-	if (NULL != pHistoryData)
-	{
-		delete pHistoryData;
-		pHistoryData = NULL;
-	}
+	m_strData = m_pQtTimeHelper->getStringValue(nDateTmp);
+	//CClientDBManager::getInstance().selectDataHistory_DataTime(m_pTextEdit_Symbol_Value, m_strData, &pHistoryData);
+	CClientDataManager::getInstance().send_req_ReqStockHistoryData(m_strSymbolUse, m_strData, m_strData);//1
 
 }
 
@@ -336,14 +337,10 @@ void CNewOrderWindow::_CreateConnect()
 {	
 	//QObject::connect(m_pCalendarWidget, SIGNAL(clicked(const QDate &)), this, SLOT(slotCalendarWidgetClicked(const QDate &)));
 	QObject::connect(m_pDateTimeEdit, SIGNAL(dateChanged(const QDate &)), this, SLOT(slotDateChanged(const QDate &)));
-
 	QObject::connect(m_pPushButtonBuy, SIGNAL(clicked(bool)), this, SLOT(slotPushButtonBuyClicked(bool)));
-
 	QObject::connect(m_pPushButtonSell, SIGNAL(clicked(bool)), this, SLOT(slotPushButtonSellClicked(bool)));
-
 	QObject::connect(m_pNewOrderConfirmWindow, 	SIGNAL(signalConfirmOrder(qint32)),	this, SLOT(slotConfirmOrder(qint32)));
 
-	
 }
 
 void CNewOrderWindow::slotConfirmOrder(qint32 nEOrderConfirm)

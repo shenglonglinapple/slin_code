@@ -8,7 +8,7 @@
 #include "ClientDataManager.h"
 #include "ClientDBManager.h"
 #include "NewOrderWindow.h"
-
+#include "HistoryData.h"
 #include "Log4cppLogger.h"
 
 static int DEFVALUE_INT_Window_Width = 600;
@@ -44,7 +44,7 @@ CStockMinTimeMaxTimeTableView::CStockMinTimeMaxTimeTableView( QWidget* parent)
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);
 	CSignalSlotManager::getInstance().set_Slot_DataChange_StockMinTimeMaxTime(this);
-
+	CSignalSlotManager::getInstance().set_Slot_DataChange_NewOrderData(this);
 
 	m_pActionReqHistoryData = NULL;
 	m_pActionNewOrder = NULL;
@@ -58,6 +58,7 @@ CStockMinTimeMaxTimeTableView::CStockMinTimeMaxTimeTableView( QWidget* parent)
 CStockMinTimeMaxTimeTableView::~CStockMinTimeMaxTimeTableView()
 {
 	CSignalSlotManager::getInstance().set_Slot_DataChange_StockMinTimeMaxTime(NULL);
+	CSignalSlotManager::getInstance().set_Slot_DataChange_NewOrderData(NULL);
 
 	if (NULL != m_pItemModel)
 	{
@@ -192,10 +193,22 @@ void CStockMinTimeMaxTimeTableView::slotActionNewOrder()
 	if (!strSymbolUse.isEmpty())
 	{
 		//get history data from server
-		CClientDataManager::getInstance().send_req_ReqStockHistoryData(strSymbolUse, strTimeFrom, strTimeTo);
+		//CClientDataManager::getInstance().send_req_ReqStockHistoryData(strSymbolUse, strTimeFrom, strTimeTo);
 
 		m_pNewOrderWindow->resetData(strSymbolUse, strTimeFrom, strTimeTo);
 		m_pNewOrderWindow->move(QCursor::pos());
 		m_pNewOrderWindow->show();
+	}
+}
+
+void CStockMinTimeMaxTimeTableView::slot_DataChange_NewOrderData( CHistoryData* pData )
+{
+	m_pNewOrderWindow->resetPrice(pData->m_strDate, pData->m_strSymbolUse, pData->m_strClose.toDouble());
+
+
+	if (NULL != pData)
+	{
+		delete pData;
+		pData = NULL;
 	}
 }

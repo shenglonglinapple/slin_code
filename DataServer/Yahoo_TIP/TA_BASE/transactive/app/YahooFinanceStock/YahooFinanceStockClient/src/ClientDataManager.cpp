@@ -39,6 +39,7 @@
 #include "QtTimeHelper.h"
 #include "ConfigInfo.h"
 #include "UserAccount.h"
+#include "HistoryData.h"
 #include "Log4cppLogger.h"
 
 CClientDataManager* CClientDataManager::m_pInstance = 0;
@@ -452,6 +453,14 @@ void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QL
 {
 	CClientDBManager::getInstance().resetDataHistory(strSymbolUse, lstData);
 	CSignalSlotManager::getInstance().emit_DataChange_StockHistoryData();
+}
+
+void CClientDataManager::resetNewOrderData( const QString& strSymbolUse, const CHistoryData* pData )
+{
+	CHistoryData* pNewHistoryData = new CHistoryData();
+	*pNewHistoryData = *pData;
+	CSignalSlotManager::getInstance().emit_DataChange_NewOrderData(pNewHistoryData);
+	pNewHistoryData = NULL;
 }
 
 

@@ -158,7 +158,21 @@ void CMessageProcesser::processAck( const CAckStockMinTimeMaxTime* pAck )
 
 void CMessageProcesser::processAck( const CAckStockHistoryData* pAck )
 {	
-	CClientDataManager::getInstance().resetDataHistory(pAck->m_strSymbolUse, pAck->m_LstHistoryData);
+	if (1 >= pAck->m_LstHistoryData.size())
+	{
+		CHistoryData* pData = new CHistoryData();
+		if (1 == pAck->m_LstHistoryData.size())
+		{
+			(*pData) = (*(pAck->m_LstHistoryData[0]));
+		}
+		CClientDataManager::getInstance().resetNewOrderData(pAck->m_strSymbolUse, pData);
+		delete pData;
+		pData = NULL;
+	}
+	else
+	{
+		CClientDataManager::getInstance().resetDataHistory(pAck->m_strSymbolUse, pAck->m_LstHistoryData);
+	}
 	return;
 }
 

@@ -42,6 +42,7 @@ public:
 	void dowork_downLoadStockBaseIinfo(qint32 nHandle);
 public:
 	void resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
+	void resetNewOrderData( const QString& strSymbolUse, const CHistoryData* pData );
 	void resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData );
 	void insertUserTradeInfo(const CUserTradeInfo* pData);
 	void resetUserAccount(const CUserAccount* pData);

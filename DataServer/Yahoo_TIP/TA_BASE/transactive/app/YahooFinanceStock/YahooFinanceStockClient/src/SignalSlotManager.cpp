@@ -110,10 +110,36 @@ void CSignalSlotManager::slot_DataChange_StockMinTimeMaxTime()
 	}
 }
 
+//
+void CSignalSlotManager::set_Slot_DataChange_NewOrderData( CStockMinTimeMaxTimeTableView* pRefSlot )
+{
+	m_pRefSlot_DataChange_StockMinTimeMaxTime = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_StockMinTimeMaxTime && NULL != m_pRefSlot_DataChange_StockMinTimeMaxTime)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_NewOrderData(CHistoryData*)), this, SLOT(slot_DataChange_NewOrderData(CHistoryData*)));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_NewOrderData(CHistoryData*)), this, SLOT(slot_DataChange_NewOrderData(CHistoryData*)));
+	}
+}
+
 void CSignalSlotManager::emit_DataChange_StockMinTimeMaxTime()
 {
 	emit signal_DataChange_StockMinTimeMaxTime();
 }
+
+void CSignalSlotManager::slot_DataChange_NewOrderData( CHistoryData* pData )
+{
+	m_pRefSlot_DataChange_StockMinTimeMaxTime->slot_DataChange_NewOrderData(pData);
+}
+
+void CSignalSlotManager::emit_DataChange_NewOrderData( CHistoryData* pData )
+{
+	emit signal_DataChange_NewOrderData(pData);
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////
