@@ -6,7 +6,7 @@
 
 
 class CUserTradeInfo;
-class CUserHoldAmount;
+class CUserHoldAccount;
 class CAckAccount;
 
 class CUserAccount

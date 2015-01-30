@@ -90,13 +90,17 @@ private:
 public:
 	void set_Signal_DataChange_UserAccount( CClientDataManager* pRefSignal);
 	void set_Slot_DataChange_UserAccount(CUserAccountWidget* pRefSlot);
+	void set_Slot_DataChange_UserHoldAccount(CUserAccountWidget* pRefSlot);
 signals:
 	void signal_DataChange_UserAccount();
+	void signal_DataChange_UserHoldAccount();
 private slots:
 	void slot_DataChange_UserAccount();
+	void slot_DataChange_UserHoldAccount();
 public:
 	void emit_DataChange_UserAccount();
-	//////////////////////////////////////////////////////
+	void emit_DataChange_UserHoldAccount();
+//////////////////////////////////////////////////////
 
 };
 

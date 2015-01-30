@@ -264,7 +264,30 @@ qint32 CServerManager::selectUserTradeInfo( quint16 nListenPort, QList<CUserTrad
 
 	return nFunRes;
 }
+qint32 CServerManager::selectUserHoldAccount( quint16 nListenPort, QList<CUserHoldAccount*>& lstData, const QString& strUserID, const QString& strSymbolUse )
+{
+	qint32 nFunRes = 0;
+	MYLOG4CPP_DEBUG<<"CServerManager selectUserHoldAccount nListenPort="<<nListenPort;
 
+	QMutexLocker lock(&m_mutex_MapTcpServerWorker);
+	QMap<quint16, CTcpServerWorker*>::iterator iterMap;
+	CTcpServerWorker* pData = NULL;
+
+	iterMap = m_MapTcpServerWorker.find(nListenPort);
+
+	if (iterMap != m_MapTcpServerWorker.end())
+	{
+		//nListenPort = iterMap.key();
+		pData = iterMap.value();
+		nFunRes = pData->selectUserHoldAccount(nListenPort, lstData, strUserID, strSymbolUse);
+	}//if
+	else
+	{
+		nFunRes = -1;
+	}
+
+	return nFunRes;
+}
 qint32 CServerManager::createUserAmount( quint16 nListenPort, const CUserAccount* pData )
 {
 	qint32 nFunRes = 0;
@@ -314,3 +337,5 @@ qint32 CServerManager::processUserAccount( quint16 nListenPort, const QString& s
 
 	return nFunRes;
 }
+
+

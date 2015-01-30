@@ -21,6 +21,7 @@ class CUserTradeInfo;
 class CHistoryData;
 class CStockMinTimeMaxTime;
 class CUserAccount;
+class CUserHoldAccount;
 
 class CClientDbOper
 {
@@ -43,6 +44,8 @@ public:
 public:
 	qint32 resetUserAccount( const CUserAccount* pData );
 	qint32 insertUserAccount(const CUserAccount* pData );
+public:
+	qint32 resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData );
 
 public:
 	QSqlDatabase* getDB();
@@ -63,6 +66,9 @@ private:
 	qint32 _CreateDBTable_TABLE_USER_ACCOUNT();
 	qint32 _Truncate_TABLE_USER_ACCOUNT();
 	qint32 _AddUserAccount( const CUserAccount* pData );
+	qint32 _CreateDBTable_TABLE_USER_HOLD_ACCOUNT();
+	qint32 _Truncate_TABLE_USER_HOLD_ACCOUNT();
+	qint32 _AddUserHoldAccountLst(const QList<CUserHoldAccount*>& lstData );
 
 private:
 	QSqlDatabase* m_pQSqlDataBase;

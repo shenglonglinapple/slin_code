@@ -1,43 +1,43 @@
-#include "UserHoldAmount.h"
+#include "UserHoldAccount.h"
 #include "QtTimeHelper.h"
 #include "UserTradeInfo.h"
 
-CUserHoldAmount::CUserHoldAmount()
+CUserHoldAccount::CUserHoldAccount()
 {
 	_Init();
 }
 
-CUserHoldAmount::~CUserHoldAmount()
+CUserHoldAccount::~CUserHoldAccount()
 {
 	
 }
 
-CUserHoldAmount& CUserHoldAmount::operator=( const CUserHoldAmount& objectCopy )
+CUserHoldAccount& CUserHoldAccount::operator=( const CUserHoldAccount& objectCopy )
 {
 	m_strUserID = objectCopy.m_strUserID;
 	m_strSymbolUse = objectCopy.m_strSymbolUse;
 	m_fPrice = objectCopy.m_fPrice;
 	m_nVolume = objectCopy.m_nVolume;
 	m_strTime = objectCopy.m_strTime;
-	m_fAmount = objectCopy.m_fAmount;
+	m_fHoldAccount = objectCopy.m_fHoldAccount;
 
 	return *this;
 }
 
 
-void CUserHoldAmount::_Init()
+void CUserHoldAccount::_Init()
 {
 	m_strUserID.clear();
 	m_strSymbolUse.clear();
 	m_fPrice = 0;
 	m_nVolume = 0;
 	m_strTime.clear();
-	m_fAmount = 0;
+	m_fHoldAccount = 0;
 
 }
 
 
-void CUserHoldAmount::setValue_FirstBuy( const CUserTradeInfo* pData )
+void CUserHoldAccount::setValue_FirstBuy( const CUserTradeInfo* pData )
 {
 	_Init();
 	if (CTcpComProtocol::ETradeType_Buy == pData->m_nTradeType)
@@ -47,11 +47,11 @@ void CUserHoldAmount::setValue_FirstBuy( const CUserTradeInfo* pData )
 		m_fPrice = 0;
 		m_nVolume = 0;
 		m_strTime = pData->m_strTradeTime;
-		m_fAmount = 0;
+		m_fHoldAccount = 0;
 	}
 }
 
-void CUserHoldAmount::updateHoldAmountValue( const CUserTradeInfo* pData )
+void CUserHoldAccount::updateHoldAmountValue( const CUserTradeInfo* pData )
 {
 	//
 	if (CTcpComProtocol::ETradeType_Buy == pData->m_nTradeType)
@@ -63,14 +63,14 @@ void CUserHoldAmount::updateHoldAmountValue( const CUserTradeInfo* pData )
 		m_nVolume = m_nVolume - pData->m_nTradeVolume;
 	}
 	m_fPrice = pData->m_fTradePrice;
-	m_fAmount = m_fPrice * m_nVolume;
+	m_fHoldAccount = m_fPrice * m_nVolume;
 	m_strTime = pData->m_strTradeTime;
 }
 
-void CUserHoldAmount::updatePrice( double fNewPrice, const QString& strTime)
+void CUserHoldAccount::updatePrice( double fNewPrice, const QString& strTime)
 {
 	m_fPrice = fNewPrice;
-	m_fAmount = m_fPrice * m_nVolume;
+	m_fHoldAccount = m_fPrice * m_nVolume;
 	m_strTime = strTime;
 }
 

@@ -75,6 +75,15 @@ static const char*  str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS = "Floati
 static const char*  str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE = "FloatingProfitAndLossPersentage";//Floating profit and loss PERSENTAGE
 static const char*  str_TABLE_USER_ACCOUNT_COLUMN_UPDATE_TIME = "Time";
 /////
+static const char*  str_TABLE_USER_HOLD_ACCOUNT = "TABLE_USER_HOLD_ACCOUNT";
+//
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_USERID = "UserID";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_SYMBOLUSE = "SymbolUse";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_PRICE = "price";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_VOLUME = "volume";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_TIME = "time";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_HOLD_ACCOUNT = "HoldAccount";
+
 
 //[DB end]
 

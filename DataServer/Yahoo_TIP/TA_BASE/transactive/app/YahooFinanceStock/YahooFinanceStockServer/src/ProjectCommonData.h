@@ -62,14 +62,14 @@ static const char*  str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS = "COLUMN
 static const char*  str_TABLE_USER_ACCOUNT_COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE = "COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE";//Floating profit and loss PERSENTAGE
 static const char*  str_TABLE_USER_ACCOUNT_COLUMN_UPDATE_TIME = "COLUMN_UPDATE_TIME";
 /////
-static const char*  str_TABLE_USER_HOLD_AMOUNT = "TABLE_USER_HOLD_AMOUNT";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT = "TABLE_USER_HOLD_ACCOUNT";
 //
-static const char*  str_TABLE_USER_HOLD_AMOUNT_COLUMN_USEID = "COLUMN_USEID";
-static const char*  str_TABLE_USER_HOLD_AMOUNT_COLUMN_SYMBOLUSE = "COLUMN_SYMBOLUSE";
-static const char*  str_TABLE_USER_HOLD_AMOUNT_COLUMN_PRICE = "COLUMN_PRICE";
-static const char*  str_TABLE_USER_HOLD_AMOUNT_COLUMN_VOLUME = "COLUMN_VOLUME";
-static const char*  str_TABLE_USER_HOLD_AMOUNT_COLUMN_TIME = "COLUMN_TIME";
-static const char*  str_TABLE_USER_HOLD_AMOUNT_COLUMN_AMOUNT = "COLUMN_AMOUNT";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_USERID = "UserID";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_SYMBOLUSE = "SymbolUse";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_PRICE = "price";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_VOLUME = "volume";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_TIME = "time";
+static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_HOLD_ACCOUNT = "HoldAccount";
 /////
 //[DB end]
 /////

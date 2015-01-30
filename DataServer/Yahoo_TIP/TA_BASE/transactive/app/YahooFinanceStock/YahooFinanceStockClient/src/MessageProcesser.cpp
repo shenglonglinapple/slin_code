@@ -14,6 +14,7 @@
 #include "ReqTrade.h"
 #include "ReqHistoryTrade.h"
 #include "ReqAccount.h"
+#include "ReqHoldAccount.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -25,6 +26,7 @@
 #include "AckTrade.h"
 #include "AckHistoryTrade.h"
 #include "AckAccount.h"
+#include "AckHoldAccount.h"
 
 #include "ClientDataManager.h"
 #include "StockDataManager.h"
@@ -98,6 +100,10 @@ void CMessageProcesser::processReq( const CReqHistoryTrade* pReq )
 }
 
 void CMessageProcesser::processReq( const CReqAccount* pReq )
+{
+
+}
+void CMessageProcesser::processReq( const CReqHoldAccount* pReq )
 {
 
 }
@@ -200,4 +206,13 @@ void CMessageProcesser::processAck( const CAckAccount* pAck )
 		pUserAmount = NULL;
 	}
 	
+}
+
+void CMessageProcesser::processAck( const CAckHoldAccount* pAck )
+{
+	if (0 >= pAck->m_nLstDataCount)
+	{
+		return;
+	}
+	CClientDataManager::getInstance().resetUserHoldAccount(pAck->m_LstData);
 }

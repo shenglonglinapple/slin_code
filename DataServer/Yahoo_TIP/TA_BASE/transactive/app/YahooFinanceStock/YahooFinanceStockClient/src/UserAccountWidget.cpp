@@ -15,6 +15,7 @@ static int DEFVALUE_INT_Window_Height = 200;
 
 CUserAccountWidget::CUserAccountWidget( QWidget* parent)
 {
+	QModelIndex inValidIndex;
 	//this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);//mdi not work
 
 	//this->setWindowFlags(Qt::FramelessWindowHint);
@@ -25,6 +26,8 @@ CUserAccountWidget::CUserAccountWidget( QWidget* parent)
 
 	m_pUserAccountTableView = NULL;
 	m_pUserAccountModel = NULL;
+	m_pUserHoldAccountTableView = NULL;
+	m_pUserHoldAccountModel = NULL;
 
 	m_pUserAccountTableView = new QTableView(this);
 	m_pUserAccountTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -38,12 +41,28 @@ CUserAccountWidget::CUserAccountWidget( QWidget* parent)
 	m_pUserAccountModel->select();
 
 	m_pUserAccountTableView->setModel(m_pUserAccountModel);
-	QModelIndex inValidIndex;
 	m_pUserAccountTableView->setCurrentIndex(inValidIndex);
 	CSignalSlotManager::getInstance().set_Slot_DataChange_UserAccount(this);
 
+
+	m_pUserHoldAccountTableView = new QTableView(this);
+	m_pUserHoldAccountTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	m_pUserHoldAccountTableView->setAlternatingRowColors(true);
+	m_pUserHoldAccountTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+	m_pUserHoldAccountTableView->resizeColumnsToContents();
+
+	m_pUserHoldAccountModel = new QSqlTableModel(this, *(CClientDBManager::getInstance().getDB()));
+	m_pUserHoldAccountModel->setTable(str_TABLE_USER_HOLD_ACCOUNT);
+	m_pUserHoldAccountModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+	m_pUserHoldAccountModel->select();
+
+	m_pUserHoldAccountTableView->setModel(m_pUserHoldAccountModel);
+	m_pUserHoldAccountTableView->setCurrentIndex(inValidIndex);
+	CSignalSlotManager::getInstance().set_Slot_DataChange_UserHoldAccount(this);
+
 	pGridLayout = new QGridLayout(this);
 	pGridLayout->addWidget(m_pUserAccountTableView, 0, 0, 1, 1);
+	pGridLayout->addWidget(m_pUserHoldAccountTableView, 2, 0, 1, 1);
 
 	_CreateAction();
 	_CreateConnect();
@@ -53,14 +72,7 @@ CUserAccountWidget::CUserAccountWidget( QWidget* parent)
 CUserAccountWidget::~CUserAccountWidget()
 {
 	CSignalSlotManager::getInstance().set_Slot_DataChange_UserAccount(NULL);
-
-	if (NULL != m_pUserAccountModel)
-	{
-		delete m_pUserAccountModel;
-		m_pUserAccountModel = NULL;
-	}
-
-
+	CSignalSlotManager::getInstance().set_Slot_DataChange_UserHoldAccount(NULL);
 }
 void CUserAccountWidget::_CreateAction()
 {
@@ -72,7 +84,7 @@ void CUserAccountWidget::_CreateConnect()
 
 void CUserAccountWidget::slot_DataChange_UserAccount()
 {
-	MYLOG4CPP_DEBUG<<"CUserTradeTableView process slot_DataChange_UserTrade";
+	MYLOG4CPP_DEBUG<<"CUserAccountWidget process slot_DataChange_UserAccount";
 	if (NULL != m_pUserAccountModel)
 	{
 		m_pUserAccountModel->select();
@@ -80,5 +92,18 @@ void CUserAccountWidget::slot_DataChange_UserAccount()
 	QModelIndex inValidIndex;
 	m_pUserAccountTableView->setCurrentIndex(inValidIndex);
 	m_pUserAccountTableView->resizeColumnsToContents();
+}
+
+void CUserAccountWidget::slot_DataChange_UserHoldAccount()
+{
+	MYLOG4CPP_DEBUG<<"CUserAccountWidget process slot_DataChange_UserHoldAccount";
+	if (NULL != m_pUserHoldAccountModel)
+	{
+		m_pUserHoldAccountModel->select();
+	}
+	QModelIndex inValidIndex;
+	m_pUserHoldAccountTableView->setCurrentIndex(inValidIndex);
+	m_pUserHoldAccountTableView->resizeColumnsToContents();
+
 }
 

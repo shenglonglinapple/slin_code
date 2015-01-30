@@ -18,6 +18,7 @@ class CHistoryData;
 class CStockMinTimeMaxTime;
 class CUserTradeInfo;
 class CUserAccount;
+class CUserHoldAccount;
 
 class CClientDataManager
 {
@@ -44,6 +45,7 @@ public:
 	void resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData );
 	void insertUserTradeInfo(const CUserTradeInfo* pData);
 	void resetUserAccount(const CUserAccount* pData);
+	void resetUserHoldAccount(const QList<CUserHoldAccount*>& lstData);
 
 public:
 	void send_req_ReqCreateUser(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
@@ -52,6 +54,7 @@ public:
 	void send_req_ReqStockMinTimeMaxTime(qint32 nHandle, const QString& strSymbolUse);
 	void send_req_ReqHistoryTrade( const QString& strSymbolUse, CTcpComProtocol::ETradeType nTradeType );
 	void send_req_ReqUserAccount(const QString& strTime);
+	void send_req_ReqUserHoldAccount(const QString& strSymbolUse);
 
 	void send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse);
 	void send_req_ReqStockHistoryData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo);

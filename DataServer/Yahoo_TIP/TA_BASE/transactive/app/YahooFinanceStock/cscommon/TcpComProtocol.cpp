@@ -80,6 +80,9 @@ QString CTcpComProtocol::getStringValue( EDataType nValue )
 	case DataType_Account:
 		strValue = "DataType_Account";
 		break;
+	case DataType_HoldAccount:
+		strValue = "DataType_HoldAccount";
+		break;
 	case DataType_Unknown:
 		strValue = "DataType_Unknown";
 		break;

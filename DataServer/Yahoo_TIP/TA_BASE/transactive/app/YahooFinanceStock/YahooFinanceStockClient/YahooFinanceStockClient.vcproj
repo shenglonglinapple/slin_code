@@ -914,6 +914,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\cscommon\AckHoldAccount.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\AckHoldAccount.h"
+				>
+			</File>
+			<File
 				RelativePath="..\cscommon\AckLogin.cpp"
 				>
 			</File>
@@ -1080,6 +1088,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\cscommon\ReqHoldAccount.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ReqHoldAccount.h"
+				>
+			</File>
+			<File
 				RelativePath="..\cscommon\ReqLogin.cpp"
 				>
 			</File>
@@ -1176,11 +1192,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\cscommon\UserHoldAmount.cpp"
+				RelativePath="..\cscommon\UserHoldAccount.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\cscommon\UserHoldAmount.h"
+				RelativePath="..\cscommon\UserHoldAccount.h"
 				>
 			</File>
 			<File

@@ -218,3 +218,31 @@ void CSignalSlotManager::emit_DataChange_UserAccount()
 {
 	emit signal_DataChange_UserAccount();
 }
+//
+void CSignalSlotManager::set_Slot_DataChange_UserHoldAccount(CUserAccountWidget* pRefSlot)
+{
+	m_pRefSlot_DataChange_UserAccount = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_UserAccount && NULL != m_pRefSlot_DataChange_UserAccount)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_UserHoldAccount()), this, SLOT(slot_DataChange_UserHoldAccount()));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_UserHoldAccount()), this, SLOT(slot_DataChange_UserHoldAccount()));
+	}
+}
+
+void CSignalSlotManager::slot_DataChange_UserHoldAccount()
+{
+	if (NULL != m_pRefSlot_DataChange_UserAccount)
+	{
+		m_pRefSlot_DataChange_UserAccount->slot_DataChange_UserHoldAccount();
+	}
+}
+
+void CSignalSlotManager::emit_DataChange_UserHoldAccount()
+{
+	emit signal_DataChange_UserHoldAccount();
+}
+//////////////////////////////////////////////////////

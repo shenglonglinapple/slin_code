@@ -1,18 +1,18 @@
-#ifndef __CLASS_USER_HOLD_AMOUNT_H__
-#define __CLASS_USER_HOLD_AMOUNT_H__
+#ifndef __CLASS_USER_HOLD_ACCOUNT_H__
+#define __CLASS_USER_HOLD_ACCOUNT_H__
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
 class CUserTradeInfo;
 
-class CUserHoldAmount
+class CUserHoldAccount
 {
 public:
-	CUserHoldAmount();
-	virtual ~CUserHoldAmount();
+	CUserHoldAccount();
+	virtual ~CUserHoldAccount();
 public:
-	CUserHoldAmount& operator=(const CUserHoldAmount& objectCopy);
+	CUserHoldAccount& operator=(const CUserHoldAccount& objectCopy);
 private:
 	void _Init();
 public:
@@ -25,8 +25,8 @@ public:
 	double m_fPrice;
 	qint32 m_nVolume;
 	QString m_strTime;
-	double m_fAmount;
+	double m_fHoldAccount;
 };
 
 
-#endif //__CLASS_USER_HOLD_AMOUNT_H__
+#endif //__CLASS_USER_HOLD_ACCOUNT_H__

@@ -29,6 +29,7 @@ private:
 	void _ProcessMessage_ReqDownLoadTrade();
 	void _ProcessMessage_ReqHistoryTrade();
 	void _ProcessMessage_ReqAccount();
+	void _ProcessMessage_ReqHoldAccount();
 private:
 	void _ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType);
 	void _ProcessMessage_AckLogin();
@@ -42,6 +43,7 @@ private:
 	void _ProcessMessage_AckDownLoadTrade();
 	void _ProcessMessage_AckHistoryTrade();
 	void _ProcessMessage_AckAccount();
+	void _ProcessMessage_AckHoldAccount();
 
 private:
 	qint32 m_nHanle;

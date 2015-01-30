@@ -30,6 +30,7 @@ public:
 		DataType_Trade  = 0x07,
 		DataType_HistoryTrade  = 0x09,
 		DataType_Account  = 0x0A,
+		DataType_HoldAccount  = 0x0B,
 		DataType_Unknown  = 0x0FFFFFFF,
 	};
 

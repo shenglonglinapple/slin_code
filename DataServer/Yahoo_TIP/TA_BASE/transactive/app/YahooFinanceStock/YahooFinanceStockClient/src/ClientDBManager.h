@@ -18,6 +18,7 @@ class QSqlDatabase;
 class CStockMinTimeMaxTime;
 class CUserTradeInfo;
 class CUserAccount;
+class CUserHoldAccount;
 
 class CClientDBManager
 {
@@ -44,6 +45,8 @@ public:
 	qint32 insertUserTradeInfo(const CUserTradeInfo* pData);
 	qint32 resetUserAccount( const CUserAccount* pData );
 	qint32 insertUserAmount(const CUserAccount* pData );
+public:
+	qint32 resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData );
 
 public:	
 	QSqlDatabase* getDB();

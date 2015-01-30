@@ -193,3 +193,15 @@ qint32 CClientDBManager::insertUserAmount(const CUserAccount* pData )
 	}
 	return nFunRes;
 }
+
+qint32 CClientDBManager::resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData )
+{
+	QMutexLocker lock(&m_mutex_ClientDbOper);
+
+	qint32 nFunRes = 0;
+	if (NULL != m_pClientDbOper)
+	{
+		nFunRes = m_pClientDbOper->resetUserHoldAccount(lstData);
+	}
+	return nFunRes;
+}

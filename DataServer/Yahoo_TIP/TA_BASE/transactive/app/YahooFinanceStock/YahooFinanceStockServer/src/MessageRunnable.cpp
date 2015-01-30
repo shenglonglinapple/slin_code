@@ -18,6 +18,7 @@
 #include "ReqTrade.h"
 #include "ReqHistoryTrade.h"
 #include "ReqAccount.h"
+#include "ReqHoldAccount.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -29,9 +30,7 @@
 #include "AckTrade.h"
 #include "AckHistoryTrade.h"
 #include "AckAccount.h"
-
-
-
+#include "AckHoldAccount.h"
 
 CMessageRunnable::CMessageRunnable(qint32 nHanle, QByteArray* pMessage)
 {
@@ -146,7 +145,16 @@ void CMessageRunnable::_ProcessMessage_Req(qint32 nMessageType, qint32 nDataType
 	{
 		_ProcessMessage_ReqAccount();
 	}
-
+	else if (CReqHoldAccount::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_ReqHoldAccount();
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"not find processer for REQ"
+			<<" "<<"nMessageType="<<nMessageType
+			<<" "<<"nDataType="<<nDataType;
+	}
 }
 
 void CMessageRunnable::_ProcessMessage_ReqLogin()
@@ -307,6 +315,22 @@ void CMessageRunnable::_ProcessMessage_ReqAccount()
 	}
 }
 
+void CMessageRunnable::_ProcessMessage_ReqHoldAccount()
+{
+	CReqHoldAccount* pReq = NULL;
+	pReq = new CReqHoldAccount();
+	pReq->setValue(m_pMessage);
+	pReq->logInfo(__FILE__, __LINE__);
+
+	m_pMessageProcesser->processReq(pReq);
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType )
@@ -350,6 +374,16 @@ void CMessageRunnable::_ProcessMessage_Ack(qint32 nMessageType, qint32 nDataType
 	else if (CAckAccount::checkMsgDataType(nMessageType, nDataType))
 	{
 		_ProcessMessage_AckAccount();
+	}
+	else if (CAckHoldAccount::checkMsgDataType(nMessageType, nDataType))
+	{
+		_ProcessMessage_AckHoldAccount();
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"not find processer for ACK"
+			<<" "<<"nMessageType="<<nMessageType
+			<<" "<<"nDataType="<<nDataType;
 	}
 }
 
@@ -502,6 +536,22 @@ void CMessageRunnable::_ProcessMessage_AckAccount()
 {
 	CAckAccount* pAck = NULL;
 	pAck = new CAckAccount();
+	pAck->setValue(m_pMessage);
+	pAck->logInfo(__FILE__, __LINE__);
+
+	m_pMessageProcesser->processAck(pAck);
+
+	if (NULL != pAck)
+	{
+		delete pAck;
+		pAck = NULL;
+	}
+}
+
+void CMessageRunnable::_ProcessMessage_AckHoldAccount()
+{
+	CAckHoldAccount* pAck = NULL;
+	pAck = new CAckHoldAccount();
 	pAck->setValue(m_pMessage);
 	pAck->logInfo(__FILE__, __LINE__);
 

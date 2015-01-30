@@ -3,7 +3,7 @@
 #include "ProjectCommonData.h"
 #include "Log4cppLogger.h"
 #include "UserAccount.h"
-
+#include "UserHoldAccount.h"
 
 CSqliteDbOperBuildSQL::CSqliteDbOperBuildSQL()
 {
@@ -706,4 +706,82 @@ QString CSqliteDbOperBuildSQL::buildSQL_Update_TABLE_USER_ACCOUNT( const CUserAc
 
 //////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+QString CSqliteDbOperBuildSQL::buildSQL_CreateTable_TABLE_USER_HOLD_ACCOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+
+	{
+		byteSQL<<"CREATE TABLE IF NOT EXISTS "<<str_TABLE_USER_HOLD_ACCOUNT
+			<<" "<<"("
+			<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_USERID<<" "<<"TEXT NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_SYMBOLUSE<<" "<<"TEXT NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_PRICE<<" "<<"decimal(25,10) NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_VOLUME<<" "<<"INTEGER NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_TIME<<" "<<"TIMESTAMP NOT NULL"<<","
+			<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_HOLD_ACCOUNT<<" "<<"decimal(25,10) NOT NULL"
+			<<" "<<")";
+	}
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+QString CSqliteDbOperBuildSQL::buildSQL_Truncate_TABLE_USER_HOLD_ACCOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	{
+		byteSQL<<"DELETE FROM"<<" "<<str_TABLE_USER_HOLD_ACCOUNT;
+	}	
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_BatchInsert_TABLE_USER_HOLD_ACCOUNT()
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	byteSQL<<"INSERT INTO "<<str_TABLE_USER_HOLD_ACCOUNT
+		<<" "<<"("
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_USERID<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_SYMBOLUSE<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_PRICE<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_VOLUME<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_TIME<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_HOLD_ACCOUNT
+		<<" "<<")"
+		<<" "<<"VALUES"
+		<<" "<<"("
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"<<","
+		<<" "<<"?"
+		<<" "<<")";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
+
+QString CSqliteDbOperBuildSQL::buildSQL_Update_TABLE_USER_HOLD_ACCOUNT( const CUserHoldAccount* pData )
+{
+	QString  strSQL;
+	std::stringstream byteSQL;
+	byteSQL<<"UPDATE"
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT
+		<<" "<<"SET"
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_PRICE<<"="<<pData->m_fPrice<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_VOLUME<<"="<<pData->m_nVolume<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_TIME<<"="<<"\""<<pData->m_strTime.toStdString()<<"\""<<","
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_HOLD_ACCOUNT<<"="<<pData->m_fHoldAccount
+		<<" "<<"WHERE"
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_USERID<<"="<<"\""<<pData->m_strUserID.toStdString()<<"\""
+		<<" "<<"AND"
+		<<" "<<str_TABLE_USER_HOLD_ACCOUNT_COLUMN_SYMBOLUSE<<"="<<"\""<<pData->m_strSymbolUse.toStdString()<<"\"";
+
+	strSQL = byteSQL.str().c_str();
+	return strSQL;
+}
 

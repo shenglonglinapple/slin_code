@@ -13,6 +13,7 @@
 #include "HistoryData.h"
 #include "StockMinTimeMaxTime.h"
 #include "UserAccount.h"
+#include "UserHoldAccount.h"
 
 //5001.db
 CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
@@ -37,6 +38,8 @@ CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
 		truncateSymbolMinMaxTime();
 		_CreateDBTable_TABLE_USER_ACCOUNT();
 		_Truncate_TABLE_USER_ACCOUNT();
+		_CreateDBTable_TABLE_USER_HOLD_ACCOUNT();
+		_Truncate_TABLE_USER_HOLD_ACCOUNT();
 	}
 }
 
@@ -785,7 +788,106 @@ qint32 CClientDbOper::_AddUserAccount( const CUserAccount* pData )
 	return nFunRes;
 }
 
+qint32 CClientDbOper::resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData )
+{
+	qint32 nFunRes = 0;
+	_StartTransaction();
+	_Truncate_TABLE_USER_HOLD_ACCOUNT();
+	nFunRes = _AddUserHoldAccountLst(lstData);
+	_CommitTransaction();
+	return nFunRes;
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////
+qint32 CClientDbOper::_CreateDBTable_TABLE_USER_HOLD_ACCOUNT()
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_HOLD_ACCOUNT();
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
+
+qint32 CClientDbOper::_Truncate_TABLE_USER_HOLD_ACCOUNT()
+{
+	qint32 nFunRes = 0;
+	QString  strSQL;
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Truncate_TABLE_USER_HOLD_ACCOUNT();
+	nFunRes = _ExecModify(strSQL);
+	return nFunRes;
+}
+
+qint32 CClientDbOper::_AddUserHoldAccountLst( const QList<CUserHoldAccount*>& lstData)
+{
+	qint32 nFunRes = 0;
+	bool bExecRes = false;
+	QString  strSQL;
+	QList<CUserHoldAccount*>::const_iterator iterLst;
+	CUserHoldAccount* pData = NULL;
+
+	QVariantList COLUMN_USEID;
+	QVariantList COLUMN_SYMBOLUSE;
+	QVariantList COLUMN_PRICE;
+	QVariantList COLUMN_VOLUME;
+	QVariantList COLUMN_TIME;
+	QVariantList COLUMN_AMOUNT;
+
+	QSqlQuery* pQSqlQueryForInseert = NULL;
+
+	if (0 >= lstData.size())
+	{
+		nFunRes = 0;
+		return nFunRes;
+	}
+
+	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
+
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_USER_HOLD_ACCOUNT();
+
+	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
+		<<" "<<"exec strSQL="<<strSQL;
+	pQSqlQueryForInseert->prepare(strSQL);
+
+
+	iterLst = lstData.constBegin();
+	while (iterLst != lstData.constEnd())
+	{
+		pData = (*iterLst);
+
+		COLUMN_USEID << pData->m_strUserID;
+		COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
+		COLUMN_PRICE << pData->m_fPrice;
+		COLUMN_VOLUME << pData->m_nVolume;
+		COLUMN_TIME << pData->m_strTime;
+		COLUMN_AMOUNT << pData->m_fHoldAccount;
+
+		iterLst++;
+	}//while
+
+
+	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
+	pQSqlQueryForInseert->addBindValue(COLUMN_SYMBOLUSE);
+	pQSqlQueryForInseert->addBindValue(COLUMN_PRICE);
+	pQSqlQueryForInseert->addBindValue(COLUMN_VOLUME);
+	pQSqlQueryForInseert->addBindValue(COLUMN_TIME);
+	pQSqlQueryForInseert->addBindValue(COLUMN_AMOUNT);
+
+	bExecRes = pQSqlQueryForInseert->execBatch();
+	if (!bExecRes)
+	{
+		nFunRes = -1;
+		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<strSQL
+			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
+	}
+
+	if (NULL != pQSqlQueryForInseert)
+	{
+		delete pQSqlQueryForInseert;
+		pQSqlQueryForInseert = NULL;
+	}
+	return nFunRes;
+}
+
 

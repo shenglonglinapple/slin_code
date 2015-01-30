@@ -23,6 +23,7 @@
 #include "ReqTrade.h"
 #include "ReqHistoryTrade.h"
 #include "ReqAccount.h"
+#include "ReqHoldAccount.h"
 
 #include "AckCreateUser.h"
 #include "AckLogin.h"
@@ -32,6 +33,7 @@
 #include "AckStockMinTimeMaxTime.h"
 #include "AckStockHistoryData.h"
 #include "AckAccount.h"
+#include "AckHoldAccount.h"
 
 #include "SignalSlotManager.h"
 #include "QtTimeHelper.h"
@@ -203,7 +205,7 @@ void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
 	}//while
 
 	send_req_ReqUserAccount("");//first load account info
-
+	send_req_ReqUserHoldAccount("");
 }
 
 void CClientDataManager::send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse)
@@ -424,6 +426,27 @@ void CClientDataManager::send_req_ReqUserAccount(const QString& strTime)
 		pReq = NULL;
 	}
 }
+
+void CClientDataManager::send_req_ReqUserHoldAccount( const QString& strSymbolUse )
+{
+	QByteArray* pByteArray = NULL;
+	CReqHoldAccount* pReq = NULL;
+	pReq = new CReqHoldAccount();
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strUserID = m_strUserID;//set User ID
+	pReq->m_strSymbolUse = strSymbolUse;
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+	CClientWorkerManager::getInstance().sendMessage(m_nHandle, pByteArray);
+	pByteArray = NULL;
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
@@ -431,6 +454,12 @@ void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QL
 	CSignalSlotManager::getInstance().emit_DataChange_StockHistoryData();
 }
 
+
+void CClientDataManager::resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData )
+{
+	CClientDBManager::getInstance().resetUserHoldAccount(lstData);
+	CSignalSlotManager::getInstance().emit_DataChange_UserHoldAccount();
+}
 
 void CClientDataManager::resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData )
 {
@@ -459,6 +488,7 @@ void CClientDataManager::insertUserTradeInfo(const CUserTradeInfo* pData)
 	CClientDBManager::getInstance().insertUserTradeInfo(pData);
 	CSignalSlotManager::getInstance().emit_DataChange_UserTrade();
 	send_req_ReqUserAccount("");
+	send_req_ReqUserHoldAccount("");
 }
 
 void CClientDataManager::resetUserAccount( const CUserAccount* pData )

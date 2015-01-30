@@ -4,6 +4,8 @@
 #include <QtCore/QString>
 
 class CUserAccount;
+class CUserHoldAccount;
+
 class CSqliteDbOperBuildSQL
 {
 public:
@@ -35,6 +37,12 @@ public:
 	QString buildSQL_Truncate_TABLE_USER_ACCOUNT();
 	QString buildSQL_Update_TABLE_USER_ACCOUNT( const CUserAccount* pData );
 	QString buildSQL_BatchInsert_TABLE_USER_ACCOUNT();
+public:
+	QString buildSQL_CreateTable_TABLE_USER_HOLD_ACCOUNT();
+	QString buildSQL_Truncate_TABLE_USER_HOLD_ACCOUNT();
+	QString buildSQL_BatchInsert_TABLE_USER_HOLD_ACCOUNT();
+	QString buildSQL_Update_TABLE_USER_HOLD_ACCOUNT(const CUserHoldAccount* pData);
+
 };
 
 

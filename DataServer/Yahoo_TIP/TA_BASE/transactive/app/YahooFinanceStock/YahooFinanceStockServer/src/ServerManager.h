@@ -1,15 +1,11 @@
 #ifndef __CLASS_SERVER_MANAGER_HH__
 #define __CLASS_SERVER_MANAGER_HH__
 
-
 #include <QtCore/QObject>
-
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
-
 #include <QtCore/QMap>
 #include <QtCore/QList>
-
 
 class CTcpServerWorker;
 class CUserInfo;
@@ -17,6 +13,7 @@ class CUserTradeInfo;
 class QByteArray;
 class CUserHold;
 class CUserAccount;
+class CUserHoldAccount;
 
 class CServerManager
 {
@@ -41,6 +38,8 @@ public:
 	qint32 createUserAmount(quint16 nListenPort, const CUserAccount* pData);
 public:
 	qint32 selectUserTradeInfo(quint16 nListenPort, QList<CUserTradeInfo*>& lstData, const QString& strUserID, const QString& strSymbolUse);
+	qint32 selectUserHoldAccount(quint16 nListenPort, QList<CUserHoldAccount*>& lstData, const QString& strUserID, const QString& strSymbolUse);
+
 public:
 	qint32 processUserTradeInfo( quint16 nListenPort, const CUserTradeInfo* pData );
 	qint32 processUserAccount(quint16 nListenPort, const QString& strUserID, const QString& strTime, CUserAccount** ppData);

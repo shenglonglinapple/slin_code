@@ -10,7 +10,7 @@
 #include "UserTradeInfo.h"
 #include "UserHold.h"
 #include "UserAccount.h"
-#include "UserHoldAmount.h"
+#include "UserHoldAccount.h"
 
 static const char*  str_QtDbType_QSQLITE = "QSQLITE";
 static const char*  str_QtDbType_QMYSQL = "QMYSQL";
@@ -32,7 +32,7 @@ CServerDbOper::CServerDbOper( const QString& strSqliteDbFileName )
 		_CreateDBTable_TABLE_USER_INFO();
 		_CreateDBTable_TABLE_USER_TRADE_INFO();
 		_CreateDBTable_TABLE_USER_ACCOUNT();
-		_CreateDBTable_TABLE_USER_HOLD_AMOUNT();
+		_CreateDBTable_TABLE_USER_HOLD_ACCOUNT();
 	}
 }
 
@@ -690,36 +690,36 @@ qint32 CServerDbOper::updateUserAccount(CUserAccount* pData )
 }
 
 //////////////////////////////////////////////////////////////////////////
-qint32 CServerDbOper::_CreateDBTable_TABLE_USER_HOLD_AMOUNT()
+qint32 CServerDbOper::_CreateDBTable_TABLE_USER_HOLD_ACCOUNT()
 {
 	qint32 nFunRes = 0;
 	QString  strSQL;
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_HOLD_AMOUNT();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_USER_HOLD_ACCOUNT();
 	nFunRes = _ExecModify(strSQL);
 	return nFunRes;
 }
 
-qint32 CServerDbOper::_Truncate_TABLE_USER_HOLD_AMOUNT()
+qint32 CServerDbOper::_Truncate_TABLE_USER_HOLD_ACCOUNT()
 {
 	qint32 nFunRes = 0;
 	QString  strSQL;
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Truncate_TABLE_USER_HOLD_AMOUNT();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Truncate_TABLE_USER_HOLD_ACCOUNT();
 	nFunRes = _ExecModify(strSQL);
 	return nFunRes;
 }
 
-qint32 CServerDbOper::selectUserHoldAmount( const QString& strUserID,const QString& strSymobolUse, CUserHoldAmount** ppData )
+qint32 CServerDbOper::selectUserHoldAccount( const QString& strUserID,const QString& strSymobolUse, CUserHoldAccount** ppData )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = true;
 	QString  strSQL;
 	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
-	CUserHoldAmount* pInfo = NULL;
+	CUserHoldAccount* pInfo = NULL;
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_HOLD_AMOUNT(strUserID, strSymobolUse);
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_HOLD_ACCOUNT(strUserID, strSymobolUse);
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
 	bExecRes = pSqlQuery->exec(strSQL);
 	if (!bExecRes)
@@ -736,7 +736,7 @@ qint32 CServerDbOper::selectUserHoldAmount( const QString& strUserID,const QStri
 
 	if ( pSqlQuery->next() )
 	{
-		pInfo = new CUserHoldAmount();
+		pInfo = new CUserHoldAccount();
 		nColumnIndex = 0;
 		pInfo->m_strUserID = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
@@ -748,7 +748,7 @@ qint32 CServerDbOper::selectUserHoldAmount( const QString& strUserID,const QStri
 		nColumnIndex++;
 		pInfo->m_strTime = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pInfo->m_fAmount = pSqlQuery->value(nColumnIndex).toDouble();
+		pInfo->m_fHoldAccount = pSqlQuery->value(nColumnIndex).toDouble();
 
 		(*ppData) = pInfo;
 		pInfo = NULL;
@@ -763,18 +763,18 @@ qint32 CServerDbOper::selectUserHoldAmount( const QString& strUserID,const QStri
 	return nFunRes;
 }
 
-qint32 CServerDbOper::selectUserHoldAmount(const QString& strUserID, QList<CUserHoldAmount*>& LstData)
+qint32 CServerDbOper::selectUserHoldAccount(const QString& strUserID, QList<CUserHoldAccount*>& LstData)
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = true;
 	QString  strSQL;
 	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
-	CUserHoldAmount* pInfo = NULL;
+	CUserHoldAccount* pInfo = NULL;
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_HOLD_AMOUNT(strUserID);
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_USER_HOLD_ACCOUNT(strUserID);
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<strSQL;
 	bExecRes = pSqlQuery->exec(strSQL);
 	if (!bExecRes)
@@ -791,7 +791,7 @@ qint32 CServerDbOper::selectUserHoldAmount(const QString& strUserID, QList<CUser
 
 	while ( pSqlQuery->next() )
 	{
-		pInfo = new CUserHoldAmount();
+		pInfo = new CUserHoldAccount();
 		nColumnIndex = 0;
 		pInfo->m_strUserID = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
@@ -803,7 +803,7 @@ qint32 CServerDbOper::selectUserHoldAmount(const QString& strUserID, QList<CUser
 		nColumnIndex++;
 		pInfo->m_strTime = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
-		pInfo->m_fAmount = pSqlQuery->value(nColumnIndex).toDouble();
+		pInfo->m_fHoldAccount = pSqlQuery->value(nColumnIndex).toDouble();
 
 		LstData.push_back(pInfo);
 		pInfo = NULL;
@@ -818,16 +818,16 @@ qint32 CServerDbOper::selectUserHoldAmount(const QString& strUserID, QList<CUser
 	return nFunRes;
 }
 
-qint32 CServerDbOper::insertUserHoldAmount( CUserHoldAmount* pData )
+qint32 CServerDbOper::insertUserHoldAccount( CUserHoldAccount* pData )
 {
 	qint32 nFunRes = 0;
 	startTransaction();
-	nFunRes = _AddUserHoldAmount(pData);
+	nFunRes = _AddUserHoldAccount(pData);
 	commitTransaction();
 	return nFunRes;
 }
 
-qint32 CServerDbOper::_AddUserHoldAmount( const CUserHoldAmount* pData )
+qint32 CServerDbOper::_AddUserHoldAccount( const CUserHoldAccount* pData )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = false;
@@ -850,7 +850,7 @@ qint32 CServerDbOper::_AddUserHoldAmount( const CUserHoldAmount* pData )
 
 	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_USER_HOLD_AMOUNT();
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_USER_HOLD_ACCOUNT();
 
 	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
 		<<" "<<"exec strSQL="<<strSQL;
@@ -862,7 +862,7 @@ qint32 CServerDbOper::_AddUserHoldAmount( const CUserHoldAmount* pData )
 		COLUMN_PRICE << pData->m_fPrice;
 		COLUMN_VOLUME << pData->m_nVolume;
 		COLUMN_TIME << pData->m_strTime;
-		COLUMN_AMOUNT << pData->m_fAmount;
+		COLUMN_AMOUNT << pData->m_fHoldAccount;
 	}
 	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
 	pQSqlQueryForInseert->addBindValue(COLUMN_SYMBOLUSE);
@@ -887,11 +887,11 @@ qint32 CServerDbOper::_AddUserHoldAmount( const CUserHoldAmount* pData )
 	return nFunRes;
 }
 
-qint32 CServerDbOper::updateUserHoldAmount( CUserHoldAmount* pData )
+qint32 CServerDbOper::updateUserHoldAccount( CUserHoldAccount* pData )
 {
 	qint32 nFunRes = 0;
 	QString  strSQL;
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Update_TABLE_USER_HOLD_AMOUNT(pData);
+	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Update_TABLE_USER_HOLD_ACCOUNT(pData);
 	nFunRes = _ExecModify(strSQL);
 	return nFunRes;
 }

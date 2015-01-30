@@ -14,6 +14,7 @@
 #include "ReqTrade.h"
 #include "ReqHistoryTrade.h"
 #include "ReqAccount.h"
+#include "ReqHoldAccount.h"
 
 #include "AckLogin.h"
 #include "AckLogout.h"
@@ -25,9 +26,9 @@
 #include "AckTrade.h"
 #include "AckHistoryTrade.h"
 #include "AckAccount.h"
+#include "AckHoldAccount.h"
 
 #include "Log4cppLogger.h"
-
 #include "ProjectEnvironment.h"
 #include "YahooDataLoader.h"
 #include "StockDataManager.h"
@@ -39,6 +40,7 @@
 #include "UserTradeInfo.h"
 #include "UserHold.h"
 #include "UserAccount.h"
+#include "UserHoldAccount.h"
 #include "ConfigInfo.h"
 
 
@@ -456,6 +458,40 @@ void CMessageProcesser::processReq( const CReqAccount* pReq )
 	}
 }
 
+void CMessageProcesser::processReq( const CReqHoldAccount* pReq )
+{
+	CAckHoldAccount* pAck = NULL;
+	QByteArray* pByteArray = NULL;
+	quint16 nListenPort = 0;
+	CUserHoldAccount* pInfo = NULL;
+	QList<CUserHoldAccount*> lstData;
+	nListenPort = CConfigInfo::getInstance().getServerPort();
+
+	pAck = new CAckHoldAccount();
+	CServerManager::getInstance().selectUserHoldAccount(nListenPort, lstData, pReq->m_strUserID, pReq->m_strSymbolUse);
+
+	{
+		pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+		pAck->m_strReqUUID = pReq->m_strReqUUID;
+		pAck->m_strUserID = pReq->m_strUserID;
+		pAck->m_strSymbolUse = pReq->m_strSymbolUse;
+		pAck->m_nLstDataCount = lstData.size();
+		pAck->m_LstData.append(lstData);
+		lstData.clear();
+	}
+
+	pByteArray = pAck->getMessage();
+	pAck->logInfo(__FILE__, __LINE__);
+	CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);
+
+	pByteArray = NULL;
+	if (NULL != pAck)
+	{
+		delete pAck;//will delete QList
+		pAck = NULL;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 void CMessageProcesser::processAck( const CAckLogin* pAck )
 {
@@ -505,6 +541,11 @@ void CMessageProcesser::processAck( const CAckHistoryTrade* pAck )
 }
 
 void CMessageProcesser::processAck( const CAckAccount* pAck )
+{
+
+}
+
+void CMessageProcesser::processAck( const CAckHoldAccount* pAck )
 {
 
 }
