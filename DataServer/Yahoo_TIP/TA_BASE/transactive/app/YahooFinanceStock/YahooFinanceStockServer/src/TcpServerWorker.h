@@ -42,7 +42,8 @@ public:
 	qint32 processUserAccount( quint16 nListenPort, const QString& strUserID, const QString& strTime, CUserAccount** ppData);
 public:
 	qint32 selectUserHoldAccount( quint16 nListenPort, QList<CUserHoldAccount*>& lstData, const QString& strUserID, const QString& strSymbolUse );
-
+private:	
+	bool _CheckTrade(const CUserTradeInfo* pData );
 private:
 	quint16 m_nListenPort;
 	CStockTcpServer* m_pStockTcpServer;

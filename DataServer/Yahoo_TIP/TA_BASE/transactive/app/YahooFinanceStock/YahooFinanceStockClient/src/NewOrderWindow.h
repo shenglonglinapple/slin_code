@@ -84,6 +84,9 @@ private:
 	QLabel* m_pLabel_DateTime;
 	QDateTimeEdit* m_pDateTimeEdit;
 	//QCalendarWidget* m_pCalendarWidget;
+
+	QLabel* m_pLabel_PriceInfo;
+
 public:
 	CNewOrderConfirmWindow* m_pNewOrderConfirmWindow;
 	CUserTradeInfo* m_pUserTradeInfo;

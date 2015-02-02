@@ -3,6 +3,7 @@
 #include "TcpComProtocol.h"
 #include "ReqTrade.h"
 #include "AckTrade.h"
+#include "Log4cppLogger.h"
 
 static const double  DEF_VALUE_DOUBLE_TRADE_FEES = 0.007;
 
@@ -127,6 +128,23 @@ void CUserTradeInfo::setValue_Sell( const QString& strTime, const QString& strSy
 	m_fUseAccount = m_fTradeAmount - m_fTotalTradeFee;//sell=A-B
 
 }
+
+void CUserTradeInfo::logInfo( const QString& fileName, qint32 lineNumber ) const
+{
+	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
+		<<" "<<"m_strTradeUUID="<<m_strTradeUUID
+		<<" "<<"m_strTradeTime="<<m_strTradeTime
+		<<" "<<"m_strUserID="<<m_strUserID
+		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
+		<<" "<<"m_nTradeType="<<CTcpComProtocol::getStringValue(m_nTradeType)
+		<<" "<<"m_fTradePrice="<<m_fTradePrice
+		<<" "<<"m_nTradeVolume="<<m_nTradeVolume
+		<<" "<<"m_fTradeAmount="<<m_fTradeAmount
+		<<" "<<"m_fTradeFees="<<m_fTradeFees
+		<<" "<<"m_fTotalTradeFee="<<m_fTotalTradeFee
+		<<" "<<"m_fUseAccount="<<m_fUseAccount;
+}
+
 
 
 

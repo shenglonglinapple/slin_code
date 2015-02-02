@@ -45,6 +45,7 @@ CNewOrderWindow::CNewOrderWindow(QWidget *parent)
 	m_pNewOrderConfirmWindow = NULL;
 	m_pUserTradeInfo = NULL;
 	m_pDateTimeEdit = NULL;
+	m_pLabel_PriceInfo = NULL;
 	//m_pCalendarWidget = NULL;
 	m_pQtTimeHelper = NULL;
 
@@ -91,62 +92,42 @@ void CNewOrderWindow::_InitData()
 
 void CNewOrderWindow::_SetupUi()
 {
+	int nRowIndex = 0;
+
 	m_pNewOrderConfirmWindow = new CNewOrderConfirmWindow(this);
 	m_pNewOrderConfirmWindow->hide();
-
 	//eg: Symbol: IF1401
 	m_pLabel_Symbol = new QLabel(this);
-	//m_pLabel_Symbol->setMinimumSize(qSizeLeftAreaOne);
-	
 	m_pLineEdit_Symbol = new QLineEdit(this);
 	m_pLineEdit_Symbol->setReadOnly(true);
-	//m_pLineEdit_Symbol->setMinimumSize(qSizeRightAreaOne);
-
 	//eg: Order Type: Limit
 	m_pLabel_OrderType = new QLabel(this);
-	//m_pLabel_OrderType->setMinimumSize(qSizeLeftAreaOne);
-
 	m_pComboBox_OrderType = new QComboBox(this);
-	//m_pComboBox_OrderType->setMinimumSize(qSizeRightAreaOne);
-
 	//Volume: 1
 	m_pLabel_Volume = new QLabel(this);
-	//m_pLabel_Volume->setMinimumSize(qSizeLeftAreaOne);
-
 	m_pSpinBox_Volume = new QSpinBox(this);
 	m_pSpinBox_Volume->setRange(0, 10000000);
-	//m_pSpinBox_Volume->setMinimumSize(qSizeRightAreaOne);
-
 	//eg: Price: 0.00
 	m_pLabel_Price = new QLabel(this);
-	//m_pLabel_Price->setMinimumSize(qSizeLeftAreaOne);
-
 	m_pSpinBox_Price = new QDoubleSpinBox(this);
 	m_pSpinBox_Price->setRange(0, 100000000);
-	//m_pSpinBox_Price->setMinimumSize(qSizeRightAreaOne);
-
 	//Buy  Sell
 	m_pPushButtonBuy = new QPushButton(this);
-	//m_pPushButtonBuy->setMinimumSize(qSizeButtonBuy);
-
 	m_pPushButtonSell = new QPushButton(this);
-	//m_pPushButtonSell->setMinimumSize(qSizeButtonSell);
-
 	m_pLabel_DateTime = new QLabel(this);
 	m_pDateTimeEdit = new QDateTimeEdit(this);
 	m_pDateTimeEdit->setMinimumDate(QDate::currentDate().addDays(-365));
 	m_pDateTimeEdit->setMaximumDate(QDate::currentDate().addDays(365));
 	m_pDateTimeEdit->setDisplayFormat(DEFVALUE_String_Data_Format);
 	m_pDateTimeEdit->setDate(QDate::currentDate());
-
 // 	m_pCalendarWidget = new QCalendarWidget(this);
 // 	m_pCalendarWidget->setGridVisible(true);
 // 	m_pCalendarWidget->setMinimumDate(QDate::currentDate().addDays(-365));
 // 	m_pCalendarWidget->setMaximumDate(QDate::currentDate().addDays(365));
 // 	m_pCalendarWidget->setSelectedDate(QDate::currentDate());
+	m_pLabel_PriceInfo = new QLabel(this);
 
-
-	int nRowIndex = 0;
+	nRowIndex = 0;
 	m_pGridLayout = new QGridLayout(this);
 	m_pGridLayout->addWidget(m_pLabel_Symbol, nRowIndex, 0, 1, 1);
 	m_pGridLayout->addWidget(m_pLineEdit_Symbol, nRowIndex, 1, 1, 2);
@@ -167,11 +148,10 @@ void CNewOrderWindow::_SetupUi()
 	m_pGridLayout->addWidget(m_pDateTimeEdit, nRowIndex, 1, 1, 2);
 	nRowIndex++;
 	//m_pGridLayout->addWidget(m_pCalendarWidget, nRowIndex, 0, 2, 2);
+	m_pGridLayout->addWidget(m_pLabel_PriceInfo, nRowIndex, 0, 1, 3);
 
 	this->setLayout(m_pGridLayout);
-
 	this->resize(DEFVALUE_INT_Window_Width, DEFVALUE_INT_Window_Height);
-	
 	QMetaObject::connectSlotsByName(this);
 }
 
@@ -207,6 +187,7 @@ void CNewOrderWindow::_TranslateLanguage()
 	m_pPushButtonBuy->setText("Buy");
 	m_pPushButtonSell->setText("Sell");
 
+	m_pLabel_PriceInfo->setText("[PriceInfo:]");
 }
 
 void CNewOrderWindow::resetData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo)
@@ -239,20 +220,31 @@ void CNewOrderWindow::resetData(const QString& strSymbolUse, const QString& strT
 
 void CNewOrderWindow::resetPrice( const QString& strDate, const QString& strSymbolUse, double fPrice )
 {
+	QString strMesg;
+	bool bGetPriceValue = false;
+	bool bShowMessageBox = false;
+
 	if (m_strData == strDate)
 	{
 		m_fPrice = fPrice;
 		m_pSpinBox_Price->setValue(m_fPrice);
-		QString strMesg = QString("get fPrice=%1\n strSymbolUse=%2\n strData=%3\n").arg(m_fPrice).arg(m_strSymbolUse).arg(m_strData);
-		QMessageBox msgBox;
-		msgBox.setText(strMesg);
-		msgBox.exec();
+		strMesg = QString("get fPrice=%1\n strSymbolUse=%2\n strData=%3\n").arg(m_fPrice).arg(m_strSymbolUse).arg(m_strData);
+		bGetPriceValue = true;
+		bShowMessageBox = false;
 	}
 	else
 	{
 		m_fPrice = fPrice;
 		m_pSpinBox_Price->setValue(m_fPrice);
-		QString strMesg = QString("not fPrice for strSymbolUse=%1\n strData=%2\n").arg(m_strSymbolUse).arg(m_strData);
+		strMesg = QString("not fPrice for strSymbolUse=%1\n strData=%2\n").arg(m_strSymbolUse).arg(m_strData);
+		bGetPriceValue = false;
+		bShowMessageBox = true;
+	}
+
+	m_pLabel_PriceInfo->setText(strMesg);
+
+	if (bShowMessageBox)
+	{
 		QMessageBox msgBox;
 		msgBox.setText(strMesg);
 		msgBox.exec();

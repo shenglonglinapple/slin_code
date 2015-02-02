@@ -17,6 +17,8 @@ public:
 	CUserTradeInfo& operator=(const CUserTradeInfo& objectCopy);
 public:
 	void clear();
+	void logInfo( const QString& fileName, qint32 lineNumber ) const;
+
 public:
 	void setValue(const QString& strUserID, const CReqTrade* pReq );
 
