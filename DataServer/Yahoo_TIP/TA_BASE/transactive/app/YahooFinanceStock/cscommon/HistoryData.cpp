@@ -1,7 +1,7 @@
 #include "HistoryData.h"
 #include "QtTimeHelper.h"
 
-static const char* DEF_VALUE_STRING_UTC_START_TIME = "08:00:00";
+static const char* Class_Def_String_Utc_Start_Time = "08:00:00";
 
 
 CHistoryData::CHistoryData()
@@ -46,7 +46,7 @@ void CHistoryData::resetValue(const QString& strLine)
 		nIndex = 0;
 		m_strDate = strLstData[nIndex];
 		m_strDate += " ";
-		m_strDate += DEF_VALUE_STRING_UTC_START_TIME;
+		m_strDate += Class_Def_String_Utc_Start_Time;
 
 		nIndex++;
 		m_strOpen = strLstData[nIndex];

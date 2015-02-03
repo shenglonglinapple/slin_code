@@ -1,7 +1,6 @@
 #include <iostream>
-//#include <QtCore/QtCore>
-#include <QtGui/QApplication>
-
+//#include <QtGui/QApplication>
+#include <QtCore/QCoreApplication>
 
 ////////////////
 //_WINDOWS;UNICODE;WIN32;QT_DLL;QT_HAVE_MMX;QT_HAVE_3DNOW;QT_HAVE_SSE;QT_HAVE_MMXEXT;QT_HAVE_SSE2;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT
@@ -25,26 +24,25 @@
 
 
 
-#include "ServerManager.h"
-
-#include "BaseException.h"
 #include "ProjectEnvironment.h"
-
+#include "ClientActorManager.h"
 
 int main(int argc, char *argv[])
 {
 	qint32 nFunRes = 0;
-    QApplication app(argc, argv);
+	QCoreApplication coreapp(argc, argv);
 	CProjectEnvironment::getInstance();
 
-	CServerManager::getInstance();
-	CServerManager::getInstance().createServer();
+	CClientActorManager::getInstance();
+	QString strServerIP = "127.0.0.1";
+	quint16 nServerPort = 5000;
+	QString strUserName = "usernamelsl";
+	QString strPassWord = "passwordlsl";
+	CClientActorManager::getInstance().createClient(strServerIP, nServerPort, strUserName, strPassWord);
 
-    nFunRes = app.exec();
 
-	CServerManager::getInstance().destoryServer();
-	CServerManager::removeInstance();
-
+    nFunRes = coreapp.exec();
+	CClientActorManager::removeInstance();
 	CProjectEnvironment::removeInstance();
 
 	return 0;

@@ -93,7 +93,50 @@ void CYahuoHistoryReqAck::test_CYahuoHistoryReqAck()
 }
 
 
+////////////////
+#if 0
 
+void YahooHistoryObject::getUrl (QDateTime sd, QDateTime ed, QString symbol, QString &url)
+{
+	//http://ichart.finance.yahoo.com/table.csv?s=AAPL&d=1&e=22&f=2011&g=d&a=8&b=7&c=1984&ignore=.csv
+	url = "http://ichart.finance.yahoo.com/table.csv?s=";
+	url.append(symbol);
+	url.append("&d=" + QString::number(ed.date().month() - 1));
+	url.append("&e=" + ed.date().toString("d"));
+	url.append("&f=" + ed.date().toString("yyyy"));
+	url.append("&a=" + QString::number(sd.date().month() - 1));
+	url.append("&b=" + sd.date().toString("d"));
+	url.append("&c=" + sd.date().toString("yyyy"));
+	url.append("&ignore=.csv");
+}
+int YahooHistoryObject::downloadName (QString symbol, QString &name)
+{
+	QString url = "http://download.finance.yahoo.com/d/quotes.csv?s=";
+	url.append(symbol);
+	url.append("&f=n");
+	url.append("&e=.csv");
+
+	QNetworkAccessManager manager;
+	QNetworkReply *reply = manager.get(QNetworkRequest(QUrl(url)));
+	QEventLoop e;
+	QObject::connect(&manager, SIGNAL(finished(QNetworkReply *)), &e, SLOT(quit()));
+	e.exec();
+
+	// parse the data and save quotes
+	QByteArray ba = reply->readAll();
+	QString s(ba);
+	s = s.remove('"');
+	s = s.remove(',');
+	s = s.trimmed();
+	if (s.isEmpty())
+		return 0;
+
+	name = s;
+
+	return 1;
+}
+#endif
+////////////////
 #if 0
 如何使用 Yahoo! Finance stock API 获取股票数据 
 http://blog.sina.com.cn/s/blog_7ed3ed3d010147pk.html

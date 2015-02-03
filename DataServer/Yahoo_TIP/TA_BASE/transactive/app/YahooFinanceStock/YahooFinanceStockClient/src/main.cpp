@@ -31,14 +31,14 @@ int main(int argc, char *argv[])
 {
 	qint32 nFunRes = 0;
     QApplication app(argc, argv);
-	CProjectEnviroment::getInstance();
+	CProjectEnvironment::getInstance();
 
 	CClientUIManager clientUIManager;
 	clientUIManager.showCClientMainWindow(true);
 
 
     nFunRes = app.exec();
-	CProjectEnviroment::removeInstance();
+	CProjectEnvironment::removeInstance();
 
 	return 0;
 }

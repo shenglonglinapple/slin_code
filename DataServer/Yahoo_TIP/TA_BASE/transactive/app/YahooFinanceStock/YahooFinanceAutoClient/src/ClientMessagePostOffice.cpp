@@ -1,29 +1,26 @@
-#include "MessageManager.h"
+#include "ClientMessagePostOffice.h"
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QMutex>
 #include <QtCore/QMutexLocker>
 #include <QtCore/QThreadPool>
-#include "MessageRunnable.h"
 #include "Log4cppLogger.h"
 
+#include "ClientMessageRunnable.h"
 
 
-CMessageManager::CMessageManager( QObject* parent /*= 0*/ )
+CClientMessagePostOffice::CClientMessagePostOffice( QObject* parent /*= 0*/ )
 {
 	m_pThreadPool = NULL;
 	m_pThreadPool = new QThreadPool(this);
-
-
 	//How many threads I want at any given time
 	//If there are more connections, they will be queued until a threads is closed
-	m_pThreadPool->setMaxThreadCount(20);
+	m_pThreadPool->setMaxThreadCount(1);
 }
 
-CMessageManager::~CMessageManager()
+CClientMessagePostOffice::~CClientMessagePostOffice()
 {
-
 	if (NULL != m_pThreadPool)
 	{
 		delete m_pThreadPool;
@@ -32,7 +29,7 @@ CMessageManager::~CMessageManager()
 }
 
 
-void CMessageManager::slotRecvMessage( qint32 handle, QByteArray* pMessage )
+void CClientMessagePostOffice::slotRecvMessage( qint32 handle, QByteArray* pMessage )
 {
 	MYLOG4CPP_DEBUG<<" "
 		<<" "<<"class:"<<" "<<"CMessageManager"
@@ -40,8 +37,8 @@ void CMessageManager::slotRecvMessage( qint32 handle, QByteArray* pMessage )
 		<<" "<<"param:"<<" "<<"handle="<<handle
 		<<" "<<"param:"<<" "<<"QByteArray* pMessage=0x"<<pMessage;
 
-	CMessageRunnable* pMessageRunnable = NULL;
-	pMessageRunnable = new CMessageRunnable(handle, pMessage);
+	CClientMessageRunnable* pMessageRunnable = NULL;
+	pMessageRunnable = new CClientMessageRunnable(handle, pMessage);
 	//Delete that object when you're done (instead of using signals and slots)
 	pMessageRunnable->setAutoDelete(true);
 
@@ -53,7 +50,7 @@ void CMessageManager::slotRecvMessage( qint32 handle, QByteArray* pMessage )
 	MYLOG4CPP_DEBUG<<" "<<"m_pThreadPool end start()";
 }
 
-void CMessageManager::sendMessage( qint32 handle, QByteArray* pMessage )
+void CClientMessagePostOffice::sendMessage( qint32 handle, QByteArray* pMessage )
 {
 	MYLOG4CPP_DEBUG<<" "
 		<<" "<<"class:"<<" "<<"CMessageManager"
@@ -64,3 +61,4 @@ void CMessageManager::sendMessage( qint32 handle, QByteArray* pMessage )
 
 	emit signalSendMessage(handle, pMessage);
 }
+

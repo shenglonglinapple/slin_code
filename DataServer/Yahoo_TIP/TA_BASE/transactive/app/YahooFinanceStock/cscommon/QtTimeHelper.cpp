@@ -1,7 +1,11 @@
 #include "QtTimeHelper.h"
 
 #include <QtCore/QDateTime>
-#include "ProjectCommonData.h"
+
+static const char* Class_Def_String_DataTime_Format = "yyyy-MM-dd hh:mm:ss";
+static const char* Class_Def_String_Data_Format = "yyyy-MM-dd";
+static const char* Class_Def_String_Utc_Start_Time = "08:00:00";
+
 
 CQtTimeHelper::CQtTimeHelper()
 {
@@ -35,7 +39,7 @@ QString CQtTimeHelper::getCurrentTimeStr()
 	time_local = QDateTime::currentDateTime();
 
 	//strCurrentTime = time_local.toString("yyyy-MM-dd hh:mm:ss");
-	strCurrentTime = time_local.toString(DEFVALUE_String_DataTime_Format);
+	strCurrentTime = time_local.toString(Class_Def_String_DataTime_Format);
 	return strCurrentTime;
 }
 
@@ -60,14 +64,14 @@ QString  CQtTimeHelper::getStringValue(time_t secsSince1Jan1970UTC)
 
 	time_utc.setTimeSpec(Qt::UTC);
 	time_utc.setTime_t(secsSince1Jan1970UTC);//(uint secsSince1Jan1970UTC
-	strTime_utc = time_utc.toString(DEFVALUE_String_DataTime_Format);
+	strTime_utc = time_utc.toString(Class_Def_String_DataTime_Format);
 	//strTime_utc = time_utc.toString("yyyy-MM-dd hh:mm:ss");
 	//
 
 	time_local.setTimeSpec(Qt::LocalTime);
 	time_local.setTime_t(secsSince1Jan1970UTC);//(uint secsSince1Jan1970UTC
 	//strTime_local = time_local.toString("yyyy-MM-dd hh:mm:ss");
-	strTime_local = time_local.toString(DEFVALUE_String_DataTime_Format);
+	strTime_local = time_local.toString(Class_Def_String_DataTime_Format);
 
 	strTime_local_Res = strTime_local;
 
@@ -80,7 +84,7 @@ QString CQtTimeHelper::getStringValue( const QDateTime& nDataTime )
 	QDateTime time_local = nDataTime;
 	time_local.setTimeSpec(Qt::LocalTime);
 
-	strTime_local = time_local.toString(DEFVALUE_String_DataTime_Format);
+	strTime_local = time_local.toString(Class_Def_String_DataTime_Format);
 	return strTime_local;
 }
 
@@ -89,9 +93,9 @@ QString CQtTimeHelper::getStringValue( const QDate& nData )
 	QString   strTime_local;
 	QDate time_local = nData;
 
-	strTime_local = time_local.toString(DEFVALUE_String_Data_Format);
+	strTime_local = time_local.toString(Class_Def_String_Data_Format);
 	strTime_local += " ";
-	strTime_local += DEF_VALUE_STRING_UTC_START_TIME;
+	strTime_local += Class_Def_String_Utc_Start_Time;
 	return strTime_local;
 
 }
@@ -104,7 +108,7 @@ QDateTime CQtTimeHelper::getDateTimeValue( const QString & strTimeValue )
 
 	strTime_local = strTimeValue;
 	time_local.setTimeSpec(Qt::LocalTime);
-	time_local = QDateTime::fromString(strTime_local, DEFVALUE_String_DataTime_Format);
+	time_local = QDateTime::fromString(strTime_local, Class_Def_String_DataTime_Format);
 	//
 	return time_local;
 }
@@ -125,7 +129,7 @@ time_t CQtTimeHelper::getTimeValue(const QString & strTimeValue)
 
 	strTime_local = strTimeValue;
 	//time_local = QDateTime::fromString(strTime_local, "yyyy-MM-dd hh:mm:ss");
-	time_local = QDateTime::fromString(strTime_local, DEFVALUE_String_DataTime_Format);
+	time_local = QDateTime::fromString(strTime_local, Class_Def_String_DataTime_Format);
 	//
 	time_local.setTimeSpec(Qt::LocalTime);
 	nTime_local = time_local.toTime_t();

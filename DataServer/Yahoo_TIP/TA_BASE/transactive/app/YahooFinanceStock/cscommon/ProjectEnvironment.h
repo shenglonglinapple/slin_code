@@ -10,19 +10,19 @@
 ////QT_END_NAMESPACE
 
 
-class CProjectEnviroment
+class CProjectEnvironment
 {
 public:
-	static CProjectEnviroment& getInstance();
+	static CProjectEnvironment& getInstance();
 	static void removeInstance();
 
 private:
-	static CProjectEnviroment* m_pInstance;
+	static CProjectEnvironment* m_pInstance;
 	static QMutex m_mutexInstance;
 
 private:
-	CProjectEnviroment(void);	
-	~CProjectEnviroment(void);
+	CProjectEnvironment(void);	
+	~CProjectEnvironment(void);
 public:
 	static void qtWaitTime(qint64 milliseconds);
 public:

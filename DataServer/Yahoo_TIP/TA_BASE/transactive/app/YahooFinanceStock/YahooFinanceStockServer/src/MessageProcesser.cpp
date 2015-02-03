@@ -168,7 +168,7 @@ void CMessageProcesser::processReq( const CReqSynYahoo* pReq )
 
 	while (1)
 	{
-		CProjectEnviroment::getInstance().qtWaitTime(300);
+		CProjectEnvironment::getInstance().qtWaitTime(300);
 		nSynYahooResult = pYahooDataLoader->getState_SynDataWithYahoo();
 		pAck->m_strACKUUID = CTcpComProtocol::getUUID();
 		pAck->m_nResult = nSynYahooResult;

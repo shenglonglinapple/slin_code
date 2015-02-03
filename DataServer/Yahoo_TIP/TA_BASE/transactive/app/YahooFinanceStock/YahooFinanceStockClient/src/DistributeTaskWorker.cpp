@@ -97,7 +97,7 @@ void CDistributeTaskWorker::slotDisconnected(qint32 nHandle)
 		<<" "<<"nHandle="<<nHandle;
 
 	//TODO.For.Test
-	CProjectEnviroment::getInstance().qtWaitTime(1000*2);
+	CProjectEnvironment::getInstance().qtWaitTime(1000*2);
 
 	MYLOG4CPP_DEBUG<<" "
 		<<" "<<"class:"<<" "<<"CDistributeTaskWorker"

@@ -33,20 +33,20 @@
 ////QT_END_NAMESPACE
 
 
-CProjectEnviroment* CProjectEnviroment::m_pInstance = 0;
-QMutex CProjectEnviroment::m_mutexInstance;
+CProjectEnvironment* CProjectEnvironment::m_pInstance = 0;
+QMutex CProjectEnvironment::m_mutexInstance;
 
-CProjectEnviroment& CProjectEnviroment::getInstance()
+CProjectEnvironment& CProjectEnvironment::getInstance()
 {	
 	QMutexLocker lock(&m_mutexInstance);	
 	if (NULL == m_pInstance)
 	{
-		m_pInstance = new CProjectEnviroment();
+		m_pInstance = new CProjectEnvironment();
 	}
 	return (*m_pInstance);
 }
 
-void CProjectEnviroment::removeInstance()
+void CProjectEnvironment::removeInstance()
 {
 	QMutexLocker lock(&m_mutexInstance);	
 	delete m_pInstance;
@@ -55,7 +55,7 @@ void CProjectEnviroment::removeInstance()
 }
 
 
-CProjectEnviroment::CProjectEnviroment( void )
+CProjectEnvironment::CProjectEnvironment( void )
 {
 	_InitLog();
 	_ReSetQTLog();
@@ -63,19 +63,19 @@ CProjectEnviroment::CProjectEnviroment( void )
 	_CheckSupportDBType();
 }
 
-CProjectEnviroment::~CProjectEnviroment( void )
+CProjectEnvironment::~CProjectEnvironment( void )
 {
 	_UnInitLog();
 }
 
-void CProjectEnviroment::_ReSetQTLog()
+void CProjectEnvironment::_ReSetQTLog()
 {
 	//QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 	/**< install qDebug function handler.*/
 	qInstallMsgHandler(logMsgHandlerToProjectLog);
 }
 
-void CProjectEnviroment::_TestQTLog()
+void CProjectEnvironment::_TestQTLog()
 {
 	qDebug()<<"QTLogTest qDebug";
 	qWarning()<<"QTLogTest qWarning";
@@ -94,7 +94,7 @@ void CProjectEnviroment::_TestQTLog()
 * @param msg [const char *]
 * @return void
 */
-void CProjectEnviroment::logMsgHandlerToProjectLog( QtMsgType type, const char *msg )
+void CProjectEnvironment::logMsgHandlerToProjectLog( QtMsgType type, const char *msg )
 {
 	QString strLog;
 
@@ -134,7 +134,7 @@ void CProjectEnviroment::logMsgHandlerToProjectLog( QtMsgType type, const char *
 * @param msg [const char *]
 * @return void
 */
-void CProjectEnviroment::logMsgHandlerToUsrFile( QtMsgType type, const char *msg )
+void CProjectEnvironment::logMsgHandlerToUsrFile( QtMsgType type, const char *msg )
 {
 	QString strLog;
 
@@ -178,7 +178,7 @@ void CProjectEnviroment::logMsgHandlerToUsrFile( QtMsgType type, const char *msg
 
 
 
-void CProjectEnviroment::_CheckSupportDBType()
+void CProjectEnvironment::_CheckSupportDBType()
 {
 	qDebug() << "Available drivers:";
 	QStringList drivers = QSqlDatabase::drivers();
@@ -189,7 +189,7 @@ void CProjectEnviroment::_CheckSupportDBType()
 }
 
 
-void CProjectEnviroment::_SetFont()
+void CProjectEnvironment::_SetFont()
 {
 	//set Font
 	QTextCodec* tc = NULL;
@@ -209,7 +209,7 @@ void CProjectEnviroment::_SetFont()
 
 
 
-void CProjectEnviroment::qtWaitTime(qint64 milliseconds)
+void CProjectEnvironment::qtWaitTime(qint64 milliseconds)
 {
 	//QThread::exec() waits until QThread::exit() called
 	QElapsedTimer timeElapsedTimer;
@@ -220,14 +220,14 @@ void CProjectEnviroment::qtWaitTime(qint64 milliseconds)
 	}
 }
 
-void CProjectEnviroment::_InitLog()
+void CProjectEnvironment::_InitLog()
 {
 	CLog4cppLogger::getInstance();
 	CLog4cppLogger::getInstance().initLog();
 	CLog4cppLogger::getInstance().testLog();
 }
 
-void CProjectEnviroment::_UnInitLog()
+void CProjectEnvironment::_UnInitLog()
 {
 	CLog4cppLogger::removeInstance();
 }
