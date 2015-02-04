@@ -1,6 +1,6 @@
 #include "ClientActorManager.h"
 #include "ClientActorParam.h"
-#include "ClientActor.h"
+#include "ClientWorker.h"
 #include "Log4cppLogger.h"
 
 
@@ -37,8 +37,8 @@ CClientActorManager::~CClientActorManager( void )
 {
 	QMutexLocker lock(&m_mutex_MapClientActor);	
 
-	QMap<qint32, CClientActor*>::iterator iterMap;
-	CClientActor* pClientActor = NULL;
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
 
 	iterMap = m_MapClientActor.begin();
 	while (iterMap != m_MapClientActor.end())
@@ -57,7 +57,7 @@ CClientActorManager::~CClientActorManager( void )
 void CClientActorManager::createClient( const QString& strServerIP, quint16 nServerPort, const QString& strUserName, const QString& strPassWord )
 {
 	QMutexLocker lock(&m_mutex_MapClientActor);	
-	CClientActor* pClientActor = NULL;
+	CClientWorker* pClientActor = NULL;
 	CClientActorParam clientActorParam;
 	qint32 nHanleTmp = 0;
 
@@ -65,7 +65,7 @@ void CClientActorManager::createClient( const QString& strServerIP, quint16 nSer
 	clientActorParam.setValue(m_nHandleAuto--);
 	clientActorParam.logInfo(__FILE__, __LINE__);
 	nHanleTmp = clientActorParam.getHandle();
-	pClientActor = new CClientActor(clientActorParam);
+	pClientActor = new CClientWorker(clientActorParam);
 	
 	//check and append
 	if (m_MapClientActor.contains(nHanleTmp))
@@ -82,11 +82,11 @@ void CClientActorManager::createClient( const QString& strServerIP, quint16 nSer
 	}
 }
 
-void CClientActorManager::resetHanleValue( const CClientActor* pActor,  qint32 nHandle)
+void CClientActorManager::resetHanleValue( const CClientWorker* pActor,  qint32 nHandle)
 {
 	QMutexLocker lock(&m_mutex_MapClientActor);	
-	QMap<qint32, CClientActor*>::iterator iterMap;
-	CClientActor* pClientActor = NULL;
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
 	bool bFindAndReset = true;
 	MYLOG4CPP_DEBUG<<"resetHanleValue pActor=0x"<<pActor<<" "<<"nHandle="<<nHandle;
 
@@ -110,7 +110,7 @@ void CClientActorManager::resetHanleValue( const CClientActor* pActor,  qint32 n
 			delete pClientActor;
 			pClientActor = NULL;
 			m_MapClientActor.erase(iterMap);
-			m_MapClientActor.insert(nHandle, (CClientActor*)pActor);
+			m_MapClientActor.insert(nHandle, (CClientWorker*)pActor);
 			bFindAndReset = false;
 		}
 	}//if (iterMap != m_MapClientActor.end())
@@ -141,8 +141,8 @@ void CClientActorManager::resetHanleValue( const CClientActor* pActor,  qint32 n
 void CClientActorManager::sendMessage(qint32 nHandle, QByteArray* pMessage)
 {
 	QMutexLocker lock(&m_mutex_MapClientActor);	
-	QMap<qint32, CClientActor*>::iterator iterMap;
-	CClientActor* pClientActor = NULL;
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
 	MYLOG4CPP_DEBUG<<"CClientActorManager sendMessage"
 		<<" "<<"nHandle="<<nHandle
 		<<" "<<"pMessage=0x"<<pMessage;

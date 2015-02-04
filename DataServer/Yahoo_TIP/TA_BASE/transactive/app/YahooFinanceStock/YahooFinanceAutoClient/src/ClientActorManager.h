@@ -7,7 +7,7 @@
 #include <QtCore/QMap>
 
 class QByteArray;
-class CClientActor;
+class CClientWorker;
 
 class CClientActorManager 
 {
@@ -26,11 +26,11 @@ public:
 	void createClient(const QString& strServerIP, quint16 nServerPort,
 		 const QString& strUserName, const QString& strPassWord);
 public:	
-	void resetHanleValue( const CClientActor* pActor, qint32 nHandle);
+	void resetHanleValue( const CClientWorker* pActor, qint32 nHandle);
 	void sendMessage(qint32 nHandle, QByteArray* pMessage);
 private:
 	QMutex m_mutex_MapClientActor;
-	QMap<qint32, CClientActor*> m_MapClientActor;
+	QMap<qint32, CClientWorker*> m_MapClientActor;
 	qint32 m_nHandleAuto;
 };
 

@@ -2,46 +2,57 @@
 
 #include <QtCore/QtCore>
 #include <QtNetwork/QtNetwork>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
+#include <QtCore/QThreadPool>
 
 #include "BaseException.h"
 #include "TcpSocketHelper.h"
 #include "SocketInfo.h"
 #include "Log4cppLogger.h"
 
+#include "ClientActorParam.h"
 #include "ClientComWorker.h"
-#include "ClientMessagePostOffice.h"
+#include "ClientMessageRunnable.h"
+#include "ClientActorManager.h"
 
-CClientWorker::CClientWorker(const QString& strServerIP, quint16 nServerPort, QObject* parent/*=0*/ )
+
+CClientWorker::CClientWorker(const CClientActorParam& param, QObject* parent/*=0*/)
 {
-	m_strServerIP = strServerIP;
-	m_nServerPort = nServerPort;
-
+	m_ClientActorParam = param;
 	m_pComWorker = NULL;
-	m_pMessageManager = NULL;
+	m_pThreadPool = NULL;
+	m_pThreadPool = new QThreadPool(this);
+	//How many threads I want at any given time
+	//If there are more connections, they will be queued until a threads is closed
+	m_pThreadPool->setMaxThreadCount(3);
 
 	m_WorkerState = WORK_STATE_BEGIN;
-
 }
+
+
 
 CClientWorker::~CClientWorker()
 {
-
+	if (NULL != m_pThreadPool)
+	{
+		delete m_pThreadPool;
+		m_pThreadPool = NULL;
+	}
 }
 
 void CClientWorker::run()
 {
 	MYLOG4CPP_DEBUG<<"CClientWorker::run() begin";
 
-	m_pComWorker = new CClientComWorker(m_strServerIP, m_nServerPort, this);
+	m_pComWorker = new CClientComWorker(m_ClientActorParam.m_strServerIP, m_ClientActorParam.m_nServerPort, this);
 	QObject::connect(m_pComWorker, SIGNAL(signalDisconnected(qint32)), this, SLOT(slotDisconnected(qint32)), Qt::AutoConnection);
 	QObject::connect(m_pComWorker, SIGNAL(signalConnected(qint32)), this, SLOT(slotConnected(qint32)), Qt::AutoConnection);
+	QObject::connect(m_pComWorker, SIGNAL(signalRecvMessage(qint32, QByteArray*)), this, SLOT(slotRecvMessage(qint32, QByteArray*)), Qt::AutoConnection);
+	QObject::connect(this, SIGNAL(signalSendMessage(qint32, QByteArray*)), m_pComWorker, SLOT(slotSendMessage(qint32, QByteArray*)), Qt::AutoConnection);
 	QObject::connect(this, SIGNAL(signalConnectToServer()), m_pComWorker, SLOT(slotConnectToServer()), Qt::AutoConnection);
-
-	//
-	m_pMessageManager = new CClientMessagePostOffice(this);
-	QObject::connect(m_pComWorker, SIGNAL(signalRecvMessage(qint32, QByteArray*)), m_pMessageManager, SLOT(slotRecvMessage(qint32, QByteArray*)), Qt::AutoConnection);
-	QObject::connect(m_pMessageManager, SIGNAL(signalSendMessage(qint32, QByteArray*)), m_pComWorker, SLOT(slotSendMessage(qint32, QByteArray*)), Qt::AutoConnection);
-
 	m_pComWorker->start();
 
 	m_WorkerState = WORK_STATE_BEGIN;
@@ -58,18 +69,13 @@ void CClientWorker::run()
 	QObject::disconnect(this, SIGNAL(signalConnectToServer()), this, SLOT(slotConnectToServer()));
 	QObject::disconnect(m_pComWorker, SIGNAL(signalDisconnected(qint32)), this, SLOT(slotDisconnected(qint32)));
 	QObject::disconnect(m_pComWorker, SIGNAL(signalConnected(qint32)), this, SLOT(slotConnected(qint32)));
-	QObject::disconnect(m_pComWorker, SIGNAL(signalRecvMessage(qint32, QByteArray*)), m_pMessageManager, SLOT(slotRecvMessage(qint32, QByteArray*)));
-	QObject::disconnect(m_pMessageManager, SIGNAL(signalSendMessage(qint32, QByteArray*)), m_pComWorker, SLOT(slotSendMessage(qint32, QByteArray*)));
+	QObject::disconnect(m_pComWorker, SIGNAL(signalRecvMessage(qint32, QByteArray*)), this, SLOT(slotRecvMessage(qint32, QByteArray*)));
+	QObject::disconnect(this, SIGNAL(signalSendMessage(qint32, QByteArray*)), m_pComWorker, SLOT(slotSendMessage(qint32, QByteArray*)));
 
 	if (NULL != m_pComWorker)
 	{
 		delete m_pComWorker;
 		m_pComWorker = NULL;
-	}
-	if (NULL != m_pMessageManager)
-	{
-		delete m_pMessageManager;
-		m_pMessageManager = NULL;
 	}
 	m_WorkerState = WORK_STATE_END;
 	MYLOG4CPP_DEBUG<<"CClientWorker::run() end";
@@ -91,7 +97,7 @@ void CClientWorker::slotDisconnected(qint32 nHandle)
 		<<" "<<"slot:"<<" "<<"slotDisconnected"
 		<<" "<<"nHandle="<<nHandle;
 
-	emit signalDisConnected(nHandle);
+	emit signalConnectToServer();
 }
 
 void CClientWorker::slotConnected(qint32 nHandle)
@@ -101,15 +107,21 @@ void CClientWorker::slotConnected(qint32 nHandle)
 		<<" "<<"slot:"<<" "<<"slotConnected"
 		<<" "<<"nHandle="<<nHandle;
 
-	emit signalConnected(nHandle);
+	CClientActorManager::getInstance().resetHanleValue(this, nHandle);
+
 }
-
-
 void CClientWorker::sendMessage(qint32 handle, QByteArray* pMessage)
 {
-	if (NULL != m_pMessageManager)
+	if (NULL != m_pComWorker)
 	{
-		m_pMessageManager->sendMessage(handle, pMessage);
+		MYLOG4CPP_DEBUG<<" "
+			<<" "<<"class:"<<" "<<"CClientWorker"
+			<<" "<<"fun:"<<" "<<"sendMessage"
+			<<" "<<"emit:"<<" "<<"signalSendMessage"
+			<<" "<<"param:"<<" "<<"handle="<<handle
+			<<" "<<"param:"<<" "<<"pMessage=0x"<<pMessage;
+
+		emit signalSendMessage(handle, pMessage);
 	}
 	else
 	{
@@ -118,9 +130,46 @@ void CClientWorker::sendMessage(qint32 handle, QByteArray* pMessage)
 	}
 }
 
-void CClientWorker::slotConnectToServer()
+void CClientWorker::slotRecvMessage(qint32 handle, QByteArray* pMessage)
 {
-	emit signalConnectToServer();
+	MYLOG4CPP_DEBUG<<" "
+		<<" "<<"class:"<<" "<<"CClientWorker"
+		<<" "<<"fun:"<<" "<<"slotRecvMessage"
+		<<" "<<"param:"<<" "<<"handle="<<handle
+		<<" "<<"param:"<<" "<<"QByteArray* pMessage=0x"<<pMessage;
+
+	CClientMessageRunnable* pMessageRunnable = NULL;
+	pMessageRunnable = new CClientMessageRunnable(handle, pMessage);
+	//Delete that object when you're done (instead of using signals and slots)
+	pMessageRunnable->setAutoDelete(true);
+	MYLOG4CPP_DEBUG<<" "<<"m_pThreadPool begin start()";
+	m_pThreadPool->start(pMessageRunnable);
+	pMessageRunnable = NULL;
+	MYLOG4CPP_DEBUG<<" "<<"m_pThreadPool end start()";
+}
+
+void CClientWorker::send_req_ReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord)
+{
+	CReqLogin* pReq = NULL;
+	QByteArray* pByteArray = NULL;
+	pReq = new CReqLogin();
+
+	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
+	pReq->m_strACKUUID = "NULL";
+	pReq->m_strUserName = m_strUserName;
+	pReq->m_strPassword = m_strPassWord;
+	pReq->logInfo(__FILE__, __LINE__);
+	pByteArray = pReq->getMessage();
+
+	CClientWorkerManager::getInstance().sendMessage(nHandle, pByteArray);
+
+	pByteArray = NULL;
+
+	if (NULL != pReq)
+	{
+		delete pReq;
+		pReq = NULL;
+	}
 }
 
 
