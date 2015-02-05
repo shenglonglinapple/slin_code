@@ -8,6 +8,18 @@
 #include <QtCore/QMutexLocker>
 #include <QtCore/QThreadPool>
 
+#include "ReqLogin.h"
+#include "ReqLogout.h"
+#include "ReqSynYahoo.h"
+#include "ReqDownLoadStock.h"
+#include "ReqStockMinTimeMaxTime.h"
+#include "ReqStockHistoryData.h"
+#include "ReqCreateUser.h"
+#include "ReqTrade.h"
+#include "ReqHistoryTrade.h"
+#include "ReqAccount.h"
+#include "ReqHoldAccount.h"
+
 #include "BaseException.h"
 #include "TcpSocketHelper.h"
 #include "SocketInfo.h"
@@ -17,6 +29,7 @@
 #include "ClientComWorker.h"
 #include "ClientMessageRunnable.h"
 #include "ClientActorManager.h"
+#include "CreateReqHelper.h"
 
 
 CClientWorker::CClientWorker(const CClientActorParam& param, QObject* parent/*=0*/)
@@ -24,6 +37,8 @@ CClientWorker::CClientWorker(const CClientActorParam& param, QObject* parent/*=0
 	m_ClientActorParam = param;
 	m_pComWorker = NULL;
 	m_pThreadPool = NULL;
+	m_pCreateReqHelper = NULL;
+	m_pCreateReqHelper = new CCreateReqHelper();
 	m_pThreadPool = new QThreadPool(this);
 	//How many threads I want at any given time
 	//If there are more connections, they will be queued until a threads is closed
@@ -36,6 +51,11 @@ CClientWorker::CClientWorker(const CClientActorParam& param, QObject* parent/*=0
 
 CClientWorker::~CClientWorker()
 {
+	if (NULL != m_pCreateReqHelper)
+	{
+		delete m_pCreateReqHelper;
+		m_pCreateReqHelper = NULL;
+	}
 	if (NULL != m_pThreadPool)
 	{
 		delete m_pThreadPool;
@@ -47,7 +67,7 @@ void CClientWorker::run()
 {
 	MYLOG4CPP_DEBUG<<"CClientWorker::run() begin";
 
-	m_pComWorker = new CClientComWorker(m_ClientActorParam.m_strServerIP, m_ClientActorParam.m_nServerPort, this);
+	m_pComWorker = new CClientComWorker(m_ClientActorParam.getServerIP(), m_ClientActorParam.getServerPort(), this);
 	QObject::connect(m_pComWorker, SIGNAL(signalDisconnected(qint32)), this, SLOT(slotDisconnected(qint32)), Qt::AutoConnection);
 	QObject::connect(m_pComWorker, SIGNAL(signalConnected(qint32)), this, SLOT(slotConnected(qint32)), Qt::AutoConnection);
 	QObject::connect(m_pComWorker, SIGNAL(signalRecvMessage(qint32, QByteArray*)), this, SLOT(slotRecvMessage(qint32, QByteArray*)), Qt::AutoConnection);
@@ -107,6 +127,7 @@ void CClientWorker::slotConnected(qint32 nHandle)
 		<<" "<<"slot:"<<" "<<"slotConnected"
 		<<" "<<"nHandle="<<nHandle;
 
+	m_ClientActorParam.setHandleValue(nHandle);
 	CClientActorManager::getInstance().resetHanleValue(this, nHandle);
 
 }
@@ -150,26 +171,16 @@ void CClientWorker::slotRecvMessage(qint32 handle, QByteArray* pMessage)
 
 void CClientWorker::send_req_ReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord)
 {
-	CReqLogin* pReq = NULL;
 	QByteArray* pByteArray = NULL;
-	pReq = new CReqLogin();
 
-	pReq->m_strReqUUID = CTcpComProtocol::getUUID();
-	pReq->m_strACKUUID = "NULL";
-	pReq->m_strUserName = m_strUserName;
-	pReq->m_strPassword = m_strPassWord;
-	pReq->logInfo(__FILE__, __LINE__);
-	pByteArray = pReq->getMessage();
+	m_pCreateReqHelper->create_req_ReqLogin(
+		m_ClientActorParam.getHandle(), 
+		m_ClientActorParam.getUserName(), 
+		m_ClientActorParam.getUserPWD());
 
-	CClientWorkerManager::getInstance().sendMessage(nHandle, pByteArray);
-
+	this->sendMessage(nHandle, pByteArray);
 	pByteArray = NULL;
-
-	if (NULL != pReq)
-	{
-		delete pReq;
-		pReq = NULL;
-	}
+	
 }
 
 

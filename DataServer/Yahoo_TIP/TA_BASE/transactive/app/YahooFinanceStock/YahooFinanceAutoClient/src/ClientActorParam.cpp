@@ -38,14 +38,21 @@ void CClientActorParam::_Init()
 	m_nHandle = Class_Def_Int_SocketHandle;
 }
 
-void CClientActorParam::setValue( const QString& strServerIP, quint16 nServerPort, const QString& strUserName, const QString& strPassWord )
+void CClientActorParam::setServerValue(const QString& strServerIP, quint16 nServerPort)
+{
+	m_strServerIP = strServerIP;
+	m_nServerPort = nServerPort;
+}
+void CClientActorParam::setUserValue(const QString& strUserName, const QString& strPassWord)
 {
 	m_strUserName = strUserName;
 	m_strPassWord = strPassWord;
-	m_strServerIP = strServerIP;
-	m_nServerPort = nServerPort;
-	m_nHandle = Class_Def_Int_SocketHandle;
 }
+void CClientActorParam::setHandleValue( qint32 nHandle )
+{
+	m_nHandle = nHandle;
+}
+
 
 void CClientActorParam::logInfo( const QString& file, qint32 line )
 {
@@ -62,11 +69,23 @@ qint32 CClientActorParam::getHandle()
 {
 	return m_nHandle;
 }
-
-void CClientActorParam::setValue( qint32 nHandle )
+QString CClientActorParam::getServerIP()
 {
-	m_nHandle = nHandle;
+	return m_strServerIP;
 }
+quint16 CClientActorParam::getServerPort()
+{
+	return m_nServerPort;
+}
+QString CClientActorParam::getUserName()
+{
+	return m_strUserName;
+}
+QString CClientActorParam::getUserPWD()
+{
+	return m_strPassWord;
+}
+
 
 
 

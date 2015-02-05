@@ -787,6 +787,14 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\src\CreateReqHelper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\CreateReqHelper.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

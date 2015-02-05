@@ -61,8 +61,9 @@ void CClientActorManager::createClient( const QString& strServerIP, quint16 nSer
 	CClientActorParam clientActorParam;
 	qint32 nHanleTmp = 0;
 
-	clientActorParam.setValue(strServerIP, nServerPort, strUserName, strPassWord);
-	clientActorParam.setValue(m_nHandleAuto--);
+	clientActorParam.setServerValue(strServerIP, nServerPort);
+	clientActorParam.setUserValue(strUserName, strPassWord);
+	clientActorParam.setHandleValue(m_nHandleAuto--);
 	clientActorParam.logInfo(__FILE__, __LINE__);
 	nHanleTmp = clientActorParam.getHandle();
 	pClientActor = new CClientWorker(clientActorParam);

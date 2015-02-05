@@ -9,6 +9,7 @@ class QByteArray;
 class QThreadPool;
 
 class CClientComWorker;
+class CCreateReqHelper;
 
 class CClientWorker : public CMyQtThread
 {
@@ -34,6 +35,7 @@ signals:
 private:
 	CClientActorParam m_ClientActorParam;
 	CClientComWorker* m_pComWorker;
+	CCreateReqHelper* m_pCreateReqHelper;
 private:
 	QThreadPool* m_pThreadPool;//Post Office Worker
 private:

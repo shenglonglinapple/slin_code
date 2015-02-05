@@ -11,22 +11,27 @@ public:
 public:
 	CClientActorParam& operator=(const CClientActorParam& objCopy);
 public:
-	void setValue( const QString& strServerIP, quint16 nServerPort, const QString& strUserName, const QString& strPassWord );
-	void setValue(qint32 nHandle);
+	void setServerValue(const QString& strServerIP, quint16 nServerPort);
+	void setUserValue(const QString& strUserName, const QString& strPassWord);
+	void setHandleValue(qint32 nHandle);
 
+	QString getServerIP();
+	quint16 getServerPort();
+	QString getUserName();
+	QString getUserPWD();
+	qint32 getHandle();
 public:
 	void logInfo(const QString& file, qint32 line);
-	qint32 getHandle();
+	
 private:
 	void _Init();
 
-public:
+private:
 	QString m_strUserName;
 	QString m_strPassWord;
-public:
 	QString m_strServerIP;
 	quint16 m_nServerPort;
-public:
+private:
 	qint32 m_nHandle;
 }; 
 

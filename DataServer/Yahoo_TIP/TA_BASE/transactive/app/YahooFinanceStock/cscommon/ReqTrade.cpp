@@ -116,6 +116,7 @@ QByteArray* CReqTrade::getMessage()
 
 void CReqTrade::setValue( const CUserTradeInfo* pData )
 {
+	m_strUserID = pData->m_strUserID;
 	m_nTradeType = pData->m_nTradeType;
 	m_strSymbolUse = pData->m_strSymbolUse;
 	m_strTradeTime = pData->m_strTradeTime;
