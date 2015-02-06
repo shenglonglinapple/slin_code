@@ -36,7 +36,7 @@ CCreateReqHelper::~CCreateReqHelper(void)
 }
 
 
-QByteArray* CCreateReqHelper::create_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse)
+QByteArray* CCreateReqHelper::create_req_ReqSynYahoo(const QString& strSymbolUse)
 {
 	QByteArray* pByteArray = NULL;
 
@@ -59,7 +59,7 @@ QByteArray* CCreateReqHelper::create_req_ReqSynYahoo(qint32 nHandle, const QStri
 
 
 
-QByteArray* CCreateReqHelper::create_req_ReqDownLoadStock(qint32 nHandle)
+QByteArray* CCreateReqHelper::create_req_ReqDownLoadStock()
 {
 	QByteArray* pByteArray = NULL;
 	CReqDownLoadStock* pReq = NULL;
@@ -75,7 +75,7 @@ QByteArray* CCreateReqHelper::create_req_ReqDownLoadStock(qint32 nHandle)
 	}
 	return pByteArray;
 }
-QByteArray* CCreateReqHelper::create_req_ReqCreateUser( qint32 nHandle, const QString& strUserName, const QString& strPassWord )
+QByteArray* CCreateReqHelper::create_req_ReqCreateUser(const QString& strUserName, const QString& strPassWord )
 {
 	QByteArray* pByteArray = NULL;
 	CReqCreateUser* pReq = NULL;
@@ -94,7 +94,7 @@ QByteArray* CCreateReqHelper::create_req_ReqCreateUser( qint32 nHandle, const QS
 	return pByteArray;
 }
 
-QByteArray* CCreateReqHelper::create_req_ReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord)
+QByteArray* CCreateReqHelper::create_req_ReqLogin(const QString& strUserName, const QString& strPassWord)
 {
 	QByteArray* pByteArray = NULL;
 
@@ -116,7 +116,7 @@ QByteArray* CCreateReqHelper::create_req_ReqLogin(qint32 nHandle, const QString&
 
 
 
-QByteArray* CCreateReqHelper::create_req_ReqStockMinTimeMaxTime(qint32 nHandle, const QString& strSymbolUse)
+QByteArray* CCreateReqHelper::create_req_ReqStockMinTimeMaxTime(const QString& strSymbolUse)
 {
 	QByteArray* pByteArray = NULL;
 

@@ -20,17 +20,21 @@ public:
 	QString getUserName();
 	QString getUserPWD();
 	qint32 getHandle();
+
+	QString getUserID();
 public:
 	void logInfo(const QString& file, qint32 line);
 	
 private:
 	void _Init();
-
+	void _InitUserID();
 private:
 	QString m_strUserName;
 	QString m_strPassWord;
 	QString m_strServerIP;
 	quint16 m_nServerPort;
+	QString m_strUserID;
+
 private:
 	qint32 m_nHandle;
 }; 

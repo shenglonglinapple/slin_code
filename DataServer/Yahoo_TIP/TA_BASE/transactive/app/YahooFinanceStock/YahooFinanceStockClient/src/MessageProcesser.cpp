@@ -187,7 +187,12 @@ void CMessageProcesser::processAck( const CAckTrade* pAck )
 	pUserTradeInfo = new CUserTradeInfo();
 	pUserTradeInfo->setValue(pAck);
 	CClientDataManager::getInstance().insertUserTradeInfo(pUserTradeInfo);
-	pUserTradeInfo = NULL;
+
+	if (NULL != pUserTradeInfo)
+	{
+		delete pUserTradeInfo;
+		pUserTradeInfo = NULL;
+	}
 }
 
 void CMessageProcesser::processAck( const CAckHistoryTrade* pAck )

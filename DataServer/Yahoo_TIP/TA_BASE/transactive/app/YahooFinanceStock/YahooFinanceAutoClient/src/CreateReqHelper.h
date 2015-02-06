@@ -18,14 +18,14 @@ public:
 	CCreateReqHelper(void);
 	~CCreateReqHelper(void);
 public:
-	QByteArray* create_req_ReqCreateUser(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
-	QByteArray* create_req_ReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
-	QByteArray* create_req_ReqDownLoadStock(qint32 nHandle);
-	QByteArray* create_req_ReqStockMinTimeMaxTime(qint32 nHandle, const QString& strSymbolUse);
+	QByteArray* create_req_ReqCreateUser(const QString& strUserName, const QString& strPassWord);
+	QByteArray* create_req_ReqLogin(const QString& strUserName, const QString& strPassWord);
+	QByteArray* create_req_ReqDownLoadStock();
+	QByteArray* create_req_ReqStockMinTimeMaxTime(const QString& strSymbolUse);
 	QByteArray* create_req_ReqHistoryTrade(const QString& strUserID, const QString& strSymbolUse, CTcpComProtocol::ETradeType nTradeType );
 	QByteArray* create_req_ReqUserAccount(const QString& strUserID, const QString& strTime);
 	QByteArray* create_req_ReqUserHoldAccount( const QString& strUserID, const QString& strSymbolUse );
-	QByteArray* create_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse);
+	QByteArray* create_req_ReqSynYahoo(const QString& strSymbolUse);
 	QByteArray* create_req_ReqStockHistoryData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo);
 	QByteArray* create_req_NewOrder(const CUserTradeInfo* pData);
 };

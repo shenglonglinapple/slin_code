@@ -1,6 +1,7 @@
 #include "ClientActorManager.h"
 #include "ClientActorParam.h"
 #include "ClientWorker.h"
+
 #include "Log4cppLogger.h"
 
 
@@ -137,35 +138,327 @@ void CClientActorManager::resetHanleValue( const CClientWorker* pActor,  qint32 
 
 }//resetHanleValue
 
-
-
-void CClientActorManager::sendMessage(qint32 nHandle, QByteArray* pMessage)
+void CClientActorManager::send_req_ReqCreateUser(qint32 nHandle)
 {
 	QMutexLocker lock(&m_mutex_MapClientActor);	
 	QMap<qint32, CClientWorker*>::iterator iterMap;
 	CClientWorker* pClientActor = NULL;
-	MYLOG4CPP_DEBUG<<"CClientActorManager sendMessage"
-		<<" "<<"nHandle="<<nHandle
-		<<" "<<"pMessage=0x"<<pMessage;
 
 	iterMap = m_MapClientActor.find(nHandle);
 	if (iterMap != m_MapClientActor.end())
 	{
 		pClientActor = iterMap.value();
-		pClientActor->sendMessage(nHandle, pMessage);
+		pClientActor->send_req_ReqCreateUser();
 	}
 	else
 	{
-		MYLOG4CPP_ERROR<<"CClientWorkerManager sendMessage"
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqCreateUser"
 			<<" "<<"nHandle="<<nHandle
-			<<" "<<"pMessage=0x"<<pMessage
 			<<" "<<"not find hanle";
-
-		if (NULL != pMessage)
-		{
-			delete pMessage;
-			pMessage = NULL;
-		}
 	}
-}//sendMessage
+}
+
+void CClientActorManager::send_req_ReqLogin(qint32 nHandle)
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->send_req_ReqLogin();
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqLogin"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::send_req_ReqDownLoadStock( qint32 nHandle )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->send_req_ReqDownLoadStock();
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqDownLoadStock"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+//////////////////////////////////////////////////////////////////////////
+void CClientActorManager::resetSymbolUse(qint32 nHandle, const QList<QString>& lstData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->resetSymbolUse(lstData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager resetSymbolUse"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::getSymbolUseLst( qint32 nHandle, QList<QString>& lstData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->getSymbolUseLst(lstData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager getSymbolUseLst"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::send_req_ReqStockMinTimeMaxTime( qint32 nHandle, const QString& strSymbolUse )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->send_req_ReqStockMinTimeMaxTime(strSymbolUse);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqStockMinTimeMaxTime"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::send_req_ReqHistoryTrade(
+	qint32 nHandle, const QString& strSymbolUse, CTcpComProtocol::ETradeType nTradeType )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->send_req_ReqHistoryTrade(strSymbolUse, nTradeType);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqHistoryTrade"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::send_req_ReqUserAccount( qint32 nHandle, const QString& strTime )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->send_req_ReqUserAccount(strTime);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqUserAccount"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+
+void CClientActorManager::send_req_ReqUserHoldAccount( qint32 nHandle, const QString& strSymbolUse )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->send_req_ReqUserHoldAccount(strSymbolUse);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqUserHoldAccount"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+void CClientActorManager::send_req_ReqSynYahoo( qint32 nHandle, const QString& strSymbolUse )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->send_req_ReqSynYahoo(strSymbolUse);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager send_req_ReqSynYahoo"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+//////////////////////////////////////////////////////////////////////////
+
+void CClientActorManager::resetDataSymbolMinMaxTime( qint32 nHandle, const CStockMinTimeMaxTime* pData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->resetDataSymbolMinMaxTime(pData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager resetDataSymbolMinMaxTime"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::resetHistoryData( qint32 nHandle, const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->resetHistoryData(strSymbolUse, lstData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager resetHistoryData"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::insertUserTradeInfo( qint32 nHandle, const QList<CUserTradeInfo*>& LstData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->insertUserTradeInfo(LstData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager insertUserTradeInfo"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::insertUserTradeInfo( qint32 nHandle, const CUserTradeInfo* pData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->insertUserTradeInfo(pData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager insertUserTradeInfo"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::resetUserAccount( qint32 nHandle, const CUserAccount* pData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->resetUserAccount(pData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager resetUserAccount"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+void CClientActorManager::resetUserHoldAccount( qint32 nHandle, const QList<CUserHoldAccount*>& lstData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
+
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->resetUserHoldAccount(lstData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager resetUserHoldAccount"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
+
+
 

@@ -215,7 +215,23 @@
 			Name="src"
 			>
 			<File
+				RelativePath=".\src\ClientDataManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ClientDataManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectCommonData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectCommonDef.h"
 				>
 			</File>
 		</Filter>
@@ -793,6 +809,38 @@
 			</File>
 			<File
 				RelativePath=".\src\CreateReqHelper.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="cfg"
+			>
+			<File
+				RelativePath=".\src\ConfigInfo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ConfigInfo.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="DB"
+			>
+			<File
+				RelativePath=".\src\ClientDbOper.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ClientDbOper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOperBuildSQL.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SqliteDbOperBuildSQL.h"
 				>
 			</File>
 		</Filter>

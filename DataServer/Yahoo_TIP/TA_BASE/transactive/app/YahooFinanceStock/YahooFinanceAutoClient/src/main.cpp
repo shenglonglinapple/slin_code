@@ -25,7 +25,7 @@
 
 
 #include "ProjectEnvironment.h"
-#include "ClientActorManager.h"
+#include "ClientDataManager.h"
 
 int main(int argc, char *argv[])
 {
@@ -33,16 +33,11 @@ int main(int argc, char *argv[])
 	QCoreApplication coreapp(argc, argv);
 	CProjectEnvironment::getInstance();
 
-	CClientActorManager::getInstance();
-	QString strServerIP = "127.0.0.1";
-	quint16 nServerPort = 5000;
-	QString strUserName = "usernamelsl";
-	QString strPassWord = "passwordlsl";
-	CClientActorManager::getInstance().createClient(strServerIP, nServerPort, strUserName, strPassWord);
-
+	CClientDataManager::getInstance();
+	CClientDataManager::getInstance().startAllClient();
 
     nFunRes = coreapp.exec();
-	CClientActorManager::removeInstance();
+	CClientDataManager::removeInstance();
 	CProjectEnvironment::removeInstance();
 
 	return 0;
