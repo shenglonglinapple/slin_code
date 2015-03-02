@@ -6,6 +6,7 @@
 #include "ClientActorManager.h"
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
+#include "ProjectSQLManager.h"
 
 CClientDataManager* CClientDataManager::m_pInstance = 0;
 QMutex CClientDataManager::m_mutexInstance;
@@ -31,12 +32,14 @@ void CClientDataManager::removeInstance()
 CClientDataManager::CClientDataManager(void)
 {
 	CConfigInfo::getInstance();
+	CProjectSQLManager::getInstance();
 	CClientActorManager::getInstance();
 }
 
 CClientDataManager::~CClientDataManager(void)
 {
 	CClientActorManager::removeInstance();
+	CProjectSQLManager::removeInstance();
 	CConfigInfo::removeInstance();
 }
 

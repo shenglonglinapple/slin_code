@@ -1,5 +1,5 @@
-#ifndef  __DEF__HISTORY_DATA_SERVER_COMMON_DEF_H_
-#define  __DEF__HISTORY_DATA_SERVER_COMMON_DEF_H_
+#ifndef  __DEF__PROJECT_COMMON_DEF_H_
+#define  __DEF__PROJECT_COMMON_DEF_H_
 
 /*
 typedef signed char qint8;  
@@ -33,7 +33,7 @@ enum TimeBaseSecond
 
 };
 
-#endif  // __DEF__HISTORY_DATA_SERVER_COMMON_DEF_H_
+#endif  // __DEF__PROJECT_COMMON_DEF_H_
 
 
 

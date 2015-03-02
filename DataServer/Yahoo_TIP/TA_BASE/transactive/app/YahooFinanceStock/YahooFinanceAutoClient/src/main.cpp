@@ -14,7 +14,7 @@
 //qt
 #pragma comment(lib,"qtmaind.lib")
 #pragma comment(lib,"QtCored4.lib")
-#pragma comment(lib,"QtGuid4.lib")
+//#pragma comment(lib,"QtGuid4.lib")
 #pragma comment(lib,"QtSqld4.lib")
 #pragma comment(lib,"QtNetworkd4.lib")
 

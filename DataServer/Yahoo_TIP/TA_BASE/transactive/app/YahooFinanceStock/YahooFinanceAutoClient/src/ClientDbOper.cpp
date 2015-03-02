@@ -3,7 +3,7 @@
 #include <QtCore/QFile>
 
 #include <sstream>
-#include "ProjectCommonData.h"
+#include "ProjectDBStruct.h"
 
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"

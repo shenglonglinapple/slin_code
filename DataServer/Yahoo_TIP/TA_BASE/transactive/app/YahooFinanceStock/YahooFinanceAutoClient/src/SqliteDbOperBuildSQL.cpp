@@ -1,6 +1,6 @@
 #include "SqliteDbOperBuildSQL.h"
 #include <sstream>
-#include "ProjectCommonData.h"
+#include "ProjectDBStruct.h"
 #include "Log4cppLogger.h"
 #include "UserAccount.h"
 #include "UserHoldAccount.h"
