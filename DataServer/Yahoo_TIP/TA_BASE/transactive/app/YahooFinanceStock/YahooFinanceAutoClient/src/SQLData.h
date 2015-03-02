@@ -11,8 +11,16 @@ public:
 	virtual ~CSQLData();
 public:
 	CSQLData& operator=(const CSQLData& objectCopy);
+public:
+	void setSQLKeyValue(const QString& strSQLKeyValue);
+	void setValue(const QString& strDBType, const QString& strSQL);
+public:
+	QString getSQLKey();
+	
 private:
-	QString m_strDataKey;
+	QString m_strSQLKey;
+	QString m_strSQL_QSQLITE;
+	QString m_strSQL_QMYSQL;
 };
 
 

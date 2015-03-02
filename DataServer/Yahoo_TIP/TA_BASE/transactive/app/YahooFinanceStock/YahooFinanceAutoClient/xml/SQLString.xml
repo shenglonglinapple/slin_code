@@ -10,124 +10,111 @@
  实体引用&apos;代表小于号（ ）
  -->
 
- <!-- Comment: Archive -->
-<Archive ArchiveAttri="ArchiveAttriValue">
-	<!--  Comment: TableNode TABLE_BAR_DATA_1DAY Begin-->
-	<TableNode TableNameAttri="TABLE_BAR_DATA_1DAY">
-		<!--  Comment: SQLNode TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000">
-			<!--  Comment: SQLStringNode TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000 QSQLITE SQLString -->
-			<SQLStringNode DBTypeAttri="QSQLITE">
+ <!-- Comment: Tables -->
+<Tables TableCount="2">
+	<!--TABLE_BAR_DATA_1DAY-->
+	<Table TableName="TABLE_BAR_DATA_1DAY">
+		<!--TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000-->
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000">
+			<!--TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000 QSQLITE SQLString -->
+			<SQLString DBType="QSQLITE">
 			CREATE TABLE IF NOT EXISTS TABLE_BAR_DATA_1DAY(
 			SymbolUse TEXT NOT NULL, Date TIMESTAMP NOT NULL, 
 			Open decimal(25,10) NOT NULL, Close decimal(25,10) NOT NULL, 
 			High decimal(25,10) NOT NULL, Low decimal(25,10) NOT NULL, 
 			Volume INTEGER NOT NULL, AdjClose decimal(25,10) NOT NULL, 
 			PRIMARY KEY (Date))
-			</SQLStringNode>
-			<!--  Comment: SQLStringNode TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000 QMYSQL SQLString -->
-			<SQLStringNode DBTypeAttri="QMYSQL">
+			</SQLString>
+			<!--TABLE_BAR_DATA_1DAY_CREATE_TABLE_0000 QMYSQL SQLString -->
+			<SQLString DBType="QMYSQL">
 			Not support net!
-			</SQLStringNode>
-		</SQLNode>
+			</SQLString>
+		</SQL>
 		
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_TRUNCATE_TABLE_0001 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_TRUNCATE_TABLE_0001">
-			<SQLStringNode DBTypeAttri="QSQLITE">DELETE FROM TABLE_BAR_DATA_1DAY</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">Not support net!</SQLStringNode>
-		</SQLNode>
+		<!--TABLE_BAR_DATA_1DAY_TRUNCATE_TABLE_0001-->
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_TRUNCATE_TABLE_0001">
+			<SQLString DBType="QSQLITE">DELETE FROM TABLE_BAR_DATA_1DAY</SQLString>
+			<SQLString DBType="QMYSQL">Not support net!</SQLString>
+		</SQL>
 		
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_INSERT_BATCH_0002 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_INSERT_BATCH_0002">
-			<SQLStringNode DBTypeAttri="QSQLITE">
+		<!--TABLE_BAR_DATA_1DAY_INSERT_BATCH_0002-->
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_INSERT_BATCH_0002">
+			<SQLString DBType="QSQLITE">
 			INSERT INTO TABLE_BAR_DATA_1DAY(SymbolUse, Date, Open, High, Low, Close, Volume, AdjClose) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-			</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">
+			</SQLString>
+			<SQLString DBType="QMYSQL">
 			Not support net!
-			</SQLStringNode>
-		</SQLNode>
-		
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_DATEASC_0003 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_DATEASC_0003">
-			<SQLStringNode DBTypeAttri="QSQLITE">
-			SELECT SymbolUse, Date, Open, High, Low, Close, Volume, AdjClose FROM TABLE_BAR_DATA_1DAY WHERE Date &gt;= "%s" AND Date &lt;= "%s" ORDER BY Date ASC
-			</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">
-			Not support net!
-			</SQLStringNode>
-		</SQLNode>		
-
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_SELECT_DATEDESC_0004 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_SELECT_DATEDESC_0004">
-			<SQLStringNode DBTypeAttri="QSQLITE">
-			SELECT Date FROM TABLE_BAR_DATA_1DAY ORDER BY Date DESC LIMIT 1
-			</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">
-			Not support net!
-			</SQLStringNode>
-		</SQLNode>	
-
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_SELECT_DATEASC_0005 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_SELECT_DATEASC_0005">
-			<SQLStringNode DBTypeAttri="QSQLITE">
-			SELECT Date FROM TABLE_BAR_DATA_1DAY ORDER BY Date ASC LIMIT 1
-			</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">
-			Not support net!
-			</SQLStringNode>
-		</SQLNode>	
-
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_0006 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_0006">
-			<SQLStringNode DBTypeAttri="QSQLITE">
-			SELECT SymbolUse, Date, Open, High, Low, Close, Volume, AdjClose FROM TABLE_BAR_DATA_1DAY WHERE SymbolUse="%s" AND Date="%s"
-			</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">
-			Not support net!
-			</SQLStringNode>
-		</SQLNode>
-
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_CLOSEASC_0007 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_CLOSEASC_0007">
-			<SQLStringNode DBTypeAttri="QSQLITE">
-			SELECT SymbolUse, Date, Open, High, Low, Close, Volume, AdjClose FROM TABLE_BAR_DATA_1DAY WHERE SymbolUse="%s" ORDER BY Close ASC LIMIT 1
-			</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">
-			Not support net!
-			</SQLStringNode>
-		</SQLNode>	
-
-		<!--  Comment:  SQLNode TABLE_BAR_DATA_1DAY_SELECT_DATACOUNT_0008 -->
-		<SQLNode SQLKeyAttri="TABLE_BAR_DATA_1DAY_SELECT_DATACOUNT_0008">
-			<SQLStringNode DBTypeAttri="QSQLITE">
-			SELECT COUNT(*) FROM TABLE_BAR_DATA_1DAY
-			</SQLStringNode>
-			<SQLStringNode DBTypeAttri="QMYSQL">
-			Not support net!
-			</SQLStringNode>
-		</SQLNode>			
-	<!--  Comment: TableNode TABLE_BAR_DATA_1DAY end-->
-	</TableNode>
-
-<!--  Comment: TableNode TABLE_USER_TRADE_INFO Begin-->
-	<TableNode TableNameAttri="TABLE_USER_TRADE_INFO">
-		<!--  Comment:  SQLNode TABLE_USER_TRADE_INFO_CREATE_TABLE_0000 -->
-		<SQLNode SQLKeyAttri="TABLE_USER_TRADE_INFO_CREATE_TABLE_0000">
-			<!--  Comment: SQLStringNode TABLE_USER_TRADE_INFO_CREATE_TABLE_0000 QSQLITE SQLString -->
-			<SQLStringNode DBTypeAttri="QSQLITE">
-			Not support net!
-			</SQLStringNode>
-			<!--  Comment: SQLStringNode TABLE_USER_TRADE_INFO_CREATE_TABLE_0000 QMYSQL SQLString -->
-			<SQLStringNode DBTypeAttri="QMYSQL">
-			Not support net!
-			</SQLStringNode>
-		</SQLNode>
+			</SQLString>
+		</SQL>
 				
-	<!--  Comment: TableNode TABLE_BAR_DATA_1DAY end-->
-	</TableNode>
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_DATEASC_0003">
+			<SQLString DBType="QSQLITE">
+			SELECT SymbolUse, Date, Open, High, Low, Close, Volume, AdjClose FROM TABLE_BAR_DATA_1DAY WHERE Date &gt;= "%s" AND Date &lt;= "%s" ORDER BY Date ASC
+			</SQLString>
+			<SQLString DBType="QMYSQL">
+			Not support net!
+			</SQLString>
+		</SQL>		
+		
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_SELECT_DATEDESC_0004">
+			<SQLString DBType="QSQLITE">
+			SELECT Date FROM TABLE_BAR_DATA_1DAY ORDER BY Date DESC LIMIT 1
+			</SQLString>
+			<SQLString DBType="QMYSQL">
+			Not support net!
+			</SQLString>
+		</SQL>	
+		
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_SELECT_DATEASC_0005">
+			<SQLString DBType="QSQLITE">
+			SELECT Date FROM TABLE_BAR_DATA_1DAY ORDER BY Date ASC LIMIT 1
+			</SQLString>
+			<SQLString DBType="QMYSQL">
+			Not support net!
+			</SQLString>
+		</SQL>	
+		
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_0006">
+			<SQLString DBType="QSQLITE">
+			SELECT SymbolUse, Date, Open, High, Low, Close, Volume, AdjClose FROM TABLE_BAR_DATA_1DAY WHERE SymbolUse="%s" AND Date="%s"
+			</SQLString>
+			<SQLString DBType="QMYSQL">
+			Not support net!
+			</SQLString>
+		</SQL>
+		
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_SELECT_ALLDATA_CLOSEASC_0007">
+			<SQLString DBType="QSQLITE">
+			SELECT SymbolUse, Date, Open, High, Low, Close, Volume, AdjClose FROM TABLE_BAR_DATA_1DAY WHERE SymbolUse="%s" ORDER BY Close ASC LIMIT 1
+			</SQLString>
+			<SQLString DBType="QMYSQL">
+			Not support net!
+			</SQLString>
+		</SQL>	
+		
+		<SQL SQLKey="TABLE_BAR_DATA_1DAY_SELECT_DATACOUNT_0008">
+			<SQLString DBType="QSQLITE">
+			SELECT COUNT(*) FROM TABLE_BAR_DATA_1DAY
+			</SQLString>
+			<SQLString DBType="QMYSQL">
+			Not support net!
+			</SQLString>
+		</SQL>			
+	<!--TABLE_BAR_DATA_1DAY-->
+	</Table>
 
-
-	
- </Archive>
+	<!--TABLE_USER_TRADE_INFO-->
+	<Table TableName="TABLE_USER_TRADE_INFO">
+		<SQL SQLKey="TABLE_USER_TRADE_INFO_CREATE_TABLE_0000">		
+			<SQLString DBType="QSQLITE">
+			Not support net!
+			</SQLString>			
+			<SQLString DBType="QMYSQL">
+			Not support net!
+			</SQLString>
+		</SQL>				
+	<!--Table TABLE_BAR_DATA_1DAY-->
+	</Table>
+ </Tables>
  
  

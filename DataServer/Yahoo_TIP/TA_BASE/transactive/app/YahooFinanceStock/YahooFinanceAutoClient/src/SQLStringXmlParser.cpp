@@ -1,7 +1,10 @@
 #include "SQLStringXmlParser.h"
 
-#include "SQLData.h"
+#include <QtCore/QFile>
+#include <QtXml/QtXml>
 
+#include "SQLData.h"
+#include "Log4cppLogger.h"
 
 
 
@@ -23,14 +26,14 @@ qint32 CSQLStringXmlParser::doParse( const QString& strSQLStringXmlFile, QMap<QS
 	qint32 nGetColumn = 0;
 
 	QDomDocument document;  
-	QDomElement node_root;
+	QDomElement node_Tables;
 
-	QDomNodeList node_root_childlist;
-	qint32 node_root_childlist_count = 0;
+	QDomNodeList node_Tables_childlist;
+	qint32 node_Tables_childlist_count = 0;
 
 
-	QString node_root_tagname;
-	QString node_root_ArchiveAttriValue;
+	QString node_Tables_tagname;//"Tables"
+	QString node_Tables_TableCount;//<Tables TableCount="2">
 
 	if (strSQLStringXmlFile.isEmpty())
 	{
@@ -67,70 +70,91 @@ qint32 CSQLStringXmlParser::doParse( const QString& strSQLStringXmlFile, QMap<QS
 		return nFunRes; 
 	}  
 
-	node_root = document.documentElement();  
-	//<Archive ArchiveAttri="ArchiveAttriValue">	
-	node_root_tagname = node_root.tagName();//node_root_tagname is Archive
-	if (node_root.hasAttribute("ArchiveAttri"))
+	node_Tables = document.documentElement();  
+	//<Tables TableCount="2">
+	node_Tables_tagname = node_Tables.tagName();//node_Tables_tagname is Tables
+	if (node_Tables.hasAttribute("TableCount"))
 	{
-		//ArchiveAttri's value is ArchiveAttriValue
-		node_root_ArchiveAttriValue = node_root.attributeNode("ArchiveAttri").value(); 
+		//TableCount's value is 2
+		node_Tables_TableCount = node_Tables.attributeNode("TableCount").value(); 
 	}
 
-	node_root_childlist = node_root.childNodes();
-	node_root_childlist_count = node_root_childlist.count();
+	node_Tables_childlist = node_Tables.childNodes();
+	node_Tables_childlist_count = node_Tables_childlist.count();
 
-	for (qint32 nIndex=0; nIndex < node_root_childlist_count; nIndex++)
+
+	for (qint32 nIndex = 0; nIndex < node_Tables_childlist_count; nIndex++)
 	{
+		QDomNode Table;
+		QDomElement node_Table;
+		QString strTableName;
+		QDomNodeList node_Table_childlist;
+		qint32 node_Table_childlist_count = 0;
 
-	}//for
-
-
-
-	//获取id="1"的节点
-	QDomElement person = node_root.firstChildElement();  
-	if(person.isNull()) 
-	{
-		nFunRes = -1;
-		return nFunRes;
-	}
-
-	QString person_tag_name = person.tagName();
-
-	//id为1
-	QString id = person.attributeNode("id").value();
-
-	//获取子节点，数目为2
-	QDomNodeList list = node_root.childNodes();
-	int count = list.count();
-	for(int i=0; i
-	{
-		QDomNode dom_node = list.item(i);
-		QDomElement element = dom_node.toElement();
-
-		//获取id值，等价
-		QString id_1 = element.attributeNode("id").value(); 
-		QString id_2 = element.attribute("id");
-
-		//获取子节点，数目为4，包括：name、age、email、website
-		QDomNodeList child_list = element.childNodes();
-		int child_count = child_list.count();
-		for(int j=0; j
+		Table = node_Tables_childlist.item(nIndex);
+		node_Table = Table.toElement();
+		if (node_Table.hasAttribute("TableName"))
 		{
-			QDomNode child_dom_node = child_list.item(j);
-			QDomElement child_element = child_dom_node.toElement();
-			QString child_tag_name = child_element.tagName();
-			QString child__tag_value = child_element.text();
+			strTableName = node_Table.attributeNode("TableName").value();
+			//strTableName = node_Table.attribute("TableName");
 		}
-	}
 
-	//按照name、age、email、website的顺序获取值
-	QDomElement element = person.firstChildElement();  
-	while(!element.isNull())
-	{  
-		QString tag_name = element.tagName();
-		QString tag_value = element.text();
-		element = element.nextSiblingElement();  
-	} 
+		node_Table_childlist = Table.childNodes();
+		node_Table_childlist_count = node_Table_childlist.count();
+
+		for (qint32 nIndexSQL = 0; nIndexSQL < node_Table_childlist_count; nIndexSQL++)
+		{
+			QDomNode SQL;
+			QDomElement node_SQL;
+			QString strSQLKey;
+			QDomNodeList node_SQL_childlist;
+			qint32 node_SQL_childlist_count = 0;
+			CSQLData sqlData;
+
+			SQL = node_Table_childlist.item(nIndexSQL);
+			node_SQL = SQL.toElement();
+			if (node_SQL.hasAttribute("SQLKey"))
+			{
+				strSQLKey = node_SQL.attributeNode("SQLKey").value();
+			}
+			sqlData.setSQLKeyValue(strSQLKey);
+
+			node_SQL_childlist = SQL.childNodes();
+			node_SQL_childlist_count = node_SQL_childlist.count();
+
+			for (qint32 nIndexSQLStr = 0; nIndexSQLStr < node_SQL_childlist_count; nIndexSQLStr++)
+			{
+				QDomNode SQLStr;
+				QDomElement node_SQLStr;
+				QString strDBType;
+				QString strTagName;
+				QString strSQL;
+
+				SQLStr = node_SQL_childlist.item(nIndexSQLStr);
+				node_SQLStr = SQLStr.toElement();
+
+				if (node_SQLStr.hasAttribute("DBType"))
+				{
+					strDBType = node_SQLStr.attribute("DBType");
+					strTagName = node_SQLStr.tagName();//"DBType"
+					strSQL = node_SQLStr.text();
+					sqlData.setValue(strDBType, strSQL);
+				}
+
+			}//for node_SQL_childlist
+			
+			if (!strSQLKey.isEmpty())
+			{
+				CSQLData* pData = NULL;
+				pData = new CSQLData();
+				*pData = sqlData;
+				mapSQLData.insert(sqlData.getSQLKey(), pData);
+				pData = NULL;
+			}
+
+
+		}//for node_Table_childlist
+	}//for node_root_childlist
 
 	return nFunRes;
 }
