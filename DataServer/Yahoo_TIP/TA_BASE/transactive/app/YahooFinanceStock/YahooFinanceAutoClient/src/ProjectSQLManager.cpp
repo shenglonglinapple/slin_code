@@ -77,4 +77,65 @@ void CProjectSQLManager::_BuildAllSQL()
 	}
 }
 
+qint32 CProjectSQLManager::_GetSQLData( CSQLData& objSQLData, const QString& sqlKey )
+{
+	qint32 nFunRes = 0;
+	CSQLData* pFindData = NULL;
+
+	if (!m_MapSQLData.contains(sqlKey))
+	{
+		MYLOG4CPP_ERROR<<"error! prepareSQLStatement not find sqlKey="<<sqlKey;
+		nFunRes = -1;
+		return nFunRes;
+	}
+	//get format string
+	pFindData = m_MapSQLData[sqlKey];
+	objSQLData = *pFindData;
+	
+	return nFunRes;
+}
+qint32 CProjectSQLManager::prepareSQLData( CSQLData& objSQLData, const CSQLParam& sqlKey )
+{
+	qint32 nFunRes = 0;
+	CSQLData formatSQLData;
+	QString strSQLKey = sqlKey.getParam();
+	strSQLKey = strSQLKey.toUpper();
+
+	nFunRes = _GetSQLData(formatSQLData, strSQLKey);
+
+	objSQLData = formatSQLData;
+	objSQLData.buildSQL();
+	return nFunRes;
+}
+
+qint32 CProjectSQLManager::prepareSQLData( CSQLData& objSQLData, const CSQLParam& sqlKey,
+	const CSQLParam& arg0 )
+{
+	qint32 nFunRes = 0;
+	CSQLData formatSQLData;
+	QString strSQLKey = sqlKey.getParam();
+	strSQLKey = strSQLKey.toUpper();
+
+	nFunRes = _GetSQLData(formatSQLData, strSQLKey);
+
+	objSQLData = formatSQLData;
+	nFunRes = objSQLData.buildSQL(arg0.getParam());
+	return nFunRes;
+}
+
+qint32 CProjectSQLManager::prepareSQLData( CSQLData& objSQLData, const CSQLParam& sqlKey, 
+	const CSQLParam& arg0, const CSQLParam& arg1 )
+{
+	qint32 nFunRes = 0;
+	CSQLData formatSQLData;
+	QString strSQLKey = sqlKey.getParam();
+	strSQLKey = strSQLKey.toUpper();
+
+	nFunRes = _GetSQLData(formatSQLData, strSQLKey);
+
+	objSQLData = formatSQLData;
+	nFunRes = objSQLData.buildSQL(arg0.getParam(), arg1.getParam());
+	return nFunRes;
+}
+
 

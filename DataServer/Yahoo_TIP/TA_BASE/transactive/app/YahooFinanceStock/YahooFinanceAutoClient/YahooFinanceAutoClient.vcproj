@@ -234,10 +234,6 @@
 				RelativePath=".\src\ProjectCommonDef.h"
 				>
 			</File>
-			<File
-				RelativePath=".\src\ProjectDBStruct.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -840,6 +836,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\ProjectDBStruct.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\ProjectSQLManager.cpp"
 				>
 			</File>
@@ -863,9 +863,17 @@
 				RelativePath=".\src\SqliteDbOperBuildSQL.h"
 				>
 			</File>
+			<File
+				RelativePath=".\src\SQLParam.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SQLParam.h"
+				>
+			</File>
 		</Filter>
 		<Filter
-			Name="xml"
+			Name="XmlSQL"
 			>
 			<File
 				RelativePath=".\xml\SQLString.xml"

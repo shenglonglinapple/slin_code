@@ -8,8 +8,9 @@
 #include <QtCore/QMap>
 #include <QtCore/QList>
 
+#include "SQLData.h"
+#include "SQLParam.h"
 
-class CSQLData;
 class CSQLStringXmlParser;
 
 class CProjectSQLManager 
@@ -23,9 +24,16 @@ private:
 private:
     CProjectSQLManager(void);
 	~CProjectSQLManager(void);
+public:
+	qint32 prepareSQLData(CSQLData& objSQLData, const CSQLParam& sqlKey);
+	qint32 prepareSQLData(CSQLData& objSQLData, const CSQLParam& sqlKey,
+		const CSQLParam& arg0);
+	qint32 prepareSQLData(CSQLData& objSQLData, const CSQLParam& sqlKey,
+		const CSQLParam& arg0, const CSQLParam& arg1);
 private:
 	void _ClearAllSQL();
 	void _BuildAllSQL();
+	qint32 _GetSQLData( CSQLData& objSQLData, const QString& sqlKey );
 private:
 	QMutex m_mutex_MapSQLData;
 	QMap<QString, CSQLData*> m_MapSQLData;

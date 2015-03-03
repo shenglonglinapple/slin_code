@@ -13,14 +13,22 @@ public:
 	CSQLData& operator=(const CSQLData& objectCopy);
 public:
 	void setSQLKeyValue(const QString& strSQLKeyValue);
-	void setValue(const QString& strDBType, const QString& strSQL);
+	void setXMLValue(const QString& strDBType, const QString& strSQL);
 public:
 	QString getSQLKey();
-	
+	void clear();
+public:
+	qint32 buildSQL();
+	qint32 buildSQL(const QString& arg0);
+	qint32 buildSQL(const QString& arg0, const QString& arg1);
+
 private:
-	QString m_strSQLKey;
-	QString m_strSQL_QSQLITE;
-	QString m_strSQL_QMYSQL;
+	QString m_strXMLSQLKey;
+	QString m_strXMLSQL_QSQLITE;
+	QString m_strXMLSQL_QMYSQL;
+private:
+	QString m_strUseSQL_QSQLITE;
+	QString m_strUseSQL_QMYSQL;
 };
 
 
