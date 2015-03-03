@@ -14,6 +14,7 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QList>
+#include "ProjectSQLManager.h"
 
 class CSqliteDbOperBuildSQL;
 class CUserInfo;
@@ -50,16 +51,9 @@ public:
 
 //////////////////////////////////////////////////////////////////////////
 private:
-	qint32 _CreateDBTable_TABLE_USER_HOLD();
-	qint32 insertUserHold(const CUserHold* pData);
-	qint32 select_UserHold(const QString& strUserID, const QString& strSymbolUse, QList<CUserHold*>& lstData );
-	qint32 _Truncate_TABLE_USER_HOLD();
-	qint32 _AddUserHold(const CUserHold* pData);
-//////////////////////////////////////////////////////////////////////////
-private:
 	void _UnInitDataBase();
 	void _InitDataBase();
-	qint32 _ExecModify(const QString& strSQL);
+	qint32 _ExecModify(const CSQLData& sqlData);
 
 private:
 	qint32 _CreateDBTable_TABLE_USER_INFO();
@@ -81,8 +75,6 @@ private:
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
 	
-private:
-	CSqliteDbOperBuildSQL* m_pSqliteDbOperBuildSQL;
 };
 
 

@@ -15,6 +15,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QList>
 
+#include "ProjectSQLManager.h"
+
 class CHistoryData;
 class CSqliteDbOperBuildSQL;
 
@@ -40,7 +42,7 @@ private:
 	void _InitDataBase();
 	int _StartTransaction();
 	int _CommitTransaction();
-	qint32 _ExecModify(const QString& strSQL);
+	qint32 _ExecModify(const CSQLData& sqlData);
 private:
 	int _AddDataArray(LstHistoryDataT* pLstData);
 	int _CreateDBTable();
@@ -53,8 +55,6 @@ private:
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
 	
-private:
-	CSqliteDbOperBuildSQL* m_pSqliteDbOperBuildSQL;
 };
 
 

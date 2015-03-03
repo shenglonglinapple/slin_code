@@ -6,6 +6,7 @@
 #include "StockDataManager.h"
 #include "TcpServerWorker.h"
 #include "ConfigInfo.h"
+#include "ProjectSQLManager.h"
 #include "UserInfo.h"
 #include "UserAccount.h"
 #include "UserTradeInfo.h"
@@ -39,6 +40,7 @@ CServerManager::CServerManager()
 	m_MapTcpServerWorker.clear();
 	CStockDataManager::getInstance();
 	CConfigInfo::getInstance();
+	CProjectSQLManager::getInstance();
 }
 
 CServerManager::~CServerManager()
@@ -67,6 +69,7 @@ CServerManager::~CServerManager()
 	}
 	CStockDataManager::removeInstance();
 	CConfigInfo::removeInstance();
+	CProjectSQLManager::removeInstance();
 
 }
 

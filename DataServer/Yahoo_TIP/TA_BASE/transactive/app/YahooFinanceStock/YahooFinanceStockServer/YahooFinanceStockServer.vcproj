@@ -1296,14 +1296,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\SqliteDbOperBuildSQL.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SqliteDbOperBuildSQL.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\SqliteDbOperHelper.cpp"
 				>
 			</File>
@@ -1340,6 +1332,50 @@
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
 				</FileConfiguration>
+			</File>
+		</Filter>
+		<Filter
+			Name="XmlSQL"
+			>
+			<File
+				RelativePath=".\src\ProjectDBStruct.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectSQLManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\ProjectSQLManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SQLData.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SQLData.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SQLParam.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SQLParam.h"
+				>
+			</File>
+			<File
+				RelativePath=".\xml\SQLString.xml"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SQLStringXmlParser.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SQLStringXmlParser.h"
+				>
 			</File>
 		</Filter>
 	</Files>

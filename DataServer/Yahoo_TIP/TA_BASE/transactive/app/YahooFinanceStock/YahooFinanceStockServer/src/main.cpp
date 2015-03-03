@@ -18,6 +18,7 @@
 #pragma comment(lib,"QtGuid4.lib")
 #pragma comment(lib,"QtSqld4.lib")
 #pragma comment(lib,"QtNetworkd4.lib")
+#pragma comment(lib,"QtXmld4.lib")
 
 //user
 #pragma comment(lib,"log4cppD.lib")

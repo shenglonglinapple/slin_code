@@ -6,8 +6,8 @@
 #include "HistoryData.h"
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
-#include "SqliteDbOperBuildSQL.h"
 #include "UserInfo.h"
+#include "ProjectSQLManager.h"
 
 static const char*  str_QtDbType_QSQLITE = "QSQLITE";
 static const char*  str_QtDbType_QMYSQL = "QMYSQL";
@@ -23,8 +23,6 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 	m_strSqliteDbKEY = m_strSqliteDbFileName;
 	m_strSqliteDbPath = CConfigInfo::getInstance().getSQLiteDBPath();
 	m_strSqliteDbFileFullPath = m_strSqliteDbPath + m_strSqliteDbFileName;
-	m_pSqliteDbOperBuildSQL = NULL;
-	m_pSqliteDbOperBuildSQL = new CSqliteDbOperBuildSQL();
 	_InitDataBase();
 	if (true == m_pQSqlDataBase->isValid())
 	{
@@ -35,11 +33,7 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 CSqliteDbOper::~CSqliteDbOper()
 {
 	_UnInitDataBase();
-	if (NULL != m_pSqliteDbOperBuildSQL)
-	{
-		delete m_pSqliteDbOperBuildSQL;
-		m_pSqliteDbOperBuildSQL = NULL;
-	}
+
 }
 
 
@@ -190,9 +184,11 @@ void CSqliteDbOper::saveData(LstHistoryDataT* pLstData)
 int CSqliteDbOper::_CreateDBTable()
 {
 	qint32 nFunRes = 0;
-	QString  strSQL;
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_CreateTable_TABLE_BAR_DATA_1DAY();
-	nFunRes = _ExecModify(strSQL);
+	CSQLData sqlData;
+	QString  strSQLKey = "TABLE_BAR_DATA_1DAY__CREATE_TABLE__0000";
+
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+	nFunRes = _ExecModify(sqlData);
 	return nFunRes;
 
 }
@@ -202,7 +198,8 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 {
 	int nFunRes = 0;
 	bool bExecRes = false;
-	QString  strSQL;
+	CSQLData sqlData;
+	QString  strSQLKey;
 	LstHistoryDataIterT iterLst;
 	CHistoryData* pDataTmp = NULL;
 	//QVariantList lstInstrumentID;
@@ -223,13 +220,14 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 
 	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_BatchInsert_TABLE_BAR_DATA_1DAY();
+	strSQLKey = "TABLE_BAR_DATA_1DAY__INSERT__0001";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 
 	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL
+		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL()
 		<<" "<<"LstHistoryDataT.size="<<pLstData->size();
 
-	pQSqlQueryForInseert->prepare(strSQL);
+	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
 
 	iterLst = pLstData->begin();
 	while (iterLst != pLstData->end())
@@ -261,7 +259,7 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 	if (!bExecRes)
 	{
 		nFunRes = -1;
-		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<strSQL
+		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"LstHistoryDataT.size="<<pLstData->size()
 			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
 	}
@@ -278,26 +276,25 @@ int CSqliteDbOper::selectData(const QString & strFrom, const QString & strTo, Ls
 {
 	int nFunRes = 0;
 	bool bExecRes = true;
-	QString  strSQL;
+	QString strSQLKey;
+	CSQLData sqlData;
 	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
 
 	lstData.clear();
-
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_TABLE_BAR_DATA_1DAY(strFrom, strTo);
-
+	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT__0003";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey, strFrom, strTo);
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
+		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
 
-	bExecRes = pSqlQuery->exec(strSQL);
+	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
 
 	if (!bExecRes)
 	{
 		nFunRes = -1;
 		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
 
 		delete pSqlQuery;
@@ -344,21 +341,23 @@ int CSqliteDbOper::selectData_MinTime(QString& strValueGet)
 {
 	int nFunRes = 0;
 	bool bExecRes = true;
-	QString  strSQL;
+	QString  strSQLKey;
+	CSQLData sqlData;
 	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_ASC_TABLE_BAR_DATA_1DAY();
+	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_DATEASC_0005";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
-	bExecRes = pSqlQuery->exec(strSQL);
+		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
+	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
 	if (!bExecRes)
 	{
 		nFunRes = -1;
 		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
 
 		delete pSqlQuery;
@@ -386,21 +385,23 @@ int CSqliteDbOper::selectData_MaxTime(QString& strValueGet)
 {
 	int nFunRes = 0;
 	bool bExecRes = true;
-	QString  strSQL;
+	QString  strSQLKey;
+	CSQLData sqlData;
 	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_DESC_TABLE_BAR_DATA_1DAY();
+	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_DATEDESC_0004";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
-	bExecRes = pSqlQuery->exec(strSQL);
+		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
+	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
 	if (!bExecRes)
 	{
 		nFunRes = -1;
 		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
 
 		delete pSqlQuery;
@@ -428,21 +429,24 @@ int CSqliteDbOper::selectData_Count( int& nValueGet )
 {
 	int nFunRes = 0;
 	bool bExecRes = true;
-	QString  strSQL;
+	QString  strSQLKey;
+	CSQLData sqlData;
 	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
 
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 
-	strSQL = m_pSqliteDbOperBuildSQL->buildSQL_Select_DataCount_TABLE_BAR_DATA_1DAY();
+	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_COUNT_0006";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+
 	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
-	bExecRes = pSqlQuery->exec(strSQL);
+		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
+	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
 	if (!bExecRes)
 	{
 		nFunRes = -1;
 		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
+			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
 
 		delete pSqlQuery;
@@ -466,10 +470,11 @@ int CSqliteDbOper::selectData_Count( int& nValueGet )
 	return nFunRes;
 }
 
-qint32 CSqliteDbOper::_ExecModify(const QString& strSQL)
+qint32 CSqliteDbOper::_ExecModify(const CSQLData& sqlData)
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = true;
+	QString strSQL = sqlData.getSqliteSQL();
 
 	QSqlQuery* pSqlQuery = NULL;
 	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
