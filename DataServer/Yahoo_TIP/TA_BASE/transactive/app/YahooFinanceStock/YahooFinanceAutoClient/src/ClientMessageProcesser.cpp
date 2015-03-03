@@ -129,8 +129,7 @@ void CClientMessageProcesser::processAck( const CAckDownLoadStock* pAck )
 	while (iterLst != pAck->m_LstStock.constEnd())
 	{
 		strSymbolUse = (*iterLst);
-		CClientActorManager::getInstance().send_req_ReqStockMinTimeMaxTime(m_nHanle, strSymbolUse);
-		CClientActorManager::getInstance().send_req_ReqHistoryTrade(m_nHanle, strSymbolUse, CTcpComProtocol::ETradeType_Buy);
+		CClientActorManager::getInstance().send_req_ReqSynYahoo(m_nHanle, strSymbolUse);
 		iterLst++;
 	}//while
 
@@ -146,6 +145,9 @@ void CClientMessageProcesser::processAck( const CAckLogout* pAck )
 
 void CClientMessageProcesser::processAck( const CAckSynYahoo* pAck )
 {
+	CClientActorManager::getInstance().send_req_ReqStockMinTimeMaxTime(m_nHanle, pAck->m_strSymbolUse);
+	CClientActorManager::getInstance().send_req_ReqHistoryTrade(m_nHanle, pAck->m_strSymbolUse, CTcpComProtocol::ETradeType_Buy);
+
 	return;
 }
 

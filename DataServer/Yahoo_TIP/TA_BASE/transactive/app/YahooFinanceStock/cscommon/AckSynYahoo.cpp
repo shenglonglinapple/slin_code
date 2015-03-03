@@ -18,6 +18,7 @@ void CAckSynYahoo::_Clear()
 	m_nDataType = CTcpComProtocol::DataType_SynYahoo;
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
+	m_strSymbolUse.clear();
 	m_nResult = CTcpComProtocol::DataType_SynYahooResult_SendReqToYahoo;
 }
 
@@ -29,6 +30,7 @@ void CAckSynYahoo::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID
 		<<" "<<"m_strACKUUID="<<m_strACKUUID
+		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_nResult="<<CTcpComProtocol::getStringValue(m_nResult);
 }
 //static
@@ -60,6 +62,7 @@ QByteArray* CAckSynYahoo::getMessage()
 	writeToByteArray<<(qint32)(m_nDataType);
 	writeToByteArray<<(m_strReqUUID);
 	writeToByteArray<<(m_strACKUUID);
+	writeToByteArray<<(m_strSymbolUse);
 	writeToByteArray<<(qint32)(m_nResult);
 
 	return pMessage;	
@@ -79,6 +82,7 @@ void CAckSynYahoo::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>nDataType;
 	readMessageBuffer>>m_strReqUUID;
 	readMessageBuffer>>m_strACKUUID;
+	readMessageBuffer>>m_strSymbolUse;
 	readMessageBuffer>>nResult;
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);

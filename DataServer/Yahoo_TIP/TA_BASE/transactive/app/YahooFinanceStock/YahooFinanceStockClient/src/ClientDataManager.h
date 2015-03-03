@@ -40,6 +40,8 @@ public:
 
 	void loginToServer_OK(qint32 nHandle, const QString& strUserID);
 	void dowork_downLoadStockBaseIinfo(qint32 nHandle);
+	void dowork_ReqSynYahoo( qint32 nHandle );
+
 public:
 	void resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
 	void resetNewOrderData( const QString& strSymbolUse, const CHistoryData* pData );

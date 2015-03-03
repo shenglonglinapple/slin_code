@@ -173,10 +173,10 @@ int CSqliteDbOper::_CommitTransaction()
 //////////////////////////////////////////////////////////////////////////
 
 
-void CSqliteDbOper::saveData(LstHistoryDataT* pLstData)
+void CSqliteDbOper::saveData(const QString& strSymbolUse, LstHistoryDataT* pLstData)
 {
 	_StartTransaction();
-	_AddDataArray(pLstData);
+	_AddDataArray(strSymbolUse, pLstData);
 	_CommitTransaction();
 }
 
@@ -194,7 +194,7 @@ int CSqliteDbOper::_CreateDBTable_TABLE_BAR_DATA_1DAY()
 }
 
 
-int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
+int CSqliteDbOper::_AddDataArray(const QString& strSymbolUse,LstHistoryDataT* pLstData)
 {
 	int nFunRes = 0;
 	bool bExecRes = false;
@@ -235,7 +235,8 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 	{
 		pDataTmp = (*iterLst);
 
-		lst_COLUMN_SYMBOLUSE << pDataTmp->m_strSymbolUse;
+		//lst_COLUMN_SYMBOLUSE << pDataTmp->m_strSymbolUse;
+		lst_COLUMN_SYMBOLUSE << strSymbolUse;
 		lst_COLUMN_DATE << pDataTmp->m_strDate;
 		lst_COLUMN_OPEN << pDataTmp->m_strOpen;
 		lst_COLUMN_HIGH << pDataTmp->m_strHigh;

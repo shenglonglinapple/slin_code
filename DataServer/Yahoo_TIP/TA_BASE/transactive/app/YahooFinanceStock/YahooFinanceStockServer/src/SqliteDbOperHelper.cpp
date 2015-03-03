@@ -136,7 +136,7 @@ void CSqliteDbOperHelper::saveData(const QString & strHistoryData)
 	if (!strListHistoryDataTmp.isEmpty())
 	{	
 		_AnalysisData(strListHistoryDataTmp, lstHistoryData);
-		m_pSqliteDbOper->saveData(&lstHistoryData);
+		m_pSqliteDbOper->saveData(m_strSymbolUse, &lstHistoryData);
 	}
 
 	MYLOG4CPP_DEBUG<<"save data to SQLite"

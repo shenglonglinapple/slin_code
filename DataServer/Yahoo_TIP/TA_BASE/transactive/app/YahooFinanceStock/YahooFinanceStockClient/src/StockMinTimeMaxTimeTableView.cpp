@@ -4,6 +4,7 @@
 
 #include "ProjectQTInclude.h"
 #include "ProjectCommonData.h"
+#include "ProjectDBStruct.h"
 #include "SignalSlotManager.h"
 #include "ClientDataManager.h"
 #include "ClientDBManager.h"

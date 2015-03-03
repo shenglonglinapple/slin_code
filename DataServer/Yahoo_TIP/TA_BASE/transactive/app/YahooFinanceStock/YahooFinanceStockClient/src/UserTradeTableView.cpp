@@ -2,6 +2,7 @@
 
 #include <QtSql/QSqlTableModel>
 #include "ProjectQTInclude.h"
+#include "ProjectDBStruct.h"
 #include "ProjectCommonData.h"
 #include "ClientDBManager.h"
 #include "SignalSlotManager.h"

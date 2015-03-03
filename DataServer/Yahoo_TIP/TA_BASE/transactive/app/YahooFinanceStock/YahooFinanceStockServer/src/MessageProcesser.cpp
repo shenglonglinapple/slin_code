@@ -160,6 +160,7 @@ void CMessageProcesser::processReq( const CReqSynYahoo* pReq )
 	pAck->m_nDataType = CTcpComProtocol::DataType_SynYahoo;
 	pAck->m_strReqUUID = pReq->m_strReqUUID;
 	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+	pAck->m_strSymbolUse = pReq->m_strSymbolUse;
 	pAck->m_nResult = nSynYahooResult;
 	pAck->logInfo(__FILE__, __LINE__);
 	pByteArray = pAck->getMessage();

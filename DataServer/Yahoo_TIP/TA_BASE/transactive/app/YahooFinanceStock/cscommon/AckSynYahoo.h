@@ -23,8 +23,8 @@ public:
 	CTcpComProtocol::EMsgType m_nMessageType;//CTcpComProtocol::EMsgType
 	CTcpComProtocol::EDataType m_nDataType;//CTcpComProtocol::EDataType
 	QString m_strReqUUID;//37
-	QString m_strACKUUID;//37
-
+	QString m_strACKUUID;
+	QString m_strSymbolUse;
 	CTcpComProtocol::EDataTypeSynYahooResult m_nResult;
 };
 

@@ -1,6 +1,7 @@
 #include "UserAccountWidget.h"
 
 #include <QtSql/QSqlTableModel>
+#include "ProjectDBStruct.h"
 #include "ProjectQTInclude.h"
 #include "ProjectCommonData.h"
 #include "ClientDBManager.h"

@@ -177,11 +177,13 @@ QString CFileDBOper::getLastUpdateTime()
 
 	QString strLineLastDate;
 	QStringList strLstDataTmp;
-	getLastUpdateLine(strDataFileName, strLineLastDate);//2014-12-03,11.00,11.88,11.00,11.20,340833800,11.20
+	//SymbolUse,Date,Open,High,Low,Close,Volume,Adj Close
+	//"XXXXXX.SZ,1970-01-01,15.63,15.63,15.63,15.63,1053200,0.01"
+	getLastUpdateLine(strDataFileName, strLineLastDate);
 	strLstDataTmp = strLineLastDate.split(",");
-	if (7 == strLstDataTmp.size())
+	if (8 == strLstDataTmp.size())
 	{
-		strLastUpdateDate = strLstDataTmp[0];//2014-12-03
+		strLastUpdateDate = strLstDataTmp[1];//2014-12-03
 		strLastUpdateDateTime = strLastUpdateDate + " "+ DEF_VALUE_STRING_UTC_START_TIME;
 	}
 
@@ -196,9 +198,10 @@ void CFileDBOper::getLastUpdateLine(const QString & strFileName, QString& strLin
 	bFileExist = checkFileExist(strFileName);
 	if (false == bFileExist)
 	{
-		strLineLastDate = DEF_VALUE_STRING_UTC_START_DATE;
+		strLineLastDate = "XXXXXX.SZ,";
+		strLineLastDate += DEF_VALUE_STRING_UTC_START_DATE;
 		strLineLastDate += ",15.63,15.63,15.63,15.63,1053200,0.01";//1970-01-01
-		//strLineLastDate = "1970-01-01,15.63,15.63,15.63,15.63,1053200,0.01";//1970-01-01
+		//strLineLastDate = "XXXXXX.SZ,1970-01-01,15.63,15.63,15.63,15.63,1053200,0.01";//1970-01-01
 		return;
 	}
 
@@ -209,8 +212,8 @@ void CFileDBOper::getLastUpdateLine(const QString & strFileName, QString& strLin
 	}
 
 	//000002.SZ
-	//Date,Open,High,Low,Close,Volume,Adj Close
-	//2014-12-03,11.00,11.88,11.00,11.20,340833800,11.20
+	//SymbolUse,Date,Open,High,Low,Close,Volume,Adj Close
+	//XXXXXX.SZ,2014-12-03,11.00,11.88,11.00,11.20,340833800,11.20
 	//......
-	//1991-01-02,15.63,15.63,15.63,15.63,1053200,0.01
+	//XXXXXX.SZ,1991-01-02,15.63,15.63,15.63,15.63,1053200,0.01
 }

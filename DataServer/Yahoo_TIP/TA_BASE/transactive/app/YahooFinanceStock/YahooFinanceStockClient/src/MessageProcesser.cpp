@@ -127,11 +127,14 @@ void CMessageProcesser::processAck( const CAckLogout* pAck )
 
 void CMessageProcesser::processAck( const CAckSynYahoo* pAck )
 {
+	CClientDataManager::getInstance().send_req_ReqStockMinTimeMaxTime(m_nHanle, pAck->m_strSymbolUse);
+	CClientDataManager::getInstance().send_req_ReqHistoryTrade(pAck->m_strSymbolUse, CTcpComProtocol::ETradeType_Buy);
 	return;
 }
 void CMessageProcesser::processAck( const CAckDownLoadStock* pAck )
 {
 	CStockDataManager::getInstance().addStockData(&(pAck->m_LstStock));
+	CClientDataManager::getInstance().dowork_ReqSynYahoo(m_nHanle);
 	CClientDataManager::getInstance().dowork_downLoadStockBaseIinfo(m_nHanle);
 	return;
 }

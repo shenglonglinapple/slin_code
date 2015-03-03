@@ -184,7 +184,7 @@ void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
 	MYLOG4CPP_DEBUG<<"CClientDataManager dowork_downLoadStockBaseIinfo"
 		<<" "<<"nHandle="<<nHandle;
 
-	CSignalSlotManager::getInstance().emit_ShownMessage("downLoad Stock From Server "+
+	CSignalSlotManager::getInstance().emit_ShownMessage("dowork_downLoadStockBaseIinfo"+
 		QString("nHandle=%1").arg(nHandle));
 
 	QList<QString> lstSymbolUse;
@@ -198,9 +198,9 @@ void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
 		strSymbolUse = (*iterLst);
 		//TODO.forTest
 		//send_req_ReqSynYahoo(nHandle, strSymbolUse);
-		send_req_ReqStockMinTimeMaxTime(nHandle, strSymbolUse);
+		//send_req_ReqStockMinTimeMaxTime(nHandle, strSymbolUse);
 		//TODO.forTest
-		send_req_ReqHistoryTrade(strSymbolUse, CTcpComProtocol::ETradeType_Buy);
+		//send_req_ReqHistoryTrade(strSymbolUse, CTcpComProtocol::ETradeType_Buy);
 
 		iterLst++;
 	}//while
@@ -209,6 +209,32 @@ void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
 	send_req_ReqUserHoldAccount("");
 }
 
+
+void CClientDataManager::dowork_ReqSynYahoo( qint32 nHandle )
+{
+	QString strSymbolUse;
+	MYLOG4CPP_DEBUG<<"CClientDataManager dowork_ReqSynYahoo"
+		<<" "<<"nHandle="<<nHandle;
+
+	CSignalSlotManager::getInstance().emit_ShownMessage("dowork_ReqSynYahoo"+
+		QString("nHandle=%1").arg(nHandle));
+
+	QList<QString> lstSymbolUse;
+	QList<QString>::iterator iterLst;
+	//TODO. for Test
+	CStockDataManager::getInstance().getAllStockData(lstSymbolUse);
+
+	iterLst = lstSymbolUse.begin();
+	while (iterLst != lstSymbolUse.end())
+	{
+		strSymbolUse = (*iterLst);
+		//TODO.forTest
+		send_req_ReqSynYahoo(nHandle, strSymbolUse);
+
+		iterLst++;
+	}//while
+
+}
 void CClientDataManager::send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse)
 {
 	CReqSynYahoo* pReq = NULL;

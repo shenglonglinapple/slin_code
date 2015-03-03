@@ -30,7 +30,7 @@ public:
 	CSqliteDbOper(const QString& strSqliteDbFileName);//strSymbolUse
 	virtual ~CSqliteDbOper();
 public:
-	void saveData(LstHistoryDataT* pLstData);
+	void saveData(const QString& strSymbolUse, LstHistoryDataT* pLstData);
 public:
 	int selectData(const QString & strFrom, const QString & strTo, LstHistoryDataT& lstData);
 	int selectData_MinTime(QString& strValueGet);
@@ -44,7 +44,7 @@ private:
 	int _CommitTransaction();
 	qint32 _ExecModify(const CSQLData& sqlData);
 private:
-	int _AddDataArray(LstHistoryDataT* pLstData);
+	int _AddDataArray(const QString& strSymbolUse,LstHistoryDataT* pLstData);
 	int _CreateDBTable_TABLE_BAR_DATA_1DAY();
 
 private:
