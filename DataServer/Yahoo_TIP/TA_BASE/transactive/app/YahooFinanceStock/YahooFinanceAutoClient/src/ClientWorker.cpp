@@ -231,7 +231,7 @@ void CClientWorker::resetHistoryData( const QString& strSymbolUse, const QList<C
 
 	if (NULL != m_pClientDbOper)
 	{
-		m_pClientDbOper->resetHistoryData(strSymbolUse, lstData);
+		m_pClientDbOper->reset_TABLE_BAR_DATA_1DAY(strSymbolUse, lstData);
 	}
 	workTime.workEnd();
 	MYLOG4CPP_DEBUG<<"CClientWorker::resetDataHistory() end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";

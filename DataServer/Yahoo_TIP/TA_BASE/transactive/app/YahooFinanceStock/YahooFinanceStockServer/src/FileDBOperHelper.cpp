@@ -132,16 +132,16 @@ void CFileDBOperHelper::_SaveData(const QStringList& strListHistoryDataTmp)
 	if (false == bFileExist)
 	{
 		//create new file and save data
-		m_pFileDBOper->saveDataToFile(strSaveDataFileName, strListHistoryDataTmp);
+		m_pFileDBOper->saveDataToFile(strSaveDataFileName, strListHistoryDataTmp, true);
 		return;
 	}
 	m_pFileDBOper->getAllDataFromFile(strSaveDataFileName, strLstOldData);
 	
 	strSaveDataFileName_Tmp = strSaveDataFileName + "_Tmp";
 	m_pFileDBOper->renameFile(strSaveDataFileName, strSaveDataFileName_Tmp);
-	m_pFileDBOper->saveDataToFile(strSaveDataFileName, strListHistoryDataTmp);
+	m_pFileDBOper->saveDataToFile(strSaveDataFileName, strListHistoryDataTmp, true);
 
-	m_pFileDBOper->saveDataToFile(strSaveDataFileName, strLstOldData);//append old data to file
+	m_pFileDBOper->saveDataToFile(strSaveDataFileName, strLstOldData, false);//append old data to file
 
 	m_pFileDBOper->removeFile(strSaveDataFileName_Tmp);
 }

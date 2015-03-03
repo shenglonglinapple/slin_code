@@ -198,12 +198,12 @@ void CProjectEnvironment::_SetFont()
 	tc = QTextCodec::codecForName("gb2312");
 	QTextCodec::setCodecForTr(tc);
 
-	QFont font("Times", 10, QFont::Normal, FALSE);
+	//QFont font("Times", 10, QFont::Normal, FALSE);
 	//app.setFont(font);
 	//qt designer qtconfig font = Bitstream Charter
 
 
-	QFont m_QTProjectEnvFont = font;
+	//QFont m_QTProjectEnvFont = font;
 }
 
 

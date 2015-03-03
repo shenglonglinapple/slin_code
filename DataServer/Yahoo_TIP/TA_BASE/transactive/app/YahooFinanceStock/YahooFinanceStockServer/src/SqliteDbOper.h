@@ -45,7 +45,7 @@ private:
 	qint32 _ExecModify(const CSQLData& sqlData);
 private:
 	int _AddDataArray(LstHistoryDataT* pLstData);
-	int _CreateDBTable();
+	int _CreateDBTable_TABLE_BAR_DATA_1DAY();
 
 private:
 	QSqlDatabase* m_pQSqlDataBase;

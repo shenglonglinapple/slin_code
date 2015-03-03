@@ -1335,46 +1335,50 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="XmlSQL"
+			Name="XML"
 			>
 			<File
-				RelativePath=".\src\ProjectDBStruct.h"
+				RelativePath="..\cscommon\Xml\ConnectionString.xml"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ProjectSQLManager.cpp"
+				RelativePath="..\cscommon\ProjectDBStruct.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\ProjectSQLManager.h"
+				RelativePath="..\cscommon\ProjectSQLManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLData.cpp"
+				RelativePath="..\cscommon\ProjectSQLManager.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLData.h"
+				RelativePath="..\cscommon\SQLData.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLParam.cpp"
+				RelativePath="..\cscommon\SQLData.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLParam.h"
+				RelativePath="..\cscommon\SQLParam.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\xml\SQLString.xml"
+				RelativePath="..\cscommon\SQLParam.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLStringXmlParser.cpp"
+				RelativePath="..\cscommon\Xml\SQLString.xml"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLStringXmlParser.h"
+				RelativePath="..\cscommon\SQLStringXmlParser.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SQLStringXmlParser.h"
 				>
 			</File>
 		</Filter>

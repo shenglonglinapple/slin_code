@@ -26,7 +26,7 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 	_InitDataBase();
 	if (true == m_pQSqlDataBase->isValid())
 	{
-		_CreateDBTable();
+		_CreateDBTable_TABLE_BAR_DATA_1DAY();
 	}
 }
 
@@ -181,7 +181,7 @@ void CSqliteDbOper::saveData(LstHistoryDataT* pLstData)
 }
 
 
-int CSqliteDbOper::_CreateDBTable()
+int CSqliteDbOper::_CreateDBTable_TABLE_BAR_DATA_1DAY()
 {
 	qint32 nFunRes = 0;
 	CSQLData sqlData;
@@ -202,7 +202,8 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 	QString  strSQLKey;
 	LstHistoryDataIterT iterLst;
 	CHistoryData* pDataTmp = NULL;
-	//QVariantList lstInstrumentID;
+
+	QVariantList lst_COLUMN_SYMBOLUSE;
 	QVariantList lst_COLUMN_DATE;
 	QVariantList lst_COLUMN_OPEN;
 	QVariantList lst_COLUMN_HIGH;
@@ -234,7 +235,7 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 	{
 		pDataTmp = (*iterLst);
 
-		//lstInstrumentID<<m_pDBOperParam->m_nInstrumentID;
+		lst_COLUMN_SYMBOLUSE << pDataTmp->m_strSymbolUse;
 		lst_COLUMN_DATE << pDataTmp->m_strDate;
 		lst_COLUMN_OPEN << pDataTmp->m_strOpen;
 		lst_COLUMN_HIGH << pDataTmp->m_strHigh;
@@ -246,7 +247,7 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 		iterLst++;
 	}//while
 
-	//pQSqlQueryForInseert->addBindValue(lstInstrumentID);
+	pQSqlQueryForInseert->addBindValue(lst_COLUMN_SYMBOLUSE);
 	pQSqlQueryForInseert->addBindValue(lst_COLUMN_DATE);
 	pQSqlQueryForInseert->addBindValue(lst_COLUMN_OPEN);
 	pQSqlQueryForInseert->addBindValue(lst_COLUMN_HIGH);
@@ -259,7 +260,7 @@ int CSqliteDbOper::_AddDataArray(LstHistoryDataT* pLstData)
 	if (!bExecRes)
 	{
 		nFunRes = -1;
-		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<sqlData.getSqliteSQL()
+		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"LstHistoryDataT.size="<<pLstData->size()
 			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
 	}
@@ -308,6 +309,8 @@ int CSqliteDbOper::selectData(const QString & strFrom, const QString & strTo, Ls
 		pHistoryData = new CHistoryData();
 		nColumnIndex = 0;
 
+		pHistoryData->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
+		nColumnIndex++;
 		pHistoryData->m_strDate = pSqlQuery->value(nColumnIndex).toString();
 		nColumnIndex++;
 		pHistoryData->m_strOpen = pSqlQuery->value(nColumnIndex).toString();

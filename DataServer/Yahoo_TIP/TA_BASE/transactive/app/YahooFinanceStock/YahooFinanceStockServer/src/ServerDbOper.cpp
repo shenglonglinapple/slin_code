@@ -252,7 +252,7 @@ qint32 CServerDbOper::updateUserInfo(const CUserInfo* pData)
 
 	strSQLKey = "TABLE_USER_INFO__UPDATE_0003";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey,
-		pData->m_strLastLoginTime, pData->m_nLoginCount, 
+		pData->m_strLastLoginTime, pData->m_nLoginCount, pData->m_nState,
 		pData->m_strUserName, pData->m_strPassWord);
 	nFunRes = _ExecModify(sqlData);
 
@@ -321,7 +321,7 @@ qint32 CServerDbOper::_AddUserInfo(const CUserInfo* pData)
 	if (!bExecRes)
 	{
 		nFunRes = -1;
-		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<sqlData.getSqliteSQL()
+		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
 	}
 
@@ -419,7 +419,7 @@ qint32 CServerDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 	if (!bExecRes)
 	{
 		nFunRes = -1;
-		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<sqlData.getSqliteSQL()
+		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
 	}
 
@@ -615,7 +615,7 @@ qint32 CServerDbOper::_AddUserAccount( const CUserAccount* pData )
 	if (!bExecRes)
 	{
 		nFunRes = -1;
-		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<sqlData.getSqliteSQL()
+		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
 	}
 
@@ -894,7 +894,7 @@ qint32 CServerDbOper::_AddUserHoldAccount( const CUserHoldAccount* pData )
 	if (!bExecRes)
 	{
 		nFunRes = -1;
-		MYLOG4CPP_DEBUG<<"execBatch strSQL="<<sqlData.getSqliteSQL()
+		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
 			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
 	}
 

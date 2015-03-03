@@ -5,7 +5,7 @@
 #include "Log4cppLogger.h"
 
 
-static const char*  DEF_VALUE_XML_FILE_SQL_STRING = "./xml/SQLString.xml";
+static const char*  DEF_VALUE_XML_FILE_SQL_STRING = "../cscommon/Xml/SQLString.xml";
 
 CProjectSQLManager* CProjectSQLManager::m_pInstance = 0;
 QMutex CProjectSQLManager::m_mutexInstance;

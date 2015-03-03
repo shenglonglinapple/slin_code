@@ -15,7 +15,7 @@ public:
 public:
 	bool checkFileExist(const QString & strFileName);
 	void getAllDataFromFile(const QString & strFileName, QStringList& strLstLines);
-	void saveDataToFile(const QString & strFileName, const QStringList& strListHistoryDataTmp);
+	void saveDataToFile(const QString & strFileName, const QStringList& strListHistoryDataTmp, bool bAddSymbolUse);
 	void removeFile(const QString & strFileName);
 	void renameFile(const QString & strOldFileName, const QString & strNewFileName);
 public:

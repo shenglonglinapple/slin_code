@@ -117,7 +117,7 @@ void CFileDBOper::createFile(const QString & strFileName)
 
 }
 
-void CFileDBOper::saveDataToFile(const QString & strFileName, const QStringList& strListHistoryDataTmp)
+void CFileDBOper::saveDataToFile(const QString & strFileName, const QStringList& strListHistoryDataTmp, bool bAddSymbolUse)
 {
 	createFile(strFileName);
 
@@ -134,7 +134,16 @@ void CFileDBOper::saveDataToFile(const QString & strFileName, const QStringList&
 	{
 		if (false == strLine.isEmpty())//TODO.
 		{
-			streamWrite<<strLine<<"\n";			
+			if (bAddSymbolUse)
+			{
+				//000001.SZ,2015-01-09,14.90,15.87,14.71,15.08,250850000,15.08
+				streamWrite<<m_strSymbolUse<<","<<strLine<<"\n";
+			}
+			else
+			{
+				streamWrite<<strLine<<"\n";
+			}
+						
 		}
 
 	}

@@ -15,6 +15,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QList>
 
+#include "ProjectSQLManager.h"
+
 class CSqliteDbOperBuildSQL;
 class CUserInfo;
 class CUserTradeInfo;
@@ -29,10 +31,8 @@ public:
 	CClientDbOper(const QString& strSqliteDbFileName);//m_strUserID
 	virtual ~CClientDbOper();
 public:
-	void resetHistoryData(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
-	qint32 selectDataHistory_ASC_PRICE(const QString& strSymbolUse, CHistoryData** ppData);
-	qint32 selectDataHistory_DataTime(const QString& strSymbolUse,const QString& strDateTime, CHistoryData** ppData);
-	void truncateTableHistoryData();
+	void reset_TABLE_BAR_DATA_1DAY(const QString& strSymbolUse, const QList<CHistoryData*>& lstData);
+	void truncate_TABLE_BAR_DATA_1DAY();
 public:
 	qint32 insertSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
 	qint32 updateSymbolMinMaxTime(const CStockMinTimeMaxTime* pData);
@@ -40,7 +40,7 @@ public:
 	void truncateSymbolMinMaxTime();
 public:
 	qint32 insertUserTradeInfo(const CUserTradeInfo* pData);
-	void truncateTableUserTradeInfo();
+	void truncate_TABLE_USER_TRADE_INFO();
 public:
 	qint32 resetUserAccount( const CUserAccount* pData );
 	qint32 insertUserAccount(const CUserAccount* pData );
@@ -57,7 +57,8 @@ private:
 	void _InitDataBase();
 	int _StartTransaction();
 	int _CommitTransaction();
-	qint32 _ExecModify(const QString& strSQL);
+	qint32 _ExecModify(const CSQLData& sqlData);
+
 
 private:
 	//
@@ -87,8 +88,7 @@ private:
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
 	
-private:
-	CSqliteDbOperBuildSQL* m_pSqliteDbOperBuildSQL;
+
 private:
 	QSqlTableModel* m_pSqlTableModel_HistoryData;
 };

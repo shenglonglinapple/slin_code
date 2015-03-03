@@ -13,6 +13,7 @@ static const char*  str_QtDbType_QMYSQL = "QMYSQL";
 /////
 static const char*  str_TABLE_BAR_DATA_1DAY = "TABLE_BAR_DATA_1DAY";
 //
+static const char*  str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE = "COLUMN_SYMBOLUSE";
 static const char*  str_TABLE_BAR_DATA_Column_DATE = "COLUMN_DATE";
 static const char*  str_TABLE_BAR_DATA_Column_OPEN = "COLUMN_OPEN";
 static const char*  str_TABLE_BAR_DATA_Column_HIGH = "COLUMN_HIGH";
@@ -83,6 +84,18 @@ static const char*  str_TABLE_USER_HOLD_COLUMN_CURRENT_AMOUNT = "COLUMN_CURRENT_
 static const char*  str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS = "COLUMN_PROFIT_LOSS";//Floating profit and loss
 static const char*  str_TABLE_USER_HOLD_COLUMN_PROFIT_LOSS_PERSENTAGE = "COLUMN_PROFIT_LOSS_PERSENTAGE";//Floating profit and loss Percentage
 
+/////
+//[[TABLE_SYMBOLUSE]]
+static const char*  str_TABLE_SYMBOLUSE = "TABLE_SYMBOLUSE";
+static const char*  str_TABLE_SYMBOLUSE_COLUMN_SYMBOLUSE = "COLUMN_SYMBOLUSE";
+
+
+//[[TABLE_MINTIME_MAXTIME]]
+static const char*  str_TABLE_MINTIME_MAXTIME = "TABLE_MINTIME_MAXTIME";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE = "COLUMN_SYMBOLUSE";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME = "COLUMN_MINTIME";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME = "COLUMN_MAXTIME";
+static const char*  str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT = "COLUMN_COUNT";
 
 
 #endif  // __DEF__PROJECT_DB_STRUCT_H__

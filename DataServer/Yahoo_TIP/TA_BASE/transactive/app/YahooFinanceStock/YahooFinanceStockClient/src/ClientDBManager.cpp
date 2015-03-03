@@ -81,7 +81,7 @@ void CClientDBManager::resetDataHistory( const QString& strSymbolUse, const QLis
 
 	if (NULL != m_pClientDbOper)
 	{
-		m_pClientDbOper->resetDataHistory(strSymbolUse, lstData);
+		m_pClientDbOper->reset_TABLE_BAR_DATA_1DAY(strSymbolUse, lstData);
 	}
 	workTime.workEnd();
 	MYLOG4CPP_DEBUG<<"CClientDBManager::resetDataHistory() end getWorkTime="<<workTime.getWorkTime()<<" "<<"ms";
@@ -147,29 +147,8 @@ qint32 CClientDBManager::insertUserTradeInfo(const CUserTradeInfo* pData)
 	return nFunRes;
 }
 
-qint32 CClientDBManager::selectDataHistory_ASC_PRICE( const QString& strSymbolUse, CHistoryData** ppData )
-{
-	QMutexLocker lock(&m_mutex_ClientDbOper);
 
-	qint32 nFunRes = 0;
-	if (NULL != m_pClientDbOper)
-	{
-		nFunRes = m_pClientDbOper->selectDataHistory_ASC_PRICE(strSymbolUse, ppData);
-	}
-	return nFunRes;
-}
 
-qint32 CClientDBManager::selectDataHistory_DataTime( const QString& strSymbolUse,const QString& strDateTime, CHistoryData** ppData )
-{
-	QMutexLocker lock(&m_mutex_ClientDbOper);
-
-	qint32 nFunRes = 0;
-	if (NULL != m_pClientDbOper)
-	{
-		nFunRes = m_pClientDbOper->selectDataHistory_DataTime(strSymbolUse, strDateTime, ppData);
-	}
-	return nFunRes;
-}
 
 qint32 CClientDBManager::resetUserAccount( const CUserAccount* pData )
 {

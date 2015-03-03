@@ -835,56 +835,52 @@
 				RelativePath=".\src\ClientDbOper.h"
 				>
 			</File>
-			<File
-				RelativePath=".\src\ProjectDBStruct.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ProjectSQLManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ProjectSQLManager.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SQLData.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SQLData.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SqliteDbOperBuildSQL.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SqliteDbOperBuildSQL.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SQLParam.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\SQLParam.h"
-				>
-			</File>
 		</Filter>
 		<Filter
-			Name="XmlSQL"
+			Name="XML"
 			>
 			<File
-				RelativePath=".\xml\SQLString.xml"
+				RelativePath="..\cscommon\Xml\ConnectionString.xml"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLStringXmlParser.cpp"
+				RelativePath="..\cscommon\ProjectDBStruct.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\SQLStringXmlParser.h"
+				RelativePath="..\cscommon\ProjectSQLManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ProjectSQLManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SQLData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SQLData.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SQLParam.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SQLParam.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\Xml\SQLString.xml"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SQLStringXmlParser.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\SQLStringXmlParser.h"
 				>
 			</File>
 		</Filter>
