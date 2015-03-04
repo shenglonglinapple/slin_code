@@ -835,6 +835,38 @@
 				RelativePath=".\src\ClientDbOper.h"
 				>
 			</File>
+			<File
+				RelativePath="..\cscommon\DBCfgXmlParser.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DBCfgXmlParser.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItemList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItemList.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ProjectDBStatusManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\ProjectDBStatusManager.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="XML"
@@ -881,6 +913,22 @@
 			</File>
 			<File
 				RelativePath="..\cscommon\SQLStringXmlParser.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="dbcon"
+			>
+			<File
+				RelativePath="..\cscommon\IDbConnection.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBConnection.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBConnection.h"
 				>
 			</File>
 		</Filter>

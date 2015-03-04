@@ -17,7 +17,6 @@
 
 #include "ProjectSQLManager.h"
 
-class CSqliteDbOperBuildSQL;
 class CUserInfo;
 class CUserTradeInfo;
 class CHistoryData;
