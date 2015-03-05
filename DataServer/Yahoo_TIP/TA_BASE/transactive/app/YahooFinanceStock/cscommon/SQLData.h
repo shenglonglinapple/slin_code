@@ -18,6 +18,8 @@ public:
 	QString getSQLKey() const;
 	QString getSqliteSQL() const;
 	void clear();
+	void logInfo( const QString& fileName, qint32 lineNumber ) const;
+
 public:
 	qint32 buildSQL();
 	qint32 buildSQL(const QString& arg0);
@@ -27,11 +29,11 @@ public:
 	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4);
 	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4, const QString& arg5 );
 	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4, const QString& arg5, const QString& arg6);
-private:
+public:
 	QString m_strXMLSQLKey;
 	QString m_strXMLSQL_QSQLITE;
 	QString m_strXMLSQL_QMYSQL;
-private:
+public:
 	QString m_strUseSQL_QSQLITE;
 	QString m_strUseSQL_QMYSQL;
 };

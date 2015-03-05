@@ -23,19 +23,18 @@ public:
 		EDBState_Offline,		
 	};
 
-
-	enum EDataTypes
-	{
-		DataTypes_CSData,
-		DataTypes_YahuoData,
-	};
-
 	enum EDBPriority
 	{
 		DBPriority_0 = 0,
 		DBPriority_1,
 	};
 
+	enum EDataTypes
+	{
+		DataTypes_Client,
+		DataTypes_Server,
+		DataTypes_YahuoData,
+	};
 
 public:
 	CDbStatusItem();
@@ -50,17 +49,18 @@ public:
 	QString m_strDBConnectionString;
 	
 	QString m_strDbType;
+	QString m_strDBKey;
 	QString m_strSchema;
 	QString m_strUser;
 	QString m_strPassword;
-	QString m_strIP;
-	
+	QString m_strIP;	
 
 public:
 	void clear();
 	void logInfo( const QString& file, qint32 line );
 	QString getConnectionString();
 	bool isValid();
+	void setProperties();
 public:
 	QString getString(EDBType nValue);
 	QString getString(EDBState nValue);

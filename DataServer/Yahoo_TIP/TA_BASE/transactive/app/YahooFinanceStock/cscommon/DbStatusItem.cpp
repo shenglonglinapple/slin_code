@@ -1,8 +1,10 @@
 #include "DbStatusItem.h"
 
+#include "TcpComProtocol.h"
+
 #include "Log4cppLogger.h"
 
-static const char* DefConStrDelimiter = ":";
+static const char* DefConStrDelimiter = "|";
 
 CDbStatusItem::CDbStatusItem()
 {
@@ -22,6 +24,7 @@ CDbStatusItem& CDbStatusItem::operator=( const CDbStatusItem& objectCopy )
 	m_nDBState = objectCopy.m_nDBState;
 	m_strDBConnectionString = objectCopy.m_strDBConnectionString;
 	m_strDbType = objectCopy.m_strDbType;
+	m_strDBKey = objectCopy.m_strDBKey;
 	m_strSchema = objectCopy.m_strSchema;
 	m_strUser = objectCopy.m_strUser;
 	m_strPassword = objectCopy.m_strPassword;
@@ -32,15 +35,24 @@ CDbStatusItem& CDbStatusItem::operator=( const CDbStatusItem& objectCopy )
 
 void CDbStatusItem::clear()
 {
-	m_nDataType = DataTypes_CSData;
+	m_nDataType = DataTypes_Client;
 	m_nDBPriority = DBPriority_0;
 	m_nDBType = DBType_QSQLITE;
 	m_nDBState = EDBState_Pending;
+	m_strDBConnectionString = "QSQLITE|c://dbname.db|usrname|password|127.0.0.1";
 	m_strDBConnectionString.clear();
+
+	m_strDbType = "QSQLITE";
 	m_strDbType.clear();
+	m_strDBKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+	m_strDBKey.clear();
+	m_strSchema = "c://dbname.db";
 	m_strSchema.clear();
+	m_strUser = "usrname";
 	m_strUser.clear();
+	m_strPassword = "password";
 	m_strPassword.clear();
+	m_strIP = "127.0.0.1";
 	m_strIP.clear();
 
 }
@@ -53,6 +65,7 @@ void CDbStatusItem::logInfo( const QString& file, qint32 line )
 		<<" "<<"m_nDBType="<<getString(m_nDBType)
 		<<" "<<"m_nDBState="<<getString(m_nDBState)
 		<<" "<<"m_strDBConnectionString="<<m_strDBConnectionString
+		<<" "<<"m_strDBKey="<<m_strDBKey
 		<<" "<<"m_strDbType="<<m_strDbType
 		<<" "<<"m_strSchema="<<m_strSchema
 		<<" "<<"m_strUser="<<m_strUser
@@ -61,6 +74,13 @@ void CDbStatusItem::logInfo( const QString& file, qint32 line )
 
 }
 
+void CDbStatusItem::setProperties()
+{
+	m_strDBKey = CTcpComProtocol::getUUID();
+	m_strDbType = getString(m_nDBType);
+
+	getConnectionString();
+}
 QString  CDbStatusItem::getConnectionString()
 {
 	//DefConStrDelimiter=":"
@@ -68,7 +88,8 @@ QString  CDbStatusItem::getConnectionString()
 		+ m_strSchema + DefConStrDelimiter 
 		+ m_strUser + DefConStrDelimiter 
 		+ m_strPassword + DefConStrDelimiter 
-		+ m_strIP;
+		+ m_strIP + DefConStrDelimiter 
+		+ m_strDBKey;
 
 	return m_strDBConnectionString;
 }
@@ -99,10 +120,10 @@ QString CDbStatusItem::getString( EDBType nValue )
 	switch (nValue)
 	{
 	case DBType_QSQLITE:
-		strValue = QString("DBType_QSQLITE");
+		strValue = QString("QSQLITE");
 		break;
 	case DBType_QMYSQL:
-		strValue = QString("DBType_QMYSQL");
+		strValue = QString("QMYSQL");
 		break;
 	default:
 		strValue = QString("Error! EDBType nValue=%1").arg(nValue);
@@ -141,8 +162,11 @@ QString CDbStatusItem::getString( EDataTypes nValue )
 
 	switch (nValue)
 	{
-	case DataTypes_CSData:
-		strValue = QString("DataTypes_CSData");
+	case DataTypes_Client:
+		strValue = QString("DataTypes_Client");
+		break;
+	case DataTypes_Server:
+		strValue = QString("DataTypes_Server");
 		break;
 	case DataTypes_YahuoData:
 		strValue = QString("DataTypes_YahuoData");
@@ -174,6 +198,7 @@ QString CDbStatusItem::getString( EDBPriority nValue )
 
 	return strValue;
 }
+
 
 
 

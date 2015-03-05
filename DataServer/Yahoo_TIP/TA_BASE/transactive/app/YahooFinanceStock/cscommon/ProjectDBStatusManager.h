@@ -10,7 +10,7 @@
 
 
 
-class CSQLStringXmlParser;
+class CDBCfgXmlParser;
 
 class CProjectDBStatusManager 
 {
@@ -23,7 +23,9 @@ private:
 private:
     CProjectDBStatusManager(void);
 	~CProjectDBStatusManager(void);
-
+private:
+	QString m_strXmlFile;
+	CDBCfgXmlParser* m_pXmlParser;
 };
 
 #endif//__CLASS_PROJECT_DBSTATUS_MANAGER_H__

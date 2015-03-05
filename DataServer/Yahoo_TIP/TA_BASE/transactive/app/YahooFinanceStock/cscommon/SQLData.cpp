@@ -152,3 +152,14 @@ qint32 CSQLData::buildSQL( const QString& arg0, const QString& arg1, const QStri
 
 	return nFunRes;
 }
+
+void CSQLData::logInfo( const QString& fileName, qint32 lineNumber ) const
+{
+	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
+		<<" "<<"CReqLogin:"
+		<<" "<<"m_strXMLSQLKey="<<m_strXMLSQLKey
+		<<" "<<"m_strXMLSQL_QSQLITE="<<m_strXMLSQL_QSQLITE
+		<<" "<<"m_strXMLSQL_QMYSQL="<<m_strXMLSQL_QMYSQL
+		<<" "<<"m_strUseSQL_QSQLITE="<<m_strUseSQL_QSQLITE
+		<<" "<<"m_strUseSQL_QMYSQL="<<m_strUseSQL_QMYSQL;
+}

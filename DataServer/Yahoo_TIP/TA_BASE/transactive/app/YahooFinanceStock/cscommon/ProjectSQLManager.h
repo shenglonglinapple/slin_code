@@ -51,7 +51,7 @@ private:
 	qint32 _GetSQLData( CSQLData& objSQLData, const QString& sqlKey );
 private:
 	QMutex m_mutex_MapSQLData;
-	QMap<QString, CSQLData*> m_MapSQLData;
+	QMap<QString, CSQLData*> m_MapSQLData;//SQLKey, ALLSQL
 private:
 	QString m_strSQLStringXmlFile;
 	CSQLStringXmlParser* m_pSQLStringXmlParser;

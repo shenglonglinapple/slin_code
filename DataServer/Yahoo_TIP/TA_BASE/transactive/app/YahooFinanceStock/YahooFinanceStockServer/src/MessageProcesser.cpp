@@ -171,16 +171,18 @@ void CMessageProcesser::processReq( const CReqSynYahoo* pReq )
 	{
 		CProjectEnvironment::getInstance().qtWaitTime(300);
 		nSynYahooResult = pYahooDataLoader->getState_SynDataWithYahoo();
-		pAck->m_strACKUUID = CTcpComProtocol::getUUID();
-		pAck->m_nResult = nSynYahooResult;
-		pAck->logInfo(__FILE__, __LINE__);
-		pByteArray = pAck->getMessage();
-		CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);
-		pByteArray = NULL;
 
 		if (CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished == nSynYahooResult
 			|| CTcpComProtocol::DataType_SynYahooResult_ERROR == nSynYahooResult)
 		{
+			pAck->m_strACKUUID = CTcpComProtocol::getUUID();
+			pAck->m_nResult = nSynYahooResult;
+			pAck->logInfo(__FILE__, __LINE__);
+
+			pByteArray = pAck->getMessage();
+			CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);
+			pByteArray = NULL;
+
 			break;//while
 		}
 	}//while

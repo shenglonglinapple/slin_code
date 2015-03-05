@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!-- Comment: Config -->
-<Config configAttr="configAttriValue">
-	<!-- Comment: UserNameValuelsl_PassWordValuelsl -->
+<Config configAttr="UserNameValue_PassWordValue.db">
+
 	<DataTypeNode DataTypesAtrr="UserNameValuelsl_PassWordValuelsl">
 		<PriorityNode Priority="0" DBType="QSQLITE" Schema="C:/LSL/LSL_DATA/ClientDB/UserNameValuelsl_PassWordValuelsl.db" User="NULL" Password="NULL" Hostname="127.0.0.1">
 		</PriorityNode>
@@ -9,11 +9,11 @@
 		</PriorityNode>
 	</DataTypeNode>
 	
-	<!-- Comment: UserNameValue_PassWordValue -->
-	<DataTypeNode DataTypesAtrr="UserNameValue_PassWordValue">
-		<PriorityNode Priority="0" DBType="QSQLITE" Schema="C:/LSL/LSL_DATA/ClientDB/UserNameValue_PassWordValue.db" User="NULL" Password="NULL" Hostname="127.0.0.1">
+	<DataTypeNode DataTypesAtrr="username1_password1">
+		<PriorityNode Priority="0" DBType="QSQLITE" Schema="C:/LSL/LSL_DATA/ClientDB/username1_password1.db" User="NULL" Password="NULL" Hostname="127.0.0.1">
 		</PriorityNode>
 		<PriorityNode Priority="1" DBType="QMYSQL" Schema="tra_occ" User="IT271350_5" Password="IT271350_5" Hostname="192.168.123.43">
 		</PriorityNode>
 	</DataTypeNode>
- </Config>
+
+</Config>

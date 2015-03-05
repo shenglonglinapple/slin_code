@@ -924,11 +924,23 @@
 				>
 			</File>
 			<File
+				RelativePath="..\cscommon\IQueryAdapter.h"
+				>
+			</File>
+			<File
 				RelativePath="..\cscommon\QtDBConnection.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\cscommon\QtDBConnection.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBQueryAdapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBQueryAdapter.h"
 				>
 			</File>
 		</Filter>

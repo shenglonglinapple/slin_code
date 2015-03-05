@@ -1,53 +1,61 @@
 #ifndef   __CLASS_QT_DB_CONNECTION_HH__
 #define	  __CLASS_QT_DB_CONNECTION_HH__
 
+#include <QtCore/QString>
+#include <QtCore/QStringList>
+#include <QtCore/QList>
+#include <QtCore/QObject>
+#include <QtCore/QMutex>
+#include <QtCore/QMutexLocker>
+#include <QtCore/QMap>
 
 #include <QtSql/QtSql>
 #include <QtCore/QChar>
-#include <QtCore/QString>
 #include <QtCore/QDir>
 #include <QtCore/QVariant>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlDatabase>
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QList>
-
+#include "IDbConnection.h"
 
 class IQueryAdapter;   // forward declare
 class CAWorkTime;
+class CDbStatusItem;
 
-class MysqlConnection : public IDbConnection
+class CQtDBConnection : public IDbConnection
 {
 public:
-	MysqlConnection(sql::Driver* pDriver, const CDbStatusItem& objDbStatusItem);
-	~MysqlConnection();
-	std::string getConnectionString() const;
-	void open();	
+	CQtDBConnection(const CDbStatusItem* pDbStatusItem);
+	~CQtDBConnection();
+public:
+	bool isAnyQueryActive( unsigned long ulMaxTimeoutInSecs );
+	QString getConnectionString() const;
+	void open();
 	bool isOpen();
-	void exec( const CSQLData& sqlData, IQueryAdapter*& pIQueryAdapter, bool isQuery = false, int prefetch = FETCH_MAX_ROWS);
+	qint32 execQuery(const CSQLData& sqlData, IQueryAdapter*& pQueryAdapter);
+	qint32 execModify( const CSQLData& sqlData );	
+	qint32 execModifyBatch( const CSQLData& sqlData, const QList<QVariantList*>& LstData);
+
+	qint32 commitTransaction();
+	qint32 startTransaction();
 	void incrementExecutionCount();
 	void decrementExecutionCount();
-	int getExecutionCount() { return m_nExecutionCount; };
-    void cleanQuery( IQueryAdapter*& pQueryAdapter );
+	qint32 getExecutionCount();
 	bool isHealth();
-	bool isAnyQueryActive( unsigned long ulMaxTimeoutInSecs );
 	void setConStatus(bool bIsHealth);
+	void cleanQuery( IQueryAdapter*& pQueryAdapter );
 private:
-	CDbStatusItem* m_pDbStatusItem;
 	void _CreateConnection();	
-	void _GetSQL(std::string& strSql, const SQLStatement& rSqlObj);
 	void _CleanAllQuery();
 	void _Close();
-	bool _CheckAnyNotQueryActive( unsigned long ulMaxTimeoutInSecs );
-private:
-	// Enables thread guarding
-	TA_Base_Core::ReEntrantThreadLockable m_lockConnection;
-	sql::Driver*     m_pDriver;
-	sql::Connection* m_pConnection;
+	bool _CheckAnyNotQueryActive( qint32 ulMaxTimeoutInSecs );
+	QString _GetSQL(const CSQLData& sqlData);
 
+private:
+	QMutex m_lockConnection;
+	QSqlDatabase* m_pConnection;
+	CDbStatusItem* m_pDbStatusItem;
 
 private:
 	//this connection is last created time
@@ -58,11 +66,11 @@ private:
 	CAWorkTime*   m_pWorkTimeNotUsingConnecion;
 	bool m_bIsHealth;
 private:
-	TA_Base_Core::ReEntrantThreadLockable m_LockMapActiveQuery;// Enables thread guarding
-	std::map<IQueryAdapter*, long> m_mapActiveQuery;
+	QMutex m_LockMapActiveQuery;// Enables thread guarding
+	QMap<QString, IQueryAdapter*> m_mapActiveQuery;//CTcpComProtocol::getUUID()  
 
-	TA_Base_Core::ReEntrantThreadLockable m_LockExecutionCount;// Enables thread guarding
-	unsigned long m_nExecutionCount;
+	QMutex m_LockExecutionCount;// Enables thread guarding
+	qint32 m_nExecutionCount;
 };
 
 
