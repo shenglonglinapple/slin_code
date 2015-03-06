@@ -45,6 +45,8 @@ public:
 	bool isHealth();
 	void setConStatus(bool bIsHealth);
 	void cleanQuery( IQueryAdapter*& pQueryAdapter );
+public:
+	QSqlDatabase* getQTDBHandle();
 private:
 	void _CreateConnection();	
 	void _CleanAllQuery();

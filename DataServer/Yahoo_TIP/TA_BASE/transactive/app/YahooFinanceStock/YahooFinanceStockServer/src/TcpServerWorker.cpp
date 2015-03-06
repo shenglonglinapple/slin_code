@@ -25,7 +25,7 @@ CTcpServerWorker::CTcpServerWorker( quint16 nListenPort, QObject* parent/*=0*/ )
 	m_pServerDbOper = NULL;
 
 	m_nListenPort = nListenPort;
-	m_pServerDbOper = new CServerDbOper(QString("%1.db").arg(m_nListenPort));//5001.db
+	m_pServerDbOper = new CServerDbOper(QString("%1").arg(m_nListenPort));//5001.db
 
 }
 

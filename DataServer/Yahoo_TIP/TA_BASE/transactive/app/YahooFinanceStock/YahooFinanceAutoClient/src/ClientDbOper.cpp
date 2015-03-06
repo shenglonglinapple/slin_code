@@ -2,7 +2,6 @@
 
 #include <QtCore/QFile>
 
-#include "ProjectDBStruct.h"
 
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
@@ -13,6 +12,8 @@
 #include "UserAccount.h"
 #include "UserHoldAccount.h"
 
+#include "ProjectSQLManager.h"
+#include "ProjectDBStruct.h"
 #include "DbStatusItem.h"
 #include "QtDBConnection.h"
 #include "IQueryAdapter.h"
@@ -269,6 +270,7 @@ qint32 CClientDbOper::insertSymbolMinMaxTime( const CStockMinTimeMaxTime* pData 
 	nFunRes = m_pDbConnection->startTransaction();
 	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
 	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
 
 	return nFunRes;
 }
@@ -340,6 +342,8 @@ qint32 CClientDbOper::selectSymbolMinMaxTime( const QString& strSymbolUse, CStoc
 		(*ppData) = pDataGet;
 		pDataGet = NULL;
 	}//while
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 
 	return nFunRes;
 }
@@ -458,6 +462,7 @@ qint32 CClientDbOper::insertUserAccount( const CUserAccount* pData )
 	nFunRes = m_pDbConnection->startTransaction();
 	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
 	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
 
 	return nFunRes;
 }
@@ -651,5 +656,7 @@ qint32 CClientDbOper::getSymbolUseLst(QList<QString>& lstData )
 		strSymbolUse.clear();
 	}
 
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 	return nFunRes;
 }

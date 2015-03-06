@@ -1809,8 +1809,40 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="XML"
+			Name="dbcon"
 			>
+			<File
+				RelativePath="..\cscommon\DBCfgXmlParser.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DBCfgXmlParser.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItemList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\DbStatusItemList.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\IDbConnection.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\IQueryAdapter.h"
+				>
+			</File>
 			<File
 				RelativePath="..\cscommon\ProjectDBStruct.h"
 				>
@@ -1821,6 +1853,22 @@
 			</File>
 			<File
 				RelativePath="..\cscommon\ProjectSQLManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBConnection.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBConnection.h"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBQueryAdapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\cscommon\QtDBQueryAdapter.h"
 				>
 			</File>
 			<File

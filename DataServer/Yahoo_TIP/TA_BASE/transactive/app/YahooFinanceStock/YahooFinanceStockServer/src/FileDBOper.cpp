@@ -102,7 +102,9 @@ void CFileDBOper::createFile(const QString & strFileName)
 	{
 		return;
 	}
-	file.open(QIODevice::WriteOnly );
+	//file.open(QIODevice::WriteOnly );
+	file.open(QIODevice::WriteOnly | QIODevice::Append);
+	//
 	file.close();//create file
 	return;
 	
@@ -122,7 +124,7 @@ void CFileDBOper::saveDataToFile(const QString & strFileName, const QStringList&
 	createFile(strFileName);
 
 	QFile file(strFileName);
-	if (!file.open(QIODevice::WriteOnly | QIODevice::Text))//Append QIODevice::WriteOnly 
+	if (!file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text))//Append QIODevice::WriteOnly 
 	{
 		MYLOG4CPP_ERROR<<"not find file strFileName="<<strFileName;
 		return;

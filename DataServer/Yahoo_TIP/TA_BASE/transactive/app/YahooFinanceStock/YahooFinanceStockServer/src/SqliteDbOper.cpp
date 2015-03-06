@@ -7,24 +7,32 @@
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 #include "UserInfo.h"
+
 #include "ProjectSQLManager.h"
-
-static const char*  str_QtDbType_QSQLITE = "QSQLITE";
-static const char*  str_QtDbType_QMYSQL = "QMYSQL";
-
+#include "ProjectDBStruct.h"
+#include "DbStatusItem.h"
+#include "QtDBConnection.h"
+#include "IQueryAdapter.h"
 
 
 //strSymbolUse
-CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
+CSqliteDbOper::CSqliteDbOper( const QString& strSymbolUse )//"002567.SZ";
 {
-	m_pQSqlDataBase = NULL;
-	m_strQTDbType = str_QtDbType_QSQLITE;
-	m_strSqliteDbFileName = strSqliteDbFileName;//"002567.SZ";
-	m_strSqliteDbKEY = m_strSqliteDbFileName;
-	m_strSqliteDbPath = CConfigInfo::getInstance().getSQLiteDBPath();
-	m_strSqliteDbFileFullPath = m_strSqliteDbPath + m_strSqliteDbFileName;
-	_InitDataBase();
-	if (true == m_pQSqlDataBase->isValid())
+	m_pDbConnection = NULL;
+	m_pDbStatusItem = NULL;
+
+	m_strSqliteDbPath = CConfigInfo::getInstance().getSQLiteDBPath();//"C:/LSL/LSL_DATA/SaveDataFile/002567.SZ"
+	m_strSqliteDbFileFullPath = m_strSqliteDbPath + strSymbolUse;
+
+	m_pDbStatusItem = new CDbStatusItem();
+	m_pDbStatusItem->m_nDBType = CDbStatusItem::DBType_QSQLITE;
+	m_pDbStatusItem->m_strSchema = m_strSqliteDbFileFullPath;//"C:/LSL/LSL_DATA/ServerDB/5001.db"
+	m_pDbStatusItem->setProperties();
+
+	m_pDbConnection = new CQtDBConnection(m_pDbStatusItem);
+	m_pDbConnection->open();
+
+	if (true == m_pDbConnection->isOpen())
 	{
 		_CreateDBTable_TABLE_BAR_DATA_1DAY();
 	}
@@ -32,153 +40,21 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSqliteDbFileName )
 
 CSqliteDbOper::~CSqliteDbOper()
 {
-	_UnInitDataBase();
-
-}
-
-
-void CSqliteDbOper::_InitDataBase()
-{
-	_UnInitDataBase();
-	
-	m_pQSqlDataBase = new QSqlDatabase(QSqlDatabase::addDatabase(m_strQTDbType, m_strSqliteDbKEY));
-	m_pQSqlDataBase->setDatabaseName(m_strSqliteDbFileFullPath);
-
-	MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-		<<" "<<"new Database  m_strQTDbType="<<m_strQTDbType.toStdString()
-		<<" "<<"m_strSqliteDbFileName="<<m_strSqliteDbFileName.toStdString()
-		<<" "<<"m_strSqliteDbKEY="<<m_strSqliteDbKEY.toStdString()
-		<<" "<<"m_strSqliteDbFileFullPath="<<m_strSqliteDbFileFullPath.toStdString();
-
-
-	if (false == m_pQSqlDataBase->open())
+	if (NULL != m_pDbStatusItem)
 	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"Fail to open!"
-			<<" "<<"error:"<<m_pQSqlDataBase->lastError().text().toStdString();
+		delete m_pDbStatusItem;
+		m_pDbStatusItem = NULL;
 	}
 
-	//check
-	if (false == m_pQSqlDataBase->isValid())
+	if (NULL != m_pDbConnection)
 	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"is not Valid";
-	}
-
-	if (false == m_pQSqlDataBase->driver()->hasFeature(QSqlDriver::Transactions)) 
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"not support Transactions";
-	}
-	else
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"support Transactions";
-	}
-	///////
-
-
-}
-
-void CSqliteDbOper::_UnInitDataBase()
-{
-
-	if (NULL != m_pQSqlDataBase)
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<"delete Database  m_strSqliteDbFileName="<<m_strSqliteDbFileName.toStdString();
-
-		m_pQSqlDataBase->close();
-		delete m_pQSqlDataBase;
-		m_pQSqlDataBase = NULL;
-		QSqlDatabase::removeDatabase(m_strSqliteDbKEY);
+		delete m_pDbConnection;
+		m_pDbConnection = NULL;
 	}
 }
 
-
-
-
-int CSqliteDbOper::_StartTransaction()
-{
-	int nFunRes = 0;
-
-	if (false == m_pQSqlDataBase->driver()->hasFeature(QSqlDriver::Transactions)) 
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"not support Transactions";
-		nFunRes = -1;
-		return nFunRes;
-	}
-
-	if (false == m_pQSqlDataBase->transaction())
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"support Transactions but start transaction error!"
-			<<" "<<"error: "<<QSqlDatabase::database().lastError().text().toStdString();
-		nFunRes = -1;
-	}
-	else
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"start Transaction";
-		nFunRes = 0;
-	}
-
-	return nFunRes;
-}
-
-
-
-int CSqliteDbOper::_CommitTransaction()
-{
-	int nFunRes = 0;
-
-	if (NULL == m_pQSqlDataBase)
-	{
-		nFunRes = -1;
-		return nFunRes;
-	}
-
-	if(false == m_pQSqlDataBase->commit())  
-	{  
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"commit error!"
-			<<" "<<"error: "<<QSqlDatabase::database().lastError().text().toStdString();
-
-		if(false == m_pQSqlDataBase->rollback())  
-		{  
-			MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-				<<" "<<m_strSqliteDbFileFullPath.toStdString()
-				<<" "<<"rollback error!"
-				<<" "<<"error: "<<QSqlDatabase::database().lastError().text().toStdString();
-		}//if 
-	}//if
-	else
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"commit Transaction";
-	}
-	return nFunRes;
-}
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-
-void CSqliteDbOper::saveData(const QString& strSymbolUse, LstHistoryDataT* pLstData)
-{
-	_StartTransaction();
-	_AddDataArray(strSymbolUse, pLstData);
-	_CommitTransaction();
-}
 
 
 int CSqliteDbOper::_CreateDBTable_TABLE_BAR_DATA_1DAY()
@@ -188,13 +64,13 @@ int CSqliteDbOper::_CreateDBTable_TABLE_BAR_DATA_1DAY()
 	QString  strSQLKey = "TABLE_BAR_DATA_1DAY__CREATE_TABLE__0000";
 
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
+	
 	return nFunRes;
 
 }
 
-
-int CSqliteDbOper::_AddDataArray(const QString& strSymbolUse,LstHistoryDataT* pLstData)
+int CSqliteDbOper::saveData(const QString& strSymbolUse, LstHistoryDataT* pLstData)
 {
 	int nFunRes = 0;
 	bool bExecRes = false;
@@ -211,7 +87,7 @@ int CSqliteDbOper::_AddDataArray(const QString& strSymbolUse,LstHistoryDataT* pL
 	QVariantList lst_COLUMN_CLOSE;
 	QVariantList lst_COLUMN_VOLUME;
 	QVariantList lst_COLUMN_ADJCLOSE;
-	QSqlQuery* pQSqlQueryForInseert = NULL;
+	QList<QVariantList*> LstData;
 
 	if (pLstData->empty())
 	{
@@ -219,16 +95,6 @@ int CSqliteDbOper::_AddDataArray(const QString& strSymbolUse,LstHistoryDataT* pL
 		return nFunRes;
 	}
 
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
-
-	strSQLKey = "TABLE_BAR_DATA_1DAY__INSERT__0001";
-	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL()
-		<<" "<<"LstHistoryDataT.size="<<pLstData->size();
-
-	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
 
 	iterLst = pLstData->begin();
 	while (iterLst != pLstData->end())
@@ -248,29 +114,22 @@ int CSqliteDbOper::_AddDataArray(const QString& strSymbolUse,LstHistoryDataT* pL
 		iterLst++;
 	}//while
 
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_SYMBOLUSE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_DATE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_OPEN);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_HIGH);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_LOW);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_CLOSE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_VOLUME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_ADJCLOSE);
+	LstData.append(&lst_COLUMN_SYMBOLUSE);
+	LstData.append(&lst_COLUMN_DATE);
+	LstData.append(&lst_COLUMN_OPEN);
+	LstData.append(&lst_COLUMN_HIGH);
+	LstData.append(&lst_COLUMN_LOW);
+	LstData.append(&lst_COLUMN_CLOSE);
+	LstData.append(&lst_COLUMN_VOLUME);
+	LstData.append(&lst_COLUMN_ADJCLOSE);
 
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"LstHistoryDataT.size="<<pLstData->size()
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
+	strSQLKey = "TABLE_BAR_DATA_1DAY__INSERT__0001";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+	nFunRes = m_pDbConnection->startTransaction();
+	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
+	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
 
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
 	return nFunRes;
 }
 
@@ -280,62 +139,64 @@ int CSqliteDbOper::selectData(const QString & strFrom, const QString & strTo, Ls
 	bool bExecRes = true;
 	QString strSQLKey;
 	CSQLData sqlData;
-	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
+	QStringList lstColumnName;
+	IQueryAdapter* pQueryAdapter = NULL;
 
-	lstData.clear();
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+	/*
+	SELECT COLUMN_SYMBOLUSE, COLUMN_DATE, COLUMN_OPEN, COLUMN_HIGH, COLUMN_LOW, COLUMN_CLOSE, COLUMN_VOLUME, COLUMN_ADJCLOSE
+	FROM TABLE_BAR_DATA_1DAY
+	WHERE COLUMN_DATE >="%1" AND COLUMN_DATE <="%2" ORDER BY COLUMN_DATE ASC
+	*/
 	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT__0003";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey, strFrom, strTo);
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
 
-	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
 
-	if (!bExecRes)
+	lstColumnName.clear();
+	lstColumnName.append(str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE);
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_DATE);
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_OPEN);
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_HIGH);
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_LOW);
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_CLOSE);
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_VOLUME);
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_ADJCLOSE);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
 	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-
-		delete pSqlQuery;
-		pSqlQuery = NULL;		
-		return nFunRes;
+		lstColumnName = pQueryAdapter->getLstColumnName();
 	}
-
-	while ( pSqlQuery->next() )
+	lstData.clear();
+	while (NULL != pQueryAdapter && pQueryAdapter->hasMore())
 	{
 		CHistoryData* pHistoryData = NULL;
 		pHistoryData = new CHistoryData();
 		nColumnIndex = 0;
+		pHistoryData->m_strSymbolUse = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_COLUMN_SYMBOLUSE);
+		nColumnIndex++;
+		pHistoryData->m_strDate = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_DATE);
+		nColumnIndex++;
+		pHistoryData->m_strOpen = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_OPEN);
+		nColumnIndex++;
+		pHistoryData->m_strHigh = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_HIGH);
+		nColumnIndex++;
+		pHistoryData->m_strLow = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_LOW);
+		nColumnIndex++;
+		pHistoryData->m_strClose = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_CLOSE);
+		nColumnIndex++;
+		pHistoryData->m_strVolume = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_VOLUME);
+		nColumnIndex++;
+		pHistoryData->m_strAdjClose = pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_ADJCLOSE);
+		nColumnIndex++;
 
-		pHistoryData->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pHistoryData->m_strDate = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pHistoryData->m_strOpen = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pHistoryData->m_strHigh = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pHistoryData->m_strLow = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pHistoryData->m_strClose = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pHistoryData->m_strVolume = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-		pHistoryData->m_strAdjClose = pSqlQuery->value(nColumnIndex).toString();
-		nColumnIndex++;
-	
 		lstData.push_back(pHistoryData);
 		pHistoryData = NULL;
-	}//while
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
 	}
+
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 
 	return nFunRes;
 }
@@ -347,40 +208,35 @@ int CSqliteDbOper::selectData_MinTime(QString& strValueGet)
 	bool bExecRes = true;
 	QString  strSQLKey;
 	CSQLData sqlData;
-	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
+	QStringList lstColumnName;
+	IQueryAdapter* pQueryAdapter = NULL;
 
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-
+	/*
+	SELECT COLUMN_DATE FROM TABLE_BAR_DATA_1DAY	ORDER BY COLUMN_DATE ASC LIMIT 1
+	*/
 	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_DATEASC_0005";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
-	if (!bExecRes)
+
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+
+	lstColumnName.clear();
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_DATE);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
 	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-
-		delete pSqlQuery;
-		pSqlQuery = NULL;		
-		return nFunRes;
+		lstColumnName = pQueryAdapter->getLstColumnName();
 	}
-
 	strValueGet.clear();
-	if ( pSqlQuery->next() )
+	if (NULL != pQueryAdapter && pQueryAdapter->hasMore())
 	{
 		nColumnIndex = 0;
-		strValueGet = pSqlQuery->value(nColumnIndex).toString();	
-	}//while
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
+		strValueGet= pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_DATE);
 	}
+
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 
 	return nFunRes;
 }
@@ -391,40 +247,35 @@ int CSqliteDbOper::selectData_MaxTime(QString& strValueGet)
 	bool bExecRes = true;
 	QString  strSQLKey;
 	CSQLData sqlData;
-	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
+	QStringList lstColumnName;
+	IQueryAdapter* pQueryAdapter = NULL;
 
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-
+	/*
+	SELECT COLUMN_DATE	FROM TABLE_BAR_DATA_1DAY	ORDER BY COLUMN_DATE DESC LIMIT 1
+	*/
 	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_DATEDESC_0004";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
-	if (!bExecRes)
+
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+
+	lstColumnName.clear();
+	lstColumnName.append(str_TABLE_BAR_DATA_Column_DATE);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
 	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-
-		delete pSqlQuery;
-		pSqlQuery = NULL;		
-		return nFunRes;
+		lstColumnName = pQueryAdapter->getLstColumnName();
 	}
-
 	strValueGet.clear();
-	if ( pSqlQuery->next() )
+	if (NULL != pQueryAdapter && pQueryAdapter->hasMore())
 	{
 		nColumnIndex = 0;
-		strValueGet = pSqlQuery->value(nColumnIndex).toString();	
-	}//while
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
+		strValueGet= pQueryAdapter->getStringData(str_TABLE_BAR_DATA_Column_DATE);
 	}
+
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 
 	return nFunRes;
 }
@@ -435,69 +286,36 @@ int CSqliteDbOper::selectData_Count( int& nValueGet )
 	bool bExecRes = true;
 	QString  strSQLKey;
 	CSQLData sqlData;
-	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
-
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-
+	QStringList lstColumnName;
+	IQueryAdapter* pQueryAdapter = NULL;
+	QString strColumnName_COUNT = "COUNT";
+	/*
+	SELECT COUNT(*)	as COUNT FROM TABLE_BAR_DATA_1DAY
+	*/
 	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_COUNT_0006";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
-	if (!bExecRes)
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+
+	lstColumnName.clear();
+	lstColumnName.append(strColumnName_COUNT);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
 	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-
-		delete pSqlQuery;
-		pSqlQuery = NULL;		
-		return nFunRes;
+		lstColumnName = pQueryAdapter->getLstColumnName();
 	}
-
 	nValueGet = 0;
-	if ( pSqlQuery->next() )
+	if (NULL != pQueryAdapter && pQueryAdapter->hasMore())
 	{
 		nColumnIndex = 0;
-		nValueGet = pSqlQuery->value(nColumnIndex).toInt();	
-	}//while
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
+		nValueGet= pQueryAdapter->getStringData(lstColumnName[0]).toInt();
 	}
+
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 
 	return nFunRes;
 }
 
-qint32 CSqliteDbOper::_ExecModify(const CSQLData& sqlData)
-{
-	qint32 nFunRes = 0;
-	bool bExecRes = true;
-	QString strSQL = sqlData.getSqliteSQL();
-
-	QSqlQuery* pSqlQuery = NULL;
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
-	bExecRes = pSqlQuery->exec(strSQL);
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-	}
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
-	}
-	return nFunRes;
-}

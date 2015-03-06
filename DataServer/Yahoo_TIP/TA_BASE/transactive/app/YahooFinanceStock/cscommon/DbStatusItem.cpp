@@ -1,5 +1,7 @@
 #include "DbStatusItem.h"
 
+#include <QtCore/QUuid>
+
 #include "TcpComProtocol.h"
 
 #include "Log4cppLogger.h"
@@ -76,7 +78,8 @@ void CDbStatusItem::logInfo( const QString& file, qint32 line )
 
 void CDbStatusItem::setProperties()
 {
-	m_strDBKey = CTcpComProtocol::getUUID();
+	QUuid newUuid = QUuid::createUuid();
+	m_strDBKey = newUuid.toString();
 	m_strDbType = getString(m_nDBType);
 
 	getConnectionString();

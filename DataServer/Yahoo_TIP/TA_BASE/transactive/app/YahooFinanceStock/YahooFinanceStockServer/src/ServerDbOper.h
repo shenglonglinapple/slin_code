@@ -16,7 +16,10 @@
 #include <QtCore/QList>
 #include "ProjectSQLManager.h"
 
-class CSqliteDbOperBuildSQL;
+class IDbConnection;
+class CDbStatusItem;
+
+
 class CUserInfo;
 class CUserTradeInfo;
 class CUserHold;
@@ -26,7 +29,7 @@ class CUserHoldAccount;
 class CServerDbOper
 {
 public:
-	CServerDbOper(const QString& strSqliteDbFileName);
+	CServerDbOper(const QString& strServerListenPort);
 	virtual ~CServerDbOper();
 public:
 	qint32 selectUserInfo(const QString & strUSERNAME, const QString& strPASSWORD, CUserInfo** ppData);
@@ -42,38 +45,29 @@ public:
 public:
 	qint32 selectUserHoldAccount(const QString& strUserID,const QString& strSymobolUse, CUserHoldAccount** ppData);
 	qint32 selectUserHoldAccount(const QString& strUserID, QList<CUserHoldAccount*>& LstData);
-	qint32 insertUserHoldAccount(CUserHoldAccount* pData);
-	qint32 updateUserHoldAccount(CUserHoldAccount* pData);
+	qint32 insertUserHoldAccount(const CUserHoldAccount* pData);
+	qint32 updateUserHoldAccount(const CUserHoldAccount* pData);
 
 public:
 	int startTransaction();
 	int commitTransaction();
 
 //////////////////////////////////////////////////////////////////////////
-private:
-	void _UnInitDataBase();
-	void _InitDataBase();
-	qint32 _ExecModify(const CSQLData& sqlData);
+
 
 private:
 	qint32 _CreateDBTable_TABLE_USER_INFO();
-	qint32 _AddUserInfo(const CUserInfo* pData);
 	qint32 _CreateDBTable_TABLE_USER_TRADE_INFO();
-	qint32 _AddUserTradeInfo(const CUserTradeInfo* pData);
 	qint32 _CreateDBTable_TABLE_USER_ACCOUNT();
-	qint32 _AddUserAccount(const CUserAccount* pData);
 	qint32 _Truncate_TABLE_USER_ACCOUNT();
 	qint32 _CreateDBTable_TABLE_USER_HOLD_ACCOUNT();
 	qint32 _Truncate_TABLE_USER_HOLD_ACCOUNT();
-	qint32 _AddUserHoldAccount(const CUserHoldAccount* pData);
 
 private:
-	QSqlDatabase* m_pQSqlDataBase;
-	QString m_strQTDbType;//"QSQLITE" "QMYSQL"
-	QString m_strSqliteDbFileName;
-	QString m_strSqliteDbKEY;
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
+	IDbConnection* m_pDbConnection;
+	CDbStatusItem* m_pDbStatusItem;
 	
 };
 

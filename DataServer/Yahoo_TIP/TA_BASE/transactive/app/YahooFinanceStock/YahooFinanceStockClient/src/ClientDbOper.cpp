@@ -2,8 +2,6 @@
 
 #include <QtCore/QFile>
 
-#include <sstream>
-#include "ProjectDBStruct.h"
 
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
@@ -14,22 +12,34 @@
 #include "UserAccount.h"
 #include "UserHoldAccount.h"
 
+#include "ProjectSQLManager.h"
+#include "ProjectDBStruct.h"
+#include "DbStatusItem.h"
+#include "QtDBConnection.h"
+#include "IQueryAdapter.h"
+
 //5001.db
-CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
+CClientDbOper::CClientDbOper( const QString& strUserID )
 {
-	m_pQSqlDataBase = NULL;
-	m_strQTDbType = str_QtDbType_QSQLITE;
-	m_strSqliteDbFileName = strSqliteDbFileName;//"002567.SZ";
-	m_strSqliteDbKEY = m_strSqliteDbFileName;
+	m_pDbConnection = NULL;
+	m_pDbStatusItem = NULL;
+	
 	m_strSqliteDbPath = CConfigInfo::getInstance().getClientDBPath();
-	m_strSqliteDbFileFullPath = m_strSqliteDbPath + m_strSqliteDbFileName + ".db";//"C:/LSL/LSL_DATA/ClientDB/UserID.db"
-	m_pSqlTableModel_HistoryData = NULL;
-	_InitDataBase();
-	if (true == m_pQSqlDataBase->isValid())
+	m_strSqliteDbFileFullPath = m_strSqliteDbPath + strUserID + ".db";//"C:/LSL/LSL_DATA/ClientDB/UserID.db"
+
+	m_pDbStatusItem = new CDbStatusItem();
+	m_pDbStatusItem->m_nDBType = CDbStatusItem::DBType_QSQLITE;
+	m_pDbStatusItem->m_strSchema = m_strSqliteDbFileFullPath;//"C:\\LSL\\LSL_DATA\\ClientDB\\UserNameValuelsl_PassWordValuelsl.db";
+	m_pDbStatusItem->setProperties();
+
+	m_pDbConnectionQtRef = new CQtDBConnection(m_pDbStatusItem);
+	m_pDbConnection = (IDbConnection*)m_pDbConnectionQtRef;
+	m_pDbConnection->open();
+
+	if (true == m_pDbConnection->isOpen())
 	{
 		_CreateDBTable_TABLE_SYMBOLUSE();
 		_Truncate_TABLE_SYMBOLUSE();
-
 		_CreateDBTable_TABLE_USER_TRADE_INFO();
 		truncate_TABLE_USER_TRADE_INFO();
 		_CreateDBTable_TABLE_BAR_DATA_1DAY();
@@ -45,153 +55,20 @@ CClientDbOper::CClientDbOper( const QString& strSqliteDbFileName )
 
 CClientDbOper::~CClientDbOper()
 {
-	_UnInitDataBase();
-
-	if (NULL != m_pSqlTableModel_HistoryData)
+	if (NULL != m_pDbStatusItem)
 	{
-		delete m_pSqlTableModel_HistoryData;
-		m_pSqlTableModel_HistoryData = NULL;
+		delete m_pDbStatusItem;
+		m_pDbStatusItem = NULL;
 	}
+
+	if (NULL != m_pDbConnection)
+	{
+		delete m_pDbConnection;
+		m_pDbConnection = NULL;
+	}
+	m_pDbConnectionQtRef = NULL;
 }
 
-QSqlDatabase* CClientDbOper::getDB()
-{
-	return m_pQSqlDataBase;
-}
-
-void CClientDbOper::_InitDataBase()
-{
-	_UnInitDataBase();
-	
-	m_pQSqlDataBase = new QSqlDatabase(QSqlDatabase::addDatabase(m_strQTDbType, m_strSqliteDbKEY));
-	m_pQSqlDataBase->setDatabaseName(m_strSqliteDbFileFullPath);
-
-	MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-		<<" "<<"new Database  m_strQTDbType="<<m_strQTDbType.toStdString()
-		<<" "<<"m_strSqliteDbFileName="<<m_strSqliteDbFileName.toStdString()
-		<<" "<<"m_strSqliteDbKEY="<<m_strSqliteDbKEY.toStdString()
-		<<" "<<"m_strSqliteDbFileFullPath="<<m_strSqliteDbFileFullPath.toStdString();
-
-
-	if (false == m_pQSqlDataBase->open())
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"Fail to open!"
-			<<" "<<"error:"<<m_pQSqlDataBase->lastError().text().toStdString();
-	}
-
-	//check
-	if (false == m_pQSqlDataBase->isValid())
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"is not Valid";
-	}
-
-	if (false == m_pQSqlDataBase->driver()->hasFeature(QSqlDriver::Transactions)) 
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"not support Transactions";
-	}
-	else
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"support Transactions";
-	}
-	///////
-
-
-}
-
-void CClientDbOper::_UnInitDataBase()
-{
-
-	if (NULL != m_pQSqlDataBase)
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<"delete Database  m_strSqliteDbFileName="<<m_strSqliteDbFileName.toStdString();
-
-		m_pQSqlDataBase->close();
-		delete m_pQSqlDataBase;
-		m_pQSqlDataBase = NULL;
-		QSqlDatabase::removeDatabase(m_strSqliteDbKEY);
-	}
-}
-
-
-
-
-int CClientDbOper::_StartTransaction()
-{
-	int nFunRes = 0;
-
-	if (false == m_pQSqlDataBase->driver()->hasFeature(QSqlDriver::Transactions)) 
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"not support Transactions";
-		nFunRes = -1;
-		return nFunRes;
-	}
-
-	if (false == m_pQSqlDataBase->transaction())
-	{
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"support Transactions but start transaction error!"
-			<<" "<<"error: "<<QSqlDatabase::database().lastError().text().toStdString();
-		nFunRes = -1;
-	}
-	else
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"start Transaction";
-		nFunRes = 0;
-	}
-
-	return nFunRes;
-}
-
-
-
-int CClientDbOper::_CommitTransaction()
-{
-	int nFunRes = 0;
-
-	if (NULL == m_pQSqlDataBase)
-	{
-		nFunRes = -1;
-		return nFunRes;
-	}
-
-	if(false == m_pQSqlDataBase->commit())  
-	{  
-		MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"commit error!"
-			<<" "<<"error: "<<QSqlDatabase::database().lastError().text().toStdString();
-
-		if(false == m_pQSqlDataBase->rollback())  
-		{  
-			MYLOG4CPP_ERROR<<m_strQTDbType.toStdString()
-				<<" "<<m_strSqliteDbFileFullPath.toStdString()
-				<<" "<<"rollback error!"
-				<<" "<<"error: "<<QSqlDatabase::database().lastError().text().toStdString();
-		}//if 
-	}//if
-	else
-	{
-		MYLOG4CPP_DEBUG<<m_strQTDbType.toStdString()
-			<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"commit Transaction";
-	}
-	return nFunRes;
-}
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 qint32 CClientDbOper::_CreateDBTable_TABLE_MINTIME_MAXTIME()
 {
@@ -200,7 +77,7 @@ qint32 CClientDbOper::_CreateDBTable_TABLE_MINTIME_MAXTIME()
 	QString  strSQLKey = "TABLE_MINTIME_MAXTIME__CREATE_TABLE_0000";
 
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
@@ -211,20 +88,11 @@ qint32 CClientDbOper::_CreateDBTable_TABLE_BAR_DATA_1DAY()
 	QString  strSQLKey = "TABLE_BAR_DATA_1DAY__CREATE_TABLE__0000";
 
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
-qint32 CClientDbOper::insertUserTradeInfo(const CUserTradeInfo* pData )
-{
-	qint32 nFunRes = 0;
-	_StartTransaction();
-	nFunRes = _AddUserTradeInfo(pData);
-	_CommitTransaction();
-	return nFunRes;
-}
-
-qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
+qint32 CClientDbOper::insertUserTradeInfo( const CUserTradeInfo* pData )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = false;
@@ -243,7 +111,7 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 	QVariantList lst_COLUMN_TOTAL_TRADE_FEE;
 	QVariantList lst_COLUMN_USE_ACCOUNT;
 
-	QSqlQuery* pQSqlQueryForInseert = NULL;
+	QList<QVariantList*> LstData;
 
 	if (NULL == pData)
 	{
@@ -251,14 +119,9 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 		return nFunRes;
 	}
 
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
-
 	strSQLKey = "TABLE_USER_TRADE_INFO__INSERT_0001";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
 
 	{
 		lst_COLUMN_USEID << pData->m_strUserID;
@@ -273,48 +136,40 @@ qint32 CClientDbOper::_AddUserTradeInfo( const CUserTradeInfo* pData )
 		lst_COLUMN_TOTAL_TRADE_FEE << pData->m_fTotalTradeFee;
 		lst_COLUMN_USE_ACCOUNT << pData->m_fUseAccount;
 	}
+	LstData.append(&lst_COLUMN_USEID);
+	LstData.append(&lst_COLUMN_TRADE_UUID);
+	LstData.append(&lst_COLUMN_TRADE_TIME);
+	LstData.append(&lst_COLUMN_TRADE_TYPE);
+	LstData.append(&lst_COLUMN_SYMBOLUSE);
+	LstData.append(&lst_COLUMN_TRADE_PRICE);
+	LstData.append(&lst_COLUMN_TRADE_VOLUME);
+	LstData.append(&lst_COLUMN_TRADE_AMOUNT);
+	LstData.append(&lst_COLUMN_TRADE_FEES);
+	LstData.append(&lst_COLUMN_TOTAL_TRADE_FEE);
+	LstData.append(&lst_COLUMN_USE_ACCOUNT);
 
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_USEID);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_UUID);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_TIME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_TYPE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_SYMBOLUSE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_PRICE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_VOLUME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_AMOUNT);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TRADE_FEES);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_TOTAL_TRADE_FEE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_USE_ACCOUNT);
-	
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
 
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
+	nFunRes = m_pDbConnection->startTransaction();
+	bExecRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
+	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
+
 	return nFunRes;
 }
 
 
 void CClientDbOper::reset_TABLE_BAR_DATA_1DAY( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
-	_StartTransaction();
+	qint32 nFunRes = 0;
 	truncate_TABLE_BAR_DATA_1DAY();
+	nFunRes = m_pDbConnection->startTransaction();
 	_AddHistoryDataLst(lstData);
-	_CommitTransaction();
+	nFunRes = m_pDbConnection->commitTransaction();
 }
 
 qint32 CClientDbOper::_AddHistoryDataLst( const QList<CHistoryData*>& lstData )
 {
 	int nFunRes = 0;
-	bool bExecRes = false;
 	CSQLData sqlData;
 	QString  strSQLKey;
 	QList<CHistoryData*>::const_iterator iterLst;
@@ -327,7 +182,7 @@ qint32 CClientDbOper::_AddHistoryDataLst( const QList<CHistoryData*>& lstData )
 	QVariantList lst_COLUMN_CLOSE;
 	QVariantList lst_COLUMN_VOLUME;
 	QVariantList lst_COLUMN_ADJCLOSE;
-	QSqlQuery* pQSqlQueryForInseert = NULL;
+	QList<QVariantList*> LstData;
 
 	if (lstData.isEmpty())
 	{
@@ -335,14 +190,8 @@ qint32 CClientDbOper::_AddHistoryDataLst( const QList<CHistoryData*>& lstData )
 		return nFunRes;
 	}
 
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
 	strSQLKey = "TABLE_BAR_DATA_1DAY__INSERT__0001";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL()
-		<<" "<<"lstData.size="<<lstData.size();
-
-	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
 
 	iterLst = lstData.begin();
 	while (iterLst != lstData.end())
@@ -361,29 +210,17 @@ qint32 CClientDbOper::_AddHistoryDataLst( const QList<CHistoryData*>& lstData )
 		iterLst++;
 	}//while
 
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_SYMBOLUSE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_DATE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_OPEN);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_HIGH);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_LOW);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_CLOSE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_VOLUME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_ADJCLOSE);
+	LstData.append(&lst_COLUMN_SYMBOLUSE);
+	LstData.append(&lst_COLUMN_DATE);
+	LstData.append(&lst_COLUMN_OPEN);
+	LstData.append(&lst_COLUMN_HIGH);
+	LstData.append(&lst_COLUMN_LOW);
+	LstData.append(&lst_COLUMN_CLOSE);
+	LstData.append(&lst_COLUMN_VOLUME);
+	LstData.append(&lst_COLUMN_ADJCLOSE);
 
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"lstData.size="<<lstData.size()
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
+	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
 
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
 	return nFunRes;
 }
 
@@ -394,11 +231,12 @@ void CClientDbOper::truncate_TABLE_BAR_DATA_1DAY()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_BAR_DATA_1DAY__DELETE__0002";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
+
 }
 
 
-qint32 CClientDbOper::_AddSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
+qint32 CClientDbOper::insertSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = false;
@@ -409,8 +247,7 @@ qint32 CClientDbOper::_AddSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
 	QVariantList lst_COLUMN_MINTIME;
 	QVariantList lst_COLUMN_MAXTIME;
 	QVariantList lst_COLUMN_COUNT;
-
-	QSqlQuery* pQSqlQueryForInseert = NULL;
+	QList<QVariantList*> LstData;
 
 	if (NULL == pData)
 	{
@@ -418,13 +255,8 @@ qint32 CClientDbOper::_AddSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
 		return nFunRes;
 	}
 
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
-
 	strSQLKey = "TABLE_MINTIME_MAXTIME__INSERT_0001";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
 
 	{
 		lst_COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
@@ -432,36 +264,20 @@ qint32 CClientDbOper::_AddSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
 		lst_COLUMN_MAXTIME << pData->m_strMaxTime;
 		lst_COLUMN_COUNT << pData->m_nCount;
 	}
+	LstData.append(&lst_COLUMN_SYMBOLUSE);
+	LstData.append(&lst_COLUMN_MINTIME);
+	LstData.append(&lst_COLUMN_MAXTIME);
+	LstData.append(&lst_COLUMN_COUNT);
 
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_SYMBOLUSE);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_MINTIME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_MAXTIME);
-	pQSqlQueryForInseert->addBindValue(lst_COLUMN_COUNT);
+	nFunRes = m_pDbConnection->startTransaction();
+	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
+	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
 
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
-
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
 	return nFunRes;
 }
 
-qint32 CClientDbOper::insertSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
-{
-	qint32 nFunRes = 0;
-	_StartTransaction();
-	nFunRes = _AddSymbolMinMaxTime(pData);
-	_CommitTransaction();
-	return nFunRes;
-}
+
 
 qint32 CClientDbOper::updateSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
 {
@@ -476,7 +292,7 @@ qint32 CClientDbOper::updateSymbolMinMaxTime( const CStockMinTimeMaxTime* pData 
 		pData->m_strMaxTime,
 		pData->m_nCount,
 		pData->m_strSymbolUse);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
@@ -487,48 +303,49 @@ qint32 CClientDbOper::selectSymbolMinMaxTime( const QString& strSymbolUse, CStoc
 	QString  strSQLKey;
 	CSQLData sqlData;
 
-	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
 	CStockMinTimeMaxTime* pDataGet = NULL;
+	IQueryAdapter* pQueryAdapter = NULL;
+	QStringList lstColumnName;
 
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
 	strSQLKey = "TABLE_MINTIME_MAXTIME__SELECT_0004";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey, strSymbolUse);
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
+	m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+	lstColumnName.clear();
+	lstColumnName.append("COLUMN_SYMBOLUSE");
+	lstColumnName.append("COLUMN_MINTIME");
+	lstColumnName.append("COLUMN_MAXTIME");
+	lstColumnName.append("COLUMN_COUNT");
 
-		delete pSqlQuery;
-		pSqlQuery = NULL;		
-		return nFunRes;
+	lstColumnName.clear();
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE);
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME);
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME);
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
+	{
+		lstColumnName = pQueryAdapter->getLstColumnName();
 	}
 
-	if ( pSqlQuery->next() )
+	if (NULL != pQueryAdapter && pQueryAdapter->hasMore())
 	{
 		pDataGet = new CStockMinTimeMaxTime();
 		nColumnIndex = 0;
-		pDataGet->m_strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
+		pDataGet->m_strSymbolUse = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE);
 		nColumnIndex++;
-		pDataGet->m_strMinTime = pSqlQuery->value(nColumnIndex).toString();
+		pDataGet->m_strMinTime = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME);
 		nColumnIndex++;
-		pDataGet->m_strMaxTime = pSqlQuery->value(nColumnIndex).toString();
+		pDataGet->m_strMaxTime = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME);
 		nColumnIndex++;
-		pDataGet->m_nCount = pSqlQuery->value(nColumnIndex).toInt();
+		pDataGet->m_nCount = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT).toInt();
 
 		(*ppData) = pDataGet;
 		pDataGet = NULL;
 	}//while
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
-	}
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 
 	return nFunRes;
 }
@@ -540,7 +357,7 @@ qint32 CClientDbOper::_CreateDBTable_TABLE_USER_TRADE_INFO()
 	QString  strSQLKey = "TABLE_USER_TRADE_INFO__CREATE_TABLE_0000";
 
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 void CClientDbOper::truncate_TABLE_USER_TRADE_INFO()
@@ -550,7 +367,7 @@ void CClientDbOper::truncate_TABLE_USER_TRADE_INFO()
 	QString  strSQLKey = "TABLE_USER_TRADE_INFO__DELETE_0002";
 
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return;
 }
 
@@ -560,36 +377,10 @@ void CClientDbOper::truncateSymbolMinMaxTime()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_MINTIME_MAXTIME__DELETE_0002";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	_ExecModify(sqlData);
+	m_pDbConnection->execModify(sqlData);
 	
 }
 
-qint32 CClientDbOper::_ExecModify(const CSQLData& sqlData)
-{
-	qint32 nFunRes = 0;
-	bool bExecRes = true;
-	QString strSQL;
-	QSqlQuery* pSqlQuery = NULL;
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
-	strSQL = sqlData.getSqliteSQL();
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<strSQL;
-	bExecRes = pSqlQuery->exec(strSQL);
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<strSQL
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-	}
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
-	}
-	return nFunRes;
-}
 //////////////////////////////////////////////////////////////////////////
 qint32 CClientDbOper::_CreateDBTable_TABLE_USER_ACCOUNT()
 {
@@ -598,7 +389,7 @@ qint32 CClientDbOper::_CreateDBTable_TABLE_USER_ACCOUNT()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_USER_ACCOUNT__CREATE_TABLE_0000";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
@@ -609,7 +400,7 @@ qint32 CClientDbOper::_Truncate_TABLE_USER_ACCOUNT()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_USER_ACCOUNT__DELETE_0001";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
@@ -623,19 +414,12 @@ qint32 CClientDbOper::resetUserAccount( const CUserAccount* pData )
 		pData->m_fInitAccount, pData->m_fLeftAccount, pData->m_fHoldAccount,
 		pData->m_fFloatingProfitLoss, pData->m_fFloatingProfitLossPersentage, pData->m_strUpdateTime,
 		pData->m_strUserID);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
-qint32 CClientDbOper::insertUserAccount(const CUserAccount* pData )
-{
-	qint32 nFunRes = 0;
-	_StartTransaction();
-	nFunRes = _AddUserAccount(pData);
-	_CommitTransaction();
-	return nFunRes;
-}
-qint32 CClientDbOper::_AddUserAccount( const CUserAccount* pData )
+
+qint32 CClientDbOper::insertUserAccount( const CUserAccount* pData )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = false;
@@ -649,24 +433,14 @@ qint32 CClientDbOper::_AddUserAccount( const CUserAccount* pData )
 	QVariantList COLUMN_FLOATINT_PROFIT_LOSS;
 	QVariantList COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE;
 	QVariantList COLUMN_UPDATE_TIME;
-
-
-	QSqlQuery* pQSqlQueryForInseert = NULL;
+	QList<QVariantList*> LstData;
 
 	if (NULL == pData)
 	{
 		nFunRes = 0;
 		return nFunRes;
 	}
-
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
-	strSQLKey = "TABLE_USER_ACCOUNT__INSERT_0002";
-	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
-
+	
 	{
 		COLUMN_USEID << pData->m_strUserID;
 		COLUMN_INIT_AMOUNT << pData->m_fInitAccount;
@@ -676,37 +450,31 @@ qint32 CClientDbOper::_AddUserAccount( const CUserAccount* pData )
 		COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE << pData->m_fFloatingProfitLossPersentage;
 		COLUMN_UPDATE_TIME << pData->m_strUpdateTime;
 	}
-	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
-	pQSqlQueryForInseert->addBindValue(COLUMN_INIT_AMOUNT);
-	pQSqlQueryForInseert->addBindValue(COLUMN_LEFT_AMOUNT);
-	pQSqlQueryForInseert->addBindValue(COLUMN_HOLD_AMOUNT);
-	pQSqlQueryForInseert->addBindValue(COLUMN_FLOATINT_PROFIT_LOSS);
-	pQSqlQueryForInseert->addBindValue(COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE);
-	pQSqlQueryForInseert->addBindValue(COLUMN_UPDATE_TIME);
+	LstData.append(&COLUMN_USEID);
+	LstData.append(&COLUMN_INIT_AMOUNT);
+	LstData.append(&COLUMN_LEFT_AMOUNT);
+	LstData.append(&COLUMN_HOLD_AMOUNT);
+	LstData.append(&COLUMN_FLOATINT_PROFIT_LOSS);
+	LstData.append(&COLUMN_FLOATINT_PROFIT_LOSS_PERSENTAGE);
+	LstData.append(&COLUMN_UPDATE_TIME);
 
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
+	strSQLKey = "TABLE_USER_ACCOUNT__INSERT_0002";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
+	nFunRes = m_pDbConnection->startTransaction();
+	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
+	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
+
 	return nFunRes;
 }
 
 qint32 CClientDbOper::resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData )
 {
-	qint32 nFunRes = 0;
-	_StartTransaction();
 	_Truncate_TABLE_USER_HOLD_ACCOUNT();
+
+	qint32 nFunRes = 0;
 	nFunRes = _AddUserHoldAccountLst(lstData);
-	_CommitTransaction();
 	return nFunRes;
 }
 
@@ -720,7 +488,7 @@ qint32 CClientDbOper::_CreateDBTable_TABLE_USER_HOLD_ACCOUNT()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_USER_HOLD_ACCOUNT__CREATE_TABLE_0000";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
@@ -731,7 +499,7 @@ qint32 CClientDbOper::_Truncate_TABLE_USER_HOLD_ACCOUNT()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_USER_HOLD_ACCOUNT__DELETE_0001";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 
@@ -750,8 +518,7 @@ qint32 CClientDbOper::_AddUserHoldAccountLst( const QList<CUserHoldAccount*>& ls
 	QVariantList COLUMN_VOLUME;
 	QVariantList COLUMN_TIME;
 	QVariantList COLUMN_AMOUNT;
-
-	QSqlQuery* pQSqlQueryForInseert = NULL;
+	QList<QVariantList*> LstData;
 
 	if (0 >= lstData.size())
 	{
@@ -759,14 +526,8 @@ qint32 CClientDbOper::_AddUserHoldAccountLst( const QList<CUserHoldAccount*>& ls
 		return nFunRes;
 	}
 
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
 	strSQLKey = "TABLE_USER_HOLD_ACCOUNT__INSERT_0002";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
-
 
 	iterLst = lstData.constBegin();
 	while (iterLst != lstData.constEnd())
@@ -782,28 +543,17 @@ qint32 CClientDbOper::_AddUserHoldAccountLst( const QList<CUserHoldAccount*>& ls
 
 		iterLst++;
 	}//while
+	LstData.append(&COLUMN_USEID);
+	LstData.append(&COLUMN_SYMBOLUSE);
+	LstData.append(&COLUMN_PRICE);
+	LstData.append(&COLUMN_VOLUME);
+	LstData.append(&COLUMN_TIME);
+	LstData.append(&COLUMN_AMOUNT);
 
+	nFunRes = m_pDbConnection->startTransaction();
+	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
+	nFunRes = m_pDbConnection->commitTransaction();
 
-	pQSqlQueryForInseert->addBindValue(COLUMN_USEID);
-	pQSqlQueryForInseert->addBindValue(COLUMN_SYMBOLUSE);
-	pQSqlQueryForInseert->addBindValue(COLUMN_PRICE);
-	pQSqlQueryForInseert->addBindValue(COLUMN_VOLUME);
-	pQSqlQueryForInseert->addBindValue(COLUMN_TIME);
-	pQSqlQueryForInseert->addBindValue(COLUMN_AMOUNT);
-
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
-
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
 	return nFunRes;
 }
 
@@ -814,7 +564,7 @@ qint32 CClientDbOper::_CreateDBTable_TABLE_SYMBOLUSE()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_SYMBOLUSE__CREATE_TABLE_0000";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
 qint32 CClientDbOper::_Truncate_TABLE_SYMBOLUSE()
@@ -824,10 +574,17 @@ qint32 CClientDbOper::_Truncate_TABLE_SYMBOLUSE()
 	CSQLData sqlData;
 	strSQLKey = "TABLE_SYMBOLUSE__DELETE_0002";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	nFunRes = _ExecModify(sqlData);
+	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
+qint32 CClientDbOper::resetSymbolUse( const QList<QString>& lstData )
+{
+	_Truncate_TABLE_SYMBOLUSE();
 
+	qint32 nFunRes = 0;
+	nFunRes = _AddSymbolLst(lstData);
+	return nFunRes;
+}
 qint32 CClientDbOper::_AddSymbolLst( const QList<QString>& lstData )
 {
 	qint32 nFunRes = 0;
@@ -837,22 +594,13 @@ qint32 CClientDbOper::_AddSymbolLst( const QList<QString>& lstData )
 	QList<QString>::const_iterator iterLst;
 	QString strData;
 	QVariantList COLUMN_SYMBOLUSE;
-
-	QSqlQuery* pQSqlQueryForInseert = NULL;
+	QList<QVariantList*> LstData;
 
 	if (0 >= lstData.size())
 	{
 		nFunRes = 0;
 		return nFunRes;
 	}
-
-	pQSqlQueryForInseert = new QSqlQuery(*m_pQSqlDataBase);
-
-	strSQLKey = "TABLE_SYMBOLUSE__INSERT_0001";
-	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	MYLOG4CPP_DEBUG<<" "<<m_strSqliteDbFileFullPath.toStdString()
-		<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	pQSqlQueryForInseert->prepare(sqlData.getSqliteSQL());
 
 	iterLst = lstData.constBegin();
 	while (iterLst != lstData.constEnd())
@@ -861,32 +609,20 @@ qint32 CClientDbOper::_AddSymbolLst( const QList<QString>& lstData )
 		COLUMN_SYMBOLUSE << strData;
 		iterLst++;
 	}//while
-	pQSqlQueryForInseert->addBindValue(COLUMN_SYMBOLUSE);
-	bExecRes = pQSqlQueryForInseert->execBatch();
-	if (!bExecRes)
-	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR<<"execBatch strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pQSqlQueryForInseert->lastError().text().toStdString();
-	}
 
-	if (NULL != pQSqlQueryForInseert)
-	{
-		delete pQSqlQueryForInseert;
-		pQSqlQueryForInseert = NULL;
-	}
+	LstData.append(&COLUMN_SYMBOLUSE);
+
+	strSQLKey = "TABLE_SYMBOLUSE__INSERT_0001";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+
+	nFunRes = m_pDbConnection->startTransaction();
+	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
+	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
 	return nFunRes;
 }
 
-qint32 CClientDbOper::resetSymbolUse( const QList<QString>& lstData )
-{
-	qint32 nFunRes = 0;
-	_StartTransaction();
-	_Truncate_TABLE_SYMBOLUSE();
-	nFunRes = _AddSymbolLst(lstData);
-	_CommitTransaction();
-	return nFunRes;
-}
+
 
 qint32 CClientDbOper::getSymbolUseLst(QList<QString>& lstData )
 {
@@ -894,42 +630,45 @@ qint32 CClientDbOper::getSymbolUseLst(QList<QString>& lstData )
 	bool bExecRes = true;
 	QString  strSQLKey;
 	CSQLData sqlData;
-	QSqlQuery* pSqlQuery = NULL;
 	int nColumnIndex = 0;
 	QString strSymbolUse;
-
-	pSqlQuery = new QSqlQuery(*m_pQSqlDataBase);
+	IQueryAdapter* pQueryAdapter = NULL;
+	QStringList lstColumnName;
 
 	strSQLKey = "TABLE_SYMBOLUSE__SELECT_0003";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-	MYLOG4CPP_DEBUG	<<" "<<m_strSqliteDbFileFullPath.toStdString()<<" "<<"exec strSQL="<<sqlData.getSqliteSQL();
-	bExecRes = pSqlQuery->exec(sqlData.getSqliteSQL());
-	if (!bExecRes)
+
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+
+	lstColumnName.clear();
+	lstColumnName.append("COLUMN_SYMBOLUSE");
+	lstColumnName.clear();
+	lstColumnName.append(str_TABLE_SYMBOLUSE_COLUMN_SYMBOLUSE);
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
 	{
-		nFunRes = -1;
-		MYLOG4CPP_ERROR	<<" "<<m_strSqliteDbFileFullPath.toStdString()
-			<<" "<<"Fail to exec strSQL="<<sqlData.getSqliteSQL()
-			<<" "<<"error:"<<pSqlQuery->lastError().text().toStdString();
-
-		delete pSqlQuery;
-		pSqlQuery = NULL;		
-		return nFunRes;
+		lstColumnName = pQueryAdapter->getLstColumnName();
 	}
-
-	while ( pSqlQuery->next() )
+	while (NULL != pQueryAdapter && pQueryAdapter->hasMore())
 	{
 		strSymbolUse.clear();
 		nColumnIndex = 0;
-		strSymbolUse = pSqlQuery->value(nColumnIndex).toString();
+		strSymbolUse = pQueryAdapter->getStringData(str_TABLE_SYMBOLUSE_COLUMN_SYMBOLUSE);
 		lstData.push_back(strSymbolUse);
 		strSymbolUse.clear();
-	}//while
-
-	if (NULL != pSqlQuery)
-	{
-		delete pSqlQuery;
-		pSqlQuery = NULL;
 	}
 
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
 	return nFunRes;
+}
+
+QSqlDatabase* CClientDbOper::getDB()
+{
+	QSqlDatabase* pQtDBRef = NULL;
+	if (NULL != m_pDbConnectionQtRef)
+	{
+		pQtDBRef = m_pDbConnectionQtRef->getQTDBHandle();
+	}
+	return pQtDBRef;
 }

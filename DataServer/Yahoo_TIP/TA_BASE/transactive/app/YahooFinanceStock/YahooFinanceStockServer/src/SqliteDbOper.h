@@ -17,6 +17,10 @@
 
 #include "ProjectSQLManager.h"
 
+
+class IDbConnection;
+class CDbStatusItem;
+
 class CHistoryData;
 class CSqliteDbOperBuildSQL;
 
@@ -27,34 +31,25 @@ public:
 	typedef QList<CHistoryData*>::iterator	LstHistoryDataIterT;
 
 public:
-	CSqliteDbOper(const QString& strSqliteDbFileName);//strSymbolUse
+	CSqliteDbOper(const QString& strSymbolUse);//strSymbolUse
 	virtual ~CSqliteDbOper();
 public:
-	void saveData(const QString& strSymbolUse, LstHistoryDataT* pLstData);
+	int saveData(const QString& strSymbolUse, LstHistoryDataT* pLstData);
 public:
 	int selectData(const QString & strFrom, const QString & strTo, LstHistoryDataT& lstData);
 	int selectData_MinTime(QString& strValueGet);
 	int selectData_MaxTime(QString& strValueGet);
 	int selectData_Count(int& nValueGet);
-
 private:
-	void _UnInitDataBase();
-	void _InitDataBase();
-	int _StartTransaction();
-	int _CommitTransaction();
-	qint32 _ExecModify(const CSQLData& sqlData);
-private:
-	int _AddDataArray(const QString& strSymbolUse,LstHistoryDataT* pLstData);
 	int _CreateDBTable_TABLE_BAR_DATA_1DAY();
 
+
 private:
-	QSqlDatabase* m_pQSqlDataBase;
-	QString m_strQTDbType;//"QSQLITE" "QMYSQL"
-	QString m_strSqliteDbFileName;
-	QString m_strSqliteDbKEY;
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
-	
+	IDbConnection* m_pDbConnection;
+	CDbStatusItem* m_pDbStatusItem;
+
 };
 
 

@@ -303,7 +303,13 @@ void CQtDBConnection::cleanQuery( IQueryAdapter*& pQueryAdapter )
 
 	QMap<QString, IQueryAdapter*>::iterator iterMap;
 	IQueryAdapter* pQueryAdapterFind = NULL;
-	QString strQueyUUID = pQueryAdapter->getQueryUUID();
+	QString strQueyUUID;
+
+	if (NULL == pQueryAdapter)
+	{
+		return;
+	}
+	strQueyUUID = pQueryAdapter->getQueryUUID();
 
 	iterMap = m_mapActiveQuery.find(strQueyUUID);
 	if (iterMap != m_mapActiveQuery.end())
@@ -503,4 +509,9 @@ qint32 CQtDBConnection::commitTransaction()
 			<<" "<<"getConnectionString="<<m_pDbStatusItem->getConnectionString();
 	}
 	return nFunRes;
+}
+
+QSqlDatabase* CQtDBConnection::getQTDBHandle()
+{
+	return m_pConnection;
 }
