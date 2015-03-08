@@ -19,6 +19,7 @@ public:
 	void setValue_FirstBuy(const CUserTradeInfo* pData);
 	void updateHoldAmountValue(const CUserTradeInfo* pData);
 	void updatePrice(double fNewPrice, const QString& strTime);
+	void logInfo( const QString& fileName, qint32 lineNumber ) const;
 public:
 	QString m_strUserID;
 	QString m_strSymbolUse;

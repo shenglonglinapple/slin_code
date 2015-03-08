@@ -4,6 +4,7 @@
 #include "ReqTrade.h"
 #include "AckTrade.h"
 #include "Log4cppLogger.h"
+#include "SQLParam.h"
 
 static const double  DEF_VALUE_DOUBLE_TRADE_FEES = 0.007;
 
@@ -137,12 +138,12 @@ void CUserTradeInfo::logInfo( const QString& fileName, qint32 lineNumber ) const
 		<<" "<<"m_strUserID="<<m_strUserID
 		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_nTradeType="<<CTcpComProtocol::getStringValue(m_nTradeType)
-		<<" "<<"m_fTradePrice="<<m_fTradePrice
+		<<" "<<"m_fTradePrice="<<CSQLParam(m_fTradePrice).getParam()
 		<<" "<<"m_nTradeVolume="<<m_nTradeVolume
-		<<" "<<"m_fTradeAmount="<<m_fTradeAmount
-		<<" "<<"m_fTradeFees="<<m_fTradeFees
-		<<" "<<"m_fTotalTradeFee="<<m_fTotalTradeFee
-		<<" "<<"m_fUseAccount="<<m_fUseAccount;
+		<<" "<<"m_fTradeAmount="<<CSQLParam(m_fTradeAmount).getParam()
+		<<" "<<"m_fTradeFees="<<CSQLParam(m_fTradeAmount).getParam()
+		<<" "<<"m_fTotalTradeFee="<<CSQLParam(m_fTradeFees).getParam()
+		<<" "<<"m_fUseAccount="<<CSQLParam(m_fUseAccount).getParam();
 }
 
 

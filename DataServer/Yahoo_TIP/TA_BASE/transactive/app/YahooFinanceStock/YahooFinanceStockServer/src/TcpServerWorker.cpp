@@ -204,8 +204,8 @@ double CTcpServerWorker::getUserHoldAmount(const QString& strUserID, const QStri
 bool CTcpServerWorker::_CheckTrade(const CUserTradeInfo* pData )
 {
 	qint32 nFunRes = 0;
-	CUserAccount* pUserAccount = NULL;
-	CUserHoldAccount* pUserHoldAccount = NULL;
+	CUserAccount* pUserAccount_Data = NULL;
+	CUserHoldAccount* pUserHoldAccount_Data = NULL;
 	double fLeftAccount = 0;
 	double fHoldAccount = 0;
 	QString strUserID;
@@ -222,23 +222,23 @@ bool CTcpServerWorker::_CheckTrade(const CUserTradeInfo* pData )
 	strUserID = pData->m_strUserID;
 	strSymbolUse = pData->m_strSymbolUse;
 	nTradeType = pData->m_nTradeType;
-	nFunRes = m_pServerDbOper->selectUserAccount(strUserID, &pUserAccount);
-	if (NULL == pUserAccount)
+	nFunRes = m_pServerDbOper->selectUserAccount(strUserID, &pUserAccount_Data);
+	if (NULL == pUserAccount_Data)
 	{
 		MYLOG4CPP_ERROR<<"_CheckTrade error:select User Account"<<" "<<"strUserID="<<strUserID;
 		bCheckRes = false;
 		return bCheckRes;
 	}
-	nFunRes = m_pServerDbOper->selectUserHoldAccount(strUserID, strSymbolUse, &pUserHoldAccount);
+	nFunRes = m_pServerDbOper->selectUserHoldAccount(strUserID, strSymbolUse, &pUserHoldAccount_Data);
 	//check and init value
-	if (NULL == pUserHoldAccount)
+	if (NULL == pUserHoldAccount_Data)
 	{
 		if (CTcpComProtocol::ETradeType_Buy == nTradeType)
 		{
 			//first buy insert one
-			pUserHoldAccount = new CUserHoldAccount();
-			pUserHoldAccount->setValue_FirstBuy(pData);
-			m_pServerDbOper->insertUserHoldAccount(pUserHoldAccount);
+			pUserHoldAccount_Data = new CUserHoldAccount();
+			pUserHoldAccount_Data->setValue_FirstBuy(pData);
+			m_pServerDbOper->insertUserHoldAccount(pUserHoldAccount_Data);
 		}
 		else
 		{
@@ -251,13 +251,13 @@ bool CTcpServerWorker::_CheckTrade(const CUserTradeInfo* pData )
 	}//if (NULL == pUserHoldAmount)
 
 	//delete first then select again
-	if (NULL != pUserHoldAccount)
+	if (NULL != pUserHoldAccount_Data)
 	{
-		delete pUserHoldAccount;
-		pUserHoldAccount = NULL;
+		delete pUserHoldAccount_Data;
+		pUserHoldAccount_Data = NULL;
 	}
-	nFunRes = m_pServerDbOper->selectUserHoldAccount(strUserID, strSymbolUse, &pUserHoldAccount);
-	if (NULL == pUserHoldAccount || NULL == pUserAccount)
+	nFunRes = m_pServerDbOper->selectUserHoldAccount(strUserID, strSymbolUse, &pUserHoldAccount_Data);
+	if (NULL == pUserHoldAccount_Data || NULL == pUserAccount_Data)
 	{
 		MYLOG4CPP_ERROR<<"_CheckTrade error again: not find pUserHoldAccount strUserID="<<strUserID
 			<<" "<<"strSymbolUse="<<strSymbolUse;
@@ -269,7 +269,7 @@ bool CTcpServerWorker::_CheckTrade(const CUserTradeInfo* pData )
 	if (CTcpComProtocol::ETradeType_Buy == nTradeType)
 	{
 		//check buy, check left Acccount
-		if (pUserAccount->m_fLeftAccount < pData->m_fUseAccount)
+		if (pUserAccount_Data->m_fLeftAccount < pData->m_fUseAccount)
 		{
 			MYLOG4CPP_ERROR<<"_CheckTrade buy error: money is not enough strUserID="<<strUserID
 				<<" "<<"fLeftAccount="<<fLeftAccount
@@ -280,25 +280,25 @@ bool CTcpServerWorker::_CheckTrade(const CUserTradeInfo* pData )
 	//check sell
 	if (CTcpComProtocol::ETradeType_Sell == nTradeType)
 	{
-		if ((0 >= pUserHoldAccount->m_nVolume) || (pData->m_nTradeVolume > pUserHoldAccount->m_nVolume))
+		if ((0 >= pUserHoldAccount_Data->m_nVolume) || (pData->m_nTradeVolume > pUserHoldAccount_Data->m_nVolume))
 		{
 			MYLOG4CPP_ERROR<<"_CheckTrade sell error: Volume is not enough strUserID="<<strUserID
 				<<" "<<"strSymbolUse="<<strSymbolUse
-				<<" "<<"pUserHoldAccount->m_nVolume="<<pUserHoldAccount->m_nVolume
+				<<" "<<"pUserHoldAccount->m_nVolume="<<pUserHoldAccount_Data->m_nVolume
 				<<" "<<"<"<<" "<<"pData->m_nTradeVolume="<<pData->m_nTradeVolume;
 			bCheckRes = false;
 		}
 	}
 
-	if (NULL == pUserAccount)
+	if (NULL == pUserAccount_Data)
 	{
-		delete pUserAccount;
-		pUserAccount = NULL;
+		delete pUserAccount_Data;
+		pUserAccount_Data = NULL;
 	}
-	if (NULL != pUserHoldAccount)
+	if (NULL != pUserHoldAccount_Data)
 	{
-		delete pUserHoldAccount;
-		pUserHoldAccount = NULL;
+		delete pUserHoldAccount_Data;
+		pUserHoldAccount_Data = NULL;
 	}
 	return bCheckRes;
 }
@@ -310,8 +310,8 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 	QString strSymbolUse;
 	CTcpComProtocol::ETradeType nTradeType;
 	bool bCheckRes = false;
-	CUserAccount* pUserAccount = NULL;
-	CUserHoldAccount* pUserHoldAccount = NULL;
+	CUserAccount* pUserAccount_Data = NULL;
+	CUserHoldAccount* pUserHoldAccount_Data = NULL;
 	double fLeftAccount = 0;
 	double fHoldAccount = 0;
 
@@ -334,9 +334,12 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 	}
 
 	//do trade
-	nFunRes = m_pServerDbOper->selectUserAccount(strUserID, &pUserAccount);
-	nFunRes = m_pServerDbOper->selectUserHoldAccount(strUserID, strSymbolUse, &pUserHoldAccount);
-	fLeftAccount = pUserAccount->m_fLeftAccount;
+	nFunRes = m_pServerDbOper->selectUserAccount(strUserID, &pUserAccount_Data);
+	nFunRes = m_pServerDbOper->selectUserHoldAccount(strUserID, strSymbolUse, &pUserHoldAccount_Data);
+	fLeftAccount = pUserAccount_Data->m_fLeftAccount;
+	MYLOG4CPP_INFO<<"processUserTradeInfo"
+		<<" "<<"pUserAccount_Data->m_fLeftAccount="<<pUserAccount_Data->m_fLeftAccount
+		<<" "<<"fLeftAccount="<<fLeftAccount;
 	if (CTcpComProtocol::ETradeType_Buy == nTradeType)
 	{
 		fLeftAccount -= pData->m_fUseAccount;
@@ -345,28 +348,40 @@ qint32 CTcpServerWorker::processUserTradeInfo( quint16 nListenPort, const CUserT
 	{
 		fLeftAccount += pData->m_fUseAccount;
 	}
-
+	MYLOG4CPP_INFO<<"processUserTradeInfo"
+		<<" "<<"pUserAccount_Data->m_fLeftAccount="<<pUserAccount_Data->m_fLeftAccount
+		<<" "<<"fLeftAccount="<<fLeftAccount;
+	pData->logInfo(__FILE__, __LINE__);
 	//do
+	MYLOG4CPP_INFO<<"processUserTradeInfo"<<" "<<"startTransaction";
 	m_pServerDbOper->startTransaction();
 	nFunRes = m_pServerDbOper->insertUserTradeInfo(pData);//trade
-	pUserHoldAccount->updateHoldAmountValue(pData);//hold
-	nFunRes = m_pServerDbOper->updateUserHoldAccount(pUserHoldAccount);//hold
+	pUserHoldAccount_Data->updateHoldAmountValue(pData);//hold
+	nFunRes = m_pServerDbOper->updateUserHoldAccount(pUserHoldAccount_Data);//hold
+	pUserHoldAccount_Data->logInfo(__FILE__, __LINE__);
 
 	fHoldAccount = getUserHoldAmount(pData->m_strUserID, pData->m_strTradeTime);//hold total
-	pUserAccount->updateLeftAccount(fLeftAccount, pData->m_strTradeTime);//
-	pUserAccount->updateHoldAccount(fHoldAccount, pData->m_strTradeTime);
-	nFunRes = m_pServerDbOper->updateUserAccount(pUserAccount);
+	MYLOG4CPP_INFO<<"getUserHoldAmount"<<" "<<"fHoldAccount="<<fHoldAccount;
+	pUserAccount_Data->updateLeftAccount(fLeftAccount, pData->m_strTradeTime);//
+	pUserAccount_Data->updateHoldAccount(fHoldAccount, pData->m_strTradeTime);
+	MYLOG4CPP_INFO<<"updateLeftAccount"<<" "<<"fLeftAccount="<<fLeftAccount
+				<<" "<<"pData->m_strTradeTime="<<pData->m_strTradeTime;
+	MYLOG4CPP_INFO<<"updateHoldAccount"<<" "<<"fHoldAccount="<<fHoldAccount
+				<<" "<<"pData->m_strTradeTime="<<pData->m_strTradeTime;
+	nFunRes = m_pServerDbOper->updateUserAccount(pUserAccount_Data);
+	pUserAccount_Data->logInfo(__FILE__, __LINE__);
 	m_pServerDbOper->commitTransaction();
+	MYLOG4CPP_INFO<<"processUserTradeInfo"<<" "<<"commitTransaction";
 
-	if (NULL == pUserAccount)
+	if (NULL == pUserAccount_Data)
 	{
-		delete pUserAccount;
-		pUserAccount = NULL;
+		delete pUserAccount_Data;
+		pUserAccount_Data = NULL;
 	}
-	if (NULL != pUserHoldAccount)
+	if (NULL != pUserHoldAccount_Data)
 	{
-		delete pUserHoldAccount;
-		pUserHoldAccount = NULL;
+		delete pUserHoldAccount_Data;
+		pUserHoldAccount_Data = NULL;
 	}
 	return nFunRes;
 }

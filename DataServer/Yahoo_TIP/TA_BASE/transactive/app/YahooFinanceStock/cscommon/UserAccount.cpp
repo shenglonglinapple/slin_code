@@ -2,6 +2,7 @@
 #include "QtTimeHelper.h"
 #include "UserTradeInfo.h"
 #include "AckAccount.h"
+#include "Log4cppLogger.h"
 
 static const int DEF_VALUE_INT_INIT_AMOUNT = 10000*10;
 
@@ -80,3 +81,16 @@ void CUserAccount::setValue( const CAckAccount* pData )
 	m_strUpdateTime = pData->m_strUpdateTime;
 
 }
+void CUserAccount::logInfo( const QString& fileName, qint32 lineNumber ) const
+{
+	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
+		<<" "<<"m_strUserID="<<m_strUserID
+		<<" "<<"m_fInitAccount="<<m_fInitAccount
+		<<" "<<"m_fLeftAccount="<<m_fLeftAccount
+		<<" "<<"m_fHoldAccount="<<m_fHoldAccount
+		<<" "<<"m_fFloatingProfitLoss="<<m_fFloatingProfitLoss
+		<<" "<<"m_fFloatingProfitLossPersentage="<<m_fFloatingProfitLossPersentage
+		<<" "<<"m_strUpdateTime="<<m_strUpdateTime;
+}
+
+

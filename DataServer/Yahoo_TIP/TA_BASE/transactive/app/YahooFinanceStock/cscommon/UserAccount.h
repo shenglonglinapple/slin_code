@@ -24,6 +24,7 @@ public:
 	void updateHoldAccount(double fHoldAmount, const QString& strTime);
 public:
 	void setValue(const CAckAccount* pData);
+	void logInfo( const QString& fileName, qint32 lineNumber ) const;
 public:
 	QString m_strUserID;
 	double m_fInitAccount;

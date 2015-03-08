@@ -70,6 +70,9 @@ void CUserTradeTableView::slot_DataChange_UserTrade()
 	if (NULL != m_pItemModel)
 	{
 		m_pItemModel->select();
+		//select double  1222.554
+		//QString "1222.55"  show error!
+		//
 	}
 	QModelIndex inValidIndex;
 	this->setCurrentIndex(inValidIndex);

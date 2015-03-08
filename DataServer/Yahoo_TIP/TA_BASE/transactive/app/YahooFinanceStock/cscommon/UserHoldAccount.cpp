@@ -1,6 +1,7 @@
 #include "UserHoldAccount.h"
 #include "QtTimeHelper.h"
 #include "UserTradeInfo.h"
+#include "Log4cppLogger.h"
 
 CUserHoldAccount::CUserHoldAccount()
 {
@@ -74,3 +75,14 @@ void CUserHoldAccount::updatePrice( double fNewPrice, const QString& strTime)
 	m_strTime = strTime;
 }
 
+
+void CUserHoldAccount::logInfo( const QString& fileName, qint32 lineNumber ) const
+{
+	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
+		<<" "<<"m_strUserID="<<m_strUserID
+		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
+		<<" "<<"m_fPrice="<<m_fPrice
+		<<" "<<"m_nVolume="<<m_nVolume
+		<<" "<<"m_fHoldAccount="<<m_fHoldAccount
+		<<" "<<"m_strTime="<<m_strTime;
+}
