@@ -41,8 +41,7 @@ CSQLParam::CSQLParam( const char& tmpValue )
 
 CSQLParam::CSQLParam( const qint32& tmpValue )
 {
-	//strParam = QString("%1").arg(tmpValue);
-	strParam = QString::number(tmpValue);
+	strParam = QString("%1").arg(tmpValue);
 }
 
 CSQLParam::CSQLParam( const qint64& tmpValue )
@@ -51,7 +50,7 @@ CSQLParam::CSQLParam( const qint64& tmpValue )
 }
 CSQLParam::CSQLParam( const float& tmpValue )
 {
-	strParam =  do_fraction(tmpValue, 6);
+	strParam = QString::number(tmpValue, 10, 18);
 }
 CSQLParam::CSQLParam( const double& tmpValue )
 {
@@ -59,15 +58,19 @@ CSQLParam::CSQLParam( const double& tmpValue )
 	//strParam = QString("%1").arg(tmpValue);
 	//strParam.setNum();
 	//strParam = QString::number(tmpValue);
+	//默认精度6来表示，但12345.67会被截断为12345.6,1234567.8， 它的结果会静悄悄地转换为科学记数法：1.23457e+06
 	//strParam = QString::number(tmpValue, 'g', 6);
-	strParam =  do_fraction(tmpValue, 6);
+
+	//strParam = QString::number(tmpValue, 10, 18);//1222.445555600000034246
+	strParam = QString::number(tmpValue, 10, 18);
+	//strParam =  do_fraction(tmpValue, 6);
 }
 
 QString CSQLParam::getParam() const
 {
 	return strParam;
 }
-//void CSQLParam::do_fraction(long double value, int decplaces=6)
+//strParam =  do_fraction(tmpValue, 6);1222.44555
 QString CSQLParam::do_fraction(long double value, int decplaces)
 {
 	QString strGetValue;
