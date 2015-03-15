@@ -40,6 +40,9 @@ public:
 	int selectData_MinTime(QString& strValueGet);
 	int selectData_MaxTime(QString& strValueGet);
 	int selectData_Count(int& nValueGet);
+	int selectData_LowHigh(double& fLowValueGet, double& fHighValueGet);
+	int selectData_Current(double& fCurrentValueGet);
+
 private:
 	int _CreateDBTable_TABLE_BAR_DATA_1DAY();
 

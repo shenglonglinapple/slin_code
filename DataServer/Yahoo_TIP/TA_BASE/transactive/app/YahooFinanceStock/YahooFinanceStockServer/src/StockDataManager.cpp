@@ -84,7 +84,7 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 			strSymbolExtern = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
 			MYLOG4CPP_DEBUG<<"strSymbol="<<strSymbol<<" "<<"strSymbolExtern="<<strSymbolExtern;
 			
-			//if (strSymbol.contains("000008"))//000008.SZ
+			//if (strSymbol.contains("002033.SZ"))//000008.SZ
 			//if (strSymbol.contains("8"))//000008.SZ
 			{
 				pData = new CStockDataActor();

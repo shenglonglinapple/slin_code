@@ -28,6 +28,11 @@ public:
 	QString m_strMinTime;
 	QString m_strMaxTime;
 	qint32 m_nCount;
+	double m_fLow;
+	double m_fHigh;
+	double m_fCurrent;
+	//%.8lf  const float EPSINON = 0.0000001;  if((x >= - EPSINON) && (x <= EPSINON) (equal)
+	double m_fCurrentPercentage;//(m_fCurrent-m_fLow)/(m_fHigh-m_fLow)  no 0 
 
 };
 

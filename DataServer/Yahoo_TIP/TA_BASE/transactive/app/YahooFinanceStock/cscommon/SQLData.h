@@ -29,6 +29,8 @@ public:
 	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4);
 	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4, const QString& arg5 );
 	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4, const QString& arg5, const QString& arg6);
+	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4, const QString& arg5, const QString& arg6, const QString& arg7);
+	qint32 buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, const QString& arg3, const QString& arg4, const QString& arg5, const QString& arg6, const QString& arg7, const QString& arg8);
 public:
 	QString m_strXMLSQLKey;
 	QString m_strXMLSQL_QSQLITE;

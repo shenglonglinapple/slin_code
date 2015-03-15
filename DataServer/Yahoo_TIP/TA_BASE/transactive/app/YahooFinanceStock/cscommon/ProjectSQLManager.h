@@ -45,6 +45,14 @@ public:
 		const CSQLParam& arg0, const CSQLParam& arg1, const CSQLParam& arg2, 
 		const CSQLParam& arg3, const CSQLParam& arg4, const CSQLParam& arg5,
 		const CSQLParam& arg6);
+	qint32 prepareSQLData( CSQLData& objSQLData, const CSQLParam& sqlKey, 
+		const CSQLParam& arg0, const CSQLParam& arg1, const CSQLParam& arg2,
+		const CSQLParam& arg3, const CSQLParam& arg4, const CSQLParam& arg5, 
+		const CSQLParam& arg6, const CSQLParam& arg7);
+	qint32 prepareSQLData( CSQLData& objSQLData, const CSQLParam& sqlKey,
+		const CSQLParam& arg0, const CSQLParam& arg1, const CSQLParam& arg2,
+		const CSQLParam& arg3, const CSQLParam& arg4, const CSQLParam& arg5, 
+		const CSQLParam& arg6, const CSQLParam& arg7, const CSQLParam& arg8);
 private:
 	void _ClearAllSQL();
 	void _BuildAllSQL();

@@ -216,3 +216,41 @@ qint32 CProjectSQLManager::prepareSQLData( CSQLData& objSQLData, const CSQLParam
 		arg5.getParam(), arg6.getParam());
 	return nFunRes;
 }
+qint32 CProjectSQLManager::prepareSQLData( CSQLData& objSQLData, const CSQLParam& sqlKey, 
+										  const CSQLParam& arg0, const CSQLParam& arg1, const CSQLParam& arg2, 
+										  const CSQLParam& arg3, const CSQLParam& arg4, const CSQLParam& arg5,
+										  const CSQLParam& arg6, const CSQLParam& arg7)
+{
+	qint32 nFunRes = 0;
+	CSQLData formatSQLData;
+	QString strSQLKey = sqlKey.getParam();
+	strSQLKey = strSQLKey.toUpper();
+
+	nFunRes = _GetSQLData(formatSQLData, strSQLKey);
+
+	objSQLData = formatSQLData;
+	nFunRes = objSQLData.buildSQL(arg0.getParam(), arg1.getParam(), 
+		arg2.getParam(), arg3.getParam(), arg4.getParam(), 
+		arg5.getParam(), arg6.getParam(), arg7.getParam());
+	return nFunRes;
+}
+qint32 CProjectSQLManager::prepareSQLData( CSQLData& objSQLData, const CSQLParam& sqlKey, 
+										  const CSQLParam& arg0, const CSQLParam& arg1, const CSQLParam& arg2, 
+										  const CSQLParam& arg3, const CSQLParam& arg4, const CSQLParam& arg5,
+										  const CSQLParam& arg6, const CSQLParam& arg7, const CSQLParam& arg8)
+{
+	qint32 nFunRes = 0;
+	CSQLData formatSQLData;
+	QString strSQLKey = sqlKey.getParam();
+	strSQLKey = strSQLKey.toUpper();
+
+	nFunRes = _GetSQLData(formatSQLData, strSQLKey);
+
+	objSQLData = formatSQLData;
+	nFunRes = objSQLData.buildSQL(arg0.getParam(), arg1.getParam(), 
+		arg2.getParam(), arg3.getParam(), arg4.getParam(), 
+		arg5.getParam(), arg6.getParam(), arg7.getParam(), arg7.getParam());
+	return nFunRes;
+}
+
+

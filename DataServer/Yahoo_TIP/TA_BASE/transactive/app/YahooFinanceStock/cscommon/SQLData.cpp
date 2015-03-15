@@ -146,10 +146,27 @@ qint32 CSQLData::buildSQL( const QString& arg0, const QString& arg1, const QStri
 						  const QString& arg3, const QString& arg4, const QString& arg5, const QString& arg6)
 {
 	qint32 nFunRes = 0;
-
 	m_strUseSQL_QSQLITE = QString(m_strXMLSQL_QSQLITE).arg(arg0).arg(arg1).arg(arg2).arg(arg3).arg(arg4).arg(arg5).arg(arg6);
 	m_strUseSQL_QMYSQL = QString(m_strXMLSQL_QMYSQL).arg(arg0).arg(arg1).arg(arg2).arg(arg3).arg(arg4).arg(arg5).arg(arg6);
+	return nFunRes;
+}
 
+qint32 CSQLData::buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, 
+						  const QString& arg3, const QString& arg4, const QString& arg5, 
+						  const QString& arg6, const QString& arg7)
+{
+	qint32 nFunRes = 0;
+	m_strUseSQL_QSQLITE = QString(m_strXMLSQL_QSQLITE).arg(arg0).arg(arg1).arg(arg2).arg(arg3).arg(arg4).arg(arg5).arg(arg6).arg(arg7);
+	m_strUseSQL_QMYSQL = QString(m_strXMLSQL_QMYSQL).arg(arg0).arg(arg1).arg(arg2).arg(arg3).arg(arg4).arg(arg5).arg(arg6).arg(arg7);
+	return nFunRes;
+}
+qint32 CSQLData::buildSQL( const QString& arg0, const QString& arg1, const QString& arg2, 
+						  const QString& arg3, const QString& arg4, const QString& arg5,
+						  const QString& arg6, const QString& arg7, const QString& arg8)
+{
+	qint32 nFunRes = 0;
+	m_strUseSQL_QSQLITE = QString(m_strXMLSQL_QSQLITE).arg(arg0).arg(arg1).arg(arg2).arg(arg3).arg(arg4).arg(arg5).arg(arg6).arg(arg7).arg(arg8);
+	m_strUseSQL_QMYSQL = QString(m_strXMLSQL_QMYSQL).arg(arg0).arg(arg1).arg(arg2).arg(arg3).arg(arg4).arg(arg5).arg(arg6).arg(arg7).arg(arg8);
 	return nFunRes;
 }
 

@@ -184,5 +184,15 @@ int CSqliteDbOperHelper::selectData_Count( int& nValueGet )
 
 }
 
+int CSqliteDbOperHelper::selectData_LowHigh(double& fLowValueGet, double& fHighValueGet)
+{
+	QMutexLocker lock(&m_mutex_SqliteDbOper);	
+	return m_pSqliteDbOper->selectData_LowHigh(fLowValueGet, fHighValueGet);
 
+}
+int CSqliteDbOperHelper::selectData_Current(double& fCurrentValueGet)
+{
+	QMutexLocker lock(&m_mutex_SqliteDbOper);	
+	return m_pSqliteDbOper->selectData_Current(fCurrentValueGet);
+}
 

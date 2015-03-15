@@ -257,6 +257,10 @@ void CMessageProcesser::processReq( const CReqStockMinTimeMaxTime* pReq )
 	pAck->m_strMinTime = pValueGet->m_strMinTime;
 	pAck->m_strMaxTime = pValueGet->m_strMaxTime;
 	pAck->m_nCount = pValueGet->m_nCount;
+	pAck->m_fLow = pValueGet->m_fLow;
+	pAck->m_fHigh = pValueGet->m_fHigh;
+	pAck->m_fCurrent = pValueGet->m_fCurrent;
+	pAck->m_fCurrentPercentage = pValueGet->m_fCurrentPercentage;
 
 	if (NULL == pValueGet)
 	{

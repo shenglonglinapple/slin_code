@@ -160,6 +160,10 @@ void CClientMessageProcesser::processAck( const CAckStockMinTimeMaxTime* pAck )
 	pData->m_strMinTime = pAck->m_strMinTime;
 	pData->m_strMaxTime = pAck->m_strMaxTime;
 	pData->m_nCount = pAck->m_nCount;
+	pData->m_fLow = pAck->m_fLow;
+	pData->m_fHigh = pAck->m_fHigh;
+	pData->m_fCurrent = pAck->m_fCurrent;
+	pData->m_fCurrentPercentage = pAck->m_fCurrentPercentage;
 
 	CClientActorManager::getInstance().resetDataSymbolMinMaxTime(m_nHanle, pData);
 	if (NULL != pData)

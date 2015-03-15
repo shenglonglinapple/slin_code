@@ -100,7 +100,7 @@ void CYahooDataLoader::slotFinished(QNetworkReply* reply)
 		{
 			m_strRequestUrl = strUrl;
 		}
-		MYLOG4CPP_ERROR<<"Reply contain html, strUrl="<<strUrl;
+		MYLOG4CPP_ERROR<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"Reply contain html, strUrl="<<strUrl;
 		MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult)
 			<<" "<<"strHistoryData="<<strHistoryData;
 		m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished;

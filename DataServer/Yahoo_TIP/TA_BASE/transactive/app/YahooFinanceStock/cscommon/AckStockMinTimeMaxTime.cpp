@@ -22,6 +22,10 @@ void CAckStockMinTimeMaxTime::_Clear()
 	m_strMinTime.clear();
 	m_strMaxTime.clear();
 	m_nCount = 0;
+	m_fLow = 0;
+	m_fHigh = 0;
+	m_fCurrent = 0;
+	m_fCurrentPercentage = 0;
 }
 
 void CAckStockMinTimeMaxTime::logInfo( const QString& fileName, qint32 lineNumber )
@@ -35,7 +39,11 @@ void CAckStockMinTimeMaxTime::logInfo( const QString& fileName, qint32 lineNumbe
 		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 		<<" "<<"m_strMinTime="<<m_strMinTime
 		<<" "<<"m_strMaxTime="<<m_strMaxTime
-		<<" "<<"m_nCount="<<m_nCount;
+		<<" "<<"m_nCount="<<m_nCount
+		<<" "<<"m_fLow="<<m_fLow
+		<<" "<<"m_fHigh="<<m_fHigh
+		<<" "<<"m_fCurrent="<<m_fCurrent
+		<<" "<<"m_fCurrentPercentage="<<m_fCurrentPercentage;
 }
 //static
 bool CAckStockMinTimeMaxTime::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
@@ -70,7 +78,10 @@ QByteArray* CAckStockMinTimeMaxTime::getMessage()
 	writeToByteArray<<(m_strMinTime);
 	writeToByteArray<<(m_strMaxTime);
 	writeToByteArray<<(m_nCount);
-
+	writeToByteArray<<(m_fLow);
+	writeToByteArray<<(m_fHigh);
+	writeToByteArray<<(m_fCurrent);
+	writeToByteArray<<(m_fCurrentPercentage);
 
 	return pMessage;	
 }
@@ -93,7 +104,10 @@ void CAckStockMinTimeMaxTime::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>m_strMinTime;
 	readMessageBuffer>>m_strMaxTime;
 	readMessageBuffer>>m_nCount;
-
+	readMessageBuffer>>m_fLow;
+	readMessageBuffer>>m_fHigh;
+	readMessageBuffer>>m_fCurrent;
+	readMessageBuffer>>m_fCurrentPercentage;
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);
 	m_nDataType = (CTcpComProtocol::EDataType)(nDataType);

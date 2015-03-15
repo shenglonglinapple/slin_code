@@ -77,24 +77,40 @@ void CStockDataDBActor::getStockMinTimeMaxTime( const QString& strSymbolUse, CSt
 	QString strMinTime;
 	QString strMaxTime;
 	int nCount = 0;
+	double fLowValue = 0;
+	double fHighValue = 0;
+	double fCurrentValue = 0;
+	double fCurrentPercentage = 0;
 
 	if (NULL != m_pSqliteDbOperHelper)
 	{
 		m_pSqliteDbOperHelper->selectData_MinTime(strMinTime);
 		m_pSqliteDbOperHelper->selectData_MaxTime(strMaxTime);
 		m_pSqliteDbOperHelper->selectData_Count(nCount);
+		m_pSqliteDbOperHelper->selectData_LowHigh(fLowValue, fHighValue);
+		m_pSqliteDbOperHelper->selectData_Current(fCurrentValue);
 	}
+
+	if ((fHighValue - fLowValue) > 0)
+	{
+		fCurrentPercentage = (fCurrentValue - fLowValue)/(fHighValue - fLowValue);
+	}
+	else
+	{
+		fCurrentPercentage = (fCurrentValue - fLowValue);
+	}
+
 	(*ppValueGet) = new CStockMinTimeMaxTime();
 	(*ppValueGet)->m_strSymbolUse = m_strSymbolUse;
 	(*ppValueGet)->m_strMinTime = strMinTime;
 	(*ppValueGet)->m_strMaxTime = strMaxTime;
 	(*ppValueGet)->m_nCount = nCount;
-	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse
-		<<" "<<"getStockMinTimeMaxTime"
-		<<" "<<"strMinTime="<<strMinTime
-		<<" "<<"strMaxTime="<<strMaxTime
-		<<" "<<"nCount"<<nCount
-		<<" "<<"getStockMinTimeMaxTime";
+	(*ppValueGet)->m_fHigh = fHighValue;
+	(*ppValueGet)->m_fLow = fLowValue;
+	(*ppValueGet)->m_fCurrent = fCurrentValue;
+	(*ppValueGet)->m_fCurrentPercentage = fCurrentPercentage;
+
+	(*ppValueGet)->logInfo(__FILE__, __LINE__);
 
 	MYLOG4CPP_DEBUG<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"getStockMinTimeMaxTime end";
 

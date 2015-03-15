@@ -30,6 +30,9 @@ public:
 	int selectData_MinTime(QString& strValueGet);
 	int selectData_MaxTime(QString& strValueGet);
 	int selectData_Count(int& nValueGet);
+	int selectData_LowHigh(double& fLowValueGet, double& fHighValueGet);
+	int selectData_Current(double& fCurrentValueGet);
+
 private:
 	void _AnalysisData(QStringList& strLstLines, LstHistoryDataT& lstData);
 	void _FreeData(LstHistoryDataT* pLstData);

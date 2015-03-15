@@ -247,6 +247,10 @@ qint32 CClientDbOper::insertSymbolMinMaxTime( const CStockMinTimeMaxTime* pData 
 	QVariantList lst_COLUMN_MINTIME;
 	QVariantList lst_COLUMN_MAXTIME;
 	QVariantList lst_COLUMN_COUNT;
+	QVariantList lst_COLUMN_LOW;
+	QVariantList lst_COLUMN_HIGH;
+	QVariantList lst_COLUMN_CURRENT;
+	QVariantList lst_COLUMN_CURRENTPERCENTAGE;
 	QList<QVariantList*> LstData;
 
 	if (NULL == pData)
@@ -263,11 +267,19 @@ qint32 CClientDbOper::insertSymbolMinMaxTime( const CStockMinTimeMaxTime* pData 
 		lst_COLUMN_MINTIME << pData->m_strMinTime;
 		lst_COLUMN_MAXTIME << pData->m_strMaxTime;
 		lst_COLUMN_COUNT << pData->m_nCount;
+		lst_COLUMN_LOW << pData->m_fLow;
+		lst_COLUMN_HIGH << pData->m_fHigh;
+		lst_COLUMN_CURRENT << pData->m_fCurrent;
+		lst_COLUMN_CURRENTPERCENTAGE << pData->m_fCurrentPercentage;
 	}
 	LstData.append(&lst_COLUMN_SYMBOLUSE);
 	LstData.append(&lst_COLUMN_MINTIME);
 	LstData.append(&lst_COLUMN_MAXTIME);
 	LstData.append(&lst_COLUMN_COUNT);
+	LstData.append(&lst_COLUMN_LOW);
+	LstData.append(&lst_COLUMN_HIGH);
+	LstData.append(&lst_COLUMN_CURRENT);
+	LstData.append(&lst_COLUMN_CURRENTPERCENTAGE);
 
 	nFunRes = m_pDbConnection->startTransaction();
 	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
@@ -291,6 +303,10 @@ qint32 CClientDbOper::updateSymbolMinMaxTime( const CStockMinTimeMaxTime* pData 
 		pData->m_strMinTime,
 		pData->m_strMaxTime,
 		pData->m_nCount,
+		pData->m_fLow,
+		pData->m_fHigh,
+		pData->m_fCurrent,
+		pData->m_fCurrentPercentage,
 		pData->m_strSymbolUse);
 	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
@@ -309,19 +325,21 @@ qint32 CClientDbOper::selectSymbolMinMaxTime( const QString& strSymbolUse, CStoc
 	QStringList lstColumnName;
 
 	strSQLKey = "TABLE_MINTIME_MAXTIME__SELECT_0004";
+	/*
+	SELECT COLUMN_SYMBOLUSE, COLUMN_MINTIME, COLUMN_MAXTIME, COLUMN_COUNT, COLUMN_LOW, COLUMN_HIGH, COLUMN_CURRENT, COLUMN_CURRENTPERCENTAGE
+	FROM TABLE_MINTIME_MAXTIME WHERE COLUMN_SYMBOLUSE = "%1"
+	*/
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey, strSymbolUse);
 	m_pDbConnection->execQuery(sqlData, pQueryAdapter);
-	lstColumnName.clear();
-	lstColumnName.append("COLUMN_SYMBOLUSE");
-	lstColumnName.append("COLUMN_MINTIME");
-	lstColumnName.append("COLUMN_MAXTIME");
-	lstColumnName.append("COLUMN_COUNT");
-
 	lstColumnName.clear();
 	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_SYMBOLUSE);
 	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_MINTIME);
 	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME);
 	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT);
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_LOW);
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_HIGH);
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_CURRENT);
+	lstColumnName.append(str_TABLE_MINTIME_MAXTIME_COLUMN_CURRENTPERCENTAGE);
 
 	lstColumnName.clear();
 	if (NULL != pQueryAdapter)
@@ -340,6 +358,14 @@ qint32 CClientDbOper::selectSymbolMinMaxTime( const QString& strSymbolUse, CStoc
 		pDataGet->m_strMaxTime = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_MAXTIME);
 		nColumnIndex++;
 		pDataGet->m_nCount = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_COUNT).toInt();
+		nColumnIndex++;
+		pDataGet->m_fLow = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_LOW).toDouble();
+		nColumnIndex++;
+		pDataGet->m_fHigh = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_HIGH).toDouble();
+		nColumnIndex++;
+		pDataGet->m_fCurrent = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_CURRENT).toDouble();
+		nColumnIndex++;
+		pDataGet->m_fCurrentPercentage = pQueryAdapter->getStringData(str_TABLE_MINTIME_MAXTIME_COLUMN_CURRENTPERCENTAGE).toDouble();
 
 		(*ppData) = pDataGet;
 		pDataGet = NULL;

@@ -319,3 +319,91 @@ int CSqliteDbOper::selectData_Count( int& nValueGet )
 	return nFunRes;
 }
 
+
+
+int CSqliteDbOper::selectData_LowHigh(double& fLowValueGet, double& fHighValueGet)
+{
+	int nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQLKey;
+	CSQLData sqlData;
+	int nColumnIndex = 0;
+	QStringList lstColumnName;
+	IQueryAdapter* pQueryAdapter = NULL;
+	QString str_Column_Low = "LOW";
+	QString str_Column_High = "HIGH";
+
+	//TABLE_BAR_DATA_1DAY__SELECT_LOWHIGH_0007
+	/*
+	SELECT MIN(COLUMN_CLOSE) AS LOW, MAX(COLUMN_CLOSE) AS HIGH FROM TABLE_BAR_DATA_1DAY;
+	*/
+	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_LOWHIGH_0007";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+
+	lstColumnName.clear();
+	lstColumnName.append(str_Column_Low);
+	lstColumnName.append(str_Column_High);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
+	{
+		lstColumnName = pQueryAdapter->getLstColumnName();
+	}
+	fLowValueGet = 0;
+	fHighValueGet = 0;
+	if (NULL != pQueryAdapter && pQueryAdapter->hasMore())
+	{
+		fLowValueGet= pQueryAdapter->getStringData(str_Column_Low).toDouble();
+		fHighValueGet= pQueryAdapter->getStringData(str_Column_High).toDouble();
+	}
+
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
+
+	return nFunRes;
+}
+
+
+
+int CSqliteDbOper::selectData_Current(double& fCurrentValueGet)
+{
+	int nFunRes = 0;
+	bool bExecRes = true;
+	QString  strSQLKey;
+	CSQLData sqlData;
+	int nColumnIndex = 0;
+	QStringList lstColumnName;
+	IQueryAdapter* pQueryAdapter = NULL;
+	QString str_Column_Current = "CURRENT";
+
+	//TABLE_BAR_DATA_1DAY__SELECT_CURRENT_0008
+	/*
+	SELECT COLUMN_CLOSE AS CURRENT FROM TABLE_BAR_DATA_1DAY ORDER BY COLUMN_DATE DESC LIMIT 1;
+	*/
+	strSQLKey = "TABLE_BAR_DATA_1DAY__SELECT_CURRENT_0008";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+
+	lstColumnName.clear();
+	lstColumnName.append(str_Column_Current);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
+	{
+		lstColumnName = pQueryAdapter->getLstColumnName();
+	}
+	fCurrentValueGet = 0;
+	if (NULL != pQueryAdapter && pQueryAdapter->hasMore())
+	{
+		fCurrentValueGet= pQueryAdapter->getStringData(str_Column_Current).toDouble();
+	}
+
+	m_pDbConnection->cleanQuery(pQueryAdapter);
+	pQueryAdapter = NULL;
+
+	return nFunRes;
+}
+
