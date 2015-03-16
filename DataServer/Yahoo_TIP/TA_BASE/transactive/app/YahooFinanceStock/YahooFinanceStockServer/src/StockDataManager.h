@@ -30,6 +30,10 @@ public:
 	void doWork_Save_HistoryData(const QString& strSymbolUse, const QString& strHistoryData); 
 	//C:\LSL\LSL_DATA\SaveDataFile\000001.SS file to C:\LSL\LSL_DATA\SaveDataSqliteDB\000001.SS sqlite db file
 	//void doWork_Local_FileDB_To_SQLiteDB();
+	void doWork_UpdateFailedCount(const QString& strSymbolUse); 
+	int doWork_Select_FailedCount(const QString& strSymbolUse, int& nFailedCount );
+	void doWork_getMaxTime(const QString& strSymbolUse, QString& strMaxTime);
+
 public:
 	void doWork_getStockSymbolUse(QList<QString >& LstStockSymbolUse);
 	void doWork_getStockMinTimeMaxTime(const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);

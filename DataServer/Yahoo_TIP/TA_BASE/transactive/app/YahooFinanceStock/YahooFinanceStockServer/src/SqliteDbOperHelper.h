@@ -12,6 +12,7 @@
 
 class CHistoryData;
 class CSqliteDbOper;
+class CSymbolUseManager;
 
 class CSqliteDbOperHelper
 {
@@ -32,6 +33,9 @@ public:
 	int selectData_Count(int& nValueGet);
 	int selectData_LowHigh(double& fLowValueGet, double& fHighValueGet);
 	int selectData_Current(double& fCurrentValueGet);
+public:
+	int select_TABLE_SYMBOLUSE_MANAGER(CSymbolUseManager** ppData);
+	int update_TABLE_SYMBOLUSE_MANAGER(const CSymbolUseManager* pData);
 
 private:
 	void _AnalysisData(QStringList& strLstLines, LstHistoryDataT& lstData);

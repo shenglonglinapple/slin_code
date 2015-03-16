@@ -72,5 +72,24 @@ int CStockDataActor::selectData( const QString & strFrom, const QString & strTo,
 	return nFunRes;
 }
 
+void CStockDataActor::updateFailedCount( const QString& strSymbolUse )
+{
+	if (NULL != m_pStockDataDBActor)
+	{
+		m_pStockDataDBActor->updateFailedCount(strSymbolUse);
+	}
+	return;
+}
+
+int CStockDataActor::select_TABLE_SYMBOLUSE_MANAGER( CSymbolUseManager** ppData )
+{
+	int nFunRes = 0;
+	if (NULL != m_pStockDataDBActor)
+	{
+		nFunRes = m_pStockDataDBActor->select_TABLE_SYMBOLUSE_MANAGER(ppData);
+	}
+	return nFunRes;
+}
+
 
 

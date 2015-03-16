@@ -7,6 +7,7 @@
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 #include "UserInfo.h"
+#include "SymbolUseManager.h"
 
 #include "ProjectSQLManager.h"
 #include "ProjectDBStruct.h"
@@ -15,14 +16,23 @@
 #include "IQueryAdapter.h"
 
 
+static const char* DEF_VALUE_STRING_UTC_START_DATE = "1970-01-01";
+static const char* DEF_VALUE_STRING_UTC_START_TIME = "08:00:00";
+static const char* DEF_VALUE_STRING_UTC_START_DATE_TIME = "1970-01-01 08:00:00";
+
+static const int DEF_INT_MAX_LINE_LENGTH = 1024*10;
+static const int DEF_INT_ONE_DAY_SECONDS = 60*60*24;
+
+
 //strSymbolUse
 CSqliteDbOper::CSqliteDbOper( const QString& strSymbolUse )//"002567.SZ";
 {
+	m_strSymbolUse = strSymbolUse;
 	m_pDbConnection = NULL;
 	m_pDbStatusItem = NULL;
 
 	m_strSqliteDbPath = CConfigInfo::getInstance().getSQLiteDBPath();//"C:/LSL/LSL_DATA/SaveDataFile/002567.SZ"
-	m_strSqliteDbFileFullPath = m_strSqliteDbPath + strSymbolUse;
+	m_strSqliteDbFileFullPath = m_strSqliteDbPath + m_strSymbolUse;
 
 	m_pDbStatusItem = new CDbStatusItem();
 	m_pDbStatusItem->m_nDBType = CDbStatusItem::DBType_QSQLITE;
@@ -35,6 +45,8 @@ CSqliteDbOper::CSqliteDbOper( const QString& strSymbolUse )//"002567.SZ";
 	if (true == m_pDbConnection->isOpen())
 	{
 		_CreateDBTable_TABLE_BAR_DATA_1DAY();
+		_CreateDBTable_TABLE_SYMBOLUSE_MANAGER();
+		_InitDBTable_TABLE_SYMBOLUSE_MANAGER();
 	}
 }
 
@@ -407,3 +419,179 @@ int CSqliteDbOper::selectData_Current(double& fCurrentValueGet)
 	return nFunRes;
 }
 
+
+
+int CSqliteDbOper::_CreateDBTable_TABLE_SYMBOLUSE_MANAGER()
+{
+	qint32 nFunRes = 0;
+	CSQLData sqlData;
+	QString  strSQLKey;
+
+	/*
+	TABLE_SYMBOLUSE_MANAGER__CREATE_TABLE__0000
+	CREATE TABLE IF NOT EXISTS TABLE_SYMBOLUSE_MANAGER (
+	COLUMN_SYMBOLUSE TEXT NOT NULL,
+	COLUMN_MAXTIME TIMESTAMP NOT NULL,
+	COLUMN_UPDATFAILED INTEGER,
+	PRIMARY KEY (COLUMN_SYMBOLUSE))
+	*/
+	strSQLKey = "TABLE_SYMBOLUSE_MANAGER__CREATE_TABLE__0000";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+	nFunRes = m_pDbConnection->execModify(sqlData);
+
+	return nFunRes;
+
+}
+
+
+int CSqliteDbOper::_InitDBTable_TABLE_SYMBOLUSE_MANAGER()
+{	
+	int nFunRes = 0;
+	CSymbolUseManager* pSymbolUseManager = NULL; 
+
+
+	select_TABLE_SYMBOLUSE_MANAGER(&pSymbolUseManager);
+	if (NULL != pSymbolUseManager)
+	{
+		delete pSymbolUseManager;
+		pSymbolUseManager = NULL;
+		return nFunRes;
+	}
+	pSymbolUseManager = new CSymbolUseManager();
+	pSymbolUseManager->m_strSymbolUse = m_strSymbolUse;
+	pSymbolUseManager->m_nUpdateFailed = 0;
+	pSymbolUseManager->m_strMaxTime = DEF_VALUE_STRING_UTC_START_DATE_TIME;
+
+	insert_TABLE_SYMBOLUSE_MANAGER(pSymbolUseManager);
+
+	if (NULL != pSymbolUseManager)
+	{
+		delete pSymbolUseManager;
+		pSymbolUseManager = NULL;
+	}
+
+
+	return nFunRes;
+
+}
+
+int CSqliteDbOper::select_TABLE_SYMBOLUSE_MANAGER(CSymbolUseManager** ppData)
+{
+	int nFunRes = 0;
+	bool bExecRes = true;
+	QString strSQLKey;
+	CSQLData sqlData;
+	int nColumnIndex = 0;
+	QStringList lstColumnName;
+	IQueryAdapter* pQueryAdapter = NULL;
+	CSymbolUseManager* pData = NULL;
+	
+
+	/*
+	TABLE_SYMBOLUSE_MANAGER__SELECT__0001
+	SELECT COLUMN_SYMBOLUSE, COLUMN_MAXTIME, COLUMN_UPDATFAILED FROM TABLE_SYMBOLUSE_MANAGER WHERE COLUMN_SYMBOLUSE = "%1"
+	*/
+	strSQLKey = "TABLE_SYMBOLUSE_MANAGER__SELECT__0001";
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey, m_strSymbolUse);
+
+	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
+
+	lstColumnName.clear();
+	lstColumnName.append(str_TABLE_SYMBOLUSE_MANAGER_COLUMN_SYMBOLUSE);
+	lstColumnName.append(str_TABLE_SYMBOLUSE_MANAGER_COLUMN_COLUMN_MAXTIME);
+	lstColumnName.append(str_TABLE_SYMBOLUSE_MANAGER_COLUMN_UPDATFAILED);
+
+	lstColumnName.clear();
+	if (NULL != pQueryAdapter)
+	{
+		lstColumnName = pQueryAdapter->getLstColumnName();
+	}
+	if (NULL != pQueryAdapter && pQueryAdapter->hasMore())
+	{
+		pData = new CSymbolUseManager();
+		nColumnIndex = 0;
+		pData->m_strSymbolUse = pQueryAdapter->getStringData(str_TABLE_SYMBOLUSE_MANAGER_COLUMN_SYMBOLUSE);
+		nColumnIndex++;
+		pData->m_strMaxTime = pQueryAdapter->getStringData(str_TABLE_SYMBOLUSE_MANAGER_COLUMN_COLUMN_MAXTIME);
+		nColumnIndex++;
+		pData->m_nUpdateFailed = pQueryAdapter->getStringData(str_TABLE_SYMBOLUSE_MANAGER_COLUMN_UPDATFAILED).toInt();
+
+		*ppData = pData;
+		pData = NULL;
+	}
+
+	if (NULL != pQueryAdapter)
+	{
+		m_pDbConnection->cleanQuery(pQueryAdapter);
+		pQueryAdapter = NULL;
+	}
+	return nFunRes;
+}
+
+
+int CSqliteDbOper::insert_TABLE_SYMBOLUSE_MANAGER(const CSymbolUseManager* pData)
+{
+	int nFunRes = 0;
+	bool bExecRes = false;
+	CSQLData sqlData;
+	QString  strSQLKey;
+
+	QVariantList lst_COLUMN_SYMBOLUSE;
+	QVariantList lst_COLUMN_MAXTIME;
+	QVariantList lst_COLUMN_UPDATFAILED;
+	QList<QVariantList*> LstData;
+
+	if (NULL == pData)
+	{
+		nFunRes = 0;
+		return nFunRes;
+	}
+	{
+		lst_COLUMN_SYMBOLUSE << pData->m_strSymbolUse;
+		lst_COLUMN_MAXTIME << pData->m_strMaxTime;
+		lst_COLUMN_UPDATFAILED << pData->m_nUpdateFailed;
+
+	}//while
+
+	LstData.append(&lst_COLUMN_SYMBOLUSE);
+	LstData.append(&lst_COLUMN_MAXTIME);
+	LstData.append(&lst_COLUMN_UPDATFAILED);
+
+	strSQLKey = "TABLE_SYMBOLUSE_MANAGER__INSERT__0002";
+	/*
+	//TABLE_SYMBOLUSE_MANAGER__INSERT__0002
+	//INSERT INTO TABLE_SYMBOLUSE_MANAGER (COLUMN_SYMBOLUSE, COLUMN_MAXTIME, COLUMN_UPDATFAILED) VALUES (?, ?, ?)
+	*/
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
+	nFunRes = m_pDbConnection->startTransaction();
+	nFunRes = m_pDbConnection->execModifyBatch(sqlData, LstData);
+	nFunRes = m_pDbConnection->commitTransaction();
+	LstData.clear();
+
+	return nFunRes;
+}
+
+
+int CSqliteDbOper::update_TABLE_SYMBOLUSE_MANAGER(const CSymbolUseManager* pData)
+{
+	int nFunRes = 0;
+	bool bExecRes = false;
+	CSQLData sqlData;
+	QString  strSQLKey;
+	if (NULL == pData)
+	{
+		nFunRes = 0;
+		return nFunRes;
+	}
+	strSQLKey = "TABLE_SYMBOLUSE_MANAGER__UPDATE__0003";
+	/*
+	TABLE_SYMBOLUSE_MANAGER__UPDATE__0003
+	UPDATE TABLE_SYMBOLUSE_MANAGER SET  COLUMN_MAXTIME = "%1", COLUMN_UPDATFAILED = %2 WHERE COLUMN_SYMBOLUSE = "%3"
+	*/
+	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey, pData->m_strMaxTime, pData->m_nUpdateFailed, pData->m_strSymbolUse);
+	nFunRes = m_pDbConnection->startTransaction();
+	nFunRes = m_pDbConnection->execModify(sqlData);
+	nFunRes = m_pDbConnection->commitTransaction();
+
+	return nFunRes;
+}

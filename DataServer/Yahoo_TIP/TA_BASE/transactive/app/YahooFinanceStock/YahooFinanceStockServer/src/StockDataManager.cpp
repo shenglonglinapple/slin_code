@@ -8,7 +8,7 @@
 #include "StockDataActor.h"
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
-
+#include "SymbolUseManager.h"
 
 
 CStockDataManager* CStockDataManager::m_pInstance = 0;
@@ -230,6 +230,82 @@ void CStockDataManager::doWork_HistoryData( const QString& strSymbolUse, const Q
 		pData = NULL;
 	}
 }
+
+void CStockDataManager::doWork_UpdateFailedCount( const QString& strSymbolUse )
+{
+	QMap<QString,CStockDataActor*>::iterator iterMap;
+	CStockDataActor* pData = NULL;
+
+	{
+		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+		iterMap = m_MapStockDataItemT_Total.find(strSymbolUse);
+	}
+
+	if (iterMap != m_MapStockDataItemT_Total.end())
+	{
+		pData = (iterMap.value());
+		pData->updateFailedCount(strSymbolUse);
+
+		pData = NULL;
+	}
+}
+
+int CStockDataManager::doWork_Select_FailedCount(const QString& strSymbolUse, int& nFailedCount )
+{
+	int nFunRes = 0;
+	QMap<QString,CStockDataActor*>::iterator iterMap;
+	CStockDataActor* pData = NULL;
+	CSymbolUseManager* pSymbolUseManager = NULL;
+
+	{
+		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+		iterMap = m_MapStockDataItemT_Total.find(strSymbolUse);
+	}
+
+	if (iterMap != m_MapStockDataItemT_Total.end())
+	{
+		pData = (iterMap.value());
+		pData->select_TABLE_SYMBOLUSE_MANAGER(&pSymbolUseManager);
+
+		pData = NULL;
+	}
+	if (NULL != pSymbolUseManager)
+	{
+		nFailedCount = pSymbolUseManager->m_nUpdateFailed;
+		delete pSymbolUseManager;
+		pSymbolUseManager = NULL;
+	}
+
+	return nFunRes;
+}
+void CStockDataManager::doWork_getMaxTime( const QString& strSymbolUse, QString& strMaxTime )
+{
+	QMap<QString,CStockDataActor*>::iterator iterMap;
+	CStockDataActor* pData = NULL;
+	CSymbolUseManager* pSymbolUseManager = NULL;
+
+	{
+		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+		iterMap = m_MapStockDataItemT_Total.find(strSymbolUse);
+	}
+
+	strMaxTime.clear();
+	if (iterMap != m_MapStockDataItemT_Total.end())
+	{
+		pData = (iterMap.value());
+		pData->select_TABLE_SYMBOLUSE_MANAGER(&pSymbolUseManager);
+
+		pData = NULL;
+	}
+
+	if (NULL != pSymbolUseManager)
+	{
+		strMaxTime = pSymbolUseManager->m_strMaxTime;
+		delete pSymbolUseManager;
+		pSymbolUseManager = NULL;
+	}
+}
+
 
 
 

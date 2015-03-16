@@ -22,7 +22,7 @@ class IDbConnection;
 class CDbStatusItem;
 
 class CHistoryData;
-class CSqliteDbOperBuildSQL;
+class CSymbolUseManager;
 
 class CSqliteDbOper
 {
@@ -42,12 +42,18 @@ public:
 	int selectData_Count(int& nValueGet);
 	int selectData_LowHigh(double& fLowValueGet, double& fHighValueGet);
 	int selectData_Current(double& fCurrentValueGet);
+public:
+	int insert_TABLE_SYMBOLUSE_MANAGER(const CSymbolUseManager* pData);
+	int select_TABLE_SYMBOLUSE_MANAGER(CSymbolUseManager** ppData);
+	int update_TABLE_SYMBOLUSE_MANAGER(const CSymbolUseManager* pData);
+
 
 private:
 	int _CreateDBTable_TABLE_BAR_DATA_1DAY();
-
-
+	int _CreateDBTable_TABLE_SYMBOLUSE_MANAGER();
+	int _InitDBTable_TABLE_SYMBOLUSE_MANAGER();
 private:
+	QString m_strSymbolUse;
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
 	IDbConnection* m_pDbConnection;

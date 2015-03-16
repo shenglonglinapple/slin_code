@@ -319,14 +319,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\RequestYahuoDataHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\RequestYahuoDataHelper.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\ServerComManager.cpp"
 				>
 			</File>
@@ -1207,6 +1199,14 @@
 			</File>
 			<File
 				RelativePath=".\src\StockDataManager.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SymbolUseManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\SymbolUseManager.h"
 				>
 			</File>
 			<File

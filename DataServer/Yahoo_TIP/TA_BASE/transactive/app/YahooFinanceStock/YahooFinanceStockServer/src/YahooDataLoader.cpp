@@ -5,9 +5,13 @@
 #include <QtNetwork/QNetworkRequest>
 
 #include "YahuoHistoryReqAck.h"
-#include "RequestYahuoDataHelper.h"
 #include "StockDataManager.h"
 #include "Log4cppLogger.h"
+#include "SymbolUseManager.h"
+#include "QtTimeHelper.h"
+
+static const int DEF_INT_ONE_DAY_SECONDS = 60*60*24;
+
 
 CYahooDataLoader::CYahooDataLoader( const QString& strSymbolUse, QObject *parent /*= 0*/ )
 {
@@ -15,11 +19,9 @@ CYahooDataLoader::CYahooDataLoader( const QString& strSymbolUse, QObject *parent
 
 
 	m_pYahuoHistoryReqAck = NULL;
-	m_pRequestYahuoDataHelper = NULL;
 	m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_Unknown;
 
 	m_pYahuoHistoryReqAck = new CYahuoHistoryReqAck();
-	m_pRequestYahuoDataHelper = new CRequestYahuoDataHelper(strSymbolUse);
 
 	m_pNetworkAccessManager = new QNetworkAccessManager(this);
 	m_pNetworkRequest = new QNetworkRequest();
@@ -40,13 +42,6 @@ CYahooDataLoader::~CYahooDataLoader()
 	{
 		delete m_pNetworkAccessManager;
 		m_pNetworkAccessManager = NULL;
-	}
-
-
-	if (NULL != m_pRequestYahuoDataHelper)
-	{
-		delete m_pRequestYahuoDataHelper;
-		m_pRequestYahuoDataHelper = NULL;
 	}
 
 	if (NULL != m_pYahuoHistoryReqAck)
@@ -103,6 +98,7 @@ void CYahooDataLoader::slotFinished(QNetworkReply* reply)
 		MYLOG4CPP_ERROR<<"m_strSymbolUse="<<m_strSymbolUse<<" "<<"Reply contain html, strUrl="<<strUrl;
 		MYLOG4CPP_DEBUG<<"m_nSynYahooResult="<<CTcpComProtocol::getStringValue(m_nSynYahooResult)
 			<<" "<<"strHistoryData="<<strHistoryData;
+		CStockDataManager::getInstance().doWork_UpdateFailedCount(m_strSymbolUse);
 		m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished;
 	}
 	else
@@ -116,6 +112,38 @@ void CYahooDataLoader::slotFinished(QNetworkReply* reply)
 
 
 
+void CYahooDataLoader::getStartEndTimeValue( 
+	unsigned int& startYear, unsigned int& startMonth, unsigned int& startDay, 
+	unsigned int& endYear, unsigned int& endMonth, unsigned int& endDay )
+{
+	//QString strLastUpdateTime_FileDB;
+	QString strLastUpdateTime_SQLiteDB;
+	//time_t nLastUpdateTime_FileDB = 0;
+	time_t nLastUpdateTime_SQLiteDB = 0;
+	time_t nTimeLastUpdateDateTime = 0;
+	time_t nTimeNow = 0;
+	CQtTimeHelper* pQtTimeHelper = NULL;
+	pQtTimeHelper = new CQtTimeHelper();
+
+	CStockDataManager::getInstance().doWork_getMaxTime(m_strSymbolUse, strLastUpdateTime_SQLiteDB);
+
+	//strLastUpdateTime_FileDB = m_pFileDBOper->getLastUpdateTime();//"1970-01-01 08:00:00"
+	//nLastUpdateTime_FileDB = pQtTimeHelper->getTimeValue(strLastUpdateTime_FileDB);
+	nLastUpdateTime_SQLiteDB = pQtTimeHelper->getTimeValue(strLastUpdateTime_SQLiteDB);
+
+	nTimeLastUpdateDateTime = nLastUpdateTime_SQLiteDB;
+	nTimeLastUpdateDateTime += DEF_INT_ONE_DAY_SECONDS;//"1970-01-02 08:00:00"
+	nTimeNow = pQtTimeHelper->getCurrentTime();
+
+	pQtTimeHelper->getTimeYearMonthDay(nTimeNow, endYear, endMonth, endDay);
+	pQtTimeHelper->getTimeYearMonthDay(nTimeLastUpdateDateTime, startYear, startMonth, startDay);
+
+	if (NULL != pQtTimeHelper)
+	{
+		delete pQtTimeHelper;
+		pQtTimeHelper = NULL;
+	}
+}
 
 void CYahooDataLoader::synDataWithYahoo()
 {
@@ -127,15 +155,29 @@ void CYahooDataLoader::synDataWithYahoo()
 	unsigned int endMonth = 0;
 	unsigned int endDay = 0;
 	QString strRequestUrl;
+	int nFailedCount = 0;
+	int nMaxUpdateFailedCount = 0;
 
 	if (m_strSymbolUse.isEmpty())
 	{
 		return;
 	}
+	nMaxUpdateFailedCount = CSymbolUseManager::getMaxUpdateFailedCount();
+	CStockDataManager::getInstance().doWork_Select_FailedCount(m_strSymbolUse, nFailedCount);
+	if (nFailedCount >= nMaxUpdateFailedCount)
+	{
+		MYLOG4CPP_ERROR<<"error! check not send req again"
+			<<" "<<"m_strSymbolUse="<<m_strSymbolUse
+			<<" "<<"nFailedCount="<<nFailedCount
+			<<" "<<"nMaxUpdateFailedCount="<<nMaxUpdateFailedCount;
+		return;
+	}
+	getStartEndTimeValue(startYear, startMonth, startDay, endYear, endMonth, endDay);
 
-	m_pRequestYahuoDataHelper->getStartEndTimeValue(
-		startYear, startMonth, startDay, 
-		endYear, endMonth, endDay);
+
+// 	m_pRequestYahuoDataHelper->getStartEndTimeValue(
+// 		startYear, startMonth, startDay, 
+// 		endYear, endMonth, endDay);
 
 	strRequestUrl = m_pYahuoHistoryReqAck->getRequestUrl(
 		m_strSymbolUse, 

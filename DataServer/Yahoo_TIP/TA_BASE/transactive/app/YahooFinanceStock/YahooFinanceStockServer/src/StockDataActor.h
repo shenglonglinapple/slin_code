@@ -9,6 +9,7 @@
 class CStockDataDBActor;
 class CStockMinTimeMaxTime;
 class CHistoryData;
+class CSymbolUseManager;
 
 class CStockDataActor : public QObject
 {
@@ -24,6 +25,8 @@ public:
 	void saveData(const QString& strHistoryData);
 	void getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
 	int selectData(const QString & strFrom, const QString & strTo, QList<CHistoryData*>& lstData );
+	void updateFailedCount( const QString& strSymbolUse);
+	int select_TABLE_SYMBOLUSE_MANAGER(CSymbolUseManager** ppData);
 
 public:
 	void logInfo( const QString& fileName, qint32 lineNumber );

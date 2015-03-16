@@ -196,3 +196,16 @@ int CSqliteDbOperHelper::selectData_Current(double& fCurrentValueGet)
 	return m_pSqliteDbOper->selectData_Current(fCurrentValueGet);
 }
 
+int CSqliteDbOperHelper::select_TABLE_SYMBOLUSE_MANAGER( CSymbolUseManager** ppData )
+{
+	QMutexLocker lock(&m_mutex_SqliteDbOper);	
+	return m_pSqliteDbOper->select_TABLE_SYMBOLUSE_MANAGER(ppData);
+}
+
+int CSqliteDbOperHelper::update_TABLE_SYMBOLUSE_MANAGER( const CSymbolUseManager* pData )
+{
+	QMutexLocker lock(&m_mutex_SqliteDbOper);	
+	return m_pSqliteDbOper->update_TABLE_SYMBOLUSE_MANAGER(pData);
+
+}
+

@@ -11,59 +11,59 @@ public:
 	Father()
 	{
 		m_fMember=1;
+		std::cout<<"Father() set m_fMember="<<m_fMember<<std::endl;
 	}
 	virtual ~Father() 
 	{
-
+		std::cout<<"virtual ~Father() m_fMember="<<m_fMember<<std::endl;
 	}
 
 public:
 	void testFunc()
 	{
-		cout<<"Father testFunc "<<m_fMember<<endl;
+		std::cout<<"Father void testFunc() m_fMember="<<m_fMember<<std::endl;
 	}
-	virtual void testVFunc()
+	virtual void testVFunc()//虚函数表指针 4
 	{
-		cout<<"Father testVFunc "<<m_fMember<<endl;
+		std::cout<<"Father virtual void testVFunc() m_fMember="<<m_fMember<<std::endl;
 	}
 public:
-	int m_fMember;
+	int m_fMember;//4
 };
 
 class Child : public Father
 {
 public:
-	int m_cMember;
+	int m_cMember;//4
 public:
 	Child()
 	{
 		m_cMember=2;
+		std::cout<<"Child() set m_cMember="<<m_cMember<<std::endl;
 	}
 	virtual ~Child()
 	{
-
+		std::cout<<"virtual ~Child() m_cMember="<<m_cMember<<std::endl;
 	}
 public:
 	virtual void testVFunc()
 	{
-		cout<<"Child testVFunc "<<m_cMember<<":"<<m_fMember<<endl;
+		std::cout<<"Child() virtual void testVFunc() m_cMember="<<m_cMember<<std::endl;
+
 	}
 	void testFunc()
 	{
-		cout<<"Child testFunc "<<m_cMember<<":"<<m_fMember<<endl;
+		std::cout<<"Child() void testFunc() m_cMember="<<m_cMember<<std::endl;
 	}
 	void testNFunc()
 	{
-		cout<<"Child testNFunc "<<m_cMember<<":"<<m_fMember<<endl;
+		std::cout<<"Child() void testNFunc() m_cMember="<<m_cMember<<std::endl;
 	}
 };
 
 
 int main()
 {
-	Father* pRealFather = new Father();
-	Child* pFalseChild = (Child*)pRealFather;
-	Father* pFalseFather = new Child();
 
 	/*
 	看看main函数里调用的五个test*Func方法吧，这里有静态的多态，也有动态的多态。编译是静态的，运行是动态的。以下解释C++编译器是怎么形成上述结果的。
@@ -77,13 +77,35 @@ int main()
 	
 	然后它调用testVFunc了，这次执行父类还是子类的？是父类的，因为这个对象是Father对象，在new出来的时候，Father的构造函数会把vptl指针指向自己的testVFunc实现哟。所以将会执行C++代码
 	*/
-	pFalseFather->testFunc();//1//Father testFunc 1
-	pFalseFather->testVFunc();//2//child
 
-	pFalseChild->testFunc();//3//Child testFunc -33333:1
-	pFalseChild->testVFunc();//4//father	
-	pFalseChild->testNFunc();//5//child	
+	Father* pRealFather = new Father();
+	Child* pFalseChild = (Child*)pRealFather;
+	Father* pFalseFather = new Child();
 
+	std::cout<<"sizeof(Father)="<<sizeof(Father)<<std::endl;//8
+	std::cout<<"sizeof(Child)="<<sizeof(Child)<<std::endl;//12
+
+
+	pFalseFather->testFunc();//1//Father void testFunc() m_fMember=1
+	pFalseFather->testVFunc();//2//Child() virtual void testVFunc() m_cMember=2
+
+	pFalseChild->testFunc();//3//Child() void testFunc() m_cMember=-33686019
+	pFalseChild->testVFunc();//4//Father virtual void testVFunc() m_fMember=1	
+	pFalseChild->testNFunc();//5//Child() void testNFunc() m_cMember=-33686019	
+/*
+Father() set m_fMember=1
+Father() set m_fMember=1
+Child() set m_cMember=2
+sizeof(Father)=8
+sizeof(Child)=12
+Father void testFunc() m_fMember=1
+Child() virtual void testVFunc() m_cMember=2
+Child() void testFunc() m_cMember=-33686019
+Father virtual void testVFunc() m_fMember=1
+Child() void testNFunc() m_cMember=-33686019
+
+
+*/
 	return 0;
 }
 

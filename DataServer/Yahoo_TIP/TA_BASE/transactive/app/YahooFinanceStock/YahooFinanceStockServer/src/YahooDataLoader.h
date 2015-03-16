@@ -9,7 +9,7 @@ class QNetworkAccessManager;
 class QNetworkReply;
 class QNetworkRequest;
 
-class CRequestYahuoDataHelper;
+
 class CYahuoHistoryReqAck;
 
 class CYahooDataLoader : public QObject
@@ -32,7 +32,7 @@ public:
 
 public:
 	void test();
-
+	void getStartEndTimeValue( unsigned int& startYear, unsigned int& startMonth, unsigned int& startDay, unsigned int& endYear, unsigned int& endMonth, unsigned int& endDay );
 private:
 	QString m_strSymbolUse;
 	CTcpComProtocol::EDataTypeSynYahooResult m_nSynYahooResult;
@@ -40,7 +40,7 @@ private:
 	QNetworkRequest* m_pNetworkRequest;
 private:
 	CYahuoHistoryReqAck* m_pYahuoHistoryReqAck;
-	CRequestYahuoDataHelper* m_pRequestYahuoDataHelper;
+	
 private:
 	QString m_strRequestUrl;
 };

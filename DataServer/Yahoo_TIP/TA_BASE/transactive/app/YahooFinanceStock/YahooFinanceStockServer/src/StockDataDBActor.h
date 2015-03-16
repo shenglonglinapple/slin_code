@@ -13,6 +13,7 @@ class CFileDBOperHelper;
 class CSqliteDbOperHelper;
 class CStockMinTimeMaxTime;
 class CHistoryData;
+class CSymbolUseManager;
 
 class CStockDataDBActor : public QObject
 {
@@ -28,6 +29,11 @@ public:
 	void saveData(const QString& strHistoryData);
 	void getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
 	int selectData(const QString & strFrom, const QString & strTo, QList<CHistoryData*>& lstData );
+	void updateFailedCount( const QString& strSymbolUse);
+	int select_TABLE_SYMBOLUSE_MANAGER(CSymbolUseManager** ppData);
+
+private:
+	void _Update_SymbolUseManager();
 private:
 	QString m_strSymbolUse;
 private:
