@@ -172,12 +172,11 @@ void CYahooDataLoader::synDataWithYahoo()
 			<<" "<<"nMaxUpdateFailedCount="<<nMaxUpdateFailedCount;
 		return;
 	}
+	MYLOG4CPP_DEBUG<<"check send req again"
+		<<" "<<"m_strSymbolUse="<<m_strSymbolUse
+		<<" "<<"nFailedCount="<<nFailedCount
+		<<" "<<"nMaxUpdateFailedCount="<<nMaxUpdateFailedCount;
 	getStartEndTimeValue(startYear, startMonth, startDay, endYear, endMonth, endDay);
-
-
-// 	m_pRequestYahuoDataHelper->getStartEndTimeValue(
-// 		startYear, startMonth, startDay, 
-// 		endYear, endMonth, endDay);
 
 	strRequestUrl = m_pYahuoHistoryReqAck->getRequestUrl(
 		m_strSymbolUse, 

@@ -1,7 +1,6 @@
 #include "StockDataDBActor.h"
 
 #include "YahuoHistoryReqAck.h"
-#include "RequestYahuoDataHelper.h"
 #include "FileDBOperHelper.h"
 #include "SqliteDbOperHelper.h"
 #include "Log4cppLogger.h"
@@ -13,12 +12,10 @@ CStockDataDBActor::CStockDataDBActor( const QString& strSymbolUse, QObject *pare
 	m_strSymbolUse = strSymbolUse;
 
 	m_pYahuoHistoryReqAck = NULL;
-	m_pRequestYahuoDataHelper = NULL;
 	m_pFileDBOperHelper = NULL;
 	m_pSqliteDbOperHelper = NULL;
 
 	m_pYahuoHistoryReqAck = new CYahuoHistoryReqAck();
-	m_pRequestYahuoDataHelper = new CRequestYahuoDataHelper(strSymbolUse);
 	m_pFileDBOperHelper = new CFileDBOperHelper(strSymbolUse);
 	m_pSqliteDbOperHelper = new CSqliteDbOperHelper(strSymbolUse);
 }
@@ -35,13 +32,6 @@ CStockDataDBActor::~CStockDataDBActor()
 	{
 		delete m_pFileDBOperHelper;
 		m_pFileDBOperHelper = NULL;
-	}
-
-
-	if (NULL != m_pRequestYahuoDataHelper)
-	{
-		delete m_pRequestYahuoDataHelper;
-		m_pRequestYahuoDataHelper = NULL;
 	}
 
 	if (NULL != m_pYahuoHistoryReqAck)
@@ -87,6 +77,7 @@ void CStockDataDBActor::_Update_SymbolUseManager()
 		pSymbolUseManager->m_strSymbolUse = pStockMinTimeMaxTime->m_strSymbolUse;
 		pSymbolUseManager->m_strMaxTime = pStockMinTimeMaxTime->m_strMaxTime;
 		pSymbolUseManager->m_nUpdateFailed = 0;
+		m_pSqliteDbOperHelper->update_TABLE_SYMBOLUSE_MANAGER(pSymbolUseManager);
 	}
 
 	if (NULL != pStockMinTimeMaxTime)

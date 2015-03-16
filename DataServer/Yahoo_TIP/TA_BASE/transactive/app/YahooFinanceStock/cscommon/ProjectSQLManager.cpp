@@ -249,7 +249,7 @@ qint32 CProjectSQLManager::prepareSQLData( CSQLData& objSQLData, const CSQLParam
 	objSQLData = formatSQLData;
 	nFunRes = objSQLData.buildSQL(arg0.getParam(), arg1.getParam(), 
 		arg2.getParam(), arg3.getParam(), arg4.getParam(), 
-		arg5.getParam(), arg6.getParam(), arg7.getParam(), arg7.getParam());
+		arg5.getParam(), arg6.getParam(), arg7.getParam(), arg8.getParam());
 	return nFunRes;
 }
 

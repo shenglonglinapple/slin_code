@@ -7,7 +7,6 @@
 #include "TcpComProtocol.h"
 
 
-class CRequestYahuoDataHelper;
 class CYahuoHistoryReqAck;
 class CFileDBOperHelper;
 class CSqliteDbOperHelper;
@@ -38,7 +37,6 @@ private:
 	QString m_strSymbolUse;
 private:
 	CYahuoHistoryReqAck* m_pYahuoHistoryReqAck;
-	CRequestYahuoDataHelper* m_pRequestYahuoDataHelper;
 private:
 	CFileDBOperHelper* m_pFileDBOperHelper;
 	CSqliteDbOperHelper* m_pSqliteDbOperHelper;

@@ -1060,14 +1060,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\cscommon\RequestYahuoDataHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\cscommon\RequestYahuoDataHelper.h"
-				>
-			</File>
-			<File
 				RelativePath="..\cscommon\SocketInfo.cpp"
 				>
 			</File>
