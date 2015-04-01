@@ -154,8 +154,11 @@ QString CTcpComProtocol::getStringValue( EDataTypeSynYahooResult nValue )
 	case DataType_SynYahooResult_SynYahooFinished:
 		strValue = "DataType_SynYahooResult_SynYahooFinished";
 		break;
-	case DataType_SynYahooResult_ERROR:
-		strValue = "DataType_SynYahooResult_ERROR";
+	case DataType_SynYahooResult_SynYahooERROR:
+		strValue = "DataType_SynYahooResult_SynYahooERROR";
+		break;
+	case DataType_SynYahooResult_SynYahooCountGreaterThanLimitError:
+		strValue = "DataType_SynYahooResult_SynYahooCountGreaterThanLimitError";
 		break;
 	case DataType_SynYahooResult_Unknown:
 		strValue = "DataType_SynYahooResult_Unknown";

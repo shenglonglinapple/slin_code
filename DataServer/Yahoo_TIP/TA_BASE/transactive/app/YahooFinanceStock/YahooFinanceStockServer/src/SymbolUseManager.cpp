@@ -2,7 +2,7 @@
 #include "Log4cppLogger.h"
 
 
-static const int DEF_VALUE_UPDATE_FAILED_COUNT = 2;
+static const int DEF_VALUE_UPDATE_FAILED_COUNT = 200;
 
 CSymbolUseManager::CSymbolUseManager( void )
 {

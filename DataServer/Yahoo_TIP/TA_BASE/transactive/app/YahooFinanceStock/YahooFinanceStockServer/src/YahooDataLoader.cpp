@@ -170,6 +170,7 @@ void CYahooDataLoader::synDataWithYahoo()
 			<<" "<<"m_strSymbolUse="<<m_strSymbolUse
 			<<" "<<"nFailedCount="<<nFailedCount
 			<<" "<<"nMaxUpdateFailedCount="<<nMaxUpdateFailedCount;
+		m_nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooCountGreaterThanLimitError;
 		return;
 	}
 	MYLOG4CPP_DEBUG<<"check send req again"

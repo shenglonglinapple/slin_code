@@ -173,7 +173,8 @@ void CMessageProcesser::processReq( const CReqSynYahoo* pReq )
 		nSynYahooResult = pYahooDataLoader->getState_SynDataWithYahoo();
 
 		if (CTcpComProtocol::DataType_SynYahooResult_SynYahooFinished == nSynYahooResult
-			|| CTcpComProtocol::DataType_SynYahooResult_ERROR == nSynYahooResult)
+			|| CTcpComProtocol::DataType_SynYahooResult_SynYahooERROR == nSynYahooResult
+			|| CTcpComProtocol::DataType_SynYahooResult_SynYahooCountGreaterThanLimitError == nSynYahooResult)
 		{
 			pAck->m_strACKUUID = CTcpComProtocol::getUUID();
 			pAck->m_nResult = nSynYahooResult;

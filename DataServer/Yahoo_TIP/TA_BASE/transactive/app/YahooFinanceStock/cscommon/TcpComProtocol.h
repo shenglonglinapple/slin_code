@@ -66,7 +66,8 @@ public:
 		DataType_SynYahooResult_RecvAckFromYahoo  = 0x03,
 		DataType_SynYahooResult_ProcessAckFromYahoo  = 0x04,
 		DataType_SynYahooResult_SynYahooFinished  = 0x05,
-		DataType_SynYahooResult_ERROR  = 0x06,
+		DataType_SynYahooResult_SynYahooERROR  = 0x06,
+		DataType_SynYahooResult_SynYahooCountGreaterThanLimitError  = 0x07,
 		DataType_SynYahooResult_Unknown  = 0x0FFFFFFF,
 	};
 public:

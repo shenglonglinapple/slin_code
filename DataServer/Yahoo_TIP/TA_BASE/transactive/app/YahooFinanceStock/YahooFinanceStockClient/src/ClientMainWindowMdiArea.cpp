@@ -42,6 +42,7 @@ CClientMainWindowMdiArea::~CClientMainWindowMdiArea()
 void CClientMainWindowMdiArea::_SetupUi()
 {
 	int nIndex = 0;
+	QMdiSubWindow* pSubWindowRef = NULL;
 	this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 	this->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
@@ -50,11 +51,19 @@ void CClientMainWindowMdiArea::_SetupUi()
 	m_pUserTradeTableView = new CUserTradeTableView(this);
 	m_pUserAccountWidget = new CUserAccountWidget(this);
 
-	this->addSubWindow(m_pStockMinTimeMaxTimeTableView);
-	this->addSubWindow(m_pStockHistoryDataTableView);
-	this->addSubWindow(m_pUserTradeTableView);
-	this->addSubWindow(m_pUserAccountWidget);
+	pSubWindowRef = NULL;
+	pSubWindowRef = this->addSubWindow(m_pUserAccountWidget);
+	pSubWindowRef = NULL;
+	pSubWindowRef = this->addSubWindow(m_pStockHistoryDataTableView);
+	pSubWindowRef = NULL;
+	pSubWindowRef = this->addSubWindow(m_pUserTradeTableView);
+	pSubWindowRef = NULL;
+	pSubWindowRef = this->addSubWindow(m_pStockMinTimeMaxTimeTableView);
 
+	this->tileSubWindows();
+	//this->cascadeSubWindows();
+
+	/*
 	nIndex = 0;
 	foreach (QMdiSubWindow *pSubWindow, this->subWindowList()) 
 	{
@@ -89,6 +98,8 @@ void CClientMainWindowMdiArea::_SetupUi()
 		}
 		nIndex++;
 	}//foreach
+
+	*/
 }
 
 void CClientMainWindowMdiArea::_TranslateLanguage()
