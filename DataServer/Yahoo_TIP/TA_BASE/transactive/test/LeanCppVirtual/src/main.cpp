@@ -5,6 +5,11 @@
 #include <iostream>
 using namespace std;
 
+
+////////////////////////////////////////////TTTT_0000__
+#if 0
+
+
 class Father
 {
 public:
@@ -34,9 +39,18 @@ public:
 class Child : public Father
 {
 public:
+	int m_nValue;//ok
+	const int m_c_nValue;//ok
+	static int m_s_nValue;//ok
+	static const int m_s_c_nValue;//ok
+
+	//int m_nValue_T = 0;//error!//only static const integral data members can be initialized within a class
+	//const int m_c_nValue_T = 0;//error!// must be initialized in constructor base/member initializer list//only static const integral data members can be initialized within a class//
+	//static int m_s_nValue_T = 0;//error!//only static const integral data members can be initialized within a class
+	static const int m_s_c_nValue_T = 0;//ok
 	int m_cMember;//4
 public:
-	Child()
+	Child():m_c_nValue(0)//ok
 	{
 		m_cMember=2;
 		std::cout<<"Child() set m_cMember="<<m_cMember<<std::endl;
@@ -60,6 +74,10 @@ public:
 		std::cout<<"Child() void testNFunc() m_cMember="<<m_cMember<<std::endl;
 	}
 };
+
+
+
+
 
 
 int main()
@@ -119,6 +137,55 @@ Child() void testNFunc() m_cMember=-33686019
 // 
 // 	return nFunRes;
 // }
+#endif
+////////////////////////////////////////////TTTT_0000__
+
+////////////////////////////////////////////TTTT_0001__
+#if 1
+//sizeof(CPU)=4Bytes
+//<4  max
+//>4  4
+class CTSizeofA
+{
+public:
+	bool m_bTemp;
+	int m_nTemp;
+	bool m_bTemp2;
+};//12
+
+class CTSizeofB
+{
+public:
+	double d;
+	float a;
+	int b;
+	char c;
+
+};//8
+
+
+
+
+int main(int argc, char *argv[])
+{
+	int nFunRes = 0;
+	int nSizeStdString = 0;
+	int nCTSizeofA = 0;
+	int nCTSizeofB = 0;
+
+	nSizeStdString = sizeof(std::string);
+	nCTSizeofA = sizeof(CTSizeofA);
+	nCTSizeofB = sizeof(CTSizeofB);
+
+	std::cout<<"nSizeStdString="<<nSizeStdString<<std::endl;
+	std::cout<<"nCTSizeofA="<<nCTSizeofA<<std::endl;
+	std::cout<<"nCTSizeofB="<<nCTSizeofB<<std::endl;
+
+	return nFunRes;
+}
+
+#endif
+////////////////////////////////////////////TTTT_0001__
 
 
 

@@ -172,6 +172,30 @@
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\src\MyClassFriend.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyClassFriend.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyClassProtected.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyClassProtected.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyString.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\MyString.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
