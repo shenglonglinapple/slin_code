@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+///
+using System.IO;
+
+namespace WPFToolChangeUserDefType
+{
+    public class DirectoryOper
+    {
+        public DirectoryOper()
+        {
+            
+        }
+
+        ~DirectoryOper()
+        {
+
+        }
+
+
+        public void createDirectory(string targetDir)
+        {
+            log4net.LogManager.GetLogger("ExeLogger").Info(System.String.Format("createDirectory targetDir={0}", targetDir));
+
+            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(targetDir);
+            if (!dir.Exists)
+            {
+                //System.IO.Directory.CreateDirectory(targetPath);
+                dir.Create();
+            }
+            else
+            {
+                deleteFiles(targetDir, true);
+            }
+        }//CreateDirectory
+
+        public void deleteFiles(System.String targetDir, Boolean delSubDir)
+        {
+            log4net.LogManager.GetLogger("ExeLogger").Info(System.String.Format("deleteFiles targetDir={0} delSubDir={1}", targetDir, delSubDir));
+
+            foreach (System.String fileName in Directory.GetFiles(targetDir))
+            {
+                File.SetAttributes(fileName, FileAttributes.Normal);
+                File.Delete(fileName);
+            }
+
+            if (delSubDir)
+            {
+                DirectoryInfo dir = new DirectoryInfo(targetDir);
+                foreach (DirectoryInfo subDi in dir.GetDirectories())
+                {
+                    deleteFiles(subDi.FullName, true);
+                    subDi.Delete();
+                    //System.IO.Directory.Delete(@"C:\Users\Public\DeleteTest");
+                }
+
+            }
+        }//DeleteFiles
+
+
+    }//public class DirectoryOper
+}//namespace WPFToolChangeUserDefType

@@ -1,0 +1,28 @@
+﻿<Window x:Class="WPFToolChangeUserDefType.WindowChangeUserDefType"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="WindowChangeUserDefType" Height="532" Width="888">
+    <Grid>
+        
+        <Label Height="28" Margin="25,18,0,0" Name="label_DirectoryFrom" VerticalAlignment="Top" HorizontalAlignment="Left" Width="133">DirectoryFrom:</Label>
+        <TextBox Height="23" Margin="26,44,12,0" Name="textBox_DirectoryFrom" VerticalAlignment="Top" />
+        
+        <Label HorizontalAlignment="Left" Margin="25,80,0,0" Name="label1_DirectoryTo" Width="120" Height="28" VerticalAlignment="Top">DirectoryTo:</Label>
+        <TextBox Margin="23,111,12,0" Name="textBox_DirectoryTo" Height="26" VerticalAlignment="Top" />
+
+        <Label HorizontalAlignment="Left" Margin="25,156,0,0" Name="label_FindWhat" Width="133" Height="28" VerticalAlignment="Top">FindWhat:</Label>
+        <TextBox Margin="26,184,12,0" Name="textBox_FindWhat" Height="23" VerticalAlignment="Top" />
+
+        
+        <Label HorizontalAlignment="Left" Margin="25,221,0,245" Name="label_ReplaceWith" Width="133">ReplaceWith:</Label>
+        <TextBox Margin="26,0,12,222" Name="textBox_ReplaceWith" Height="23" VerticalAlignment="Bottom" />
+
+        <Label HorizontalAlignment="Left" Margin="24,0,0,173" Name="label_FileExten" Width="133" Height="28" VerticalAlignment="Bottom">FileExten:</Label>
+        <TextBox Margin="24,0,14,150" Name="textBox_FileExten" Height="23" VerticalAlignment="Bottom" />
+
+        <CheckBox  Content="SubDirectory" Checked="CheckBox_SubDirectory_Checked" Unchecked="CheckBox_SubDirectory_Unchecked" Margin="26,0,0,97.172" HorizontalAlignment="Left" Width="151.474" Height="28.58" VerticalAlignment="Bottom"></CheckBox>
+
+        <Button Height="23" HorizontalAlignment="Left" Margin="26,0,0,57" Name="buttonChangeUserDef_DoWork" VerticalAlignment="Bottom" Width="75" Click="button_ChangeUserDef_DoWork_Click">DoWork</Button>
+        
+    </Grid>
+</Window>
