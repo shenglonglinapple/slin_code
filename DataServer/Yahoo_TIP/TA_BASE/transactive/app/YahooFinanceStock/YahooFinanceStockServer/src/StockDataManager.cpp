@@ -80,7 +80,7 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 		{
 			//setValue
 			strSymbol = s_SSSZ_Stocks[nIndex].m_psz_Symbol;
-			strNamePinYin = s_SSSZ_Stocks[nIndex].m_psz_NamePinYin;
+			strNamePinYin = s_SSSZ_Stocks[nIndex].m_psz_NamePinYinFirst;
 			strSymbolExtern = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
 			MYLOG4CPP_DEBUG<<"strSymbol="<<strSymbol<<" "<<"strSymbolExtern="<<strSymbolExtern;
 			
