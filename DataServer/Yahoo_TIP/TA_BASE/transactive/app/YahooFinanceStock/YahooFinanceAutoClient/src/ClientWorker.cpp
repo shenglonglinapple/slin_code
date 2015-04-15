@@ -177,27 +177,19 @@ void CClientWorker::slotRecvMessage(qint32 handle, QByteArray* pMessage)
 
 
 //////////////////////////////////////////////////////////////////////////
-qint32 CClientWorker::resetSymbolUse( const QList<QString>& lstData )
+
+qint32 CClientWorker::resetAllStockInfo( const QList<CStockInfo*>& lstData )
 {
 	QMutexLocker lock(&m_mutex_ClientDbOper);	
 	qint32 nFunRes = 0;
 	if (NULL != m_pClientDbOper)
 	{
-		nFunRes = m_pClientDbOper->resetSymbolUse(lstData);
+		nFunRes = m_pClientDbOper->resetAllStockInfo(lstData);
 	}
 	return nFunRes;
 }
 
-qint32 CClientWorker::getSymbolUseLst(QList<QString>& lstData )
-{
-	QMutexLocker lock(&m_mutex_ClientDbOper);	
-	qint32 nFunRes = 0;
-	if (NULL != m_pClientDbOper)
-	{
-		nFunRes = m_pClientDbOper->getSymbolUseLst(lstData);
-	}
-	return nFunRes;
-}
+
 void CClientWorker::resetDataSymbolMinMaxTime( const CStockMinTimeMaxTime* pData )
 {
 	QMutexLocker lock(&m_mutex_ClientDbOper);	

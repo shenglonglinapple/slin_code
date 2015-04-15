@@ -25,6 +25,7 @@ class CHistoryData;
 class CStockMinTimeMaxTime;
 class CUserAccount;
 class CUserHoldAccount;
+class CStockInfo;
 
 class CClientDbOper
 {
@@ -48,16 +49,14 @@ public:
 public:
 	qint32 resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData );
 public:
-	qint32 resetSymbolUse(const QList<QString>& lstData);
-	qint32 getSymbolUseLst(QList<QString>& lstData);
+	qint32 resetAllStockInfo(const QList<CStockInfo*>& lstData);
 public:
 	QSqlDatabase* getDB();
 private:
 	//
-	qint32 _CreateDBTable_TABLE_SYMBOLUSE();
-	qint32 _Truncate_TABLE_SYMBOLUSE();
-	qint32 _AddSymbolLst(const QList<QString>& lstData);
-
+	qint32 _CreateDBTable_TABLE_STOCKSSQLITE();
+	qint32 _Truncate_TABLE_STOCKSSQLITE();
+	qint32 _AddStockInfoList( const QList<CStockInfo*>& lstData );
 	//
 	qint32 _CreateDBTable_TABLE_USER_TRADE_INFO();
 	qint32 _CreateDBTable_TABLE_BAR_DATA_1DAY();

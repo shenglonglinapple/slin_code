@@ -19,6 +19,7 @@ class CStockMinTimeMaxTime;
 class CUserTradeInfo;
 class CUserAccount;
 class CUserHoldAccount;
+class CStockInfo;
 
 class CClientDataManager
 {
@@ -39,7 +40,7 @@ public:
 	void createUser_OK(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
 
 	void loginToServer_OK(qint32 nHandle, const QString& strUserID);
-	void dowork_downLoadStockBaseIinfo(qint32 nHandle);
+	void dowork_downLoadUserAccountInfo(qint32 nHandle);
 	void dowork_ReqSynYahoo( qint32 nHandle );
 
 public:
@@ -49,7 +50,7 @@ public:
 	void insertUserTradeInfo(const CUserTradeInfo* pData);
 	void resetUserAccount(const CUserAccount* pData);
 	void resetUserHoldAccount(const QList<CUserHoldAccount*>& lstData);
-
+	void resetAllStockInfo(const QList<CStockInfo*>& lstData);
 public:
 	void send_req_ReqCreateUser(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
 	void send_req_ReqLogin(qint32 nHandle, const QString& strUserName, const QString& strPassWord);
@@ -62,6 +63,7 @@ public:
 	void send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse);
 	void send_req_ReqStockHistoryData(const QString& strSymbolUse, const QString& strTimeFrom, const QString& strTimeTo);
 	void send_req_NewOrder(const CUserTradeInfo* pData);
+
 private:
 	QString m_strServerIP;// = "127.0.0.1";
 	quint16 m_nServerPort;// = 5000;

@@ -7,6 +7,7 @@
 #include "StockDataActor.h"
 
 #include "Log4cppLogger.h"
+#include "StockInfo.h"
 
 
 
@@ -41,73 +42,55 @@ CStockDataManager::~CStockDataManager()
 	_FreeData_SSSZ_Stocks();
 }
 
+void CStockDataManager::_FreeLstData(QList<CStockInfo*>& lstData)
+{
+	foreach (CStockInfo* pData, lstData)
+	{
+		delete pData;
+		pData = NULL;
+	}
+	lstData.clear();
+}
+void CStockDataManager::_FreeData_SSSZ_Stocks()
+{
+	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+	_FreeLstData(m_lstStockInfoData);
+}
 
-
-void CStockDataManager::addStockData( const QList<QString>* pLstStock )
+void CStockDataManager::addStockData(const QList<CStockInfo*>* pLstStockInfoData)
 {	
-	CStockDataActor* pData = NULL;
 	qint32  nIndex = 0;
 	QString  strSymbolUse;
-	QList<QString>::const_iterator iterLst;
+	QList<CStockInfo*>::const_iterator iterLst;
 	QMap<QString,CStockDataActor*>::iterator iterFind;
+	CStockInfo* pRef = NULL;
 
-	MYLOG4CPP_INFO<<"CStockDataManager addStockData pLstStock->size="<<pLstStock->size();
+	MYLOG4CPP_INFO<<"CStockDataManager addStockData pLstStockInfoData->size="<<pLstStockInfoData->size();
 
 	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);
-	iterLst = pLstStock->begin();
-	while (iterLst != pLstStock->end())
+	iterLst = pLstStockInfoData->begin();
+	while (iterLst != pLstStockInfoData->end())
 	{
-		strSymbolUse = (*iterLst);
-		MYLOG4CPP_DEBUG<<"strSymbolUse="<<strSymbolUse;
+		pRef = (*iterLst);
+		strSymbolUse = pRef->m_strSymbolUse;
+		MYLOG4CPP_DEBUG<<"addStockData strSymbolUse="<<strSymbolUse;
 
-		//if (strSymbolUse.contains("000008"))//000008.SZ
 		{
-			pData = new CStockDataActor();
-			pData->setValue(strSymbolUse);
+			CStockInfo* pNewStockInfo = NULL;
+			pNewStockInfo = new CStockInfo();
+			*pNewStockInfo = *pRef;
 
-			iterFind = m_MapStockDataItemT_Total.find(pData->m_strSymbolUse);
-			if (iterFind != m_MapStockDataItemT_Total.end())
-			{
-				MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pData->m_strSymbolUse;
-				//find same name
-				delete pData;
-				pData = NULL;
-			}
-			else
-			{
-				m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
-				pData = NULL;
-			}
+			m_lstStockInfoData.push_back(pNewStockInfo);
+			pNewStockInfo = NULL;
+			
 		}//if
-
 
 		iterLst++;
 	}//while
 }
 
 
-void CStockDataManager::_FreeData_SSSZ_Stocks()
-{
-	{
-		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-		QMap<QString,CStockDataActor*>::iterator iterMap;
-		CStockDataActor* pData = NULL;
 
-		iterMap = m_MapStockDataItemT_Total.begin();
-		while (iterMap != m_MapStockDataItemT_Total.end())
-		{
-			pData = (iterMap.value());
-
-			delete pData;
-			pData = NULL;
-
-			iterMap++;
-		}
-
-		m_MapStockDataItemT_Total.clear();
-	}
-
-}
 
 
 void CStockDataManager::qSleep(int nMilliseconds)
@@ -135,21 +118,13 @@ void CStockDataManager::qWait(int nMilliseconds)
 void CStockDataManager::getAllStockData( QList<QString>& LstStock )
 {
 	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
 	QString strSymbolUse;
 
-	iterMap = m_MapStockDataItemT_Total.begin();
-	while (iterMap != m_MapStockDataItemT_Total.end())
+	foreach (CStockInfo* pData, m_lstStockInfoData)
 	{
-		strSymbolUse = (iterMap.key());
-		pData = (iterMap.value());
-
+		strSymbolUse = pData->m_strSymbolUse;
 		LstStock.push_back(strSymbolUse);
-
-		iterMap++;
 	}
-
 }
 
 

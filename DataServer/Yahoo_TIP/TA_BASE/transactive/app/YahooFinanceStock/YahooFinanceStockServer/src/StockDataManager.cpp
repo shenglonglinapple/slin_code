@@ -9,7 +9,8 @@
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 #include "SymbolUseManager.h"
-
+#include "StocksDbOper.h"
+#include "StockInfo.h"
 
 CStockDataManager* CStockDataManager::m_pInstance = 0;
 QMutex CStockDataManager::m_mutexInstance;
@@ -34,8 +35,13 @@ void CStockDataManager::removeInstance()
 
 CStockDataManager::CStockDataManager()
 {
+	m_pCStocksDbOper = NULL;
+	m_pCStocksDbOper = new CStocksDbOper();
+	m_pCStocksDbOper->freeLstData(m_lstStockInfoData);
+
 	_FreeData_SSSZ_Stocks();
-	_LoadData_SSSZ_Stocks();
+	//_LoadData_SSSZ_Stocks();
+	_LoadData_SSSZ_Stocks_FromDB();
 
 
 }
@@ -44,6 +50,15 @@ CStockDataManager::~CStockDataManager()
 {	
 
 	_FreeData_SSSZ_Stocks();
+
+
+	if (NULL != m_pCStocksDbOper)
+	{
+		m_pCStocksDbOper->freeLstData(m_lstStockInfoData);
+
+		delete m_pCStocksDbOper;
+		m_pCStocksDbOper = NULL;
+	}
 }
 
 
@@ -53,9 +68,7 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 	qint32 nArrSize = 0;
 	CStockDataActor* pData = NULL;
 	qint32  nIndex = 0;
-	QString  strSymbol;
-	QString  strNamePinYin;
-	QString  strSymbolExtern;
+	QString  strSymbolUse;
 	QMap<QString,CStockDataActor*>::iterator iterFind;
 	qint32 nMinStockIndex = 0;
 	qint32 nMaxStockIndex = 0;
@@ -79,16 +92,14 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 		for (nIndex = nMinStockIndex; nIndex < nMaxStockIndex; nIndex++)
 		{
 			//setValue
-			strSymbol = s_SSSZ_Stocks[nIndex].m_psz_Symbol;
-			strNamePinYin = s_SSSZ_Stocks[nIndex].m_psz_NamePinYinFirst;
-			strSymbolExtern = s_SSSZ_Stocks[nIndex].m_psz_SymbolExtern;
-			MYLOG4CPP_DEBUG<<"strSymbol="<<strSymbol<<" "<<"strSymbolExtern="<<strSymbolExtern;
+			strSymbolUse = s_SSSZ_Stocks[nIndex].m_psz_SymbolUse;
+			MYLOG4CPP_DEBUG<<"strSymbolUse="<<strSymbolUse;
 			
 			//if (strSymbol.contains("002033.SZ"))//000008.SZ
 			//if (strSymbol.contains("8"))//000008.SZ
 			{
 				pData = new CStockDataActor();
-				pData->setValue(strSymbol, strSymbolExtern);
+				pData->setValue(strSymbolUse);
 
 				iterFind = m_MapStockDataItemT_Total.find(pData->m_strSymbolUse);
 				if (iterFind != m_MapStockDataItemT_Total.end())
@@ -112,6 +123,85 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 }
 
 
+void CStockDataManager::_LoadData_SSSZ_Stocks_FromDB()
+{
+	qint32 nArrSize = 0;
+	CStockDataActor* pStockDataActorNew = NULL;
+	qint32  nIndex = 0;
+	QMap<QString,CStockDataActor*>::iterator iterFind;
+	qint32 nMinStockIndex = 0;
+	qint32 nMaxStockIndex = 0;
+	QList<CStockInfo*> lstStockInfoData;
+
+	nMinStockIndex = CConfigInfo::getInstance().getMinStockIndex();
+	nMaxStockIndex = CConfigInfo::getInstance().getMaxStockIndex();
+
+	m_pCStocksDbOper->freeLstData(lstStockInfoData);
+	m_pCStocksDbOper->selectAllStock(lstStockInfoData);
+	nArrSize = 0;
+	nArrSize = lstStockInfoData.size();
+	if (0 >= nArrSize)
+	{
+		MYLOG4CPP_ERROR<<"Stock_Count ArrSize="<<nArrSize<<"please check STOCKSSQLITE_DB.db TABLE_STOCKSSQLITE";
+		return;
+	}
+	if (nMaxStockIndex > nArrSize)
+	{
+		nMaxStockIndex = nArrSize;
+	}
+	MYLOG4CPP_INFO<<"Stock_Count ArrSize="<<nArrSize
+		<<" "<<"nMinStockIndex="<<nMinStockIndex
+		<<" "<<"nMaxStockIndex="<<nMaxStockIndex;
+
+	{
+		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
+		for (nIndex = nMinStockIndex; nIndex < nMaxStockIndex; nIndex++)
+		{
+			//setValue
+			CStockInfo* pStockInfoRef = NULL;
+			CStockInfo* pStockInfoNew = new CStockInfo();
+			pStockInfoRef = lstStockInfoData[nIndex];
+			*pStockInfoNew = *pStockInfoRef;
+			pStockInfoRef = NULL;
+
+			MYLOG4CPP_DEBUG<<"nIndex="<<nIndex
+				<<" "<<"strSymbolUse="<<pStockInfoNew->m_strSymbolUse;
+
+			//if (strSymbol.contains("002033.SZ"))//000008.SZ
+			//if (strSymbol.contains("8"))//000008.SZ
+			{
+				pStockDataActorNew = new CStockDataActor();
+				pStockDataActorNew->setValue(pStockInfoNew->m_strSymbolUse);
+
+				iterFind = m_MapStockDataItemT_Total.find(pStockDataActorNew->m_strSymbolUse);
+				if (iterFind != m_MapStockDataItemT_Total.end())
+				{
+					MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pStockDataActorNew->m_strSymbolUse;
+					//find same name
+					delete pStockDataActorNew;
+					pStockDataActorNew = NULL;
+
+					delete pStockInfoNew;
+					pStockInfoNew = NULL;
+				}
+				else
+				{
+					m_MapStockDataItemT_Total.insert(pStockDataActorNew->m_strSymbolUse, pStockDataActorNew);
+					pStockDataActorNew = NULL;
+
+					m_lstStockInfoData.push_back(pStockInfoNew);
+					pStockInfoNew = NULL;
+				}
+			}//if
+
+
+		}//for
+	}
+
+	m_pCStocksDbOper->freeLstData(lstStockInfoData);
+	lstStockInfoData.clear();
+
+}
 void CStockDataManager::_FreeData_SSSZ_Stocks()
 {
 	{
@@ -154,22 +244,17 @@ void CStockDataManager::doWork_Save_HistoryData( const QString& strSymbolUse, co
 		pData = NULL;
 	}
 }
-void CStockDataManager::doWork_getStockSymbolUse(QList<QString>& LstStockSymbolUse)
+void CStockDataManager::doWork_getAllStockInfo(QList<CStockInfo*>& LstStockInfo)
 {
 	QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
 
-	iterMap = m_MapStockDataItemT_Total.begin();
-	while (iterMap != m_MapStockDataItemT_Total.end())
+	foreach (CStockInfo* pData, m_lstStockInfoData)
 	{
-		pData = (iterMap.value());
-
-		LstStockSymbolUse.push_back(pData->m_strSymbolUse);
-
-		pData = NULL;
-		iterMap++;
+		CStockInfo* pDataNew = new CStockInfo();
+		*pDataNew = *pData;
+		LstStockInfo.push_back(pDataNew);
 	}
+
 }
 
 void CStockDataManager::qSleep(int nMilliseconds)

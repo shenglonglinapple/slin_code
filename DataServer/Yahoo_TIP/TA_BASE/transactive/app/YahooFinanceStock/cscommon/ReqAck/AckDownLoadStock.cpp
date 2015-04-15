@@ -1,6 +1,7 @@
 #include "AckDownLoadStock.h"
 #include <QtCore/QDataStream>
 #include "Log4cppLogger.h"
+#include "StockInfo.h"
 
 CAckDownLoadStock::CAckDownLoadStock( void )
 {
@@ -19,7 +20,13 @@ void CAckDownLoadStock::_Clear()
 	m_strReqUUID.clear();
 	m_strACKUUID.clear();
 	m_nStockCount = 0;
-	m_LstStock.clear();	
+
+	foreach (CStockInfo* pData, m_lstStockInfoData)
+	{
+		delete pData;
+		pData = NULL;
+	}
+	m_lstStockInfoData.clear();
 }
 
 void CAckDownLoadStock::logInfo( const QString& fileName, qint32 lineNumber )
@@ -54,7 +61,7 @@ QByteArray* CAckDownLoadStock::getMessage()
 	//QByteArray &append(const char *s, int len);
 	pMessage = new QByteArray();
 
-	m_nStockCount = m_LstStock.size();
+	m_nStockCount = m_lstStockInfoData.size();
 
 	QDataStream writeToByteArray(pMessage, QIODevice::WriteOnly);
 	writeToByteArray.setVersion(QDataStream::Qt_4_0);
@@ -65,9 +72,13 @@ QByteArray* CAckDownLoadStock::getMessage()
 	writeToByteArray<<(m_strACKUUID);
 	writeToByteArray<<(qint32)(m_nStockCount);
 
-	foreach (const QString& strValue, m_LstStock)
+	foreach (CStockInfo* pData, m_lstStockInfoData)
 	{
-		writeToByteArray<<strValue;
+		writeToByteArray<<pData->m_strSymbolUse;
+		writeToByteArray<<pData->m_strNamePinYinFirst;
+		writeToByteArray<<pData->m_strNamePinYinFull0;
+		writeToByteArray<<pData->m_strNamePinYinFull4;
+		writeToByteArray<<pData->m_strNameUtf8;
 	}
 
 	return pMessage;	
@@ -88,13 +99,23 @@ void CAckDownLoadStock::setValue(const QByteArray* pMessage )
 	readMessageBuffer>>m_strReqUUID;
 	readMessageBuffer>>m_strACKUUID;
 	readMessageBuffer>>m_nStockCount;
-	m_LstStock.clear();
-
+	
+	foreach (CStockInfo* pData, m_lstStockInfoData)
+	{
+		delete pData;
+		pData = NULL;
+	}
+	m_lstStockInfoData.clear();
+	//
 	for (qint32 nIndex = 0; nIndex < m_nStockCount; nIndex++)
 	{
-		QString strValue;
-		readMessageBuffer>>strValue;
-		m_LstStock.push_back(strValue);
+		CStockInfo* pDataNew = new CStockInfo();
+		readMessageBuffer>>pDataNew->m_strSymbolUse;
+		readMessageBuffer>>pDataNew->m_strNamePinYinFirst;
+		readMessageBuffer>>pDataNew->m_strNamePinYinFull0;
+		readMessageBuffer>>pDataNew->m_strNamePinYinFull4;
+		readMessageBuffer>>pDataNew->m_strNameUtf8;		
+		m_lstStockInfoData.push_back(pDataNew);
 	}
 
 	m_nMessageType = (CTcpComProtocol::EMsgType)(nMessageType);

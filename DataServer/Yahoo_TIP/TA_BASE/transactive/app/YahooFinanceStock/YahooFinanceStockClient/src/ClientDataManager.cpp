@@ -178,32 +178,14 @@ void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUser
 
 }
 
-void CClientDataManager::dowork_downLoadStockBaseIinfo( qint32 nHandle )
+void CClientDataManager::dowork_downLoadUserAccountInfo( qint32 nHandle )
 {
 	QString strSymbolUse;
-	MYLOG4CPP_DEBUG<<"CClientDataManager dowork_downLoadStockBaseIinfo"
+	MYLOG4CPP_DEBUG<<"CClientDataManager dowork_downLoadUserAccountInfo"
 		<<" "<<"nHandle="<<nHandle;
 
-	CSignalSlotManager::getInstance().emit_ShownMessage("dowork_downLoadStockBaseIinfo"+
+	CSignalSlotManager::getInstance().emit_ShownMessage("dowork_downLoadUserAccountInfo"+
 		QString("nHandle=%1").arg(nHandle));
-
-	QList<QString> lstSymbolUse;
-	QList<QString>::iterator iterLst;
-	//TODO. for Test
-	CStockDataManager::getInstance().getAllStockData(lstSymbolUse);
-
-	iterLst = lstSymbolUse.begin();
-	while (iterLst != lstSymbolUse.end())
-	{
-		strSymbolUse = (*iterLst);
-		//TODO.forTest
-		//send_req_ReqSynYahoo(nHandle, strSymbolUse);
-		//send_req_ReqStockMinTimeMaxTime(nHandle, strSymbolUse);
-		//TODO.forTest
-		//send_req_ReqHistoryTrade(strSymbolUse, CTcpComProtocol::ETradeType_Buy);
-
-		iterLst++;
-	}//while
 
 	send_req_ReqUserAccount("");//first load account info
 	send_req_ReqUserHoldAccount("");
@@ -475,6 +457,10 @@ void CClientDataManager::send_req_ReqUserHoldAccount( const QString& strSymbolUs
 }
 
 //////////////////////////////////////////////////////////////////////////
+void CClientDataManager::resetAllStockInfo(const QList<CStockInfo*>& lstData)
+{
+	CClientDBManager::getInstance().resetAllStockInfo(lstData);
+}
 void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {
 	CClientDBManager::getInstance().resetDataHistory(strSymbolUse, lstData);

@@ -92,12 +92,7 @@ static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_VOLUME = "COLUMN_VOLUME";
 static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_TIME = "COLUMN_TIME";
 static const char*  str_TABLE_USER_HOLD_ACCOUNT_COLUMN_HOLD_ACCOUNT = "COLUMN_HOLDACCOUNT";
 /////
-//[DB end]
-/////
-//C:\LSL\LSL_DATA\ClientDB\UserNameValue_PassWordValue.db
-//[[TABLE_SYMBOLUSE]]
-static const char*  str_TABLE_SYMBOLUSE = "TABLE_SYMBOLUSE";
-static const char*  str_TABLE_SYMBOLUSE_COLUMN_SYMBOLUSE = "COLUMN_SYMBOLUSE";
+
 
 //C:\LSL\LSL_DATA\ClientDB\UserNameValue_PassWordValue.db
 //[[TABLE_MINTIME_MAXTIME]]

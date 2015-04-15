@@ -8,6 +8,7 @@
 
 #include "TcpComProtocol.h"
 
+class CStockInfo;
 
 class CAckDownLoadStock
 {
@@ -27,7 +28,7 @@ public:
 	QString m_strReqUUID;//37
 	QString m_strACKUUID;//37
 	qint32 m_nStockCount;
-	QList<QString> m_LstStock;
+	QList<CStockInfo*> m_lstStockInfoData;
 
 };
 

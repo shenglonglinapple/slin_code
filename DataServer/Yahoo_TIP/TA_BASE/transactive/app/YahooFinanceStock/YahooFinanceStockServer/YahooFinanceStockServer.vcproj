@@ -905,6 +905,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\cscommon\Data\StockInfo.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\cscommon\Data\StockInfo.h"
+					>
+				</File>
+				<File
 					RelativePath="..\cscommon\Data\StockMinTimeMaxTime.cpp"
 					>
 				</File>

@@ -31,18 +31,16 @@ void CStockDataActor::logInfo( const QString& fileName, qint32 lineNumber )
 		<<" "<<"CStockDataActor:m_strSymbolUse="<<m_strSymbolUse;
 }
 
-void CStockDataActor::setValue( const QString& strSymbol, const QString& strSymbolExtern )
+
+
+void CStockDataActor::setValue( const QString& strSymbolUse)
 {
-	QString  strSymbolUse;
 	QString  strStockID;
 	qint32 nStockID = 0;
 
-	strSymbolUse = strSymbol + strSymbolExtern;
 	strStockID = strSymbolUse.mid(0, strSymbolUse.indexOf("."));
 	nStockID = strStockID.toInt();
-
 	this->m_strSymbolUse = strSymbolUse;
-
 	m_pStockDataDBActor = new CStockDataDBActor(strSymbolUse);
 }
 

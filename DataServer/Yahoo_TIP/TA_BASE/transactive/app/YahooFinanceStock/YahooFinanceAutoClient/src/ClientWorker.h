@@ -21,6 +21,7 @@ class CHistoryData;
 class CUserTradeInfo;
 class CUserAccount;
 class CUserHoldAccount;
+class CStockInfo;
 
 class CClientWorker : public CMyQtThread
 {
@@ -54,8 +55,7 @@ public:
 	void send_req_ReqSynYahoo(const QString& strSymbolUse);
 
 public:
-	qint32 resetSymbolUse(const QList<QString>& lstData);
-	qint32 getSymbolUseLst(QList<QString>& lstData );
+	qint32 resetAllStockInfo( const QList<CStockInfo*>& lstData );
 	void resetDataSymbolMinMaxTime(const CStockMinTimeMaxTime* pData );
 	void resetHistoryData(const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
 	void insertUserTradeInfo(const QList<CUserTradeInfo*>& LstData );

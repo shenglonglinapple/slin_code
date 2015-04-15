@@ -133,9 +133,10 @@ void CMessageProcesser::processAck( const CAckSynYahoo* pAck )
 }
 void CMessageProcesser::processAck( const CAckDownLoadStock* pAck )
 {
-	CStockDataManager::getInstance().addStockData(&(pAck->m_LstStock));
+	CStockDataManager::getInstance().addStockData(&(pAck->m_lstStockInfoData));
+	CClientDataManager::getInstance().resetAllStockInfo(pAck->m_lstStockInfoData);
 	CClientDataManager::getInstance().dowork_ReqSynYahoo(m_nHanle);
-	CClientDataManager::getInstance().dowork_downLoadStockBaseIinfo(m_nHanle);
+	CClientDataManager::getInstance().dowork_downLoadUserAccountInfo(m_nHanle);
 	return;
 }
 

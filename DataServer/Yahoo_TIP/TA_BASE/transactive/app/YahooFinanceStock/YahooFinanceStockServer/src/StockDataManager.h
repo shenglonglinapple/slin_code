@@ -12,6 +12,8 @@ class CStockDataActor;
 class CStockMinTimeMaxTime;
 class CHistoryData;
 class CUserHold;
+class CStocksDbOper;
+class CStockInfo;
 
 class CStockDataManager 
 {
@@ -35,19 +37,22 @@ public:
 	void doWork_getMaxTime(const QString& strSymbolUse, QString& strMaxTime);
 
 public:
-	void doWork_getStockSymbolUse(QList<QString >& LstStockSymbolUse);
+	void doWork_getAllStockInfo(QList<CStockInfo*>& LstStockInfo);
 	void doWork_getStockMinTimeMaxTime(const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
 	void doWork_HistoryData(const QString& strSymbolUse, const QString& strFrom, const QString& strTo, QList<CHistoryData*>& lstData);
 private:
 	void _FreeData_SSSZ_Stocks();
 	void _LoadData_SSSZ_Stocks();
-
+	void _LoadData_SSSZ_Stocks_FromDB();
 private:
 	void qSleep(int nMilliseconds);
 	void qWait(int nMilliseconds);
+
 private:
 	QMutex m_mutexMapStockDataItemT_Total;
 	QMap<QString,CStockDataActor*> m_MapStockDataItemT_Total;
+	CStocksDbOper* m_pCStocksDbOper;
+	QList<CStockInfo*> m_lstStockInfoData; 
 };
 
 

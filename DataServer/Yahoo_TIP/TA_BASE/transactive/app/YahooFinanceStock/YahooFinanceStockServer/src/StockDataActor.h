@@ -17,10 +17,9 @@ class CStockDataActor : public QObject
 public:
 	CStockDataActor(QObject* parent=0);
 	virtual ~CStockDataActor();
+
 public:
-	QString  m_strSymbolUse;//m_strSymbol+m_strSymbolExtern
-public:
-	void setValue(const QString& strSymbol,	const QString& strSymbolExtern);
+	void setValue( const QString& strSymbolUse);
 public:
 	void saveData(const QString& strHistoryData);
 	void getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet);
@@ -30,6 +29,8 @@ public:
 
 public:
 	void logInfo( const QString& fileName, qint32 lineNumber );
+public:
+	QString  m_strSymbolUse;//m_strSymbol+m_strSymbolExtern
 private:
 	CStockDataDBActor* m_pStockDataDBActor;
 };

@@ -198,7 +198,7 @@ void CClientActorManager::send_req_ReqDownLoadStock( qint32 nHandle )
 	}
 }
 //////////////////////////////////////////////////////////////////////////
-void CClientActorManager::resetSymbolUse(qint32 nHandle, const QList<QString>& lstData )
+void CClientActorManager::resetAllStockInfo(qint32 nHandle, const QList<CStockInfo*>& lstData )
 {
 	QMutexLocker lock(&m_mutex_MapClientActor);	
 	QMap<qint32, CClientWorker*>::iterator iterMap;
@@ -208,7 +208,7 @@ void CClientActorManager::resetSymbolUse(qint32 nHandle, const QList<QString>& l
 	if (iterMap != m_MapClientActor.end())
 	{
 		pClientActor = iterMap.value();
-		pClientActor->resetSymbolUse(lstData);
+		pClientActor->resetAllStockInfo(lstData);
 	}
 	else
 	{
@@ -218,25 +218,7 @@ void CClientActorManager::resetSymbolUse(qint32 nHandle, const QList<QString>& l
 	}
 }
 
-void CClientActorManager::getSymbolUseLst( qint32 nHandle, QList<QString>& lstData )
-{
-	QMutexLocker lock(&m_mutex_MapClientActor);	
-	QMap<qint32, CClientWorker*>::iterator iterMap;
-	CClientWorker* pClientActor = NULL;
 
-	iterMap = m_MapClientActor.find(nHandle);
-	if (iterMap != m_MapClientActor.end())
-	{
-		pClientActor = iterMap.value();
-		pClientActor->getSymbolUseLst(lstData);
-	}
-	else
-	{
-		MYLOG4CPP_ERROR<<"CClientActorManager getSymbolUseLst"
-			<<" "<<"nHandle="<<nHandle
-			<<" "<<"not find hanle";
-	}
-}
 
 void CClientActorManager::send_req_ReqStockMinTimeMaxTime( qint32 nHandle, const QString& strSymbolUse )
 {

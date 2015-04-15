@@ -16,6 +16,7 @@ class CHistoryData;
 class CUserTradeInfo;
 class CUserAccount;
 class CUserHoldAccount;
+class CStockInfo;
 
 class CClientActorManager 
 {
@@ -46,8 +47,7 @@ public:
 	void send_req_ReqSynYahoo(qint32 nHandle, const QString& strSymbolUse);
 
 public:
-	void resetSymbolUse(qint32 nHandle, const QList<QString>& lstData );
-	void getSymbolUseLst(qint32 nHandle, QList<QString>& lstData );
+	void resetAllStockInfo(qint32 nHandle, const QList<CStockInfo*>& lstData );
 	void resetDataSymbolMinMaxTime(qint32 nHandle, const CStockMinTimeMaxTime* pData );
 	void resetHistoryData(qint32 nHandle, const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
     void insertUserTradeInfo(qint32 nHandle, const QList<CUserTradeInfo*>& LstData);

@@ -35,6 +35,7 @@
 #include "UserTradeInfo.h"
 #include "UserAccount.h"
 #include "ClientActorManager.h"
+#include "StockInfo.h"
 
 #include "Log4cppLogger.h"
 
@@ -122,13 +123,16 @@ void CClientMessageProcesser::processAck( const CAckLogin* pAck )
 }
 void CClientMessageProcesser::processAck( const CAckDownLoadStock* pAck )
 {
-	QList<QString>::const_iterator iterLst;
+	QList<CStockInfo*>::const_iterator iterLst;
 	QString strSymbolUse;
-	CClientActorManager::getInstance().resetSymbolUse(m_nHanle, pAck->m_LstStock);
-	iterLst = pAck->m_LstStock.constBegin();
-	while (iterLst != pAck->m_LstStock.constEnd())
+	CClientActorManager::getInstance().resetAllStockInfo(m_nHanle, pAck->m_lstStockInfoData);
+	iterLst = pAck->m_lstStockInfoData.constBegin();
+	while (iterLst != pAck->m_lstStockInfoData.constEnd())
 	{
-		strSymbolUse = (*iterLst);
+		CStockInfo* pRef = NULL;
+
+		pRef = (*iterLst);
+		strSymbolUse = pRef->m_strSymbolUse;
 		CClientActorManager::getInstance().send_req_ReqSynYahoo(m_nHanle, strSymbolUse);
 		iterLst++;
 	}//while

@@ -151,6 +151,8 @@ void CMessageProcesser::processReq( const CReqSynYahoo* pReq )
 	CAckSynYahoo* pAck = NULL;
 	QByteArray* pByteArray = NULL;
 	CYahooDataLoader* pYahooDataLoader = NULL;
+	int nWaitIndex = 0;
+	int nWaitLimit = 10;
 	CTcpComProtocol::EDataTypeSynYahooResult nSynYahooResult = CTcpComProtocol::DataType_SynYahooResult_SynYahooStart;
 
 	pYahooDataLoader = new CYahooDataLoader(pReq->m_strSymbolUse);
@@ -167,8 +169,11 @@ void CMessageProcesser::processReq( const CReqSynYahoo* pReq )
 	CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);
 	pYahooDataLoader->synDataWithYahoo();
 
-	while (1)
+	nWaitIndex = 0;
+	nWaitLimit = 10;
+	while (nWaitIndex < nWaitLimit)
 	{
+		nWaitIndex++;
 		CProjectEnvironment::getInstance().qtWaitTime(300);
 		nSynYahooResult = pYahooDataLoader->getState_SynDataWithYahoo();
 
@@ -185,6 +190,10 @@ void CMessageProcesser::processReq( const CReqSynYahoo* pReq )
 			pByteArray = NULL;
 
 			break;//while
+		}
+		else
+		{
+			CProjectEnvironment::getInstance().qtWaitTime(500);
 		}
 	}//while
 
@@ -214,8 +223,8 @@ void CMessageProcesser::processReq(const CReqDownLoadStock* pReq)
 	pAck->m_nDataType = CTcpComProtocol::DataType_DownLoadStock;
 	pAck->m_strReqUUID = pReq->m_strReqUUID;
 	pAck->m_strACKUUID = CTcpComProtocol::getUUID();
-	CStockDataManager::getInstance().doWork_getStockSymbolUse(pAck->m_LstStock);
-	pAck->m_nStockCount = pAck->m_LstStock.size();
+	CStockDataManager::getInstance().doWork_getAllStockInfo(pAck->m_lstStockInfoData);
+	pAck->m_nStockCount = pAck->m_lstStockInfoData.size();
 	pAck->logInfo(__FILE__, __LINE__);
 	pByteArray = pAck->getMessage();
 	CServerManager::getInstance().sendMessage(CConfigInfo::getInstance().getServerPort(), m_nHanle, pByteArray);

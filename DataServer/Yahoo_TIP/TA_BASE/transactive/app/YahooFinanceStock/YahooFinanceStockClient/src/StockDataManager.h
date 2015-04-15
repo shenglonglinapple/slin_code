@@ -9,6 +9,7 @@
 #include "TcpComProtocol.h"
 
 class CStockDataActor;
+class CStockInfo;
 
 class CStockDataManager 
 {
@@ -28,12 +29,14 @@ private:
 private:
 	void qSleep(int nMilliseconds);
 	void qWait(int nMilliseconds);
+	void _FreeLstData(QList<CStockInfo*>& lstData);
+
 public:
-	void addStockData(const QList<QString>* LstStock);
+	void addStockData(const QList<CStockInfo*>* pLstStockInfoData);
 	void getAllStockData(QList<QString>& LstStock);
 private:
 	QMutex m_mutexMapStockDataItemT_Total;
-	QMap<QString,CStockDataActor*> m_MapStockDataItemT_Total;
+	QList<CStockInfo*> m_lstStockInfoData; 
 };
 
 

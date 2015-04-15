@@ -17,6 +17,7 @@
 #include "DbStatusItem.h"
 #include "QtDBConnection.h"
 #include "IQueryAdapter.h"
+#include "StockInfo.h"
 
 //5001.db
 CClientDbOper::CClientDbOper( const QString& strUserID )
@@ -37,8 +38,8 @@ CClientDbOper::CClientDbOper( const QString& strUserID )
 
 	if (true == m_pDbConnection->isOpen())
 	{
-		_CreateDBTable_TABLE_SYMBOLUSE();
-		_Truncate_TABLE_SYMBOLUSE();
+		_CreateDBTable_TABLE_STOCKSSQLITE();
+		_Truncate_TABLE_STOCKSSQLITE();
 		_CreateDBTable_TABLE_USER_TRADE_INFO();
 		truncate_TABLE_USER_TRADE_INFO();
 		_CreateDBTable_TABLE_BAR_DATA_1DAY();
@@ -581,44 +582,64 @@ qint32 CClientDbOper::_AddUserHoldAccountLst( const QList<CUserHoldAccount*>& ls
 	return nFunRes;
 }
 
-qint32 CClientDbOper::_CreateDBTable_TABLE_SYMBOLUSE()
+qint32 CClientDbOper::_CreateDBTable_TABLE_STOCKSSQLITE()
 {
 	qint32 nFunRes = 0;
 	QString  strSQLKey;
 	CSQLData sqlData;
-	strSQLKey = "TABLE_SYMBOLUSE__CREATE_TABLE_0000";
+	/*
+	TABLE_STOCKSSQLITE__CREATE_TABLE__0000
+	CREATE TABLE IF NOT EXISTS TABLE_STOCKSSQLITE (
+	COLUMN_SYMBOLUSE TEXT,
+	COLUMN_NAMEPINYINFIRST TEXT,
+	COLUMN_NAMEPINYINFULL0 TEXT,
+	COLUMN_NAMEPINYINFULL4 TEXT,
+	COLUMN_NAMEUTF8 nvarchar(256))	
+	*/
+	strSQLKey = "TABLE_STOCKSSQLITE__CREATE_TABLE__0000";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
-qint32 CClientDbOper::_Truncate_TABLE_SYMBOLUSE()
+qint32 CClientDbOper::_Truncate_TABLE_STOCKSSQLITE()
 {
 	qint32 nFunRes = 0;
 	QString  strSQLKey;
 	CSQLData sqlData;
-	strSQLKey = "TABLE_SYMBOLUSE__DELETE_0002";
+	/*
+	TABLE_STOCKSSQLITE__DELETE__0003
+	DELETE FROM TABLE_STOCKSSQLITE
+	*/
+	strSQLKey = "TABLE_STOCKSSQLITE__DELETE__0003";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 	nFunRes = m_pDbConnection->execModify(sqlData);
 	return nFunRes;
 }
-qint32 CClientDbOper::resetSymbolUse( const QList<QString>& lstData )
+
+qint32 CClientDbOper::resetAllStockInfo(const QList<CStockInfo*>& lstData)
 {
-	_Truncate_TABLE_SYMBOLUSE();
+	_Truncate_TABLE_STOCKSSQLITE();
 
 	qint32 nFunRes = 0;
-	nFunRes = _AddSymbolLst(lstData);
+	nFunRes = _AddStockInfoList(lstData);
 	return nFunRes;
 }
-qint32 CClientDbOper::_AddSymbolLst( const QList<QString>& lstData )
+
+
+qint32 CClientDbOper::_AddStockInfoList( const QList<CStockInfo*>& lstData )
 {
 	qint32 nFunRes = 0;
 	bool bExecRes = false;
 	QString  strSQLKey;
 	CSQLData sqlData;
-	QList<QString>::const_iterator iterLst;
-	QString strData;
+	QList<CStockInfo*>::const_iterator iterLst;
 	QVariantList COLUMN_SYMBOLUSE;
+	QVariantList COLUMN_NAMEPINYINFIRST;
+	QVariantList COLUMN_NAMEPINYINFULL0;
+	QVariantList COLUMN_NAMEPINYINFULL4;
+	QVariantList COLUMN_NAMEUTF8;
 	QList<QVariantList*> LstData;
+	CStockInfo* pRef = NULL;
 
 	if (0 >= lstData.size())
 	{
@@ -629,14 +650,27 @@ qint32 CClientDbOper::_AddSymbolLst( const QList<QString>& lstData )
 	iterLst = lstData.constBegin();
 	while (iterLst != lstData.constEnd())
 	{
-		strData = (*iterLst);
-		COLUMN_SYMBOLUSE << strData;
+		pRef = (*iterLst);
+
+		COLUMN_SYMBOLUSE<<pRef->m_strSymbolUse;
+		COLUMN_NAMEPINYINFIRST<<pRef->m_strNamePinYinFirst;
+		COLUMN_NAMEPINYINFULL0<<pRef->m_strNamePinYinFull0;
+		COLUMN_NAMEPINYINFULL4<<pRef->m_strNamePinYinFull4;
+		COLUMN_NAMEUTF8<<pRef->m_strNameUtf8;
+
 		iterLst++;
 	}//while
 
 	LstData.append(&COLUMN_SYMBOLUSE);
-
-	strSQLKey = "TABLE_SYMBOLUSE__INSERT_0001";
+	LstData.append(&COLUMN_NAMEPINYINFIRST);
+	LstData.append(&COLUMN_NAMEPINYINFULL0);
+	LstData.append(&COLUMN_NAMEPINYINFULL4);
+	LstData.append(&COLUMN_NAMEUTF8);
+	/*
+	TABLE_STOCKSSQLITE__INSERT__0001
+	INSERT INTO TABLE_STOCKSSQLITE (COLUMN_SYMBOLUSE, COLUMN_NAMEPINYINFIRST, COLUMN_NAMEPINYINFULL0, COLUMN_NAMEPINYINFULL4, COLUMN_NAMEUTF8) VALUES (?, ?, ?, ?, ?)
+	*/
+	strSQLKey = "TABLE_STOCKSSQLITE__INSERT__0001";
 	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
 
 	nFunRes = m_pDbConnection->startTransaction();
@@ -648,41 +682,3 @@ qint32 CClientDbOper::_AddSymbolLst( const QList<QString>& lstData )
 
 
 
-qint32 CClientDbOper::getSymbolUseLst(QList<QString>& lstData )
-{
-	qint32 nFunRes = 0;
-	bool bExecRes = true;
-	QString  strSQLKey;
-	CSQLData sqlData;
-	int nColumnIndex = 0;
-	QString strSymbolUse;
-	IQueryAdapter* pQueryAdapter = NULL;
-	QStringList lstColumnName;
-
-	strSQLKey = "TABLE_SYMBOLUSE__SELECT_0003";
-	CProjectSQLManager::getInstance().prepareSQLData(sqlData, strSQLKey);
-
-	nFunRes = m_pDbConnection->execQuery(sqlData, pQueryAdapter);
-
-	lstColumnName.clear();
-	lstColumnName.append("COLUMN_SYMBOLUSE");
-	lstColumnName.clear();
-	lstColumnName.append(str_TABLE_SYMBOLUSE_COLUMN_SYMBOLUSE);
-	lstColumnName.clear();
-	if (NULL != pQueryAdapter)
-	{
-		lstColumnName = pQueryAdapter->getLstColumnName();
-	}
-	while (NULL != pQueryAdapter && pQueryAdapter->hasMore())
-	{
-		strSymbolUse.clear();
-		nColumnIndex = 0;
-		strSymbolUse = pQueryAdapter->getStringData(str_TABLE_SYMBOLUSE_COLUMN_SYMBOLUSE);
-		lstData.push_back(strSymbolUse);
-		strSymbolUse.clear();
-	}
-
-	m_pDbConnection->cleanQuery(pQueryAdapter);
-	pQueryAdapter = NULL;
-	return nFunRes;
-}

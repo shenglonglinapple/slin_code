@@ -20,12 +20,17 @@
 
 class IDbConnection;
 class CDbStatusItem;
+class CStockInfo;
 
 class CStocksDbOper
 {
 public:
 	CStocksDbOper();
 	virtual ~CStocksDbOper();
+public:
+	int selectAllStock(QList<CStockInfo*>& lstData);
+	void freeLstData(QList<CStockInfo*>& lstData);
+
 private:
 	QString m_strSqliteDbFileFullPath;
 	QString m_strSqliteDbPath;
