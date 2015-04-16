@@ -1,0 +1,89 @@
+#!/bin/bash
+
+g_datasyn_synid=`sed '/^g_datasyn_synid=/!d;s/.*=//' /u01/app/HA/ha.cnf`
+g_datasyn_synid=`echo $g_datasyn_synid|sed 's/^[ \t]*//g'|sed 's/[ \t]*$//g'`
+
+g_datasyn_exe_path=`sed '/^g_datasyn_exe_path=/!d;s/.*=//' /u01/app/HA/ha.cnf`
+g_datasyn_exe_path=`echo $g_datasyn_exe_path|sed 's/^[ \t]*//g'|sed 's/[ \t]*$//g'`
+
+g_datasyn_config_file_path=`sed '/^g_datasyn_config_file_path=/!d;s/.*=//' /u01/app/HA/ha.cnf`
+g_datasyn_config_file_path=`echo $g_datasyn_config_file_path|sed 's/^[ \t]*//g'|sed 's/[ \t]*$//g'`
+
+g_ha_log_path=`sed '/^g_ha_log_path=/!d;s/.*=//' /u01/app/HA/ha.cnf`
+g_ha_log_path=`echo $g_ha_log_path|sed 's/^[ \t]*//g'|sed 's/[ \t]*$//g'`
+
+master_hostname=`sed '/^ha_master_hostname=/!d;s/.*=//' /u01/app/HA/ha.cnf`
+master_hostname=`echo $master_hostname|sed 's/^[ \t]*//g'|sed 's/[ \t]*$//g'`
+
+slave_hostname=`sed '/^ha_slave_hostname=/!d;s/.*=//' /u01/app/HA/ha.cnf`
+slave_hostname=`echo $slave_hostname|sed 's/^[ \t]*//g'|sed 's/[ \t]*$//g'`
+
+mode=$1
+
+#if [ "$1"  -ne "start" -o ]; then
+case "$mode" in
+  'start')
+  
+  mkdir -p "$g_ha_log_path" 
+  chmod -R 777 "$g_ha_log_path"
+  
+  if [ "$master_hostname" = "" ]; then
+	echo "The mode and master_hostname must be specified. Please set the configuration file /u01/app/HA/ha.cnf properly."
+	exit 1
+  else
+    kill -9 $(pgrep HA-No-GTID) > /dev/null 2>&1
+	#/etc/init.d/mysql.server start
+	echo "`date`: NOTE: Begin to start HA-No-GTID." 1>&2 >> /u01/app/HA/LOG/ERR-HA-MySQL.`date "+%y%m"`
+	# Add 'nohup' by Will 17/Jun/2013
+	nohup /u01/app/HA/HA-No-GTID.sh 1>/dev/null 2>> >( 
+	while read line
+	do
+		if [[ "{$line}" =~ "Using a password on the command line interface can be insecure" ]]; then
+			line=""
+		else
+			echo "$(date): ${line}"
+		fi
+	done >> /u01/app/HA/LOG/ERR-HA-MySQL.`date "+%y%m"`) &
+  fi	
+  ;;
+  'stop')
+  #/etc/init.d/mysql.server stop
+  kill -9 $(pgrep HA-No-GTID)
+  if [ $? = 0 ]; then
+  echo "`date`: NOTE: HA-No-GTID has been stopped." 1>&2 >> /u01/app/HA/LOG/ERR-HA-MySQL.`date "+%y%m"`
+  fi
+  
+  $g_datasyn_exe_path --SynID=$g_datasyn_synid --default-file=$g_datasyn_config_file_path --mode=stop 
+  v_proc_count=`ps -ef | grep "SynID="$g_datasyn_synid | grep -v grep | awk '{print $0}' |wc -l`
+  v_proc_id=`ps -ef | grep "SynID="$g_datasyn_synid | grep -v grep | cut -c10-15`
+  v_stop_timeout=0
+  while [[ $v_proc_count -ne 0 ]]; do	
+	v_stop_timeout=$((v_stop_timeout+1))
+	printf .
+	sleep 1
+	if [ $v_stop_timeout -gt 30 ]; then
+		kill -9 $v_proc_id
+	fi
+	v_proc_count=`ps -ef | grep "SynID="$g_datasyn_synid | grep -v grep | awk '{print $0}' |wc -l`
+  done
+  echo "stop success!"
+  ;;
+  'restart')
+  #/etc/init.d/mysql.server restart
+  ;;
+  'reload')
+  #/etc/init.d/mysql.server reload
+  ;;
+  'force-reload')
+  #/etc/init.d/mysql.server force-reload
+  ;;
+  'status')
+  #/etc/init.d/mysql.server status
+  ps -ef | grep HA-No-GTID | grep -v grep
+  ps -ef | grep "SynID="$g_datasyn_synid | grep -v grep
+  ;;
+  *)
+ 	echo "Usage: ./HA-MySQL.bsh {start|stop|restart|reload|force-reload|status} "
+	exit 1
+	;;
+esac

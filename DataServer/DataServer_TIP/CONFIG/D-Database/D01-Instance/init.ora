@@ -1,0 +1,149 @@
+########################################################
+# The source code in this file is the property of
+# Ripple Systems and is not for redistribution
+# in any form.
+#
+# Source:  $File: //depot/3001_Review_Branch_DBSync/CONFIG/D-Database/D01-Instance/init.ora $ 
+# Author:  Ripple
+# Version: $Revision: #1 $
+#
+# Last modification: $DateTime: 2013/01/24 17:57:59 $
+# Last modified by:  $Author: CM $
+#
+########################################################
+
+##############################################################################
+# Copyright (c) 1991, 2001, 2002 by Oracle Corporation
+##############################################################################
+ 
+###########################################
+# Archive
+###########################################
+log_archive_dest='/u04/arch/GENERIC' 
+log_archive_format=%t_%s.dbf
+log_archive_start=true
+ 
+###########################################
+# Cache and I/O
+###########################################
+db_block_size=8192
+sga_max_size=4096M
+db_cache_size=1024M
+db_keep_cache_size=512M
+db_recycle_cache_size=512M
+#***db_file_multiblock_read_count=16
+db_file_multiblock_read_count=31
+ 
+###########################################
+# Cursors and Library Cache
+###########################################
+open_cursors=400
+session_cached_cursors=400
+cursor_sharing='similar'
+ 
+###########################################
+# Database Identification
+###########################################
+db_domain=""
+db_name=GENERIC
+ 
+###########################################
+# Diagnostics and Statistics
+###########################################
+background_dump_dest=/u01/app/oracle/admin/GENERIC/bdump
+core_dump_dest=/u01/app/oracle/admin/GENERIC/cdump
+timed_statistics=TRUE
+user_dump_dest=/u01/app/oracle/admin/GENERIC/udump
+ 
+###########################################
+# File Configuration
+###########################################
+control_files=("/u03/oradata/GENERIC/control01.ctl", "/u04/oradata/GENERIC/control02.ctl", "/u05/oradata/GENERIC/control03.ctl")
+ 
+###########################################
+# Instance Identification
+###########################################
+instance_name=GENERIC
+ 
+###########################################
+# MTS
+###########################################
+dispatchers="(PROTOCOL=TCP)"
+ 
+###########################################
+# Miscellaneous
+###########################################
+compatible=9.2.0.0.0
+ 
+###########################################
+# Optimizer
+###########################################
+#***hash_join_enabled=TRUE
+#***query_rewrite_enabled=FALSE
+#***star_transformation_enabled=FALSE
+hash_join_enabled=TRUE
+query_rewrite_enabled=FALSE
+star_transformation_enabled=FALSE
+ 
+###########################################
+# Pools
+###########################################
+java_pool_size=8388608
+#large_pool_size=41943040
+large_pool_size=125829120
+#shared_pool_size=209715200
+shared_pool_size=512M
+shared_pool_reserved_size=41943040
+ 
+###########################################
+# Processes and Sessions
+###########################################
+processes=500
+ 
+###########################################
+# Redo Log and Recovery
+###########################################
+fast_start_mttr_target=600
+ 
+###########################################
+# Security and Auditing
+###########################################
+remote_login_passwordfile=EXCLUSIVE
+ 
+###########################################
+# Sort, Hash Joins, Bitmap Indexes
+###########################################
+#***pga_aggregate_target=52428800
+pga_aggregate_target=512M
+sort_area_size=1048576
+ 
+###########################################
+# System Managed Undo and Rollback Segments
+###########################################
+undo_management=AUTO
+#***undo_retention=10800
+undo_retention=7200
+undo_tablespace=UNDOTBS
+ 
+###########################################
+# Job Queues
+###########################################
+aq_tm_processes=6
+job_queue_processes=36
+
+###########################################
+# PL/SQL
+###########################################
+utl_file_dir=*
+
+log_buffer=10485760
+ 
+###########################################
+# Resource Manager
+###########################################
+resource_manager_plan=SYSTEM_PLAN
+
+###########################################
+# File System IO
+###########################################
+#disk_async_io=false

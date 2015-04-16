@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{ac677d33-cd81-4011-b888-1a8bae3c381d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\ADM_SEQUENCE.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\AQ_SAMPLE_QUEUE_NAME_T_I.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\AQ_SAMPLE_QUEUE_NAME_T_S.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\CREATE_QUEUE_RECORD.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\CREATE_TYPE_AS_OBJECT.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\DataSync_MySQL_Main.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\FUNC_SEQ_GET_NEXT_NUMBER.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\MY_LOG.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\PRC_DBMS_AQADM_CREATE_QUEUE.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\PRC_ENQUEUE_AUDIT_DATA.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\SAMPLE_QUEUE_NAME_T.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\FUNC_BASE_BUILD_SQL_INSERT.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\FUNC_BASE_BUILD_SQL_DELETE.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\FUNC_BASE_BUILD_SQL_SELECT.sql">
+      <Filter>src</Filter>
+    </None>
+    <None Include="src\FUNC_BASE_BUILD_SQL_UPDATE.sql">
+      <Filter>src</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+DELIMITER $$
+
+DROP TABLE IF EXISTS `adm_sequence`$$
+
+CREATE TABLE   `adm_sequence` (
+  `PKEY` int(10) NOT NULL,
+  `NAME` varchar(30) COLLATE utf8_bin NOT NULL,
+  `INIT_NUMBER` bigint(20) NOT NULL,
+  `LAST_NUMBER` decimal(30,0) NOT NULL,
+  `MAX_NUMBER` decimal(30,0) NOT NULL,
+  `INCREMENT_BY` int(11) NOT NULL,
+  `CYCLE_FLAG` varchar(1) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`PKEY`),
+  UNIQUE KEY `idx_adm_seq_name` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin $$
+
+
+$$
+
+DELIMITER ;
+
+
+INSERT INTO adm_sequence(PKEY,NAME,INIT_NUMBER,LAST_NUMBER,MAX_NUMBER,INCREMENT_BY,CYCLE_FLAG) 
+     VALUES (1,'ERRLOG_SEQ',0,0,18446744073709551610,1,'N');
+
+

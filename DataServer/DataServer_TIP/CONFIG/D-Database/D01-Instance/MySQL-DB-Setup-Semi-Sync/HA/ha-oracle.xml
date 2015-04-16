@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE service_bundle SYSTEM "/usr/share/lib/xml/dtd/service_bundle.dtd.1">
+<service_bundle type="manifest" name="mypackage:ha-oracle">
+<service
+name="application/ha-oracle"
+type="service"
+version="1">
+<create_default_instance enabled="true" />
+<single_instance/>
+<dependency
+name="milestone"
+grouping="require_all"
+restart_on="none"
+type="service">
+<service_fmri value="svc:/milestone/multi-user" />
+</dependency>
+<method_context>
+<method_environment>
+<envvar name="LD_LIBRARY_PATH" 
+value="$LD_LIBRARY_PATH:/u01/app/datasyn/lib"
+/>
+<envvar name="PATH" 
+value="$PATH:/usr/sbin:/usr/bin:/usr/local/bin"
+/>
+<envvar name="ORACLE_HOME" 
+value="/u01/app/oracle/product/10.2.0/db_1"
+/>
+</method_environment>
+</method_context>
+<exec_method
+type="method"
+name="start"
+exec="/u01/app/datasyn/bin/HA-DBSyn-Main.bsh start"
+timeout_seconds="60" />
+<exec_method
+type="method"
+name="stop"
+exec="/u01/app/datasyn/bin/HA-DBSyn-Main.bsh stop"
+timeout_seconds="60" />
+</service>
+</service_bundle>

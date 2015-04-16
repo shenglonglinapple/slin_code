@@ -1,0 +1,20 @@
+# (*Required) DataSyn ID
+g_datasyn_synid=1
+# (*Required) Paths
+g_datasyn_exe_path=/u01/app/datasyn/bin/SynchEngine
+g_datasyn_config_file_path=/u01/app/datasyn/bin/c_cfg.cnf
+g_ha_log_path=/u01/app/HA/LOG
+
+# (*Required) Master Hostname
+ha_master_hostname=
+
+# (Optional) Slave Hostname
+ha_slave_hostname=
+# (Optional) MySQL UserName (Default root)
+ha_user=
+# (Optional) MySQL Password
+ha_passwd=
+# (Optional) MySQL Port (Default 3306)
+ha_port=
+# (Optional) Connection Timeout (Default 2 Seconds)
+ha_timeout=

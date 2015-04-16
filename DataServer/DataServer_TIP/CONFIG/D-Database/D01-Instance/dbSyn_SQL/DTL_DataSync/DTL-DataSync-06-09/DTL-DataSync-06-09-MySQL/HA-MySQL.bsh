@@ -1,0 +1,72 @@
+#!/bin/bash
+
+g_datasyn_synid=1
+g_datasyn_exe_path=/u01/app/datasyn/bin/SynchEngine
+g_datasyn_config_file_path=/u01/app/datasyn/bin/c_cfg.cnf
+g_ha_log_path=/u01/app/HA/LOG
+
+mode=$1
+master_hostname=$2
+slave_hostname=$3
+
+#if [ "$1"  -ne "start" -o ]; then
+case "$mode" in
+  'start')
+  
+  mkdir -p "$g_ha_log_path" 
+  
+  if [ "$master_hostname" = "" ]; then
+	echo "The mode and master_hostname must be specified. Usage: $0 start <local_hostname> <remote_node_hostname> 
+		E.G.: ./HA-MySQL.bsh start occ-cms-A occ-cms-B
+		  OR: ./HA-MySQL.bsh start occ-cms-A"
+	exit 1
+  else
+	#/etc/init.d/mysql.server start
+	/u01/app/HA/HA-No-GTID.sh $g_datasyn_synid $master_hostname $slave_hostname 1>/dev/null 2>> >( 
+	while read line
+	do
+		if [[ "{$line}" =~ "Using a password on the command line interface can be insecure" ]]; then
+			line=""
+		else
+			echo "$(date): ${line}"
+		fi
+	done >> /u01/app/HA/LOG/ERR-HA-MySQL.`date "+%y%m"`) &
+  fi	
+  ;;
+  'stop')
+  #/etc/init.d/mysql.server stop
+  kill -9 $(pgrep HA-No-GTID)
+  $g_datasyn_exe_path --SynID=$g_datasyn_synid --default-file=$g_datasyn_config_file_path --mode=stop 
+  v_proc_count=`ps -ef | grep "SynID="$g_datasyn_synid | grep -v grep | awk '{print $0}' |wc -l`
+  v_proc_id=`ps -ef | grep "SynID="$g_datasyn_synid | grep -v grep | cut -c10-15`
+  v_stop_timeout=0
+  while [[ $v_proc_count -ne 0 ]]; do	
+	v_stop_timeout=$((v_stop_timeout+1))
+	printf .
+	sleep 1
+	if [ $v_stop_timeout -gt 30 ]; then
+		kill -9 $v_proc_id
+	fi
+	v_proc_count=`ps -ef | grep "SynID="$g_datasyn_synid | grep -v grep | awk '{print $0}' |wc -l`
+  done
+  echo "stop success!"
+  ;;
+  'restart')
+  #/etc/init.d/mysql.server restart
+  ;;
+  'reload')
+  #/etc/init.d/mysql.server reload
+  ;;
+  'force-reload')
+  #/etc/init.d/mysql.server force-reload
+  ;;
+  'status')
+  #/etc/init.d/mysql.server status
+  ps -ef | grep HA-No-GTID
+  ps -ef | grep "SynID="$g_datasyn_synid
+  ;;
+  *)
+ 	echo "Usage: ./HA-MySQL.bsh {start|stop|restart|reload|force-reload|status <local_hostname> <remote_node_hostname>(optional)} "
+	exit 1
+	;;
+esac	
