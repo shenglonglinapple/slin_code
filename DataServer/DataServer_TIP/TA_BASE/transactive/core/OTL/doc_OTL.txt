@@ -1,0 +1,14 @@
+OTL 是 Oracle, Odbc and DB2-CLI Template Library 的缩写，是一个C++编译中操控关系数据库的模板库，它目前几乎支持所有的当前各种主流数据库，例如Oracle, MS SQL Server, Sybase, Informix, MySQL, DB2, Interbase / Firebird, PostgreSQL, SQLite, SAP/DB, TimesTen, MS ACCESS等等。
+
+OTL中直接操作Oracle主要是通过Oracle提供的OCI接口进行，进行操作DB2数据库则是通过CLI接口来进行，至于MS的数据库和其它一些数据库，则OTL只提供了ODBC来操作的方式。当然Oracle和DB2也可以由OTL间接使用ODBC的方式来进行操纵。
+
+在MS Windows and Unix 平台下，OTL目前支持的数据库版本主要有：Oracle 7 (直接使用 OCI7), Oracle 8 (直接使用 OCI8), Oracle 8i (直接使用OCI8i), Oracle 9i (直接使用OCI9i), Oracle 10g (直接使用OCI10g), DB2 (直接使用DB2 CLI), ODBC 3.x ,ODBC 2.5。OTL最新版本为4.0，参见http://otl.sourceforge.net/，下载地址http://otl.sourceforge.net/otlv4_h.zip。
+
+优点：
+      a. 跨平台
+      b. 运行效率高，与C语言直接调用API相当
+      c. 开发效率高，起码比ADO.net使用起来更简单，更简洁
+      d. 部署容易，不需要ADO组件，不需要.net framework 等
+缺点：
+      a. 说明文档以及范例不足够丰富（暂时性的）
+其实现在它提供有377个使用范例可参考，下载地址：http://otl.sourceforge.net/otl4_examples.zip。

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+   <TITLE>class  FileFinder</TITLE>
+   <META NAME="GENERATOR" CONTENT="DOC++ 3.4.9">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+In file src\helper\FileFinder.h:<TABLE BORDER=0><TR>
+<TD VALIGN=TOP><H2>class  <A HREF="#DOC.DOCU">FileFinder</A></H2></TD></H2></TD></TR></TABLE>
+<BLOCKQUOTE> Helper class used for get and traverse all files  in specified directory and subdirectories.</BLOCKQUOTE>
+<HR>
+
+<DL>
+<P><TABLE BORDER>
+<DT><H3>Public Methods</H3><DD><TR>
+<TD VALIGN=TOP><A HREF="#DOC.4.1"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A> </TD><TD><B>FileFinder</B> (const std::string filter, const std::string directory = ".", bool include_subdir = true)<BR>
+<I> Constructor for FileFinder.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.4.2"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A> </TD><TD><B>FileFinder</B> (Filters filters, const std::string directory = ".", bool include_subdir = true)<BR>
+<I> Constructor for FileFinder.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.4.3"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>bool </TD><TD><B>hasMoreElements</B> ()<BR>
+<I> Ensure the "position" point to the valid elment.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.4.4"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>std::string </TD><TD><B>nextElement</B> ()<BR>
+<I> Retrieve full path of the current file,  and set the "position" to the next file.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.4.5"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>reset</B> ()<BR>
+<I> set the "position" to the start of list.</I>
+</TD></TR></TABLE></P>
+
+</DL>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+Helper class used for get and traverse all files 
+in specified directory and subdirectories.
+
+<P><em>IMPORTANT:</em>This class can only work under Microsoft Visual C++ platform now.
+
+<P></BLOCKQUOTE>
+<DL>
+
+<A NAME="FileFinder"></A>
+<A NAME="DOC.4.1"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B> FileFinder(const std::string filter, const std::string directory = ".", bool include_subdir = true)</B></TT>
+<DD>
+Constructor for FileFinder.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>filter</B> -  a string that specify filter you can apply to the file
+<BR><B>directory</B> -  a string that specify base directory to find, 
+default for current directory, 
+DO NOT end up with character '\'
+<BR><B>include_subdir</B> -  indicate whether include subdirectories or not<BR><DD></DL><P>
+<A NAME="FileFinder"></A>
+<A NAME="DOC.4.2"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B> FileFinder(Filters filters, const std::string directory = ".", bool include_subdir = true)</B></TT>
+<DD>
+Constructor for FileFinder.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>filters</B> -  a series of strings that specify filters 
+you can apply to the file
+<BR><B>directory</B> -  a string specify that base directory to find, 
+default for current directory, 
+DO NOT end up with character '\'
+<BR><B>include_subdir</B> -  indicate whether include subdirectories or not<BR><DD></DL><P>
+<A NAME="hasMoreElements"></A>
+<A NAME="DOC.4.3"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>bool hasMoreElements()</B></TT>
+<DD>
+Ensure the "position" point to the valid elment.
+
+<DL><DT><DT><B>Returns:</B><DD>  true the "position" is valid, 
+false the "position" is invalid<BR><DD></DL><P>
+<A NAME="nextElement"></A>
+<A NAME="DOC.4.4"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>std::string nextElement()</B></TT>
+<DD>
+Retrieve full path of the current file, 
+and set the "position" to the next file.
+
+<DL><DT><DT><B>Returns:</B><DD>  the full path of the current file<BR><DD></DL><P>
+<A NAME="reset"></A>
+<A NAME="DOC.4.5"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void reset()</B></TT>
+<DD>
+set the "position" to the start of list.
+Call this method firstly, if you want to call 
+hasMoreElements() and nextElement() repeadly.
+<DL><DT><DD></DL><P></DL>
+
+<HR><DL><DT><B>This class has no child classes.</B></DL>
+
+<DL><DT><DT><B>See Also:</B><DD><!1><A HREF="FileHelper.html">FileHelper</A><BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I> <I><A HREF="HIER.html">HTML hierarchy of classes</A> or <A HREF="HIERjava.html">Java</A></I></P><HR>
+<BR>
+This page was generated with the help of <A HREF="http://docpp.sourceforge.net">DOC++</A>.
+</BODY>
+</HTML>

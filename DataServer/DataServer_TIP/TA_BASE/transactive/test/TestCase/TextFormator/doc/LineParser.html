@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+   <TITLE>class  LineParser</TITLE>
+   <META NAME="GENERATOR" CONTENT="DOC++ 3.4.9">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+In file src\core\LineParser.h:<TABLE BORDER=0><TR>
+<TD VALIGN=TOP><H2>class  <A HREF="#DOC.DOCU">LineParser</A></H2></TD></H2></TD></TR></TABLE>
+<BLOCKQUOTE> This class is used to parse text line by line.</BLOCKQUOTE>
+<HR>
+
+<DL>
+<P><TABLE BORDER>
+<DT><H3>Public Methods</H3><DD><TR>
+<TD VALIGN=TOP><A HREF="#DOC.7.1"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A> </TD><TD><B>LineParser</B> ()<BR>
+<I> Constructor for LineParser</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.7.2"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A> </TD><TD><B>~LineParser</B> ()<BR>
+<I> Destructor for LineParser</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.7.3"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>parse</B> (Lines&amp; lines)<BR>
+<I> Parse text line by line.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.7.4"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>registParseHandler</B> (<!1><A HREF="ParseHandler.html">ParseHandler</A>* handler)<BR>
+<I> regist parse handler.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.7.5"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>unreigistParseHandler</B> (<!1><A HREF="ParseHandler.html">ParseHandler</A>* handler)<BR>
+<I> unregist parse handler.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.7.6"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>TokensInfoList&amp; </TD><TD><B>getTokensInfoList</B> ()<BR>
+<I> get parsed result, call this method after parse complete.</I>
+</TD></TR></TABLE></P>
+
+</DL>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+This class is used to parse text line by line.
+</BLOCKQUOTE>
+<DL>
+
+<A NAME="LineParser"></A>
+<A NAME="DOC.7.1"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B> LineParser()</B></TT>
+<DD>
+Constructor for LineParser
+<DL><DT><DD></DL><P>
+<A NAME="~LineParser"></A>
+<A NAME="DOC.7.2"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B> ~LineParser()</B></TT>
+<DD>
+Destructor for LineParser
+<DL><DT><DD></DL><P>
+<A NAME="parse"></A>
+<A NAME="DOC.7.3"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void parse(Lines&amp; lines)</B></TT>
+<DD>
+Parse text line by line.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>lines</B> -  an array stand for the text<BR><DD></DL><P>
+<A NAME="registParseHandler"></A>
+<A NAME="DOC.7.4"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void registParseHandler(<!1><A HREF="ParseHandler.html">ParseHandler</A>* handler)</B></TT>
+<DD>
+regist parse handler.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>handler</B> -  concrete handler which determines how to <!1><A HREF="LineParser.html#DOC.7.3">parse</A> text<BR><DD></DL><P>
+<A NAME="unreigistParseHandler"></A>
+<A NAME="DOC.7.5"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void unreigistParseHandler(<!1><A HREF="ParseHandler.html">ParseHandler</A>* handler)</B></TT>
+<DD>
+unregist parse handler.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>handler</B> -  concrete handler which determines how to <!1><A HREF="LineParser.html#DOC.7.3">parse</A> text<BR><DD></DL><P>
+<A NAME="getTokensInfoList"></A>
+<A NAME="DOC.7.6"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>TokensInfoList&amp; getTokensInfoList()</B></TT>
+<DD>
+get parsed result, call this method after parse complete.
+
+<DL><DT><DT><B>Returns:</B><DD>  a list contain parsed result<BR><DD></DL><P></DL>
+
+<HR><DL><DT><B>This class has no child classes.</B></DL>
+
+<DL><DT><DT><B>See Also:</B><DD><!1><A HREF="ParseHandler.html">ParseHandler</A><BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I> <I><A HREF="HIER.html">HTML hierarchy of classes</A> or <A HREF="HIERjava.html">Java</A></I></P><HR>
+<BR>
+This page was generated with the help of <A HREF="http://docpp.sourceforge.net">DOC++</A>.
+</BODY>
+</HTML>

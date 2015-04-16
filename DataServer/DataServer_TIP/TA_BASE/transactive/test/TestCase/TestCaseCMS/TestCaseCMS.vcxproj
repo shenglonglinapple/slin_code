@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FE6E5185-185A-429B-A9C5-5A7DB4C96145}</ProjectGuid>
+    <RootNamespace>TestCaseCMS</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v110</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;.\src;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;..\..\..\..\transactive;..\..\..\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers\;..\..\..\..\..\..\..\PUBLIC\boost\boost_1_55_0;..\..\..\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996;4251;4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\..\..\..\sdk\win32_nd;..\..\..\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers\lib;..\..\..\..\..\..\..\PUBLIC\boost\boost_1_55_0\stage64\lib;..\..\..\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CMS.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\;.\src;.\GeneratedFiles;.\debug;.\release;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;..\..\..\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers\;..\..\..\..\..\..\..\PUBLIC\boost\boost_1_55_0;..\..\..\..\..\..\..\PUBLIC\SQLite\include;..\..\..\..\..\..\..\PUBLIC\MarketData\include;C:\Qt\4.8.5\include;D:\libs\c++\x64\include\boost-1_55;D:\libs\c++\x64\ACE_wrappers;D:\sllin_code\PUBLIC\CMS_64\CMS_RELEASE\include;</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4996;4251;4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\..\..\..\sdk\win32_nd;..\..\..\..\..\build\win32_nd;..\..\..\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers\lib;..\..\..\..\..\..\..\PUBLIC\boost\boost_1_55_0\stage_vs2008_32\lib;..\..\..\..\..\..\..\PUBLIC\SQLite\lib;..\..\..\..\..\..\..\PUBLIC\MarketData\lib;C:\Qt\4.8.5\lib;D:\libs\c++\x64\lib;D:\libs\c++\x64\ACE_wrappers\lib;D:\sllin_code\PUBLIC\CMS_64\CMS_RELEASE\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CMS.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.\;.\src;.\GeneratedFiles;.\debug;.\release;..\;..\..\;..\..\..\;..\..\..\..\;..\..\..\..\..\build\win32_n\transactive;..\..\..\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers\;..\..\..\..\..\..\..\PUBLIC\boost\boost_1_55_0;..\..\..\..\..\..\..\PUBLIC\SQLite\include;..\..\..\..\..\..\..\PUBLIC\MarketData\include;C:\Qt\4.8.5\include;D:\libs\c++\x64\include\boost-1_55;D:\libs\c++\x64\ACE_wrappers;D:\sllin_code\PUBLIC\CMS_64\CMS_RELEASE\include;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\..\..\..\..\sdk\win32_nr;..\..\..\..\..\build\win32_nr;..\..\..\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers\lib;..\..\..\..\..\..\..\PUBLIC\boost\boost_1_55_0\stage_vs2008_32\lib;..\..\..\..\..\..\..\PUBLIC\SQLite\lib;..\..\..\..\..\..\..\PUBLIC\MarketData\lib;C:\Qt\4.8.5\lib;D:\libs\c++\x64\lib;D:\libs\c++\x64\ACE_wrappers\lib;D:\sllin_code\PUBLIC\CMS_64\CMS_RELEASE\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CMS.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BoostLogger.cpp" />
+    <ClCompile Include="src\BoostThread.cpp" />
+    <ClCompile Include="src\ClientManager.cpp" />
+    <ClCompile Include="src\ClientSessionActor.cpp" />
+    <ClCompile Include="src\ClientsManagerWorker.cpp" />
+    <ClCompile Include="src\ClientWorkerForTest.cpp" />
+    <ClCompile Include="src\ConfigInfo.cpp" />
+    <ClCompile Include="src\ConfigInfoHelper.cpp" />
+    <ClCompile Include="src\CTOSReqBeginTestFrame.cpp" />
+    <ClCompile Include="src\CTOSReqDoTestFrame.cpp" />
+    <ClCompile Include="src\CTOSReqEndTestFrame.cpp" />
+    <ClCompile Include="src\CTOSReqUserLoginFrame.cpp" />
+    <ClCompile Include="src\CTOSReqUserLogOutFrame.cpp" />
+    <ClCompile Include="src\FileSystemItem.cpp" />
+    <ClCompile Include="src\HelpClass.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ParamItem.cpp" />
+    <ClCompile Include="src\ProcessClientReqHelperForTest.cpp" />
+    <ClCompile Include="src\ProcessServerAckHelperForTest.cpp" />
+    <ClCompile Include="src\ServerManage.cpp" />
+    <ClCompile Include="src\ServerWorkerForTest.cpp" />
+    <ClCompile Include="src\STOCAckBeginTestFrame.cpp" />
+    <ClCompile Include="src\STOCAckDoTestFrame.cpp" />
+    <ClCompile Include="src\STOCAckEndTestFrame.cpp" />
+    <ClCompile Include="src\STOCAckUserLoginFrame.cpp" />
+    <ClCompile Include="src\STOCAckUserLogOutFrame.cpp" />
+    <ClCompile Include="src\TestCase.cpp" />
+    <ClCompile Include="src\UtilityFun.cpp" />
+    <ClCompile Include="src\WorkTime.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\BoostLogger.h" />
+    <ClInclude Include="src\BoostThread.h" />
+    <ClInclude Include="src\ClientManager.h" />
+    <ClInclude Include="src\ClientSessionActor.h" />
+    <ClInclude Include="src\ClientsManagerWorker.h" />
+    <ClInclude Include="src\ClientWorkerForTest.h" />
+    <ClInclude Include="src\CommonData.h" />
+    <ClInclude Include="src\CommonDef.h" />
+    <ClInclude Include="src\ConfigInfo.h" />
+    <ClInclude Include="src\ConfigInfoHelper.h" />
+    <ClInclude Include="src\CTOSReqBeginTestFrame.h" />
+    <ClInclude Include="src\CTOSReqDoTestFrame.h" />
+    <ClInclude Include="src\CTOSReqEndTestFrame.h" />
+    <ClInclude Include="src\CTOSReqUserLoginFrame.h" />
+    <ClInclude Include="src\CTOSReqUserLogOutFrame.h" />
+    <ClInclude Include="src\FileSystemItem.h" />
+    <ClInclude Include="src\HelpClass.h" />
+    <ClInclude Include="src\ParamItem.h" />
+    <ClInclude Include="src\ProcessClientReqHelperForTest.h" />
+    <ClInclude Include="src\ProcessServerAckHelperForTest.h" />
+    <ClInclude Include="src\ServerManage.h" />
+    <ClInclude Include="src\ServerWorkerForTest.h" />
+    <ClInclude Include="src\STOCAckBeginTestFrame.h" />
+    <ClInclude Include="src\STOCAckDoTestFrame.h" />
+    <ClInclude Include="src\STOCAckEndTestFrame.h" />
+    <ClInclude Include="src\STOCAckUserLoginFrame.h" />
+    <ClInclude Include="src\STOCAckUserLogOutFrame.h" />
+    <ClInclude Include="src\SysTypes.h" />
+    <ClInclude Include="src\TestCase.h" />
+    <ClInclude Include="src\UtilityFun.h" />
+    <ClInclude Include="src\WorkTime.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

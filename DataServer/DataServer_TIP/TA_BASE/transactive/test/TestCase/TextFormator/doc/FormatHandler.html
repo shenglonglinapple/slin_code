@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+   <TITLE>class  FormatHandler</TITLE>
+   <META NAME="GENERATOR" CONTENT="DOC++ 3.4.9">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+In file src\core\FormatHandler.h:<TABLE BORDER=0><TR>
+<TD VALIGN=TOP><H2>class  <A HREF="#DOC.DOCU">FormatHandler</A></H2></TD></H2></TD></TR></TABLE>
+<BLOCKQUOTE> Abstract class of format handler.</BLOCKQUOTE>
+<HR>
+
+<H2>Inheritance:</H2>
+<APPLET CODE="ClassGraph.class" WIDTH=600 HEIGHT=215>
+<param name=classes value="CFormatHandler,MFormatHandler.html,CWhitespaceFormatHandler,MWhitespaceFormatHandler.html,COperatorFormatHandler,MOperatorFormatHandler.html,CNormalFormatHandler,MNormalFormatHandler.html,CKeywordCountHandler,MKeywordCountHandler.html,CCommentCountHandler,MCommentCountHandler.html,CBodyFormatHandler,MBodyFormatHandler.html">
+<param name=before value="M,M|_,MR_,MR_,MR_,MR_,Mr_">
+<param name=after value="M,M,M,M,M,M,M">
+<param name=indent value="0,0,0,0,0,0,0">
+<param name=arrowdir value="down">
+</APPLET>
+<HR>
+
+<DL>
+<P><TABLE BORDER>
+<DT><H3>Public Methods</H3><DD><TR>
+<TD VALIGN=TOP><A HREF="#DOC.9.1"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>virtual   void </TD><TD><B>format</B> (TokenInfo&amp; token_info, <!1><A HREF="Context.html">Context</A>&amp; context)<BR>
+<I> Format current token.</I>
+</TD></TR></TABLE></P>
+
+</DL>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+Abstract class of format handler.
+
+<P>All format handlers should be a subclass of FormatHandler.
+In subclasses, you can override format method to redefine action
+for specific token</BLOCKQUOTE>
+<DL>
+
+<A NAME="format"></A>
+<A NAME="DOC.9.1"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>virtual   void format(TokenInfo&amp; token_info, <!1><A HREF="Context.html">Context</A>&amp; context)</B></TT>
+<DD>
+Format current token.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>token_info</B> -  token information
+<BR><B>context</B> -  used to keep information among handlers<BR><DD></DL><P></DL>
+<HR>
+<DL><DT><B>Direct child classes:
+</B><DD><A HREF="WhitespaceFormatHandler.html">WhitespaceFormatHandler</A><BR>
+<A HREF="OperatorFormatHandler.html">OperatorFormatHandler</A><BR>
+<A HREF="NormalFormatHandler.html">NormalFormatHandler</A><BR>
+<A HREF="KeywordCountHandler.html">KeywordCountHandler</A><BR>
+<A HREF="CommentCountHandler.html">CommentCountHandler</A><BR>
+<A HREF="BodyFormatHandler.html">BodyFormatHandler</A><BR>
+</DL>
+
+<DL><DT><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I> <I><A HREF="HIER.html">HTML hierarchy of classes</A> or <A HREF="HIERjava.html">Java</A></I></P><HR>
+<BR>
+This page was generated with the help of <A HREF="http://docpp.sourceforge.net">DOC++</A>.
+</BODY>
+</HTML>

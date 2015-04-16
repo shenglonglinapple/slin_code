@@ -1,0 +1,64 @@
+[INFO]RECV(220):220 126.com Anti-spam GT for Coremail System (126com[20140526])
+
+[INFO]SEND:HELO R89BYEK-Lenovo
+
+[INFO]RECV(250):250 OK
+
+[INFO]SEND:AUTH LOGIN
+
+[INFO]RECV(334):334 dXNlcm5hbWU6
+
+[INFO]SEND:bGluc2hlbmdsb25nODg4
+
+[INFO]RECV(334):334 UGFzc3dvcmQ6
+
+[INFO]SEND:MDUxMzM1
+
+[INFO]RECV(235):235 Authentication successful
+
+[INFO]SEND:MAIL FROM: <linshenglong888@126.com>
+
+[INFO]RECV(250):250 Mail OK
+
+[INFO]SEND:RCPT TO: <linshenglong777@126.com>
+
+[INFO]RECV(250):250 Mail OK
+
+[INFO]SEND:RCPT TO: <shenglonglin1986@gmail.com>
+
+[INFO]RECV(250):250 Mail OK
+
+[INFO]SEND:DATA
+
+[INFO]RECV(354):354 End data with <CR><LF>.<CR><LF>
+
+[INFO]SEND:
+From: "linshenglong888" <linshenglong888@126.com>
+To: "linshenglong777" <linshenglong777@126.com>, "shenglonglin1986" <shenglonglin1986@gmail.com>
+Date: Tue, 01 Jul 14 16:16:16 +0800
+Subject: a test mail ≤‚ ‘” º˛
+X-Mailer: SMailer
+X-Priority: 3
+MIME-Version: 1.0
+Content-type: multipart/mixed; boundary="#BOUNDARY#"
+
+
+[INFO]SEND:
+--#BOUNDARY#
+Content-Type: text/plain; charset=gb2312
+Content-Transfer-Encoding: 8bit
+
+plain text content≤‚ ‘” º˛ƒ⁄»›
+
+
+[INFO]SEND:
+--#BOUNDARY#--
+.
+
+[INFO]RECV(250):250 Mail OK queued as smtp4,jdKowECpAEZLbrJTjiutAw--.654S2 14042
+02574
+
+[INFO]SEND:QUIT
+
+[INFO]RECV(221):221 Bye
+

@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{fe14db02-908b-44f6-899d-37f1b08dd7d0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BoostLogger.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BoostThread.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientSessionActor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientsManagerWorker.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ClientWorkerForTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConfigInfo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ConfigInfoHelper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTOSReqBeginTestFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTOSReqDoTestFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTOSReqEndTestFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTOSReqUserLoginFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTOSReqUserLogOutFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileSystemItem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HelpClass.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ParamItem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ProcessClientReqHelperForTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ProcessServerAckHelperForTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ServerManage.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ServerWorkerForTest.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STOCAckBeginTestFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STOCAckDoTestFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STOCAckEndTestFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STOCAckUserLoginFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\STOCAckUserLogOutFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TestCase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UtilityFun.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WorkTime.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\BoostLogger.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BoostThread.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClientManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClientSessionActor.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClientsManagerWorker.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClientWorkerForTest.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CommonData.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CommonDef.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ConfigInfo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ConfigInfoHelper.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CTOSReqBeginTestFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CTOSReqDoTestFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CTOSReqEndTestFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CTOSReqUserLoginFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CTOSReqUserLogOutFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileSystemItem.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HelpClass.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ParamItem.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ProcessClientReqHelperForTest.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ProcessServerAckHelperForTest.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ServerManage.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ServerWorkerForTest.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STOCAckBeginTestFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STOCAckDoTestFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STOCAckEndTestFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STOCAckUserLoginFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\STOCAckUserLogOutFrame.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SysTypes.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TestCase.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UtilityFun.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WorkTime.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

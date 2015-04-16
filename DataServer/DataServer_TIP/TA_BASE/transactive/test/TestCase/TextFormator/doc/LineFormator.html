@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+   <TITLE>class  LineFormator</TITLE>
+   <META NAME="GENERATOR" CONTENT="DOC++ 3.4.9">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+In file src\core\LineFormator.h:<TABLE BORDER=0><TR>
+<TD VALIGN=TOP><H2>class  <A HREF="#DOC.DOCU">LineFormator</A></H2></TD></H2></TD></TR></TABLE>
+<BLOCKQUOTE> This class is used to format text line by line.</BLOCKQUOTE>
+<HR>
+
+<DL>
+<P><TABLE BORDER>
+<DT><H3>Public Methods</H3><DD><TR>
+<TD VALIGN=TOP><A HREF="#DOC.8.1"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A> </TD><TD><B>LineFormator</B> ()<BR>
+<I> Constructor for LineFormator</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.8.2"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A> </TD><TD><B>~LineFormator</B> ()<BR>
+<I> Destructor for LineFormator</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.8.3"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>format</B> (TokensInfoList&amp; token_info_list)<BR>
+<I> format parsed result line by line.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.8.4"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>registFormatHandler</B> (TokenType type, <!1><A HREF="FormatHandler.html">FormatHandler</A>* handler)<BR>
+<I> regist format handler.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.8.5"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>registFormatHandler</B> (TokenTypes types, <!1><A HREF="FormatHandler.html">FormatHandler</A>* handler)<BR>
+<I> regist the same format handler for a set of types </I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.8.6"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>unreigistFormatHandler</B> (<!1><A HREF="FormatHandler.html">FormatHandler</A>* handler)<BR>
+<I> unregist format handler.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.8.7"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>Lines&amp; </TD><TD><B>getFormattedLines</B> ()<BR>
+<I> get formatted result.</I>
+</TD></TR></TABLE></P>
+
+</DL>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+This class is used to format text line by line.
+</BLOCKQUOTE>
+<DL>
+
+<A NAME="LineFormator"></A>
+<A NAME="DOC.8.1"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B> LineFormator()</B></TT>
+<DD>
+Constructor for LineFormator
+<DL><DT><DD></DL><P>
+<A NAME="~LineFormator"></A>
+<A NAME="DOC.8.2"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B> ~LineFormator()</B></TT>
+<DD>
+Destructor for LineFormator
+<DL><DT><DD></DL><P>
+<A NAME="format"></A>
+<A NAME="DOC.8.3"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void format(TokensInfoList&amp; token_info_list)</B></TT>
+<DD>
+format parsed result line by line.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>token_info_list</B> -  list including token information<BR><DD></DL><P>
+<A NAME="registFormatHandler"></A>
+<A NAME="DOC.8.4"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void registFormatHandler(TokenType type, <!1><A HREF="FormatHandler.html">FormatHandler</A>* handler)</B></TT>
+<DD>
+regist format handler.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>type</B> -  indicate token type
+<BR><B>handler</B> -  concrete handler which determines 
+how to <!1><A HREF="LineFormator.html#DOC.8.3">format</A> text of specific token type<BR><DD></DL><P>
+<A NAME="registFormatHandler"></A>
+<A NAME="DOC.8.5"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void registFormatHandler(TokenTypes types, <!1><A HREF="FormatHandler.html">FormatHandler</A>* handler)</B></TT>
+<DD>
+regist the same format handler for a set of types
+
+<DL><DT><DT><B>Parameters:</B><DD><B>types</B> -  indicate token types
+<BR><B>handler</B> -  concrete handler which determines 
+how to <!1><A HREF="LineFormator.html#DOC.8.3">format</A> text of specific token type<BR><DD></DL><P>
+<A NAME="unreigistFormatHandler"></A>
+<A NAME="DOC.8.6"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void unreigistFormatHandler(<!1><A HREF="FormatHandler.html">FormatHandler</A>* handler)</B></TT>
+<DD>
+unregist format handler.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>handler</B> -  concrete handler which determines 
+how to <!1><A HREF="LineFormator.html#DOC.8.3">format</A> text of specific token type<BR><DD></DL><P>
+<A NAME="getFormattedLines"></A>
+<A NAME="DOC.8.7"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>Lines&amp; getFormattedLines()</B></TT>
+<DD>
+get formatted result.
+
+<DL><DT><DT><B>Returns:</B><DD>  an array stand for the formatted text<BR><DD></DL><P></DL>
+
+<HR><DL><DT><B>This class has no child classes.</B></DL>
+
+<DL><DT><DT><B>See Also:</B><DD><!1><A HREF="FormatHandler.html">FormatHandler</A><BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I> <I><A HREF="HIER.html">HTML hierarchy of classes</A> or <A HREF="HIERjava.html">Java</A></I></P><HR>
+<BR>
+This page was generated with the help of <A HREF="http://docpp.sourceforge.net">DOC++</A>.
+</BODY>
+</HTML>

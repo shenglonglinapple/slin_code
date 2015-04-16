@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- Comment: Config -->
+<Config configAttr="configAttriValue">
+	<!-- Comment: DBSYNC -->
+	<DataTypeNode NodeIndexAttr="0" DataTypesAtrr="DBSYNC">
+		<PriorityNode Priority="0" DBType="MYSQL" Schema="tra_occ" User="IT271350_5" Password="IT271350_5" Hostname="192.168.123.43">
+		</PriorityNode>
+		<PriorityNode Priority="1" DBType="ORACLE" Schema="DEV_C225" User="IT271350_5" Password="IT271350_5" Hostname="192.168.253.225">
+		</PriorityNode>
+	</DataTypeNode>
+	
+	<!-- Comment: ALARM -->
+	<DataTypeNode NodeIndexAttr="1" DataTypesAtrr="ALARM">
+		<PriorityNode Priority="0" DBType="MYSQL" Schema="tra_occ" User="IT271350_5" Password="IT271350_5" Hostname="192.168.123.43">
+		</PriorityNode>
+		<PriorityNode Priority="1" DBType="ORACLE" Schema="DEV_C225" User="IT271350_5" Password="IT271350_5" Hostname="192.168.253.225">
+		</PriorityNode>
+	</DataTypeNode>
+	
+ </Config>

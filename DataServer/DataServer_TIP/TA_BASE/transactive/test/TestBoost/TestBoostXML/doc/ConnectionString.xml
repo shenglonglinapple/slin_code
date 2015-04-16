@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!-- 注释说明 ConnectionStringConfig -->
+<ConnectionStringConfig>
+
+	<!-- 注释说明 DBSYNC -->
+	<DataTypeNode NodeIndx="0",DataTypes="DBSYNC">
+		<PriorityNode Priority="0">
+			<DBType>MYSQL</DBType>
+			<Schema>tra_occ</Schema>
+			<User>IT271350_5</User>
+			<Password>IT271350_5</Password>
+			<Hostname>192.168.123.43</Hostname>
+		</PriorityNode>
+		<PriorityNode Priority="1">
+			<DBType>ORACLE</DBType>
+			<Schema>DEV_C225</Schema>
+			<User>IT271350_5</User>
+			<Password>IT271350_5</Password>
+			<Hostname>192.168.253.225</Hostname>
+		</PriorityNode>
+	</DataTypeNode>
+	
+	<!-- 注释说明 Alarm -->
+	<DataTypeNode NodeIndx="1",DataTypes="Alarm">
+		<PriorityNode Priority="0">
+			<DBType>MYSQL</DBType>
+			<Schema>tra_occ</Schema>
+			<User>IT271350_5</User>
+			<Password>IT271350_5</Password>
+			<Hostname>192.168.123.43</Hostname>
+		</PriorityNode>
+		
+		<PriorityNode Priority="1">
+			<DBType>ORACLE</DBType>
+			<Schema>DEV_C225</Schema>
+			<User>IT271350_5</User>
+			<Password>IT271350_5</Password>
+			<Hostname>192.168.253.225</Hostname>
+		</PriorityNode>
+	</DataTypeNode>
+
+ </ConnectionStringConfig>

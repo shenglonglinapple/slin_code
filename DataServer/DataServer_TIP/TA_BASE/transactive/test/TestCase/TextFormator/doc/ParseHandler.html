@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+   <TITLE>class  ParseHandler</TITLE>
+   <META NAME="GENERATOR" CONTENT="DOC++ 3.4.9">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+In file src\core\ParseHandler.h:<TABLE BORDER=0><TR>
+<TD VALIGN=TOP><H2>class  <A HREF="#DOC.DOCU">ParseHandler</A></H2></TD></H2></TD></TR></TABLE>
+<BLOCKQUOTE> Abstract class of parse handler</BLOCKQUOTE>
+<HR>
+
+<H2>Inheritance:</H2>
+<APPLET CODE="ClassGraph.class" WIDTH=600 HEIGHT=245>
+<param name=classes value="CParseHandler,MParseHandler.html,CWhitespaceParseHandler,MWhitespaceParseHandler.html,CStringParseHandler,MStringParseHandler.html,COperatorParseHandler,MOperatorParseHandler.html,CNumberParseHandler,MNumberParseHandler.html,CIdentifierParseHandler,MIdentifierParseHandler.html,CDefaultParseHandler,MDefaultParseHandler.html,CCommentParseHandler,MCommentParseHandler.html">
+<param name=before value="M,M|_,MR_,MR_,MR_,MR_,MR_,Mr_">
+<param name=after value="M,M,M,M,M,M,M,M">
+<param name=indent value="0,0,0,0,0,0,0,0">
+<param name=arrowdir value="down">
+</APPLET>
+<HR>
+
+<DL>
+<P><TABLE BORDER>
+<DT><H3>Public Methods</H3><DD><TR>
+<TD VALIGN=TOP><A HREF="#DOC.5.1"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>virtual   bool </TD><TD><B>accept</B> (const Line&amp; line, Line::size_type&amp; pos, <!1><A HREF="Context.html">Context</A>&amp; context, TokenInfo&amp; token_info)<BR>
+<I> Parse current line from current position.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.5.2"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>int </TD><TD><B>getPriority</B> () const <BR>
+<I> Get priority of handler </I>
+</TD></TR></TABLE></P>
+
+</DL>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+Abstract class of parse handler
+
+<P>All parse handlers should be a subclass of ParseHandler.
+In subclasses, you can override accept method to redefine action
+for specific token</BLOCKQUOTE>
+<DL>
+
+<A NAME="accept"></A>
+<A NAME="DOC.5.1"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>virtual   bool accept(const Line&amp; line, Line::size_type&amp; pos, <!1><A HREF="Context.html">Context</A>&amp; context, TokenInfo&amp; token_info)</B></TT>
+<DD>
+Parse current line from current position.
+This method will adjust current position after parsing
+
+<DL><DT><DT><B>Parameters:</B><DD><B>line</B> -  a line of text
+<BR><B>pos</B> -  current character position
+<BR><B>context</B> -  used to keep information among handlers
+<BR><B>token_info</B> -  used to keep parsed result, if possible
+<BR><DT><B>Returns:</B><DD>  return true if parse successfully, else return false<BR><DD></DL><P>
+<A NAME="getPriority"></A>
+<A NAME="DOC.5.2"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>int getPriority() const </B></TT>
+<DD>
+Get priority of handler
+
+<DL><DT><DT><B>Returns:</B><DD>  priority of handler<BR><DD></DL><P></DL>
+<HR>
+<DL><DT><B>Direct child classes:
+</B><DD><A HREF="WhitespaceParseHandler.html">WhitespaceParseHandler</A><BR>
+<A HREF="StringParseHandler.html">StringParseHandler</A><BR>
+<A HREF="OperatorParseHandler.html">OperatorParseHandler</A><BR>
+<A HREF="NumberParseHandler.html">NumberParseHandler</A><BR>
+<A HREF="IdentifierParseHandler.html">IdentifierParseHandler</A><BR>
+<A HREF="DefaultParseHandler.html">DefaultParseHandler</A><BR>
+<A HREF="CommentParseHandler.html">CommentParseHandler</A><BR>
+</DL>
+
+<DL><DT><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I> <I><A HREF="HIER.html">HTML hierarchy of classes</A> or <A HREF="HIERjava.html">Java</A></I></P><HR>
+<BR>
+This page was generated with the help of <A HREF="http://docpp.sourceforge.net">DOC++</A>.
+</BODY>
+</HTML>

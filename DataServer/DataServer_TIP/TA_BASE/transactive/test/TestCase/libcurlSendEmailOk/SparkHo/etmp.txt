@@ -1,0 +1,9 @@
+Date: Mon, 29 Nov 2010 21:54:29 +1100
+To: <linshenglong888@126.com>
+From: <linshenglong777@126.com>
+Cc: <shenglonglin1986@gmail.com>
+Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@rfcpedant.example.org>
+Subject: SMTP SSL example message
+
+The body of the message starts here.
+It could be a lot of lines, could be MIME encoded, whatever.

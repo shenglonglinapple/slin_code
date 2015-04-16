@@ -1,0 +1,33 @@
+2003/4/17
+- Finished TextFormator Framework Version 0.9 beta
+- Finished "TextFormator Framework Introduction"
+
+2003/5/5
+- Updated "TextFormator Framework Introduction"
+
+2003/5/10
+- src/GeneralDefine.h: Removed enum TokenType, instead of std::string
+- src/core/DefaultParseHandler.h, 
+  src/extend/ConcreteParseHandlers.h, 
+  src/extend/IndentFormatHandlers.h, 
+  src/extend/CountFormatHandlers.h: Updated to use new token type
+- src/core/LineFormator.*: Added method of register format handler for a set of types
+- sample/*.cpp, 
+  "TextFormator Framework Introduction": Updated to reflect changes above
+
+2003/5/13
+- src/extend/IndentFormatHandlers.h: Bug fix, modified WhitespaceFormatHandler::format to avoid a fatal error while there's a text line with only white spaces
+- src/helper/FileFinder.*: Added a new helper class to traverse all files in specified directory and subdirectory
+- src/Portability.h: Added a new head file used to platform portability configuration
+- "TextFormator Framework Introduction": Updated to reflect changes above
+
+2003/5/17
+- Portability test: Under MSVC, g++, STLport platform
+- src/helper/FileHelper.*: Modified the first "save" method(the first parameter "stream" should be a reference, not an instance), this mistake ignored by MSVC
+- src/extend/ConcreteParseHandlers.h: Moved the declaration of counter variable out of "for" statement, this mistake ignored by MSVC, but regarded as a warning by g++
+
+2003/5/18
+- Updated "TextFormator Framework Introduction"
+
+2003/8/13
+- Normal update, generated documentation

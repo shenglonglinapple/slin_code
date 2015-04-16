@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+<HEAD>
+   <TITLE>class  Context</TITLE>
+   <META NAME="GENERATOR" CONTENT="DOC++ 3.4.9">
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+
+In file src\helper\Context.h:<TABLE BORDER=0><TR>
+<TD VALIGN=TOP><H2>class  <A HREF="#DOC.DOCU">Context</A></H2></TD></H2></TD></TR></TABLE>
+<BLOCKQUOTE> Indicate context while parsing or formatting text, and also  keep some information for handlers in order to transfer message among them.</BLOCKQUOTE>
+<HR>
+
+<DL>
+<P><TABLE BORDER>
+<DT><H3>Public Methods</H3><DD><TR>
+<TD VALIGN=TOP><A HREF="#DOC.3.1"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A><!1><A HREF="Session.html">Session</A>&amp; </TD><TD><B>session</B> ()<BR>
+<I> Get session object.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.3.2"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>setTokensInfo</B> (const TokensInfo* tokens_info)<BR>
+<I> Set token list of a text line.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.3.3"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>const TokensInfo* </TD><TD><B>getTokensInfo</B> ()<BR>
+<I> Get token list of a text line.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.3.4"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>setCurTokenPos</B> (TokensInfo::size_type pos)<BR>
+<I> Set current position in the token list.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.3.5"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>TokensInfo::size_type </TD><TD><B>getCurTokenPos</B> ()<BR>
+<I> Get current position in the token list.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.3.6"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>void </TD><TD><B>setCurLinePos</B> (TokensInfoList::size_type pos)<BR>
+<I> Set current line position.</I>
+</TD></TR><TR>
+<TD VALIGN=TOP><A HREF="#DOC.3.7"><IMG ALT="[more]" BORDER=0 SRC=icon1.gif></A>TokensInfoList::size_type </TD><TD><B>getCurLinePos</B> ()<BR>
+<I> Get current line position.</I>
+</TD></TR></TABLE></P>
+
+</DL>
+
+<A NAME="DOC.DOCU"></A>
+<HR>
+<H2>Documentation</H2>
+<BLOCKQUOTE>
+Indicate context while parsing or formatting text, and also 
+keep some information for handlers in order to transfer message among them.
+</BLOCKQUOTE>
+<DL>
+
+<A NAME="session"></A>
+<A NAME="DOC.3.1"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B><!1><A HREF="Session.html">Session</A>&amp; session()</B></TT>
+<DD>
+Get session object.
+
+<DL><DT><DT><B>Returns:</B><DD>  reference of session object<BR><DD></DL><P>
+<A NAME="setTokensInfo"></A>
+<A NAME="DOC.3.2"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void setTokensInfo(const TokensInfo* tokens_info)</B></TT>
+<DD>
+Set token list of a text line.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>tokens_info</B> -  token list of a text line<BR><DD></DL><P>
+<A NAME="getTokensInfo"></A>
+<A NAME="DOC.3.3"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>const TokensInfo* getTokensInfo()</B></TT>
+<DD>
+Get token list of a text line.
+
+<DL><DT><DT><B>Returns:</B><DD>  token list of a text line<BR><DD></DL><P>
+<A NAME="setCurTokenPos"></A>
+<A NAME="DOC.3.4"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void setCurTokenPos(TokensInfo::size_type pos)</B></TT>
+<DD>
+Set current position in the token list.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>pos</B> -  position point to current token<BR><DD></DL><P>
+<A NAME="getCurTokenPos"></A>
+<A NAME="DOC.3.5"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>TokensInfo::size_type getCurTokenPos()</B></TT>
+<DD>
+Get current position in the token list.
+
+<DL><DT><DT><B>Returns:</B><DD>  position point to current token<BR><DD></DL><P>
+<A NAME="setCurLinePos"></A>
+<A NAME="DOC.3.6"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>void setCurLinePos(TokensInfoList::size_type pos)</B></TT>
+<DD>
+Set current line position.
+
+<DL><DT><DT><B>Parameters:</B><DD><B>pos</B> -  current line position<BR><DD></DL><P>
+<A NAME="getCurLinePos"></A>
+<A NAME="DOC.3.7"></A>
+<DT><IMG ALT="o" BORDER=0 SRC=icon2.gif><TT><B>TokensInfoList::size_type getCurLinePos()</B></TT>
+<DD>
+Get current line position.
+
+<DL><DT><DT><B>Returns:</B><DD>  current line position<BR><DD></DL><P></DL>
+
+<HR><DL><DT><B>This class has no child classes.</B></DL>
+
+<DL><DT><DT><B>See Also:</B><DD><!1><A HREF="Session.html">Session</A><BR><DD></DL><P><P><I><A HREF="index.html">Alphabetic index</A></I> <I><A HREF="HIER.html">HTML hierarchy of classes</A> or <A HREF="HIERjava.html">Java</A></I></P><HR>
+<BR>
+This page was generated with the help of <A HREF="http://docpp.sourceforge.net">DOC++</A>.
+</BODY>
+</HTML>

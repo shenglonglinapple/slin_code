@@ -1,0 +1,11 @@
+		  TextFormator Framework
+		--------------------------
+        http://morningspace.51.net
+
+TextFormator is an open source framework which can parse and format text files.
+
+To use TextFormator, please extract the files from the archive, give your compiler right access to their paths, and include them appropriately in your code via "include" directive.
+
+Bug reports are welcome. Email to the current maintainer may be sent to
+<moyingzz@etang.com>.
+
