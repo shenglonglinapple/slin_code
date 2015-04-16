@@ -1,0 +1,21 @@
+http://blog.sina.com.cn/s/blog_60797fd90100p3hp.html
+
+
+
+日志配置
+下面我们来看一下NLog的配置原理。于其他工具不同，NLog将在程序启动时尝试进行自动配置，换句话说，NLog将自动在某些默认位置中搜索其配置文件。当NLog和标准的exe文件配合使用时，将自动按照顺序搜索下列路径，以得到配置文件：
+应用程序的标准配置文件（通常为applicationname.exe.config）
+应用程序所在目录中的applicationname.exe.nlog文件
+应用程序所在目录中的NLog.config文件
+NLog.dll所在目录中的NLog.dll.nlog文件
+环境变量NLOG_GLOBAL_CONFIG_FILE所指向的文件
+对于ASP.NET应用程序，NLog将自动按照顺序搜索下列路径：
+Web应用程序的标准配置文件——web.config
+web.config所在目录中的web.nlog文件
+应用程序所在目录中的NLog.config文件
+NLog.dll所在目录中的NLog.dll.nlog文件
+环境变量NLOG_GLOBAL_CONFIG_FILE所指向的文件
+.NET Compact Framework并不支持应用程序配置文件（*.exe.config）以及环境变量，因此NLog将自动按照顺序搜索下列路径：
+应用程序所在目录中的applicationname.exe.nlog文件
+应用程序所在目录中的NLog.config文件
+NLog.dll所在目录中的NLog.dll.nlog文件

@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/qm">
+        <file alias="main_widget_en">main_widget_en.qm</file>
+        <file alias="main_widget_zh">main_widget_zh.qm</file>
+    </qresource>
+</RCC>

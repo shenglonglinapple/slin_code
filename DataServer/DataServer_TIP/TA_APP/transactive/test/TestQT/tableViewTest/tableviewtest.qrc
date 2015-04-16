@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file alias="chunk">Resources/Images/chunk.png</file>
+        <file alias="progress">Resources/Images/progress.png</file>
+    </qresource>
+</RCC>

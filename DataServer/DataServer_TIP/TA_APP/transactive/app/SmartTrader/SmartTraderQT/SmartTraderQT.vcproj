@@ -938,6 +938,14 @@
 			Name="common"
 			>
 			<File
+				RelativePath=".\src\BaseException.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\BaseException.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\ConfigFileHelper.cpp"
 				>
 			</File>
@@ -1275,14 +1283,6 @@
 		<Filter
 			Name="csdata"
 			>
-			<File
-				RelativePath=".\src\BaseException.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\BaseException.h"
-				>
-			</File>
 			<File
 				RelativePath=".\src\MyBar.cpp"
 				>

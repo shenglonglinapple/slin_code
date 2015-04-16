@@ -9,8 +9,8 @@ echo "SUB_LOG_DIR=%SUB_LOG_DIR%"
 
 
 REM del DLL File
-del %CURRENT_DIR%\*.log
-del %SUB_LOG_DIR%\*.log
+del %CURRENT_DIR%\*.log*
+del %SUB_LOG_DIR%\*.log*
 
 
 

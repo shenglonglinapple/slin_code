@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>Resources/checkbox_inter_disabled.png</file>
+        <file>Resources/checkbox_inter_enabled.png</file>
+        <file>Resources/checkbox_inter_enabled_hover.png</file>
+        <file>Resources/checkbox_inter_enabled_pressed.png</file>
+        <file>Resources/checkbox_off_disabled.png</file>
+        <file>Resources/checkbox_off_enabled.png</file>
+        <file>Resources/checkbox_off_enabled_hover.png</file>
+        <file>Resources/checkbox_off_enabled_pressed.png</file>
+        <file>Resources/checkbox_on_disabled.png</file>
+        <file>Resources/checkbox_on_enabled.png</file>
+        <file>Resources/checkbox_on_enabled_hover.png</file>
+        <file>Resources/checkbox_on_enabled_pressed.png</file>
+        <file>Resources/menu_indicator.png</file>
+        <file>Resources/menu_indicator_disabled.png</file>
+        <file>Resources/radiobutton_off_disabled.png</file>
+        <file>Resources/radiobutton_off_enabled.png</file>
+        <file>Resources/radiobutton_off_enabled_hover.png</file>
+        <file>Resources/radiobutton_off_enabled_pressed.png</file>
+        <file>Resources/radiobutton_on_disabled.png</file>
+        <file>Resources/radiobutton_on_enabled.png</file>
+        <file>Resources/radiobutton_on_enabled_hover.png</file>
+        <file>Resources/radiobutton_on_enabled_pressed.png</file>
+        <file>Resources/spin_down_disabled.png</file>
+        <file>Resources/spin_down_enabled.png</file>
+        <file>Resources/spin_down_enabled_hover.png</file>
+        <file>Resources/spin_down_enabled_pressed.png</file>
+        <file>Resources/spin_up_disabled.png</file>
+        <file>Resources/spin_up_enabled.png</file>
+        <file>Resources/spin_up_enabled_hover.png</file>
+        <file>Resources/spin_up_enabled_pressed.png</file>
+        <file>Resources/style.css</file>
+    </qresource>
+</RCC>
