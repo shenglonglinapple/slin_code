@@ -52,9 +52,9 @@ public:
 	void resetHistoryData(qint32 nHandle, const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
     void insertUserTradeInfo(qint32 nHandle, const QList<CUserTradeInfo*>& LstData);
 	void insertUserTradeInfo(qint32 nHandle, const CUserTradeInfo* pData);
+	void insertUserAccount(qint32 nHandle, const CUserAccount* pData );
 	void resetUserAccount(qint32 nHandle, const CUserAccount* pData);
 	void resetUserHoldAccount(qint32 nHandle, const QList<CUserHoldAccount*>& lstData);
-
 private:
 	QMutex m_mutex_MapClientActor;
 	QMap<qint32, CClientWorker*> m_MapClientActor;

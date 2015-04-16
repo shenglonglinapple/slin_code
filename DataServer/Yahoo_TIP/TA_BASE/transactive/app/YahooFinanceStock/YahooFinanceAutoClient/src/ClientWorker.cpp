@@ -260,7 +260,16 @@ void CClientWorker::insertUserTradeInfo( const CUserTradeInfo* pData )
 
 	return;
 }
-
+void CClientWorker::insertUserAccount(const CUserAccount* pData )
+{
+	QMutexLocker lock(&m_mutex_ClientDbOper);
+	qint32 nFunRes = 0;
+	if (NULL != m_pClientDbOper)
+	{
+		nFunRes = m_pClientDbOper->insertUserAccount(pData);
+	}
+	return;
+}
 void CClientWorker::resetUserAccount( const CUserAccount* pData )
 {
 	QMutexLocker lock(&m_mutex_ClientDbOper);

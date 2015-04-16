@@ -174,7 +174,7 @@ qint32 CClientDBManager::resetAllStockInfo(const QList<CStockInfo*>& lstData)
 	return nFunRes;
 }
 
-qint32 CClientDBManager::insertUserAmount(const CUserAccount* pData )
+qint32 CClientDBManager::insertUserAccount(const CUserAccount* pData )
 {
 	QMutexLocker lock(&m_mutex_ClientDbOper);
 

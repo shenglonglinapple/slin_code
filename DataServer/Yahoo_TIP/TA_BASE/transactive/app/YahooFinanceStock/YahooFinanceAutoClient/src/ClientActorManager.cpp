@@ -401,7 +401,25 @@ void CClientActorManager::insertUserTradeInfo( qint32 nHandle, const CUserTradeI
 			<<" "<<"not find hanle";
 	}
 }
+void CClientActorManager::insertUserAccount(qint32 nHandle, const CUserAccount* pData )
+{
+	QMutexLocker lock(&m_mutex_MapClientActor);	
+	QMap<qint32, CClientWorker*>::iterator iterMap;
+	CClientWorker* pClientActor = NULL;
 
+	iterMap = m_MapClientActor.find(nHandle);
+	if (iterMap != m_MapClientActor.end())
+	{
+		pClientActor = iterMap.value();
+		pClientActor->insertUserAccount(pData);
+	}
+	else
+	{
+		MYLOG4CPP_ERROR<<"CClientActorManager insertUserAccount"
+			<<" "<<"nHandle="<<nHandle
+			<<" "<<"not find hanle";
+	}
+}
 void CClientActorManager::resetUserAccount( qint32 nHandle, const CUserAccount* pData )
 {
 	QMutexLocker lock(&m_mutex_MapClientActor);	

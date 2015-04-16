@@ -43,7 +43,7 @@ public:
 public:
 	qint32 insertUserTradeInfo(const CUserTradeInfo* pData);
 	qint32 resetUserAccount( const CUserAccount* pData );
-	qint32 insertUserAmount(const CUserAccount* pData );
+	qint32 insertUserAccount(const CUserAccount* pData );
 public:
 	qint32 resetUserHoldAccount( const QList<CUserHoldAccount*>& lstData );
 	qint32 resetAllStockInfo(const QList<CStockInfo*>& lstData);

@@ -150,7 +150,7 @@ void CClientDataManager::createUser_OK( qint32 nHandle, const QString& strUserNa
 
 void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUserID)
 {
-	CUserAccount* pUserAmount = NULL;
+	CUserAccount* pUserAccount = NULL;
 
 	m_strUserID = strUserID;
 	MYLOG4CPP_DEBUG<<"CClientDataManager loginedToServer"
@@ -169,13 +169,13 @@ void CClientDataManager::loginToServer_OK(qint32 nHandle, const QString& strUser
 	send_req_ReqDownLoadStock(nHandle);
 
 	//first insert 
-	pUserAmount = new CUserAccount();
-	pUserAmount->m_strUserID = strUserID;
-	CClientDBManager::getInstance().insertUserAmount(pUserAmount);
-	if (NULL != pUserAmount)
+	pUserAccount = new CUserAccount();
+	pUserAccount->m_strUserID = strUserID;
+	CClientDBManager::getInstance().insertUserAccount(pUserAccount);
+	if (NULL != pUserAccount)
 	{
-		delete pUserAmount;
-		pUserAmount = NULL;
+		delete pUserAccount;
+		pUserAccount = NULL;
 	}
 
 }

@@ -40,7 +40,7 @@ bool CReqAccount::checkMsgDataType( qint32 nMessageType, qint32 nDataType )
 void CReqAccount::logInfo( const QString& fileName, qint32 lineNumber )
 {
 	MYLOG4CPP_DEBUG_Base<<" "<<"["<<fileName<<":"<<lineNumber<<"]"
-		<<" "<<"CReqAmount:"
+		<<" "<<"CReqAccount:"
 		<<" "<<"nMessageType="<<CTcpComProtocol::getStringValue(m_nMessageType)
 		<<" "<<"m_nDataType="<<CTcpComProtocol::getStringValue(m_nDataType)
 		<<" "<<"m_strReqUUID="<<m_strReqUUID

@@ -60,6 +60,7 @@ public:
 	void resetHistoryData(const QString& strSymbolUse, const QList<CHistoryData*>& lstData );
 	void insertUserTradeInfo(const QList<CUserTradeInfo*>& LstData );
 	void insertUserTradeInfo(const CUserTradeInfo* pData);
+	void insertUserAccount(const CUserAccount* pData );
 	void resetUserAccount(const CUserAccount* pData);
 	void resetUserHoldAccount(const QList<CUserHoldAccount*>& lstData );
 

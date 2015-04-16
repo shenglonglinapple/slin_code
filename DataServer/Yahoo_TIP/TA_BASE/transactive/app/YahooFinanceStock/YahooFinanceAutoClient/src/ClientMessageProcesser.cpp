@@ -116,8 +116,19 @@ void CClientMessageProcesser::processAck( const CAckCreateUser* pAck )
 }
 void CClientMessageProcesser::processAck( const CAckLogin* pAck )
 {
-	QString strUserID;
-	strUserID = pAck->m_strUserID;//TODO
+	CUserAccount* pUserAccount = NULL;
+
+	//first insert 
+	pUserAccount = new CUserAccount();
+	pUserAccount->m_strUserID = pAck->m_strUserID;
+	CClientActorManager::getInstance().insertUserAccount(m_nHanle, pUserAccount);
+	if (NULL != pUserAccount)
+	{
+		delete pUserAccount;
+		pUserAccount = NULL;
+	}
+
+
 	CClientActorManager::getInstance().send_req_ReqDownLoadStock(m_nHanle);
 	return;
 }

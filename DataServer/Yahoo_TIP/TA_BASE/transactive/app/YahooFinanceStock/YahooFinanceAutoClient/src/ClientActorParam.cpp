@@ -49,6 +49,7 @@ void CClientActorParam::setUserValue(const QString& strUserName, const QString& 
 {
 	m_strUserName = strUserName;
 	m_strPassWord = strPassWord;
+	_InitUserID();
 }
 void CClientActorParam::setHandleValue( qint32 nHandle )
 {
