@@ -22,7 +22,7 @@
 static const int DEFVALUE_INT_Window_Width = 400;
 static const int DEFVALUE_INT_Window_Height = 400;
 
-static const std::string DEFVALUE_String_Window_WindowTitle = "New Order";
+static const std::string DEFVALUE_String_Window_WindowTitle = "NewOrder";
 static const std::string DEFVALUE_String_Label_Symbol_Text = "Symbol:";
 static const std::string DEFVALUE_String_Label_OrderType_Text = "Order Type:";
 

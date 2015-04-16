@@ -5,7 +5,7 @@
 
 #include "BaseException.h"
 #include "TotalStocksData.h"
-#include "StockDataActor.h"
+#include "StockDataDBActor.h"
 #include "ConfigInfo.h"
 #include "Log4cppLogger.h"
 #include "SymbolUseManager.h"
@@ -66,10 +66,10 @@ CStockDataManager::~CStockDataManager()
 void CStockDataManager::_LoadData_SSSZ_Stocks()
 {
 	qint32 nArrSize = 0;
-	CStockDataActor* pData = NULL;
+	CStockDataDBActor* pActor = NULL;
 	qint32  nIndex = 0;
 	QString  strSymbolUse;
-	QMap<QString,CStockDataActor*>::iterator iterFind;
+	QMap<QString,CStockDataDBActor*>::iterator iterFind;
 	qint32 nMinStockIndex = 0;
 	qint32 nMaxStockIndex = 0;
 
@@ -98,21 +98,20 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 			//if (strSymbol.contains("002033.SZ"))//000008.SZ
 			//if (strSymbol.contains("8"))//000008.SZ
 			{
-				pData = new CStockDataActor();
-				pData->setValue(strSymbolUse);
+				pActor = new CStockDataDBActor(strSymbolUse);
 
-				iterFind = m_MapStockDataItemT_Total.find(pData->m_strSymbolUse);
+				iterFind = m_MapStockDataItemT_Total.find(pActor->m_strSymbolUse);
 				if (iterFind != m_MapStockDataItemT_Total.end())
 				{
-					MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pData->m_strSymbolUse;
+					MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pActor->m_strSymbolUse;
 					//find same name
-					delete pData;
-					pData = NULL;
+					delete pActor;
+					pActor = NULL;
 				}
 				else
 				{
-					m_MapStockDataItemT_Total.insert(pData->m_strSymbolUse, pData);
-					pData = NULL;
+					m_MapStockDataItemT_Total.insert(pActor->m_strSymbolUse, pActor);
+					pActor = NULL;
 				}
 			}//if
 
@@ -126,9 +125,9 @@ void CStockDataManager::_LoadData_SSSZ_Stocks()
 void CStockDataManager::_LoadData_SSSZ_Stocks_FromDB()
 {
 	qint32 nArrSize = 0;
-	CStockDataActor* pStockDataActorNew = NULL;
+	CStockDataDBActor* pActor = NULL;
 	qint32  nIndex = 0;
-	QMap<QString,CStockDataActor*>::iterator iterFind;
+	QMap<QString,CStockDataDBActor*>::iterator iterFind;
 	qint32 nMinStockIndex = 0;
 	qint32 nMaxStockIndex = 0;
 	QList<CStockInfo*> lstStockInfoData;
@@ -170,24 +169,23 @@ void CStockDataManager::_LoadData_SSSZ_Stocks_FromDB()
 			//if (strSymbol.contains("002033.SZ"))//000008.SZ
 			//if (strSymbol.contains("8"))//000008.SZ
 			{
-				pStockDataActorNew = new CStockDataActor();
-				pStockDataActorNew->setValue(pStockInfoNew->m_strSymbolUse);
+				pActor = new CStockDataDBActor(pStockInfoNew->m_strSymbolUse);
 
-				iterFind = m_MapStockDataItemT_Total.find(pStockDataActorNew->m_strSymbolUse);
+				iterFind = m_MapStockDataItemT_Total.find(pActor->m_strSymbolUse);
 				if (iterFind != m_MapStockDataItemT_Total.end())
 				{
-					MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pStockDataActorNew->m_strSymbolUse;
+					MYLOG4CPP_ERROR<<"find same name m_strSymbolUse="<<pActor->m_strSymbolUse;
 					//find same name
-					delete pStockDataActorNew;
-					pStockDataActorNew = NULL;
+					delete pActor;
+					pActor = NULL;
 
 					delete pStockInfoNew;
 					pStockInfoNew = NULL;
 				}
 				else
 				{
-					m_MapStockDataItemT_Total.insert(pStockDataActorNew->m_strSymbolUse, pStockDataActorNew);
-					pStockDataActorNew = NULL;
+					m_MapStockDataItemT_Total.insert(pActor->m_strSymbolUse, pActor);
+					pActor = NULL;
 
 					m_lstStockInfoData.push_back(pStockInfoNew);
 					pStockInfoNew = NULL;
@@ -206,8 +204,8 @@ void CStockDataManager::_FreeData_SSSZ_Stocks()
 {
 	{
 		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
-		QMap<QString,CStockDataActor*>::iterator iterMap;
-		CStockDataActor* pData = NULL;
+		QMap<QString,CStockDataDBActor*>::iterator iterMap;
+		CStockDataDBActor* pData = NULL;
 
 		iterMap = m_MapStockDataItemT_Total.begin();
 		while (iterMap != m_MapStockDataItemT_Total.end())
@@ -227,8 +225,8 @@ void CStockDataManager::_FreeData_SSSZ_Stocks()
 
 void CStockDataManager::doWork_Save_HistoryData( const QString& strSymbolUse, const QString& strHistoryData )
 {
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
+	QMap<QString,CStockDataDBActor*>::iterator iterMap;
+	CStockDataDBActor* pData = NULL;
 
 	{
 		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
@@ -281,8 +279,8 @@ void CStockDataManager::qWait(int nMilliseconds)
 
 void CStockDataManager::doWork_getStockMinTimeMaxTime( const QString& strSymbolUse, CStockMinTimeMaxTime** ppValueGet )
 {
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
+	QMap<QString,CStockDataDBActor*>::iterator iterMap;
+	CStockDataDBActor* pData = NULL;
 
 	{
 		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
@@ -299,8 +297,8 @@ void CStockDataManager::doWork_getStockMinTimeMaxTime( const QString& strSymbolU
 
 void CStockDataManager::doWork_HistoryData( const QString& strSymbolUse, const QString& strFrom, const QString& strTo, QList<CHistoryData*>& lstData )
 {
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
+	QMap<QString,CStockDataDBActor*>::iterator iterMap;
+	CStockDataDBActor* pData = NULL;
 
 	{
 		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
@@ -318,8 +316,8 @@ void CStockDataManager::doWork_HistoryData( const QString& strSymbolUse, const Q
 
 void CStockDataManager::doWork_UpdateFailedCount( const QString& strSymbolUse )
 {
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
+	QMap<QString,CStockDataDBActor*>::iterator iterMap;
+	CStockDataDBActor* pData = NULL;
 
 	{
 		QMutexLocker lock(&m_mutexMapStockDataItemT_Total);	
@@ -338,8 +336,8 @@ void CStockDataManager::doWork_UpdateFailedCount( const QString& strSymbolUse )
 int CStockDataManager::doWork_Select_FailedCount(const QString& strSymbolUse, int& nFailedCount )
 {
 	int nFunRes = 0;
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
+	QMap<QString,CStockDataDBActor*>::iterator iterMap;
+	CStockDataDBActor* pData = NULL;
 	CSymbolUseManager* pSymbolUseManager = NULL;
 
 	{
@@ -365,8 +363,8 @@ int CStockDataManager::doWork_Select_FailedCount(const QString& strSymbolUse, in
 }
 void CStockDataManager::doWork_getMaxTime( const QString& strSymbolUse, QString& strMaxTime )
 {
-	QMap<QString,CStockDataActor*>::iterator iterMap;
-	CStockDataActor* pData = NULL;
+	QMap<QString,CStockDataDBActor*>::iterator iterMap;
+	CStockDataDBActor* pData = NULL;
 	CSymbolUseManager* pSymbolUseManager = NULL;
 
 	{

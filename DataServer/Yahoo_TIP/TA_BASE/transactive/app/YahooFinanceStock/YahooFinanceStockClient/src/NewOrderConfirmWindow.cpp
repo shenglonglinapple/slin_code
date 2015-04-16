@@ -12,7 +12,7 @@
 static const int DEFVALUE_INT_Window_Width = 400;
 static const int DEFVALUE_INT_Window_Height = 300;
 
-static const std::string DEFVALUE_String_COrderInfoWidget_WindowTitle = "New Order Info";
+static const std::string DEFVALUE_String_COrderInfoWidget_WindowTitle = "NewOrderConfirm";
 static const std::string DEFVALUE_String_Label_SymbolUse_Text = "SymbolUse:";
 static const std::string DEFVALUE_String_Label_OrderType_Text = "Order Type:";
 

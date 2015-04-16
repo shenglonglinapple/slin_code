@@ -33,7 +33,7 @@ public:
 
 private:
 	void _Update_SymbolUseManager();
-private:
+public:
 	QString m_strSymbolUse;
 private:
 	CYahuoHistoryReqAck* m_pYahuoHistoryReqAck;

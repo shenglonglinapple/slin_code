@@ -11,7 +11,8 @@
 
 static int DEFVALUE_INT_Window_Width = 600;
 static int DEFVALUE_INT_Window_Height = 200;
-
+static char* DEFVALUE_WINDOW_TITLE = "UserTrade";
+//this->setWindowTitle(QObject::tr(DEFVALUE_WINDOW_TITLE));
 
 
 CUserTradeTableView::CUserTradeTableView( QWidget* parent)
@@ -21,6 +22,7 @@ CUserTradeTableView::CUserTradeTableView( QWidget* parent)
 	//this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setWindowFlags(Qt::WindowMinMaxButtonsHint);
 	this->setWindowFlags(Qt::WindowTitleHint);
+	this->setWindowTitle(QObject::tr(DEFVALUE_WINDOW_TITLE));
 
 	this->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	this->setAlternatingRowColors(true);

@@ -6,6 +6,8 @@
 #include "StockHistoryDataTableView.h"
 #include "UserTradeTableView.h"
 #include "UserAccountWidget.h"
+#include "UserHoldAccountWidget.h"
+#include "StockInfoWidget.h"
 
 #include "Log4cppLogger.h"
 
@@ -34,14 +36,24 @@ CSignalSlotManager::CSignalSlotManager(void)
 {	
 	m_pRefSignal_ShownMessage = NULL;
 	m_pRefSlot_ShownMessage = NULL;
+	//
 	m_pRefSignal_DataChange_StockMinTimeMaxTime = NULL;
 	m_pRefSlot_DataChange_StockMinTimeMaxTime = NULL;
+	//
 	m_pRefSignal_DataChange_StockHistoryData = NULL;
 	m_pRefSlot_DataChange_StockHistoryData = NULL;
+	//
 	m_pRefSignal_DataChange_UserTrade = NULL;
 	m_pRefSlot_DataChange_UserTrade = NULL;
+	//
 	m_pRefSignal_DataChange_UserAccount = NULL;
 	m_pRefSlot_DataChange_UserAccount = NULL;
+	//
+	m_pRefSignal_DataChange_UserHoldAccount = NULL;
+	m_pRefSlot_DataChange_UserHoldAccount = NULL;
+	//
+	m_pRefSignal_DataChange_StockInfo = NULL;
+	m_pRefSlot_DataChange_StockInfo = NULL;
 	
 }
 
@@ -244,12 +256,20 @@ void CSignalSlotManager::emit_DataChange_UserAccount()
 {
 	emit signal_DataChange_UserAccount();
 }
-//
-void CSignalSlotManager::set_Slot_DataChange_UserHoldAccount(CUserAccountWidget* pRefSlot)
-{
-	m_pRefSlot_DataChange_UserAccount = pRefSlot;
 
-	if (NULL != m_pRefSignal_DataChange_UserAccount && NULL != m_pRefSlot_DataChange_UserAccount)
+
+//////////////////////////////////////////////////////
+
+void CSignalSlotManager::set_Signal_DataChange_UserHoldAccount( CClientDataManager* pRefSignal )
+{
+	m_pRefSignal_DataChange_UserHoldAccount = pRefSignal;
+}
+//
+void CSignalSlotManager::set_Slot_DataChange_UserHoldAccount(CUserHoldAccountWidget* pRefSlot)
+{
+	m_pRefSlot_DataChange_UserHoldAccount = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_UserHoldAccount && NULL != m_pRefSlot_DataChange_UserHoldAccount)
 	{
 		QObject::connect(this, SIGNAL(signal_DataChange_UserHoldAccount()), this, SLOT(slot_DataChange_UserHoldAccount()));
 	}
@@ -261,9 +281,9 @@ void CSignalSlotManager::set_Slot_DataChange_UserHoldAccount(CUserAccountWidget*
 
 void CSignalSlotManager::slot_DataChange_UserHoldAccount()
 {
-	if (NULL != m_pRefSlot_DataChange_UserAccount)
+	if (NULL != m_pRefSlot_DataChange_UserHoldAccount)
 	{
-		m_pRefSlot_DataChange_UserAccount->slot_DataChange_UserHoldAccount();
+		m_pRefSlot_DataChange_UserHoldAccount->slot_DataChange_UserHoldAccount();
 	}
 }
 
@@ -271,4 +291,34 @@ void CSignalSlotManager::emit_DataChange_UserHoldAccount()
 {
 	emit signal_DataChange_UserHoldAccount();
 }
-//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+void CSignalSlotManager::set_Signal_DataChange_StockInfo( CClientDataManager* pRefSignal)
+{
+	m_pRefSignal_DataChange_StockInfo = pRefSignal;
+}
+void CSignalSlotManager::set_Slot_DataChange_StockInfo(CStockInfoWidget* pRefSlot)
+{
+	m_pRefSlot_DataChange_StockInfo = pRefSlot;
+
+	if (NULL != m_pRefSignal_DataChange_StockInfo && NULL != m_pRefSlot_DataChange_StockInfo)
+	{
+		QObject::connect(this, SIGNAL(signal_DataChange_StockInfo()), this, SLOT(slot_DataChange_StockInfo()));
+	}
+	else
+	{
+		QObject::disconnect(this, SIGNAL(signal_DataChange_StockInfo()), this, SLOT(slot_DataChange_StockInfo()));
+	}
+}
+void CSignalSlotManager::slot_DataChange_StockInfo()
+{
+	if (NULL != m_pRefSlot_DataChange_StockInfo)
+	{
+		m_pRefSlot_DataChange_StockInfo->slot_DataChange_StockInfo();
+	}
+}
+void CSignalSlotManager::emit_DataChange_StockInfo()
+{
+	emit signal_DataChange_StockInfo();
+}
+

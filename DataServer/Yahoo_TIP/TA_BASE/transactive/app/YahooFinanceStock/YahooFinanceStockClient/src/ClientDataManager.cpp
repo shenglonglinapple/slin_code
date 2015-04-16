@@ -84,6 +84,8 @@ CClientDataManager::CClientDataManager(void)
 	CSignalSlotManager::getInstance().set_Signal_DataChange_StockMinTimeMaxTime(this);
 	CSignalSlotManager::getInstance().set_Signal_DataChange_UserTrade(this);
 	CSignalSlotManager::getInstance().set_Signal_DataChange_UserAccount(this);
+	CSignalSlotManager::getInstance().set_Signal_DataChange_UserHoldAccount(this);
+	CSignalSlotManager::getInstance().set_Signal_DataChange_StockInfo(this);
 
 }
 
@@ -460,6 +462,8 @@ void CClientDataManager::send_req_ReqUserHoldAccount( const QString& strSymbolUs
 void CClientDataManager::resetAllStockInfo(const QList<CStockInfo*>& lstData)
 {
 	CClientDBManager::getInstance().resetAllStockInfo(lstData);
+	CSignalSlotManager::getInstance().emit_DataChange_StockInfo();
+
 }
 void CClientDataManager::resetDataHistory( const QString& strSymbolUse, const QList<CHistoryData*>& lstData )
 {

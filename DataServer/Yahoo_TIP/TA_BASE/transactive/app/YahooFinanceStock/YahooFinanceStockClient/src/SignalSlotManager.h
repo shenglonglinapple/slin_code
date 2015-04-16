@@ -14,6 +14,8 @@ class CStockHistoryDataTableView;
 class CUserTradeTableView;
 class CUserAccountWidget;
 class CHistoryData;
+class CUserHoldAccountWidget;
+class CStockInfoWidget;
 
 class CSignalSlotManager : public QObject
 {
@@ -95,16 +97,39 @@ private:
 public:
 	void set_Signal_DataChange_UserAccount( CClientDataManager* pRefSignal);
 	void set_Slot_DataChange_UserAccount(CUserAccountWidget* pRefSlot);
-	void set_Slot_DataChange_UserHoldAccount(CUserAccountWidget* pRefSlot);
 signals:
 	void signal_DataChange_UserAccount();
-	void signal_DataChange_UserHoldAccount();
 private slots:
 	void slot_DataChange_UserAccount();
-	void slot_DataChange_UserHoldAccount();
 public:
 	void emit_DataChange_UserAccount();
+//////////////////////////////////////////////////////
+private:
+	CClientDataManager* m_pRefSignal_DataChange_UserHoldAccount;
+	CUserHoldAccountWidget* m_pRefSlot_DataChange_UserHoldAccount;
+public:
+	void set_Signal_DataChange_UserHoldAccount( CClientDataManager* pRefSignal);
+	void set_Slot_DataChange_UserHoldAccount(CUserHoldAccountWidget* pRefSlot);
+signals:
+	void signal_DataChange_UserHoldAccount();
+private slots:
+	void slot_DataChange_UserHoldAccount();
+public:
 	void emit_DataChange_UserHoldAccount();
+//////////////////////////////////////////////////////
+
+private:
+	CClientDataManager* m_pRefSignal_DataChange_StockInfo;
+	CStockInfoWidget* m_pRefSlot_DataChange_StockInfo;
+public:
+	void set_Signal_DataChange_StockInfo( CClientDataManager* pRefSignal);
+	void set_Slot_DataChange_StockInfo(CStockInfoWidget* pRefSlot);
+signals:
+	void signal_DataChange_StockInfo();
+private slots:
+	void slot_DataChange_StockInfo();
+public:
+	void emit_DataChange_StockInfo();
 //////////////////////////////////////////////////////
 
 };

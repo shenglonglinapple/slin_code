@@ -9,7 +9,8 @@
 
 static int DEFVALUE_INT_Window_Width = 600;
 static int DEFVALUE_INT_Window_Height = 500;
-
+static char* DEFVALUE_WINDOW_TITLE = "StockHistoryData";
+//this->setWindowTitle(QObject::tr(DEFVALUE_WINDOW_TITLE));
 
 
 CStockHistoryDataTableView::CStockHistoryDataTableView( QWidget* parent)
@@ -19,6 +20,7 @@ CStockHistoryDataTableView::CStockHistoryDataTableView( QWidget* parent)
 	//this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setWindowFlags(Qt::WindowMinMaxButtonsHint);
 	this->setWindowFlags(Qt::WindowTitleHint);
+	this->setWindowTitle(QObject::tr(DEFVALUE_WINDOW_TITLE));
 
 	this->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	this->setAlternatingRowColors(true);

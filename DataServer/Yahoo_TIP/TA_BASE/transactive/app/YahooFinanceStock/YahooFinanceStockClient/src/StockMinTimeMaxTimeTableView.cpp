@@ -17,7 +17,8 @@ static int DEFVALUE_INT_Window_Height = 500;
 
 static const char* DEFVALUE_String_ActionReqHistoryData = "ReqHistoryData";
 static const std::string DEFVALUE_String_ActionNewOrder = "NewOrder";//"ÏÂµ¥";
-
+static char* DEFVALUE_WINDOW_TITLE = "StockMinTimeMaxTime";
+//this->setWindowTitle(QObject::tr(DEFVALUE_WINDOW_TITLE));
 
 
 
@@ -28,6 +29,7 @@ CStockMinTimeMaxTimeTableView::CStockMinTimeMaxTimeTableView( QWidget* parent)
 	//this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setWindowFlags(Qt::WindowMinMaxButtonsHint);
 	this->setWindowFlags(Qt::WindowTitleHint);
+	this->setWindowTitle(QObject::tr(DEFVALUE_WINDOW_TITLE));
 
 	this->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	this->setAlternatingRowColors(true);

@@ -4,6 +4,8 @@
 #include "StockHistoryDataTableView.h"
 #include "UserTradeTableView.h"
 #include "UserAccountWidget.h"
+#include "UserHoldAccountWidget.h"
+#include "StockInfoWidget.h"
 
 #include "Log4cppLogger.h"
 
@@ -50,6 +52,8 @@ void CClientMainWindowMdiArea::_SetupUi()
 	m_pStockHistoryDataTableView = new CStockHistoryDataTableView(this);
 	m_pUserTradeTableView = new CUserTradeTableView(this);
 	m_pUserAccountWidget = new CUserAccountWidget(this);
+	m_pUserHoldAccountWidget = new CUserHoldAccountWidget(this);
+	m_pStockInfoWidget = new CStockInfoWidget(this);
 
 	pSubWindowRef = NULL;
 	pSubWindowRef = this->addSubWindow(m_pUserAccountWidget);
@@ -59,6 +63,10 @@ void CClientMainWindowMdiArea::_SetupUi()
 	pSubWindowRef = this->addSubWindow(m_pUserTradeTableView);
 	pSubWindowRef = NULL;
 	pSubWindowRef = this->addSubWindow(m_pStockMinTimeMaxTimeTableView);
+	pSubWindowRef = NULL;
+	pSubWindowRef = this->addSubWindow(m_pUserHoldAccountWidget);
+	pSubWindowRef = NULL;
+	pSubWindowRef = this->addSubWindow(m_pStockInfoWidget);
 
 	this->tileSubWindows();
 	//this->cascadeSubWindows();

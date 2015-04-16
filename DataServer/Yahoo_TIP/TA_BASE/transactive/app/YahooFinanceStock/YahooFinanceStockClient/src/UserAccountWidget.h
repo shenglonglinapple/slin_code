@@ -15,17 +15,12 @@ public:
 signals:
 public slots:
 	void slot_DataChange_UserAccount();
-	void slot_DataChange_UserHoldAccount();
-
 private:
 	void _CreateAction();
 	void _CreateConnect();
 private:
 	QTableView* m_pUserAccountTableView;
 	QSqlTableModel* m_pUserAccountModel;
-
-	QTableView* m_pUserHoldAccountTableView;
-	QSqlTableModel* m_pUserHoldAccountModel;
 }; 
 
 

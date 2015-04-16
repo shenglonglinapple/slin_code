@@ -8,7 +8,7 @@
 
 #include "TcpComProtocol.h"
 
-class CStockDataActor;
+class CStockDataDBActor;
 class CStockMinTimeMaxTime;
 class CHistoryData;
 class CUserHold;
@@ -50,7 +50,7 @@ private:
 
 private:
 	QMutex m_mutexMapStockDataItemT_Total;
-	QMap<QString,CStockDataActor*> m_MapStockDataItemT_Total;
+	QMap<QString,CStockDataDBActor*> m_MapStockDataItemT_Total;
 	CStocksDbOper* m_pCStocksDbOper;
 	QList<CStockInfo*> m_lstStockInfoData; 
 };
