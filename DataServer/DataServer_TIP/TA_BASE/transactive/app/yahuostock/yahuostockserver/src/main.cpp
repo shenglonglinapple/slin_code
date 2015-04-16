@@ -2,6 +2,7 @@
 #include <iostream>
 
 //////////////////////////////////////////////////////////////////////////
+//#define CURL_STATICLIB
 #pragma comment(lib,"winmm.lib")
 #pragma comment(lib,"wldap32.lib")
 #pragma comment(lib,"libcurld.lib")
@@ -12,6 +13,9 @@
 #pragma comment(lib,"QtCored4.lib")
 #pragma comment(lib,"QtGuid4.lib")
 #pragma comment(lib,"QtSqld4.lib")
+#pragma comment(lib,"QtNetworkd4.lib")
+
+
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -58,9 +62,9 @@ int main()
 	CLog4cppLogger::getInstance().initLog();
 	CLog4cppLogger::getInstance().testLog();
 
-	testCYahuoRealTimeReqAck();
+	//testCYahuoRealTimeReqAck();
 	//testCYahuoHistoryReqAck();
-	//testCYahuoDataToLocalDB();
+	testCYahuoDataToLocalDB();
 	
 
 	CLog4cppLogger::removeInstance();

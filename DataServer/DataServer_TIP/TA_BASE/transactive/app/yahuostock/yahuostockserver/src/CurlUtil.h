@@ -12,6 +12,15 @@
 #include <QtCore/QMutexLocker>
 #include <QtCore/QMap>
 
+/*
+history:
+http://ichart.finance.yahoo.com/table.csv?s=600155.SS&a=00&b=1&c=2014&d=02&e=1&f=2014
+
+realtime:
+http://finance.yahoo.com/d/quotes.csv?s=600667.SS&f=xsc6p2d1t1obaghml1t8va2n
+
+*/
+
 class CurlUtil
 {
 public:

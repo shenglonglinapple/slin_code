@@ -230,10 +230,10 @@ namespace WPFToolProcessFile
             strLineDest =  "\t"+ "/*Symbol*/" + "(\"" + str_symbol + "\"),";
             fileWriterHander.WriteLine(strLineDest);
 
-            strLineDest = "\t" + "/*SymbolExtern*/" + "(\"" + str_Symbol_Extern + "\"),";
+            strLineDest = "\t" + "/*SymbolExtern*/" + "(\"" + str_Symbol_Extern + "\")";
             fileWriterHander.WriteLine(strLineDest);
 
-            strLineDest = "\t" + "/*SymbolUse*/" + "(\"" + str_symboluse + "\"),";
+            strLineDest = "\t" + "/*SymbolUse*/" + "(\"" + str_symboluse + "\")";
             fileWriterHander.WriteLine(strLineDest);
 
 
@@ -246,7 +246,7 @@ namespace WPFToolProcessFile
             strLineDest = "\t" + "/*NamePinYinFull4*/" + "(\"" + str_namePinYinFull_4 + "\"),";
             fileWriterHander.WriteLine(strLineDest);
 
-            strLineDest = "\t" + "/*NameUtf8*/" + "(L\"" + str_name_utf8 + "\")";
+            strLineDest = "\t" + "/*NameUtf8*/" + "(L\"" + str_name_utf8 + "\"),";
             fileWriterHander.WriteLine(strLineDest);
             
              strLineDest = "},";
@@ -257,10 +257,10 @@ namespace WPFToolProcessFile
             // 	/*Symbol*/("600652"),
             // 	/*SymbolExtern*/(".SS"),
             // 	/*SymbolUse*/("600652.SS"),
-            // 	/*NamePinYinFirst*/("ASGF"),
-            // 	/*NamePinYinFull0*/("AI SI GU FEN"),
-            // 	/*NamePinYinFull4*/("AI4 SI3 GU3 FEN4"),
-            // 	/*NameUtf8*/(L"爱使股份")
+            // 	/*NamePinYinFirst*/("ASGF")
+            // 	/*NamePinYinFull0*/("AI SI GU FEN")
+            // 	/*NamePinYinFull4*/("AI4 SI3 GU3 FEN4")
+            // 	/*NameUtf8*/(L"爱使股份"),
             // },
 
             return;
