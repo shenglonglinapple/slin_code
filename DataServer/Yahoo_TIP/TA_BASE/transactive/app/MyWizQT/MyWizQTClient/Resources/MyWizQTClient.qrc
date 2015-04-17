@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/MainWidgetWindowIcon.ico</file>
+    </qresource>
+</RCC>
