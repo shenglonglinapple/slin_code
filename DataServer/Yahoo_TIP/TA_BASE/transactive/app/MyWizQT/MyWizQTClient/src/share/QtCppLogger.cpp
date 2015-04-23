@@ -1,4 +1,4 @@
-#include "logger.h"
+#include "QtCppLogger.h"
 
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -9,29 +9,27 @@
 #include <QtCore/QBuffer>
 #include <QtCore/QTextStream>
 
-#include "utils/pathresolve.h"
 
 
 #define LOG_LINES_MAX 30000
 #define LOG_DAYS_MAX 10
 #define LOG_LINES_BUFFER_MAX 3000
 
-namespace Utils {
 
-Logger::Logger()
+QtCppLogger::QtCppLogger()
     : m_buffer(new QBuffer())
     , m_mutex(QMutex::Recursive)
 {
     connect(m_buffer, SIGNAL(readyRead()), SLOT(onBuffer_readRead()));
 }
 
-Logger::~Logger()
+QtCppLogger::~QtCppLogger()
 {
 }
 
 
 #if QT_VERSION < 0x050000
-void Logger::messageHandler(QtMsgType type, const char* msg)
+void QtCppLogger::messageHandler(QtMsgType type, const char* msg)
 {
     QString text = QString::fromUtf8(msg);
     logger()->saveToLogFile(text);
@@ -53,7 +51,7 @@ void Logger::messageHandler(QtMsgType type, const char* msg)
     }
 }
 #else
-void Logger::messageHandler(QtMsgType type, const QMessageLogContext& context, const QString &msg)
+void QtCppLogger::messageHandler(QtMsgType type, const QMessageLogContext& context, const QString &msg)
 {
     Q_UNUSED(context);
 
@@ -77,17 +75,17 @@ void Logger::messageHandler(QtMsgType type, const QMessageLogContext& context, c
 }
 #endif
 //////////////////////////
-qint64 Logger::WizGetFileSize(const QString& strFileName)
+qint64 QtCppLogger::WizGetFileSize(const QString& strFileName)
 {
 	QFileInfo info(strFileName);
 	return info.size();
 }
-void Logger::WizDeleteFile(const QString& strFileName)
+void QtCppLogger::WizDeleteFile(const QString& strFileName)
 {
 	QDir dir(WizExtractFilePath(strFileName));
 	dir.remove(WizExtractFileName(strFileName));
 }
-QString Logger::WizExtractFilePath(const QString& strFileName)
+QString QtCppLogger::WizExtractFilePath(const QString& strFileName)
 {
 	QString str = strFileName;
 	str.replace('\\', '/');
@@ -99,7 +97,7 @@ QString Logger::WizExtractFilePath(const QString& strFileName)
 	//
 	return str.left(index + 1); //include separator
 }
-QString Logger::WizExtractFileName(const QString& strFileName)
+QString QtCppLogger::WizExtractFileName(const QString& strFileName)
 {
 	QString str = strFileName;
 	str.replace('\\', '/');
@@ -111,9 +109,9 @@ QString Logger::WizExtractFileName(const QString& strFileName)
 }
 
 //////////////////////////
-QString Logger::logFileName()
+QString QtCppLogger::logFileName()
 {
-    QString strFileName = PathResolve::logFile();
+    QString strFileName = "./log_logfile.log";
 
     if (WizGetFileSize(strFileName) > 10 * 1024 * 1024)
     {
@@ -123,13 +121,23 @@ QString Logger::logFileName()
     return strFileName;
 }
 
-QString Logger::msg2LogMsg(const QString& strMsg)
+QString QtCppLogger::msg2LogMsg(const QString& strMsg)
 {
-    QString strTime = QDateTime::currentDateTime().toString(Qt::ISODate);
-    return strTime + ": " + strMsg + "\n";
+	QString strTime;
+	QString strLogLine;
+
+    strTime = QDateTime::currentDateTime().toString(Qt::ISODate);
+	strLogLine = "[";
+	strLogLine += strTime;
+	strLogLine += "]";
+	strLogLine += " ";
+	strLogLine += strMsg;
+	strLogLine += "\n";
+
+    return strLogLine;
 }
 
-void Logger::saveToLogFile(const QString& strMsg)
+void QtCppLogger::saveToLogFile(const QString& strMsg)
 {
     QFile f(logFileName());
     f.open(QIODevice::Append | QIODevice::Text);
@@ -137,7 +145,7 @@ void Logger::saveToLogFile(const QString& strMsg)
     f.close();
 }
 
-void Logger::addToBuffer(const QString& strMsg)
+void QtCppLogger::addToBuffer(const QString& strMsg)
 {
     QMutexLocker locker(&m_mutex);
     Q_UNUSED(locker);
@@ -147,7 +155,7 @@ void Logger::addToBuffer(const QString& strMsg)
     m_buffer->close();
 }
 
-void Logger::getAll(QString &text)
+void QtCppLogger::getAll(QString &text)
 {
     QMutexLocker locker(&m_mutex);
     Q_UNUSED(locker);
@@ -159,19 +167,33 @@ void Logger::getAll(QString &text)
     m_buffer->setBuffer(NULL);
 }
 
-Logger* Logger::logger()
+QtCppLogger* QtCppLogger::logger()
 {
-    static Logger logger;
+    static QtCppLogger logger;
     return &logger;
 }
 
-void Logger::writeLog(const QString& strMsg)
+void QtCppLogger::writeLog(const QString& strMsg)
 {
     qDebug() << strMsg;
 }
-void Logger::getAllLogs(QString& text)
+void QtCppLogger::getAllLogs(QString& text)
 {
     logger()->getAll(text);
 }
 
-} // namespace Utils
+/*how to use
+int main(int argc, char *argv[])
+{
+int ret = 0;
+//===============
+#if QT_VERSION > 0x050000
+qInstallMessageHandler(Utils::Logger::messageHandler);
+QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#else
+qInstallMsgHandler(Utils::Logger::messageHandler);
+#endif
+//===============
+qDebug()<<"Test Log"<<"ret="<<ret;
+}
+*/
