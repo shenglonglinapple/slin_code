@@ -74,7 +74,6 @@ CClientDataManager::CClientDataManager(void)
 	m_pQtTimeHelper = NULL;
 	m_pQtTimeHelper = new CQtTimeHelper();
 
-	CConfigInfo::getInstance();
 	CClientWorkerManager::getInstance();
 	CStockDataManager::getInstance();
 	CClientDBManager::getInstance();
@@ -93,7 +92,6 @@ CClientDataManager::~CClientDataManager(void)
 {
 	CStockDataManager::removeInstance();
 	CClientWorkerManager::removeInstance();
-	CConfigInfo::removeInstance();
 	CClientDBManager::removeInstance();
 
 	if (NULL != m_pQtTimeHelper)
