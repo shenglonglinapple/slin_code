@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/qmlfile">
+        <file>QtQuickFinancialEye.qml</file>
+        <file>content/Button.qml</file>
+        <file>content/PageListData.qml</file>
+        <file>content/TopBanner.qml</file>
+        <file>content/PageListView.qml</file>
+        <file>content/PageView.qml</file>
+        <file>content/StockListDelegate.qml</file>
+        <file>content/StockListModel.qml</file>
+        <file>content/StockListView.qml</file>
+        <file>content/StockDataRealTimeWindow.qml</file>
+        <file>content/StockDetailView.qml</file>
+        <file>content/ChooseHistoryDataTypeWindow.qml</file>
+        <file>content/HistoryDataGraphWindow.qml</file>
+        <file>content/YahooRealTimeReqAck.qml</file>
+        <file>content/CurrentUserStockData.qml</file>
+        <file>content/YahooHistoryReqAck.qml</file>
+        <file>content/StockDetailBigView.qml</file>
+        <file>content/HistoryDataBigGraphWindow.qml</file>
+        <file>content/SqliteDbStorage.qml</file>
+        <file>content/TotalStockListModel.qml</file>
+        <file>content/BottomBanner.qml</file>
+        <file>content/UsrSearchStockListModel.qml</file>
+        <file>content/UsrSearchStockListDelegate.qml</file>
+        <file>content/UsrSearchStockListView.qml</file>
+    </qresource>
+    <qresource prefix="/imgfile">
+        <file>images/icon_left_arrow.png</file>
+        <file>images/icon_right_arrow.png</file>
+    </qresource>
+</RCC>
