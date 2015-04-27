@@ -353,58 +353,12 @@
 				RelativePath=".\log4cpp.conf"
 				>
 			</File>
-			<File
-				RelativePath=".\Resources\YahooFinanceStockClient.qrc"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Rcc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath)"
-						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Rcc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath)"
-						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
-					/>
-				</FileConfiguration>
-			</File>
 		</Filter>
 		<Filter
 			Name="Generated Files"
 			Filter="moc;h;cpp"
 			UniqueIdentifier="{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}"
 			>
-			<File
-				RelativePath=".\GeneratedFiles\qrc_YahooFinanceStockClient.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-			</File>
 			<Filter
 				Name="Debug"
 				Filter="cpp;moc"
@@ -579,18 +533,6 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_QtCppLogger.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_SignalSlotManager.cpp"
 					>
 					<FileConfiguration
@@ -640,54 +582,6 @@
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Debug\moc_StockMinTimeMaxTimeTableView.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_UiCanMoveWidget.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_UiCanResizeMoveWidget.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_UiCanResizeWidget.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Debug\moc_UiImageBorderWidget.cpp"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
@@ -909,18 +803,6 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\GeneratedFiles\Release\moc_QtCppLogger.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\GeneratedFiles\Release\moc_SignalSlotManager.cpp"
 					>
 					<FileConfiguration
@@ -970,54 +852,6 @@
 				</File>
 				<File
 					RelativePath=".\GeneratedFiles\Release\moc_StockMinTimeMaxTimeTableView.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_UiCanMoveWidget.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_UiCanResizeMoveWidget.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_UiCanResizeWidget.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\GeneratedFiles\Release\moc_UiImageBorderWidget.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -1506,10 +1340,10 @@
 						>
 						<Tool
 							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing QtCppLogger.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..\cscommon\Data&quot; &quot;-I.\..\cscommon\dbcon&quot; &quot;-I.\..\cscommon\ReqAck&quot; &quot;-I.\..\cscommon\utility&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -1517,10 +1351,10 @@
 						>
 						<Tool
 							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing QtCppLogger.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6\include\QtCore&quot; &quot;-IC:\Qt\4.8.6\include\QtGui&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-IC:\Qt\4.8.6\mkspecs\default&quot; &quot;-IC:\Qt\4.8.6\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							Description=""
+							CommandLine=""
+							AdditionalDependencies=""
+							Outputs=""
 						/>
 					</FileConfiguration>
 				</File>
@@ -1546,6 +1380,22 @@
 				</File>
 				<File
 					RelativePath="..\cscommon\utility\TcpSocketHelper.h"
+					>
+				</File>
+				<File
+					RelativePath="..\cscommon\utility\UiPathResolve.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\cscommon\utility\UiPathResolve.h"
+					>
+				</File>
+				<File
+					RelativePath="..\cscommon\utility\UiStyleManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\cscommon\utility\UiStyleManager.h"
 					>
 				</File>
 				<File
@@ -2184,184 +2034,6 @@
 						</FileConfiguration>
 					</File>
 				</Filter>
-			</Filter>
-			<Filter
-				Name="share"
-				>
-				<File
-					RelativePath=".\src\share\QtCppLogger.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\QtCppLogger.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing QtCppLogger.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..\cscommon\Data&quot; &quot;-I.\..\cscommon\dbcon&quot; &quot;-I.\..\cscommon\ReqAck&quot; &quot;-I.\..\cscommon\utility&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing QtCppLogger.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6\include\QtCore&quot; &quot;-IC:\Qt\4.8.6\include\QtGui&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-IC:\Qt\4.8.6\mkspecs\default&quot; &quot;-IC:\Qt\4.8.6\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCanMoveWidget.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCanMoveWidget.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiCanMoveWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..\cscommon\Data&quot; &quot;-I.\..\cscommon\dbcon&quot; &quot;-I.\..\cscommon\ReqAck&quot; &quot;-I.\..\cscommon\utility&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiCanMoveWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6\include\QtCore&quot; &quot;-IC:\Qt\4.8.6\include\QtGui&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-IC:\Qt\4.8.6\mkspecs\default&quot; &quot;-IC:\Qt\4.8.6\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCanResizeMoveWidget.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCanResizeMoveWidget.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiCanResizeMoveWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..\cscommon\Data&quot; &quot;-I.\..\cscommon\dbcon&quot; &quot;-I.\..\cscommon\ReqAck&quot; &quot;-I.\..\cscommon\utility&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiCanResizeMoveWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6\include\QtCore&quot; &quot;-IC:\Qt\4.8.6\include\QtGui&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-IC:\Qt\4.8.6\mkspecs\default&quot; &quot;-IC:\Qt\4.8.6\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCanResizeWidget.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCanResizeWidget.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiCanResizeWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..\cscommon\Data&quot; &quot;-I.\..\cscommon\dbcon&quot; &quot;-I.\..\cscommon\ReqAck&quot; &quot;-I.\..\cscommon\utility&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiCanResizeWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6\include\QtCore&quot; &quot;-IC:\Qt\4.8.6\include\QtGui&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-IC:\Qt\4.8.6\mkspecs\default&quot; &quot;-IC:\Qt\4.8.6\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCommon.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiCommon.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiImageBorderWidget.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiImageBorderWidget.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiImageBorderWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-I.\debug&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.&quot; &quot;-I.&quot; &quot;-I.\src&quot; &quot;-I.\..\cscommon&quot; &quot;-I.\..\cscommon\Data&quot; &quot;-I.\..\cscommon\dbcon&quot; &quot;-I.\..\cscommon\ReqAck&quot; &quot;-I.\..\cscommon\utility&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\transactive\core\QCustomPlot\GitHub_QCustomPlot\qcustomplot\src&quot; &quot;-I.\..\..\..\..\PUBLIC\log4cpp\log4cpp-1.1.1\include&quot; &quot;-I.\..\..\..\..\PUBLIC\curl\curl-7.20.0\build\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing UiImageBorderWidget.h..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;  -D_WINDOWS -DUNICODE -DWIN32 -DQT_DLL -DQT_HAVE_MMX -DQT_HAVE_3DNOW -DQT_HAVE_SSE -DQT_HAVE_MMXEXT -DQT_HAVE_SSE2 -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT -DNDEBUG -D_VC80_UPGRADE=0x0600 -D_MBCS &quot;-IC:\Qt\4.8.6\include\QtCore&quot; &quot;-IC:\Qt\4.8.6\include\QtGui&quot; &quot;-IC:\Qt\4.8.6\include&quot; &quot;-IC:\Qt\4.8.6\mkspecs\default&quot; &quot;-IC:\Qt\4.8.6\include\ActiveQt&quot; &quot;-I.\GeneratedFiles&quot; &quot;-I.\debug&quot; &quot;-I.\release&quot; &quot;-I.\src&quot; &quot;-I.&quot; &quot;-I.\..&quot; &quot;-I.\..\..&quot; &quot;-I.\..\..\..&quot; &quot;-I.\..\..\..\..&quot; &quot;-I.\..\..\..\..\..\build\win32_n\transactive&quot; &quot;-I.\..\..\..\..\PUBLIC\ACE\6_2_0\ACE_wrappers&quot; &quot;-I.\..\..\..\..\PUBLIC\boost\boost_1_55_0&quot; &quot;-I.\..\..\..\..\PUBLIC\CMS\CMS_RELEASE\include&quot; &quot;-ID:\libs\c++\ACE_wrappers&quot; &quot;-ID:\libs\c++\boost\include\boost-1_55&quot; &quot;-ID:\sllin_code\PUBLIC\SQLite\include&quot; &quot;-ID:\sllin_code\PUBLIC\CMS\CMS_RELEASE\include&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\src\share\UiPathResolve.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiPathResolve.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiStyleManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\share\UiStyleManager.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter

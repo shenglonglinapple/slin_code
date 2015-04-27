@@ -1,7 +1,5 @@
 #include "ClientUIManager.h"
 
-#include "share/UiPathResolve.h"
-#include "share/UiStyleManager.h"
 #include "ConfigInfo.h"
 #include "ClientDataManager.h"
 #include "SignalSlotManager.h"
@@ -12,9 +10,7 @@
 
 CClientUIManager::CClientUIManager()
 {
-	CUiPathResolve::getInstance();
 	CConfigInfo::getInstance();
-	CUiStyleManager::getInstance();
 	CSignalSlotManager::getInstance();
 	CClientDataManager::getInstance();
 	//CSignalSlotManager::set_Signal_ShownMessage(CClientDataManager*);
@@ -40,9 +36,7 @@ CClientUIManager::~CClientUIManager()
 
 	CClientDataManager::removeInstance();
 	CSignalSlotManager::removeInstance();
-	CUiStyleManager::removeInstance();
 	CConfigInfo::removeInstance();
-	CUiPathResolve::removeInstance();
 
 }
 void CClientUIManager::showCClientMainWindow( bool bShow )
