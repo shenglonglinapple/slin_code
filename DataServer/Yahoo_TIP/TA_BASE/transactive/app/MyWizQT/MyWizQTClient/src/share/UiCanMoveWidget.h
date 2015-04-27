@@ -3,7 +3,7 @@
 
 #include <QtGui/QDialog>
 
-class CUiImageBorderWidget;
+class CUiRect9GirdWidget;
 
 class CUiCanMoveWindow : public QWidget
 {
@@ -22,7 +22,7 @@ public:
 protected:
 	bool m_bMousePressed;
 	bool m_bCanMove;
-	CUiImageBorderWidget* m_pUiImageBorderWidget;
+	CUiRect9GirdWidget* m_pUiImageBorderWidget;
 	QPoint m_ptGlobalOldTopLeft;
 	QPoint m_ptGlobalMousePress;
 };

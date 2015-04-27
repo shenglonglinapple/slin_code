@@ -1,6 +1,6 @@
 #include "share/UiCanResizeMoveWidget.h"
 
-#include "share/UiImageBorderWidget.h"
+#include "share/UiRect9GridWidget.h"
 
 #include <QtCore/QPoint>
 #include <QtGui/QMouseEvent>
@@ -276,7 +276,7 @@ CUiCanResizeMoveWidget::CUiCanResizeMoveWidget( QWidget* parent /*= 0*/ )
 	this->setWindowFlags(Qt::FramelessWindowHint);
 	this->setContentsMargins(0, 0, 0, 0);
 	//Ui level 1
-	m_pUiImageBorderWidget = new CUiImageBorderWidget(this);
+	m_pUiImageBorderWidget = new CUiRect9GirdWidget(this);
 
 	m_pUiMouseEventWidget = new CUiMouseEventWidget(this, m_pUiImageBorderWidget);
 	m_pUiMouseEventWidget->setContentsMargins(0, 0, 0, 0);

@@ -15,8 +15,6 @@ private:
     CUiSkin9GridImage* m_pUiSkin9GridImage;
 protected:
     virtual void paintEvent(QPaintEvent *p);
-private:
-	void _SetAttribute();
 public:
 	CUiCommon::ESplitRectType posType(const QPoint& posValue);
 };

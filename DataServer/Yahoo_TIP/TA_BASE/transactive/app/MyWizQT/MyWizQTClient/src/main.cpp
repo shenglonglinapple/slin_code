@@ -27,9 +27,10 @@
 #include "share/QtCppLogger.h"
 #include <QtCore/QDebug>
 
-#include "share/UiImageBorderWidget.h"
+#include "share/UiRect9GridWidget.h"
 #include "share/UiCanResizeMoveWidget.h"
 
+#include "share/UiIconLineEditContainer.h"
 
 #include "share/UiCanMoveWidget.h"
 #include "share/UiCanResizeWidget.h"
@@ -82,6 +83,10 @@ int main(int argc, char *argv[])
 	//CUiTitleWidget objTest_CUiTitleWidget;
 	//objTest_CUiTitleWidget.resize(300, 50);
 	//objTest_CUiTitleWidget.show();
+
+	//CUiIconLineEditContainer objTest_CUiIconLineEditContainer;
+	//objTest_CUiIconLineEditContainer.resize(200, 100);
+	//objTest_CUiIconLineEditContainer.show();
 
 	CClientLoginWindow objTest_CClientLoginWindow;
 	objTest_CClientLoginWindow.resize(300, 500);

@@ -4,7 +4,7 @@
 #include "share/UiCommon.h"
 #include <QtGui/QDialog>
 
-class CUiImageBorderWidget;
+class CUiRect9GirdWidget;
 
 class CUiCanResizeWindow : public QWidget
 {
@@ -26,7 +26,7 @@ private:
 protected:
 	bool m_bMousePressed;
 	bool m_bCanResize;
-	CUiImageBorderWidget* m_pUiImageBorderWidget;
+	CUiRect9GirdWidget* m_pUiImageBorderWidget;
 	CUiCommon::ESplitRectType m_posTypeMousePress;
 	QPoint m_ptGlobalMousePress;
 	QRect m_rcOldGeometry;

@@ -61,7 +61,7 @@ private:
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-class CUiImageBorderWidget;
+class CUiRect9GirdWidget;
 class CUiCanResizeMoveWidget : public IUiCanResizeMoveWidget
 {
 	Q_OBJECT;
@@ -71,7 +71,7 @@ public:
 	CUiCommon::ESplitRectType posType( const QPoint& posValue );
 private:
 	CUiMouseEventWidget* m_pUiMouseEventWidget;
-	CUiImageBorderWidget* m_pUiImageBorderWidget;
+	CUiRect9GirdWidget* m_pUiImageBorderWidget;
 };
 
 #endif // __CLASS_UI_CNA_RESIZE_MOVE_WIDGET_H__

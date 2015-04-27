@@ -18,12 +18,15 @@ class QPushButton;
 class QToolButton;
 class QPoint;
 class QRect;
+class QCheckBox;
 QT_END_NAMESPACE
 
 
 class CUiMouseEventWidget;
-class CUiImageBorderWidget;
+class CUiRect9GirdWidget;
 class CUiTitleWidget;
+class CUiIconLineEditContainer;
+class CUiImageButton;
 
 class CClientLoginWindow : public IUiCanResizeMoveWidget
 {
@@ -32,6 +35,16 @@ public:
 	explicit CClientLoginWindow(QWidget* parent = 0);
 public:
 	CUiCommon::ESplitRectType posType( const QPoint& posValue );//IUiCanResizeMoveWidget
+private slots:
+	void onLoginInputChanged();
+	void onUserNameEdited(const QString& arg1);
+	void on_btn_login_clicked();
+	void on_btn_changeToSignin_clicked();
+	void on_btn_changeToLogin_clicked();
+
+private:
+	void enableLoginControls(bool bEnable);
+
 public:
 	void setCanResize( bool bValue );
 	bool canResize() const;
@@ -40,10 +53,20 @@ public:
 	bool canMove() const;
 private:
 	CUiMouseEventWidget* m_pUiMouseEventWidget;
-	CUiImageBorderWidget* m_pUiImageBorderWidget;
+	CUiRect9GirdWidget* m_pUiImageBorderWidget;
 private:
 	CUiTitleWidget* m_pUiTitleWidget;
-
+	CUiIconLineEditContainer* m_wgt_usercontainer;
+	QLineEdit* m_lineEditUserNameRef;//m_wgt_usercontainer
+	CUiIconLineEditContainer* m_wgt_passwordcontainer;
+	QLineEdit* m_lineEditPasswordRef;//m_wgt_passwordcontainer
+	QCheckBox* m_cbx_remberPassword;
+	QCheckBox* m_cbx_autologin;
+	CUiImageButton* m_buttonLogin;
+	QLabel* m_label_separator2;
+	QLabel* m_label_noaccount;
+	QPushButton* m_btn_changeToSignin;
+	QPushButton* m_btn_changeToLogin;
 };
 
 

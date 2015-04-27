@@ -106,6 +106,28 @@ bool CUiSkin9GridImage::isValid() const
     return bIsValid;
 }
 
+void CUiSkin9GridImage::draw_const( QPainter* p, QRect rc, int nAlpha ) const
+{
+	QRect arrayDest[9];
+	//
+	splitRect(rc, m_arrayRcImage9Grid[0].bottomRight(), arrayDest, 9);
+	//
+	for (int nIndex = 0; nIndex < 9; nIndex++)
+	{
+		const QRect& rcSrc = m_arrayRcImage9Grid[nIndex];
+		const QRect& rcDest = arrayDest[nIndex];
+		//
+		if (nAlpha > 0 && nAlpha <= 255)
+		{
+			p->drawImage(rcDest, m_imge, rcSrc);
+		}
+		else
+		{
+			p->drawImage(rcDest, m_imge, rcSrc);
+		}
+	}
+}
+
 //void CUiSkin9GridImage::draw(QPainter* p, QRect rc, int nAlpha) const
 void CUiSkin9GridImage::draw(QPainter* p, QRect rc, int nAlpha)
 {
@@ -133,6 +155,29 @@ void CUiSkin9GridImage::draw(QPainter* p, QRect rc, int nAlpha)
         }
     }
 }
+
+void CUiSkin9GridImage::drawBorder_const(QPainter* p, QRect rc) const
+{
+	QRect arrayDest[9];
+	//
+	splitRect(rc, m_arrayRcImage9Grid[0].bottomRight(), arrayDest, 9);
+	//
+	//0 1 2 
+	//3 4 5 
+	//6 7 8 
+	for (int nIndex = 0; nIndex < 9; nIndex++)
+	{
+		//4 is client area		
+		if (nIndex == 4)
+			continue;
+		//
+		const QRect& rcSrc = m_arrayRcImage9Grid[nIndex];
+		const QRect& rcDest = arrayDest[nIndex];
+		//
+		p->drawImage(rcDest, m_imge, rcSrc);
+	}
+}
+
 //void CUiSkin9GridImage::drawBorder(QPainter* p, QRect rc) const
 void CUiSkin9GridImage::drawBorder(QPainter* p, QRect rc)
 {

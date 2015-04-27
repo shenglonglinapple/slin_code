@@ -1,4 +1,4 @@
-#include "share/UiImageBorderWidget.h"
+#include "share/UiRect9GridWidget.h"
 
 //#include <QtGui/QPainter>
 //#include <QtGui/QPaintEngine>
@@ -25,7 +25,7 @@ static const int DEF_VALUE_Contents_Margins_bottom = 10;
 
 
 
-CUiImageBorderWidget::CUiImageBorderWidget(QWidget* parent)
+CUiRect9GirdWidget::CUiRect9GirdWidget(QWidget* parent)
     : QWidget(parent)
 {
 	//setAttribute
@@ -57,7 +57,7 @@ CUiImageBorderWidget::CUiImageBorderWidget(QWidget* parent)
 
 }
 
-void CUiImageBorderWidget::paintEvent(QPaintEvent *p)
+void CUiRect9GirdWidget::paintEvent(QPaintEvent *p)
 {
 	//class Q_GUI_EXPORT QWidget : public QObject, public QPaintDevice
     QPainter painter(this);
@@ -67,7 +67,7 @@ void CUiImageBorderWidget::paintEvent(QPaintEvent *p)
     _Draw8Border(&painter, rectWidget);
 }
 
-bool CUiImageBorderWidget::_ClearImage()
+bool CUiRect9GirdWidget::_ClearImage()
 {
 	if (!m_imge.isNull())
 	{
@@ -76,7 +76,7 @@ bool CUiImageBorderWidget::_ClearImage()
 	return true;
 }
 
-void CUiImageBorderWidget::_SetAttribute()
+void CUiRect9GirdWidget::_SetAttribute()
 {
 	//
 	//enable MainWindow to be transparent
@@ -105,7 +105,7 @@ void CUiImageBorderWidget::_SetAttribute()
 //0 1 2 
 //3 4 5 
 //6 7 8 
-bool CUiImageBorderWidget::_SplitRect(const QRect& rcSrc, QPoint ptTopLeft, QRect* parrayRect, int nArrayCount)
+bool CUiRect9GirdWidget::_SplitRect(const QRect& rcSrc, QPoint ptTopLeft, QRect* parrayRect, int nArrayCount)
 {
 	//
 	QRect* arrayRect = parrayRect;
@@ -147,7 +147,7 @@ bool CUiImageBorderWidget::_SplitRect(const QRect& rcSrc, QPoint ptTopLeft, QRec
 	return true;
 }
 
-bool CUiImageBorderWidget::_SetImage(const QString& strImageFileName, QPoint ptTopLeft)
+bool CUiRect9GirdWidget::_SetImage(const QString& strImageFileName, QPoint ptTopLeft)
 {
 	_ClearImage();
 	//
@@ -166,7 +166,7 @@ bool CUiImageBorderWidget::_SetImage(const QString& strImageFileName, QPoint ptT
 
 
 //void CUiSkin9GridImage::draw(QPainter* p, QRect rc, int nAlpha) const
-void CUiImageBorderWidget::_Draw9(QPainter* p, QRect rc, int nAlpha)
+void CUiRect9GirdWidget::_Draw9(QPainter* p, QRect rc, int nAlpha)
 {
 	QRect arrayDest[9];
 	m_rcSrc = rc;//save data
@@ -193,7 +193,7 @@ void CUiImageBorderWidget::_Draw9(QPainter* p, QRect rc, int nAlpha)
 	}
 }
 //void CUiSkin9GridImage::drawBorder(QPainter* p, QRect rc) const
-void CUiImageBorderWidget::_Draw8Border(QPainter* p, QRect rc)
+void CUiRect9GirdWidget::_Draw8Border(QPainter* p, QRect rc)
 {
 	QRect arrayDest[9];
 
@@ -221,7 +221,7 @@ void CUiImageBorderWidget::_Draw8Border(QPainter* p, QRect rc)
 }
 
 
-CUiCommon::ESplitRectType CUiImageBorderWidget::posType( const QPoint& posValue )
+CUiCommon::ESplitRectType CUiRect9GirdWidget::posType( const QPoint& posValue )
 {
 	CUiCommon::ESplitRectType nPosType = CUiCommon::SplitRectType_NULL;
 	bool bIsValid = false;

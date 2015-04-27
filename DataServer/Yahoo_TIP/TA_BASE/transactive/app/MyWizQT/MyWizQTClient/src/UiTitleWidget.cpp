@@ -168,10 +168,12 @@ void CUiTitleWidget::onMaxSizeClicked()
 {
 	if (Qt::WindowMaximized == m_pAffectedWidget->windowState())
 	{
+		m_maxsize->setStyleSheet(m_maxSheet);
 		m_pAffectedWidget->showNormal();
 	}
 	else
 	{
+		m_maxsize->setStyleSheet(m_restoreStyleSheet);
 		m_pAffectedWidget->showMaximized();
 	}
 	

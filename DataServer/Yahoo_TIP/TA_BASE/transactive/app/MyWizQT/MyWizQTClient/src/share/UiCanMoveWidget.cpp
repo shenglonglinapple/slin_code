@@ -1,6 +1,6 @@
 #include "share/UiCanMoveWidget.h"
 
-#include "share/UiImageBorderWidget.h"
+#include "share/UiRect9GridWidget.h"
 
 #include <QtCore/QPoint>
 #include <QtGui/QMouseEvent>
@@ -17,7 +17,7 @@ CUiCanMoveWindow::CUiCanMoveWindow( QWidget* parent /*= 0*/ )
 	//Ui level 0, nothing
 	_SetAttribute();
 	//Ui level 1
-	m_pUiImageBorderWidget = new CUiImageBorderWidget(this);
+	m_pUiImageBorderWidget = new CUiRect9GirdWidget(this);
 
 	//用一个QBoxLayout来设置m_pShadowWidget的大小和CUiShadowWindow一样大
 	QBoxLayout* windowLayout = NULL;

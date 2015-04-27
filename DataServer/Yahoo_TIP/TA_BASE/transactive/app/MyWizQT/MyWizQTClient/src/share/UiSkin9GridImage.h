@@ -17,11 +17,12 @@ protected:
     //
     bool _Clear();
 public:
-    //static bool splitRect(const QRect& rcSrc, QPoint ptTopLeft, QRect* parrayRect, int nArrayCount);
-	//void draw(QPainter* p, QRect rc, int nAlpha) const;
+    static bool splitRect(const QRect& rcSrc, QPoint ptTopLeft, QRect* parrayRect, int nArrayCount);
+	void draw_const(QPainter* p, QRect rc, int nAlpha) const;
 	//void drawBorder(QPainter* p, QRect rc) const;
+	void drawBorder_const(QPainter* p, QRect rc) const;
 public:
-	bool splitRect(const QRect& rcSrc, QPoint ptTopLeft, QRect* parrayRect, int nArrayCount);
+	//bool splitRect(const QRect& rcSrc, QPoint ptTopLeft, QRect* parrayRect, int nArrayCount);
     bool setImage(const QString& strImageFileName, QPoint ptTopLeft);
 	void draw(QPainter* p, QRect rc, int nAlpha);
 	void drawBorder(QPainter* p, QRect rc);

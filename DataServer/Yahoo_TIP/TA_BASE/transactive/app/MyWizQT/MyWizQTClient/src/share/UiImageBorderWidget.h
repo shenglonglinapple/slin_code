@@ -8,11 +8,11 @@
 
 class QPainter;
 
-class CUiImageBorderWidget : public QWidget
+class CUiRect9GirdWidget : public QWidget
 {
 	Q_OBJECT;
 public:
-    CUiImageBorderWidget(QWidget* parent = 0);
+    CUiRect9GirdWidget(QWidget* parent = 0);
 protected:
     virtual void paintEvent(QPaintEvent *p);
 public:
